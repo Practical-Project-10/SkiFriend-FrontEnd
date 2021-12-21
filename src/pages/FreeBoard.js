@@ -10,6 +10,7 @@ const FreeBoard = () => {
     <React.Fragment>
       <Header />
       <Grid main>하이원</Grid>
+      asdasd
       <CarpoolMenuBar />
       <Navbar />
     </React.Fragment>
