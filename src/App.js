@@ -13,6 +13,8 @@ import Card from "./components/Card";
 import FreeBoardList from "../src/pages/FreeBoardList";
 import FreeBoardWrite from "./pages/FreeBoardWrite";
 import FreeBoardDetail from "./pages/FreeBoardDetail";
+import PlaceInfo from "./pages/PlaceInfo";
+import PlaceInfoDetail from './pages/PlaceInfoDetail';
 import MyPage from "./pages/MyPage";
 import Navbar from "./components/Navbar";
 
@@ -20,7 +22,7 @@ function App() {
   return (
     <React.Fragment>
       <Grid mainFrame>
-        <Route exact path="/home" component={Home}></Route>
+        <Route exact path="/" component={Home}></Route>
         <Route path="/signupone" component={SignupOne}></Route>
         <Route path="/signupTwo" component={SignupTwo}></Route>
         <Route path="/login" component={Login} />
@@ -30,6 +32,8 @@ function App() {
         <Route path="/freeboardlist" component={FreeBoardList} />
         <Route path="/freeboardwrite" component={FreeBoardWrite} />
         <Route path="/freeboarddetail" component={FreeBoardDetail} />
+        <Route path="/placeinfo" component={PlaceInfo} />
+        <Route path="/placeinfodetail" component={PlaceInfoDetail} />
         <Route path="/mypage" component={MyPage} />
         <Navbar />
       </Grid>

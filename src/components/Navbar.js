@@ -15,15 +15,15 @@ const Navbar = ({ location }) => {
     <React.Fragment>
       <Grid>
         <Grid is_flex navbar>
-          <NavLink to="#" className="navLink">
-            {location.pathname === "#" ? (
+          <NavLink to="/" className="navLink">
+            {location.pathname === "/" ? (
               <AiTwotoneHome size="25" />
             ) : (
               <AiOutlineHome size="25" />
             )}
           </NavLink>
-          <NavLink to="#" className="navLink">
-            {location.pathname === "#" ? (
+          <NavLink to="/placeinfo" className="navLink">
+            {location.pathname === "/placeinfo" ? (
               <AiFillInfoCircle size="25" />
             ) : (
               <AiOutlineInfoCircle size="25" />
