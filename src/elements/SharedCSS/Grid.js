@@ -27,6 +27,7 @@ const Grid = (props) => {
     mainFrame,
     navbar,
     header,
+    menubar,
   } = props;
 
   const styles = {
@@ -55,13 +56,14 @@ const Grid = (props) => {
   if (mainFrame) {
     return <MainFrame>{children}</MainFrame>;
   }
-
   if (header) {
     return <Header {...styles}>{children}</Header>;
   }
-
   if (navbar) {
     return <Navbar {...styles}>{children}</Navbar>;
+  }
+  if (menubar) {
+    return <Menubar {...styles}>{children}</Menubar>;
   }
 
   return (
@@ -99,6 +101,14 @@ const Header = styled.div`
   text-align: center;
   padding-top: 10px;
   background: orange;
+`;
+
+const Menubar = styled.div`
+  width: 100%;
+  height: 60px;
+  border-bottom: 2px solid black;
+  justify-content: space-around;
+  ${(props) => (props.is_flex ? "display: flex; align-items: center;" : "")};
 `;
 
 const GridBox = styled.div`

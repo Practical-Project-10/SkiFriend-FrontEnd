@@ -1,6 +1,7 @@
 import React from "react";
-import { NavLink, withRouter } from "react-router-dom";
+import "../App.css";
 
+import { NavLink, withRouter } from "react-router-dom";
 import { Grid, Text } from "../elements/SharedCSS/index";
 
 // react-icons
@@ -14,28 +15,28 @@ const Navbar = ({ location }) => {
     <React.Fragment>
       <Grid>
         <Grid is_flex navbar>
-          <NavLink to="#">
+          <NavLink to="#" className="navLink">
             {location.pathname === "#" ? (
               <AiTwotoneHome size="25" />
             ) : (
               <AiOutlineHome size="25" />
             )}
           </NavLink>
-          <NavLink to="#">
+          <NavLink to="#" className="navLink">
             {location.pathname === "#" ? (
               <AiFillInfoCircle size="25" />
             ) : (
               <AiOutlineInfoCircle size="25" />
             )}
           </NavLink>
-          <NavLink to="#">
+          <NavLink to="#" className="navLink">
             {location.pathname === "#" ? (
               <BsChatFill size="25" />
             ) : (
               <BsChat size="25" />
             )}
           </NavLink>
-          <NavLink to="#">
+          <NavLink to="#" className="navLink">
             {location.pathname === "#" ? (
               <AiFillAppstore size="25" />
             ) : (
