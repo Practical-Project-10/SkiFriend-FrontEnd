@@ -5,7 +5,7 @@ const Card = (props) => {
     return (
         <Grid cards>
             <Text carpoolInfo>[{props.carpoolType}]</Text>
-            <Text carpoolInfo>({props.startLocation}) ->  {props.endLocation} </Text>
+            {/* <Text carpoolInfo>({props.startLocation}) =>  {props.endLocation} </Text> */}
             <Text margin="3px" >날짜 : {props.date}</Text>
             <Text margin = "3px">시간 : {props.time}</Text>
             <Text margin = "3px">인원 : {props.memberNum}</Text>

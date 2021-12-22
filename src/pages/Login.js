@@ -4,7 +4,7 @@ import {Grid, Text, Input, Button} from '../elements/LoginCSS';
 
 const Login = (props) => {
   
-//test
+
   return (
     <React.Fragment>
       <Grid>
