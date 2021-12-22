@@ -11,6 +11,7 @@ const Image = (props) => {
     _onClick,
     radius,
     className,
+    myIcon,
   } = props;
 
   const styles = {
@@ -23,7 +24,13 @@ const Image = (props) => {
     radius: radius,
     className: className,
   };
-
+  if (myIcon) {
+    return (
+      <React.Fragment>
+        <MyIcon {...styles} onClick={_onClick} />
+      </React.Fragment>
+    );
+  }
   return (
     <React.Fragment>
       <MyProfile {...styles} onClick={_onClick} />
@@ -38,7 +45,15 @@ Image.defaultProps = {
   _onClick: () => {},
 };
 
-
+const MyIcon = styled.div`
+  width: 3.5em;
+  height: 3.5em;
+  border-radius: 50%;
+  margin-right: 10px;
+  background-size: cover;
+  background-position: center;
+  ${(props) => (props.src ? `background-image: url(${props.src});` : "")}
+`;
 
 const MyProfile = styled.div`
   width: 150px;
@@ -52,6 +67,5 @@ const MyProfile = styled.div`
     cursor: pointer;
   }
 `;
-
 
 export default Image;

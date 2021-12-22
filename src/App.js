@@ -11,6 +11,9 @@ import CarpoolWrite from "./pages/CarpoolWrite";
 import Card from "./components/Card";
 import FreeBoardList from "../src/pages/FreeBoardList";
 import FreeBoardWrite from "./pages/FreeBoardWrite";
+import FreeBoardDetail from "./pages/FreeBoardDetail";
+import MyPage from "./pages/MyPage";
+import Navbar from "./components/Navbar";
 
 function App() {
   return (
@@ -24,6 +27,9 @@ function App() {
         <Route path="/card" component={Card} />
         <Route path="/freeboardlist" component={FreeBoardList} />
         <Route path="/freeboardwrite" component={FreeBoardWrite} />
+        <Route path="/freeboarddetail" component={FreeBoardDetail} />
+        <Route path="/mypage" component={MyPage} />
+        <Navbar />
       </Grid>
     </React.Fragment>
   );

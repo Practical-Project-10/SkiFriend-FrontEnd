@@ -1,7 +1,6 @@
 import React from "react";
-import { Grid } from "../elements/SharedCSS";
-import { Button, Input, Text } from "../elements/FreeBoardCSS/index";
-import Navbar from "../components/Navbar";
+import { Grid, Button } from "../elements/SharedCSS";
+import { Input, Text } from "../elements/FreeBoardCSS/index";
 
 //react icons
 import { GrFormPrevious } from "react-icons/gr";
@@ -21,7 +20,6 @@ const FreeBoardWrite = () => {
         </Grid>
         <Input textarea placeholder="내용을 입력하세요" />
       </Grid>
-      <Navbar />
     </React.Fragment>
   );
 };

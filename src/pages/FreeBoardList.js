@@ -1,7 +1,6 @@
 import React from "react";
 
 import Header from "../components/Header";
-import Navbar from "../components/Navbar";
 import CarpoolMenuBar from "../components/CarpoolMenuBar";
 import { Grid, Text } from "../elements/FreeBoardCSS/index";
 
@@ -31,7 +30,6 @@ const FreeBoardList = () => {
           </Grid>
         </Grid>
       </Grid>
-      <Navbar />
     </React.Fragment>
   );
 };
