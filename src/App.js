@@ -16,12 +16,15 @@ import FreeBoardDetail from "./pages/FreeBoardDetail";
 import PlaceInfo from "./pages/PlaceInfo";
 import PlaceInfoDetail from './pages/PlaceInfoDetail';
 import MyPage from "./pages/MyPage";
+import ChatList from "./pages/ChatList";
+import Header from "./components/Header";
 import Navbar from "./components/Navbar";
 
 function App() {
   return (
     <React.Fragment>
       <Grid mainFrame>
+        <Header/>
         <Route exact path="/" component={Home}></Route>
         <Route path="/signupone" component={SignupOne}></Route>
         <Route path="/signupTwo" component={SignupTwo}></Route>
@@ -35,6 +38,7 @@ function App() {
         <Route path="/placeinfo" component={PlaceInfo} />
         <Route path="/placeinfodetail" component={PlaceInfoDetail} />
         <Route path="/mypage" component={MyPage} />
+        <Route path="/chatlist" component={ChatList} />
         <Navbar />
       </Grid>
     </React.Fragment>
