@@ -17,7 +17,7 @@ const Input = (props) => {
 
   return (
     <React.Fragment>
-      <Text margin='0' size='13px'>{label}</Text>  {/* 추가 */}
+      <Text>{label}</Text>
       <ElInput
         placeholder={placeholder}
         onChange={_onChange}

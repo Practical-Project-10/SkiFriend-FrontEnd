@@ -6,7 +6,6 @@ import "../elements/CarpoolCSS/styles.css";
 import { ko } from "date-fns/esm/locale";
 import styled from "styled-components";
 
-
 // 데이트 피커입니다!!! 이름이 Example 일떄밖에 인식이 안되서 이렇게 일단 놔뒀습니다ㅠㅠ 나중에 수정하겠습니다!
 const Example = () => {
 
@@ -23,8 +22,7 @@ const Example = () => {
         minDate={new Date()}
       />
       </Grid>
-    </Grid>
-    
+    </React.Fragment>
   );
 };
 
@@ -39,4 +37,3 @@ font-size:12px;
 `;
 
 export default Example;
-

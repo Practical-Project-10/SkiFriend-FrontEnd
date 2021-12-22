@@ -30,11 +30,9 @@ const Text = (props) => {
     cursor: cursor,
     width:width,
   };
-if(carpoolInfo) {
-  return(
-    <CarpoolInfo>{children}</CarpoolInfo>
-  )
-}
+  if (carpoolInfo) {
+    return <CarpoolInfo>{children}</CarpoolInfo>;
+  }
   return (
     <P {...styles} onClick={_onClick}>
       {children}
@@ -47,9 +45,9 @@ Text.defaultProps = {
   _onClick: () => {},
 };
 const CarpoolInfo = styled.text`
-font-weight: 700;
-font-size: 20px;
-margin-bottom: 5px;
+  font-weight: 700;
+  font-size: 20px;
+  margin-bottom: 5px;
 `;
 const P = styled.p`
   color: ${(props) => props.color};
@@ -59,7 +57,7 @@ const P = styled.p`
   ${(props) => (props.align ? `text-align: ${props.align};` : "")}
   ${(props) => (props.padding ? `padding: ${props.padding};` : "")}
   ${(props) => (props.cursor ? `cursor: ${props.cursor};` : "")}
-  width: ${(props) => props.width};
+  ${(props) => (props.width ? `width: ${props.width};` : "")}
 `;
 
 export default Text;
