@@ -21,6 +21,7 @@ const Grid = (props) => {
     align,
     cursor,
     main,
+    list,
   } = props;
 
   const styles = {
@@ -40,23 +41,31 @@ const Grid = (props) => {
     align: align,
     cursor: cursor,
   };
-
+  //FreeBoardList 시작
   if (main) {
     return (
-      <React.Fragment>
-        <Main {...styles} onClick={_onClick}>
-          {children}
-        </Main>
-      </React.Fragment>
+      <Main {...styles} onClick={_onClick}>
+        {children}
+      </Main>
     );
   }
+  if (list) {
+    return (
+      <List {...styles} onClick={_onClick}>
+        {children}
+      </List>
+    );
+  }
+  //FreeBoardList 끝
+
+  //FreeBoardWrite 시작
+
+  //FreeBoardWrite 끝
 
   return (
-    <React.Fragment>
-      <GridBox {...styles} onClick={_onClick}>
-        {children}
-      </GridBox>
-    </React.Fragment>
+    <GridBox {...styles} onClick={_onClick}>
+      {children}
+    </GridBox>
   );
 };
 
@@ -64,10 +73,16 @@ Grid.defaultProps = {
   _onClick: () => {},
 };
 
+//이미지 들어갈 곳
 const Main = styled.div`
-  width: 100%;
   height: 13em;
   background: red;
+`;
+//전체 목록
+const List = styled.div`
+  padding: 20px;
+  height: 384px;
+  overflow: scroll;
 `;
 
 const GridBox = styled.div`
