@@ -28,7 +28,7 @@ const Text = (props) => {
     link: link,
     padding: padding,
     cursor: cursor,
-    width,
+    width:width,
   };
   if (carpoolInfo) {
     return <CarpoolInfo>{children}</CarpoolInfo>;
