@@ -1,28 +1,29 @@
-import "./App.css";
 import React from "react";
 
-import {Grid} from "./elements/SharedCSS";
+import { Grid } from "./elements/SharedCSS";
 import { Route } from "react-router-dom";
-import Carpool from './pages/Carpool';
-import CarpoolWrite from "./pages/CarpoolWrite";
-import Card from "./components/Card";
-import FreeBoard from "../src/pages/FreeBoard";
-import Login from "./pages/Login";
+//pages import
 import SignupOne from "./pages/SignupOne";
 import SignupTwo from "./pages/SignupTwo";
-
+import Login from "./pages/Login";
+import Carpool from "./pages/Carpool";
+import CarpoolWrite from "./pages/CarpoolWrite";
+import Card from "./components/Card";
+import FreeBoardList from "../src/pages/FreeBoardList";
+import FreeBoardWrite from "./pages/FreeBoardWrite";
 
 function App() {
   return (
     <React.Fragment>
       <Grid mainFrame>
-        <Route path="/carpool" exact component ={Carpool}/>
-        <Route path="/carpoolwrite" component ={CarpoolWrite}/>
-        <Route path="/login" component ={Login}/>
-        <Route path="/card" component ={Card}/>
-        <Route path="/freeboard" component={FreeBoard} />
-        <Route path='/signupone' component={SignupOne}></Route>
-        <Route path='/signupTwo' component={SignupTwo}></Route>
+        <Route exact path="/signupone" component={SignupOne}></Route>
+        <Route path="/signupTwo" component={SignupTwo}></Route>
+        <Route path="/login" component={Login} />
+        <Route path="/carpool" component={Carpool} />
+        <Route path="/carpoolwrite" component={CarpoolWrite} />
+        <Route path="/card" component={Card} />
+        <Route path="/freeboardlist" component={FreeBoardList} />
+        <Route path="/freeboardwrite" component={FreeBoardWrite} />
       </Grid>
     </React.Fragment>
   );

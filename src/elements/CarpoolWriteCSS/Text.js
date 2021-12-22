@@ -49,11 +49,8 @@ Text.defaultProps = {
 };
 
 const List = styled.p`
-  border-bottom: 2px solid red;
+  border-bottom: 1px solid black;
   color: red;
-  &:hover {
-    opacity: 0.8;
-  }
 `;
 
 const P = styled.p`

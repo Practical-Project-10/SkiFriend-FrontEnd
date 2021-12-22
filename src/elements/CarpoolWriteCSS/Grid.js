@@ -5,6 +5,7 @@ const Grid = (props) => {
   const {
     is_flex,
     width,
+    maxWidth,
     padding,
     margin,
     bg,
@@ -14,20 +15,26 @@ const Grid = (props) => {
     position,
     justify,
     height,
+    minHeight,
     overflow,
     border,
     radius,
     className,
     align,
+    borderB,
+    wrap,
     cursor,
-    main,
-    list,
+    mainFrame,
+    navbar,
+    header,
   } = props;
 
   const styles = {
     is_flex: is_flex,
     width: width,
+    maxWidth: maxWidth,
     height: height,
+    minHeight: minHeight,
     margin: margin,
     padding: padding,
     bg: bg,
@@ -39,33 +46,30 @@ const Grid = (props) => {
     radius: radius,
     className: className,
     align: align,
+    borderB: borderB,
+    wrap: wrap,
     cursor: cursor,
+    mainFrame: mainFrame,
   };
-  //FreeBoardList 시작
-  if (main) {
-    return (
-      <Main {...styles} onClick={_onClick}>
-        {children}
-      </Main>
-    );
-  }
-  if (list) {
-    return (
-      <List {...styles} onClick={_onClick}>
-        {children}
-      </List>
-    );
-  }
-  //FreeBoardList 끝
 
-  //FreeBoardWrite 시작
+  if (mainFrame) {
+    return <MainFrame>{children}</MainFrame>;
+  }
 
-  //FreeBoardWrite 끝
+  if (header) {
+    return <Header {...styles}>{children}</Header>;
+  }
+
+  if (navbar) {
+    return <Navbar {...styles}>{children}</Navbar>;
+  }
 
   return (
-    <GridBox {...styles} onClick={_onClick}>
-      {children}
-    </GridBox>
+    <React.Fragment>
+      <GridBox {...styles} onClick={_onClick}>
+        {children}
+      </GridBox>
+    </React.Fragment>
   );
 };
 
@@ -73,23 +77,37 @@ Grid.defaultProps = {
   _onClick: () => {},
 };
 
-//이미지 들어갈 곳
-const Main = styled.div`
-  height: 13em;
-  background: red;
+const MainFrame = styled.div`
+  width: 100%;
+  height: 100%;
+  max-width: 412px;
+  min-height: 100vh;
+  border: 1px solid #000;
 `;
-//전체 목록
-const List = styled.div`
-  padding: 20px;
-  height: 384px;
-  overflow: scroll;
+
+const Navbar = styled.div`
+  width: 100%;
+  height: 30px;
+  justify-content: space-around;
+  ${(props) => (props.is_flex ? "display: flex; align-items: center;" : "")};
+  ${(props) => (props.margin ? `margin: ${props.margin};` : "")}
+`;
+
+const Header = styled.div`
+  width: 100%;
+  height: 50px;
+  text-align: center;
+  padding-top: 10px;
+  background: orange;
 `;
 
 const GridBox = styled.div`
   width: ${(props) => props.width};
   box-sizing: border-box;
+  ${(props) => (props.maxWidth ? `max-width: ${props.maxWidth};` : "")}
   ${(props) => (props.color ? `color: ${props.color};` : "")}
   ${(props) => (props.height ? `height: ${props.height};` : "")}
+  ${(props) => (props.minHeight ? `min-height: ${props.minHeight};` : "")}
   ${(props) => (props.justify ? `justify-content: ${props.justify};` : "")}
   ${(props) => (props.padding ? `padding: ${props.padding};` : "")}
   ${(props) => (props.margin ? `margin: ${props.margin};` : "")}
@@ -97,13 +115,16 @@ const GridBox = styled.div`
   ${(props) => (props.is_flex ? "display: flex; align-items: center;" : "")}
   ${(props) => (props.position ? `position: ${props.position};` : "")}
   ${(props) => (props.border ? `border: ${props.border};` : "")}
+  ${(props) => (props.borderB ? `border-bottom: ${props.borderB};` : "")}
   ${(props) => (props.radius ? `border-radius: ${props.radius};` : "")}
   ${(props) => (props.overflow ? `overflow: ${props.overflow};` : "")}
   ${(props) => (props.className ? `className: ${props.className};` : "")}
   ${(props) => (props.align ? `text-align: ${props.align};` : "")}
+  ${(props) => (props.wrap ? `flex-wrap: ${props.wrap};` : "")}
   ${(props) => (props.cursor ? `cursor: ${props.cursor};` : "")}
   &::-webkit-scrollbar {
     display: none;
   }
+  border: 1px solid black;
 `;
 export default Grid;
