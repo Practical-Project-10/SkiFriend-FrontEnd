@@ -15,7 +15,6 @@ const Button = (props) => {
     opacity,
     color,
     className,
-    smallBtn,
   } = props;
 
   const styles = {
@@ -29,20 +28,13 @@ const Button = (props) => {
     color: color,
     className: className,
   };
-  //FreeBoardWrite 시작
-  if (smallBtn) {
-    return (
-      <SmallBtn {...styles} onClick={_onClick}>
-        {text ? text : children}
-      </SmallBtn>
-    );
-  }
-  //FreeBoardWrite 끝
-
+  
   return (
-    <ElButton {...styles} onClick={_onClick}>
-      {text ? text : children}
-    </ElButton>
+    <React.Fragment>
+      <ElButton {...styles} onClick={_onClick}>
+        {text ? text : children}
+      </ElButton>
+    </React.Fragment>
   );
 };
 
@@ -52,15 +44,7 @@ Button.defaultProps = {
   width: "100%",
 };
 
-const SmallBtn = styled.button`
-  color: white;
-  background: orange;
-  font-weight: 800;
-  width: 4em;
-  margin-right: 1em;
-  border: none;
-  border-radius: 5px;
-`;
+
 
 //---- 기본 return Button ----
 const ElButton = styled.button`

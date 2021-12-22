@@ -25,9 +25,6 @@ const Grid = (props) => {
     wrap,
     cursor,
     mainFrame,
-    navbar,
-    header,
-    menubar,
   } = props;
 
   const styles = {
@@ -50,20 +47,13 @@ const Grid = (props) => {
     borderB: borderB,
     wrap: wrap,
     cursor: cursor,
-    mainFrame: mainFrame,
+    mainFrame: mainFrame
   };
-
-  if (mainFrame) {
-    return <MainFrame>{children}</MainFrame>;
-  }
-  if (header) {
-    return <Header {...styles}>{children}</Header>;
-  }
-  if (navbar) {
-    return <Navbar {...styles}>{children}</Navbar>;
-  }
-  if (menubar) {
-    return <Menubar {...styles}>{children}</Menubar>;
+  
+  if(mainFrame) {
+    return(
+      <MainFrame>{children}</MainFrame>
+    )
   }
 
   return (
@@ -84,33 +74,8 @@ const MainFrame = styled.div`
   height: 100%;
   max-width: 412px;
   min-height: 100vh;
-  padding: 42px 16px 48px;
   border: 1px solid #000;
-`;
-
-const Navbar = styled.div`
-  width: 100%;
-  height: 30px;
-  justify-content: space-around;
-  ${(props) => (props.is_flex ? "display: flex; align-items: center;" : "")};
-  ${(props) => (props.margin ? `margin: ${props.margin};` : "")}
-`;
-
-const Header = styled.div`
-  width: 100%;
-  height: 50px;
-  text-align: center;
-  padding-top: 10px;
-  background: orange;
-`;
-
-const Menubar = styled.div`
-  width: 100%;
-  height: 60px;
-  border-bottom: 2px solid black;
-  justify-content: space-around;
-  ${(props) => (props.is_flex ? "display: flex; align-items: center;" : "")};
-`;
+`
 
 const GridBox = styled.div`
   width: ${(props) => props.width};
@@ -136,6 +101,5 @@ const GridBox = styled.div`
   &::-webkit-scrollbar {
     display: none;
   }
-  border: 1px solid black;
 `;
 export default Grid;

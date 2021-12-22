@@ -36,19 +36,19 @@ const Navbar = ({ location }) => {
               <BsChat size="25" />
             )}
           </NavLink>
-          <NavLink to="#" className="navLink">
-            {location.pathname === "#" ? (
+          <NavLink to="/mypage" className="navLink">
+            {location.pathname === "/mypage" ? (
               <AiFillAppstore size="25" />
             ) : (
               <AiOutlineAppstore size="25" />
             )}
           </NavLink>
         </Grid>
-        <Grid is_flex navbar margin="0 0 0 8px">
+        <Grid is_flex navbar margin="0 0 0 15px">
           <Text>홈</Text>
-          <Text margin="0 0 0 3px">스키장</Text>
+          <Text margin="0 0 0 3px">스키장정보</Text>
           <Text>채팅</Text>
-          <Text margin="0 3px 0 0">더보기</Text>
+          <Text margin="0 3px 0 0">마이페이지</Text>
         </Grid>
       </Grid>
     </React.Fragment>
