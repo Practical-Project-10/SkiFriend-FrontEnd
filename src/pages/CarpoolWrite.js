@@ -4,6 +4,7 @@ import { AiOutlineArrowLeft } from "react-icons/ai";
 import {BsArrowLeftRight} from "react-icons/bs";
 import "../elements/CarpoolCSS/styles.css";
 import Example from "../components/Example";
+import TimePicker from "../components/TimePicker";
 
 
 const CarpoolWrite = () => {
@@ -47,8 +48,20 @@ const CarpoolWrite = () => {
                 </span>
                 <span className="skiResort">용평</span>
             </Grid>
-      <Grid width="100px">
+      <Grid is_flex width="100px">
          <Example/>
+         <TimePicker/>
+      </Grid>
+      <Grid margin="0 10px 20px 0">
+          <Text>가격</Text>
+          <Input/>
+          <Text>모집인원</Text>
+          <Input/>
+          <Text>주의사항</Text>
+          <Input/>
+      </Grid>
+      <Grid margin="10px">
+          <Button padding="10px">작성</Button>
       </Grid>
     </Grid>
   );

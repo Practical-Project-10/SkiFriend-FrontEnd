@@ -15,6 +15,7 @@ const Text = (props) => {
     _onClick,
     cursor,
     carpoolInfo,
+    width,
   } = props;
 
   const styles = {
@@ -27,6 +28,7 @@ const Text = (props) => {
     link: link,
     padding: padding,
     cursor: cursor,
+    width:width,
   };
 if(carpoolInfo) {
   return(
@@ -57,6 +59,7 @@ const P = styled.p`
   ${(props) => (props.align ? `text-align: ${props.align};` : "")}
   ${(props) => (props.padding ? `padding: ${props.padding};` : "")}
   ${(props) => (props.cursor ? `cursor: ${props.cursor};` : "")}
+  width: ${(props) => props.width};
 `;
 
 export default Text;

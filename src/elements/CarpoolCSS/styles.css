@@ -52,3 +52,46 @@ img {
   .optionBox {
        width:90%;
 }
+.selectBox{
+  margin: 0 10px;
+}
+.chatRight{ 
+    right:0;
+    position: relative;
+    background: #d1d1d1;
+    border-radius: .4em;
+}
+.chatRight:after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 50%;
+    width: 0;
+    height: 0;
+    border: 44px solid transparent;
+    border-left-color: #d1d1d1;
+    border-right: 0;
+    border-bottom: 0;
+    margin-top: -22px;
+    margin-right: -44px;
+  }
+.chatLeft{ 
+    left:0;
+    position: relative;
+    background: #d1d1d1;
+    border-radius: .4em;
+}
+.chatLeft:after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 0;
+    height: 0;
+    border: 44px solid transparent;
+    border-left-color: #d1d1d1;
+    border-right: 0;
+    border-bottom: 0;
+    margin-top: -22px;
+    margin-right: -44px;
+  }
