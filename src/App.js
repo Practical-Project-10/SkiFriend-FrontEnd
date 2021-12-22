@@ -13,6 +13,8 @@ import Card from "./components/Card";
 import FreeBoardList from "../src/pages/FreeBoardList";
 import FreeBoardWrite from "./pages/FreeBoardWrite";
 import FreeBoardDetail from "./pages/FreeBoardDetail";
+import PlaceInfo from "./pages/PlaceInfo";
+import PlaceInfoDetail from './pages/PlaceInfoDetail';
 import MyPage from "./pages/MyPage";
 import ChatList from "./pages/ChatList";
 import Header from "./components/Header";
@@ -33,6 +35,8 @@ function App() {
         <Route path="/freeboardlist" component={FreeBoardList} />
         <Route path="/freeboardwrite" component={FreeBoardWrite} />
         <Route path="/freeboarddetail" component={FreeBoardDetail} />
+        <Route path="/placeinfo" component={PlaceInfo} />
+        <Route path="/placeinfodetail" component={PlaceInfoDetail} />
         <Route path="/mypage" component={MyPage} />
         <Route path="/chatlist" component={ChatList} />
         <Navbar />

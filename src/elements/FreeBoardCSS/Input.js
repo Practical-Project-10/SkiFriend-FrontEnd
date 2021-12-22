@@ -8,10 +8,7 @@ const Input = (props) => {
     placeholder,
     _onChange,
     type,
-    margin,
-    height,
     width,
-    padding,
     _value,
     textarea,
     title,
@@ -31,11 +28,8 @@ const Input = (props) => {
         onChange={_onChange}
         type={type}
         id={type}
-        margin={margin}
         width={width}
-        height={height}
         value={_value}
-        padding={padding}
       />
     </React.Fragment>
   );
@@ -64,12 +58,8 @@ const Textarea = styled.textarea`
 `;
 
 const ElInput = styled.input`
-  border: 1px solid #87cefa;
   width: ${(props) => props.width};
-  height: ${(props) => props.height};
-  padding: ${(props) => props.padding};
   box-sizing: border-box;
-  margin: ${(props) => props.margin};
 `;
 
 export default Input;

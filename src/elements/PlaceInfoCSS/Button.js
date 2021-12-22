@@ -15,6 +15,7 @@ const Button = (props) => {
     opacity,
     color,
     className,
+    placeBtn,
   } = props;
 
   const styles = {
@@ -28,7 +29,14 @@ const Button = (props) => {
     color: color,
     className: className,
   };
-  
+
+  if (placeBtn) {
+    return (
+      <PlaceBtn {...styles} onClick={_onClick}>
+        {text ? text : children}
+      </PlaceBtn>
+    );
+  }
   return (
     <React.Fragment>
       <ElButton {...styles} onClick={_onClick}>
@@ -44,7 +52,11 @@ Button.defaultProps = {
   width: "100%",
 };
 
-
+const PlaceBtn = styled.button`
+  width: 90%;
+  margin: 10px auto;
+  padding: 10px;
+`;
 
 //---- 기본 return Button ----
 const ElButton = styled.button`
