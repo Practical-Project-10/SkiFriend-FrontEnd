@@ -17,9 +17,9 @@ function App() {
     <React.Fragment>
       <Grid mainFrame>
         <Route path="/carpool" exact component ={Carpool}/>
-        <Route path="/carpoolwrite"  component ={CarpoolWrite}/>
-        <Route path="/login"  component ={Login}/>
-        <Route path="/card"  component ={Card}/>
+        <Route path="/carpoolwrite" component ={CarpoolWrite}/>
+        <Route path="/login" component ={Login}/>
+        <Route path="/card" component ={Card}/>
         <Route path="/freeboard" component={FreeBoard} />
         <Route path='/signupone' component={SignupOne}></Route>
         <Route path='/signupTwo' component={SignupTwo}></Route>

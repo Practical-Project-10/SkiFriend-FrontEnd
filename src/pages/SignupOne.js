@@ -1,12 +1,14 @@
 import React from "react";
 
 import {Grid, Text, Input, Button} from '../elements/SignupOneCSS';
+import Header from '../components/Header'
 
 const SignupOne = (props) => {
 
 
   return (
     <React.Fragment>
+      <Header/>
       <Grid>
         <Grid>
           <Grid className='title'>
