@@ -124,6 +124,7 @@ const Wraps = styled.div`
 const SelectBox = styled.div`
   margin: 0 auto;
   width: 170px;
+  height: 100%;
   display:flex;
   align-items: center;
   padding: 20px;
