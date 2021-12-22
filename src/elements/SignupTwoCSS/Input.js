@@ -5,45 +5,30 @@ import Text from "./Text";
 const Input = (props) => {
   const {
     label,
-    placeholder,
-    _onChange,
-    type,
-    margin,
-    height,
     width,
-    padding,
-    _value,
+    inline,
   } = props;
+
+  const style = {
+    inline,
+  }
 
   return (
     <React.Fragment>
-      <Text margin='0' size='13px'>{label}</Text>  {/* 추가 */}
-      <ElInput
-        placeholder={placeholder}
-        onChange={_onChange}
-        type={type}
-        id={type}
-        margin={margin}
-        width={width}
-        height={height}
-        value={_value}
-        padding={padding}
-      />
+      {label
+        ?(<Text margin='0' size='13px' {...style}>{label}</Text>)  
+        :""
+      }
+      <ElInput width={width}/>
     </React.Fragment>
   );
 };
 
-Input.defaultProps = {
-  width: "100%",
-};
+
 
 const ElInput = styled.input`
-  border: 1px solid #87cefa;
-  width: ${(props) => props.width};
-  height: ${(props) => props.height};
-  padding: ${(props) => props.padding};
-  box-sizing: border-box;
-  margin: ${(props) => props.margin};
+  width: ${props => props.width? props.width: ''};
+  height: 17px;
 `;
 
 export default Input;

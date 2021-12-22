@@ -3,6 +3,7 @@ import React from "react";
 import { Grid } from "./elements/SharedCSS";
 import { Route } from "react-router-dom";
 //pages import
+import Home from "./pages/Home";
 import SignupOne from "./pages/SignupOne";
 import SignupTwo from "./pages/SignupTwo";
 import Login from "./pages/Login";
@@ -16,7 +17,8 @@ function App() {
   return (
     <React.Fragment>
       <Grid mainFrame>
-        <Route exact path="/signupone" component={SignupOne}></Route>
+        <Route exact path="/home" component={Home}></Route>
+        <Route path="/signupone" component={SignupOne}></Route>
         <Route path="/signupTwo" component={SignupTwo}></Route>
         <Route path="/login" component={Login} />
         <Route path="/carpool" component={Carpool} />
