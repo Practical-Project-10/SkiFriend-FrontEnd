@@ -29,6 +29,7 @@ Image.defaultProps = {
 const MyProfile = styled.div`
   width: 170px;
   height: 170px;
+  margin: auto;
   border: 1px solid #000;
   border-radius: 999px;
 `;

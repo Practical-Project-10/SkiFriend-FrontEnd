@@ -47,7 +47,6 @@ Grid.defaultProps = {
 
 const GridBox = styled.div`
   width: 70%;
-  padding: 20px 16px;
   margin: auto;
   border: 1px solid #000;
   text-align: center;

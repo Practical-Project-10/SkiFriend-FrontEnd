@@ -5,30 +5,22 @@ const Text = (props) => {
   const {
     children,
     _onClick,
-    inline,
-    size
+    size,
   } = props;
 
   const style = {
-    inline,
-    size
+    size,
   }
 
   return (
-    <P onClick={_onClick} {...style}>
+    <Span {...style} onClick={_onClick}>
       {children}
-    </P>
+    </Span>
   );
 };
 
-Text.defaultProps = {
-  children: null,
-  _onClick: () => {},
-};
-
-const P = styled.p`
-  margin-bottom: 5px;
+const Span = styled.span`
   font-size: ${props => props.size? props.size: ''};
-`;
+`
 
 export default Text;
