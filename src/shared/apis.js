@@ -16,6 +16,7 @@ const api = axios.create({
 //   },
 // });
 //
+
 api.interceptors.request.use(function (config) {
   const accessToken = document.cookie.split("=")[1];
   config.headers.common["Authorization"] = `Bearer ${accessToken}`;

@@ -86,6 +86,7 @@ const MainFrame = styled.div`
   min-height: 100vh;
   padding: 42px 16px 48px;
   border: 1px solid #000;
+  box-sizing: border-box;
 `;
 
 const Navbar = styled.div`

@@ -10,6 +10,7 @@ import styled from "styled-components";
 const Example = () => {
   const [startDate, setStartDate] = useState(new Date());
   return (
+    
     <Grid is_flex justify="center">
       <Grid is_flex>
         <Text width="3em">날짜</Text>

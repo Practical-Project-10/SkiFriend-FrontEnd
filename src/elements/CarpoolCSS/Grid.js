@@ -64,6 +64,7 @@ if(mainFrame) {
       <MainFrame>{children}</MainFrame>
     )
   }
+  
 if(wraps) {
     return(
       <Wraps>{children}</Wraps>
