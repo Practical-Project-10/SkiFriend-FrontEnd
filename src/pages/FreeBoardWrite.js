@@ -17,6 +17,7 @@ const FreeBoardWrite = () => {
         <Grid is_flex padding="20px">
           <Text>제목</Text>
           <Input title></Input>
+          asd
         </Grid>
         <Input textarea placeholder="내용을 입력하세요" />
       </Grid>

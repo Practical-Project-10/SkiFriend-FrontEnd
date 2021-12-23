@@ -15,7 +15,7 @@ import FreeBoardList from "../src/pages/FreeBoardList";
 import FreeBoardWrite from "./pages/FreeBoardWrite";
 import FreeBoardDetail from "./pages/FreeBoardDetail";
 import PlaceInfo from "./pages/PlaceInfo";
-import PlaceInfoDetail from './pages/PlaceInfoDetail';
+import PlaceInfoDetail from "./pages/PlaceInfoDetail";
 import MyPage from "./pages/MyPage";
 import ChatList from "./pages/ChatList";
 import Header from "./components/Header";
@@ -27,7 +27,7 @@ function App() {
   return (
     <React.Fragment>
       <Grid mainFrame>
-        <Header/>
+        {/* <Header/> */}
         <Route exact path="/" component={Home}></Route>
         <Route path="/signupone" component={SignupOne}></Route>
         <Route path="/signupTwo" component={SignupTwo}></Route>
