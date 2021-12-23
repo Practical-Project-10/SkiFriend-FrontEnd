@@ -22,7 +22,7 @@ const Example = () => {
         minDate={new Date()}
       />
       </Grid>
-    </React.Fragment>
+    </Grid>
   );
 };
 
