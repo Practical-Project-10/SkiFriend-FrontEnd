@@ -30,15 +30,58 @@ api.interceptors.request.use(function (config) {
 // });
 
 export const apis = {
-  //로그인, 회원가입
-  signup: (id, fullname, username, pwd) =>
-    api.post("/auth/signup", {
-      email: id,
-      fullname: fullname,
-      username: username,
+  //로그인 / 회원가입
+  // sms인증 api 찾아보기
+  login: (id, pwd) =>
+    api.post('/user/login', {
+      username: id,
       password: pwd,
     }),
-  login: (id, pwd) => api.post("/auth/login", { email: id, password: pwd }),
+  
+  signup: (userInfo) =>
+    api.post('/user/signup', {
+      username: userInfo.username,
+      password: userInfo.password,
+      phoneNum: userInfo.phoneNum,
+      nickname: userInfo.nickname,
+      profileImg: userInfo.profileImg,
+      vacImg: userInfo.vacImg,
+      gender: userInfo.gender,
+      ageRange: userInfo.ageRange,
+      career: userInfo.career,
+      selfInfro: userInfo.selfInfro,
+    }),
+
+  idCheck: (id) => 
+    api.post('/user/signup/idcheck', {
+      username: id,
+    }),
+
+  nicknameCheck: (nickname) =>
+    api.post('/user/signup/nicknamecheck', {
+      nickname
+    }),
+
+  getUserInfo: () =>
+    api.get('/user/info'),
+
+  editUserInfo: (userInfo) => // 비밀번호 예외 처리
+    api.put('/user/info', {
+      password: userInfo.password,
+      nickname: userInfo.nickname,
+      profileImg: userInfo.profileImg,
+      vacImg: userInfo.vacImg,
+      career: userInfo.career,
+      selfIntro: userInfo.selfInfro,
+    }),
+
+
+  //마이페이지  
+  deleteUser: () => 
+    api.delete('/user/info'),
+  
+  
+  
 
   //카풀게시글/ 자유게시글
   getPost: (skiResort) => api.get(`/board/${skiResort}`, {}),
