@@ -1,5 +1,5 @@
 import { handleActions, createAction } from "redux-actions";
-import { apis } from "../shared/apis";
+import { apis } from "../../shared/apis";
 import axios from "axios";
 
 import produce from "immer";
