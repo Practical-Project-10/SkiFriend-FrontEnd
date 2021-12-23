@@ -1,5 +1,5 @@
 import React from "react";
-import { Grid, Text } from "../elements/CarpoolCSS";
+import { Grid, Text,Button } from "../elements/CarpoolCSS";
 import "../elements/CarpoolCSS/styles.css";
 import Example from "../components/Example";
 import { BsArrowLeftRight } from "react-icons/bs";
@@ -45,6 +45,11 @@ const CarpoolFilter = () => {
           control={<Checkbox />}
           label="카풀 제공만 보기"
         />
+      </Grid>
+      <Grid>
+        <Button>
+          작성버튼
+        </Button>
       </Grid>
     </Grid>
   );
