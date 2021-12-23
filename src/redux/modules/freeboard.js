@@ -7,7 +7,6 @@ import produce from "immer";
 // initialState
 const initialState = {
   list: [],
-  likedPostList: [],
 };
 
 // action
@@ -17,81 +16,53 @@ const UPDATE = "freeboard/UPDATE";
 const DELETE = "freeboard/DELETE";
 
 // action creater
-export const loadBoard = createAction(LOAD, (postList, liked) => ({
+export const loadBoard = createAction(LOAD, (postList) => ({
   postList,
-  liked,
 }));
 export const addBoard = createAction(ADD, (postData) => ({ postData }));
 export const updateBoard = createAction(UPDATE, (postData) => ({ postData }));
 export const deleteBoard = createAction(DELETE, (postId) => ({ postId }));
 
+// token
+const accessToken = document.cookie.split("=")[1];
+const token = {
+  headers: {
+    "Content-Type": "multipart/form-data",
+    Authorization: `Bearer ${accessToken}`,
+  },
+};
 // thunk
-export const addBoardDB = (data) => {
-  return function (dispatch, getState, { history }) {
+export const loadBoardDB =
+  (skiResort) =>
+  async (dispatch, getState, { history }) => {
+    const data = await apis.getPost(skiResort);
+    dispatch(loadBoard(data.data));
+  };
+
+export const addBoardDB =
+  (skiResort, datas) =>
+  async (dispatch, getState, { history }) => {
+    const data = await apis.writeFreePost(skiResort, token, datas);
     dispatch(addBoard(data));
     dispatch(loadBoardDB());
   };
-};
-
-export const loadBoardDB =
-  () =>
-  async (dispatch, getState, { history }) => {
-    const data = await apis.getPost();
-    dispatch(loadBoard(data.data.posts, data.data.likedPostList));
-  };
 
 export const updateBoardDB =
-  (post_id = null, content = {}, location, formData) =>
+  (postId, datas) =>
   async (dispatch, getState, { history }) => {
-    try {
-      if (!post_id) {
-        console.log("게시물 정보가 없어요!");
-        return;
-      }
-      const image_url = getState().image.preview;
-
-      const accessToken = document.cookie.split("=")[1];
-
-      const _post = {
-        ...initialState,
-        content: content,
-        location: location,
-        image: image_url,
-      };
-
-      axios({
-        method: "put",
-        url: `http://52.78.31.61/api/board/detail/${post_id}`,
-        data: formData,
-        _post,
-        headers: {
-          "Content-Type": "multipart/form-data",
-          "X-AUTH-TOKEN": `${accessToken}`,
-        },
-      })
-        .then((response) => {
-          window.alert("게시물 수정 완료");
-
-          dispatch(
-            updateBoard(post_id, { ...content, ...location, image: image_url })
-          );
-          // dispatch(imageActions.setPreview(null));
-          history.replace("/");
-        })
-        .catch((err) => {
-          window.alert("게시물 수정 실패");
-          console.log(err);
-        });
-    } catch (err) {
-      window.alert("");
-      console.log(err);
+    if (!postId) {
+      console.log("게시물 정보가 없어요!");
+      return;
     }
+    const data = await apis.updateFreePost(postId, token, datas);
+    dispatch(updateBoard(data));
+    dispatch(loadBoardDB());
   };
 
 export const deleteBoardDB =
   (postId) =>
-  (dispatch, getState, { history }) => {
-    apis.deletePost(postId).then((res) => {
+  async (dispatch, getState, { history }) => {
+    apis.deleteFreePost(postId, token).then((res) => {
       dispatch(deleteBoard(postId));
     });
   };
@@ -103,7 +74,6 @@ export default handleActions(
       return {
         ...state,
         list: action.payload.postList,
-        likedPostList: action.payload.liked,
       };
     },
     [ADD]: (state, action) =>
