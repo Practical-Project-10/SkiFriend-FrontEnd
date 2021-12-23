@@ -21,7 +21,7 @@ import ChatList from "./pages/ChatList";
 import Header from "./components/Header";
 import Navbar from "./components/Navbar";
 import ChatRoom from "./pages/ChatRoom";
-// import Test from "./components/Test";
+import SelectRegion from "./components/SelectRegion";
 
 function App() {
   return (
@@ -44,7 +44,7 @@ function App() {
         <Route path="/mypage" component={MyPage} />
         <Route path="/chatroom" component={ChatRoom} />
         <Route path="/chatlist" component={ChatList} />
-        {/* <Route path="/test" component={Test} /> */}
+        <Route path="/selectregion" component={SelectRegion} />
         <Navbar />
       </Grid>
     </React.Fragment>

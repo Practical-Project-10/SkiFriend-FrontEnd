@@ -85,8 +85,8 @@ export const apis = {
 
   //카풀게시글/ 자유게시글
   getPost: (skiResort) => api.get(`/board/${skiResort}`, {}),
-  writeFreePost: (skiResort, token, fd) =>
-    api.post(`/board/${skiResort}/freeBoard`, { token, fd }),
+  writeFreePost: (skiResort, token, datas) =>
+    api.post(`/board/${skiResort}/freeBoard`, { token, datas }),
   getOneFreePost: (postId) => api.post(`board/freeBoard/${postId}`, {}),
   updateFreePost: (postId, token, datas) =>
     api.put(`board/freeBoard/${postId}`, { token, datas }),
