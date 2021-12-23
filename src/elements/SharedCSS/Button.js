@@ -16,6 +16,7 @@ const Button = (props) => {
     color,
     className,
     smallBtn,
+    floatBtn,
   } = props;
 
   const styles = {
@@ -29,7 +30,7 @@ const Button = (props) => {
     color: color,
     className: className,
   };
-  
+
   if (smallBtn) {
     return (
       <SmallBtn {...styles} onClick={_onClick}>
@@ -37,6 +38,14 @@ const Button = (props) => {
       </SmallBtn>
     );
   }
+  if (floatBtn) {
+    return (
+      <FloatButton {...styles} onClick={_onClick}>
+        {text ? text : children}
+      </FloatButton>
+    );
+  }
+
   return (
     <React.Fragment>
       <ElButton {...styles} onClick={_onClick}>
@@ -49,7 +58,6 @@ const Button = (props) => {
 Button.defaultProps = {
   children: null,
   _onClick: () => {},
-  width: "100%",
 };
 
 const SmallBtn = styled.button`
@@ -62,6 +70,17 @@ const SmallBtn = styled.button`
   border-radius: 5px;
 `;
 
+const FloatButton = styled.button`
+  font-size: 30px;
+  width: 50px;
+  height: 50px;
+  background: orange;
+  border: none;
+  border-radius: 50%;
+  &:hover {
+    opacity: 0.9;
+  }
+`;
 //---- 기본 return Button ----
 const ElButton = styled.button`
   width: ${(props) => props.width};

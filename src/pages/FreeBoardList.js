@@ -1,8 +1,9 @@
 import React from "react";
 
+import { Grid, Text } from "../elements/FreeBoardCSS/index";
 import Header from "../components/Header";
 import CarpoolMenuBar from "../components/CarpoolMenuBar";
-import { Grid, Text } from "../elements/FreeBoardCSS/index";
+import FloatButton from "../components/FloatButton";
 
 //react icon
 import { AiOutlineHeart } from "react-icons/ai";
@@ -30,6 +31,7 @@ const FreeBoardList = () => {
           </Grid>
         </Grid>
       </Grid>
+      <FloatButton />
     </React.Fragment>
   );
 };
