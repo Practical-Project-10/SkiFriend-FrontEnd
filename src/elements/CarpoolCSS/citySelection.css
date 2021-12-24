@@ -4,7 +4,7 @@ body {
     -moz-osx-font-smoothing: grayscale;
   }
   .wrap-all{
-    
+    width: 100%;
     border-bottom: 1px solid #CACACA;
     
   }

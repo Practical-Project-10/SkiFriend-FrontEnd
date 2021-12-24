@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 
-
 const Grid = (props) => {
   const {
     is_flex,
@@ -30,7 +29,6 @@ const Grid = (props) => {
     wraps,
     navbar,
     head,
-    datepicker,
     cards
   } = props;
 
@@ -84,11 +82,6 @@ if(wraps) {
   if(head) {
     return(
       <Head>{children}</Head>
-    )
-  }
-  if(datepicker) {
-    return(
-      <Datepicker>{children}</Datepicker>
     )
   }
 if(cards) {
@@ -145,14 +138,6 @@ background-color: #C4C4C4;
 width: 100%
 `;
 
-const Datepicker = styled.div`
-margin : 0 auto;
-  width: 170px;
-  display:flex;
-  align-items: center;
-  padding: 20px;
-`;
-
 const Cards = styled.div`
     width: 75%;
     display: flex;
@@ -164,6 +149,7 @@ const Cards = styled.div`
     margin: 10px auto;
     padding: 15px 20px;
 `;
+
 const GridBox = styled.div`
   width: ${(props) => props.width};
   box-sizing: border-box;
