@@ -9,6 +9,8 @@ const Input = (props) => {
     _onChange,
     type,
     _value,
+    _onBlur,
+    _name,
   } = props;
 
   return (
@@ -19,6 +21,8 @@ const Input = (props) => {
         placeholder={placeholder}
         onChange={_onChange}
         value={_value}
+        onBlur={_onBlur}
+        name={_name}
       ></SignupInput>
     </React.Fragment>
   );

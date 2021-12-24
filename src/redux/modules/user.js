@@ -6,36 +6,33 @@ import { apis } from '../../shared/apis';
 //action
 const SET_USER = 'SET_USER';
 const LOGOUT = 'LOGOUT';
-const UPDATE_USER = 'UPDATE_USER';
+const EDIT_USER = 'EDIT_USER';
 const ID_CHECK = 'ID_CHECK';
 const NICKNAME_CHECK = 'NICKNAME_CHEKCK';
+const PHONENUM_CHECK = 'PHONENUM_CHECK';
 const SMS_CHECK = 'SMS_CHECK';
 
 //action creators
 const setUser = (SET_USER, user => ({user}));
 const logout = (LOGOUT, () => ({}));
-const updateUserInfo = (UPDATE_USER, (userInfo) => ({userInfo}));
+const editUserInfo = (EDIT_USER, (userInfo) => ({userInfo}));
 const idCheck = (ID_CHECK => (state) => ({state}));
 const nicknameCheck = (NICKNAME_CHECK => (state) => ({state}));
-// const smsCheck = (SMS_CHECK, (state) => ({state}));
+const phoneNumCheck = (PHONENUM_CHECK, (num) => ({num}));
+const smsCheck = (SMS_CHECK, (state) => ({state}));
 
 //[회원가입, 회원탈퇴, 비밀번호수정, 문자인증]은 서버에서 처리 리덕스에서 할거 없음
 
 //middlewares
-// const isSmsCheckDB = (smsNum) => {
-//   return async (dispatch, getState, {history}) => {
-//     try {
-//       const response = await apis.smsCheck(smsNum);
-
-//       response && dispatch(smsCheck(true));
-//     } catch(err) {
-//       console.log(err);
-//     }
-//   };
-// };
-
-const signupDB = (userInfo) => {
+const signup1DB = (userInfo) => {
   return async (dispatch, getState, {history}) => {
+    const _userInfo = {
+      username: userInfo.username,
+      nickname: userInfo.nickname,
+      password: userInfo.password,
+      phoneNum: userInfo.phoneNum,
+    };
+
     const userData = {
       username: userInfo.username,
       nickname: userInfo.nickname,
@@ -52,7 +49,38 @@ const signupDB = (userInfo) => {
     try {
       const response = await apis.signup(userData);
 
-      response && history.push('/');
+      
+      response && window.alert('회원가입이 완료되었습니다.');
+      history.push('/');
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};
+
+const signup2DB = (userInfo) => {
+  return async (dispatch, getState, {history}) => {
+    
+
+    const userData = {
+      username: userInfo.username,
+      nickname: userInfo.nickname,
+      password: userInfo.password,
+      phoneNum: userInfo.phoneNum,
+      profileImg: userInfo.profileImg,
+      vacImg: userInfo.vacImg, 
+      gender: userInfo.gender,
+      ageRange: userInfo.ageRange,
+      career: userInfo.career,
+      selfIntro: userInfo.selfIntro,
+    }
+
+    try {
+      const response = await apis.signup(userData);
+
+      
+      response && window.alert('회원가입이 완료되었습니다.');
+      history.push('/');
     } catch (err) {
       console.log(err);
     }
@@ -60,12 +88,15 @@ const signupDB = (userInfo) => {
 };
 
 const isIdDB = (id) => {
-  return async (dispatch,) => {
+  return async (dispatch) => {
+    console.log(id)
     try{
       await apis.idCheck(id);
 
+      window.alert('사용 가능한 아이디 입니다.')
       dispatch(idCheck(true));
     } catch(err) {
+      window.alert('이미 사용중인 아이디 입니다.')
       console.log(err);
     }
   };  
@@ -73,14 +104,39 @@ const isIdDB = (id) => {
 
 const isNicknameDB = (nickname) => {
   return async (dispatch,) => {
+    console.log(nickname)
     try{
       await apis.nicknameCheck(nickname);
 
+      window.alert('사용 가능한 닉네임 입니다.')
       dispatch(nicknameCheck(true));
     } catch(err) {
+      window.alert('이미 사용중인 닉네임 입니다.')
       console.log(err);
     }
   };  
+};
+
+const isPhoneNumCheckDB = (phoneNum) => {
+  return async (dispatch, getState, {history}) => {
+    try {
+      await apis.phoneNumCheck(phoneNum);
+    } catch(err) {
+      console.log(err);
+    }
+  };
+};
+
+const isSmsCheckDB = (phoneNum, randomNum) => {
+  return async (dispatch, getState, {history}) => {
+    try {
+      await apis.smsCheck(phoneNum, randomNum);
+
+      dispatch(smsCheck(true));
+    } catch(err) {
+      console.log(err);
+    }
+  };
 };
 
 const loginDB = (id, pwd) => {
@@ -99,7 +155,17 @@ const loginDB = (id, pwd) => {
 
 const editUserInfoDB = (userInfo) => {
   return async (dispatch, getState, {history}) => {
-    
+    try {
+      const oldUserInfo = getState().user.user;
+      const newUserInfo = {...oldUserInfo, userInfo};
+      const response = await apis.editUserInfo(newUserInfo);
+      const _userInfo = response.data
+
+      response && history.push('/freeboarddetail');
+      dispatch(editUserInfo(_userInfo));
+    } catch(err) {
+      console.log(err);
+    }
   }
 }
 
@@ -136,7 +202,7 @@ export default handleActions(
         draft.is_login = false;
         draft.user = {};
       }),
-    [UPDATE_USER]: (state, action) =>
+    [EDIT_USER]: (state, action) =>
       produce(state, draft => {
         draft.user = action.payload.userInfo;
       }),
@@ -148,10 +214,10 @@ export default handleActions(
       produce(state, draft => {
         draft.is_nickname = action.payload.state;
       }),
-    // [SMS_CHECK]: (state, action) =>
-    //   produce(state, draft => {
-    //     draft.sms = action.payload.state;
-    //   }),
+    [SMS_CHECK]: (state, action) =>
+      produce(state, draft => {
+        draft.is_sms = action.payload.state;
+      }),
   },
   initialState
 );
@@ -159,13 +225,15 @@ export default handleActions(
 const userActions = {
   setUser,
   logout,
-  updateUserInfo,
   idCheck,
   nicknameCheck,
-  signupDB,
+  // signupDB,
   isIdDB,
   isNicknameDB,
+  isPhoneNumCheckDB,
+  isSmsCheckDB,
   loginDB,
+  editUserInfoDB,
   deleteUserInfoDB,
 }
 
