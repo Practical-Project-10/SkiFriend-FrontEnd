@@ -15,10 +15,10 @@ const Input = (props) => {
   } = props;
 
   if (title) {
-    return <Title placeholder={placeholder}></Title>;
+    return <Title placeholder={placeholder} onChange={_onChange}></Title>;
   }
   if (textarea) {
-    return <Textarea placeholder={placeholder}></Textarea>;
+    return <Textarea placeholder={placeholder} onChange={_onChange}></Textarea>;
   }
   return (
     <React.Fragment>

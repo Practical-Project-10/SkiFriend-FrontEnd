@@ -79,6 +79,7 @@ const FloatButton = styled.button`
   border-radius: 50%;
   &:hover {
     opacity: 0.9;
+    cursor: pointer;
   }
 `;
 //---- 기본 return Button ----

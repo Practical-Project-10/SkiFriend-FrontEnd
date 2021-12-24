@@ -13,8 +13,8 @@ const CarpoolMenuBar = ({ location }) => {
           <Text>카풀</Text>
         )}
       </NavLink>
-      <NavLink to="/freeboard" className="navLink">
-        {location.pathname === "/freeboard" ? (
+      <NavLink to="/freeboardlist" className="navLink">
+        {location.pathname === "/freeboardlist" ? (
           <Text boardlink>게시글</Text>
         ) : (
           <Text>게시글</Text>

@@ -1,7 +1,7 @@
-import { apis } from "../components/shared/apis";
 import { createAction, handleActions } from "redux-actions";
 import produce from "immer";
 import alert from "sweetalert";
+import { apis } from "../components/shared/apis";
 import { loadPostDB } from "./post";
 
 // initialState
@@ -11,23 +11,25 @@ const initialState = {
 
 // action
 const LOAD = "comment/LOAD";
-const COMMENT = "comment/COMMENT";
+const ADD = "comment/ADD";
+const UPDATE = "comment/UPDATE";
 const DELETE = "comment/DELETE";
 
 // action create
-const addComment = createAction(COMMENT, (comment, store) => ({
+const loadComment = createAction(LOAD, (comment) => ({ comment }));
+const addComment = createAction(ADD, (comment, store) => ({
   comment,
   store,
 }));
-const loadComment = createAction(LOAD, (comment) => ({ comment }));
+const updateComment = createAction(UPDATE, (content) => ({ content }));
 const deleteComment = createAction(DELETE, (commentId) => ({ commentId }));
 
 // thunk middleWare
 export const addCommentDB =
   (postId, content) =>
-  (dispatch, getState, { history }) => {
-    const state = getState().post.list;
-    apis
+  async (dispatch, getState, { history }) => {
+    const state = getState().freeboard.list.resortPosts;
+    await apis
       .addComment(postId, content)
       .then((res) => {
         let index;
@@ -48,16 +50,24 @@ export const addCommentDB =
 
 export const loadCommentDB =
   (postId) =>
-  (dispatch, getState, { history }) => {
-    apis.getComment(postId).then((res) => {
+  async (dispatch, getState, { history }) => {
+    await apis.getComment(postId).then((res) => {
+      dispatch(loadComment(res.data));
+    });
+  };
+
+export const updateCommentDB =
+  (commentId, content) =>
+  async (dispatch, getState, { history }) => {
+   await apis.updateComment(commentId, content).then((res) => {
       dispatch(loadComment(res.data));
     });
   };
 
 export const deleteCommentDB =
   (postId, commentId) =>
-  (dispatch, getState, { history }) => {
-    apis.deleteComment(postId, commentId).then((res) => {
+  async (dispatch, getState, { history }) => {
+    await apis.deleteComment(postId, commentId).then((res) => {
       dispatch(loadCommentDB(postId));
       deleteComment(commentId);
       alert("댓글 삭제");
@@ -73,11 +83,20 @@ export default handleActions(
         list: action.payload.comment,
       };
     },
-    [COMMENT]: (state, action) =>
+    [ADD]: (state, action) =>
       produce(state, (draft) => {
         draft.list.push(action.payload.comment);
         draft.list.push((action.payload.store.numOfComments += 1));
       }),
+
+    [UPDATE]: (state, action) =>
+      produce(state, (draft) => {
+        let idx = draft.list.findIndex(
+          (p) => p.id === Number(action.payload.userId)
+        );
+        draft.list[idx] = { ...draft.list[idx], ...action.payload.post };
+      }),
+
     [DELETE]: (state, action) => {
       return {
         ...state,
