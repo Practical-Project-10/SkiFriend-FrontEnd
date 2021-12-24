@@ -7,7 +7,6 @@ const Login = (props) => {
 
   return (
     <React.Fragment>
-      <Grid>
         <Grid>
           <Grid className='title'>
             <Text className='pageTitle'>로그인</Text>
@@ -25,7 +24,6 @@ const Login = (props) => {
             <Button className='social'>카카오 로그인</Button>
           </Grid>
         </Grid>
-      </Grid>
     </React.Fragment>
   )
 };
