@@ -25,7 +25,8 @@ const CarpoolFilter = () => {
       <Grid justify="center">
         <Example />
       </Grid>
-      <Grid selectBox>
+      {/* 출발 도착지역 셀렉박스 */}
+      {/* <Grid selectBox>
         <select>
           <option value="">도시선택</option>
           <option>지방</option>
@@ -35,7 +36,7 @@ const CarpoolFilter = () => {
           <BsArrowLeftRight style={{ margin: "0px 20px" }} />
         </span>
         <span className="skiResort">용평</span>
-      </Grid>
+      </Grid> */}
       <Grid is_flex justify="center" margin="30px">
         <FormControlLabel
           control={<Checkbox />}

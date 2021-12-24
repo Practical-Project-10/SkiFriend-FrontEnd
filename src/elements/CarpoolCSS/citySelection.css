@@ -3,7 +3,11 @@ body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
-  
+  .wrap-all{
+    
+    border-bottom: 1px solid #CACACA;
+    
+  }
   :root {
     --bg:  #fff;
     --text-color: #dadce1;
@@ -28,9 +32,10 @@ body {
   /* <nav> */
   .navbar {
     height: var(--nav-size);
-    background-color: var(--bg);
+    background-color: #CACACA;
     padding: 0 1rem;
     border-bottom: var(--border);
+    
   }
   
   /* <ul> */
@@ -65,6 +70,7 @@ body {
   
   .icon-button:hover {
     filter: brightness(1.2);
+    cursor: pointer;
   }
   
   /* Dropdown Menu */
@@ -81,6 +87,7 @@ body {
     padding: 1rem;
     overflow-x:scroll;
     transition: height var(--speed) ease;
+    
   }
   
   .menu {

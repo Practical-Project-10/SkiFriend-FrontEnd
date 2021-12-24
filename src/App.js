@@ -21,7 +21,7 @@ import ChatList from "./pages/ChatList";
 import Header from "./components/Header";
 import Navbar from "./components/Navbar";
 import ChatRoom from "./pages/ChatRoom";
-import SelectRegion from "./components/SelectRegion";
+import BoundChangeBox from './components/BoundChangeBox';
 
 function App() {
   return (
@@ -44,7 +44,7 @@ function App() {
         <Route path="/mypage" component={MyPage} />
         <Route path="/chatroom" component={ChatRoom} />
         <Route path="/chatlist" component={ChatList} />
-        <Route path="/selectregion" component={SelectRegion} />
+        <Route path="/boundchangebox" component={BoundChangeBox} />
         <Navbar />
       </Grid>
     </React.Fragment>

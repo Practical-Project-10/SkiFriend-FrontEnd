@@ -38,7 +38,8 @@ const CarpoolWrite = () => {
             <Text>출발지역</Text>
             <Text>도착지역</Text>
             </Grid>
-        <Grid selectBox>
+            {/* 출발도착지역 셀렉박스 */}
+        {/* <Grid selectBox>
                 <select>
                 <option>지방</option>
                 <option>서울</option>
@@ -47,7 +48,7 @@ const CarpoolWrite = () => {
                 <BsArrowLeftRight style={{ margin: "0px 20px" }} />
                 </span>
                 <span className="skiResort">용평</span>
-            </Grid>
+            </Grid> */}
       <Grid is_flex width="100px">
          <Example/>
          <TimePicker/>
