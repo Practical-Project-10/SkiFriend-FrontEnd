@@ -1,4 +1,5 @@
 import React from "react";
+import GlobalStyleds from "./shared/globalStyles";
 
 import { Grid } from "./elements/SharedCSS";
 import { Route } from "react-router-dom";
@@ -21,11 +22,12 @@ import ChatList from "./pages/ChatList";
 import Header from "./components/Header";
 import Navbar from "./components/Navbar";
 import ChatRoom from "./pages/ChatRoom";
-import BoundChangeBox from './components/BoundChangeBox';
+import BoundChangeBox from "./components/BoundChangeBox";
 
 function App() {
   return (
     <React.Fragment>
+      <GlobalStyleds />
       <Grid mainFrame>
         {/* <Header/> */}
         <Route exact path="/" component={Home}></Route>

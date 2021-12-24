@@ -29,7 +29,8 @@
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.4.1",
     "styled-components": "^5.3.3",
-    "swiper": "6.8.4",
+    "styled-reset": "^4.3.4",
+    "swiper": "^6.8.4",
     "web-vitals": "^2.1.0"
   },
   "scripts": {
