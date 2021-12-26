@@ -5,6 +5,7 @@ import { Grid } from "./elements/index";
 import { Route } from "react-router-dom";
 //pages import
 import Home from "./pages/Home";
+import PhoneAuth from "./pages/PhoneAuth";
 import SignupOne from "./pages/SignupOne";
 import SignupTwo from "./pages/SignupTwo";
 import Login from "./pages/Login";
@@ -31,6 +32,7 @@ function App() {
       <Grid mainFrame>
         {/* <Header/> */}
         <Route exact path="/" component={Home}></Route>
+        <Route exact path="/phoneauth" component={PhoneAuth}></Route>
         <Route path="/signupone" component={SignupOne}></Route>
         <Route path="/signupTwo" component={SignupTwo}></Route>
         <Route path="/login" component={Login} />
@@ -51,6 +53,6 @@ function App() {
       </Grid>
     </React.Fragment>
   );
-}
+};
 
 export default App;

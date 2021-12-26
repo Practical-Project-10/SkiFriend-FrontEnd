@@ -1,11 +1,11 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "",
-  headers: {
-    "content-type": "application/json;charset=UTF-8",
-    accept: "application/json,",
-  },
+  baseURL: "http://13.125.249.172/", //http://13.125.249.172/
+  // headers: {
+  //   "content-type": "application/json;charset=UTF-8",
+  //   accept: "application/json,",
+  // },
 });
 
 // const apiMultipart = axios.create({
@@ -18,8 +18,10 @@ const api = axios.create({
 //
 
 api.interceptors.request.use(function (config) {
-  const accessToken = document.cookie.split("=")[1];
-  config.headers.common["Authorization"] = `Bearer ${accessToken}`;
+  config.headers["Content-Type"] = "application/json; charset=utf-8";
+  config.headers["X-Requested-With"] = "XMLHttpRequest";
+  // config.headers["Authorization"] = getToken() ? `Bearer ${getToken()}` : "";
+  config.headers.Accept = "application/json";
   return config;
 });
 
@@ -32,6 +34,17 @@ api.interceptors.request.use(function (config) {
 export const apis = {
   //로그인 / 회원가입
   // sms인증 api 찾아보기
+  imsy: (userInfo) => 
+    {
+      console.log(userInfo);
+      api.post('/user/test/signup', {
+        username: userInfo.username,
+        password: userInfo.password,
+        phoneNum: userInfo.phoneNum,
+        nickname: userInfo.nickname,
+      })
+    },
+
   login: (id, pwd) =>
     api.post('/user/login', {
       username: id,
@@ -58,8 +71,8 @@ export const apis = {
   nicknameCheck: (nickname) =>
     api.post('/user/signup/nicknamecheck', { nickname }),
 
-  phoneNumCheck: (phoneNumber) => 
-    api.get('/user/sms', {phoneNumber}),
+  phoneNumCheck: (phoneNumber) =>
+    api.post('/user/sms', {phoneNumber: phoneNumber}),
 
   smsNumCheck: (phoneNumber, randomNumber) => 
     api.post('/user/sms/check', {

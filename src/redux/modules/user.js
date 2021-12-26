@@ -13,45 +13,34 @@ const PHONENUM_CHECK = 'PHONENUM_CHECK';
 const SMS_CHECK = 'SMS_CHECK';
 
 //action creators
-const setUser = (SET_USER, user => ({user}));
-const logout = (LOGOUT, () => ({}));
-const editUserInfo = (EDIT_USER, (userInfo) => ({userInfo}));
-const idCheck = (ID_CHECK => (state) => ({state}));
-const nicknameCheck = (NICKNAME_CHECK => (state) => ({state}));
-const phoneNumCheck = (PHONENUM_CHECK, (num) => ({num}));
-const smsCheck = (SMS_CHECK, (state) => ({state}));
+const setUser = createAction(SET_USER, (user) => ({user}));
+const logout = createAction(LOGOUT, () => ({}));
+const editUserInfo = createAction(EDIT_USER, (userInfo) => ({userInfo}));
+const idCheck = createAction(ID_CHECK => (state) => ({state}));
+const nicknameCheck = createAction(NICKNAME_CHECK => (state) => ({state}));
+const phoneNum = createAction(PHONENUM_CHECK, (num) => ({num}));
+// const smsCheck = createAction(SMS_CHECK, (state) => ({state}));
 
 //[회원가입, 회원탈퇴, 비밀번호수정, 문자인증]은 서버에서 처리 리덕스에서 할거 없음
 
 //middlewares
-const signup1DB = (userInfo) => {
+const imsy = (userInfo) => {
   return async (dispatch, getState, {history}) => {
+    const _phoneNum = getState().user.user.phoneNum;
+    console.log(_phoneNum);
     const _userInfo = {
-      username: userInfo.username,
-      nickname: userInfo.nickname,
+      username: userInfo.id,
       password: userInfo.password,
-      phoneNum: userInfo.phoneNum,
+      phoneNum: _phoneNum,
+      nickname: userInfo.nickname,
     };
-
-    const userData = {
-      username: userInfo.username,
-      nickname: userInfo.nickname,
-      password: userInfo.password,
-      phoneNum: userInfo.phoneNum,
-      profileImg: userInfo.profileImg,
-      vacImg: userInfo.vacImg, 
-      gender: userInfo.gender,
-      ageRange: userInfo.ageRange,
-      career: userInfo.career,
-      selfIntro: userInfo.selfIntro,
-    }
-
+    console.log(_userInfo);
     try {
-      const response = await apis.signup(userData);
+      const response = await apis.imsy(_userInfo);
 
       
       response && window.alert('회원가입이 완료되었습니다.');
-      history.push('/');
+      // history.push('/login');
     } catch (err) {
       console.log(err);
     }
@@ -117,11 +106,16 @@ const isNicknameDB = (nickname) => {
   };  
 };
 
-const isPhoneNumCheckDB = (phoneNum) => {
+const isPhoneNumDB = (_phoneNum) => {
   return async (dispatch, getState, {history}) => {
+    console.log(_phoneNum);
     try {
-      await apis.phoneNumCheck(phoneNum);
+      await apis.phoneNumCheck(_phoneNum);
+       
+      window.alert('인증번호가 전송되었습니다.');
+      dispatch(phoneNum(_phoneNum));
     } catch(err) {
+      window.alert('입력하신 번호가 올바르지 않습니다.');
       console.log(err);
     }
   };
@@ -129,11 +123,16 @@ const isPhoneNumCheckDB = (phoneNum) => {
 
 const isSmsCheckDB = (phoneNum, randomNum) => {
   return async (dispatch, getState, {history}) => {
-    try {
-      await apis.smsCheck(phoneNum, randomNum);
 
-      dispatch(smsCheck(true));
+    console.log(phoneNum, randomNum)
+    try {
+      await apis.smsNumCheck(phoneNum, randomNum);
+
+      window.alert('인증이 완료되었습니다.');
+      history.push('/signupone')
+      // dispatch(smsCheck(true));
     } catch(err) {
+      window.alert('인증번호가 일치하지 않습니다.');
       console.log(err);
     }
   };
@@ -141,13 +140,15 @@ const isSmsCheckDB = (phoneNum, randomNum) => {
 
 const loginDB = (id, pwd) => {
   return async (dispatch, getState, {history}) => {
+    console.log(id, pwd);
     try {
       const response = await apis.login(id, pwd);
       const user = response.data;
-
-      response && history.push('/');
+      console.log(response.data)
+      // response && history.push('/');
       dispatch(setUser(user));
     } catch(err) {
+      window.alert('아이디와 비밀번호를 확인해주세요.')
       console.log(err);
     }
   }
@@ -174,6 +175,7 @@ const deleteUserInfoDB = () => {
     try {
       await apis.deleteUser();
 
+      window.alert('회원탈퇴가 완료되었습니다.');
       history.push('/');
       dispatch(logout());
     } catch(err) {
@@ -186,7 +188,7 @@ const initialState = {
   is_login: false,
   is_id: false,
   is_nickname: false,
-  is_sms: false,
+  // is_sms: false,
   user: {},
 }
 
@@ -214,23 +216,32 @@ export default handleActions(
       produce(state, draft => {
         draft.is_nickname = action.payload.state;
       }),
-    [SMS_CHECK]: (state, action) =>
+    [PHONENUM_CHECK]: (state, action) =>
       produce(state, draft => {
-        draft.is_sms = action.payload.state;
+        console.log(action.payload.num);
+        draft.user.phoneNum = action.payload.num;
       }),
+    // [SMS_CHECK]: (state, action) =>
+    //   produce(state, draft => {
+    //     draft.is_sms = action.payload.state;
+    //   }),
   },
   initialState
 );
 
 const userActions = {
+  imsy,
   setUser,
   logout,
+  editUserInfo,
   idCheck,
   nicknameCheck,
+  phoneNum,
+  // smsCheck,
   // signupDB,
   isIdDB,
   isNicknameDB,
-  isPhoneNumCheckDB,
+  isPhoneNumDB,
   isSmsCheckDB,
   loginDB,
   editUserInfoDB,

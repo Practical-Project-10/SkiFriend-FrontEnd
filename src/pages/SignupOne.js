@@ -2,13 +2,16 @@ import React, { useState } from "react";
 
 import { Grid, Text, Input, Button } from "../elements/index";
 
-import { idRegExp, pwdRegExp, phoneNumExp } from "../shared/validation";
+import { idRegExp, pwdRegExp } from "../shared/validation";
 
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { userActions } from "../redux/modules/user";
 
 const SignupOne = (props) => {
   const dispatch = useDispatch();
+  const joinState = useSelector(state => state.user);
+  console.log(joinState);
+
   // 유효성검사 상태
   const [checkId, setCheckId] = useState(true);
   const [checkPwd, setCheckPwd] = useState(true);
@@ -71,7 +74,20 @@ const SignupOne = (props) => {
         setCheckRePwd(true);
       }
     }
-  };
+  }
+
+  const join = () => {
+    const userInfo = {
+      id: id,
+      password: pwd,
+      nickname: nickname,
+    }
+
+    dispatch(userActions.imsy(userInfo))
+    // if(joinState.is_id && joinState.is_nickname) {
+      
+    // }
+  }
 
   return (
     <React.Fragment>
@@ -83,44 +99,18 @@ const SignupOne = (props) => {
         </Grid>
         <Grid>
           <Grid>
-            <Input
-              signup
-              _name="id"
-              _onBlur={handleBlur}
-              _onChange={handleChange}
-              label="로그인"
-              type="text"
-            />
-            <Button normalBtn>중복확인</Button>
+            <Grid>
+              <Input signup _name='id' _onBlur={handleBlur} _onChange={handleChange} label='로그인' type='text'/>
+            </Grid>
+            <Grid className='dup'>
+              <Input signup _name='nickname' _onBlur={handleBlur} _onChange={handleChange} label='닉네임' type='text'/>
+            </Grid>
+            <Input signup _name='pwd' _onBlur={handleBlur} _onChange={handleChange} label='비밀번호' type='password'/>
+            <Input signup _name='rePwd' _onBlur={handleBlur} _onChange={handleChange} label='비밀번호 확인' type='password'/>
           </Grid>
-          <Grid className="dup">
-            <Input
-              signup
-              _name="nickname"
-              _onBlur={handleBlur}
-              label="닉네임"
-              type="text"
-            />
-            <Button normalBtn>중복확인</Button>
+          <Grid>
+            <Button _onClick={join}>가입</Button>
           </Grid>
-          <Input
-            signup
-            _name="pwd"
-            _onBlur={handleBlur}
-            label="비밀번호"
-            type="password"
-          />
-          <Input
-            signup
-            _name="rePwd"
-            _onBlur={handleBlur}
-            label="비밀번호 확인"
-            type="password"
-          />
-        </Grid>
-        <Grid margin="15px 0">
-          <Button normalBtn>핸드폰번호 인증</Button>
-          <Button normalBtn>다음</Button>
         </Grid>
       </Grid>
     </React.Fragment>
