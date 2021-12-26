@@ -7,6 +7,7 @@ import { idRegExp, pwdRegExp } from "../shared/validation";
 import { useDispatch, useSelector } from "react-redux";
 import { userActions } from "../redux/modules/user";
 
+//test
 const SignupOne = (props) => {
   const dispatch = useDispatch();
   const joinState = useSelector(state => state.user);
