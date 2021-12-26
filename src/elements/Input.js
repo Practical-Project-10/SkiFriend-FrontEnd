@@ -13,16 +13,53 @@ const Input = (props) => {
     width,
     padding,
     _value,
-    textarea,
+    _onBlur,
+    _name,
+    inline,
     title,
+    textarea,
+    signup,
+    profile,
   } = props;
 
+  const style = {
+    inline,
+  };
+
   if (title) {
-    return <Title type={type} placeholder={placeholder}>
-    </Title>;
+    return <Title placeholder={placeholder} onChange={_onChange}></Title>;
   }
   if (textarea) {
-    return <Textarea placeholder={placeholder}></Textarea>;
+    return <Textarea placeholder={placeholder} onChange={_onChange}></Textarea>;
+  }
+  if (signup) {
+    return (
+      <React.Fragment>
+        <Text margin="0">{label}</Text>
+        <SignupInput
+          type={type}
+          placeholder={placeholder}
+          onChange={_onChange}
+          value={_value}
+          onBlur={_onBlur}
+          name={_name}
+        ></SignupInput>
+      </React.Fragment>
+    );
+  }
+  if (profile) {
+    return (
+      <React.Fragment>
+        {label ? (
+          <Text margin="0" size="13px" {...style}>
+            {label}
+          </Text>
+        ) : (
+          ""
+        )}
+        <ProfileInput width={width} />
+      </React.Fragment>
+    );
   }
   return (
     <React.Fragment>
@@ -37,6 +74,8 @@ const Input = (props) => {
         height={height}
         value={_value}
         padding={padding}
+        onBlur={_onBlur}
+        name={_name}
       />
     </React.Fragment>
   );
@@ -47,25 +86,24 @@ Input.defaultProps = {
 };
 
 const ElInput = styled.input`
-  border: 1px solid #87cefa;
   width: ${(props) => props.width};
   height: ${(props) => props.height};
   padding: ${(props) => props.padding};
   box-sizing: border-box;
   margin: ${(props) => props.margin};
 `;
+
 const Title = styled.input`
   width: 80%;
   border: none;
-  font-size: 25;
-  border-bottom: 2px solid black;
+  border-bottom: 1px solid black;
   &:focus {
     outline: none;
   }
 `;
 const Textarea = styled.textarea`
   width: 90%;
-  height: 500px;
+  height: 400px;
   max-width: 400px;
   padding: 10px;
   border: none;
@@ -73,5 +111,15 @@ const Textarea = styled.textarea`
     outline: none;
     resize: none;
   }
+`;
+
+const SignupInput = styled.input`
+  width: 70%;
+  margin-bottom: 10px;
+`;
+
+const ProfileInput = styled.input`
+  width: ${(props) => (props.width ? props.width : "")};
+  height: 17px;
 `;
 export default Input;

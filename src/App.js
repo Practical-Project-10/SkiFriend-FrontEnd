@@ -1,6 +1,7 @@
 import React from "react";
+import GlobalStyleds from "./shared/globalStyles";
 
-import { Grid } from "./elements/SharedCSS";
+import { Grid } from "./elements/index";
 import { Route } from "react-router-dom";
 //pages import
 import Home from "./pages/Home";
@@ -15,19 +16,20 @@ import FreeBoardList from "../src/pages/FreeBoardList";
 import FreeBoardWrite from "./pages/FreeBoardWrite";
 import FreeBoardDetail from "./pages/FreeBoardDetail";
 import PlaceInfo from "./pages/PlaceInfo";
-import PlaceInfoDetail from './pages/PlaceInfoDetail';
+import PlaceInfoDetail from "./pages/PlaceInfoDetail";
 import MyPage from "./pages/MyPage";
 import ChatList from "./pages/ChatList";
 import Header from "./components/Header";
 import Navbar from "./components/Navbar";
 import ChatRoom from "./pages/ChatRoom";
-
+import BoundChangeBox from "./components/BoundChangeBox";
 
 function App() {
   return (
     <React.Fragment>
+      <GlobalStyleds />
       <Grid mainFrame>
-        <Header/>
+        {/* <Header/> */}
         <Route exact path="/" component={Home}></Route>
         <Route path="/signupone" component={SignupOne}></Route>
         <Route path="/signupTwo" component={SignupTwo}></Route>
@@ -44,6 +46,7 @@ function App() {
         <Route path="/mypage" component={MyPage} />
         <Route path="/chatroom" component={ChatRoom} />
         <Route path="/chatlist" component={ChatList} />
+        <Route path="/boundchangebox" component={BoundChangeBox} />
         <Navbar />
       </Grid>
     </React.Fragment>

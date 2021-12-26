@@ -1,42 +1,47 @@
 import React from "react";
-import "react-datepicker/dist/react-datepicker.css";
-import { Grid,Button } from "../elements/CarpoolCSS";
-import "../elements/CarpoolCSS/styles.css";
+import { useHistory } from "react-router";
+// import "react-datepicker/dist/react-datepicker.css";
+import "../elements/styles.css";
+import { Grid, Button } from "../elements/index";
+// components
 import CarpoolMenuBar from "../components/CarpoolMenuBar";
 import Card from "../components/Card";
-import { useHistory } from "react-router";
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
-import Pagination from '@mui/material/Pagination';
-import Stack from '@mui/material/Stack';
+
+// material icons
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Checkbox from "@mui/material/Checkbox";
+import Pagination from "@mui/material/Pagination";
+import Stack from "@mui/material/Stack";
 
 const Carpool = (props) => {
-  const history= useHistory();
+  const history = useHistory();
   return (
-    
-      <Grid wraps>
-        <Grid head>
-           
-        </Grid>
-        {/* 스키 리조트 배너들어갈곳 */}
-        <img alt="스키 리조트" src={props.skiResortImg} />
-        
-        {/* 카풀/게시글 네비게이션 바 */}
-        <CarpoolMenuBar/>
-        <Grid justify="space-between"is_flex width="100%">
-          <Grid width="100%">
+    <Grid is_flex align="center" direction="column">
+      <Grid bg="#C4C4C4"></Grid>
+      {/* 스키 리조트 배너들어갈곳 */}
+      <img alt="스키 리조트" src={props.skiResortImg} />
+
+      {/* 카풀/게시글 네비게이션 바 */}
+      <CarpoolMenuBar />
+      <Grid justify="space-around" is_flex width="100%">
+        <Grid>
           <FormControlLabel control={<Checkbox />} label="카풀완료 숨기기" />
-          </Grid>
-        
-        <Button  _onClick={()=>{history.push("/carpoolfilter")}}>필터</Button>
         </Grid>
-        
-        <Card/>
-        <Stack spacing={2}>
-      <Pagination count={5} />
-      </Stack>
+
+        <Button
+          _onClick={() => {
+            history.push("/carpoolfilter");
+          }}
+        >
+          필터
+        </Button>
       </Grid>
-    
+
+      <Card />
+      <Stack spacing={2}>
+        <Pagination count={5} />
+      </Stack>
+    </Grid>
   );
 };
 

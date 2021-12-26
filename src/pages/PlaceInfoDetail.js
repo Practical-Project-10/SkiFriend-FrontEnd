@@ -1,5 +1,5 @@
 import React from "react";
-import { Grid } from "../elements/SharedCSS";
+import { Grid } from "../elements/index";
 
 const PlaceInfoDetail = () => {
   return (

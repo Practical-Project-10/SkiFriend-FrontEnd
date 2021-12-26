@@ -2,7 +2,7 @@ import React from "react";
 import "../App.css";
 
 import { NavLink, withRouter } from "react-router-dom";
-import { Grid, Text } from "../elements/SharedCSS/index";
+import { Grid, Text } from "../elements/index";
 
 // react-icons
 import { AiTwotoneHome, AiOutlineHome } from "react-icons/ai";
@@ -29,8 +29,8 @@ const Navbar = ({ location }) => {
               <AiOutlineInfoCircle size="25" />
             )}
           </NavLink>
-          <NavLink to="#" className="navLink">
-            {location.pathname === "#" ? (
+          <NavLink to="/chatroom" className="navLink">
+            {location.pathname === "/chatroom" ? (
               <BsChatFill size="25" />
             ) : (
               <BsChat size="25" />

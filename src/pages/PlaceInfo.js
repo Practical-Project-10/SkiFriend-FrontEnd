@@ -1,6 +1,5 @@
 import React from "react";
-import { Grid } from "../elements/SharedCSS/index";
-import { Button } from "../elements/PlaceInfoCSS/index";
+import { Grid, Button } from "../elements/index";
 
 const PlaceInfo = () => {
   return (

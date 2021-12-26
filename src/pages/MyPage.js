@@ -1,9 +1,9 @@
 import React from "react";
-import { Grid, Button, Image } from "../elements/SharedCSS/index";
-import { Text } from "../elements/MyPageCSS/index";
+import { Grid, Button, Image, Text } from "../elements/index";
 
 const MyPage = () => {
   const is_login = 1;
+  console.log(is_login)
   if (!is_login) {
     return (
       //로그인 안한 경우

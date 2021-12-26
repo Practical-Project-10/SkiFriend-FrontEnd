@@ -1,6 +1,6 @@
 import React from "react";
-import { Grid, Button } from "../elements/SharedCSS/index";
-import { Text, Input } from "../elements/FreeBoardCSS/index";
+
+import { Grid, Button, Input, Text } from "../elements/index";
 
 //react icons
 import { GrFormPrevious } from "react-icons/gr";

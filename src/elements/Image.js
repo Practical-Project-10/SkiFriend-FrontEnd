@@ -11,19 +11,26 @@ const Image = (props) => {
     _onClick,
     radius,
     className,
+    myIcon,
   } = props;
 
   const styles = {
-    src: src,
-    size: size,
-    width: width,
-    height: height,
-    margin: margin,
-    _onClick: _onClick,
-    radius: radius,
-    className: className,
+    src,
+    size,
+    width,
+    height,
+    margin,
+    _onClick,
+    radius,
+    className,
   };
-
+  if (myIcon) {
+    return (
+      <React.Fragment>
+        <MyIcon {...styles} onClick={_onClick} />
+      </React.Fragment>
+    );
+  }
   return (
     <React.Fragment>
       <MyProfile {...styles} onClick={_onClick} />
@@ -38,20 +45,28 @@ Image.defaultProps = {
   _onClick: () => {},
 };
 
-
+const MyIcon = styled.div`
+  width: 3.5em;
+  height: 3.5em;
+  border-radius: 50%;
+  margin-right: 10px;
+  background-size: cover;
+  background-position: center;
+  ${(props) => (props.src ? `background-image: url(${props.src});` : "")}
+`;
 
 const MyProfile = styled.div`
-  width: 150px;
-  height: 150px;
-  border-radius: 50%;
+  width: ${(props) => props.width};
+  height: ${(props) => props.height};
+  margin: ${(props) => props.margin};
+  border-radius: ${(props) => props.radius};
   background-size: cover;
   background-position: center;
   ${(props) => (props.src ? `background-image: url(${props.src});` : "")}
   &:hover {
-    opacity: 0.9;
+    /* opacity: 0.9; */
     cursor: pointer;
   }
 `;
-
 
 export default Image;

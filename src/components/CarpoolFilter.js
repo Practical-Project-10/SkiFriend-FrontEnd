@@ -1,13 +1,17 @@
 import React from "react";
-import { Grid, Text } from "../elements/CarpoolCSS";
-import "../elements/CarpoolCSS/styles.css";
-import Example from "../components/Example";
-import { BsArrowLeftRight } from "react-icons/bs";
-import { AiOutlineArrowLeft } from "react-icons/ai";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
 import { useHistory } from "react-router";
 
+import { Grid, Text,Button } from "../elements/index";
+import Example from "../components/Example";
+
+//react icons
+import { BsArrowLeftRight } from "react-icons/bs";
+import { AiOutlineArrowLeft } from "react-icons/ai";
+//material icons
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Checkbox from "@mui/material/Checkbox";
+
+import "../elements/styles.css";
 
 const CarpoolFilter = () => {
     const history = useHistory();
@@ -25,7 +29,8 @@ const CarpoolFilter = () => {
       <Grid justify="center">
         <Example />
       </Grid>
-      <Grid selectBox>
+      {/* 출발 도착지역 셀렉박스 */}
+      {/* <Grid selectBox>
         <select>
           <option value="">도시선택</option>
           <option>지방</option>
@@ -35,7 +40,7 @@ const CarpoolFilter = () => {
           <BsArrowLeftRight style={{ margin: "0px 20px" }} />
         </span>
         <span className="skiResort">용평</span>
-      </Grid>
+      </Grid> */}
       <Grid is_flex justify="center" margin="30px">
         <FormControlLabel
           control={<Checkbox />}
@@ -45,6 +50,11 @@ const CarpoolFilter = () => {
           control={<Checkbox />}
           label="카풀 제공만 보기"
         />
+      </Grid>
+      <Grid>
+        <Button>
+          작성버튼
+        </Button>
       </Grid>
     </Grid>
   );
