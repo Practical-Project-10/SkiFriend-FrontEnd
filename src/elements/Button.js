@@ -14,21 +14,21 @@ const Button = (props) => {
     bgColor,
     opacity,
     color,
-    className,
     smallBtn,
     floatBtn,
+    placeBtn,
+    normalBtn,
   } = props;
 
   const styles = {
-    margin: margin,
-    width: width,
-    padding: padding,
-    disabled: disabled,
-    radius: radius,
-    bgColor: bgColor,
-    opacity: opacity,
-    color: color,
-    className: className,
+    margin,
+    width,
+    padding,
+    disabled,
+    radius,
+    bgColor,
+    opacity,
+    color,
   };
 
   if (smallBtn) {
@@ -45,6 +45,20 @@ const Button = (props) => {
       </FloatButton>
     );
   }
+  if (placeBtn) {
+    return (
+      <PlaceBtn {...styles} onClick={_onClick}>
+        {text ? text : children}
+      </PlaceBtn>
+    );
+  }
+  if (normalBtn) {
+    return (
+      <React.Fragment>
+        <NormalButton onClick={_onClick}>{text ? text : children}</NormalButton>
+      </React.Fragment>
+    );
+  }
 
   return (
     <React.Fragment>
@@ -59,6 +73,19 @@ Button.defaultProps = {
   children: null,
   _onClick: () => {},
 };
+
+//---- 기본 return Button ----
+const ElButton = styled.button`
+  width: ${(props) => props.width};
+  padding: ${(props) => props.padding};
+  margin: ${(props) => props.margin};
+  position: ${(props) => props.position};
+  background-color: ${(props) => props.bgColor};
+  border: ${(props) => props.border};
+  box-sizing: border-box;
+  ${(props) => (props.className ? `className: ${props.className}` : "")};
+  cursor: pointer;
+`;
 
 const SmallBtn = styled.button`
   color: white;
@@ -82,17 +109,17 @@ const FloatButton = styled.button`
     cursor: pointer;
   }
 `;
-//---- 기본 return Button ----
-const ElButton = styled.button`
-  width: ${(props) => props.width};
-  padding: ${(props) => props.padding};
-  box-sizing: border-box;
-  border: none;
-  ${(props) => (props.margin ? `margin: ${props.margin};` : "")};
-  position: ${(props) => (props.position ? `${props.position}` : "")};
-  background-color: ${(props) => (props.bgColor ? `${props.bgColor}` : "")};
-  ${(props) => (props.className ? `className: ${props.className}` : "")};
-  cursor: pointer;
+
+const PlaceBtn = styled.button`
+  width: 90%;
+  margin: 10px auto;
+  padding: 10px;
+`;
+
+const NormalButton = styled.button`
+  width: 120px;
+  padding: 5px 0;
+  margin: 5px auto;
 `;
 
 export default Button;

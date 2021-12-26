@@ -1,98 +1,94 @@
-// src/redux/modules/places.jsx
-// import { createAction, handleActions } from "redux-actions";
-// import produce from "immer";
-// import { apis } from "../components/shared/apis";
+import { createAction, handleActions } from "redux-actions";
+import produce from "immer";
+import { apis } from "../../shared/apis";
 
-// // ACTIONS
-// export const SET_PLACE = 'skyprinter/places/SET_PLACE';
-// export const FETCH_PLACE = 'skyprinter/places/FETCH_PLACE';
-// export const SWITCH_PLACES = 'skyprinter/places/SWITCH_PLACES';
-// export const INITIALIZE_PLACES = 'skyprinter/places/INITIALIZE_PLACES';
+// ACTIONS
+// const LOAD = "carpool/LOAD";
+const ADD = "carpool/ADD";
+const UPDATE = "carpool/UPDATE";
+const DELETE = "carpool/DELETE";
+const SWITCH_PLACES = "carpool/SWITCH_PLACES";
 
-// // ACTION CREATORS
-// export const initializePlaces = () => ({
-//   type: INITIALIZE_PLACES
-// });
-// export const setPlace = places => ({ type: SET_PLACE, places });
-// export const switchPlaces = () => ({ type: SWITCH_PLACES });
+//initialState
+const initialState = {
+  list: [],
+  startLocName: "",
+  endLocName: "",
+};
 
-// export function* fetchPlaces(action) {
-//   const error = yield select(state => state.error);
+//action creator
+const addCarpool = createAction(ADD, (carpoolData) => ({ carpoolData }));
+const updateCarpool = createAction(UPDATE, (carpoolData) => ({ carpoolData }));
+const deleteCarpool = createAction(DELETE, (carpoolId) => ({ carpoolId }));
+const switchPlaces = createAction(SWITCH_PLACES, (placeData) => ({
+  placeData,
+}));
 
-//   try {
-//     yield put({
-//       type: FETCH_PLACE,
-//       places: action.places
-//     });
+//middleware
 
-//     // 유효성 검사
-//     if (error.errorOccurred) {
-//       const places = yield select(state => state.places);
-//       let newErrors = error.errors;
-//       if (newErrors !== null) {
-//         if (places.inBoundId && places.outBoundId) {
-//           newErrors = newErrors.filter(e => e.type !== 'Incorrect places');
-//         }
-//         if (places.inBoundId !== places.outBoundId) {
-//           newErrors = newErrors.filter(e => e.type !== 'PlaceId is same');
-//         }
-//         if (places.inBoundId.length !== 2 && places.outBoundId.length !== 2) {
-//           newErrors = newErrors.filter(e => e.type !== 'No Country');
-//         }
-//         newErrors.length === 0 || newErrors === null
-//           ? yield put({ type: SET_ERROR, errors: null })
-//           : yield put({ type: SET_ERROR, errors: newErrors });
-//       }
-//     }
-//   } catch (error) {
-//     console.log(error);
-//   }
-// }
+const addCarpoolDB =
+  (skiResort, datas) =>
+  async (dispatch, getState, { history }) => {
+    const data = await apis.writeCarpool(skiResort, datas);
+    dispatch(addCarpool(data));
+    //   dispatch(loadBoardDB()); 이부분 어떻게 해야할지 잘 모르겠습니다ㅠㅠ
+  };
 
-// // ROOT SAGA
-// export function* placesSaga() {
-//   yield takeEvery(SET_PLACE, fetchPlaces);
-// }
+const updateCarpoolDB =
+  (carpoolId, datas) =>
+  async (dispatch, getState, { history }) => {
+    if (!carpoolId) {
+      console.log("카풀 정보가 없어요!");
+      return;
+    }
+    const data = await apis.updateCarpool(carpoolId, datas);
+    dispatch(updateCarpool(data));
+    //   dispatch(loadBoardDB()); 이부분도요!
+  };
 
-// // INIITIAL STATE
-// const initialState = {
-//   inBoundId: '',
-//   inBoundName: '',
-//   outBoundId: '',
-//   outBoundName: ''
-// };
+const deleteCarpoolDB =
+  (carpoolId) =>
+  async (dispatch, getState, { history }) => {
+    apis.deleteCarpool(carpoolId).then((res) => {
+      dispatch(deleteCarpool(carpoolId));
+    });
+  };
 
-// // REDUCER
-// export default function places(state = initialState, action) {
-//   switch (action.type) {
-//     case INITIALIZE_PLACES:
-//       return initialState;
+//reducer
+export default handleActions(
+  {
+    [ADD]: (state, action) =>
+      produce(state, (draft) => {
+        draft.list.unshift(action.payload.carpoolData);
+      }),
+    [UPDATE]: (state, action) =>
+      produce(state, (draft) => {
+        let idx = draft.list.findIndex(
+          (c) => c.id === Number(action.payload.carpoolId)
+        );
+        draft.list[idx] = { ...draft.list[idx], ...action.payload.carpool };
+      }),
+    [DELETE]: (state, action) => {
+      return {
+        ...state,
+        list: state.list.filter((list) => list.id !== action.payload.carpoolId),
+      };
+    },
+    //위치바꾸기 불완전함!
+    [SWITCH_PLACES]: (state, action) =>
+      produce(state, (draft) => {
+        draft.startLocName = action.payload.startLocName;
+        draft.endLocName = action.payload.endLocName;
+      }),
+  },
+  initialState
+);
 
-//     case FETCH_PLACE:
-//       const { places } = action;
-//       if (places.type === 'inBound') {
-//         return {
-//           inBoundId: places.PlaceId,
-//           inBoundName: places.PlaceName,
-//           outBoundId: state.outBoundId,
-//           outBoundName: state.outBoundName
-//         };
-//       } else {
-//         return {
-//           inBoundId: state.inBoundId,
-//           inBoundName: state.inBoundName,
-//           outBoundId: places.PlaceId,
-//           outBoundName: places.PlaceName
-//         };
-//       }
-//     case SWITCH_PLACES:
-//       return {
-//         inBoundId: state.outBoundId,
-//         inBoundName: state.outBoundName,
-//         outBoundId: state.inBoundId,
-//         outBoundName: state.inBoundName
-//       };
-//     default:
-//       return state;
-//   }
-// }
+const carpoolCreators = {
+  addCarpoolDB,
+  updateCarpoolDB,
+  deleteCarpoolDB,
+  switchPlaces,
+};
+
+export { carpoolCreators };

@@ -2,7 +2,7 @@ import React from "react";
 import { history } from "../redux/ConfigStore";
 import { useSelector } from "react-redux";
 
-import { Grid, Text } from "../elements/FreeBoardCSS/index";
+import { Grid, Text } from "../elements/index";
 import Header from "../components/Header";
 import CarpoolMenuBar from "../components/CarpoolMenuBar";
 import FloatButton from "../components/FloatButton";
@@ -17,9 +17,11 @@ const FreeBoardList = () => {
   return (
     <React.Fragment>
       <Header />
-      <Grid main>하이원</Grid>
+      <Grid height="13em" bg="red">
+        하이원
+      </Grid>
       <CarpoolMenuBar />
-      <Grid list>
+      <Grid padding="20px" height="384px" overflow="scroll">
         <Text>전체</Text>
         {/* {boardList.map((post)=>{
           return ( */}

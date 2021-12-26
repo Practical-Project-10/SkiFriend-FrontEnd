@@ -1,6 +1,5 @@
 import React from "react";
-import { Grid, Button, Image } from "../elements/SharedCSS/index";
-import { Text } from "../elements/MyPageCSS/index";
+import { Grid, Button, Image, Text } from "../elements/index";
 
 const MyPage = () => {
   const is_login = 1;

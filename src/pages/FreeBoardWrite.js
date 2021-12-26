@@ -3,8 +3,7 @@ import { history } from "../redux/ConfigStore";
 import { useDispatch } from "react-redux";
 import { boardCreators as boardActions } from "../redux/modules/freeboard";
 
-import { Grid, Button } from "../elements/SharedCSS";
-import { Input, Text, Image } from "../elements/FreeBoardCSS/index";
+import { Grid, Button, Text, Input } from "../elements/index";
 
 //react icons
 import { GrFormPrevious } from "react-icons/gr";
@@ -91,31 +90,26 @@ const FreeBoardWrite = () => {
         />
       </Grid>
       <Grid is_flex width="100%" height="200px">
-        <Swiper {...swiperParams}>
+        {/* <Swiper {...swiperParams} style={{ width: "100%" }}>
           {uploadURL.length !== 0 &&
             uploadURL.map((file, index) => {
               return (
                 <React.Fragment>
                   <SwiperSlide
-                    style={{ margin: "auto", position: "relative" }}
+                    style={{
+                      margin: "auto",
+                      position: "relative",
+                    }}
                     key={index}
                   >
-                    <Grid is_flex width="100%" height="200px">
-                      <img
-                        src={file}
-                        alt="userUploadImg"
-                        style={{
-                          maxWidth: "440px",
-                          maxHeight: "480px",
-                          display: "block",
-                        }}
-                      />
-                    </Grid>
+                    <Grid is_flex width="100%" height="200px"> */}
+        <img src={uploadURL} alt="userUploadImg" />
+        {/* </Grid>
                   </SwiperSlide>
                 </React.Fragment>
               );
             })}
-        </Swiper>
+        </Swiper> */}
       </Grid>
       <Grid>
         <label htmlFor="myFile" style={{ cursor: "pointer" }}>
@@ -125,7 +119,7 @@ const FreeBoardWrite = () => {
           type="file"
           id="myFile"
           style={{ display: "none" }}
-          multiple
+          // multiple
           accept="image/*"
           onChange={uploadImg}
         />
