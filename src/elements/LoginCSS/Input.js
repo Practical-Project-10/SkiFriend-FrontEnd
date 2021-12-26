@@ -11,6 +11,7 @@ const Input = (props) => {
     _value,
   } = props;
 
+
   return (
     <React.Fragment>
       <Text size margin='0'>{label}</Text>

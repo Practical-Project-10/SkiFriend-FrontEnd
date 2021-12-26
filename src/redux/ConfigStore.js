@@ -6,7 +6,7 @@ import { connectRouter } from "connected-react-router";
 //---- Reducer ----
 
 // import Post from "./post";
-// import User from "./user";
+import User from "./modules/user";
 // import Comment from "./comment";
 // import Like from "./like";
 
@@ -18,7 +18,7 @@ const rootReducer = combineReducers({
   // like: Like,
   // comment: Comment,
   // post: Post,
-  // user: User,
+  user: User,
   router: connectRouter(history),
 });
 

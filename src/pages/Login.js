@@ -2,8 +2,30 @@ import React from 'react';
 
 import {Grid, Text, Input, Button} from '../elements/LoginCSS';
 
+import { useDispatch, useSelector } from 'react-redux';
+import { userActions } from '../redux/modules/user';
+
 const Login = (props) => {
-  
+  const dispatch = useDispatch();
+  const user = useSelector(state => state.user.user);
+  console.log(user);
+  const ldInput = React.useRef();
+  const pwdInput = React.useRef();
+
+  const join = () => {
+    const id = ldInput.current.value;
+    const pwd = pwdInput.current.value;
+
+    if (id === '') {
+      window.alert('아이디를 입력해주세요.');
+      return null;
+    } else if (pwd === '') {
+      window.alert('비밀번호를 입력해주세요.');
+      return null;
+    }
+
+    dispatch(userActions.loginDB(id, pwd));
+  }
 
   return (
     <React.Fragment>
@@ -12,11 +34,13 @@ const Login = (props) => {
             <Text className='pageTitle'>로그인</Text>
           </Grid>
           <Grid className='loginInput'>
-            <Input label='로그인' type='text'/>
-            <Input label='비밀번호' type='password'/>
+            <input type='text' ref={ldInput}/>
+            <input type='password' ref={pwdInput}/>
+            {/* <Input label='로그인' type='text' ref={ldInput}/>
+            <Input label='비밀번호' type='password' ref={pwdInput}/> */}
           </Grid>
           <Grid className='loginButtons'>
-            <Button>로그인</Button>
+            <Button _onClick={join}>로그인</Button>
             <Button>회원가입</Button>
           </Grid>
           <Grid className='socialButtons'>
