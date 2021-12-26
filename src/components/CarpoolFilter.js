@@ -1,13 +1,17 @@
 import React from "react";
-import { Grid, Text,Button } from "../elements/CarpoolCSS";
-import "../elements/CarpoolCSS/styles.css";
-import Example from "../components/Example";
-import { BsArrowLeftRight } from "react-icons/bs";
-import { AiOutlineArrowLeft } from "react-icons/ai";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
 import { useHistory } from "react-router";
 
+import { Grid, Text,Button } from "../elements/index";
+import Example from "../components/Example";
+
+//react icons
+import { BsArrowLeftRight } from "react-icons/bs";
+import { AiOutlineArrowLeft } from "react-icons/ai";
+//material icons
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Checkbox from "@mui/material/Checkbox";
+
+import "../elements/styles.css";
 
 const CarpoolFilter = () => {
     const history = useHistory();

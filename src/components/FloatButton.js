@@ -1,5 +1,5 @@
 import React from "react";
-import { Grid, Button } from "../elements/SharedCSS";
+import { Grid, Button } from "../elements/index";
 
 const FloatButton = () => {
   return (

@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { Text, Grid } from "../elements/CarpoolCSS/index";
-import "../elements/CarpoolCSS/styles.css";
+import { Text, Grid } from "../elements/index";
+import "../elements/styles.css";
 import { ko } from "date-fns/esm/locale";
 import styled from "styled-components";
 
@@ -10,7 +10,6 @@ import styled from "styled-components";
 const Example = () => {
   const [startDate, setStartDate] = useState(new Date());
   return (
-    
     <Grid is_flex justify="center">
       <Grid is_flex>
         <Text width="3em">날짜</Text>

@@ -1,7 +1,7 @@
 import React from "react";
 import "../App.css";
 import { NavLink, withRouter } from "react-router-dom";
-import { Grid, Text } from "../elements/SharedCSS/index";
+import { Grid, Text } from "../elements/index";
 
 const CarpoolMenuBar = ({ location }) => {
   return (

@@ -1,7 +1,7 @@
 import React from "react";
 import GlobalStyleds from "./shared/globalStyles";
 
-import { Grid } from "./elements/SharedCSS";
+import { Grid } from "./elements/index";
 import { Route } from "react-router-dom";
 //pages import
 import Home from "./pages/Home";
@@ -42,7 +42,7 @@ function App() {
         <Route path="/card" component={Card} />
         <Route path="/freeboardlist" component={FreeBoardList} />
         <Route path="/freeboardwrite" component={FreeBoardWrite} />
-        <Route path="/freeboarddetail/:postId" component={FreeBoardDetail} />
+        <Route path="/freeboarddetail" component={FreeBoardDetail} />
         <Route path="/placeinfo" component={PlaceInfo} />
         <Route path="/placeinfodetail" component={PlaceInfoDetail} />
         <Route path="/mypage" component={MyPage} />
