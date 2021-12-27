@@ -3,7 +3,7 @@ import { produce } from "immer";
 
 import { apis } from "../../shared/apis";
 
-import { setCookie, deleteCookie } from '../../shared/cookie';
+import { setCookie, deleteCookie } from "../../shared/cookie";
 
 //action
 const SET_USER = "SET_USER";
@@ -39,9 +39,9 @@ const imsy = (userInfo) => {
     console.log(_userInfo);
     try {
       const response = await apis.imsy(_userInfo);
-      
-      response && window.alert('회원가입이 완료되었습니다.');
-      history.push('/login');
+
+      response && window.alert("회원가입이 완료되었습니다.");
+      history.push("/login");
     } catch (err) {
       console.log(err);
     }
@@ -124,9 +124,9 @@ const isSmsCheckDB = (phoneNum, randomNum) => {
     console.log(phoneNum, randomNum);
     try {
       await apis.smsNumCheck(phoneNum, randomNum);
-      window.alert('인증이 완료되었습니다.');
-      
-      history.push('/signupone');
+      window.alert("인증이 완료되었습니다.");
+
+      history.push("/signupone");
       // dispatch(smsCheck(true));
     } catch (err) {
       window.alert("인증번호가 일치하지 않습니다.");
@@ -143,8 +143,10 @@ const loginDB = (id, pwd) => {
       const user = response.data;
       const token = response.headers.authorization;
 
-      response && history.push('/');
-      setCookie('token', token)
+      setCookie("token", token);
+      localStorage.setItem("nickname", response.data.nickname);
+      localStorage.setItem("userId", response.data.userId);
+      response && history.push("/");
       dispatch(setUser(user));
     } catch (err) {
       window.alert("아이디와 비밀번호를 확인해주세요.");
@@ -199,9 +201,8 @@ export default handleActions(
         draft.user = action.payload.user;
       }),
     [LOGOUT]: (state, action) =>
-
-      produce(state, draft => {
-        deleteCookie('token');
+      produce(state, (draft) => {
+        deleteCookie("token");
         draft.is_login = false;
         draft.user = {};
       }),
