@@ -144,7 +144,7 @@ const loginDB = (id, pwd) => {
       const token = response.headers.authorization;
 
       response && history.push('/');
-      setCookie('token', token)
+      setCookie('token', token);
       dispatch(setUser(user));
     } catch (err) {
       window.alert("아이디와 비밀번호를 확인해주세요.");
@@ -199,7 +199,6 @@ export default handleActions(
         draft.user = action.payload.user;
       }),
     [LOGOUT]: (state, action) =>
-
       produce(state, draft => {
         deleteCookie('token');
         draft.is_login = false;
