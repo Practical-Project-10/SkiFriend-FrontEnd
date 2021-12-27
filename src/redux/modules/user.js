@@ -143,10 +143,8 @@ const loginDB = (id, pwd) => {
       const user = response.data;
       const token = response.headers.authorization;
 
-      setCookie("token", token);
-      localStorage.setItem("nickname", response.data.nickname);
-      localStorage.setItem("userId", response.data.userId);
-      response && history.push("/");
+      response && history.push('/');
+      setCookie('token', token);
       dispatch(setUser(user));
     } catch (err) {
       window.alert("아이디와 비밀번호를 확인해주세요.");
@@ -201,8 +199,8 @@ export default handleActions(
         draft.user = action.payload.user;
       }),
     [LOGOUT]: (state, action) =>
-      produce(state, (draft) => {
-        deleteCookie("token");
+      produce(state, draft => {
+        deleteCookie('token');
         draft.is_login = false;
         draft.user = {};
       }),
