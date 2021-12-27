@@ -1,58 +1,55 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "http://13.125.249.172/", //http://13.125.249.172/
-  // headers: {
-  //   "content-type": "application/json;charset=UTF-8",
-  //   accept: "application/json,",
-  // },
+  baseURL: "http://13.125.249.172/",
+  headers: {
+    "content-type": "application/json;charset=UTF-8",
+    accept: "application/json,",
+  },
 });
 
-// const apiMultipart = axios.create({
-//   baseURL: "",
-//   headers: {
-//     "content-type":
-//       "multipart/form-data; boundary=----WebKitFormBoundaryfApYSlK1ODwmeKW3",
-//   },
-// });
-//
+const apiMultipart = axios.create({
+  baseURL: "http://13.125.249.172/",
+  headers: {
+    "content-type":
+      "multipart/form-data; boundary=----WebKitFormBoundarymqOgr6Cp7jHF3SAA",
+  },
+});
 
 api.interceptors.request.use(function (config) {
-  config.headers["Content-Type"] = "application/json; charset=utf-8";
-  config.headers["X-Requested-With"] = "XMLHttpRequest";
-  // config.headers["Authorization"] = getToken() ? `Bearer ${getToken()}` : "";
-  config.headers.Accept = "application/json";
+  const accessToken = document.cookie.split("=")[1];
+  console.log(accessToken);
+  config.headers.common["Authorization"] = `${accessToken}`;
   return config;
 });
 
-// apiMultipart.interceptors.request.use(function (config) {
-//   const accessToken = document.cookie.split("=")[1];
-//   config.headers.common["Authorization"] = `Bearer ${accessToken}`;
-//   return config;
-// });
+apiMultipart.interceptors.request.use(function (config) {
+  const accessToken = document.cookie.split("=")[1];
+  config.headers.common["Authorization"] = `${accessToken}`;
+  return config;
+});
 
 export const apis = {
   //로그인 / 회원가입
   // sms인증 api 찾아보기
-  imsy: (userInfo) => 
-    {
-      console.log(userInfo);
-      api.post('/user/test/signup', {
-        username: userInfo.username,
-        password: userInfo.password,
-        phoneNum: userInfo.phoneNum,
-        nickname: userInfo.nickname,
-      })
-    },
+  imsy: (userInfo) => {
+    console.log(userInfo);
+    api.post("/user/test/signup", {
+      username: userInfo.username,
+      password: userInfo.password,
+      phoneNum: userInfo.phoneNum,
+      nickname: userInfo.nickname,
+    });
+  },
 
   login: (id, pwd) =>
-    api.post('/user/login', {
+    api.post("/user/login", {
       username: id,
       password: pwd,
     }),
-  
+
   signup: (userInfo) =>
-    api.post('/user/signup', {
+    api.post("/user/signup", {
       username: userInfo.username,
       password: userInfo.password,
       phoneNum: userInfo.phoneNum,
@@ -65,26 +62,26 @@ export const apis = {
       selfInfro: userInfo.selfInfro,
     }),
 
-  idCheck: (id) => 
-    api.post('/user/signup/idcheck', { username: id }),
+  idCheck: (id) => api.post("/user/signup/idcheck", { username: id }),
 
   nicknameCheck: (nickname) =>
-    api.post('/user/signup/nicknamecheck', { nickname }),
+    api.post("/user/signup/nicknamecheck", { nickname }),
 
   phoneNumCheck: (phoneNumber) =>
-    api.post('/user/sms', {phoneNumber: phoneNumber}),
+    api.post("/user/sms", { phoneNumber: phoneNumber }),
 
-  smsNumCheck: (phoneNumber, randomNumber) => 
-    api.post('/user/sms/check', {
+  smsNumCheck: (phoneNumber, randomNumber) =>
+    api.post("/user/sms/check", {
       phoneNumber,
       randomNumber,
     }),
 
-  getUserInfo: () =>
-    api.get('/user/info'),
+  getUserInfo: () => api.get("/user/info"),
 
-  editUserInfo: (userInfo) => // 비밀번호 예외 처리
-    api.put('/user/info', {
+  editUserInfo: (
+    userInfo // 비밀번호 예외 처리
+  ) =>
+    api.put("/user/info", {
       password: userInfo.password,
       nickname: userInfo.nickname,
       profileImg: userInfo.profileImg,
@@ -93,34 +90,30 @@ export const apis = {
       selfIntro: userInfo.selfInfro,
     }),
 
+  //마이페이지
+  deleteUser: () => api.delete("/user/info"),
 
-  //마이페이지  
-  deleteUser: () => 
-    api.delete('/user/info'),
-  
-  
-  
+  //카풀게시글
 
-  //카풀게시글/ 자유게시글
-  getPost: (skiResort) => api.get(`/board/${skiResort}`, {}),
-  writeFreePost: (skiResort, token, datas) =>
-    api.post(`/board/${skiResort}/freeBoard`, { token, datas }),
+  // 자유게시글
+  getFreePost: (skiResort) => api.get(`/board/freeBoard/${skiResort}`, {}),
+  writeFreePost: (skiResort, datas, token) =>
+    apiMultipart.post(`/board/${skiResort}/freeBoard`, { datas }),
   getOneFreePost: (postId) => api.post(`board/freeBoard/${postId}`, {}),
-  updateFreePost: (postId, token, datas) =>
-    api.put(`board/freeBoard/${postId}`, { token, datas }),
-  deleteFreePost: (postId, token) => api.delete(`/posts/${postId}`, { token }),
+  updateFreePost: (postId, datas) =>
+    api.put(`board/freeBoard/${postId}`, { datas }),
+  deleteFreePost: (postId) => api.delete(`/posts/${postId}`, {}),
 
   // //댓글
-  addComment: (postId, token, content) =>
-    api.post(`/board/freeBoard/${postId}/comments`, { token, content }),
-  updateComment: (commentId, token, content) =>
-    api.put(`/board/freeBoard/comments/${commentId}`, { token, content }),
-  deleteComment: (commentId, token) =>
-    api.delete(`/board/freeBoard/comments/${commentId}`, { token }),
+  addComment: (postId, content) =>
+    api.post(`/board/freeBoard/${postId}/comments`, { content }),
+  updateComment: (commentId, content) =>
+    api.put(`/board/freeBoard/comments/${commentId}`, { content }),
+  deleteComment: (commentId) =>
+    api.delete(`/board/freeBoard/comments/${commentId}`, {}),
 
   //좋아요
-  changeLike: (postId, token) =>
-    api.post(`/board/freeBoard/${postId}/likes`, { token }),
+  changeLike: (postId) => api.post(`/board/freeBoard/${postId}/likes`, {}),
 };
 
 // export const apisMultipart = {

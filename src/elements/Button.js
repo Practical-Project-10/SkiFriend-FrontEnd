@@ -95,6 +95,7 @@ const SmallBtn = styled.button`
   margin-right: 1em;
   border: none;
   border-radius: 5px;
+  cursor: pointer;
 `;
 
 const FloatButton = styled.button`

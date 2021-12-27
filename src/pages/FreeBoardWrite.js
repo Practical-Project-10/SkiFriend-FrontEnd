@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { history } from "../redux/ConfigStore";
+import { useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { boardCreators as boardActions } from "../redux/modules/freeboard";
 
@@ -14,9 +15,11 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/swiper.min.css";
 import "swiper/components/navigation/navigation.min.css";
 import SwiperCore, { Navigation, Pagination } from "swiper";
+import axios from "axios";
 
 const FreeBoardWrite = () => {
-  const dispatch = useDispatch;
+  const params = useParams();
+  const dispatch = useDispatch();
 
   // swiper관리
   // SwiperCore.use([Navigation, Pagination]);
@@ -59,12 +62,27 @@ const FreeBoardWrite = () => {
 
   // 데이터 전송 (완료 버튼)
   const addPostBtn = () => {
+    const accessToken = document.cookie.split("=")[1];
+    const token = {
+      headers: {
+        "Content-Type": "multipart/form-data",
+        Authorization: `${accessToken}`,
+      },
+    };
+
+    const requestDto = { title: title, content: content };
     let formdata = new FormData();
     formdata.append("image", uploadFiles[0]);
-    formdata.append("title", title);
-    formdata.append("content", content);
-
-    dispatch(boardActions.addBoardDB(formdata));
+    formdata.append(
+      "requestDto",
+      new Blob([JSON.stringify(requestDto)], { type: "application/json" })
+    );
+    // return axios.post(
+    //   `http://13.125.249.172/board/${params.skiresort}/freeBoard`,
+    //   formdata,
+    //   token
+    // );
+    dispatch(boardActions.addBoardDB(params.skiresort, formdata));
   };
 
   return (

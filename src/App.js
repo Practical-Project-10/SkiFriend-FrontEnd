@@ -32,7 +32,7 @@ function App() {
       <Grid mainFrame>
         {/* <Header/> */}
         <Route exact path="/" component={Home}></Route>
-        <Route exact path="/phoneauth" component={PhoneAuth}></Route>
+        <Route path="/phoneauth" component={PhoneAuth}></Route>
         <Route path="/signupone" component={SignupOne}></Route>
         <Route path="/signupTwo" component={SignupTwo}></Route>
         <Route path="/login" component={Login} />
@@ -40,8 +40,8 @@ function App() {
         <Route path="/carpoolwrite" component={CarpoolWrite} />
         <Route path="/carpoolfilter" component={CarpoolFilter} />
         <Route path="/card" component={Card} />
-        <Route path="/freeboardlist" component={FreeBoardList} />
-        <Route path="/freeboardwrite" component={FreeBoardWrite} />
+        <Route path="/freeboardlist/:skiresort" component={FreeBoardList} />
+        <Route path="/freeboardwrite/:skiresort" component={FreeBoardWrite} />
         <Route path="/freeboarddetail" component={FreeBoardDetail} />
         <Route path="/placeinfo" component={PlaceInfo} />
         <Route path="/placeinfodetail" component={PlaceInfoDetail} />
@@ -53,6 +53,6 @@ function App() {
       </Grid>
     </React.Fragment>
   );
-};
+}
 
 export default App;
