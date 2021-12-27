@@ -3,6 +3,7 @@ import { useHistory } from "react-router";
 // import "react-datepicker/dist/react-datepicker.css";
 import "../elements/styles.css";
 import { Grid, Button } from "../elements/index";
+
 // components
 import CarpoolMenuBar from "../components/CarpoolMenuBar";
 import Card from "../components/Card";
@@ -22,7 +23,7 @@ const Carpool = (props) => {
       <img alt="스키 리조트" src={props.skiResortImg} />
 
       {/* 카풀/게시글 네비게이션 바 */}
-      <CarpoolMenuBar />
+      <CarpoolMenuBar match={props.match}/>
       <Grid justify="space-around" is_flex width="100%">
         <Grid>
           <FormControlLabel control={<Checkbox />} label="카풀완료 숨기기" />

@@ -36,7 +36,7 @@ function App() {
         <Route path="/signupone" component={SignupOne}></Route>
         <Route path="/signupTwo" component={SignupTwo}></Route>
         <Route path="/login" component={Login} />
-        <Route path="/carpool" component={Carpool} />
+        <Route path="/carpool/:skiresort" component={Carpool} />
         <Route path="/carpoolwrite" component={CarpoolWrite} />
         <Route path="/carpoolfilter" component={CarpoolFilter} />
         <Route path="/card" component={Card} />

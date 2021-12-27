@@ -1,4 +1,4 @@
-const setToken = (token) => {
+const setLocal = (token) => {
   if(token) {
     localStorage.setItem('token', token);
   } else {
@@ -6,7 +6,7 @@ const setToken = (token) => {
   }
 };
 
-const getToken = () => {
+const getLocal = () => {
   const _token = localStorage.getItem('token');
 
   if(_token) {
@@ -18,8 +18,8 @@ const getToken = () => {
   }
 };
 
-const deleteToken = () => {
+const deleteLocal = () => {
   localStorage.removeItem('token');
 };
 
-export {setToken, getToken, deleteToken};
+export {setLocal, getLocal, deleteLocal};
