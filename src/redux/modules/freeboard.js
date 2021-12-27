@@ -41,16 +41,30 @@ export const deleteBoard = createAction(DELETE, (postId) => ({ postId }));
 export const loadBoardDB =
   (skiResort) =>
   async (dispatch, getState, { history }) => {
-    const data = await apis.getPost(skiResort);
-    dispatch(loadBoard(data.data));
+    try {
+      const data = await apis.getFreePost(skiResort);
+      dispatch(loadBoard(data.data));
+    } catch (error) {
+      console.log(`불러오기 실패${error}`);
+    }
   };
 
 export const addBoardDB =
-  (skiResort, datas) =>
+  (skiResort, formdata) =>
   async (dispatch, getState, { history }) => {
-    const data = await apis.writeFreePost(skiResort, datas);
-    dispatch(addBoard(data));
-    dispatch(loadBoardDB());
+    console.log(skiResort);
+    console.log(formdata);
+    console.log(formdata.image);
+    console.log(formdata.requestDto);
+    try {
+      const data = await apis.writeFreePost(skiResort, formdata);
+      console.log(data);
+      console.log("등록 완료~");
+      dispatch(addBoard(data));
+      dispatch(loadBoardDB());
+    } catch (error) {
+      console.log(`오류 발생!${error}`);
+    }
   };
 
 export const updateBoardDB =
@@ -84,6 +98,9 @@ export default handleActions(
     [ADD]: (state, action) =>
       produce(state, (draft) => {
         draft.list.unshift(action.payload.postData);
+        console.log(draft);
+        console.log(action);
+        console.log(action.payload);
       }),
 
     [UPDATE]: (state, action) =>

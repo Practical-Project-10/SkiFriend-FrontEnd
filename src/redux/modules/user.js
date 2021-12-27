@@ -3,7 +3,9 @@ import { produce } from "immer";
 
 import { apis } from "../../shared/apis";
 
-import { setCookie, deleteCookie } from '../../shared/cookie';
+
+import { setCookie, deleteCookie } from "../../shared/cookie";
+
 
 //action
 const SET_USER = "SET_USER";
@@ -140,11 +142,14 @@ const loginDB = (id, pwd) => {
     console.log(id, pwd);
     try {
       const response = await apis.login(id, pwd);
+      console.log(response);
       const user = response.data;
       const token = response.headers.authorization;
 
-      response && history.push('/');
-      setCookie('token', token);
+      response && history.push("/");
+      setCookie("token", token);
+      localStorage.setItem("nickname", response.data.nickname);
+      localStorage.setItem("userId", response.data.userId);
       dispatch(setUser(user));
     } catch (err) {
       window.alert("아이디와 비밀번호를 확인해주세요.");

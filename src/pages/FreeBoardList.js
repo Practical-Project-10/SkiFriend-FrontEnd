@@ -1,5 +1,6 @@
 import React from "react";
 import { history } from "../redux/ConfigStore";
+import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { boardCreators as boardActions } from "../redux/modules/freeboard";
 
@@ -13,6 +14,7 @@ import { AiOutlineHeart } from "react-icons/ai";
 import { BsChat } from "react-icons/bs";
 
 const FreeBoardList = () => {
+  const params = useParams();
   const dispatch = useDispatch();
 
   const boardList = useSelector((state) => state.freeboard.list);
@@ -55,7 +57,7 @@ const FreeBoardList = () => {
       </Grid>
       <Grid
         _onClick={() => {
-          history.push("/freeboardwrite");
+          history.push(`/freeboardwrite/${params.skiresort}`);
         }}
       >
         <FloatButton />
