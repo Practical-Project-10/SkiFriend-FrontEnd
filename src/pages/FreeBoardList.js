@@ -1,6 +1,7 @@
 import React from "react";
 import { history } from "../redux/ConfigStore";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { boardCreators as boardActions } from "../redux/modules/freeboard";
 
 import { Grid, Text } from "../elements/index";
 import Header from "../components/Header";
@@ -12,7 +13,10 @@ import { AiOutlineHeart } from "react-icons/ai";
 import { BsChat } from "react-icons/bs";
 
 const FreeBoardList = () => {
-  // const boardList = useSelector((state) => state.freeboard.list);
+  const dispatch = useDispatch();
+
+  const boardList = useSelector((state) => state.freeboard.list);
+  console.log(boardList);
 
   return (
     <React.Fragment>
@@ -23,25 +27,31 @@ const FreeBoardList = () => {
       <CarpoolMenuBar />
       <Grid padding="20px" height="384px" overflow="scroll">
         <Text>전체</Text>
-        {/* {boardList.map((post)=>{
-          return ( */}
-        <Grid is_flex justify="space-between">
-          <Grid is_flex>
-            {/* <Text margin="0 10px 0 0">{post.nickname}</Text> */}
-            {/* <Text margin="0 10px 0 0" _onClick={()=>{history.push(`/freeboarddetail/${post.postId}`)}}>글제목</Text> */}
-          </Grid>
-          <Grid is_flex>
-            <AiOutlineHeart size="17" />
-            {/* <Text margin="0 5px 0 0">{post.likeCnt}</Text> */}
-            <BsChat size="15" />
-            {/* <Text margin="0 5px 0 0">{post.commentCnt}</Text> */}
-            {/* <Text>{post.createdAt}</Text> */}
-          </Grid>
-        </Grid>
-        {/* )
-        })
-          
-        } */}
+        {boardList.map((post, idx) => {
+          return (
+            <Grid is_flex justify="space-between">
+              <Grid is_flex>
+                <Text margin="0 10px 0 0">{post.nickname}</Text>
+                <Text
+                  margin="0 10px 0 0"
+                  cursor="pointer"
+                  _onClick={() => {
+                    history.push(`/freeboarddetail/${post.title}`);
+                  }}
+                >
+                  {post.title}
+                </Text>
+              </Grid>
+              <Grid is_flex>
+                <AiOutlineHeart size="17" />
+                <Text margin="0 5px 0 0">{post.likeCnt}</Text>
+                <BsChat size="15" />
+                <Text margin="0 5px 0 0">{post.commentCnt}</Text>
+                <Text>{post.createdAt}</Text>
+              </Grid>
+            </Grid>
+          );
+        })}
       </Grid>
       <Grid
         _onClick={() => {
