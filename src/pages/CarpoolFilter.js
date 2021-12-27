@@ -1,20 +1,19 @@
 import React from "react";
-import { useHistory } from "react-router";
 
 import { Grid, Text,Button } from "../elements/index";
 import Example from "../components/Example";
 
-//react icons
-import { BsArrowLeftRight } from "react-icons/bs";
-import { AiOutlineArrowLeft } from "react-icons/ai";
 //material icons
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 
 import "../elements/styles.css";
 
-const CarpoolFilter = () => {
-    const history = useHistory();
+const CarpoolFilter = (props) => {
+  const history = props.history;
+
+
+
   return (
     <Grid justify="center">
       <Grid 
@@ -23,9 +22,10 @@ const CarpoolFilter = () => {
         padding="10px"
         margin="0 0 20px 0"
       >
-        <AiOutlineArrowLeft onClick={()=> {history.push("/carpool")}} style={{cursor:"pointer"}}/>
+        <Grid _onClick={() => history.goBack()}>&lt;</Grid>
         <Text margin="0 auto">검색필터</Text>
       </Grid>
+
       <Grid justify="center">
         <Example />
       </Grid>
@@ -53,7 +53,7 @@ const CarpoolFilter = () => {
       </Grid>
       <Grid>
         <Button>
-          작성버튼
+          필터적용
         </Button>
       </Grid>
     </Grid>

@@ -27,6 +27,8 @@ const Login = (props) => {
     dispatch(userActions.loginDB(id, pwd));
   }
 
+  console.log(localStorage.getItem('user'));
+
   return (
     <React.Fragment>
       <Grid width="70%" margin="auto" align="center">

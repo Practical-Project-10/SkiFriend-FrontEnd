@@ -6,6 +6,7 @@ import { connectRouter } from "connected-react-router";
 //---- Reducer ----
 import User from "./modules/user";
 import FreeBoard from "./modules/freeboard";
+import Carpool from "./modules/carpool"
 // import Comment from "./comment";
 // import Like from "./like";
 
@@ -16,6 +17,7 @@ export const history = createBrowserHistory();
 const rootReducer = combineReducers({
   user: User,
   freeboard: FreeBoard,
+  carpool: Carpool,
   // comment: Comment,
   // like: Like,
   router: connectRouter(history),

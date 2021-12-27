@@ -9,7 +9,7 @@ const CarpoolMenuBar = ({ match, location }) => {
 
   return (
     <Grid is_flex menubar>
-      <NavLink to="/carpool" className="navLink">
+      <NavLink to={`/carpool/${params}`} className="navLink">
         {location.pathname === `/carpool/${params}` ? (
           <Text boardlink>카풀</Text>
         ) : (

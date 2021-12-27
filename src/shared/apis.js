@@ -1,7 +1,8 @@
 import axios from "axios";
+import { getCookie } from "./cookie";
 
 const api = axios.create({
-  baseURL: "http://13.125.249.172/", //http://13.125.249.172/
+  baseURL: "http://13.125.249.172/", 
   // headers: {
   //   "content-type": "application/json;charset=UTF-8",
   //   accept: "application/json,",
@@ -16,11 +17,12 @@ const api = axios.create({
 //   },
 // });
 //
+console.log(getCookie("token"))
 
 api.interceptors.request.use(function (config) {
   config.headers["Content-Type"] = "application/json; charset=utf-8";
   config.headers["X-Requested-With"] = "XMLHttpRequest";
-  // config.headers["Authorization"] = getToken() ? `Bearer ${getToken()}` : "";
+  config.headers["Authorization"] = `Bearer ${getCookie()}` // ? `Bearer ${getCookie()}` : "";
   config.headers.Accept = "application/json";
   return config;
 });
@@ -98,10 +100,38 @@ export const apis = {
   deleteUser: () => 
     api.delete('/user/info'),
   
+  //카풀 게시글
+  getCarpool: (skiResort) =>
+    api.get(`/board/carpool/${skiResort}`),
   
-  
+  addCarpool: (skiResort, carpool) =>
+    api.post(`/board/carpool/${skiResort}`,{
+      carpoolType: carpool.carpoolType,
+      startLocation: carpool.startLocation,
+      endLocation: carpool.endLocation,
+      date: carpool.date,
+      time: carpool.time,
+      price: carpool.price,
+      memberNum: carpool.memberNum,
+      notice: carpool.notice,
+    }),
 
-  //카풀게시글/ 자유게시글
+  editCarpool: (carpoolId, carpool) =>
+    api.put(`/board/carpool/${carpoolId}`, {
+      carpoolType: carpool.carpoolType,
+      startLocation: carpool.startLocation,
+      endLocation: carpool.endLocation,
+      date: carpool.date,
+      time: carpool.time,
+      price: carpool.price,
+      memberNum: carpool.memberNum,
+      notice: carpool.notice,
+    }),
+
+  deleteCarpool: (carpoolId) =>
+    api.delete(`/board/carpool/${carpoolId}`),
+
+  // 자유게시글
   getPost: (skiResort) => api.get(`/board/${skiResort}`, {}),
   writeFreePost: (skiResort, token, datas) =>
     api.post(`/board/${skiResort}/freeBoard`, { token, datas }),
