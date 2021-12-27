@@ -3,7 +3,9 @@ import { produce } from "immer";
 
 import { apis } from "../../shared/apis";
 
-import { setCookie, deleteCookie } from "../../shared/cookie";
+
+import { setCookie, deleteCookie } from '../../shared/cookie';
+import { setLocal, deleteLocal } from "../../shared/localStorage";
 
 //action
 const SET_USER = "SET_USER";
@@ -48,31 +50,31 @@ const imsy = (userInfo) => {
   };
 };
 
-const signup2DB = (userInfo) => {
-  return async (dispatch, getState, { history }) => {
-    const userData = {
-      username: userInfo.username,
-      nickname: userInfo.nickname,
-      password: userInfo.password,
-      phoneNum: userInfo.phoneNum,
-      profileImg: userInfo.profileImg,
-      vacImg: userInfo.vacImg,
-      gender: userInfo.gender,
-      ageRange: userInfo.ageRange,
-      career: userInfo.career,
-      selfIntro: userInfo.selfIntro,
-    };
+// const signupDB = (userInfo) => {
+//   return async (dispatch, getState, { history }) => {
+//     const userData = {
+//       username: userInfo.username,
+//       nickname: userInfo.nickname,
+//       password: userInfo.password,
+//       phoneNum: userInfo.phoneNum,
+//       profileImg: userInfo.profileImg,
+//       vacImg: userInfo.vacImg,
+//       gender: userInfo.gender,
+//       ageRange: userInfo.ageRange,
+//       career: userInfo.career,
+//       selfIntro: userInfo.selfIntro,
+//     };
 
-    try {
-      const response = await apis.signup(userData);
+//     try {
+//       const response = await apis.signup(userData);
 
-      response && window.alert("회원가입이 완료되었습니다.");
-      history.push("/");
-    } catch (err) {
-      console.log(err);
-    }
-  };
-};
+//       response && window.alert("회원가입이 완료되었습니다.");
+//       history.push("/");
+//     } catch (err) {
+//       console.log(err);
+//     }
+//   };
+// };
 
 const isIdDB = (id) => {
   return async (dispatch) => {
@@ -145,6 +147,7 @@ const loginDB = (id, pwd) => {
 
       response && history.push('/');
       setCookie('token', token);
+      setLocal('user', user);
       dispatch(setUser(user));
     } catch (err) {
       window.alert("아이디와 비밀번호를 확인해주세요.");
@@ -201,6 +204,7 @@ export default handleActions(
     [LOGOUT]: (state, action) =>
       produce(state, draft => {
         deleteCookie('token');
+        deleteLocal('user');
         draft.is_login = false;
         draft.user = {};
       }),
