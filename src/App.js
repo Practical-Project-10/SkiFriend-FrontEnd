@@ -11,7 +11,7 @@ import SignupTwo from "./pages/SignupTwo";
 import Login from "./pages/Login";
 import Carpool from "./pages/Carpool";
 import CarpoolWrite from "./pages/CarpoolWrite";
-import CarpoolFilter from "./components/CarpoolFilter";
+import CarpoolFilter from "./pages/CarpoolFilter";
 import Card from "./components/Card";
 import FreeBoardList from "../src/pages/FreeBoardList";
 import FreeBoardWrite from "./pages/FreeBoardWrite";

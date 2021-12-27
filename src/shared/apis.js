@@ -1,4 +1,5 @@
 import axios from "axios";
+import { getCookie } from "./cookie";
 
 const api = axios.create({
   baseURL: "http://13.125.249.172/",
@@ -90,10 +91,40 @@ export const apis = {
       selfIntro: userInfo.selfInfro,
     }),
 
-  //마이페이지
-  deleteUser: () => api.delete("/user/info"),
+  //마이페이지  
+  deleteUser: () => 
+    api.delete('/user/info'),
+  
+  //카풀 게시글
+  getCarpool: (skiResort) =>
+    api.get(`/board/carpool/${skiResort}`),
+  
+  addCarpool: (skiResort, carpool) =>
+    api.post(`/board/carpool/${skiResort}`,{
+      carpoolType: carpool.carpoolType,
+      startLocation: carpool.startLocation,
+      endLocation: carpool.endLocation,
+      date: carpool.date,
+      time: carpool.time,
+      price: carpool.price,
+      memberNum: carpool.memberNum,
+      notice: carpool.notice,
+    }),
 
-  //카풀게시글
+  editCarpool: (carpoolId, carpool) =>
+    api.put(`/board/carpool/${carpoolId}`, {
+      carpoolType: carpool.carpoolType,
+      startLocation: carpool.startLocation,
+      endLocation: carpool.endLocation,
+      date: carpool.date,
+      time: carpool.time,
+      price: carpool.price,
+      memberNum: carpool.memberNum,
+      notice: carpool.notice,
+    }),
+
+  deleteCarpool: (carpoolId) =>
+    api.delete(`/board/carpool/${carpoolId}`),
 
   // 자유게시글
   getFreePost: (skiResort) => api.get(`/board/freeBoard/${skiResort}`, {}),
