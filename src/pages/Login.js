@@ -36,24 +36,6 @@ const Login = (props) => {
           </Text>
         </Grid>
         <Grid>
-          {/* <Grid>
-            <Text className='pageTitle'>로그인</Text>
-          </Grid>
-          <Grid className='loginInput'>
-            <input type='text' ref={ldInput}/>
-            <input type='password' ref={pwdInput}/>
-            <Input label='로그인' type='text' ref={ldInput}/>
-            <Input label='비밀번호' type='password' ref={pwdInput}/> 
-          </Grid>
-          <Grid className='loginButtons'>
-            <Button _onClick={join}>로그인</Button>
-            <Button>회원가입</Button>
-          </Grid>
-          <Grid className='socialButtons'>
-            <Button className='social'>네이버 로그인</Button>
-            <Button className='social'>카카오 로그인</Button>
-          </Grid>- */}
-
           <input type='text' ref={ldInput}/>
           <input type='password' ref={pwdInput}/>
           {/* <Input label="로그인" type="text"/>

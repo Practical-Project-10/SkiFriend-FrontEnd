@@ -3,6 +3,8 @@ import {produce} from 'immer'
 
 import { apis } from '../../shared/apis';
 
+import { setCookie, deleteCookie } from '../../shared/cookie';
+
 //action
 const SET_USER = 'SET_USER';
 const LOGOUT = 'LOGOUT';
@@ -40,7 +42,7 @@ const imsy = (userInfo) => {
 
       
       response && window.alert('회원가입이 완료되었습니다.');
-      // history.push('/login');
+      history.push('/login');
     } catch (err) {
       console.log(err);
     }
@@ -129,7 +131,7 @@ const isSmsCheckDB = (phoneNum, randomNum) => {
       await apis.smsNumCheck(phoneNum, randomNum);
 
       window.alert('인증이 완료되었습니다.');
-      history.push('/signupone')
+      history.push('/signupone');
       // dispatch(smsCheck(true));
     } catch(err) {
       window.alert('인증번호가 일치하지 않습니다.');
@@ -144,15 +146,17 @@ const loginDB = (id, pwd) => {
     try {
       const response = await apis.login(id, pwd);
       const user = response.data;
-      console.log(response.data)
+      const token = response.headers.authorization;
+
       // response && history.push('/');
+      setCookie('token', token)
       dispatch(setUser(user));
     } catch(err) {
       window.alert('아이디와 비밀번호를 확인해주세요.')
       console.log(err);
     }
-  }
-}
+  };
+};
 
 const editUserInfoDB = (userInfo) => {
   return async (dispatch, getState, {history}) => {
@@ -201,6 +205,7 @@ export default handleActions(
       }),
     [LOGOUT]: (state, action) =>
       produce(state, draft => {
+        deleteCookie('token');
         draft.is_login = false;
         draft.user = {};
       }),
