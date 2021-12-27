@@ -19,12 +19,12 @@ const FreeBoardWrite = () => {
   const dispatch = useDispatch;
 
   // swiper관리
-  SwiperCore.use([Navigation, Pagination]);
+  // SwiperCore.use([Navigation, Pagination]);
 
-  const swiperParams = {
-    navigation: true,
-    pagination: true,
-  };
+  // const swiperParams = {
+  //   navigation: true,
+  //   pagination: true,
+  // };
 
   // useState관리
   const [title, setTitle] = useState();
@@ -59,7 +59,12 @@ const FreeBoardWrite = () => {
 
   // 데이터 전송 (완료 버튼)
   const addPostBtn = () => {
-    dispatch(boardActions.addBoardDB(title, content));
+    let formdata = new FormData();
+    formdata.append("image", uploadFiles[0]);
+    formdata.append("title", title);
+    formdata.append("content", content);
+
+    dispatch(boardActions.addBoardDB(formdata));
   };
 
   return (

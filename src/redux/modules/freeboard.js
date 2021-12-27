@@ -5,7 +5,22 @@ import produce from "immer";
 
 // initialState
 const initialState = {
-  list: [],
+  list: [
+    {
+      nickname: "jaewoo",
+      createdAt: 2021,
+      title: "설원",
+      likeCnt: 2,
+      commentCnt: 3,
+    },
+    {
+      nickname: "gildong",
+      createdAt: 2022,
+      title: "hello",
+      likeCnt: 5,
+      commentCnt: 4,
+    },
+  ],
 };
 
 // action
@@ -61,12 +76,10 @@ export const deleteBoardDB =
 // reducer
 export default handleActions(
   {
-    [LOAD]: (state, action) => {
-      return {
-        ...state,
-        list: action.payload.postList,
-      };
-    },
+    [LOAD]: (state, action) =>
+      produce(state, (draft) => {
+        draft.list.push(...action.payload.postList);
+      }),
 
     [ADD]: (state, action) =>
       produce(state, (draft) => {
