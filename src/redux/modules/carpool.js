@@ -2,93 +2,163 @@ import { createAction, handleActions } from "redux-actions";
 import produce from "immer";
 import { apis } from "../../shared/apis";
 
-// ACTIONS
-// const LOAD = "carpool/LOAD";
-const ADD = "carpool/ADD";
-const UPDATE = "carpool/UPDATE";
-const DELETE = "carpool/DELETE";
-const SWITCH_PLACES = "carpool/SWITCH_PLACES";
+//action
+const SET_CARPOOL = 'SET_CARPOOL';
+const ADD_CARPOOL = 'ADD_CARPOOL';
+const EDIT_CARPOOL = 'EDIT_CARPOOL';
+const DELETE_CARPOOL = 'DELETE_CARPOOL';
 
-//initialState
-const initialState = {
-  list: [],
-  startLocName: "",
-  endLocName: "",
+// acrtion creators
+const setCarpool = createAction(SET_CARPOOL, (list) => ({list}));
+const addCarpool = createAction(ADD_CARPOOL, (carpool) => ({carpool}));
+const editCarpool = createAction(EDIT_CARPOOL, (postId, carpool) => ({postId, carpool}));
+const deleteCarpool = createAction(DELETE_CARPOOL, (postId) => ({postId}));
+
+// middlewares
+const getCarpoolDB = (skiResort) => {
+  return async function(dispatch) {
+    console.log(skiResort)
+
+    try {
+      const response = await apis.getCarpool(skiResort);
+      const carpool_list = response.data;
+      console.log(response.data);
+
+      response && dispatch(setCarpool(carpool_list));
+    } catch(err) {
+      console.log(err);
+    }
+  };
 };
 
-//action creator
-const addCarpool = createAction(ADD, (carpoolData) => ({ carpoolData }));
-const updateCarpool = createAction(UPDATE, (carpoolData) => ({ carpoolData }));
-const deleteCarpool = createAction(DELETE, (carpoolId) => ({ carpoolId }));
-const switchPlaces = createAction(SWITCH_PLACES, (placeData) => ({
-  placeData,
-}));
+const addCarpoolDB = (skiResort, carpool) => {
+  return async function(dispatch, getState, {history}) {
+    console.log(skiResort, carpool)
 
-//middleware
-
-const addCarpoolDB =
-  (skiResort, datas) =>
-  async (dispatch, getState, { history }) => {
-    const data = await apis.writeCarpool(skiResort, datas);
-    dispatch(addCarpool(data));
-    //   dispatch(loadBoardDB()); 이부분 어떻게 해야할지 잘 모르겠습니다ㅠㅠ
-  };
-
-const updateCarpoolDB =
-  (carpoolId, datas) =>
-  async (dispatch, getState, { history }) => {
-    if (!carpoolId) {
-      console.log("카풀 정보가 없어요!");
-      return;
+    const carpool_form = {
+      carpoolType: carpool.carpoolType,
+      startLocation: carpool.startLocation,
+      endLocation: carpool.endLocation,
+      date: carpool.date,
+      time: carpool.time,
+      price: carpool.price,
+      memberNum: carpool.memberNum,
+      notice: carpool.notice,
     }
-    const data = await apis.updateCarpool(carpoolId, datas);
-    dispatch(updateCarpool(data));
-    //   dispatch(loadBoardDB()); 이부분도요!
-  };
 
-const deleteCarpoolDB =
-  (carpoolId) =>
-  async (dispatch, getState, { history }) => {
-    apis.deleteCarpool(carpoolId).then((res) => {
-      dispatch(deleteCarpool(carpoolId));
-    });
-  };
+    try {
+      await apis.addCarpool(skiResort, carpool_form);
 
-//reducer
+      history.push('/');
+    } catch(err) {
+      console.log(err);
+    }
+  }
+}
+
+const editCarpoolDB = (skiResort, carpool) => {
+  return async function(dispatch, getState, {history}) {
+    console.log(skiResort, carpool)
+
+    const carpool_form = {
+      carpoolType: carpool.carpoolType,
+      startLocation: carpool.startLocation,
+      endLocation: carpool.endLocation,
+      date: carpool.date,
+      time: carpool.time,
+      price: carpool.price,
+      memberNum: carpool.memberNum,
+      notice: carpool.notice,
+    }
+
+    try {
+      await apis.editCarpool(skiResort, carpool_form);
+
+      history.goBack();
+    } catch(err) {
+      console.log(err);
+    }
+  };
+};
+
+const deleteCarpoolDB = (postId) => {
+  return async function(dispatch, getState, {history}) {
+    console.log(postId);
+
+    try {
+      await apis.deleteCarpool(postId);
+
+      history.push('/');
+    } catch(err) {
+      console.log(err);
+    }
+  }
+}
+
+// initialState
+const initialState = {
+  list: [
+    {
+      postId: '',
+      userId: '',
+      nickname: '',
+      createdAt: '',
+      carpoolType: '',
+      startLocation: '',
+      endLocation: '',
+      skiResort: '',
+      date: '',
+      time: '',
+      price: '',
+      memberNum: '',
+      notice: '',
+      status: true,
+    }
+  ]
+}
+
+// reducer
 export default handleActions(
   {
-    [ADD]: (state, action) =>
+    [SET_CARPOOL]: (state, action) => 
       produce(state, (draft) => {
-        draft.list.unshift(action.payload.carpoolData);
+        draft.list = action.payload.list;
       }),
-    [UPDATE]: (state, action) =>
-      produce(state, (draft) => {
-        let idx = draft.list.findIndex(
-          (c) => c.id === Number(action.payload.carpoolId)
-        );
-        draft.list[idx] = { ...draft.list[idx], ...action.payload.carpool };
-      }),
-    [DELETE]: (state, action) => {
-      return {
-        ...state,
-        list: state.list.filter((list) => list.id !== action.payload.carpoolId),
-      };
-    },
-    //위치바꾸기 불완전함!
-    [SWITCH_PLACES]: (state, action) =>
-      produce(state, (draft) => {
-        draft.startLocName = action.payload.startLocName;
-        draft.endLocName = action.payload.endLocName;
-      }),
+
+    // [ADD_CARPOOL]: (state, action) => 
+    //   produce(state, (draft) => {
+    //     draft.list.push(action.payload.carpool);
+    //   }),
+
+    // [EDIT_CARPOOL]: (state, action) => 
+    //   produce(state, (draft) => {
+    //     const idx = draft.list.findIndex(l => l.postId === action.payload.postId)
+    //     console.log(idx);
+
+    //     draft.list[idx] = {...draft.list[idx], ...action.payload.carpool};
+    //   }),
+
+    // [DELETE_CARPOOL]: (state, action) => 
+    //   produce(state, (draft) => {
+    //     let deleted_list = draft.list.filter(
+    //       (l) => l.postId !== action.payload.postId
+    //     );
+
+    //     draft.list = deleted_list;
+    //   }),
   },
   initialState
-);
+)
 
-const carpoolCreators = {
+const carpoolActions = {
+  setCarpool,
+  addCarpool,
+  editCarpool,
+  deleteCarpool,
+  getCarpoolDB,
   addCarpoolDB,
-  updateCarpoolDB,
+  editCarpoolDB,
   deleteCarpoolDB,
-  switchPlaces,
-};
+}
 
-export { carpoolCreators };
+export {carpoolActions};

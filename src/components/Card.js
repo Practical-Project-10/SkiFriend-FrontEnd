@@ -1,7 +1,17 @@
 import React from "react";
 import { Grid, Text } from "../elements/index";
 
+import { useDispatch } from "react-redux";
+import {carpoolActions} from '../redux/modules/carpool';
+
 const Card = (props) => {
+  const dispatch = useDispatch();
+  console.log(props)
+
+  const deleteCarpool = () => {
+    dispatch(carpoolActions.deleteCarpoolDB(props.postId));
+  }
+
   return (
     <Grid
       display="flex"
@@ -14,10 +24,11 @@ const Card = (props) => {
       padding="15px 20px"
       border="1px solid transparent"
     >
+      <button onClick={deleteCarpool}>삭제</button>
       <Text size="20px" weight="700" marginB="5px">
         [{props.carpoolType}]
       </Text>
-      {/* <Text carpoolInfo>({props.startLocation}) =>  {props.endLocation} </Text> */}
+      <Text carpoolInfo>{props.startLocation} =&gt;  {props.endLocation} </Text>
       <Text margin="3px">날짜 : {props.date}</Text>
       <Text margin="3px">시간 : {props.time}</Text>
       <Text margin="3px">인원 : {props.memberNum}</Text>
