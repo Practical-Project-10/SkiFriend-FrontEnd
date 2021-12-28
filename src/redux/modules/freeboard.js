@@ -1,31 +1,27 @@
 import { handleActions, createAction } from "redux-actions";
 import { apis } from "../../shared/apis";
-
+import axios from "axios";
 import produce from "immer";
 
 // initialState
 const initialState = {
-  list: [
-    {
-      nickname: "jaewoo",
-      createdAt: 2021,
-      title: "설원",
-      likeCnt: 2,
-      commentCnt: 3,
-    },
-    {
-      nickname: "gildong",
-      createdAt: 2022,
-      title: "hello",
-      likeCnt: 5,
-      commentCnt: 4,
-    },
-  ],
+  list: [],
+  detail: [],
+};
+
+// token
+const accessToken = document.cookie.split("=")[1];
+const token = {
+  headers: {
+    "Content-Type": "multipart/form-data",
+    Authorization: `${accessToken}`,
+  },
 };
 
 // action
 const LOAD = "freeboard/LOAD";
 const ADD = "freeboard/POST";
+const GETONE = "freeboard/GETONE";
 const UPDATE = "freeboard/UPDATE";
 const DELETE = "freeboard/DELETE";
 
@@ -34,37 +30,70 @@ export const loadBoard = createAction(LOAD, (postList) => ({
   postList,
 }));
 export const addBoard = createAction(ADD, (postData) => ({ postData }));
+export const getOneBoard = createAction(GETONE, (postData) => ({ postData }));
 export const updateBoard = createAction(UPDATE, (postData) => ({ postData }));
 export const deleteBoard = createAction(DELETE, (postId) => ({ postId }));
 
 // thunk
+// 자유 게시판 목록 불러오기
 export const loadBoardDB =
   (skiResort) =>
   async (dispatch, getState, { history }) => {
-    try {
-      const data = await apis.getFreePost(skiResort);
-      dispatch(loadBoard(data.data));
-    } catch (error) {
-      console.log(`불러오기 실패${error}`);
-    }
+    await apis
+      .getFreePost(skiResort)
+      .then((res) => {
+        console.log(res.data);
+        dispatch(loadBoard(res.data));
+      })
+      .catch((error) => {
+        console.log(`불러오기 실패${error}`);
+      });
   };
 
+// 게시글 등록하기
 export const addBoardDB =
-  (skiResort, formdata) =>
+  (skiResort, image, datas) =>
   async (dispatch, getState, { history }) => {
-    console.log(skiResort);
-    console.log(formdata);
-    console.log(formdata.image);
-    console.log(formdata.requestDto);
-    try {
-      const data = await apis.writeFreePost(skiResort, formdata);
-      console.log(data);
-      console.log("등록 완료~");
-      dispatch(addBoard(data));
-      dispatch(loadBoardDB());
-    } catch (error) {
-      console.log(`오류 발생!${error}`);
-    }
+    let formdata = new FormData();
+    formdata.append("image", image);
+    formdata.append(
+      "requestDto",
+      new Blob([JSON.stringify(datas)], { type: "application/json" })
+    );
+
+    await axios
+      .post(
+        `http://13.125.249.172/board/${skiResort}/freeBoard`,
+        formdata,
+        token
+      )
+      // await apis
+      //   .writeFreePost(skiResort, formdata)
+      .then((res) => {
+        console.log(res);
+        console.log(res.data);
+        console.log("등록 완료~");
+        dispatch(addBoard(res.config.data));
+        history.push(`/freeboardlist/${skiResort}`);
+      })
+      .catch((error) => {
+        console.log(`오류 발생!${error}`);
+      });
+  };
+
+export const getOnePostDB =
+  (postId) =>
+  async (dispatch, getState, { history }) => {
+    await apis
+      .getOneFreePost(postId)
+      .then((res) => {
+        console.log("데이터 가져오기 성공");
+        console.log(res.data);
+        dispatch(getOneBoard(res.data));
+      })
+      .catch((error) => {
+        console.log(`오류 발생!${error}`);
+      });
   };
 
 export const updateBoardDB =
@@ -98,9 +127,11 @@ export default handleActions(
     [ADD]: (state, action) =>
       produce(state, (draft) => {
         draft.list.unshift(action.payload.postData);
-        console.log(draft);
-        console.log(action);
-        console.log(action.payload);
+      }),
+
+    [GETONE]: (state, action) =>
+      produce(state, (draft) => {
+        draft.detail = action.payload.postData;
       }),
 
     [UPDATE]: (state, action) =>
@@ -124,6 +155,7 @@ export default handleActions(
 const boardCreators = {
   addBoardDB,
   loadBoardDB,
+  getOnePostDB,
   updateBoardDB,
   deleteBoardDB,
 };
