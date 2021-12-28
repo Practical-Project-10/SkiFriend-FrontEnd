@@ -32,6 +32,7 @@ const CarpoolWrite = (props) => {
       endLocation: `${carpool? carpool.endLocation: endLoca}`,
       date: `${carpool? carpool.date: ''}`,
       time: `${carpool? carpool.time: ''}`,
+      title: `${carpool? carpool.title: ''}`,
       price: `${carpool? carpool.price: ''}`,
       memberNum: `${carpool? carpool.memberNum: ''}`,
       notice: `${carpool? carpool.notice: ''}`,
@@ -43,6 +44,7 @@ const CarpoolWrite = (props) => {
     endLocation,
     date,
     time,
+    title,
     price,
     memberNum,
     notice,
@@ -65,7 +67,7 @@ const CarpoolWrite = (props) => {
     )
   }
 
-  const locationChange = (e) => {
+  const locationChange = () => {
     if(!state) {
       setState(true);
       setStartLoca(endLoca);
@@ -153,6 +155,8 @@ const CarpoolWrite = (props) => {
           <TimePicker />
         </Grid>
         <Grid margin="10px">
+          <Text>제목</Text>
+          <Input _name='title' _onChange={handleChange}/>
           <Text>가격</Text>
           <Input _name='price' _onChange={handleChange}/>
           <Text>모집인원</Text>

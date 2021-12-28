@@ -28,7 +28,7 @@ const phoneNum = createAction(PHONENUM_CHECK, (num) => ({ num }));
 //[회원가입, 회원탈퇴, 비밀번호수정, 문자인증]은 서버에서 처리 리덕스에서 할거 없음
 
 //middlewares
-const imsy = (userInfo) => {
+const signupDB = (userInfo) => {
   return async (dispatch, getState, { history }) => {
     const _phoneNum = getState().user.user.phoneNum;
     console.log(_phoneNum);
@@ -40,7 +40,7 @@ const imsy = (userInfo) => {
     };
     console.log(_userInfo);
     try {
-      const response = await apis.imsy(_userInfo);
+      const response = await apis.signup(_userInfo);
       
       response && window.alert('회원가입이 완료되었습니다.');
       history.push('/login');
@@ -150,6 +150,7 @@ const loginDB = (id, pwd) => {
       setCookie("token", token);
       localStorage.setItem("nickname", response.data.nickname);
       localStorage.setItem("userId", response.data.userId);
+      localStorage.setItem('is_login', true);
       dispatch(setUser(user));
     } catch (err) {
       window.alert("아이디와 비밀번호를 확인해주세요.");
@@ -236,7 +237,7 @@ export default handleActions(
 );
 
 const userActions = {
-  imsy,
+  signupDB,
   setUser,
   logout,
   editUserInfo,
