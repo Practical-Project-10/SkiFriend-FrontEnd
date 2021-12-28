@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState, useRef} from "react";
 
 import {useDispatch, useSelector} from 'react-redux';
 import {carpoolActions} from '../redux/modules/carpool'
@@ -9,15 +9,19 @@ import "../elements/styles.css";
 
 import Example from "../components/Example";
 import TimePicker from "../components/TimePicker";
+import { inputClasses } from "@mui/material";
 
 const CarpoolWrite = (props) => {
   const dispatch = useDispatch();
   const carpool_list = useSelector(state => state.carpool.list);
   console.log(carpool_list)
-  const [state, setState] = React.useState(false);
+  const [state, setState] = useState(false);
+
+  const skiResort = props.match.params.skiresort;
+  const [startLoca, setStartLoca] = useState('');
+  const [endLoca, setEndLoca] = useState(skiResort);
   
   const postId = props.match.params.postId;
-  const skiResort = props.match.params.skiresort;
   const is_edit = postId? true: false;
   const carpool = is_edit? carpool_list.find(l => l.postId === Number(postId)): null;
 
@@ -25,7 +29,7 @@ const CarpoolWrite = (props) => {
     {
       carpoolType: `${carpool? carpool.carpoolType: ''}`,
       startLocation: `${carpool? carpool.startLocation: ''}`,
-      endLocation: `${carpool? carpool.endLocation: skiResort}`,
+      endLocation: `${carpool? carpool.endLocation: endLoca}`,
       date: `${carpool? carpool.date: ''}`,
       time: `${carpool? carpool.time: ''}`,
       price: `${carpool? carpool.price: ''}`,
@@ -47,6 +51,12 @@ const CarpoolWrite = (props) => {
   const handleChange = e => {
     const{ name, value } = e.target;
     console.log(name, value);
+
+    if(name === 'startLocation') {
+      setStartLoca(value);
+      console.log(startLoca);
+    }
+
     setFrom(
       {
         ...form,
@@ -54,18 +64,31 @@ const CarpoolWrite = (props) => {
       }
     )
   }
-  console.log(form);
-  
-  const changeLocation = (e) => {
 
+  const locationChange = (e) => {
     if(!state) {
       setState(true);
-    } else if(state) {
+      setStartLoca(endLoca);
+      setEndLoca(startLoca);
+    } else {
       setState(false);
+      setStartLoca(endLoca);
+      setEndLoca(startLoca);
     }
-  };
-  console.log(state)
+    console.log(startLoca)
+    console.log(endLoca)
+    console.log(form);
 
+    setFrom(
+      {
+        ...form,
+        startLocation: startLoca,
+        endLocation: endLoca,
+      }
+    )
+
+  };
+  
   const addCarpool = () => {
     dispatch(carpoolActions.addCarpoolDB(skiResort, form))
   }
@@ -88,7 +111,7 @@ const CarpoolWrite = (props) => {
 
         <Grid borderB="1px solid #CACACA">
           <Grid align="center" border="1px solid #000" padding="10px">
-            하이원
+            {skiResort}
           </Grid>
           <Grid is_flex margin="10px 15px">
             <input
@@ -115,13 +138,14 @@ const CarpoolWrite = (props) => {
         {/* 출발도착지역 셀렉박스 */}
         <Grid is_flex justify='space-around' selectBox position='relative' direction={state? 'row-reverse': ''} >
             <Grid>
-              <select name={!state? 'startLocation': 'endLocation'} onChange={handleChange}>
+              <select name='startLocation' value={startLocation} onChange={handleChange}>
                 <option value='지방'>지방</option>
                 <option value='서울'>서울</option>
               </select>
             </Grid>
-          <Cross state onClick={changeLocation}>교차</Cross>
-          <div className="skiResort" name={!state? 'endLocation': 'startLocation'}>{skiResort}</div>
+          <Cross state onClick={locationChange}>교차</Cross>
+          <label htmlFor="endLocation" style={{ border:'1px solid #000'}}>{skiResort}</label>
+          <input type='text' id="endLocation" name='endLocation' value={endLocation} style={{display:"none"}}/>
         </Grid>
 
         <Grid is_flex width="300px">
