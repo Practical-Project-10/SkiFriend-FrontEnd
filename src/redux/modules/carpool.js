@@ -49,16 +49,16 @@ const addCarpoolDB = (skiResort, carpool) => {
     try {
       await apis.addCarpool(skiResort, carpool_form);
 
-      history.push('/');
+      history.push(`/carpool/${skiResort}`);
     } catch(err) {
       console.log(err);
     }
   }
 }
 
-const editCarpoolDB = (skiResort, carpool) => {
+const editCarpoolDB = (postId, carpool) => {
   return async function(dispatch, getState, {history}) {
-    console.log(skiResort, carpool)
+    console.log(postId, carpool)
 
     const carpool_form = {
       carpoolType: carpool.carpoolType,
@@ -72,7 +72,7 @@ const editCarpoolDB = (skiResort, carpool) => {
     }
 
     try {
-      await apis.editCarpool(skiResort, carpool_form);
+      await apis.editCarpool(postId, carpool_form);
 
       history.goBack();
     } catch(err) {
@@ -81,14 +81,15 @@ const editCarpoolDB = (skiResort, carpool) => {
   };
 };
 
-const deleteCarpoolDB = (postId) => {
+const deleteCarpoolDB = (skiResort, postId) => {
   return async function(dispatch, getState, {history}) {
-    console.log(postId);
+    console.log(skiResort, postId);
 
     try {
       await apis.deleteCarpool(postId);
 
-      history.push('/');
+      dispatch(deleteCarpool(postId));
+      history.push(`/carpool/${skiResort}`);
     } catch(err) {
       console.log(err);
     }
@@ -138,14 +139,14 @@ export default handleActions(
     //     draft.list[idx] = {...draft.list[idx], ...action.payload.carpool};
     //   }),
 
-    // [DELETE_CARPOOL]: (state, action) => 
-    //   produce(state, (draft) => {
-    //     let deleted_list = draft.list.filter(
-    //       (l) => l.postId !== action.payload.postId
-    //     );
+    [DELETE_CARPOOL]: (state, action) => 
+      produce(state, (draft) => {
+        let deleted_list = draft.list.filter(
+          (l) => l.postId !== action.payload.postId
+        );
 
-    //     draft.list = deleted_list;
-    //   }),
+        draft.list = deleted_list;
+      }),
   },
   initialState
 )

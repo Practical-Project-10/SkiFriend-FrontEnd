@@ -37,7 +37,9 @@ function App() {
         <Route path="/signupTwo" component={SignupTwo}></Route>
         <Route path="/login" component={Login} />
         <Route path="/carpool/:skiresort" component={Carpool} />
-        <Route path="/carpoolwrite" component={CarpoolWrite} />
+        <Route exact path="/carpoolwrite" component={CarpoolWrite} />
+        <Route exact path="/carpoolwrite/:skiresort" component={CarpoolWrite} />
+        <Route path="/carpoolwrite/:skiresort/:postId" component={CarpoolWrite} />
         <Route path="/carpoolfilter" component={CarpoolFilter} />
         <Route path="/card" component={Card} />
         <Route path="/freeboardlist/:skiresort" component={FreeBoardList} />

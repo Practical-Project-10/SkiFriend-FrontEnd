@@ -95,7 +95,8 @@ export const apis = {
   deleteUser: () => api.delete("/user/info"),
 
   //카풀 게시글
-  getCarpool: (skiResort) => api.get(`/board/carpool/${skiResort}`),
+  getCarpool: (skiResort) =>
+    api.get(`/board/carpool/${skiResort}?size=10&page=1`),
 
   addCarpool: (skiResort, carpool) =>
     api.post(`/board/carpool/${skiResort}`, {

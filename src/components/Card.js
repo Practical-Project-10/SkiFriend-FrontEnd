@@ -1,15 +1,18 @@
 import React from "react";
+
 import { Grid, Text } from "../elements/index";
 
 import { useDispatch } from "react-redux";
+import { history } from "../redux/ConfigStore"
 import {carpoolActions} from '../redux/modules/carpool';
 
 const Card = (props) => {
   const dispatch = useDispatch();
   console.log(props)
+  const {skiResort, postId} = props;
 
   const deleteCarpool = () => {
-    dispatch(carpoolActions.deleteCarpoolDB(props.postId));
+    dispatch(carpoolActions.deleteCarpoolDB(skiResort, postId));
   }
 
   return (
@@ -25,6 +28,7 @@ const Card = (props) => {
       border="1px solid transparent"
     >
       <button onClick={deleteCarpool}>삭제</button>
+      <button onClick={() => {history.push(`/carpoolwrite/${skiResort}/${postId}`)}}>수정</button>
       <Text size="20px" weight="700" marginB="5px">
         [{props.carpoolType}]
       </Text>

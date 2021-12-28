@@ -6,15 +6,15 @@ import {carpoolActions} from '../redux/modules/carpool'
 import CarpoolMenuBar from "../components/CarpoolMenuBar";
 import CarpoolControl from "../components/CarpoolControl"
 import Card from "../components/Card";
+import FloatButton from '../components/FloatButton';
 
 import "../elements/styles.css";
 import { Grid, Button } from "../elements/index";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
 
 const Carpool = (props) => {
+  const history = props.history;
   const dispatch= useDispatch();
   const carpool_list = useSelector(state => state.carpool.list);
   console.log(carpool_list);
@@ -36,7 +36,7 @@ const Carpool = (props) => {
       {carpool_list.map(l => {
         return(
           <Grid key={l.postId} width='100%'>
-            <Card {...l} />
+            <Card {...l} skiResort={skiResort} />
           </Grid>
         )
       })}
@@ -44,6 +44,8 @@ const Carpool = (props) => {
       <Stack spacing={2}>
         <Pagination count={5} />
       </Stack>
+
+      <FloatButton _onClick={() => {history.push(`/carpoolwrite/${skiResort}`)}}/>
     </Grid>
   );
 };
