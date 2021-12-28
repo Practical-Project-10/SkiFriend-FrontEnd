@@ -25,6 +25,7 @@ const Grid = (props) => {
     wrap,
     direction,
     cursor,
+    className,
     mainFrame,
     navbar,
     header,
@@ -73,6 +74,20 @@ const Grid = (props) => {
       <SkiIcon {...styles} onClick={_onClick}>
         {children}
       </SkiIcon>
+    );
+  }
+  if (className === "modalBackground") {
+    return (
+      <ModalBackground {...styles} onClick={_onClick}>
+        {children}
+      </ModalBackground>
+    );
+  }
+  if (className === "modalContainer") {
+    return (
+      <ModalContainer {...styles} onClick={_onClick}>
+        {children}
+      </ModalContainer>
     );
   }
 
@@ -158,6 +173,29 @@ const SkiIcon = styled.div`
   display: flex;
   flex-direction: column;
   background: red;
+`;
+
+const ModalBackground = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 3;
+`;
+
+const ModalContainer = styled.div`
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  max-height: 225px;
+  width: 25rem;
+  height: 225px;
+  background: #ffffff;
+  border-radius: 10px;
+  text-align: center;
 `;
 
 export default Grid;

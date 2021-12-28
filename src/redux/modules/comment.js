@@ -1,8 +1,7 @@
 import { createAction, handleActions } from "redux-actions";
 import produce from "immer";
-import alert from "sweetalert";
-import { apis } from "../components/shared/apis";
-import { loadPostDB } from "./post";
+import { apis } from "../../shared/apis";
+import { getOneBoardDB } from "./freeboard";
 
 // initialState
 const initialState = {
@@ -28,38 +27,20 @@ const deleteComment = createAction(DELETE, (commentId) => ({ commentId }));
 export const addCommentDB =
   (postId, content) =>
   async (dispatch, getState, { history }) => {
-    const state = getState().freeboard.list.resortPosts;
     await apis
-      .addComment(postId, content)
+      .addPostComment(postId, content)
       .then((res) => {
-        let index;
-        for (let i = 0; i < state.length; i++) {
-          if (state[i].id === postId) {
-            index = i;
-          }
-        }
-        alert("댓글달기 성공!");
-        dispatch(addComment(res.data, state[index]));
-        dispatch(loadPostDB()).then(console.log("갯수추가 완료"));
-        dispatch(loadCommentDB(postId))
-          .then(console.log("댓글로딩완료"))
-          .catch((e) => console.log(e));
+        console.log("댓글달기 성공");
+        dispatch(addComment(res));
+        dispatch(getOneBoardDB(postId));
       })
       .catch((e) => console.log(e));
-  };
-
-export const loadCommentDB =
-  (postId) =>
-  async (dispatch, getState, { history }) => {
-    await apis.getComment(postId).then((res) => {
-      dispatch(loadComment(res.data));
-    });
   };
 
 export const updateCommentDB =
   (commentId, content) =>
   async (dispatch, getState, { history }) => {
-   await apis.updateComment(commentId, content).then((res) => {
+    await apis.updatePostComment(commentId, content).then((res) => {
       dispatch(loadComment(res.data));
     });
   };
@@ -67,8 +48,8 @@ export const updateCommentDB =
 export const deleteCommentDB =
   (postId, commentId) =>
   async (dispatch, getState, { history }) => {
-    await apis.deleteComment(postId, commentId).then((res) => {
-      dispatch(loadCommentDB(postId));
+    await apis.deletePostComment(postId, commentId).then((res) => {
+      dispatch(getOneBoardDB(postId));
       deleteComment(commentId);
       alert("댓글 삭제");
     });
@@ -80,13 +61,12 @@ export default handleActions(
     [LOAD]: (state, action) => {
       return {
         ...state,
-        list: action.payload.comment,
+        list: action.payload.postData.commentDtoList,
       };
     },
     [ADD]: (state, action) =>
       produce(state, (draft) => {
-        draft.list.push(action.payload.comment);
-        draft.list.push((action.payload.store.numOfComments += 1));
+        draft.list.push(action.payload.postData.commentDtoList);
       }),
 
     [UPDATE]: (state, action) =>
@@ -106,3 +86,12 @@ export default handleActions(
   },
   initialState
 );
+
+const commentCreators = {
+  loadComment,
+  addCommentDB,
+  updateCommentDB,
+  deleteCommentDB,
+};
+
+export { commentCreators };

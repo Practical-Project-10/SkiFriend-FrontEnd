@@ -18,8 +18,6 @@ const FreeBoardWrite = () => {
   const postId = params.postId;
 
   const postData = useSelector((state) => state.freeboard.detail);
-  console.log(postData);
-  const is_login = localStorage.getItem("nickname");
   const is_edit = postId ? true : false;
 
   // useState관리

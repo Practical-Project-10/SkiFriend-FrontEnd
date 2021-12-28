@@ -126,7 +126,7 @@ export const apis = {
 
   // 자유게시글
   getFreePost: (skiResort) =>
-    api.get(`/board/freeBoard/${skiResort}?page=1&size=10`, {}),
+    api.get(`/board/freeBoard/${skiResort}?size=10&page=1`, {}),
   writeFreePost: (skiResort, datas) =>
     apiMultipart.post(`/board/${skiResort}/freeBoard`, { datas }),
   getOneFreePost: (postId) => api.get(`board/freeBoard/${postId}/detail`, {}),
@@ -135,11 +135,11 @@ export const apis = {
   deleteFreePost: (postId) => api.delete(`/board/freeBoard/${postId}`, {}),
 
   // //댓글
-  addComment: (postId, content) =>
+  addPostComment: (postId, content) =>
     api.post(`/board/freeBoard/${postId}/comments`, { content }),
-  updateComment: (commentId, content) =>
+  updatePostComment: (commentId, content) =>
     api.put(`/board/freeBoard/comments/${commentId}`, { content }),
-  deleteComment: (commentId) =>
+  deletePostComment: (commentId) =>
     api.delete(`/board/freeBoard/comments/${commentId}`, {}),
 
   //좋아요
