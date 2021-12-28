@@ -9,15 +9,6 @@ const initialState = {
   detail: [],
 };
 
-// token
-const accessToken = document.cookie.split("=")[1];
-const token = {
-  headers: {
-    "Content-Type": "multipart/form-data",
-    Authorization: `${accessToken}`,
-  },
-};
-
 // action
 const LOAD = "freeboard/LOAD";
 const ADD = "freeboard/POST";
@@ -42,7 +33,6 @@ export const loadBoardDB =
     await apis
       .getFreePost(skiResort)
       .then((res) => {
-        console.log(res.data);
         dispatch(loadBoard(res.data));
       })
       .catch((error) => {
@@ -54,12 +44,25 @@ export const loadBoardDB =
 export const addBoardDB =
   (skiResort, image, datas) =>
   async (dispatch, getState, { history }) => {
+    // token
+    const accessToken = document.cookie.split("=")[1];
+    const token = {
+      headers: {
+        "Content-Type": "multipart/form-data",
+        Authorization: `${accessToken}`,
+      },
+    };
+
     let formdata = new FormData();
     formdata.append("image", image);
     formdata.append(
       "requestDto",
       new Blob([JSON.stringify(datas)], { type: "application/json" })
     );
+    //formdata 객체 내용 확인
+    for (let pair of formdata.entries()) {
+      console.log(pair[0] + ", " + pair[1]);
+    }
 
     await axios
       .post(
@@ -70,8 +73,6 @@ export const addBoardDB =
       // await apis
       //   .writeFreePost(skiResort, formdata)
       .then((res) => {
-        console.log(res);
-        console.log(res.data);
         console.log("등록 완료~");
         dispatch(addBoard(res.config.data));
         history.push(`/freeboardlist/${skiResort}`);
@@ -88,7 +89,6 @@ export const getOnePostDB =
       .getOneFreePost(postId)
       .then((res) => {
         console.log("데이터 가져오기 성공");
-        console.log(res.data);
         dispatch(getOneBoard(res.data));
       })
       .catch((error) => {
@@ -97,23 +97,60 @@ export const getOnePostDB =
   };
 
 export const updateBoardDB =
-  (postId, datas) =>
+  (skiResort, postId, image, datas) =>
   async (dispatch, getState, { history }) => {
     if (!postId) {
       console.log("게시물 정보가 없어요!");
       return;
     }
-    const data = await apis.updateFreePost(postId, datas);
-    dispatch(updateBoard(data));
-    dispatch(loadBoardDB());
+    // token
+    const accessToken = document.cookie.split("=")[1];
+    const token = {
+      headers: {
+        "Content-Type": "multipart/form-data",
+        Authorization: `${accessToken}`,
+      },
+    };
+
+    let formdata = new FormData();
+    formdata.append("image", image);
+    formdata.append(
+      "requestDto",
+      new Blob([JSON.stringify(datas)], { type: "application/json" })
+    );
+    //formdata 객체 내용 확인
+    for (let pair of formdata.entries()) {
+      console.log(pair[0] + ", " + pair[1]);
+    }
+
+    await axios
+      .put(`http://13.125.249.172/board/freeBoard/${postId}`, formdata, token)
+      // await apis
+      //   .updateFreePost(postId, formdata)
+      .then((res) => {
+        console.log("수정 완료~");
+        dispatch(updateBoard(res.config.data));
+        history.push(`/freeboarddetail/${skiResort}/${postId}`);
+      })
+      .catch((error) => {
+        console.log(`오류 발생!${error}`);
+      });
   };
 
 export const deleteBoardDB =
-  (postId) =>
+  (postId, skiresort) =>
   async (dispatch, getState, { history }) => {
-    apis.deleteFreePost(postId).then((res) => {
-      dispatch(deleteBoard(postId));
-    });
+    await apis
+      .deleteFreePost(postId)
+      .then((res) => {
+        console.log("삭제 성공!!");
+        window.alert("게시물이 정상적으로 삭제되었습니다.");
+        dispatch(deleteBoard(postId));
+        history.push(`/freeboardlist/${skiresort}`);
+      })
+      .catch((error) => {
+        console.log(`삭제요청 실패${error}`);
+      });
   };
 
 // reducer
@@ -122,6 +159,15 @@ export default handleActions(
     [LOAD]: (state, action) =>
       produce(state, (draft) => {
         draft.list.push(...action.payload.postList);
+
+        draft.list = draft.list.reduce((prev, now) => {
+          if (prev.findIndex((a) => a.postId === now.postId) === -1) {
+            return [...prev, now];
+          } else {
+            prev[prev.findIndex((a) => a.postId === now.postId)] = now;
+            return prev;
+          }
+        }, []);
       }),
 
     [ADD]: (state, action) =>
@@ -137,15 +183,17 @@ export default handleActions(
     [UPDATE]: (state, action) =>
       produce(state, (draft) => {
         let idx = draft.list.findIndex(
-          (p) => p.id === Number(action.payload.userId)
+          (p) => p.postId === Number(action.payload.postId)
         );
-        draft.list[idx] = { ...draft.list[idx], ...action.payload.post };
+        draft.list[idx] = { ...draft.list[idx], ...action.payload.detail };
       }),
 
     [DELETE]: (state, action) => {
       return {
         ...state,
-        list: state.list.filter((list) => list.id !== action.payload.postId),
+        list: state.list.filter(
+          (list) => list.postId !== action.payload.postId
+        ),
       };
     },
   },

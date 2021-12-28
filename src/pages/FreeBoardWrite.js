@@ -1,33 +1,26 @@
 import React, { useState } from "react";
 import { history } from "../redux/ConfigStore";
 import { useParams } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { boardCreators as boardActions } from "../redux/modules/freeboard";
 
-import { Grid, Button, Text, Input } from "../elements/index";
+import { Grid, Button, Text, Input, Image } from "../elements/index";
 
 //react icons
 import { GrFormPrevious } from "react-icons/gr";
 import { AiOutlineCamera } from "react-icons/ai";
 
-// swiper
-import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/swiper.min.css";
-import "swiper/components/navigation/navigation.min.css";
-import SwiperCore, { Navigation, Pagination } from "swiper";
-import axios from "axios";
-
 const FreeBoardWrite = () => {
-  const params = useParams();
   const dispatch = useDispatch();
 
-  // swiper관리
-  // SwiperCore.use([Navigation, Pagination]);
+  const params = useParams();
+  const skiresort = params.skiresort;
+  const postId = params.postId;
 
-  // const swiperParams = {
-  //   navigation: true,
-  //   pagination: true,
-  // };
+  const postData = useSelector((state) => state.freeboard.detail);
+  console.log(postData);
+  const is_login = localStorage.getItem("nickname");
+  const is_edit = postId ? true : false;
 
   // useState관리
   const [title, setTitle] = useState();
@@ -63,14 +56,33 @@ const FreeBoardWrite = () => {
   // 데이터 전송 (완료 버튼)
   const addPostBtn = () => {
     const requestDto = { title: title, content: content };
+    dispatch(boardActions.addBoardDB(skiresort, uploadFiles[0], requestDto));
+  };
+
+  // 데이터 수정 (완료 버튼)
+  const editPostBtn = () => {
+    const requestDto = { title: title, content: content };
     dispatch(
-      boardActions.addBoardDB(params.skiresort, uploadFiles[0], requestDto)
+      boardActions.updateBoardDB(skiresort, postId, uploadFiles[0], requestDto)
     );
   };
 
+  // 상세정보 데이터 가져오기
+  React.useEffect(() => {
+    if (is_edit) {
+      return dispatch(boardActions.getOnePostDB(postId));
+    } else {
+      return;
+    }
+  }, []);
+
   return (
     <React.Fragment>
-      <Grid header>게시글 작성 페이지</Grid>
+      {is_edit ? (
+        <Grid header>게시글 수정하기</Grid>
+      ) : (
+        <Grid header>게시글 작성하기</Grid>
+      )}
       <Grid is_flex justify="space-between">
         <Grid
           cursor="pointer"
@@ -80,42 +92,49 @@ const FreeBoardWrite = () => {
         >
           <GrFormPrevious size="40" />
         </Grid>
-        <Button smallBtn _onClick={addPostBtn}>
-          완료
-        </Button>
+        {is_edit ? (
+          <Button smallBtn _onClick={editPostBtn}>
+            수정
+          </Button>
+        ) : (
+          <Button smallBtn _onClick={addPostBtn}>
+            완료
+          </Button>
+        )}
       </Grid>
       <Grid align="center">
         <Grid is_flex padding="20px">
           <Text>제목</Text>
-          <Input title _onChange={postTitle}></Input>
+          {is_edit ? (
+            <Input
+              title
+              defaultValue={postData.title}
+              _onChange={postTitle}
+            ></Input>
+          ) : (
+            <Input title _onChange={postTitle}></Input>
+          )}
         </Grid>
-        <Input
-          textarea
-          placeholder="내용을 입력하세요"
-          _onChange={postContent}
-        />
+        {is_edit ? (
+          <Input
+            textarea
+            defaultValue={postData.content}
+            _onChange={postContent}
+          />
+        ) : (
+          <Input
+            textarea
+            placeholder="내용을 입력하세요"
+            _onChange={postContent}
+          />
+        )}
       </Grid>
       <Grid is_flex width="100%" height="200px">
-        {/* <Swiper {...swiperParams} style={{ width: "100%" }}>
-          {uploadURL.length !== 0 &&
-            uploadURL.map((file, index) => {
-              return (
-                <React.Fragment>
-                  <SwiperSlide
-                    style={{
-                      margin: "auto",
-                      position: "relative",
-                    }}
-                    key={index}
-                  >
-                    <Grid is_flex width="100%" height="200px"> */}
-        <img src={uploadURL} alt="userUploadImg" />
-        {/* </Grid>
-                  </SwiperSlide>
-                </React.Fragment>
-              );
-            })}
-        </Swiper> */}
+        {is_edit ? (
+          <Image src={postData.image} width="100%" height="100%" />
+        ) : (
+          <Image src={uploadURL} width="100%" height="100%" />
+        )}
       </Grid>
       <Grid>
         <label htmlFor="myFile" style={{ cursor: "pointer" }}>
@@ -125,7 +144,6 @@ const FreeBoardWrite = () => {
           type="file"
           id="myFile"
           style={{ display: "none" }}
-          // multiple
           accept="image/*"
           onChange={uploadImg}
         />

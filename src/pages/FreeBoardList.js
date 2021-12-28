@@ -15,19 +15,38 @@ import { BsChat } from "react-icons/bs";
 
 const FreeBoardList = () => {
   const params = useParams();
+  const skiresort = params.skiresort;
   const dispatch = useDispatch();
-
   const boardList = useSelector((state) => state.freeboard.list);
+  const is_login = localStorage.getItem("nickname");
+
+  // 게시글 작성 페이지 이동 판단
+  const moveWritePage = () => {
+    if (is_login) {
+      return history.push(`/freeboardwrite/${skiresort}`);
+    } else {
+      const ask = window.confirm(
+        `게시물 등록은 로그인한 회원만 가능합니다. \n 로그인 페지로 이동하시겠습니까?`
+      );
+      if (ask) {
+        return history.push("/login");
+      } else {
+        return;
+      }
+    }
+  };
 
   React.useEffect(() => {
-    dispatch(boardActions.loadBoardDB(params.skiresort));
+    if (boardList.length === 0) {
+      dispatch(boardActions.loadBoardDB(skiresort));
+    }
   }, []);
 
   return (
     <React.Fragment>
       <Header />
       <Grid height="13em" bg="red">
-        {params.skiresort}
+        {skiresort}
       </Grid>
       <CarpoolMenuBar />
       <Grid padding="20px" height="384px" overflow="scroll">
@@ -41,7 +60,9 @@ const FreeBoardList = () => {
                   margin="0 10px 0 0"
                   cursor="pointer"
                   _onClick={() => {
-                    history.push(`/freeboarddetail/${post.postId}`);
+                    history.push(
+                      `/freeboarddetail/${skiresort}/${post.postId}`
+                    );
                   }}
                 >
                   {post.title}
@@ -58,11 +79,7 @@ const FreeBoardList = () => {
           );
         })}
       </Grid>
-      <Grid
-        _onClick={() => {
-          history.push(`/freeboardwrite/${params.skiresort}`);
-        }}
-      >
+      <Grid _onClick={moveWritePage}>
         <FloatButton />
       </Grid>
     </React.Fragment>

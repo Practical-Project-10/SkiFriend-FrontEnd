@@ -39,12 +39,19 @@ function App() {
         <Route path="/carpool/:skiresort" component={Carpool} />
         <Route exact path="/carpoolwrite" component={CarpoolWrite} />
         <Route exact path="/carpoolwrite/:skiresort" component={CarpoolWrite} />
-        <Route path="/carpoolwrite/:skiresort/:postId" component={CarpoolWrite} />
+        <Route
+          path="/carpoolwrite/:skiresort/:postId"
+          component={CarpoolWrite}
+        />
         <Route path="/carpoolfilter" component={CarpoolFilter} />
         <Route path="/card" component={Card} />
         <Route path="/freeboardlist/:skiresort" component={FreeBoardList} />
         <Route path="/freeboardwrite/:skiresort" component={FreeBoardWrite} />
-        <Route path="/freeboarddetail/:postId" component={FreeBoardDetail} />
+        <Route path="/freeboardedit/:skiresort/:postId" component={FreeBoardWrite} />
+        <Route
+          path="/freeboarddetail/:skiresort/:postId"
+          component={FreeBoardDetail}
+        />
         <Route path="/placeinfo" component={PlaceInfo} />
         <Route path="/placeinfodetail" component={PlaceInfoDetail} />
         <Route path="/mypage" component={MyPage} />

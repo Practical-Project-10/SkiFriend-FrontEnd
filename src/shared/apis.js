@@ -132,7 +132,7 @@ export const apis = {
   getOneFreePost: (postId) => api.get(`board/freeBoard/${postId}/detail`, {}),
   updateFreePost: (postId, datas) =>
     api.put(`board/freeBoard/${postId}`, { datas }),
-  deleteFreePost: (postId) => api.delete(`/posts/${postId}`, {}),
+  deleteFreePost: (postId) => api.delete(`/board/freeBoard/${postId}`, {}),
 
   // //댓글
   addComment: (postId, content) =>
