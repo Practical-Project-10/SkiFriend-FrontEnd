@@ -83,7 +83,7 @@ const SignupOne = (props) => {
       nickname: nickname,
     }
 
-    dispatch(userActions.imsy(userInfo))
+    dispatch(userActions.signupDB(userInfo))
     // if(joinState.is_id && joinState.is_nickname) {
       
     // }

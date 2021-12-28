@@ -7,7 +7,7 @@ import { Route } from "react-router-dom";
 import Home from "./pages/Home";
 import PhoneAuth from "./pages/PhoneAuth";
 import SignupOne from "./pages/SignupOne";
-import SignupTwo from "./pages/SignupTwo";
+import MyProfile from "./pages/MyProfile";
 import Login from "./pages/Login";
 import Carpool from "./pages/Carpool";
 import CarpoolWrite from "./pages/CarpoolWrite";
@@ -34,7 +34,7 @@ function App() {
         <Route exact path="/" component={Home}></Route>
         <Route path="/phoneauth" component={PhoneAuth}></Route>
         <Route path="/signupone" component={SignupOne}></Route>
-        <Route path="/signupTwo" component={SignupTwo}></Route>
+        <Route path="/myProfile" component={MyProfile}></Route>
         <Route path="/login" component={Login} />
         <Route path="/carpool/:skiresort" component={Carpool} />
         <Route exact path="/carpoolwrite" component={CarpoolWrite} />

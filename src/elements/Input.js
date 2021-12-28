@@ -70,7 +70,12 @@ const Input = (props) => {
         ) : (
           ""
         )}
-        <ProfileInput width={width} />
+        <ProfileInput
+          width={width}
+          onChange={_onChange}
+          value={_value}
+          name={_name}
+        />
       </React.Fragment>
     );
   }
@@ -79,15 +84,15 @@ const Input = (props) => {
       <Text>{label}</Text>
       <ElInput
         placeholder={placeholder}
-        onChange={_onChange}
         type={type}
         id={type}
         margin={margin}
         width={width}
         height={height}
-        value={_value}
         padding={padding}
         onBlur={_onBlur}
+        onChange={_onChange}
+        value={_value}
         name={_name}
       />
     </React.Fragment>

@@ -1,26 +1,35 @@
 
 import React from "react";
+
+import { useDispatch, useSelector } from "react-redux";
+import { myProfilieActions } from "../redux/modules/myProfile";
+
 import { Grid, Button, Image, Text } from "../elements/index";
 
-const MyPage = () => {
-  const is_login = 1;
-  console.log(is_login)
+const MyPage = (props) => {
+  const history = props.history;
+  const is_login = localStorage.getItem('is_login');
+  const dispatch = useDispatch();
+  const user_Profile = useSelector(state => state.myProfile.user_profile);
+  // console.log(user_Profile);
+
+  // React.useEffect(() => {
+  //   dispatch(myProfilieActions.getProfileDB());
+  // }, [])
+
   if (!is_login) {
     return (
       //로그인 안한 경우
       <React.Fragment>
         <Grid bg="yellow">
           <Grid header> 마이페이지</Grid>
-          <Grid align="end">
-            <Button smallBtn>로그아웃</Button>
-          </Grid>
           <Grid is_flex justify="space-between" borderB="1px solid #dbdbdb">
             <Grid is_flex>
               <Image myIcon />
               <Text>로그인을 해주세요</Text>
             </Grid>
             <Grid>
-              <Button smallBtn>회원가입</Button>
+              <Button smallBtn _onClick={() => history.push('/login')}>로그인</Button>
             </Grid>
           </Grid>
         </Grid>
