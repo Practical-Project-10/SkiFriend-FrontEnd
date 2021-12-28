@@ -7,32 +7,26 @@ const Home = (props) => {
   const skiResort = [
     {
       resortNum: 1,
-      resort: "하이원",
       name: "HighOne",
     },
     {
       resortNum: 2,
-      resort: "용평",
       name: "YongPyong",
     },
     {
       resortNum: 3,
-      resort: "비발디",
       name: "VivaldiPark",
     },
     {
       resortNum: 4,
-      resort: "휘닉스",
       name: "Phoenix",
     },
     {
       resortNum: 5,
-      resort: "웰리힐리",
       name: "WellihilliPark",
     },
     {
       resortNum: 6,
-      resort: "곤지암",
       name: "Konjiam",
     },
   ];
@@ -60,7 +54,7 @@ const Home = (props) => {
                 <div
                   style={{ width: "30px", height: "30px", background: "#000" }}
                 ></div>
-                <Text>{r.resort}</Text>
+                <Text>{r.name}</Text>
               </Grid>
             );
           })}

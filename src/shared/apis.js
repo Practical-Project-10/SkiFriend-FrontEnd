@@ -19,7 +19,6 @@ const apiMultipart = axios.create({
 
 api.interceptors.request.use(function (config) {
   const accessToken = document.cookie.split("=")[1];
-  console.log(accessToken);
   config.headers.common["Authorization"] = `${accessToken}`;
   return config;
 });
@@ -97,7 +96,7 @@ export const apis = {
   
   //카풀 게시글
   getCarpool: (skiResort) =>
-    api.get(`/board/carpool/${skiResort}`),
+    api.get(`/board/carpool/${skiResort}?size=10&page=1`),
   
   addCarpool: (skiResort, carpool) =>
     api.post(`/board/carpool/${skiResort}`,{

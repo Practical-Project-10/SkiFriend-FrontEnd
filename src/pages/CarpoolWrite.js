@@ -1,6 +1,6 @@
 import React from "react";
 
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {carpoolActions} from '../redux/modules/carpool'
 
 import styled from 'styled-components'
@@ -12,17 +12,25 @@ import TimePicker from "../components/TimePicker";
 
 const CarpoolWrite = (props) => {
   const dispatch = useDispatch();
+  const carpool_list = useSelector(state => state.carpool.list);
+  console.log(carpool_list)
   const [state, setState] = React.useState(false);
+  
+  const postId = props.match.params.postId;
+  const skiResort = props.match.params.skiresort;
+  const is_edit = postId? true: false;
+  const carpool = is_edit? carpool_list.find(l => l.postId === Number(postId)): null;
+
   const [form, setFrom] = React.useState(
     {
-      carpoolType: '',
-      startLocation: '',
-      endLocation: '',
-      date: '',
-      time: '',
-      price: '',
-      memberNum: '',
-      notice: '',
+      carpoolType: `${carpool? carpool.carpoolType: ''}`,
+      startLocation: `${carpool? carpool.startLocation: ''}`,
+      endLocation: `${carpool? carpool.endLocation: skiResort}`,
+      date: `${carpool? carpool.date: ''}`,
+      time: `${carpool? carpool.time: ''}`,
+      price: `${carpool? carpool.price: ''}`,
+      memberNum: `${carpool? carpool.memberNum: ''}`,
+      notice: `${carpool? carpool.notice: ''}`,
     }
   );
   const {
@@ -37,8 +45,8 @@ const CarpoolWrite = (props) => {
   } = form;
 
   const handleChange = e => {
-    const{name, value} = e.target;
-
+    const{ name, value } = e.target;
+    console.log(name, value);
     setFrom(
       {
         ...form,
@@ -49,7 +57,6 @@ const CarpoolWrite = (props) => {
   console.log(form);
   
   const changeLocation = (e) => {
-    e.preventDefault();
 
     if(!state) {
       setState(true);
@@ -59,92 +66,82 @@ const CarpoolWrite = (props) => {
   };
   console.log(state)
 
-  const skijang = 'HighOne'
-  const write = () => {
-    dispatch(carpoolActions.addCarpoolDB(skijang, form))
+  const addCarpool = () => {
+    dispatch(carpoolActions.addCarpoolDB(skiResort, form))
+  }
+  const editCarpool = () => {
+    dispatch(carpoolActions.editCarpoolDB(postId, form))
   }
   
   return (
     <React.Fragment>
-        <div>
-         <input type='text' name='carpoolType' onChange={handleChange}/>
-         <input type='text' name='startLocation' onChange={handleChange}/>
-         <input type='text' name='endLocation' onChange={handleChange}/>
-         <input type='text' name='date' onChange={handleChange}/>
-         <input type='text' name='time' onChange={handleChange}/>
-         <input type='text' name='price' onChange={handleChange}/>
-         <input type='text' name='memberNum' onChange={handleChange}/>
-         <input type='text' name='notice' onChange={handleChange}/>
-       </div>
-    
-
-    <Grid justify="column">
-      
-      {/* <Grid
-        is_flex
-        borderB="1px solid #CACACA"
-        padding="10px"
-        margin="0 0 20px 0"
-      >
-        <Text margin="0 auto">카풀 작성 페이지</Text>
-      </Grid>
-
-      <Grid borderB="1px solid #CACACA">
-        <Grid align="center" border="1px solid #000" padding="10px">
-          하이원
+      <Grid justify="column">
+        
+        <Grid
+          is_flex
+          borderB="1px solid #CACACA"
+          padding="10px"
+          margin="0 0 20px 0"
+        >
+          <Text margin="0 auto">카풀 작성 페이지</Text>
         </Grid>
-        <Grid is_flex margin="10px 15px">
-          <input
-            type='radio'
-            name='carpoolType'
-            value='카풀요청'
-            onChange={handleChange}
-          />카풀요청
-          <input
-            type='radio'
-            name='carpoolType'
-            value='카풀제공'
-            onChange={handleChange}
-          />카풀제공
-        </Grid>
-      </Grid> */}
 
-      {/* <Grid is_flex padding="10px">
-        <Text margin="10px">제목 : </Text>
-        <Input title type="text" placeholder="제목을 입력해주세요."></Input>
-      </Grid> */}
-
-
-      {/* 출발도착지역 셀렉박스 */}
-      {/* <Grid is_flex justify='space-around' selectBox position='relative' direction={state? 'row-reverse': ''} >
-          <Grid>
-            <select onChange={(e) => e.target}>
-              <option>지방</option>
-              <option>서울</option>
-            </select>
+        <Grid borderB="1px solid #CACACA">
+          <Grid align="center" border="1px solid #000" padding="10px">
+            하이원
           </Grid>
-        <Cross state onClick={changeLocation}>교차</Cross>
-        <div className="skiResort">하이원</div>
-      </Grid> */}
+          <Grid is_flex margin="10px 15px">
+            <input
+              type='radio'
+              name='carpoolType'
+              value='카풀요청'
+              onChange={handleChange}
+            />카풀요청
+            <input
+              type='radio'
+              name='carpoolType'
+              value='카풀제공'
+              onChange={handleChange}
+            />카풀제공
+          </Grid>
+        </Grid>
 
-      {/* <Grid is_flex width="100px">
-        <Example />
-        <TimePicker />
+        {/* <Grid is_flex padding="10px">
+          <Text margin="10px">제목 : </Text>
+          <Input title type="text" placeholder="제목을 입력해주세요."></Input>
+        </Grid> */}
+
+
+        {/* 출발도착지역 셀렉박스 */}
+        <Grid is_flex justify='space-around' selectBox position='relative' direction={state? 'row-reverse': ''} >
+            <Grid>
+              <select name={!state? 'startLocation': 'endLocation'} onChange={handleChange}>
+                <option value='지방'>지방</option>
+                <option value='서울'>서울</option>
+              </select>
+            </Grid>
+          <Cross state onClick={changeLocation}>교차</Cross>
+          <div className="skiResort" name={!state? 'endLocation': 'startLocation'}>{skiResort}</div>
+        </Grid>
+
+        <Grid is_flex width="300px">
+          <Example _name='date' _onChange={e => console.log(e.target)} />
+          <TimePicker />
+        </Grid>
+        <Grid margin="10px">
+          <Text>가격</Text>
+          <Input _name='price' _onChange={handleChange}/>
+          <Text>모집인원</Text>
+          <Input _name='memberNum' _onChange={handleChange}/>
+          <Text>주의사항</Text>
+          <Input _name='notice' _onChange={handleChange}/>
+        </Grid>
+        <Grid margin="10px">
+          <Button width="100%" padding="10px" _onClick={is_edit? editCarpool: addCarpool}>
+            {is_edit? '수정': '작성'}
+          </Button>
+        </Grid>
       </Grid>
-      <Grid margin="10px">
-        <Text>가격</Text>
-        <Input />
-        <Text>모집인원</Text>
-        <Input />
-        <Text>주의사항</Text>
-        <Input />
-      </Grid> */}
-      <Grid margin="10px">
-        <Button width="100%" padding="10px" _onClick={write}>
-          작성
-        </Button>
-      </Grid>
-    </Grid>
     </React.Fragment>
   );
 };
