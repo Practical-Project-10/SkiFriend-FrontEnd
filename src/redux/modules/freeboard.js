@@ -2,6 +2,7 @@ import { handleActions, createAction } from "redux-actions";
 import { apis } from "../../shared/apis";
 import axios from "axios";
 import produce from "immer";
+import { commentCreators as commentActions } from "./comment";
 
 // initialState
 const initialState = {
@@ -82,14 +83,16 @@ export const addBoardDB =
       });
   };
 
-export const getOnePostDB =
+export const getOneBoardDB =
   (postId) =>
   async (dispatch, getState, { history }) => {
     await apis
       .getOneFreePost(postId)
       .then((res) => {
+        console.log(res);
         console.log("데이터 가져오기 성공");
         dispatch(getOneBoard(res.data));
+        dispatch(commentActions.loadComment(res.data));
       })
       .catch((error) => {
         console.log(`오류 발생!${error}`);
@@ -203,7 +206,7 @@ export default handleActions(
 const boardCreators = {
   addBoardDB,
   loadBoardDB,
-  getOnePostDB,
+  getOneBoardDB,
   updateBoardDB,
   deleteBoardDB,
 };

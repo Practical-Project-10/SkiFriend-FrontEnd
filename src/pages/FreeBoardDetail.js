@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import styled from "styled-components";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { boardCreators as boardActions } from "../redux/modules/freeboard";
+import CommentList from "../components/CommentList";
 
-import { Grid, Button, Input, Text, Image } from "../elements/index";
+import { Grid, Button, Text, Image } from "../elements/index";
 
 //react icons
 import { GrFormPrevious } from "react-icons/gr";
@@ -19,7 +19,6 @@ const FreeBoardDetail = ({ history }, props) => {
   const postId = params.postId;
   const skiresort = params.skiresort;
   const postData = useSelector((state) => state.freeboard.detail);
-  console.log(postData);
   const nickname = localStorage.getItem("nickname");
 
   //------useState관리-------
@@ -47,7 +46,7 @@ const FreeBoardDetail = ({ history }, props) => {
   };
 
   React.useEffect(() => {
-    dispatch(boardActions.getOnePostDB(postId));
+    dispatch(boardActions.getOneBoardDB(postId));
   }, []);
 
   return (
@@ -68,7 +67,7 @@ const FreeBoardDetail = ({ history }, props) => {
           <Text>{postData.title}</Text>
         </Grid>
         <Grid is_flex>
-          {/* modal 시작 */}
+          {/* 게시글 수정 삭제 modal 시작 */}
           {/* 게시글을 조회한사람이 작성한 사람과 일치할 경우 모달 선택창이 보이게 하기 */}
           {nickname === postData.nickname ? (
             <Grid
@@ -82,8 +81,11 @@ const FreeBoardDetail = ({ history }, props) => {
           ) : null}
           <div showmodal={showmodal} />
           {showmodal ? (
-            <Background onClick={closemodal}>
-              <ModalContainer onClick={(e) => e.stopPropagation()}>
+            <Grid className="modalBackground" _onClick={closemodal}>
+              <Grid
+                className="modalContainer"
+                _onClick={(e) => e.stopPropagation()}
+              >
                 <Grid margin="25px 0">
                   <BsFillExclamationCircleFill size="30" />
                 </Grid>
@@ -105,8 +107,8 @@ const FreeBoardDetail = ({ history }, props) => {
                 >
                   취소
                 </Text>
-              </ModalContainer>
-            </Background>
+              </Grid>
+            </Grid>
           ) : null}
           {/* modal 끝 */}
         </Grid>
@@ -115,11 +117,11 @@ const FreeBoardDetail = ({ history }, props) => {
       <Grid is_flex justify="flex-end">
         <Grid is_flex margin="0 5px">
           <AiOutlineHeart />
-          <Text>{postData.likesDtoList}</Text>
+          <Text>{postData.likeCnt}</Text>
         </Grid>
         <Grid is_flex>
           <BsChat />
-          <Text>{postData.commentDtoList}</Text>
+          <Text>{postData.commentCnt}</Text>
         </Grid>
         <Grid margin="0 5px">
           <Text>{postData.createdAt}</Text>
@@ -137,12 +139,9 @@ const FreeBoardDetail = ({ history }, props) => {
         </Grid>
       </Grid>
 
-      <Grid is_flex justify="space-around">
-        <Input width="80%" placeholder="댓글작성" />
-        <Button smallBtn>작성</Button>
-      </Grid>
-      <Grid>
-        <Text>Comment</Text>
+      <CommentList />
+      {/* <Grid>
+        <Text>댓글</Text>
       </Grid>
       <Grid is_flex justify="space-between">
         <Text>닉네임</Text>
@@ -151,31 +150,12 @@ const FreeBoardDetail = ({ history }, props) => {
           <Button smallBtn>삭제</Button>
         </Grid>
       </Grid>
+      <Grid is_flex justify="space-around">
+        <Input width="80%" placeholder="댓글작성" />
+        <Button smallBtn>작성</Button>
+      </Grid> */}
     </React.Fragment>
   );
 };
 
-//모달창 CSS
-const Background = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-  z-index: 3;
-`;
-
-const ModalContainer = styled.div`
-  position: fixed;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  max-height: 225px;
-  width: 25rem;
-  height: 225px;
-  background: #ffffff;
-  border-radius: 10px;
-  text-align: center;
-`;
 export default FreeBoardDetail;
