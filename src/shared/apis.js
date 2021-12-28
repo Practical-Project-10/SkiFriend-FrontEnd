@@ -19,13 +19,13 @@ const apiMultipart = axios.create({
 
 api.interceptors.request.use(function (config) {
   const accessToken = document.cookie.split("=")[1];
-  console.log(accessToken);
   config.headers.common["Authorization"] = `${accessToken}`;
   return config;
 });
 
 apiMultipart.interceptors.request.use(function (config) {
   const accessToken = document.cookie.split("=")[1];
+  console.log(config);
   config.headers.common["Authorization"] = `${accessToken}`;
   return config;
 });
@@ -91,16 +91,14 @@ export const apis = {
       selfIntro: userInfo.selfInfro,
     }),
 
-  //마이페이지  
-  deleteUser: () => 
-    api.delete('/user/info'),
-  
+  //마이페이지
+  deleteUser: () => api.delete("/user/info"),
+
   //카풀 게시글
-  getCarpool: (skiResort) =>
-    api.get(`/board/carpool/${skiResort}`),
-  
+  getCarpool: (skiResort) => api.get(`/board/carpool/${skiResort}`),
+
   addCarpool: (skiResort, carpool) =>
-    api.post(`/board/carpool/${skiResort}`,{
+    api.post(`/board/carpool/${skiResort}`, {
       carpoolType: carpool.carpoolType,
       startLocation: carpool.startLocation,
       endLocation: carpool.endLocation,
@@ -123,14 +121,14 @@ export const apis = {
       notice: carpool.notice,
     }),
 
-  deleteCarpool: (carpoolId) =>
-    api.delete(`/board/carpool/${carpoolId}`),
+  deleteCarpool: (carpoolId) => api.delete(`/board/carpool/${carpoolId}`),
 
   // 자유게시글
-  getFreePost: (skiResort) => api.get(`/board/freeBoard/${skiResort}`, {}),
-  writeFreePost: (skiResort, datas, token) =>
+  getFreePost: (skiResort) =>
+    api.get(`/board/freeBoard/${skiResort}?page=1&size=10`, {}),
+  writeFreePost: (skiResort, datas) =>
     apiMultipart.post(`/board/${skiResort}/freeBoard`, { datas }),
-  getOneFreePost: (postId) => api.post(`board/freeBoard/${postId}`, {}),
+  getOneFreePost: (postId) => api.get(`board/freeBoard/${postId}/detail`, {}),
   updateFreePost: (postId, datas) =>
     api.put(`board/freeBoard/${postId}`, { datas }),
   deleteFreePost: (postId) => api.delete(`/posts/${postId}`, {}),

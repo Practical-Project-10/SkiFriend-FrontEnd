@@ -62,27 +62,10 @@ const FreeBoardWrite = () => {
 
   // 데이터 전송 (완료 버튼)
   const addPostBtn = () => {
-    const accessToken = document.cookie.split("=")[1];
-    const token = {
-      headers: {
-        "Content-Type": "multipart/form-data",
-        Authorization: `${accessToken}`,
-      },
-    };
-
     const requestDto = { title: title, content: content };
-    let formdata = new FormData();
-    formdata.append("image", uploadFiles[0]);
-    formdata.append(
-      "requestDto",
-      new Blob([JSON.stringify(requestDto)], { type: "application/json" })
+    dispatch(
+      boardActions.addBoardDB(params.skiresort, uploadFiles[0], requestDto)
     );
-    // return axios.post(
-    //   `http://13.125.249.172/board/${params.skiresort}/freeBoard`,
-    //   formdata,
-    //   token
-    // );
-    dispatch(boardActions.addBoardDB(params.skiresort, formdata));
   };
 
   return (

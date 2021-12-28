@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import { useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { boardCreators as boardActions } from "../redux/modules/freeboard";
 
 import { Grid, Button, Input, Text } from "../elements/index";
 
@@ -9,61 +12,75 @@ import { AiOutlineHeart } from "react-icons/ai";
 import { BsChat } from "react-icons/bs";
 import { BiDotsHorizontalRounded } from "react-icons/bi";
 
-const FreeBoardDetail = () => {
+const FreeBoardDetail = ({ history }) => {
+  const dispatch = useDispatch();
+  const params = useParams();
+  const postId = params.postId;
+  const postData = useSelector((state) => state.freeboard.detail);
+
   //------useState관리-------
-  const [showModal, setShowModal] = useState();
+  const [showmodal, setShowModal] = useState();
 
   //-------Modal-------
-  const CloseModal = () => {
+  const closemodal = () => {
     setShowModal(false);
   };
+
+  React.useEffect(() => {
+    dispatch(boardActions.getOnePostDB(postId));
+  }, []);
 
   return (
     <React.Fragment>
       <Grid header>상세게시글</Grid>
-      <GrFormPrevious size="40" />
+      <Grid
+        cursor="pointer"
+        _onClick={() => {
+          history.goBack();
+        }}
+      >
+        <GrFormPrevious size="40" />
+      </Grid>
       <Grid is_flex justify="space-between">
-        
         <Grid is_flex>
-          <Text margin="0 10px">닉네임</Text>
-          <Text>게시글 제목</Text>
+          <Text margin="0 10px">{postData.nickname}</Text>
+          <Text>{postData.title}</Text>
         </Grid>
         <Grid is_flex>
           <Grid
             cursor="pointer"
             _onClick={() => {
-              showModal(true);
+              setShowModal(true);
             }}
           >
             <BiDotsHorizontalRounded />
           </Grid>
-          <div showModal={showModal} closeModal={CloseModal}></div>
-          {showModal ? (
-            <Background onClick={CloseModal}>
+          <div showmodal={showmodal} />
+          {showmodal ? (
+            <Background onClick={closemodal}>
               <ModalContainer onClick={(e) => e.stopPropagation()}>
                 <Text>프로필 사진 바꾸기</Text>
 
                 <Text color="#ed4956">삭제</Text>
-                <Text _onClick={CloseModal} padding="15px 0" cursor="pointer">
+                <Text _onClick={closemodal} padding="15px 0" cursor="pointer">
                   취소
                 </Text>
               </ModalContainer>
             </Background>
           ) : null}
         </Grid>
-
       </Grid>
       <Grid is_flex justify="flex-end">
         <Grid is_flex margin="0 5px">
           <AiOutlineHeart />
-          <Text>2</Text>
+          <Text>{postData.likesDtoList}</Text>
         </Grid>
         <Grid is_flex>
           <BsChat />
-          <Text>3</Text>
+          <Text>{postData.commentDtoList}</Text>
         </Grid>
         <Grid margin="0 5px">
-          <Text>12:00</Text>
+          <Text>{postData.createdAt}</Text>
         </Grid>
       </Grid>
       <Grid>
