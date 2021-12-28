@@ -8,6 +8,7 @@ import User from "./modules/user";
 import FreeBoard from "./modules/freeboard";
 import Carpool from "./modules/carpool";
 import Comment from "./modules/comment";
+import Profile from "./modules/profile"
 // import Like from "./like";
 
 //---- history----
@@ -19,6 +20,7 @@ const rootReducer = combineReducers({
   freeboard: FreeBoard,
   carpool: Carpool,
   comment: Comment,
+  profile: Profile,
   // like: Like,
   router: connectRouter(history),
 });

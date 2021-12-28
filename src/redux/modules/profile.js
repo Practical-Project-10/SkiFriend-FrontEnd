@@ -20,7 +20,10 @@ const getProfileDB = () => {
       const response = await apis.getProfile();
       console.log(response.data);
 
-      // response && dispatch(getProfile());
+      response && dispatch(getProfile(response.data));
+      if(response.data.profileImg) {
+        localStorage.setItem('is_profile', true);
+      };
     } catch(err) {
       console.log('getProfileDB', err);
     }
@@ -47,7 +50,8 @@ const addProfileDB = (profile) => {
       const response = await apis.addProfile(formData);
       const _profile = response.data;
 
-      response && dispatch(addProfile(_profile))
+      response && history.push('/mypage');
+      dispatch(addProfile(_profile));
     } catch(err) {
       console.log('addProfileDB', err)
     }
@@ -92,7 +96,7 @@ const initialState = {
     ageRange: '',
     career: '',
     selfIntro: '',
-  }
+  },
 }
 
 //reducer
@@ -100,21 +104,21 @@ export default handleActions(
   {
     [GET_PROFILE]: (state, action) =>
       produce(state, (draft) => {
-        draft.user_profile = action.payload.profile
+        draft.user_profile = action.payload.profile;
       }),
     [ADD_PROFILE]: (state, action) =>
       produce(state, (draft) => {
-        draft.user_profile = action.payload.profile
+        draft.user_profile = action.payload.profile;
       }),
     [EDIT_PROFILE]: (state, action) =>
       produce(state, (draft) => {
-        draft.user_profile = action.payload.profile
+        draft.user_profile = action.payload.profile;
       }),
   },
   initialState
 )
 
-const myProfilieActions = {
+const ProfilieActions = {
   getProfile,
   addProfile,
   editProfile,
@@ -123,4 +127,4 @@ const myProfilieActions = {
   editProfileDB,
 }
 
-export {myProfilieActions};
+export { ProfilieActions };

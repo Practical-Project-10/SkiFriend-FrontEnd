@@ -1,27 +1,31 @@
-import React, {useState, useRef} from "react";
+import React, {useState, useRef, useEffect} from "react";
 
-import { useDispatch } from "react-redux";
-import { myProfilieActions } from "../redux/modules/myProfile";
+import { useDispatch, useSelector } from "react-redux";
+import { ProfilieActions } from "../redux/modules/profile";
 
 import { Grid, Image, Text, Input, Button } from "../elements/index";
 
 const SignupTwo = (props) => {
   const dispatch = useDispatch();
-
-  const [profileImg_, setProfileImg_] = useState('');
-  const [vacImg_, setVacImg_] = useState('');
+  const profile = useSelector(state => state.profile.user_profile);
   const pfImgFile = useRef('');
   const vImgFile = useRef('');
 
+  const username = props.match.params.username;
+  console.log(username)
+  const is_edit = username? true: false;
+  console.log(is_edit);
+  
+
   const [profile, setProfile] = useState(
     {
-      nickname: '',
-      profileImg: '',
-      gender: '',
-      ageRange: '',
-      career: '',
-      selfIntro: '',
-      vacImg: '',
+      nickname: `${is_edit? profile.nickname: ''}`,
+      profileImg: `${is_edit? profile.profileImg: ''}`,
+      gender: `${is_edit? profile.gender: ''}`,
+      ageRange: `${is_edit? profile.ageRange: ''}`,
+      career: `${is_edit? profile.career: ''}`,
+      selfIntro: `${is_edit? profile.selfIntro: ''}`,
+      vacImg: `${is_edit? profile.vacImg: ''}`,
     }
   );
   const {
@@ -33,6 +37,15 @@ const SignupTwo = (props) => {
     selfIntro,
     vacImg,
   } = profile;
+
+  useEffect(() => {
+    if(!is_edit) {
+      window.alert('프로필 정보가 없어요!');
+      history.goback();
+
+      return null;
+    }
+  }, [])
 
   const handleChange = (e) => {
     const {name, value} = e.target;
@@ -75,7 +88,7 @@ const SignupTwo = (props) => {
   console.log(profile)
 
   const addProfile = () => {
-    dispatch(myProfilieActions.addProfileDB(profile))
+    dispatch(ProfilieActions.addProfileDB(profile))
   }
 
   return (

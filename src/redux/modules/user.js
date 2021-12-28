@@ -14,7 +14,7 @@ const EDIT_USER = "EDIT_USER";
 const ID_CHECK = "ID_CHECK";
 const NICKNAME_CHECK = "NICKNAME_CHEKCK";
 const PHONENUM_CHECK = "PHONENUM_CHECK";
-const SMS_CHECK = "SMS_CHECK";
+// const SMS_CHECK = "SMS_CHECK";
 
 //action creators
 const setUser = createAction(SET_USER, (user) => ({ user }));
@@ -177,6 +177,7 @@ const editUserInfoDB = (userInfo) => {
 
 const deleteUserInfoDB = () => {
   return async (dispatch, getState, { history }) => {
+    
     try {
       await apis.deleteUser();
 

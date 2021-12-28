@@ -2,20 +2,25 @@
 import React from "react";
 
 import { useDispatch, useSelector } from "react-redux";
-import { myProfilieActions } from "../redux/modules/myProfile";
+import { ProfilieActions } from "../redux/modules/profile";
+import { userActions } from "../redux/modules/user";
 
 import { Grid, Button, Image, Text } from "../elements/index";
 
 const MyPage = (props) => {
   const history = props.history;
-  const is_login = localStorage.getItem('is_login');
   const dispatch = useDispatch();
-  const user_Profile = useSelector(state => state.myProfile.user_profile);
-  // console.log(user_Profile);
+  const is_login = localStorage.getItem('is_login');
+  const is_profile = localStorage.getItem('is_profile');
+  const user_profile = useSelector(state => state.profile.user_profile);
 
-  // React.useEffect(() => {
-  //   dispatch(myProfilieActions.getProfileDB());
-  // }, [])
+  React.useEffect(() => {
+    dispatch(ProfilieActions.getProfileDB());
+  }, [])
+
+  const deleteUser = () => {
+    dispatch(userActions.deleteUserInfoDB());
+  }
 
   if (!is_login) {
     return (
@@ -49,11 +54,15 @@ const MyPage = (props) => {
         <Grid header> 마이페이지</Grid>
         <Grid is_flex justify="space-between" borderB="1px solid #dbdbdb">
           <Grid is_flex>
-            <Image myIcon />
-            <Text>환영해요 ...님</Text>
+            <Image myIcon src={user_profile.profileImg}/>
+            <Text>{user_profile.nickname}</Text>
           </Grid>
           <Grid>
-            <Button smallBtn>정보수정</Button>
+            {is_profile
+              ? <Button smallBtn _onClick={() => {history.push(`/myprofile/${user_profile.username}`)}}>프로필 수정</Button>
+              : <Button smallBtn _onClick={() => {history.push('/myprofile')}}>등록하기</Button>
+            }
+            <Button smallBtn _onClick={deleteUser}>회원탈퇴</Button>
           </Grid>
         </Grid>
         <Grid>
