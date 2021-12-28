@@ -44,7 +44,7 @@ function App() {
         <Route path="/card" component={Card} />
         <Route path="/freeboardlist/:skiresort" component={FreeBoardList} />
         <Route path="/freeboardwrite/:skiresort" component={FreeBoardWrite} />
-        <Route path="/freeboarddetail" component={FreeBoardDetail} />
+        <Route path="/freeboarddetail/:postId" component={FreeBoardDetail} />
         <Route path="/placeinfo" component={PlaceInfo} />
         <Route path="/placeinfodetail" component={PlaceInfoDetail} />
         <Route path="/mypage" component={MyPage} />

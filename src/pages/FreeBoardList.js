@@ -18,13 +18,16 @@ const FreeBoardList = () => {
   const dispatch = useDispatch();
 
   const boardList = useSelector((state) => state.freeboard.list);
-  console.log(boardList);
+
+  React.useEffect(() => {
+    dispatch(boardActions.loadBoardDB(params.skiresort));
+  }, []);
 
   return (
     <React.Fragment>
       <Header />
       <Grid height="13em" bg="red">
-        하이원
+        {params.skiresort}
       </Grid>
       <CarpoolMenuBar />
       <Grid padding="20px" height="384px" overflow="scroll">
@@ -38,7 +41,7 @@ const FreeBoardList = () => {
                   margin="0 10px 0 0"
                   cursor="pointer"
                   _onClick={() => {
-                    history.push(`/freeboarddetail/${post.title}`);
+                    history.push(`/freeboarddetail/${post.postId}`);
                   }}
                 >
                   {post.title}
