@@ -6,6 +6,7 @@ const Input = (props) => {
   const {
     label,
     placeholder,
+    defaultValue,
     _onChange,
     type,
     margin,
@@ -27,10 +28,22 @@ const Input = (props) => {
   };
 
   if (title) {
-    return <Title placeholder={placeholder} onChange={_onChange}></Title>;
+    return (
+      <Title
+        placeholder={placeholder}
+        defaultValue={defaultValue}
+        onChange={_onChange}
+      ></Title>
+    );
   }
   if (textarea) {
-    return <Textarea placeholder={placeholder} onChange={_onChange}></Textarea>;
+    return (
+      <Textarea
+        placeholder={placeholder}
+        defaultValue={defaultValue}
+        onChange={_onChange}
+      ></Textarea>
+    );
   }
   if (signup) {
     return (
