@@ -32,7 +32,6 @@ export const loadBoardDB =
     await apis
       .getFreePost(skiResort)
       .then((res) => {
-        dispatch(addBoard(res.data))
         dispatch(loadBoard(res.data));
       })
       .catch((error) => {

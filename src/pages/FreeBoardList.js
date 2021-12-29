@@ -37,9 +37,7 @@ const FreeBoardList = () => {
   };
 
   React.useEffect(() => {
-    if (boardList.length === 0) {
-      dispatch(boardActions.loadBoardDB(skiresort));
-    }
+    dispatch(boardActions.loadBoardDB(skiresort));
   }, []);
 
   return (
