@@ -1,5 +1,4 @@
 import axios from "axios";
-import { getCookie } from "./cookie";
 
 const api = axios.create({
   baseURL: "http://13.125.249.172/",
@@ -9,23 +8,8 @@ const api = axios.create({
   },
 });
 
-const apiMultipart = axios.create({
-  baseURL: "http://13.125.249.172/",
-  headers: {
-    "content-type":
-      "multipart/form-data; boundary=----WebKitFormBoundarymqOgr6Cp7jHF3SAA",
-  },
-});
-
 api.interceptors.request.use(function (config) {
   const accessToken = document.cookie.split("=")[1];
-  config.headers.common["Authorization"] = `${accessToken}`;
-  return config;
-});
-
-apiMultipart.interceptors.request.use(function (config) {
-  const accessToken = document.cookie.split("=")[1];
-  console.log(config);
   config.headers.common["Authorization"] = `${accessToken}`;
   return config;
 });
@@ -68,8 +52,8 @@ export const apis = {
   addProfile: (profile) =>
     api.post("/user/profile", profile, {
       headers: {
-        "Content-Type": "multipart/form-data"
-      }
+        "Content-Type": "multipart/form-data",
+      },
     }),
 
   editProfile: (profile) =>
@@ -123,10 +107,18 @@ export const apis = {
   getFreePost: (skiResort) =>
     api.get(`/board/freeBoard/${skiResort}?size=10&page=1`, {}),
   writeFreePost: (skiResort, datas) =>
-    apiMultipart.post(`/board/${skiResort}/freeBoard`, { datas }),
+    api.post(`/board/${skiResort}/freeBoard`, datas, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    }),
   getOneFreePost: (postId) => api.get(`board/freeBoard/${postId}/detail`, {}),
   updateFreePost: (postId, datas) =>
-    api.put(`board/freeBoard/${postId}`, { datas }),
+    api.put(`board/freeBoard/${postId}`, datas, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    }),
   deleteFreePost: (postId) => api.delete(`/board/freeBoard/${postId}`, {}),
 
   // //댓글
@@ -140,7 +132,3 @@ export const apis = {
   //좋아요
   changeLike: (postId) => api.post(`/board/freeBoard/${postId}/likes`, {}),
 };
-
-// export const apisMultipart = {
-//   addPost: (formdata) => apiMultipart.post("/posts", { formdata }),
-// };

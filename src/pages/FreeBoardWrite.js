@@ -82,15 +82,6 @@ const FreeBoardWrite = () => {
     }
   };
 
-  // 상세정보 데이터 가져오기
-  React.useEffect(() => {
-    if (is_edit) {
-      return dispatch(boardActions.getOnePostDB(postId));
-    } else {
-      return;
-    }
-  }, []);
-
   return (
     <React.Fragment>
       {is_edit ? (

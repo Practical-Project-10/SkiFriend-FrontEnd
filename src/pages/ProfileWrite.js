@@ -1,4 +1,4 @@
-import React, {useState, useRef, useEffect} from "react";
+import React, { useState, useRef, useEffect } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
 import { ProfileActions } from "../redux/modules/profile";
@@ -6,6 +6,7 @@ import { imageActions } from "../redux/modules/image";
 import { userActions } from "../redux/modules/user";
 
 import { Grid, Image, Text, Input, Button } from "../elements/index";
+
 
 const ProfileWrite = (props) => {
   const history = props.history;
@@ -52,6 +53,7 @@ const ProfileWrite = (props) => {
       return null;
     }
 
+
     if(is_edit) {
       dispatch(imageActions.setPreview(user_profile.profileImg))
 
@@ -59,7 +61,8 @@ const ProfileWrite = (props) => {
   }, [])
 
   const handleChange = (e) => {
-    const {name, value} = e.target;
+    const { name, value } = e.target;
+
 
     setProfile(
       {
@@ -82,6 +85,7 @@ const ProfileWrite = (props) => {
     const reader = new FileReader();
     const profileImgFile = pfImgFile.current.files[0];
     const vacImgFile = vImgFile.current.files[0];
+
 
     if(profileImgFile) {
       reader.readAsDataURL(profileImgFile);

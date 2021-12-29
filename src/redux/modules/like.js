@@ -1,45 +1,22 @@
-import { apis } from "../components/shared/apis";
-import { handleActions } from "redux-actions";
-
-// initialState
-const initialState = {
-  list: [],
-};
-
-// action
-// const LOAD = "like/LOAD";
-const ADD = "like/LOAD";
-const DEL = "like/DEL";
-
-// action create
-// const loadLike = createAction(LOAD, (like) => ({ like }));
-// const addLike = createAction(ADD, (like) => ({ like }));
-// const delLike = createAction(DEL, (like) => ({ like }));
+import { apis } from "../../shared/apis";
+import { boardCreators as boardActions } from './freeboard';
 
 // thunk
-export const addLikeDB = (postId) => {
-  apis.changeLike(postId).then((res) => {
-    console.log(res);
-  });
+export const addLikeDB =
+  (postId) =>
+  async (dispatch, getState, { history }) => {
+    await apis
+      .changeLike(postId)
+      .then((res) => {
+        console.log(`좋아요 성공`);
+        dispatch(boardActions.getOneBoardDB(postId))
+      })
+      .catch((error) => {
+        console.log(`좋아요 변경 실패${error}`);
+      });
+  };
+
+const likeCreators = {
+  addLikeDB,
 };
-
-export const delLikeDB = () => {};
-
-// reducer
-export default handleActions(
-  {
-    [ADD]: (state, action) => {
-      return {
-        ...state,
-        list: action.payload.like,
-      };
-    },
-    [DEL]: (state, action) => {
-      return {
-        ...state,
-        list: action.payload.like,
-      };
-    },
-  },
-  initialState
-);
+export { likeCreators };
