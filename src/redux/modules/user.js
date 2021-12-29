@@ -86,6 +86,7 @@ const isIdDB = (id) => {
       dispatch(idCheck(true));
     } catch (err) {
       window.alert("이미 사용중인 아이디 입니다.");
+      // dispatch(idCheck(true));
       console.log(err);
     }
   };
@@ -128,7 +129,7 @@ const isSmsCheckDB = (phoneNum, randomNum) => {
       await apis.smsNumCheck(phoneNum, randomNum);
       window.alert('인증이 완료되었습니다.');
       
-      history.push('/signupone');
+      history.push('/signup');
       // dispatch(smsCheck(true));
     } catch (err) {
       window.alert("인증번호가 일치하지 않습니다.");
@@ -226,7 +227,6 @@ export default handleActions(
       }),
     [PHONENUM_CHECK]: (state, action) =>
       produce(state, (draft) => {
-        console.log(action.payload.num);
         draft.user.phoneNum = action.payload.num;
       }),
     // [SMS_CHECK]: (state, action) =>

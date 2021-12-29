@@ -73,15 +73,20 @@ export const apis = {
     }),
 
   editProfile: (profile) =>
-    api.put("/user/info", {
-      gender: profile.gender,
-      ageRange: profile.ageRange,
-      career: profile.career,
-      selfIntro: profile.selfInfro,
-      profileImg: profile.profileImg,
-      vacImg: profile.vacImg,
+    api.put("/user/info", profile, {
+      headers: {
+        "Content-Type": "multipart/form-data"
+      }
     }),
 
+  //비밀번호 변경
+  changePwd: (password, newPassword) => 
+    api.put('/user/info/password', {
+      password,
+      newPassword,
+    }),
+
+  //회원탈퇴
   deleteUser: () => api.delete("/user/info"),
 
   //카풀 게시글
