@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { history } from "../redux/ConfigStore";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -51,9 +51,9 @@ const FreeBoardList = () => {
       <CarpoolMenuBar />
       <Grid padding="20px" height="384px" overflow="scroll">
         <Text>전체</Text>
-        {boardList.map((post, idx) => {
+        {boardList.map((post) => {
           return (
-            <Grid is_flex justify="space-between">
+            <Grid is_flex justify="space-between" key={post.postId}>
               <Grid is_flex>
                 <Text margin="0 10px 0 0">{post.nickname}</Text>
                 <Text

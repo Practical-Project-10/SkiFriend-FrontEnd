@@ -62,10 +62,6 @@ const MyProfile = styled.div`
   background-size: cover;
   background-position: center;
   ${(props) => (props.src ? `background-image: url(${props.src});` : "")}
-  &:hover {
-    /* opacity: 0.9; */
-    cursor: pointer;
-  }
 `;
 
 export default Image;
