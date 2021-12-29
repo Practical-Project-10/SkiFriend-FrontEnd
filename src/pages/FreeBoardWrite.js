@@ -19,10 +19,11 @@ const FreeBoardWrite = () => {
 
   const postData = useSelector((state) => state.freeboard.detail);
   const is_edit = postId ? true : false;
+  console.log(postData);
 
   // useState관리
-  const [title, setTitle] = useState();
-  const [content, setContet] = useState();
+  const [title, setTitle] = useState(postData? postData.title: '');
+  const [content, setContet] = useState(postData? postData.content: '');
   const [uploadURL, setUploadURL] = useState([]);
   const [uploadFiles, setUploadFiles] = useState(null);
 
@@ -111,29 +112,14 @@ const FreeBoardWrite = () => {
       <Grid align="center">
         <Grid is_flex padding="20px">
           <Text>제목</Text>
-          {is_edit ? (
-            <Input
-              title
-              defaultValue={postData.title}
-              _onChange={postTitle}
-            ></Input>
-          ) : (
-            <Input title _onChange={postTitle}></Input>
-          )}
+          <Input title _value={title} _onChange={postTitle}/>
         </Grid>
-        {is_edit ? (
-          <Input
-            textarea
-            defaultValue={postData.content}
-            _onChange={postContent}
-          />
-        ) : (
-          <Input
+        <Input
             textarea
             placeholder="내용을 입력하세요"
             _onChange={postContent}
+            _value={content}
           />
-        )}
       </Grid>
       <Grid is_flex width="100%" height="200px">
         {is_edit ? (

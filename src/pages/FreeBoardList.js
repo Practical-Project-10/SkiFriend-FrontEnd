@@ -18,6 +18,7 @@ const FreeBoardList = () => {
   const skiresort = params.skiresort;
   const dispatch = useDispatch();
   const boardList = useSelector((state) => state.freeboard.list);
+  console.log(boardList);
   const is_login = localStorage.getItem("nickname");
 
   // 게시글 작성 페이지 이동 판단
@@ -37,9 +38,10 @@ const FreeBoardList = () => {
   };
 
   React.useEffect(() => {
-    if (boardList.length === 0) {
-      dispatch(boardActions.loadBoardDB(skiresort));
-    }
+    dispatch(boardActions.loadBoardDB(skiresort));
+    // if (boardList.length === 0) {
+    //   dispatch(boardActions.loadBoardDB(skiresort));
+    // }
   }, []);
 
   return (

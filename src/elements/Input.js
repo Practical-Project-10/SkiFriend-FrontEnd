@@ -34,6 +34,7 @@ const Input = (props) => {
         placeholder={placeholder}
         defaultValue={defaultValue}
         onChange={_onChange}
+        value={_value}
       ></Title>
     );
   }
@@ -43,6 +44,7 @@ const Input = (props) => {
         placeholder={placeholder}
         defaultValue={defaultValue}
         onChange={_onChange}
+        value={_value}
       ></Textarea>
     );
   }
