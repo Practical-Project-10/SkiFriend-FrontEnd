@@ -21,6 +21,7 @@ const Input = (props) => {
     textarea,
     signup,
     profile,
+    _disabled,
   } = props;
 
   const style = {
@@ -73,8 +74,10 @@ const Input = (props) => {
         <ProfileInput
           width={width}
           onChange={_onChange}
+          onBlur={_onBlur}
           value={_value}
           name={_name}
+          disabled={_disabled}
         />
       </React.Fragment>
     );

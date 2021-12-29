@@ -9,8 +9,9 @@ import { userActions } from "../redux/modules/user";
 
 const SignupOne = (props) => {
   const dispatch = useDispatch();
-  const joinState = useSelector(state => state.user);
-  console.log(joinState);
+  const is_id = useSelector(state => state.user.is_id);
+  const is_nickname = useSelector(state => state.user.is_nickname);
+  console.log(is_id, is_nickname);
 
   // 유효성검사 상태
   const [checkId, setCheckId] = useState(true);
@@ -46,13 +47,13 @@ const SignupOne = (props) => {
         console.log("성공");
         dispatch(userActions.isIdDB(id));
         setCheckId(true);
-      }
-    }
+      };
+    };
 
     if (name === "nickname") {
       console.log("성공");
       dispatch(userActions.isNicknameDB(nickname));
-    }
+    };
 
     if (name === "pwd") {
       if (!pwdRegExp.test(pwd)) {
@@ -62,32 +63,32 @@ const SignupOne = (props) => {
       } else {
         console.log("성공");
         setCheckPwd(true);
-      }
-    }
+      };
+    };
 
     if (name === "rePwd") {
       if (pwd !== rePwd) {
         console.log("실패");
         setCheckRePwd(false);
+        return null;
       } else {
         console.log("성공");
         setCheckRePwd(true);
-      }
-    }
-  }
+      };
+    };
+  };
 
   const join = () => {
     const userInfo = {
       id: id,
       password: pwd,
       nickname: nickname,
-    }
+    };
 
-    dispatch(userActions.signupDB(userInfo))
-    // if(joinState.is_id && joinState.is_nickname) {
-      
-    // }
-  }
+    if(checkId, checkPwd, checkRePwd) {
+      dispatch(userActions.signupDB(userInfo));
+    };
+  };
 
   return (
     <React.Fragment>
@@ -101,12 +102,27 @@ const SignupOne = (props) => {
           <Grid>
             <Grid>
               <Input signup _name='id' _onBlur={handleBlur} _onChange={handleChange} label='로그인' type='text'/>
+              {!checkId &&
+                <Text color='red'>올바른 형식의 아이디가 아닙니다.</Text>
+              }
+              {/* {is_id && <Text color='red'>이미 사용 중인 아이디 입니다.</Text>} */}
             </Grid>
             <Grid className='dup'>
               <Input signup _name='nickname' _onBlur={handleBlur} _onChange={handleChange} label='닉네임' type='text'/>
             </Grid>
-            <Input signup _name='pwd' _onBlur={handleBlur} _onChange={handleChange} label='비밀번호' type='password'/>
+            <Grid>
+              <Input signup _name='pwd' _onBlur={handleBlur} _onChange={handleChange} label='비밀번호' type='password'/>
+              {!checkPwd &&
+                <Text color='red'>올바른 형식의 비밀번호가 아닙니다.</Text>
+              }
+            </Grid>
+            <Grid>
             <Input signup _name='rePwd' _onBlur={handleBlur} _onChange={handleChange} label='비밀번호 확인' type='password'/>
+              {!checkRePwd &&
+                <Text color='red'>비밀번호가 일치하지 않습니다.</Text>
+              }
+            </Grid>
+            
           </Grid>
           <Grid>
             <Button _onClick={join}>가입</Button>

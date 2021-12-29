@@ -9,6 +9,7 @@ import FreeBoard from "./modules/freeboard";
 import Carpool from "./modules/carpool";
 import Comment from "./modules/comment";
 import Profile from "./modules/profile"
+import Image from "./modules/image"
 // import Like from "./like";
 
 //---- history----
@@ -21,6 +22,7 @@ const rootReducer = combineReducers({
   carpool: Carpool,
   comment: Comment,
   profile: Profile,
+  image: Image,
   // like: Like,
   router: connectRouter(history),
 });
