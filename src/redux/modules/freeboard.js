@@ -77,6 +77,7 @@ export const addBoardDB =
         console.log("등록 완료~");
         dispatch(addBoard(res.config.data));
         history.push(`/freeboardlist/${skiResort}`);
+        // window.location.reload();
       })
       .catch((error) => {
         console.log(`오류 발생!${error}`);
@@ -92,7 +93,7 @@ export const getOneBoardDB =
         console.log(res);
         console.log("데이터 가져오기 성공");
         dispatch(getOneBoard(res.data));
-        dispatch(commentActions.loadComment(res.data));
+        // dispatch(commentActions.loadComment(res.data));
       })
       .catch((error) => {
         console.log(`오류 발생!${error}`);

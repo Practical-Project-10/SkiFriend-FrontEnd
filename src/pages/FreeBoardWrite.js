@@ -54,15 +54,32 @@ const FreeBoardWrite = () => {
   // 데이터 전송 (완료 버튼)
   const addPostBtn = () => {
     const requestDto = { title: title, content: content };
-    dispatch(boardActions.addBoardDB(skiresort, uploadFiles[0], requestDto));
+    const ask = window.confirm("게시물을 등록하시겠습니까?");
+    if (ask) {
+      return dispatch(
+        boardActions.addBoardDB(skiresort, uploadFiles[0], requestDto)
+      );
+    } else {
+      return;
+    }
   };
 
   // 데이터 수정 (완료 버튼)
   const editPostBtn = () => {
     const requestDto = { title: title, content: content };
-    dispatch(
-      boardActions.updateBoardDB(skiresort, postId, uploadFiles[0], requestDto)
-    );
+    const ask = window.confirm("게시물을 등록하시겠습니까?");
+    if (ask) {
+      return dispatch(
+        boardActions.updateBoardDB(
+          skiresort,
+          postId,
+          uploadFiles[0],
+          requestDto
+        )
+      );
+    } else {
+      return;
+    }
   };
 
   // 상세정보 데이터 가져오기

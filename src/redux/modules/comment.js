@@ -31,7 +31,8 @@ export const addCommentDB =
       .addPostComment(postId, content)
       .then((res) => {
         console.log("댓글달기 성공");
-        dispatch(addComment(res));
+        console.log(res);
+        // dispatch(addComment(res));
         dispatch(getOneBoardDB(postId));
       })
       .catch((e) => console.log(e));
@@ -48,11 +49,16 @@ export const updateCommentDB =
 export const deleteCommentDB =
   (postId, commentId) =>
   async (dispatch, getState, { history }) => {
-    await apis.deletePostComment(postId, commentId).then((res) => {
-      dispatch(getOneBoardDB(postId));
-      deleteComment(commentId);
-      alert("댓글 삭제");
-    });
+    await apis
+      .deletePostComment(commentId)
+      .then((res) => {
+        dispatch(getOneBoardDB(postId));
+        // deleteComment(commentId);
+        console.log("댓글 삭제");
+      })
+      .catch((error) => {
+        console.log(`댓글삭제 실패${error}`);
+      });
   };
 
 // reducer

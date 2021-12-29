@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { commentCreators as commentActions } from "../redux/modules/comment";
@@ -13,20 +13,19 @@ const CommentList = ({ history }) => {
   const dispatch = useDispatch();
   const params = useParams();
   const postId = params.postId;
+  const skiresort = params.skiresort;
   const postData = useSelector((state) => state.freeboard.detail);
   const commentArray = useSelector(
     (state) => state.freeboard.detail.commentDtoList
   );
-
   const nickname = localStorage.getItem("nickname");
-
   //------useState관리-------
   const [showmodal, setShowModal] = useState();
   const [commentValue, setCommentValue] = useState();
 
   //-------Modal-------
   const closemodal = () => {
-    setShowModal(false);
+    setShowModal(0);
   };
 
   //------댓글내용 가져오기------
@@ -41,20 +40,21 @@ const CommentList = ({ history }) => {
   };
 
   //-------댓글 수정-------
-  // const updateCommentBtn = () => {
-  //   history.push(`/freeboardedit/${skiresort}/${postId}`);
-  // };
+  const updateCommentBtn = () => {
+    history.push(`/freeboardedit/${skiresort}/${postId}`);
+  };
 
   //-------댓글 삭제--------
-  // const deleteCommentBtn = () => {
-  //   const ask = window.confirm("정말 삭제하시겠습니까?");
-  //   if (ask) {
-  //     return dispatch(commentActions.deleteBoardDB(postId, skiresort));
-  //   } else {
-  //     setShowModal(false);
-  //     return;
-  //   }
-  // };
+  const deleteCommentBtn = (commentId) => {
+    console.log(commentId);
+    const ask = window.confirm("정말 삭제하시겠습니까?");
+    if (ask) {
+      return dispatch(commentActions.deleteCommentDB(postId, commentId));
+    } else {
+      setShowModal(0);
+      return;
+    }
+  };
   return (
     <React.Fragment>
       <Grid>
@@ -64,7 +64,7 @@ const CommentList = ({ history }) => {
       {commentArray &&
         commentArray.map((comment, idx) => {
           return (
-            <Grid is_flex justify="space-between" key={idx}>
+            <Grid is_flex justify="space-between" key={comment.commentId}>
               <Grid is_flex justify="space-between" width="100%">
                 <Grid is_flex>
                   <Text margin="0 10px 0 0">{comment.nickname}</Text>
@@ -82,7 +82,7 @@ const CommentList = ({ history }) => {
                   <Grid
                     cursor="pointer"
                     _onClick={() => {
-                      setShowModal(true);
+                      setShowModal(1);
                     }}
                   >
                     <BiDotsHorizontalRounded size="20" />
@@ -102,7 +102,7 @@ const CommentList = ({ history }) => {
                         <Text
                           size="20px"
                           cursor="pointer"
-                          // _onClick={updateCommentBtn}
+                          _onClick={updateCommentBtn}
                         >
                           댓글 수정하기
                         </Text>
@@ -111,7 +111,9 @@ const CommentList = ({ history }) => {
                         <Text
                           size="20px"
                           cursor="pointer"
-                          // _onClick={deleteCommentBtn}
+                          _onClick={() => {
+                            deleteCommentBtn(commentArray[idx].commentId);
+                          }}
                         >
                           댓글 삭제하기
                         </Text>
@@ -134,7 +136,11 @@ const CommentList = ({ history }) => {
         })}
 
       <Grid is_flex margin="10px 0" justify="space-around">
-        <Input width="80%" placeholder="댓글작성" _onChange={postComment} />
+        <Input
+          width="80%"
+          placeholder="댓글작성"
+          _onChange={postComment}
+        />
         <Button smallBtn _onClick={addCommentBtn}>
           작성
         </Button>
