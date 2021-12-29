@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { boardCreators as boardActions } from "../redux/modules/freeboard";
+import { likeCreators as likeActions } from "../redux/modules/like";
 import CommentList from "../components/CommentList";
 
 import { Grid, Button, Text, Image } from "../elements/index";
@@ -43,6 +44,11 @@ const FreeBoardDetail = ({ history }, props) => {
       setShowModal(false);
       return;
     }
+  };
+
+  //-------좋아요 변경---------
+  const likeChange = () => {
+    dispatch(likeActions.addLikeDB(postId));
   };
 
   React.useEffect(() => {
@@ -135,25 +141,13 @@ const FreeBoardDetail = ({ history }, props) => {
           <Text>{postData.content}</Text>
         </Grid>
         <Grid>
-          <Button smallBtn>공감</Button>
+          <Button smallBtn _onClick={likeChange}>
+            공감
+          </Button>
         </Grid>
       </Grid>
 
       <CommentList />
-      {/* <Grid>
-        <Text>댓글</Text>
-      </Grid>
-      <Grid is_flex justify="space-between">
-        <Text>닉네임</Text>
-        <Grid>
-          <Button smallBtn>수정</Button>
-          <Button smallBtn>삭제</Button>
-        </Grid>
-      </Grid>
-      <Grid is_flex justify="space-around">
-        <Input width="80%" placeholder="댓글작성" />
-        <Button smallBtn>작성</Button>
-      </Grid> */}
     </React.Fragment>
   );
 };

@@ -83,6 +83,7 @@ const Input = (props) => {
     <React.Fragment>
       <Text>{label}</Text>
       <ElInput
+        defaultValue={defaultValue}
         placeholder={placeholder}
         type={type}
         id={type}

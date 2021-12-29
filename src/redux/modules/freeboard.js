@@ -1,8 +1,6 @@
 import { handleActions, createAction } from "redux-actions";
 import { apis } from "../../shared/apis";
-import axios from "axios";
 import produce from "immer";
-import { commentCreators as commentActions } from "./comment";
 
 // initialState
 const initialState = {
@@ -34,6 +32,7 @@ export const loadBoardDB =
     await apis
       .getFreePost(skiResort)
       .then((res) => {
+        dispatch(addBoard(res.data))
         dispatch(loadBoard(res.data));
       })
       .catch((error) => {
@@ -45,37 +44,21 @@ export const loadBoardDB =
 export const addBoardDB =
   (skiResort, image, datas) =>
   async (dispatch, getState, { history }) => {
-    // token
-    const accessToken = document.cookie.split("=")[1];
-    const token = {
-      headers: {
-        "Content-Type": "multipart/form-data",
-        Authorization: `${accessToken}`,
-      },
-    };
-
-    let formdata = new FormData();
-    formdata.append("image", image);
-    formdata.append(
+    let formData = new FormData();
+    formData.append("image", image);
+    formData.append(
       "requestDto",
       new Blob([JSON.stringify(datas)], { type: "application/json" })
     );
     //formdata 객체 내용 확인
-    for (let pair of formdata.entries()) {
+    for (let pair of formData.entries()) {
       console.log(pair[0] + ", " + pair[1]);
     }
 
-    await axios
-      .post(
-        `http://13.125.249.172/board/${skiResort}/freeBoard`,
-        formdata,
-        token
-      )
-      // await apis
-      //   .writeFreePost(skiResort, formdata)
+    await apis
+      .writeFreePost(skiResort, formData)
       .then((res) => {
         console.log("등록 완료~");
-        dispatch(addBoard(res.config.data));
         history.push(`/freeboardlist/${skiResort}`);
         // window.location.reload();
       })
@@ -93,7 +76,6 @@ export const getOneBoardDB =
         console.log(res);
         console.log("데이터 가져오기 성공");
         dispatch(getOneBoard(res.data));
-        // dispatch(commentActions.loadComment(res.data));
       })
       .catch((error) => {
         console.log(`오류 발생!${error}`);
@@ -107,14 +89,6 @@ export const updateBoardDB =
       console.log("게시물 정보가 없어요!");
       return;
     }
-    // token
-    const accessToken = document.cookie.split("=")[1];
-    const token = {
-      headers: {
-        "Content-Type": "multipart/form-data",
-        Authorization: `${accessToken}`,
-      },
-    };
 
     let formdata = new FormData();
     formdata.append("image", image);
@@ -127,10 +101,8 @@ export const updateBoardDB =
       console.log(pair[0] + ", " + pair[1]);
     }
 
-    await axios
-      .put(`http://13.125.249.172/board/freeBoard/${postId}`, formdata, token)
-      // await apis
-      //   .updateFreePost(postId, formdata)
+    await apis
+      .updateFreePost(postId, formdata)
       .then((res) => {
         console.log("수정 완료~");
         dispatch(updateBoard(res.config.data));

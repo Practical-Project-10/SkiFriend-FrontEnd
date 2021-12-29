@@ -1,34 +1,23 @@
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { commentCreators as commentActions } from "../redux/modules/comment";
 
 import { Grid, Button, Input, Text } from "../elements/index";
 
-//react icons
-import { BsFillExclamationCircleFill } from "react-icons/bs";
-import { BiDotsHorizontalRounded } from "react-icons/bi";
-
 const CommentList = ({ history }) => {
   const dispatch = useDispatch();
   const params = useParams();
   const postId = params.postId;
-  const skiresort = params.skiresort;
-  const postData = useSelector((state) => state.freeboard.detail);
   const commentArray = useSelector(
     (state) => state.freeboard.detail.commentDtoList
   );
   const nickname = localStorage.getItem("nickname");
   //------useState관리-------
-  const [showmodal, setShowModal] = useState();
   const [commentValue, setCommentValue] = useState();
+  const [editCommentNo, setEditCommentNo] = useState();
 
-  //-------Modal-------
-  const closemodal = () => {
-    setShowModal(0);
-  };
-
-  //------댓글내용 가져오기------
+  //------댓글 입력한 내용 가져오기------
   const postComment = (e) => {
     const currentComment = e.target.value;
     setCommentValue(currentComment);
@@ -39,108 +28,116 @@ const CommentList = ({ history }) => {
     dispatch(commentActions.addCommentDB(postId, commentValue));
   };
 
-  //-------댓글 수정-------
-  const updateCommentBtn = () => {
-    history.push(`/freeboardedit/${skiresort}/${postId}`);
+  //-------댓글수정-------
+  const updateCommentBtn = (commentId) => {
+    setEditCommentNo(commentId);
+  };
+
+  //-------댓글수정 전송-------
+  const updateSubmitCommentBtn = () => {
+    setEditCommentNo(0);
+    dispatch(
+      commentActions.updateCommentDB(postId, editCommentNo, commentValue)
+    );
   };
 
   //-------댓글 삭제--------
   const deleteCommentBtn = (commentId) => {
-    console.log(commentId);
     const ask = window.confirm("정말 삭제하시겠습니까?");
     if (ask) {
-      return dispatch(commentActions.deleteCommentDB(postId, commentId));
+      dispatch(commentActions.deleteCommentDB(postId, commentId));
+      return;
     } else {
-      setShowModal(0);
       return;
     }
   };
+
   return (
     <React.Fragment>
       <Grid>
         <Text>댓글</Text>
       </Grid>
-
       {commentArray &&
         commentArray.map((comment, idx) => {
           return (
-            <Grid is_flex justify="space-between" key={comment.commentId}>
+            <Grid key={comment.commentId}>
               <Grid is_flex justify="space-between" width="100%">
                 <Grid is_flex>
                   <Text margin="0 10px 0 0">{comment.nickname}</Text>
-                  <Text>{comment.content}</Text>
+                  {/* 댓글수정시 인풋 보여주기 */}
+                  {commentArray[idx].commentId === editCommentNo ? (
+                    <Input
+                      defaultValue={comment.content}
+                      _onChange={postComment}
+                    >
+                      {" "}
+                    </Input>
+                  ) : (
+                    <Text>{comment.content}</Text>
+                  )}
                 </Grid>
                 <Grid>
                   <Text>{comment.createdAt}</Text>
                 </Grid>
               </Grid>
 
-              {/* 채팅글 수정 삭제 modal 시작 */}
-              {/* 게시글을 조회한사람이 작성한 사람과 일치할 경우 모달 선택창이 보이게 하기 */}
-              <Grid is_flex>
-                {nickname === postData.nickname ? (
-                  <Grid
-                    cursor="pointer"
-                    _onClick={() => {
-                      setShowModal(1);
-                    }}
-                  >
-                    <BiDotsHorizontalRounded size="20" />
-                  </Grid>
-                ) : null}
-                <div showmodal={showmodal} />
-                {showmodal ? (
-                  <Grid className="modalBackground" _onClick={closemodal}>
-                    <Grid
-                      className="modalContainer"
-                      _onClick={(e) => e.stopPropagation()}
-                    >
-                      <Grid margin="25px 0">
-                        <BsFillExclamationCircleFill size="30" />
-                      </Grid>
-                      <Grid margin="10px 0">
-                        <Text
-                          size="20px"
+              {/* 댓글 수정,삭제,변경 */}
+              <Grid is_flex justify="flex-end">
+                {nickname === commentArray[idx].nickname ? (
+                  <React.Fragment>
+                    {commentArray[idx].commentId === editCommentNo ? (
+                      <Grid is_flex>
+                        <Button
+                          smallBtn
                           cursor="pointer"
-                          _onClick={updateCommentBtn}
+                          _onClick={() => {
+                            updateSubmitCommentBtn();
+                          }}
                         >
-                          댓글 수정하기
-                        </Text>
+                          변경
+                        </Button>
+                        <Button
+                          smallBtn
+                          _onClick={() => {
+                            setEditCommentNo(0);
+                          }}
+                          cursor="pointer"
+                        >
+                          취소
+                        </Button>
                       </Grid>
-                      <Grid margin="10px 0">
-                        <Text
-                          size="20px"
+                    ) : (
+                      <Grid is_flex>
+                        <Button
+                          smallBtn
+                          cursor="pointer"
+                          _onClick={() => {
+                            updateCommentBtn(commentArray[idx].commentId);
+                          }}
+                        >
+                          수정
+                        </Button>
+                        <Button
+                          smallBtn
                           cursor="pointer"
                           _onClick={() => {
                             deleteCommentBtn(commentArray[idx].commentId);
                           }}
                         >
-                          댓글 삭제하기
-                        </Text>
+                          삭제
+                        </Button>
                       </Grid>
-                      <Text
-                        _onClick={closemodal}
-                        size="18px"
-                        margin="20px 0"
-                        cursor="pointer"
-                      >
-                        취소
-                      </Text>
-                    </Grid>
-                  </Grid>
+                    )}
+                  </React.Fragment>
                 ) : null}
               </Grid>
-              {/* modal 끝 */}
+              {/* 버튼 끝 */}
             </Grid>
           );
         })}
 
       <Grid is_flex margin="10px 0" justify="space-around">
-        <Input
-          width="80%"
-          placeholder="댓글작성"
-          _onChange={postComment}
-        />
+        <Input width="80%" placeholder="댓글작성" _onChange={postComment} />
         <Button smallBtn _onClick={addCommentBtn}>
           작성
         </Button>
