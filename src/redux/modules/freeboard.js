@@ -133,7 +133,8 @@ export default handleActions(
   {
     [LOAD]: (state, action) =>
       produce(state, (draft) => {
-        draft.list.push(...action.payload.postList);
+        // draft.list.push(...action.payload.postList);
+        draft.list = action.payload.postList;
 
         draft.list = draft.list.reduce((prev, now) => {
           if (prev.findIndex((a) => a.postId === now.postId) === -1) {

@@ -6,7 +6,6 @@ const Input = (props) => {
   const {
     label,
     placeholder,
-    defaultValue,
     _onChange,
     type,
     margin,
@@ -32,8 +31,8 @@ const Input = (props) => {
     return (
       <Title
         placeholder={placeholder}
-        defaultValue={defaultValue}
         onChange={_onChange}
+        value={_value}
       ></Title>
     );
   }
@@ -41,8 +40,8 @@ const Input = (props) => {
     return (
       <Textarea
         placeholder={placeholder}
-        defaultValue={defaultValue}
         onChange={_onChange}
+        value={_value}
       ></Textarea>
     );
   }
@@ -86,7 +85,6 @@ const Input = (props) => {
     <React.Fragment>
       <Text>{label}</Text>
       <ElInput
-        defaultValue={defaultValue}
         placeholder={placeholder}
         type={type}
         id={type}

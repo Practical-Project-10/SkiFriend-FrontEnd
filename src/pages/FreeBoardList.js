@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { history } from "../redux/ConfigStore";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -18,6 +18,7 @@ const FreeBoardList = () => {
   const skiresort = params.skiresort;
   const dispatch = useDispatch();
   const boardList = useSelector((state) => state.freeboard.list);
+  console.log(boardList);
   const is_login = localStorage.getItem("nickname");
 
   // 게시글 작성 페이지 이동 판단

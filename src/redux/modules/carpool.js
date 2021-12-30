@@ -103,25 +103,7 @@ const deleteCarpoolDB = (skiResort, postId) => {
 
 // initialState
 const initialState = {
-  list: [
-    {
-      postId: "",
-      userId: "",
-      nickname: "",
-      createdAt: "",
-      carpoolType: "",
-      startLocation: "",
-      endLocation: "",
-      skiResort: "",
-      date: "",
-      time: "",
-      title: "",
-      price: "",
-      memberNum: "",
-      notice: "",
-      status: true,
-    },
-  ],
+  list: [],
 };
 
 // reducer
