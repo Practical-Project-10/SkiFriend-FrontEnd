@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { history } from "../redux/ConfigStore";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -39,9 +39,6 @@ const FreeBoardList = () => {
 
   React.useEffect(() => {
     dispatch(boardActions.loadBoardDB(skiresort));
-    // if (boardList.length === 0) {
-    //   dispatch(boardActions.loadBoardDB(skiresort));
-    // }
   }, []);
 
   return (

@@ -3,6 +3,7 @@ import { history } from "../redux/ConfigStore";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { boardCreators as boardActions } from "../redux/modules/freeboard";
+import { imageActions } from "../redux/modules/image";
 
 import { Grid, Button, Text, Input, Image } from "../elements/index";
 
@@ -13,17 +14,21 @@ import { AiOutlineCamera } from "react-icons/ai";
 const FreeBoardWrite = () => {
   const dispatch = useDispatch();
 
+  // 주소 경로값
   const params = useParams();
   const skiresort = params.skiresort;
   const postId = params.postId;
 
-  const postData = useSelector((state) => state.freeboard.detail);
+  // 작성 수정 판단 여부
   const is_edit = postId ? true : false;
-  console.log(postData);
+
+  // redux데이터
+  const postData = useSelector((state) => state.freeboard.detail);
+  const preview = useSelector((state) => state.image.preview);
 
   // useState관리
-  const [title, setTitle] = useState(postData? postData.title: '');
-  const [content, setContet] = useState(postData? postData.content: '');
+  const [title, setTitle] = useState(postData ? postData.title : "");
+  const [content, setContet] = useState(postData ? postData.content : "");
   const [uploadURL, setUploadURL] = useState([]);
   const [uploadFiles, setUploadFiles] = useState(null);
 
@@ -46,9 +51,10 @@ const FreeBoardWrite = () => {
     const ImgUrlList = [...uploadURL];
     for (let i = 0; i < e.target.files.length; i++) {
       const ImgUrl = URL.createObjectURL(e.target.files[i]);
-
       ImgUrlList.push(ImgUrl);
     }
+
+    dispatch(imageActions.setPreview(ImgUrlList));
     setUploadURL(ImgUrlList);
   };
 
@@ -83,6 +89,12 @@ const FreeBoardWrite = () => {
     }
   };
 
+  React.useEffect(() => {
+    if (is_edit) {
+      dispatch(imageActions.setPreview(postData.image));
+    }
+  }, []);
+
   return (
     <React.Fragment>
       {is_edit ? (
@@ -112,18 +124,30 @@ const FreeBoardWrite = () => {
       <Grid align="center">
         <Grid is_flex padding="20px">
           <Text>제목</Text>
-          <Input title _value={title} _onChange={postTitle}/>
+          {is_edit ? (
+            <Input title _value={title} _onChange={postTitle} />
+          ) : (
+            <Input title _onChange={postTitle} />
+          )}
         </Grid>
-        <Input
+        {is_edit ? (
+          <Input
+            textarea
+            _value={content}
+            placeholder="내용을 입력하세요"
+            _onChange={postContent}
+          />
+        ) : (
+          <Input
             textarea
             placeholder="내용을 입력하세요"
             _onChange={postContent}
-            _value={content}
           />
+        )}
       </Grid>
       <Grid is_flex width="100%" height="200px">
         {is_edit ? (
-          <Image src={postData.image} width="100%" height="100%" />
+          <Image src={preview ? preview : ""} width="100%" height="100%" />
         ) : (
           <Image src={uploadURL} width="100%" height="100%" />
         )}

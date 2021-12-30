@@ -31,6 +31,10 @@ const Grid = (props) => {
     header,
     menubar,
     skiIcon,
+    link,
+    href,
+    target,
+    id,
   } = props;
 
   const styles = {
@@ -90,10 +94,17 @@ const Grid = (props) => {
       </ModalContainer>
     );
   }
+  if (link) {
+    return (
+      <Link {...styles} href={href} target={target}>
+        {children}
+      </Link>
+    );
+  }
 
   return (
     <React.Fragment>
-      <GridBox {...styles} onClick={_onClick}>
+      <GridBox {...styles} onClick={_onClick} id={id}>
         {children}
       </GridBox>
     </React.Fragment>
@@ -196,6 +207,10 @@ const ModalContainer = styled.div`
   background: #ffffff;
   border-radius: 10px;
   text-align: center;
+`;
+
+const Link = styled.a`
+  font-size: 15px;
 `;
 
 export default Grid;

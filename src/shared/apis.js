@@ -59,13 +59,13 @@ export const apis = {
   editProfile: (profile) =>
     api.put("/user/info", profile, {
       headers: {
-        "Content-Type": "multipart/form-data"
-      }
+        "Content-Type": "multipart/form-data",
+      },
     }),
 
   //비밀번호 변경
-  changePwd: (password, newPassword) => 
-    api.put('/user/info/password', {
+  changePwd: (password, newPassword) =>
+    api.put("/user/info/password", {
       password,
       newPassword,
     }),
@@ -135,4 +135,7 @@ export const apis = {
 
   //좋아요
   changeLike: (postId) => api.post(`/board/freeBoard/${postId}/likes`, {}),
+
+  // 메인페이지 HOT게시물
+  hotPost: api.get("/main"),
 };
