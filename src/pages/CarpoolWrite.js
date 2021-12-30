@@ -8,28 +8,26 @@ import { Grid, Text, Button, Input } from "../elements/index";
 import "../elements/styles.css";
 
 import Example from "../components/Example";
-import TimePicker from "../components/TimePicker";
-import { inputClasses } from "@mui/material";
 
 const CarpoolWrite = (props) => {
   const dispatch = useDispatch();
   const carpool_list = useSelector(state => state.carpool.list);
-  console.log(carpool_list)
   const [state, setState] = useState(false);
 
   const skiResort = props.match.params.skiresort;
-  const [startLoca, setStartLoca] = useState('');
-  const [endLoca, setEndLoca] = useState(skiResort);
+  const startLoca = useRef();
+  const endLoca = useRef();
   
+  //수정페이지
   const postId = props.match.params.postId;
   const is_edit = postId? true: false;
   const carpool = is_edit? carpool_list.find(l => l.postId === Number(postId)): null;
 
-  const [form, setFrom] = React.useState(
+  const [form, setForm] = React.useState(
     {
       carpoolType: `${carpool? carpool.carpoolType: ''}`,
       startLocation: `${carpool? carpool.startLocation: ''}`,
-      endLocation: `${carpool? carpool.endLocation: endLoca}`,
+      endLocation: `${carpool? carpool.endLocation: skiResort}`,
       date: `${carpool? carpool.date: ''}`,
       time: `${carpool? carpool.time: ''}`,
       title: `${carpool? carpool.title: ''}`,
@@ -54,12 +52,7 @@ const CarpoolWrite = (props) => {
     const{ name, value } = e.target;
     console.log(name, value);
 
-    if(name === 'startLocation') {
-      setStartLoca(value);
-      console.log(startLoca);
-    }
-
-    setFrom(
+    setForm(
       {
         ...form,
         [name]: value,
@@ -69,27 +62,45 @@ const CarpoolWrite = (props) => {
 
   const locationChange = () => {
     if(!state) {
+      console.log(startLoca.current.value)
       setState(true);
-      setStartLoca(endLoca);
-      setEndLoca(startLoca);
+      setForm(
+        {
+          ...form,
+          startLocation: skiResort,
+          endLocation: startLoca.current.value,
+        }
+      )
     } else {
       setState(false);
-      setStartLoca(endLoca);
-      setEndLoca(startLoca);
+      setForm(
+        {
+          ...form,
+          startLocation: endLoca.current.value,
+          endLocation: skiResort,
+        }
+      )
     }
-    console.log(startLoca)
-    console.log(endLoca)
-    console.log(form);
+  };
 
-    setFrom(
+  const selectDate = (date) => {
+    setForm(
       {
         ...form,
-        startLocation: startLoca,
-        endLocation: endLoca,
+        date,
       }
     )
+  }
 
-  };
+  // const selectTime = (time) => {
+  //   setForm(
+  //     {
+  //       ...form,
+  //       time,
+  //     }
+  //   )
+  // }
+  console.log(form);
   
   const addCarpool = () => {
     dispatch(carpoolActions.addCarpoolDB(skiResort, form))
@@ -119,50 +130,46 @@ const CarpoolWrite = (props) => {
             <input
               type='radio'
               name='carpoolType'
-              value='카풀요청'
+              value='카풀 요청'
               onChange={handleChange}
-            />카풀요청
+            />카풀 요청
             <input
               type='radio'
               name='carpoolType'
-              value='카풀제공'
+              value='카풀 제공'
               onChange={handleChange}
-            />카풀제공
+            />카풀 제공
           </Grid>
         </Grid>
 
-        {/* <Grid is_flex padding="10px">
-          <Text margin="10px">제목 : </Text>
-          <Input title type="text" placeholder="제목을 입력해주세요."></Input>
-        </Grid> */}
-
-
         {/* 출발도착지역 셀렉박스 */}
         <Grid is_flex justify='space-around' selectBox position='relative' direction={state? 'row-reverse': ''} >
-            <Grid>
-              <select name='startLocation' value={startLocation} onChange={handleChange}>
-                <option value='지방'>지방</option>
-                <option value='서울'>서울</option>
-              </select>
-            </Grid>
+          <Grid>
+            <select name={state? 'endLocation': 'startLocation'}  value={startLocation} onChange={handleChange} ref={startLoca}>
+              <option value='지방'>지방</option>
+              <option value='서울'>서울</option>
+            </select>
+          </Grid>
           <Cross state onClick={locationChange}>교차</Cross>
           <label htmlFor="endLocation" style={{ border:'1px solid #000'}}>{skiResort}</label>
-          <input type='text' id="endLocation" name='endLocation' value={endLocation} style={{display:"none"}}/>
+          <input type='text' id="endLocation" name='endLocation' value={endLocation} style={{display:"none"}} ref={endLoca}/>
+          {/* <div style={{border: '1px solid #000'}} value={endLocation} ref={endLoca}>{skiResort}</div> */}
         </Grid>
 
         <Grid is_flex width="300px">
-          <Example _name='date' _onChange={e => console.log(e.target)} />
-          <TimePicker />
+          <Example _value={date}  _selectDate={selectDate}/>
+          {/* <TimePicker _value={time} selectTime={selectTime}/> */}
+          <Input type='time' _name='time' _value={time} _onChange={handleChange}/>
         </Grid>
         <Grid margin="10px">
           <Text>제목</Text>
-          <Input _name='title' _onChange={handleChange}/>
+          <Input _name='title' _value={title} _onChange={handleChange}/>
           <Text>가격</Text>
-          <Input _name='price' _onChange={handleChange}/>
+          <Input _name='price' _value={price} _onChange={handleChange}/>원
           <Text>모집인원</Text>
-          <Input _name='memberNum' _onChange={handleChange}/>
+          <Input _name='memberNum' _value={memberNum} _onChange={handleChange}/>
           <Text>주의사항</Text>
-          <Input _name='notice' _onChange={handleChange}/>
+          <Input _name='notice' _value={notice} _onChange={handleChange}/>
         </Grid>
         <Grid margin="10px">
           <Button width="100%" padding="10px" _onClick={is_edit? editCarpool: addCarpool}>
@@ -179,6 +186,8 @@ const Cross = styled.div`
   height: 20px;
   border: 1px solid #000;
   cursor: pointer;
+  position: absolute;
+  
 `
 
 export default CarpoolWrite;

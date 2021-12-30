@@ -73,7 +73,7 @@ export const apis = {
   //회원탈퇴
   deleteUser: () => api.delete("/user/info"),
 
-  //카풀 게시글
+  //카풀
   getCarpool: (skiResort) =>
     api.get(`/board/carpool/${skiResort}?size=10&page=1`),
 
@@ -84,6 +84,7 @@ export const apis = {
       endLocation: carpool.endLocation,
       date: carpool.date,
       time: carpool.time,
+      title: carpool.title,
       price: carpool.price,
       memberNum: carpool.memberNum,
       notice: carpool.notice,
@@ -96,12 +97,15 @@ export const apis = {
       endLocation: carpool.endLocation,
       date: carpool.date,
       time: carpool.time,
+      title: carpool.title,
       price: carpool.price,
       memberNum: carpool.memberNum,
       notice: carpool.notice,
     }),
 
   deleteCarpool: (carpoolId) => api.delete(`/board/carpool/${carpoolId}`),
+
+  getMyCarpool: () => api.get('/user/info/carpool'),
 
   // 자유게시글
   getFreePost: (skiResort) =>

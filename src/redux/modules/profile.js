@@ -68,7 +68,7 @@ const editProfileDB = (profile) => {
       career: profile.career,
       selfIntro: profile.selfIntro,
     }
-    console.log(profile.profileImg)
+    console.log(profile.profileImg);
 
     const formData = new FormData();
     formData.append('profileImg', profile.profileImg);
