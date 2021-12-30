@@ -33,6 +33,7 @@ const Card = (props) => {
         [{props.carpoolType}]
       </Text>
       <Text carpoolInfo>{props.startLocation} =&gt;  {props.endLocation} </Text>
+      <Text margin="3px">[{props.title}]</Text>
       <Text margin="3px">날짜 : {props.date}</Text>
       <Text margin="3px">시간 : {props.time}</Text>
       <Text margin="3px">인원 : {props.memberNum}</Text>

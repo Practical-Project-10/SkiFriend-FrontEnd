@@ -14,10 +14,11 @@ const ProfileWrite = (props) => {
   const preview = useSelector(state => state.image.preview);
   const basicImage = "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBw8HBhARBxAPFRESEg0PDhAQDw8PEhUQFRYXHRUVFRMZHSggGBolHRUVITEhJTUrLi4uIx8zODMtNygtLisBCgoKDg0NGxAQFTcZHR8rLS0rKy03LTgtLS0tKzctLS0rLS83KysrOCstMCstKy0tLTctKy0tNy0rLS0rLTctK//AABEIAOAA4QMBIgACEQEDEQH/xAAaAAEAAgMBAAAAAAAAAAAAAAAABAUCAwYB/8QAMRABAAECAwUFCAIDAAAAAAAAAAECAwQRMQUhMlFxEhNBYZEiM0KBobHB0TSSFFJy/8QAGQEBAQEBAQEAAAAAAAAAAAAAAAMCAQQF/8QAHREBAQEBAAIDAQAAAAAAAAAAAAECEQMxEiFRQf/aAAwDAQACEQMRAD8A6wB9F80AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHtNE1z7ETPSM2+nA3Kvh9ZiHOx3lRxJnAXI+H6w0XLVVv3kTHWDsOViA64AAAAAAAAAAAAAAAAAAAAAAa6LDC7OzjO/8A1/bPZ2F7NPbuazwxyjmnpa3/ACK5x/a8ooiinKiIiPJ6CagTGcbwBBxOz4rjOzunl4T+lZVTNFWVUZTGsOhRcfhe/ozp4o0845KZ3+sax+KcBVEAAAAAAAAAAAAAAAAAAbcJa77ERE6az0hqWGyKd9U9IZ1eRrM7VkAguAAAAAAp9o2u6xGcaVb/AJ+KKtNrU52YnlP3Va+b2IanKANMgAAAAAAAAAAAAAAACz2R7urrH2VifsmvK5VTPjGcfJnfpvHtZgILAAAAAAIm0/4k9aVQs9rV5W6aec5+isWx6R37AG2AAAAAAAAAAAAAAAABnZuTauxVHgwB10NFcV0RNOk74eqjAYvuZ7Nzhn6St4nONyGs8XzrsAGXQAAmco3it2hjO1HYtafFP4h2TrlvIi4y939+ZjTSOjSC8QoA64AAAAAAAAAAAAAAAAAAN+GxdVjh3xyloHLOuy8XFrH0XOKcp8/2kU1xVwzE9Jhz7xi+ONzyV0U1RTrMerRdxtu345zyjepHpPGXyJWJx1V7dTup5eM9ZRQbk4xb0AdcAAAAAAAAAAAAAAAAAABssWKr9WVuOs+ELPD4Ci1vr9qfPT0ZupGpm1WWrFd33dMz5+HqlW9mVT7yqI6b1poJ3dUmIhU7NojimqfSGcYC1yn1lKGflf1r4z8Rv8C1/rP9pYVbNonhmqPnmmB8r+nxn4rK9mTHu6onrGSLdw9drjpnrrHqvRqbrNxHOi4xGBou8O6ecfpWYjD1WKvbjd4TGik1Knc2NQDTIAAAAAAAAAAAAAAk4PCTiJzq3U8+fRjg8N/kXN/DGs/hdU0xTTlTpGjGtc+opnPft5RRFunKiMoZAiqAAAAAAAAPKqYrpyrjOOUvQFRjcFNnfb30/ZEdFMZxvU+OwvcV50cM6eU8lc679VLeefcRQFEwAAAAAAAAAB7TTNVURTrO6Hidsq12rs1T8O6OsuW8jsnasMPZixaimPnPOWwHnegAAAAAAAAAAAAY3bcXbcxVpLIBz923Nq5NNWsMVjta1uiuOk/hXPRm9iGpygDrIAAAAAAAAutn2+7wseftT81Lq6Gins0REeERCfkv0p4/b0BJUAAAAAAAAAAAAABrxNvvbFUeU5dVC6JQXqexeqjlMx9VPHU/JGACqQAAAAAAADK1vuU9Y+7oHP2fe0/9U/d0CXkV8YAmoAAAAAAAAAAAAAAKPGxli6+q8UmO/l19fwp4/bHk9NACqIAAAD//2Q==";
   const user_profile = useSelector(state => state.profile.user_profile);
+  console.log(user_profile);
+
   const emptyFile = new File([""], "empty");
   const pfImgFile = useRef();
   const vImgFile = useRef();
-  console.log(user_profile);
 
   const username = props.match.params.username;
   const is_edit = username? true: false;
@@ -25,13 +26,13 @@ const ProfileWrite = (props) => {
   const [profile, setProfile] = useState(
     {
       nickname: `${user_profile.nickname}`,
-      profileImg: `${is_edit? user_profile.profileImg: ''}`,
+      profileImg: emptyFile,
       gender: `${is_edit? user_profile.gender: ''}`,
       ageRange: `${is_edit? user_profile.ageRange: ''}`,
       career: `${is_edit? user_profile.career: ''}`,
       selfIntro: `${is_edit? user_profile.selfIntro: ''}`,
       phoneNum: `${user_profile.phoneNum}`,
-      vacImg: `${is_edit? user_profile.vacImg: ''}`,
+      vacImg: emptyFile,
     }
   );
   const {
@@ -63,14 +64,13 @@ const ProfileWrite = (props) => {
   const handleChange = (e) => {
     const { name, value } = e.target;
 
-
     setProfile(
       {
         ...profile,
         [name]: value,
       }
-    )
-  }
+    );
+  };
   
   const handleBlur = (e) => {
     const {name} = e.target;
@@ -78,8 +78,8 @@ const ProfileWrite = (props) => {
     if(name === 'nickname') {
       console.log('성공')
       dispatch(userActions.isNicknameDB(nickname));
-    }
-  }
+    };
+  };
 
   const selectFile = () => {
     const reader = new FileReader();
@@ -99,7 +99,7 @@ const ProfileWrite = (props) => {
           ...profile,
           profileImg: profileImgFile,
         }
-      )
+      );
     };
 
     if(vacImgFile) {
@@ -110,15 +110,15 @@ const ProfileWrite = (props) => {
         }
       )
     };
-  }
+  };
 
   const addProfile = () => {
     dispatch(ProfileActions.addProfileDB(profile))
-  }
+  };
 
   const editProfile = () => {
     dispatch(ProfileActions.editProfileDB(profile))
-  }
+  };
 
   return (
     <React.Fragment>
