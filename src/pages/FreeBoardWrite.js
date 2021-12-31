@@ -13,6 +13,7 @@ import { AiOutlineCamera } from "react-icons/ai";
 
 const FreeBoardWrite = () => {
   const dispatch = useDispatch();
+  // const emptyFile = new File([""], "empty");
 
   // 주소 경로값
   const params = useParams();

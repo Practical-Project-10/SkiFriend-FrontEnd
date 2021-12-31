@@ -105,31 +105,40 @@ export const apis = {
 
   deleteCarpool: (carpoolId) => api.delete(`/board/carpool/${carpoolId}`),
 
-  getMyCarpool: () => api.get('/user/info/carpool'),
+  getMyCarpool: () => api.get("/user/info/carpool"),
+
+  filterCarpool: (skiResort, datas) =>
+    api.get(`board/carpool/${skiResort}/category?size=10&page=1`, { datas }),
 
   // 자유게시글
   getFreePost: (skiResort) =>
     api.get(`/board/freeBoard/${skiResort}?size=10&page=1`, {}),
+
   writeFreePost: (skiResort, datas) =>
     api.post(`/board/${skiResort}/freeBoard`, datas, {
       headers: {
         "Content-Type": "multipart/form-data",
       },
     }),
+
   getOneFreePost: (postId) => api.get(`board/freeBoard/${postId}/detail`, {}),
+
   updateFreePost: (postId, datas) =>
     api.put(`board/freeBoard/${postId}`, datas, {
       headers: {
         "Content-Type": "multipart/form-data",
       },
     }),
+
   deleteFreePost: (postId) => api.delete(`/board/freeBoard/${postId}`, {}),
 
   // //댓글
   addPostComment: (postId, content) =>
     api.post(`/board/freeBoard/${postId}/comments`, { content }),
+
   updatePostComment: (commentId, content) =>
     api.put(`/board/freeBoard/comments/${commentId}`, { content }),
+
   deletePostComment: (commentId) =>
     api.delete(`/board/freeBoard/comments/${commentId}`, {}),
 

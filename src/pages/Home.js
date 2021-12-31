@@ -4,6 +4,9 @@ import { mainCreators as mainActions } from "../redux/modules/main";
 
 import { Grid, Image, Text } from "../elements/index";
 
+//react icons
+import { AiOutlineHeart } from "react-icons/ai";
+
 // 메인 페이지 기능 완성 후 map으로 바꾸기
 const Home = (props) => {
   const dispatch = useDispatch();
@@ -95,9 +98,23 @@ const Home = (props) => {
                 <Grid is_flex justify="space-between" key="a">
                   <Grid is_flex>
                     <Text>{post.skiResort}</Text>
-                    <Text margin="0 10px">{post.title}</Text>
+                    <Text
+                      margin="0 10px"
+                      cursor="pointer"
+                      _onClick={() => {
+                        history.push(
+                          `freeboarddetail/${post.skiResort}/${post.postId}`
+                        );
+                      }}
+                    >
+                      {post.title}
+                    </Text>
                   </Grid>
-                  <Text>{post.createdAt}</Text>
+                  <Grid is_flex>
+                    <AiOutlineHeart />
+                    <Text margin="0 10px 0 0">{post.likeCnt}</Text>
+                    <Text>{post.createdAt}</Text>
+                  </Grid>
                 </Grid>
               );
             })}

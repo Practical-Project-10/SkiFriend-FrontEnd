@@ -62,7 +62,7 @@ const FreeBoardDetail = ({ history }, props) => {
         width="50px"
         cursor="pointer"
         _onClick={() => {
-          history.goBack();
+          history.push(`/freeboardlist/${skiresort}`);
         }}
       >
         <GrFormPrevious size="40" />
