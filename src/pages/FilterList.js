@@ -13,20 +13,14 @@ import { Grid, Button } from "../elements/index";
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
 
-const Carpool = (props, { location }) => {
+const FilterList = (props, { location }) => {
   const history = props.history;
   const dispatch = useDispatch();
   const is_profile = localStorage.getItem("is_profile");
   console.log(is_profile);
-  const carpool_list = useSelector((state) => state.carpool.list);
+  const carpool_list = useSelector((state) => state.carpool.filter);
   console.log(carpool_list);
   const skiResort = props.match.params.skiresort;
-
-  React.useEffect(() => {
-    if (carpool_list.length === 0) {
-      dispatch(carpoolActions.getCarpoolDB(skiResort));
-    }
-  }, []);
 
   const induceProfile = () => {
     if (!is_profile) {
@@ -62,10 +56,10 @@ const Carpool = (props, { location }) => {
   );
 };
 
-Carpool.defaultProps = {
+FilterList.defaultProps = {
   skiResort: "하이원",
   id: "",
   skiResortImg:
     "https://ww.namu.la/s/8824bc74d5ab99b1b526bdc3f8f22d449d90c7807c7dba5c576468522e89d158d227d98274f8f9433a7e6d7e2fb6d40b77958a91da322fed977c2ef80f241eba318aec584de0f642748dd476e983e1ca",
 };
-export default Carpool;
+export default FilterList;
