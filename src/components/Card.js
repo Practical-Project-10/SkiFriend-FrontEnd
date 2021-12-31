@@ -22,7 +22,7 @@ const Card = (props) => {
         ?<Grid>
           <Button _onClick={() => dispatch(carpoolActions.deleteCarpoolDB(props.skiResort, props.postId))}>삭제</Button>
           <Button _onClick={() => history.push(`/carpoolwrite/${props.skiResort}/${props.postId}`)}>수정</Button>
-          <Button _onClick={() => dispatch(carpoolActions.completeCarpoolDB(props.postId))}>모집 완료</Button>
+          <Button _onClick={() => dispatch(carpoolActions.completeCarpoolDB(props.skiResort, props.postId))}>모집 완료</Button>
          </Grid>
         : null
       }

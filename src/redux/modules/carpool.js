@@ -108,33 +108,32 @@ const deleteCarpoolDB = (skiResort, postId) => {
   };
 };
 
-const completeCarpoolDB = (postId) => {
+const completeCarpoolDB = (skiResort, postId) => {
   return async function (dispatch, getState, { history }) {
     try {
       await apis.completeCarpool(postId);
-      console.log("모집완료");
-    } catch (err) {
+      console.log('모집완료')
+
+      dispatch(getCarpoolDB(skiResort));
+    } catch(err) {
       console.log(err);
     }
   };
 };
 
-export const filterCarpoolDB =
-  (skiResort, datas) =>
-  async (dispatch, getState, { history }) => {
-    await apis
-      .filterCarpool(skiResort, datas)
-      .then((res) => {
-        console.log("필터요청 성공");
-        console.log(res);
-        // dispatch(getCarpool(res.data));
-        history.push(`/carpool/${skiResort}`);
-      })
-      .catch((error) => {
-        console.log(`불러오기 실패${error}`);
-      });
-  };
+const filterCarpoolDB = (skiResort, datas) => {
+  return async function (dispatch, getState, { history }) {
+    try{
+      const response = await apis.filterCarpool(skiResort, datas)
+      console.log(response.data);
 
+      response && dispatch(getCarpool(response.data.content));
+      history.push(`/carpool/${skiResort}`);
+    } catch(err) {
+      console.log(err);
+    }
+  }
+}
 const getMyCarpoolDB = () => {
   return async function (dispatch, getState, { history }) {
     console.log("내가 쓴 카풀");
@@ -160,6 +159,7 @@ export default handleActions(
   {
     [GET_CARPOOL]: (state, action) =>
       produce(state, (draft) => {
+        console.log(action.payload.list)
         draft.list = action.payload.list;
       }),
 

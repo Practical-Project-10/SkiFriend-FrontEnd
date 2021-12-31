@@ -76,11 +76,12 @@ const CarpoolFilter = ({ history }) => {
   // 데이터 전송
   const filterSubmit = async () => {
     if (datas.startLocation === "" || datas.endLocation === "") {
-      return window.alert("지역을 선택해 주세요");
+      return window.alert("지역선택은 필수입니다.");
     }
     dispatch(carpoolActions.filterCarpoolDB(skiresort, datas));
   };
   console.log(datas);
+
   return (
     <React.Fragment>
       <Grid header>검색필터</Grid>
