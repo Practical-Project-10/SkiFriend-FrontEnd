@@ -31,7 +31,7 @@ const FreeBoardWrite = () => {
   const [title, setTitle] = useState(postData ? postData.title : "");
   const [content, setContet] = useState(postData ? postData.content : "");
   const [uploadURL, setUploadURL] = useState([]);
-  const [uploadFiles, setUploadFiles] = useState(null);
+  const [uploadFiles, setUploadFiles] = useState(emptyFile);
 
   // 제목
   const postTitle = (e) => {
@@ -48,15 +48,15 @@ const FreeBoardWrite = () => {
   // 이미지 업로드
   const uploadImg = (e) => {
     e.preventDefault();
-    setUploadFiles(e.target.files);
-    // const ImgUrlList = [...uploadURL];
-    // for (let i = 0; i < e.target.files.length; i++) {
-    const ImgUrl = URL.createObjectURL(e.target.files);
-    // ImgUrlList.push(ImgUrl);
-    // }
+    setUploadFiles(e.target.files[0]);
+    const ImgUrlList = [...uploadURL];
+    for (let i = 0; i < e.target.files.length; i++) {
+      const ImgUrl = URL.createObjectURL(e.target.files[i]);
+      ImgUrlList.push(ImgUrl);
+    }
 
-    dispatch(imageActions.setPreview(ImgUrl));
-    setUploadURL(ImgUrl);
+    dispatch(imageActions.setPreview(ImgUrlList));
+    setUploadURL(ImgUrlList);
   };
 
   // 데이터 전송 (완료 버튼)
@@ -74,12 +74,8 @@ const FreeBoardWrite = () => {
 
   // 데이터 수정 (완료 버튼)
   const editPostBtn = () => {
-    if (uploadFiles === null) {
-      setUploadFiles(emptyFile);
-    }
-    console.log(uploadFiles);
     const requestDto = { title: title, content: content };
-    console.log(requestDto)
+    console.log(requestDto);
     const ask = window.confirm("게시물을 등록하시겠습니까?");
     if (ask) {
       return dispatch(
