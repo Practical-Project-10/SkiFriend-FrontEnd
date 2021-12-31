@@ -7,7 +7,7 @@ const GET_CARPOOL = "GET_CARPOOL";
 const ADD_CARPOOL = "ADD_CARPOOL";
 const EDIT_CARPOOL = "EDIT_CARPOOL";
 const DELETE_CARPOOL = "DELETE_CARPOOL";
-const GET_MYCARPOOL = 'GET_MYCARPOOL';
+const GET_MYCARPOOL = "GET_MYCARPOOL";
 
 // acrtion creators
 const getCarpool = createAction(GET_CARPOOL, (list) => ({ list }));
@@ -17,7 +17,9 @@ const editCarpool = createAction(EDIT_CARPOOL, (postId, carpool) => ({
   carpool,
 }));
 const deleteCarpool = createAction(DELETE_CARPOOL, (postId) => ({ postId }));
-const getMyCarpool = createAction(GET_MYCARPOOL, (myCarpools) => ({myCarpools}));
+const getMyCarpool = createAction(GET_MYCARPOOL, (myCarpools) => ({
+  myCarpools,
+}));
 
 // middlewares
 const getCarpoolDB = (skiResort) => {
@@ -106,6 +108,7 @@ const deleteCarpoolDB = (skiResort, postId) => {
   };
 };
 
+
 const completeCarpoolDB = (postId) => {
   return async function (dispatch, getState, { history }) {
     try {
@@ -118,31 +121,49 @@ const completeCarpoolDB = (postId) => {
   }
 }
 
-const filterCarpoolDb = (skiResort, datas) => 
+export const filterCarpoolDB =
+  (skiResort, datas) =>
   async (dispatch, getState, { history }) => {
     await apis
       .filterCarpool(skiResort, datas)
       .then((res) => {
-        dispatch(getCarpool(res.data));
+        console.log("필터요청 성공");
+        console.log(res);
+        // dispatch(getCarpool(res.data));
+        history.push(`/carpool/${skiResort}`);
       })
       .catch((error) => {
         console.log(`불러오기 실패${error}`);
       });
   };
 
+// const filterCarpoolDB = (skiResort, datas) => {
+//   return async function (dispatch, getState, { history }) {
+//     try {
+//       const response = await apis.filterCarpool(skiResort, datas);
+//       console.log("필터요청 성공");
+//       console.log(response);
+//       // dispatch(getCarpool(res.data));
+//       history.push(`/carpool/${skiResort}`);
+//     } catch (error) {
+//       console.log(`불러오기 실패${error}`);
+//     }
+//   };
+// };
+
 const getMyCarpoolDB = () => {
   return async function (dispatch, getState, { history }) {
-    console.log('내가 쓴 카풀')
-    try{
+    console.log("내가 쓴 카풀");
+    try {
       const response = await apis.getMyCarpool();
       console.log(response.data);
 
-      response && dispatch(getMyCarpool(response.data))
-    } catch(err) {
+      response && dispatch(getMyCarpool(response.data));
+    } catch (err) {
       console.log(err);
     }
-  }
-}
+  };
+};
 
 
 // initialState
@@ -167,10 +188,12 @@ export default handleActions(
 
     [EDIT_CARPOOL]: (state, action) =>
       produce(state, (draft) => {
-        const idx = draft.list.findIndex(l => l.postId === action.payload.postId)
+        const idx = draft.list.findIndex(
+          (l) => l.postId === action.payload.postId
+        );
         console.log(idx);
 
-        draft.list[idx] = {...draft.list[idx], ...action.payload.carpool};
+        draft.list[idx] = { ...draft.list[idx], ...action.payload.carpool };
       }),
 
     [DELETE_CARPOOL]: (state, action) =>
