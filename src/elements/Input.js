@@ -7,6 +7,7 @@ const Input = (props) => {
     label,
     placeholder,
     _onChange,
+    _onClick,
     type,
     margin,
     height,
@@ -83,7 +84,6 @@ const Input = (props) => {
   }
   return (
     <React.Fragment>
-      <Text>{label}</Text>
       <ElInput
         placeholder={placeholder}
         type={type}
@@ -94,15 +94,13 @@ const Input = (props) => {
         padding={padding}
         onBlur={_onBlur}
         onChange={_onChange}
+        onClick={_onClick}
         value={_value}
         name={_name}
       />
+      <Text>{label}</Text>
     </React.Fragment>
   );
-};
-
-Input.defaultProps = {
-  width: "100%",
 };
 
 const ElInput = styled.input`

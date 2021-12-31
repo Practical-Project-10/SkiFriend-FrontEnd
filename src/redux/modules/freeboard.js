@@ -50,16 +50,15 @@ export const addBoardDB =
       new Blob([JSON.stringify(datas)], { type: "application/json" })
     );
     //formdata 객체 내용 확인
-    for (let pair of formData.entries()) {
-      console.log(pair[0] + ", " + pair[1]);
-    }
-
+    // for (let pair of formData.entries()) {
+    //   console.log(pair[0] + ", " + pair[1]);
+    // }
     await apis
       .writeFreePost(skiResort, formData)
       .then((res) => {
         console.log("등록 완료~");
         history.push(`/freeboardlist/${skiResort}`);
-        // window.location.reload();
+        dispatch(addBoard(res.data));
       })
       .catch((error) => {
         console.log(`오류 발생!${error}`);
@@ -95,11 +94,7 @@ export const updateBoardDB =
       "requestDto",
       new Blob([JSON.stringify(datas)], { type: "application/json" })
     );
-    //formdata 객체 내용 확인
-    for (let pair of formdata.entries()) {
-      console.log(pair[0] + ", " + pair[1]);
-    }
-
+    console.log(formdata);
     await apis
       .updateFreePost(postId, formdata)
       .then((res) => {
@@ -133,8 +128,7 @@ export default handleActions(
   {
     [LOAD]: (state, action) =>
       produce(state, (draft) => {
-        // draft.list.push(...action.payload.postList);
-        draft.list = action.payload.postList;
+        draft.list.push(...action.payload.postList);
 
         draft.list = draft.list.reduce((prev, now) => {
           if (prev.findIndex((a) => a.postId === now.postId) === -1) {
