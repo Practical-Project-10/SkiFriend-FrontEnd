@@ -12,7 +12,6 @@ import { BsArrowLeftRight } from "react-icons/bs";
 import { BsArrowRight } from "react-icons/bs";
 
 import "../elements/styles.css";
-import axios from "axios";
 
 const CarpoolFilter = ({ history }) => {
   const dispatch = useDispatch();
@@ -43,7 +42,7 @@ const CarpoolFilter = ({ history }) => {
       [name]: value,
     });
   };
-  
+
   // 출발 도착 지역 바꾸기
   const locationChange = () => {
     if (!state) {
@@ -76,7 +75,10 @@ const CarpoolFilter = ({ history }) => {
 
   // 데이터 전송
   const filterSubmit = async () => {
-    dispatch(carpoolActions.filterCarpoolDB(skiresort, datas))
+    if (datas.startLocation === "" || datas.endLocation === "") {
+      return window.alert("지역선택은 필수입니다.");
+    }
+    dispatch(carpoolActions.filterCarpoolDB(skiresort, datas));
   };
   console.log(datas);
 
@@ -133,7 +135,11 @@ const CarpoolFilter = ({ history }) => {
         {/* 최대 수용가능한 인원 */}
         <Grid>
           <Text margin="0 5px">수용가능인원</Text>
-          <select name="memberNum" defaultValue="default" onChange={valueChange}>
+          <select
+            name="memberNum"
+            defaultValue="default"
+            onChange={valueChange}
+          >
             <option value="default" disabled>
               선택
             </option>
@@ -141,7 +147,7 @@ const CarpoolFilter = ({ history }) => {
             <option value="2">2명</option>
             <option value="3">3명</option>
             <option value="4">4명</option>
-            <option value="5">5명</option>
+            <option value="5">5인이상</option>
           </select>
         </Grid>
       </Grid>

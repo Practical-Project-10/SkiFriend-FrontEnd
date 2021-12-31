@@ -8,27 +8,39 @@ import styled from "styled-components";
 
 // 데이트 피커입니다!!! 이름이 Example 일떄밖에 인식이 안되서 이렇게 일단 놔뒀습니다ㅠㅠ 나중에 수정하겠습니다!
 const Example = (props) => {
-  const {
-    _selectDate,
-    _value
-  } = props;
-  console.log(_value)
+  const { _selectDate, _value } = props;
+  console.log(_value);
 
   const dateRef = useRef();
   const [date_, setDate_] = React.useState(new Date());
-  
+
   const sendDate = (date) => {
     setDate_(date);
-    console.log(date)
+    console.log(date_);
 
     const selectDate = dateRef.current.input.value;
-    console.log(dateRef.current.input) // 12월 31일
-    console.log(selectDate)// 12월 30일
-    console.log(date_)
+    console.log(dateRef.current.input);
+    console.log(selectDate);
+    console.log(date_);
 
     _selectDate(selectDate);
-  }
-// value 다시 손보기
+    
+  };
+  
+  console.log(date_);
+  // function (date) {
+  //   console.log(date);
+  //   var year = date.getFullYear(); //yyyy
+  //   var month = 1 + date.getMonth(); //M
+  //   month = month >= 10 ? month : "0" + month; //month 두자리로 저장
+  //   var day = date.getDate(); //d
+  //   day = day >= 10 ? day : "0" + day; //day 두자리로 저장
+  //   return year + "-" + month + "-" + day; //'-' 추가하여 yyyy-mm-dd 형태 생성 가능
+  // }
+  // const date = sendDate(date_);
+  // console.log(date);
+
+  // value 다시 손보기
   return (
     <Grid is_flex justify="center">
       <DatePicker
@@ -36,7 +48,7 @@ const Example = (props) => {
         dateFormat="yyyy-MM-dd"
         selected={date_}
         onChange={(date) => {
-          sendDate(date)
+          sendDate(date);
         }}
         // value={_value}
         minDate={new Date()}

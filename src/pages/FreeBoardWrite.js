@@ -74,9 +74,8 @@ const FreeBoardWrite = () => {
 
   // 데이터 수정 (완료 버튼)
   const editPostBtn = () => {
-    console.log(uploadFiles);
     const requestDto = { title: title, content: content };
-    console.log(requestDto)
+    console.log(requestDto);
     const ask = window.confirm("게시물을 등록하시겠습니까?");
     if (ask) {
       return dispatch(
