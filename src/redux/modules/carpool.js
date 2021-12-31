@@ -101,6 +101,19 @@ const deleteCarpoolDB = (skiResort, postId) => {
   };
 };
 
+const filterCarpoolDb =
+  (skiResort, datas) =>
+  async (dispatch, getState, { history }) => {
+    await apis
+      .filterCarpool(skiResort, datas)
+      .then((res) => {
+        dispatch(setCarpool(res.data));
+      })
+      .catch((error) => {
+        console.log(`불러오기 실패${error}`);
+      });
+  };
+
 // initialState
 const initialState = {
   list: [],
@@ -148,6 +161,7 @@ const carpoolActions = {
   addCarpoolDB,
   editCarpoolDB,
   deleteCarpoolDB,
+  filterCarpoolDb,
 };
 
 export { carpoolActions };

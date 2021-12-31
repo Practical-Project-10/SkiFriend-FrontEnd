@@ -15,7 +15,6 @@ import FreeBoardList from "../src/pages/FreeBoardList";
 import FreeBoardWrite from "./pages/FreeBoardWrite";
 import FreeBoardDetail from "./pages/FreeBoardDetail";
 import PlaceInfo from "./pages/PlaceInfo";
-import PlaceInfoDetail from "./pages/PlaceInfoDetail";
 import MyPage from "./pages/MyPage";
 import ProfileWrite from "./pages/ProfileWrite";
 import PwdChange from "./pages/PwdChange";
@@ -42,20 +41,29 @@ function App() {
           path="/carpoolwrite/:skiresort/:postId"
           component={CarpoolWrite}
         />
-        <Route path="/carpoolfilter" component={CarpoolFilter} />
+        <Route path="/carpoolfilter/:skiresort" component={CarpoolFilter} />
         <Route path="/freeboardlist/:skiresort" component={FreeBoardList} />
         <Route path="/freeboardwrite/:skiresort" component={FreeBoardWrite} />
-        <Route path="/freeboardedit/:skiresort/:postId" component={FreeBoardWrite} />
+        <Route
+          path="/freeboardedit/:skiresort/:postId"
+          component={FreeBoardWrite}
+        />
         <Route
           path="/freeboarddetail/:skiresort/:postId"
           component={FreeBoardDetail}
         />
         <Route path="/placeinfo" component={PlaceInfo} />
-        <Route path="/placeinfodetail" component={PlaceInfoDetail} />
         <Route path="/mypage" component={MyPage} />
         <Route exact path="/profilewrite" component={ProfileWrite}></Route>
-        <Route exact path="/profilewrite/:username" component={ProfileWrite}></Route>
-        <Route path="/profilewrite/:username/pwdchange" component={PwdChange}></Route>
+        <Route
+          exact
+          path="/profilewrite/:username"
+          component={ProfileWrite}
+        ></Route>
+        <Route
+          path="/profilewrite/:username/pwdchange"
+          component={PwdChange}
+        ></Route>
         <Route path="/chatroom" component={ChatRoom} />
         <Route path="/chatlist" component={ChatList} />
         <Route path="/boundchangebox" component={BoundChangeBox} />

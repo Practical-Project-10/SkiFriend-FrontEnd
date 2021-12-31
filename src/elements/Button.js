@@ -8,6 +8,7 @@ const Button = (props) => {
     children,
     margin,
     width,
+    size,
     padding,
     disabled,
     radius,
@@ -23,6 +24,7 @@ const Button = (props) => {
   const styles = {
     margin,
     width,
+    size,
     padding,
     disabled,
     radius,
@@ -92,9 +94,10 @@ const SmallBtn = styled.button`
   background: orange;
   font-weight: 800;
   width: 4.5em;
-  margin-right: 1em;
   border: none;
   border-radius: 5px;
+  margin: ${(props) => props.margin};
+  font-size: ${(props) => props.size};
   cursor: pointer;
 `;
 
