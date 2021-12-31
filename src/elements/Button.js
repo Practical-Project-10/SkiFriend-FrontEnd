@@ -3,6 +3,7 @@ import styled from "styled-components";
 
 const Button = (props) => {
   const {
+    _name,
     text,
     _onClick,
     children,
@@ -64,7 +65,7 @@ const Button = (props) => {
 
   return (
     <React.Fragment>
-      <ElButton {...styles} onClick={_onClick}>
+      <ElButton {...styles} onClick={_onClick} name={_name}>
         {text ? text : children}
       </ElButton>
     </React.Fragment>

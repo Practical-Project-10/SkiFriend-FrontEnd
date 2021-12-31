@@ -10,7 +10,7 @@ import { phoneNumExp } from '../shared/validation';
 const PhoneAuth = (props) => {
   const dispatch = useDispatch();
   const userInfo = useSelector(state => state.user.user);
-  const isSms = useSelector(state => state.user.is_sms);
+  // const isSms = useSelector(state => state.user.is_sms);
   console.log(userInfo);
   const phoneNumInput = React.useRef('');
   const smsNumInput = React.useRef('');

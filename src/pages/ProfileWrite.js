@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
-import { ProfileActions } from "../redux/modules/profile";
+import { profileActions } from "../redux/modules/profile";
 import { imageActions } from "../redux/modules/image";
 import { userActions } from "../redux/modules/user";
 
@@ -16,22 +16,24 @@ const ProfileWrite = (props) => {
   const user_profile = useSelector(state => state.profile.user_profile);
   console.log(user_profile);
 
-  const emptyFile = new File([""], "empty");
   const pfImgFile = useRef();
   const vImgFile = useRef();
+
+  const emptyFile = new File([""], "empty");
+  const deleteFile = new File(["delete"], "delete");
 
   const username = props.match.params.username;
   const is_edit = username? true: false;
 
   const [profile, setProfile] = useState(
     {
-      nickname: `${user_profile.nickname}`,
+      nickname: user_profile.nickname,
       profileImg: emptyFile,
-      gender: `${is_edit? user_profile.gender: ''}`,
-      ageRange: `${is_edit? user_profile.ageRange: ''}`,
-      career: `${is_edit? user_profile.career: ''}`,
-      selfIntro: `${is_edit? user_profile.selfIntro: ''}`,
-      phoneNum: `${user_profile.phoneNum}`,
+      gender: is_edit? user_profile.gender: '',
+      ageRange: is_edit? user_profile.ageRange: '',
+      career: is_edit? user_profile.career: '',
+      selfIntro: is_edit? user_profile.selfIntro: '',
+      phoneNum: user_profile.phoneNum,
       vacImg: emptyFile,
     }
   );
@@ -113,12 +115,36 @@ const ProfileWrite = (props) => {
   };
 
   const addProfile = () => {
-    dispatch(ProfileActions.addProfileDB(profile))
+    dispatch(profileActions.addProfileDB(profile));
   };
 
   const editProfile = () => {
-    dispatch(ProfileActions.editProfileDB(profile))
+    dispatch(profileActions.editProfileDB(profile));
   };
+
+  const deleteImg = (e) => {
+    const {name} = e.target;
+
+    if(name === 'deleteProfile') {
+      setProfile(
+        {
+          ...profile,
+          profileImg: deleteFile
+        }
+      );
+
+      dispatch(imageActions.deletePreview());
+    };
+
+    if(name === 'deleteVac') {
+      setProfile(
+        {
+          ...profile,
+          vacImg: deleteFile
+        }
+      );
+    };
+  }
 
   return (
     <React.Fragment>
@@ -126,13 +152,13 @@ const ProfileWrite = (props) => {
         <Grid width="70%" margin="auto">
           <Image width="170px" height="170px" margin="auto" radius="50%" src={preview? preview: basicImage}/>
           <input type="file" onChange={selectFile} ref={pfImgFile}/>
+          <Button _name='deleteProfile' _onClick={deleteImg}>사진 삭제</Button>
         </Grid>
         <Grid is_flex padding="0 24px" direction="column">
           <Grid>
             <Text marginB="5px">
               닉네임: <Input profile type="text" width="50px" _name='nickname' _value={nickname} _onBlur={handleBlur} _onChange={handleChange}/>
             </Text>
-            {/* <Button _onClick={}>중복검사</Button> */}
           </Grid>
           <Grid>
             <Text marginB="5px">
@@ -162,7 +188,8 @@ const ProfileWrite = (props) => {
             <Button _onClick={() => history.push(`/profilewrite/${username}/pwdchange`)}>비밀번호 변경</Button>
           </Grid>
           <Grid>
-          백신인증: <input type="file" onChange={selectFile} ref={vImgFile}/>
+            백신인증: <input type="file" onChange={selectFile} ref={vImgFile}/>
+            <Button _name='deleteVac' _onClick={deleteImg}>사진 삭제</Button>
           </Grid>
         </Grid>
         <Grid align="center">

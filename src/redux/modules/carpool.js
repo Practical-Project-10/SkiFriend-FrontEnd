@@ -3,19 +3,21 @@ import produce from "immer";
 import { apis } from "../../shared/apis";
 
 //action
-const SET_CARPOOL = "SET_CARPOOL";
+const GET_CARPOOL = "SET_CARPOOL";
 const ADD_CARPOOL = "ADD_CARPOOL";
 const EDIT_CARPOOL = "EDIT_CARPOOL";
 const DELETE_CARPOOL = "DELETE_CARPOOL";
+const GET_MYCARPOOL = 'GET_MYCARPOOL';
 
 // acrtion creators
-const setCarpool = createAction(SET_CARPOOL, (list) => ({ list }));
+const getCarpool = createAction(GET_CARPOOL, (list) => ({ list }));
 const addCarpool = createAction(ADD_CARPOOL, (carpool) => ({ carpool }));
 const editCarpool = createAction(EDIT_CARPOOL, (postId, carpool) => ({
   postId,
   carpool,
 }));
 const deleteCarpool = createAction(DELETE_CARPOOL, (postId) => ({ postId }));
+const getMyCarpool = createAction(GET_MYCARPOOL, (myCarpools) => ({myCarpools}));
 
 // middlewares
 const getCarpoolDB = (skiResort) => {
@@ -27,7 +29,7 @@ const getCarpoolDB = (skiResort) => {
       const carpool_list = response.data;
       console.log(response.data);
 
-      response && dispatch(setCarpool(carpool_list));
+      response && dispatch(getCarpool(carpool_list));
     } catch (err) {
       console.log(err);
     }
@@ -114,31 +116,46 @@ const filterCarpoolDb =
       });
   };
 
+const getMyCarpoolDB = () => {
+  return async function (dispatch, getState, { history }) {
+    console.log('내가 쓴 카풀')
+    try{
+      const response = await apis.getMyCarpool();
+      console.log(response.data);
+
+      response && dispatch(getMyCarpool(response.data))
+    } catch(err) {
+      console.log(err);
+    }
+  }
+}
+
 // initialState
 const initialState = {
   list: [],
+  myList: [],
 };
 
 // reducer
 export default handleActions(
   {
-    [SET_CARPOOL]: (state, action) =>
+    [GET_CARPOOL]: (state, action) =>
       produce(state, (draft) => {
         draft.list = action.payload.list;
       }),
 
-    // [ADD_CARPOOL]: (state, action) =>
-    //   produce(state, (draft) => {
-    //     draft.list.push(action.payload.carpool);
-    //   }),
+    [ADD_CARPOOL]: (state, action) =>
+      produce(state, (draft) => {
+        draft.list.push(action.payload.carpool);
+      }),
 
-    // [EDIT_CARPOOL]: (state, action) =>
-    //   produce(state, (draft) => {
-    //     const idx = draft.list.findIndex(l => l.postId === action.payload.postId)
-    //     console.log(idx);
+    [EDIT_CARPOOL]: (state, action) =>
+      produce(state, (draft) => {
+        const idx = draft.list.findIndex(l => l.postId === action.payload.postId)
+        console.log(idx);
 
-    //     draft.list[idx] = {...draft.list[idx], ...action.payload.carpool};
-    //   }),
+        draft.list[idx] = {...draft.list[idx], ...action.payload.carpool};
+      }),
 
     [DELETE_CARPOOL]: (state, action) =>
       produce(state, (draft) => {
@@ -148,12 +165,17 @@ export default handleActions(
 
         draft.list = deleted_list;
       }),
+
+    [GET_MYCARPOOL]: (state, action) =>
+      produce(state, (draft) => {
+        draft.myList = action.payload.myCarpools;
+      }),
   },
   initialState
 );
 
 const carpoolActions = {
-  setCarpool,
+  getCarpool,
   addCarpool,
   editCarpool,
   deleteCarpool,
@@ -162,6 +184,7 @@ const carpoolActions = {
   editCarpoolDB,
   deleteCarpoolDB,
   filterCarpoolDb,
+  getMyCarpoolDB,
 };
 
 export { carpoolActions };

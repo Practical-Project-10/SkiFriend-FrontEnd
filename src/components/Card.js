@@ -9,7 +9,7 @@ import {carpoolActions} from '../redux/modules/carpool';
 const Card = (props) => {
   const dispatch = useDispatch();
   console.log(props)
-  const {skiResort, postId} = props;
+  const {skiResort, postId, small} = props;
 
   const deleteCarpool = () => {
     dispatch(carpoolActions.deleteCarpoolDB(skiResort, postId));
@@ -19,7 +19,7 @@ const Card = (props) => {
     <Grid
       display="flex"
       direction="column"
-      width="75%"
+      width={small? "50%": "75%"}
       radius="20px"
       bg="#EAEAEA"
       height="220px"

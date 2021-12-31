@@ -12,20 +12,23 @@ const Example = (props) => {
     _selectDate,
     _value
   } = props;
+  console.log(_value)
 
   const dateRef = useRef();
   const [date_, setDate_] = React.useState(new Date());
   
   const sendDate = (date) => {
     setDate_(date);
+    console.log(date)
 
     const selectDate = dateRef.current.input.value;
     console.log(dateRef.current.input) // 12월 31일
     console.log(selectDate)// 12월 30일
+    console.log(date_)
 
     _selectDate(selectDate);
   }
-
+// value 다시 손보기
   return (
     <Grid is_flex justify="center">
       <DatePicker
@@ -35,7 +38,7 @@ const Example = (props) => {
         onChange={(date) => {
           sendDate(date)
         }}
-        value={date_}
+        // value={_value}
         minDate={new Date()}
         ref={dateRef}
       />

@@ -69,6 +69,7 @@ const editProfileDB = (profile) => {
       selfIntro: profile.selfIntro,
     }
     console.log(profile.profileImg);
+    console.log(profile.vacImg);
 
     const formData = new FormData();
     formData.append('profileImg', profile.profileImg);
@@ -148,7 +149,7 @@ export default handleActions(
   initialState
 );
 
-const ProfileActions = {
+const profileActions = {
   getProfile,
   addProfile,
   editProfile,
@@ -158,4 +159,4 @@ const ProfileActions = {
   changePwdDB
 };
 
-export { ProfileActions };
+export { profileActions };
