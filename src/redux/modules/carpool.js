@@ -25,7 +25,7 @@ const getMyCarpool = createAction(GET_MYCARPOOL, (myCarpools) => ({
 const getCarpoolDB = (skiResort) => {
   return async function (dispatch) {
     console.log(skiResort);
-    console.log('성공')
+    console.log("성공");
     try {
       const response = await apis.getCarpool(skiResort);
       const carpool_list = response.data;
@@ -57,7 +57,7 @@ const addCarpoolDB = (skiResort, carpool) => {
     try {
       const response = await apis.addCarpool(skiResort, carpool_form);
       console.log(response.data);
-      
+
       response && history.push(`/carpool/${skiResort}`);
       dispatch(addCarpool(response.data));
     } catch (err) {
@@ -108,18 +108,16 @@ const deleteCarpoolDB = (skiResort, postId) => {
   };
 };
 
-
 const completeCarpoolDB = (postId) => {
   return async function (dispatch, getState, { history }) {
     try {
       await apis.completeCarpool(postId);
-      console.log('모집완료')
-
-    } catch(err) {
+      console.log("모집완료");
+    } catch (err) {
       console.log(err);
     }
-  }
-}
+  };
+};
 
 export const filterCarpoolDB =
   (skiResort, datas) =>
@@ -137,20 +135,6 @@ export const filterCarpoolDB =
       });
   };
 
-// const filterCarpoolDB = (skiResort, datas) => {
-//   return async function (dispatch, getState, { history }) {
-//     try {
-//       const response = await apis.filterCarpool(skiResort, datas);
-//       console.log("필터요청 성공");
-//       console.log(response);
-//       // dispatch(getCarpool(res.data));
-//       history.push(`/carpool/${skiResort}`);
-//     } catch (error) {
-//       console.log(`불러오기 실패${error}`);
-//     }
-//   };
-// };
-
 const getMyCarpoolDB = () => {
   return async function (dispatch, getState, { history }) {
     console.log("내가 쓴 카풀");
@@ -164,7 +148,6 @@ const getMyCarpoolDB = () => {
     }
   };
 };
-
 
 // initialState
 const initialState = {
@@ -182,7 +165,7 @@ export default handleActions(
 
     [ADD_CARPOOL]: (state, action) =>
       produce(state, (draft) => {
-        console.log(action.payload.carpool)
+        console.log(action.payload.carpool);
         draft.list.unshift(action.payload.carpool);
       }),
 
@@ -223,7 +206,7 @@ const carpoolActions = {
   editCarpoolDB,
   deleteCarpoolDB,
   completeCarpoolDB,
-  filterCarpoolDb,
+  filterCarpoolDB,
   getMyCarpoolDB,
 };
 
