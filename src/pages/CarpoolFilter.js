@@ -27,9 +27,9 @@ const CarpoolFilter = ({ history }) => {
   const [state, setState] = useState(0);
   const [datas, setDatas] = useState({
     carpoolType: "",
-    maxNum: "",
-    departure: "",
-    destination: skiresort,
+    memberNum: "",
+    startLocation: "",
+    endLocation: skiresort,
     date: "",
   });
 
@@ -43,16 +43,7 @@ const CarpoolFilter = ({ history }) => {
       [name]: value,
     });
   };
-
-  // 수용인원 datas useState값 바꾸기
-  const valueNum = (e) => {
-    const { name, value } = e.target;
-    setDatas({
-      ...datas,
-      [name]: parseInt(value),
-    });
-  };
-
+  
   // 출발 도착 지역 바꾸기
   const locationChange = () => {
     if (!state) {
@@ -61,15 +52,15 @@ const CarpoolFilter = ({ history }) => {
       setState(1);
       setDatas({
         ...datas,
-        departure: skiresort,
-        destination: departureLoca.current.value,
+        startLocation: skiresort,
+        endLocation: departureLoca.current.value,
       });
     } else {
       setState(0);
       setDatas({
         ...datas,
-        departure: arrivalLoca.current.value,
-        destination: skiresort,
+        startLocation: arrivalLoca.current.value,
+        endLocation: skiresort,
       });
     }
   };
@@ -85,33 +76,10 @@ const CarpoolFilter = ({ history }) => {
 
   // 데이터 전송
   const filterSubmit = async () => {
-    const accessToken = document.cookie.split("=")[1];
-    const token = {
-      headers: {
-        "Content-Type": "multipart/form-data",
-        Authorization: `${accessToken}`,
-      },
-    };
-
-    await axios
-      .get(
-        `http://13.125.249.172/board/carpool/${skiresort}/category?size=10&page=1`,
-        token,
-        datas
-      )
-      .then((res) => {
-        console.log("필터적용 성공");
-        console.log(res);
-        console.log(res.data);
-        history.push(`carpool/${skiresort}`);
-        dispatch(carpoolActions.getCarpool(res.data));
-      })
-      .catch((error) => {
-        console.log(`필터적용 실패${error}`);
-      });
-    // dispatch((carpoolActions.filterCarpoolDB = (skiresort, datas)));
+    dispatch(carpoolActions.filterCarpoolDB(skiresort, datas))
   };
   console.log(datas);
+
   return (
     <React.Fragment>
       <Grid header>검색필터</Grid>
@@ -133,8 +101,8 @@ const CarpoolFilter = ({ history }) => {
       </Grid>
       <Grid is_flex justify="center" direction={state ? "row-reverse" : ""}>
         <select
-          name={state ? "destination" : "departure"}
-          value={datas.departure}
+          name={state ? "endLocation" : "startLocation"}
+          value={datas.startLocation}
           ref={departureLoca}
           onChange={valueChange}
         >
@@ -147,7 +115,7 @@ const CarpoolFilter = ({ history }) => {
         </span>
         <span
           className="skiResort"
-          name="destination"
+          name="endLocation"
           value={skiresort}
           ref={arrivalLoca}
         >
@@ -165,7 +133,7 @@ const CarpoolFilter = ({ history }) => {
         {/* 최대 수용가능한 인원 */}
         <Grid>
           <Text margin="0 5px">수용가능인원</Text>
-          <select name="maxNum" defaultValue="default" onChange={valueChange}>
+          <select name="memberNum" defaultValue="default" onChange={valueChange}>
             <option value="default" disabled>
               선택
             </option>
@@ -182,14 +150,14 @@ const CarpoolFilter = ({ history }) => {
         <Input
           type="radio"
           _name="carpoolType"
-          _value="카풀요청"
+          _value="카풀 요청"
           _onClick={valueChange}
           label="카풀 요청만 보기"
         />
         <Input
           type="radio"
           _name="carpoolType"
-          _value="카풀제공"
+          _value="카풀 제공"
           _onClick={valueChange}
           label="카풀 제공만 보기"
         />

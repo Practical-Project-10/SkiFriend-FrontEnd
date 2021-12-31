@@ -89,7 +89,7 @@ const MyPage = (props) => {
       <Grid is_flex>
         {myCarpool.map(l => {
           return(
-            <Grid key={l.creatAt} width='270px'>
+            <Grid key={l.createdAt} width='270px'>
               <Card small {...l}/>
             </Grid>
           )
