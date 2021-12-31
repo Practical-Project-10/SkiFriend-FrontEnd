@@ -21,7 +21,9 @@ const Carpool = (props) => {
   const skiResort = props.match.params.skiresort;
 
   React.useEffect(() => {
-    dispatch(carpoolActions.getCarpoolDB(skiResort));
+    if(carpool_list === 0) {
+      dispatch(carpoolActions.getCarpoolDB(skiResort));
+    }
   }, [])
 
   return (
