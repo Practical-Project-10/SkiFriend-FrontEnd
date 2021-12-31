@@ -13,7 +13,7 @@ import { AiOutlineCamera } from "react-icons/ai";
 
 const FreeBoardWrite = () => {
   const dispatch = useDispatch();
-  // const emptyFile = new File([""], "empty");
+  const emptyFile = new File([""], "empty");
 
   // 주소 경로값
   const params = useParams();
@@ -49,14 +49,14 @@ const FreeBoardWrite = () => {
   const uploadImg = (e) => {
     e.preventDefault();
     setUploadFiles(e.target.files);
-    const ImgUrlList = [...uploadURL];
-    for (let i = 0; i < e.target.files.length; i++) {
-      const ImgUrl = URL.createObjectURL(e.target.files[i]);
-      ImgUrlList.push(ImgUrl);
-    }
+    // const ImgUrlList = [...uploadURL];
+    // for (let i = 0; i < e.target.files.length; i++) {
+    const ImgUrl = URL.createObjectURL(e.target.files);
+    // ImgUrlList.push(ImgUrl);
+    // }
 
-    dispatch(imageActions.setPreview(ImgUrlList));
-    setUploadURL(ImgUrlList);
+    dispatch(imageActions.setPreview(ImgUrl));
+    setUploadURL(ImgUrl);
   };
 
   // 데이터 전송 (완료 버튼)
@@ -65,7 +65,7 @@ const FreeBoardWrite = () => {
     const ask = window.confirm("게시물을 등록하시겠습니까?");
     if (ask) {
       return dispatch(
-        boardActions.addBoardDB(skiresort, uploadFiles[0], requestDto)
+        boardActions.addBoardDB(skiresort, uploadFiles, requestDto)
       );
     } else {
       return;
@@ -74,16 +74,16 @@ const FreeBoardWrite = () => {
 
   // 데이터 수정 (완료 버튼)
   const editPostBtn = () => {
+    if (uploadFiles === null) {
+      setUploadFiles(emptyFile);
+    }
+    console.log(uploadFiles);
     const requestDto = { title: title, content: content };
+    console.log(requestDto)
     const ask = window.confirm("게시물을 등록하시겠습니까?");
     if (ask) {
       return dispatch(
-        boardActions.updateBoardDB(
-          skiresort,
-          postId,
-          uploadFiles[0],
-          requestDto
-        )
+        boardActions.updateBoardDB(skiresort, postId, uploadFiles, requestDto)
       );
     } else {
       return;
