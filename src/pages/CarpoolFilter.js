@@ -43,6 +43,16 @@ const CarpoolFilter = ({ history }) => {
     });
   };
 
+  const valueNum = (e) => {
+    const { name, value } = e.target;
+    console.log(name, value);
+
+    setDatas({
+      ...datas,
+      [name]: parseInt(value),
+    });
+  };
+
   // 출발 도착 지역 바꾸기
   const locationChange = () => {
     if (!state) {
@@ -75,9 +85,9 @@ const CarpoolFilter = ({ history }) => {
 
   // 데이터 전송
   const filterSubmit = async () => {
-    if (datas.startLocation === "" || datas.endLocation === "") {
-      return window.alert("지역선택은 필수입니다.");
-    }
+    // if (datas.startLocation === "" || datas.endLocation === "") {
+    //   return window.alert("지역선택은 필수입니다.");
+    // }
     dispatch(carpoolActions.filterCarpoolDB(skiresort, datas));
   };
   console.log(datas);
@@ -135,11 +145,7 @@ const CarpoolFilter = ({ history }) => {
         {/* 최대 수용가능한 인원 */}
         <Grid>
           <Text margin="0 5px">수용가능인원</Text>
-          <select
-            name="memberNum"
-            defaultValue="default"
-            onChange={valueChange}
-          >
+          <select name="memberNum" defaultValue="default" onChange={valueNum}>
             <option value="default" disabled>
               선택
             </option>

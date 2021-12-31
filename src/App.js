@@ -11,6 +11,7 @@ import Login from "./pages/Login";
 import Carpool from "./pages/Carpool";
 import CarpoolWrite from "./pages/CarpoolWrite";
 import CarpoolFilter from "./pages/CarpoolFilter";
+import FilterList from "./pages/FilterList";
 import FreeBoardList from "../src/pages/FreeBoardList";
 import FreeBoardWrite from "./pages/FreeBoardWrite";
 import FreeBoardDetail from "./pages/FreeBoardDetail";
@@ -35,6 +36,7 @@ function App() {
         <Route path="/signup" component={Signup}></Route>
         <Route path="/login" component={Login} />
         <Route path="/carpool/:skiresort" component={Carpool} />
+        <Route path="/filter/:skiresort" component={FilterList} />
         <Route exact path="/carpoolwrite" component={CarpoolWrite} />
         <Route exact path="/carpoolwrite/:skiresort" component={CarpoolWrite} />
         <Route
