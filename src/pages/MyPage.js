@@ -87,28 +87,11 @@ const MyPage = (props) => {
         <Text>사용자 피드백을 남겨주세요.</Text>
       </Grid>
       <Grid is_flex>
-        <Grid width="40%" margin="0 10px">
-          <Text>[카풀제공]</Text>
-          <Text>하이원 - 서울</Text>
-          <Text>날짜: 2001-12-01</Text>
-          <Text>시간: 15시</Text>
-          <Text>완료</Text>
-        </Grid>
-        <Grid width="40%" margin="0 10px">
-          <Text>[카풀제공]</Text>
-          <Text>하이원 - 서울</Text>
-          <Text>날짜: 2001-12-01</Text>
-          <Text>시간: 15시</Text>
-          <Text>완료</Text>
-        </Grid>
-      </Grid>
-      <Grid>
-        <Text>내가 쓴 게시글</Text>
-      </Grid>
-      <Grid is_flex>
         {myCarpool.map(l => {
           return(
+            <Grid key={l.creatAt} width='270px'>
               <Card small {...l}/>
+            </Grid>
           )
         })}
       </Grid>

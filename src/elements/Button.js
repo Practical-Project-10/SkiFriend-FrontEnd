@@ -65,7 +65,7 @@ const Button = (props) => {
 
   return (
     <React.Fragment>
-      <ElButton {...styles} onClick={_onClick} name={_name}>
+      <ElButton {...styles} onClick={_onClick} name={_name} >
         {text ? text : children}
       </ElButton>
     </React.Fragment>
