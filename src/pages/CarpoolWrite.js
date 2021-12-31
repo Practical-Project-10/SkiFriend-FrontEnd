@@ -12,8 +12,6 @@ import InduceProfile from "../components/InduceProfile";
 
 const CarpoolWrite = (props) => {
   const dispatch = useDispatch();
-  const is_profile = localStorage.getItem('is_profile');
-  console.log(is_profile);
   const carpool_list = useSelector(state => state.carpool.list);
   const [state, setState] = useState(false);
 
@@ -50,17 +48,6 @@ const CarpoolWrite = (props) => {
     memberNum,
     notice,
   } = form;
-
-  // useEffect(() => {
-  //   if(is_profile) {
-  //     window.alert('프로필 작성 후 이용할 수 있는 서비스 입니다.')
-  //     return(
-  //       <Grid>
-  //         <InduceProfile/>
-  //       </Grid>
-  //     )
-  //   }
-  // }, [])
 
   const handleChange = e => {
     const{ name, value } = e.target;
@@ -159,23 +146,22 @@ const CarpoolWrite = (props) => {
           <Cross state onClick={locationChange}>교차</Cross>
           <label htmlFor="endLocation" style={{ border:'1px solid #000'}}>{skiResort}</label>
           <input type='text' id="endLocation" name='endLocation' value={endLocation} style={{display:"none"}} ref={endLoca}/>
-          {/* <div style={{border: '1px solid #000'}} value={endLocation} ref={endLoca}>{skiResort}</div> */}
         </Grid>
 
         <Grid is_flex width="300px">
-          <Example _value={date}  _selectDate={selectDate}/>
-          {/* <TimePicker _value={time} selectTime={selectTime}/> */}
+          <Example _value={date} _selectDate={selectDate}/>
           <Input type='time' _name='time' _value={time} _onChange={handleChange}/>
         </Grid>
         <Grid margin="10px">
           <Text>제목</Text>
-          <Input _name='title' _value={title} _onChange={handleChange}/>
+          <Input type='text' _maxLength='15' _name='title' _value={title} _onChange={handleChange}/>
+          <input type='text' maxLength='15'/>
           <Text>가격</Text>
           <Input _name='price' _value={price} _onChange={handleChange}/>원
           <Text>모집인원</Text>
           <Input _name='memberNum' _value={memberNum} _onChange={handleChange}/>
           <Text>주의사항</Text>
-          <Input _name='notice' _value={notice} _onChange={handleChange}/>
+          <Input type='text' _maxLength='15' _name='notice' _value={notice} _onChange={handleChange}/>
         </Grid>
         <Grid margin="10px">
           <Button width="100%" padding="10px" _onClick={is_edit? editCarpool: addCarpool}>

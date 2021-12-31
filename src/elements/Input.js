@@ -21,8 +21,9 @@ const Input = (props) => {
     signup,
     profile,
     _disabled,
+    _maxLength,
   } = props;
-
+  
   const style = {
     inline,
   };
@@ -63,13 +64,9 @@ const Input = (props) => {
   if (profile) {
     return (
       <React.Fragment>
-        {label ? (
-          <Text margin="0" size="13px" {...style}>
-            {label}
-          </Text>
-        ) : (
-          ""
-        )}
+        <Text margin="0" size="13px" {...style}>
+          {label}
+        </Text>
         <ProfileInput
           width={width}
           onChange={_onChange}
@@ -96,6 +93,7 @@ const Input = (props) => {
         onChange={_onChange}
         value={_value}
         name={_name}
+        maxLength={_maxLength}
       />
     </React.Fragment>
   );
