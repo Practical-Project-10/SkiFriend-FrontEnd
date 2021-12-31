@@ -85,7 +85,7 @@ const SignupOne = (props) => {
       nickname: nickname,
     };
 
-    if(checkId, checkPwd, checkRePwd) {
+    if(checkId && checkPwd && checkRePwd) {
       dispatch(userActions.signupDB(userInfo));
     };
   };

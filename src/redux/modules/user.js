@@ -11,7 +11,7 @@ import { setCookie, deleteCookie } from "../../shared/cookie";
 const SET_USER = "SET_USER";
 const LOGOUT = "LOGOUT";
 const EDIT_USER = "EDIT_USER";
-const ID_CHECK = "ID_CHECK";
+const ID_CHECK = "ID_CHECK_";
 const NICKNAME_CHECK = "NICKNAME_CHEKCK";
 const PHONENUM_CHECK = "PHONENUM_CHECK";
 // const SMS_CHECK = "SMS_CHECK";
@@ -20,8 +20,8 @@ const PHONENUM_CHECK = "PHONENUM_CHECK";
 const setUser = createAction(SET_USER, (user) => ({ user }));
 const logout = createAction(LOGOUT, () => ({}));
 const editUserInfo = createAction(EDIT_USER, (userInfo) => ({ userInfo }));
-const idCheck = createAction((ID_CHECK) => (state) => ({ state }));
-const nicknameCheck = createAction((NICKNAME_CHECK) => (state) => ({ state }));
+const idCheck = createAction(ID_CHECK, (state) => ({ state }));
+const nicknameCheck = createAction(NICKNAME_CHECK, (state) => ({ state }));
 const phoneNum = createAction(PHONENUM_CHECK, (num) => ({ num }));
 // const smsCheck = createAction(SMS_CHECK, (state) => ({state}));
 
@@ -50,31 +50,6 @@ const signupDB = (userInfo) => {
   };
 };
 
-// const signupDB = (userInfo) => {
-//   return async (dispatch, getState, { history }) => {
-//     const userData = {
-//       username: userInfo.username,
-//       nickname: userInfo.nickname,
-//       password: userInfo.password,
-//       phoneNum: userInfo.phoneNum,
-//       profileImg: userInfo.profileImg,
-//       vacImg: userInfo.vacImg,
-//       gender: userInfo.gender,
-//       ageRange: userInfo.ageRange,
-//       career: userInfo.career,
-//       selfIntro: userInfo.selfIntro,
-//     };
-
-//     try {
-//       const response = await apis.signup(userData);
-
-//       response && window.alert("회원가입이 완료되었습니다.");
-//       history.push("/");
-//     } catch (err) {
-//       console.log(err);
-//     }
-//   };
-// };
 
 const isIdDB = (id) => {
   return async (dispatch) => {
@@ -204,6 +179,7 @@ export default handleActions(
     [SET_USER]: (state, action) =>
       produce(state, (draft) => {
         draft.is_login = true;
+        console.log(action.payload.user);
         draft.user = action.payload.user;
       }),
     [LOGOUT]: (state, action) =>
@@ -242,8 +218,8 @@ const userActions = {
   setUser,
   logout,
   editUserInfo,
-  idCheck,
-  nicknameCheck,
+  // idCheck,
+  // nicknameCheck,
   phoneNum,
   // smsCheck,
   // signupDB,

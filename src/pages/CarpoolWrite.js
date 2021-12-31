@@ -1,4 +1,4 @@
-import React, {useState, useRef} from "react";
+import React, {useState, useRef, useEffect} from "react";
 
 import {useDispatch, useSelector} from 'react-redux';
 import {carpoolActions} from '../redux/modules/carpool'
@@ -8,9 +8,12 @@ import { Grid, Text, Button, Input } from "../elements/index";
 import "../elements/styles.css";
 
 import Example from "../components/Example";
+import InduceProfile from "../components/InduceProfile";
 
 const CarpoolWrite = (props) => {
   const dispatch = useDispatch();
+  const is_profile = localStorage.getItem('is_profile');
+  console.log(is_profile);
   const carpool_list = useSelector(state => state.carpool.list);
   const [state, setState] = useState(false);
 
@@ -48,9 +51,19 @@ const CarpoolWrite = (props) => {
     notice,
   } = form;
 
+  // useEffect(() => {
+  //   if(is_profile) {
+  //     window.alert('프로필 작성 후 이용할 수 있는 서비스 입니다.')
+  //     return(
+  //       <Grid>
+  //         <InduceProfile/>
+  //       </Grid>
+  //     )
+  //   }
+  // }, [])
+
   const handleChange = e => {
     const{ name, value } = e.target;
-    console.log(name, value);
 
     setForm(
       {
@@ -84,6 +97,7 @@ const CarpoolWrite = (props) => {
   };
 
   const selectDate = (date) => {
+    console.log(date)
     setForm(
       {
         ...form,
@@ -92,14 +106,6 @@ const CarpoolWrite = (props) => {
     )
   }
 
-  // const selectTime = (time) => {
-  //   setForm(
-  //     {
-  //       ...form,
-  //       time,
-  //     }
-  //   )
-  // }
   console.log(form);
   
   const addCarpool = () => {
@@ -127,18 +133,18 @@ const CarpoolWrite = (props) => {
             {skiResort}
           </Grid>
           <Grid is_flex margin="10px 15px">
-            <input
-              type='radio'
-              name='carpoolType'
-              value='카풀 요청'
-              onChange={handleChange}
-            />카풀 요청
-            <input
-              type='radio'
-              name='carpoolType'
-              value='카풀 제공'
-              onChange={handleChange}
-            />카풀 제공
+            <form onChange={handleChange}>
+              <input
+                type='radio'
+                name='carpoolType'
+                value='카풀 요청'
+              />카풀 요청
+              <input
+                type='radio'
+                name='carpoolType'
+                value='카풀 제공'
+              />카풀 제공
+            </form>
           </Grid>
         </Grid>
 

@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 
 import { useDispatch } from 'react-redux';
-import { ProfileActions } from '../redux/modules/profile';
+import { profileActions } from '../redux/modules/profile';
 
 import { Grid, Input, Button } from '../elements';
 
@@ -62,7 +62,7 @@ const PwdChange = (props) => {
 
   const changePwd = () => {
     if(checkPwd && checkRePwd) {
-      dispatch(ProfileActions.changePwdDB(pwd, newPwd)) 
+      dispatch(profileActions.changePwdDB(pwd, newPwd)) 
     }
   }
 
