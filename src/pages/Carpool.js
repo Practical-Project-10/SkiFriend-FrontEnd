@@ -9,7 +9,7 @@ import Card from "../components/Card";
 import FloatButton from "../components/FloatButton";
 
 import "../elements/styles.css";
-import { Grid, Button } from "../elements/index";
+import { Grid } from "../elements/index";
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
 
@@ -17,9 +17,7 @@ const Carpool = (props, { location }) => {
   const history = props.history;
   const dispatch = useDispatch();
   const is_profile = localStorage.getItem("is_profile");
-  console.log(is_profile);
   const carpool_list = useSelector((state) => state.carpool.list);
-  console.log(carpool_list);
   const skiResort = props.match.params.skiresort;
 
   React.useEffect(() => {

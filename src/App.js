@@ -20,10 +20,8 @@ import MyPage from "./pages/MyPage";
 import ProfileWrite from "./pages/ProfileWrite";
 import PwdChange from "./pages/PwdChange";
 import ChatList from "./pages/ChatList";
-import Header from "./components/Header";
 import Navbar from "./components/Navbar";
 import ChatRoom from "./pages/ChatRoom";
-import BoundChangeBox from "./components/BoundChangeBox";
 
 function App() {
   return (
@@ -68,7 +66,6 @@ function App() {
         ></Route>
         <Route path="/chatroom" component={ChatRoom} />
         <Route path="/chatlist" component={ChatList} />
-        <Route path="/boundchangebox" component={BoundChangeBox} />
         <Navbar />
       </Grid>
     </React.Fragment>

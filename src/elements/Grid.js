@@ -101,6 +101,13 @@ const Grid = (props) => {
       </Link>
     );
   }
+  if (className === "dropdown") {
+    return (
+      <Dropdown {...styles} onClick={_onClick}>
+        {children}
+      </Dropdown>
+    );
+  }
 
   return (
     <React.Fragment>
@@ -211,6 +218,22 @@ const ModalContainer = styled.div`
 
 const Link = styled.a`
   font-size: 15px;
+`;
+
+const Dropdown = styled.div`
+  position: absolute;
+  max-height: 150px;
+  min-width: 100px;
+  top: 175px;
+  /* left: 100px; */
+  /* transform: translateX(-45%); */
+  background-color: var(--bg);
+  border: var(--border);
+  /* border-radius: var(--border-radius); */
+  padding: 1rem;
+  overflow-x: scroll;
+  transition: height var(--speed) ease;
+  z-index: 1;
 `;
 
 export default Grid;
