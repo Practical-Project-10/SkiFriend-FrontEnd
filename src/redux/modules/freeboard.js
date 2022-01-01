@@ -6,6 +6,9 @@ import produce from "immer";
 const initialState = {
   list: [],
   detail: [],
+  page: 1,
+  is_loading: false,
+  is_next: false,
 };
 
 // action
@@ -14,25 +17,34 @@ const ADD = "freeboard/POST";
 const GETONE = "freeboard/GETONE";
 const UPDATE = "freeboard/UPDATE";
 const DELETE = "freeboard/DELETE";
+const LOADING = "freeboard/LOADING";
+const NEXT = "freeboard/NEXT";
 
 // action creater
-export const loadBoard = createAction(LOAD, (postList) => ({
-  postList,
-}));
+export const loadBoard = createAction(LOAD, (postList) => ({ postList }));
 export const addBoard = createAction(ADD, (postData) => ({ postData }));
 export const getOneBoard = createAction(GETONE, (postData) => ({ postData }));
 export const updateBoard = createAction(UPDATE, (postData) => ({ postData }));
 export const deleteBoard = createAction(DELETE, (postId) => ({ postId }));
+export const loadingBoard = createAction(LOADING, (state) => ({ state }));
+export const nextBoard = createAction(NEXT, (state) => ({ state }));
 
 // thunk
 // 자유 게시판 목록 불러오기
 export const loadBoardDB =
-  (skiResort) =>
+  (skiResort, page) =>
   async (dispatch, getState, { history }) => {
     await apis
-      .getFreePost(skiResort)
+      .getFreePost(skiResort, page)
       .then((res) => {
-        dispatch(loadBoard(res.data));
+        console.log(res.data.length);
+        if(res.data.length === 17) {
+          dispatch(loadBoard(res.data));
+          dispatch(nextBoard(true));
+        } else {
+          dispatch(loadBoard(res.data));
+          dispatch(nextBoard(false));
+        }
       })
       .catch((error) => {
         console.log(`불러오기 실패${error}`);
@@ -128,6 +140,7 @@ export default handleActions(
   {
     [LOAD]: (state, action) =>
       produce(state, (draft) => {
+        draft.page += 1
         draft.list.push(...action.payload.postList);
 
         draft.list = draft.list.reduce((prev, now) => {
@@ -166,6 +179,16 @@ export default handleActions(
         ),
       };
     },
+
+    [LOADING]: (state, action) =>
+      produce(state, (draft) => {
+        draft.is_loading = action.payload.state;
+      }),
+
+    [GETONE]: (state, action) =>
+      produce(state, (draft) => {
+        draft.is_next = action.payload.state;
+      }),
   },
   initialState
 );

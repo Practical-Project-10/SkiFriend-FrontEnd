@@ -113,11 +113,13 @@ export const apis = {
     api.post(`/board/carpool/${carpoolId}/status`),
 
   filterCarpool: (skiResort, datas) =>
-    api.post(`/board/carpool/${skiResort}/category?size=10&page=1`, datas),
+    api.post(`/board/carpool/${skiResort}/category`, datas),
 
   // 자유게시글
-  getFreePost: (skiResort) =>
-    api.get(`/board/freeBoard/${skiResort}?size=10&page=1`, {}),
+  getFreePost: (skiResort, page) =>
+    api.get(`/board/freeBoard/${skiResort}`, {
+      params: {page: page, size: 17}
+    }),
 
   writeFreePost: (skiResort, datas) =>
     api.post(`/board/${skiResort}/freeBoard`, datas, {

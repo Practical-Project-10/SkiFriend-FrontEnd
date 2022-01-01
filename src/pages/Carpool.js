@@ -11,8 +11,6 @@ import InfinityScroll from "../components/InfinityScroll";
 
 import "../elements/styles.css";
 import { Grid, Button } from "../elements/index";
-import Pagination from "@mui/material/Pagination";
-import Stack from "@mui/material/Stack";
 
 const Carpool = (props, { location }) => {
   const history = props.history;
@@ -39,7 +37,7 @@ const Carpool = (props, { location }) => {
   };
 
   return (
-    <Grid is_flex align="center" direction="column">
+    <Grid is_flex align="center" direction="column" heigth='100px'>
       <Grid bg="#C4C4C4"></Grid>
 
       {/* 카풀/게시글 네비게이션 바 */}
