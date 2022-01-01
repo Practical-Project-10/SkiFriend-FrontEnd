@@ -8,7 +8,6 @@ const ADD_CARPOOL = "ADD_CARPOOL";
 const EDIT_CARPOOL = "EDIT_CARPOOL";
 const DELETE_CARPOOL = "DELETE_CARPOOL";
 const GET_MYCARPOOL = "GET_MYCARPOOL";
-const FILTER_CARPOOL = "FILTER_CARPOOL";
 
 // acrtion creators
 const getCarpool = createAction(GET_CARPOOL, (list) => ({ list }));
@@ -21,7 +20,6 @@ const deleteCarpool = createAction(DELETE_CARPOOL, (postId) => ({ postId }));
 const getMyCarpool = createAction(GET_MYCARPOOL, (myCarpools) => ({
   myCarpools,
 }));
-const filterCarpool = createAction(FILTER_CARPOOL, (list) => ({ list }));
 
 // middlewares
 const getCarpoolDB = (skiResort) => {
@@ -128,9 +126,13 @@ const filterCarpoolDB = (skiResort, datas) => {
     try {
       const response = await apis.filterCarpool(skiResort, datas);
       console.log(response.data);
-
-      dispatch(filterCarpool(response.data.content));
-      history.push(`/filter/${skiResort}`);
+      if (response.data.content.length === 0) {
+        window.alert("필터에 맞는 정보가 없습니다");
+        history.push(`/carpool/${skiResort}`);
+      } else {
+        dispatch(getCarpool(response.data.content));
+        history.push(`/filter/${skiResort}`);
+      }
     } catch (err) {
       console.log(err);
     }
@@ -154,7 +156,6 @@ const getMyCarpoolDB = () => {
 const initialState = {
   list: [],
   myList: [],
-  filter: [],
 };
 
 // reducer
@@ -195,11 +196,6 @@ export default handleActions(
       produce(state, (draft) => {
         draft.myList = action.payload.myCarpools;
       }),
-    [FILTER_CARPOOL]: (state, action) =>
-      produce(state, (draft) => {
-        console.log(action.payload.list);
-        draft.filter = action.payload.list;
-      }),
   },
   initialState
 );
@@ -209,7 +205,6 @@ const carpoolActions = {
   addCarpool,
   editCarpool,
   deleteCarpool,
-  filterCarpool,
   getCarpoolDB,
   addCarpoolDB,
   editCarpoolDB,
