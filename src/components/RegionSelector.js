@@ -1,25 +1,20 @@
 import React, { useState, useEffect, useRef } from "react";
 import "../elements/citySelection.css";
 import { CSSTransition } from "react-transition-group";
-
+import { Grid } from "../elements/index";
 //지역선택 셀렉박스 css 는 import 경로에 쓰여져 있습니다!
-const SelectRegion = () => {
+const RegionSelector = () => {
   //다음 메뉴로 넘겨주는 usestate
   const [activeMenu, setActiveMenu] = useState("main");
-  const [menuHeight, setMenuHeight] = useState(null);
   //시군구 정하는 useState
   const [city, setCity] = useState([]);
   const [region, setRegion] = useState([]);
-  
-  const dropdownRef = useRef(null);
 
-  useEffect(() => {
-    setMenuHeight(dropdownRef.current?.firstChild.offsetHeight);
-  }, []);
+  const dropdownRef = useRef(null);
 
   function Navbar(props) {
     return (
-      <nav className="navbar">
+      <nav>
         {" "}
         <ul className="navbar-nav">{props.children}</ul>
       </nav>
@@ -28,20 +23,15 @@ const SelectRegion = () => {
   function NavItem(props) {
     const [open, setOpen] = useState(false);
     return (
-      <>
-        <li className="nav-item">
-          <select className="icon-button" onClick={() => setOpen(!open)}>
-            지역선택
-          </select>
-          {open && props.children}
-        </li>
-      </>
+      <li>
+        <select onClick={() => setOpen(!open)}>지역선택</select>
+        {open && props.children}
+      </li>
     );
   }
 
   const calcHeight = (el) => {
     const height = el.offsetHeight;
-    setMenuHeight(height);
   };
 
   const DropdownItem = (props) => {
@@ -332,27 +322,24 @@ const SelectRegion = () => {
   ];
 
   return (
-    <div className="wrap-all">
-      <div>
-        {city} {region}
-      </div>
+    <Grid width="120px">
       <Navbar>
+        <Grid margin="0 5px">{city}</Grid>
+        <Grid>{region}</Grid>
         <NavItem>
-          <div
+          <Grid
             className="dropdown"
-            style={{ height: menuHeight }}
-            ref={dropdownRef}
+            // style={{ height: menuHeight }}
+            // ref={dropdownRef}
           >
             <CSSTransition
               in={activeMenu === "main"}
               timeout={500}
-              classNames="menu-primary"
               unmountOnExit
               onEnter={calcHeight}
             >
-              <div
-                className="menu"
-                onClick={(e) => {
+              <Grid
+                _onClick={(e) => {
                   setCity(e.target.value);
                   console.log(e.target.value);
                 }}
@@ -361,27 +348,27 @@ const SelectRegion = () => {
                   return (
                     <DropdownItem
                       value={c}
-                      key={idx + "city"}
+                      key={"cityName" + idx}
                       goToMenu={"city" + idx}
                     >
                       {c}
                     </DropdownItem>
                   );
                 })}
-              </div>
+              </Grid>
             </CSSTransition>
             {city_name.map((c, idx) => {
               return (
                 <CSSTransition
                   in={activeMenu === "city" + idx}
+                  key={"cityName" + idx}
                   timeout={500}
                   classNames="menu-secondary"
                   unmountOnExit
                   onEnter={calcHeight}
                 >
-                  <div
-                    className="menu"
-                    onClick={(e) => {
+                  <Grid
+                    _onClick={(e) => {
                       setRegion(e.target.value);
                       console.log(e.target.value);
                     }}
@@ -391,21 +378,20 @@ const SelectRegion = () => {
                     </DropdownItem>
                     {region_name[idx].map((r, idx) => {
                       return (
-                        <DropdownItem value={r} key={r + "region"}>
+                        <DropdownItem value={r} key={"region"}>
                           {r}
                         </DropdownItem>
                       );
                     })}
-                  </div>
+                  </Grid>
                 </CSSTransition>
               );
             })}
-          </div>
+          </Grid>
         </NavItem>
       </Navbar>
-      <div></div>
-    </div>
+    </Grid>
   );
 };
 
-export default SelectRegion;
+export default RegionSelector;

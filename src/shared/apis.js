@@ -111,7 +111,7 @@ export const apis = {
     api.post(`/board/carpool/${carpoolId}/status`),
 
   filterCarpool: (skiResort, datas) =>
-    api.post(`/board/carpool/${skiResort}/category?size=10&page=1`, datas),
+    api.post(`/board/carpool/${skiResort}/category`, datas),
 
   // 자유게시글
   getFreePost: (skiResort) =>

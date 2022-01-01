@@ -125,12 +125,11 @@ const filterCarpoolDB = (skiResort, datas) => {
   return async function (dispatch, getState, { history }) {
     try {
       const response = await apis.filterCarpool(skiResort, datas);
-      console.log(response.data);
-      if (response.data.content.length === 0) {
+      if (response.data.length === 0) {
         window.alert("필터에 맞는 정보가 없습니다");
         history.push(`/carpool/${skiResort}`);
       } else {
-        dispatch(getCarpool(response.data.content));
+        dispatch(getCarpool(response.data));
         history.push(`/filter/${skiResort}`);
       }
     } catch (err) {

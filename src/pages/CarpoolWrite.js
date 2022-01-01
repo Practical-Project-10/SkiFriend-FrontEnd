@@ -7,7 +7,7 @@ import styled from 'styled-components'
 import { Grid, Text, Button, Input } from "../elements/index";
 import "../elements/styles.css";
 
-import Example from "../components/Example";
+import DateSelector from "../components/DateSelector";
 import InduceProfile from "../components/InduceProfile";
 
 const CarpoolWrite = (props) => {
@@ -149,7 +149,7 @@ const CarpoolWrite = (props) => {
         </Grid>
 
         <Grid is_flex width="300px">
-          <Example _value={date} _selectDate={selectDate}/>
+          <DateSelector _value={date} _selectDate={selectDate}/>
           <Input type='time' _name='time' _value={time} _onChange={handleChange}/>
         </Grid>
         <Grid margin="10px">
