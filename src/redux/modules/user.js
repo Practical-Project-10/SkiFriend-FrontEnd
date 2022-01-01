@@ -3,9 +3,7 @@ import { produce } from "immer";
 
 import { apis } from "../../shared/apis";
 
-
 import { setCookie, deleteCookie } from "../../shared/cookie";
-
 
 //action
 const SET_USER = "SET_USER";
@@ -41,15 +39,14 @@ const signupDB = (userInfo) => {
     console.log(_userInfo);
     try {
       const response = await apis.signup(_userInfo);
-      
-      response && window.alert('회원가입이 완료되었습니다.');
-      history.push('/login');
+
+      response && window.alert("회원가입이 완료되었습니다.");
+      history.push("/login");
     } catch (err) {
       console.log(err);
     }
   };
 };
-
 
 const isIdDB = (id) => {
   return async (dispatch) => {
@@ -102,9 +99,9 @@ const isSmsCheckDB = (phoneNum, randomNum) => {
     console.log(phoneNum, randomNum);
     try {
       await apis.smsNumCheck(phoneNum, randomNum);
-      window.alert('인증이 완료되었습니다.');
-      
-      history.push('/signup');
+      window.alert("인증이 완료되었습니다.");
+
+      history.push("/signup");
       // dispatch(smsCheck(true));
     } catch (err) {
       window.alert("인증번호가 일치하지 않습니다.");
@@ -126,7 +123,7 @@ const loginDB = (id, pwd) => {
       setCookie("token", token);
       localStorage.setItem("nickname", response.data.nickname);
       localStorage.setItem("userId", response.data.userId);
-      localStorage.setItem('is_login', true);
+      localStorage.setItem("is_login", true);
       dispatch(setUser(user));
     } catch (err) {
       window.alert("아이디와 비밀번호를 확인해주세요.");
@@ -153,10 +150,9 @@ const editUserInfoDB = (userInfo) => {
 
 const deleteUserInfoDB = () => {
   return async (dispatch, getState, { history }) => {
-    
     try {
       await apis.deleteUser();
-
+      console.log("탈퇴완료");
       window.alert("회원탈퇴가 완료되었습니다.");
       history.push("/");
       dispatch(logout());
@@ -183,8 +179,8 @@ export default handleActions(
         draft.user = action.payload.user;
       }),
     [LOGOUT]: (state, action) =>
-      produce(state, draft => {
-        deleteCookie('token');
+      produce(state, (draft) => {
+        deleteCookie("token");
         localStorage.clear();
         draft.is_login = false;
         draft.user = {};

@@ -5,7 +5,7 @@ import { carpoolActions } from "../redux/modules/carpool";
 
 import { Grid, Text, Button, Input } from "../elements/index";
 import DateSelector from "../components/DateSelector";
-import RegionSelector from '../components/RegionSelector';
+import RegionSelector from "../components/RegionSelector";
 
 //react icons
 import { GrFormPrevious } from "react-icons/gr";
@@ -18,7 +18,24 @@ const CarpoolFilter = ({ history }) => {
   const dispatch = useDispatch();
   const params = useParams();
   const skiresort = params.skiresort;
-
+  const city_name = [
+    "서울",
+    "부산",
+    "대구",
+    "인천",
+    "광주",
+    "대전",
+    "울산",
+    "강원",
+    "경기",
+    "경남",
+    "경북",
+    "전남",
+    "전북",
+    "제주",
+    "충남",
+    "충북",
+  ];
   // useRef
   const departureLoca = useRef();
   const arrivalLoca = useRef();
@@ -43,16 +60,6 @@ const CarpoolFilter = ({ history }) => {
       [name]: value,
     });
   };
-
-  // const valueNum = (e) => {
-  //   const { name, value } = e.target;
-  //   console.log(name, value);
-
-  //   setDatas({
-  //     ...datas,
-  //     [name]: parseInt(value),
-  //   });
-  // };
 
   // 출발 도착 지역 바꾸기
   const locationChange = () => {
@@ -104,7 +111,6 @@ const CarpoolFilter = ({ history }) => {
         />
       </Grid>
 
-      {/* <CarpoolBody bodyDatas={setForm} /> */}
       {/* 출발 도착지역 셀렉박스 */}
       <Grid is_flex justify="center">
         <Text>출발지역</Text>
@@ -113,18 +119,27 @@ const CarpoolFilter = ({ history }) => {
         </Button>
         <Text>도착지역</Text>
       </Grid>
+
       <Grid is_flex justify="center" direction={state ? "row-reverse" : ""}>
-      <RegionSelector/>
-        {/* <select
+        {/* <RegionSelector/> */}
+        <select
           name={state ? "endLocation" : "startLocation"}
           value={state ? datas.endLocation : datas.startLocation}
           ref={departureLoca}
           onChange={valueChange}
         >
-          <option value="">도시선택</option>
-          <option value="지방">지방</option>
-          <option value="서울">서울</option>
-        </select> */}
+          <option value="" disabled>
+            지역선택
+          </option>
+          ;
+          {city_name.map((city, idx) => {
+            return (
+              <React.Fragment key={"bigCity" + idx}>
+                <option value={city}>{city}</option>;
+              </React.Fragment>
+            );
+          })}
+        </select>
         <span>
           <BsArrowRight style={{ margin: "0px 20px" }} />
         </span>
