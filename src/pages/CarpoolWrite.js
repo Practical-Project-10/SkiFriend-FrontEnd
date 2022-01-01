@@ -138,7 +138,7 @@ const CarpoolWrite = (props) => {
         {/* 출발도착지역 셀렉박스 */}
         <Grid is_flex justify='space-around' selectBox position='relative' direction={state? 'row-reverse': ''} >
           <Grid>
-            <select name={state? 'endLocation': 'startLocation'}  value={startLocation} onChange={handleChange} ref={startLoca}>
+            <select name={state? 'endLocation': 'startLocation'}  value={state? endLocation: startLocation} onChange={handleChange} ref={startLoca}>
               <option value='지방'>지방</option>
               <option value='서울'>서울</option>
             </select>

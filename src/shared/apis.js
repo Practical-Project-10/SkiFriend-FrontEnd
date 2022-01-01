@@ -74,8 +74,10 @@ export const apis = {
   deleteUser: () => api.delete("/user/info"),
 
   //카풀
-  getCarpool: (skiResort) =>
-    api.get(`/board/carpool/${skiResort}?size=10&page=1`),
+  getCarpool: (skiResort, page) =>
+    api.get(`/board/carpool/${skiResort}`,{
+      params: {page: page, size: 3}
+    }),
 
   addCarpool: (skiResort, carpool) =>
     api.post(`/board/carpool/${skiResort}`, {
@@ -114,8 +116,10 @@ export const apis = {
     api.post(`/board/carpool/${skiResort}/category`, datas),
 
   // 자유게시글
-  getFreePost: (skiResort) =>
-    api.get(`/board/freeBoard/${skiResort}?size=10&page=1`, {}),
+  getFreePost: (skiResort, page) =>
+    api.get(`/board/freeBoard/${skiResort}`, {
+      params: {page: page, size: 17}
+    }),
 
   writeFreePost: (skiResort, datas) =>
     api.post(`/board/${skiResort}/freeBoard`, datas, {

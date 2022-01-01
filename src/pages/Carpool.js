@@ -7,22 +7,26 @@ import CarpoolMenuBar from "../components/CarpoolMenuBar";
 import CarpoolControl from "../components/CarpoolControl";
 import Card from "../components/Card";
 import FloatButton from "../components/FloatButton";
+import InfinityScroll from "../components/InfinityScroll";
 
 import "../elements/styles.css";
-import { Grid } from "../elements/index";
+import { Grid, Button } from "../elements/index";
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
 
 const Carpool = (props, { location }) => {
   const history = props.history;
   const dispatch = useDispatch();
+
   const is_profile = localStorage.getItem("is_profile");
   const carpool_list = useSelector((state) => state.carpool.list);
+  const page = useSelector((state) => state.carpool.page);
+  const is_loading = useSelector((state) => state.carpool.is_loading);
   const skiResort = props.match.params.skiresort;
 
   React.useEffect(() => {
     if (carpool_list.length === 0) {
-      dispatch(carpoolActions.getCarpoolDB(skiResort));
+      dispatch(carpoolActions.getCarpoolDB(skiResort, page));
     }
   }, []);
 
@@ -35,7 +39,7 @@ const Carpool = (props, { location }) => {
   };
 
   return (
-    <Grid is_flex align="center" direction="column">
+    <Grid is_flex align="center" direction="column" heigth='100px'>
       <Grid bg="#C4C4C4"></Grid>
 
       {/* 카풀/게시글 네비게이션 바 */}
@@ -43,17 +47,20 @@ const Carpool = (props, { location }) => {
 
       <CarpoolControl />
 
-      {carpool_list.map((l) => {
-        return (
-          <Grid key={l.postId} width="100%">
-            <Card {...l} skiResort={skiResort} />
-          </Grid>
-        );
-      })}
-
-      <Stack spacing={2}>
-        <Pagination count={5} />
-      </Stack>
+      <InfinityScroll
+        callNext={() => {
+          dispatch(carpoolActions.getCarpoolDB(skiResort, page))
+        }}
+        is_loading={is_loading}
+      >
+        {carpool_list.map((l) => {
+          return (
+            <Grid key={l.postId} width="100%">
+              <Card {...l} skiResort={skiResort} />
+            </Grid>
+          )
+        })}
+      </InfinityScroll>
 
       <FloatButton _onClick={induceProfile} />
     </Grid>
