@@ -110,7 +110,7 @@ const filterCarpoolDB = (skiResort, datas) => {
     console.log(skiResort, datas)
     try {
       const response = await apis.filterCarpool(skiResort, datas);
-      console.log(response.data);
+      
       if (response.data.length === 0) {
         window.alert("필터에 맞는 정보가 없습니다");
         return null;

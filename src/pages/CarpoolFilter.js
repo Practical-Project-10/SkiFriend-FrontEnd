@@ -4,7 +4,8 @@ import { useDispatch } from "react-redux";
 import { carpoolActions } from "../redux/modules/carpool";
 
 import { Grid, Text, Button, Input } from "../elements/index";
-import Example from "../components/Example";
+import DateSelector from "../components/DateSelector";
+import RegionSelector from '../components/RegionSelector';
 
 //react icons
 import { GrFormPrevious } from "react-icons/gr";
@@ -43,15 +44,15 @@ const CarpoolFilter = ({ history }) => {
     });
   };
 
-  const valueNum = (e) => {
-    const { name, value } = e.target;
-    console.log(name, value);
+  // const valueNum = (e) => {
+  //   const { name, value } = e.target;
+  //   console.log(name, value);
 
-    setDatas({
-      ...datas,
-      [name]: parseInt(value),
-    });
-  };
+  //   setDatas({
+  //     ...datas,
+  //     [name]: parseInt(value),
+  //   });
+  // };
 
   // 출발 도착 지역 바꾸기
   const locationChange = () => {
@@ -85,9 +86,9 @@ const CarpoolFilter = ({ history }) => {
 
   // 데이터 전송
   const filterSubmit = async () => {
-    if (datas.startLocation === "" || datas.endLocation === "") {
-      return window.alert("지역선택은 필수입니다.");
-    }
+    // if (datas.startLocation === "" || datas.endLocation === "") {
+    //   return window.alert("지역선택은 필수입니다.");
+    // }
     dispatch(carpoolActions.filterCarpoolDB(skiresort, datas));
   };
   console.log(datas);
@@ -103,6 +104,7 @@ const CarpoolFilter = ({ history }) => {
         />
       </Grid>
 
+      {/* <CarpoolBody bodyDatas={setForm} /> */}
       {/* 출발 도착지역 셀렉박스 */}
       <Grid is_flex justify="center">
         <Text>출발지역</Text>
@@ -112,16 +114,17 @@ const CarpoolFilter = ({ history }) => {
         <Text>도착지역</Text>
       </Grid>
       <Grid is_flex justify="center" direction={state ? "row-reverse" : ""}>
-        <select
+      <RegionSelector/>
+        {/* <select
           name={state ? "endLocation" : "startLocation"}
-          value={state? datas.endLocation: datas.startLocation}
+          value={state ? datas.endLocation : datas.startLocation}
           ref={departureLoca}
           onChange={valueChange}
         >
           <option value="">도시선택</option>
           <option value="지방">지방</option>
           <option value="서울">서울</option>
-        </select>
+        </select> */}
         <span>
           <BsArrowRight style={{ margin: "0px 20px" }} />
         </span>
@@ -139,16 +142,18 @@ const CarpoolFilter = ({ history }) => {
         {/* 날짜선택 */}
         <Grid>
           <Text>날짜 선택</Text>
-          <Example _value={datas.date} _selectDate={selectDate} />
+          <DateSelector _value={datas.date} _selectDate={selectDate} />
         </Grid>
 
         {/* 최대 수용가능한 인원 */}
         <Grid>
           <Text margin="0 5px">수용가능인원</Text>
-          <select name="memberNum" defaultValue="default" onChange={valueNum}>
-            <option value="default" disabled>
-              선택
-            </option>
+          <select
+            name="memberNum"
+            defaultValue="default"
+            onChange={valueChange}
+          >
+            <option value="0">선택</option>
             <option value="1">1명</option>
             <option value="2">2명</option>
             <option value="3">3명</option>

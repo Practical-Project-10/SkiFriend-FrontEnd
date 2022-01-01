@@ -20,7 +20,6 @@ import MyPage from "./pages/MyPage";
 import ProfileWrite from "./pages/ProfileWrite";
 import PwdChange from "./pages/PwdChange";
 import ChatList from "./pages/ChatList";
-import Header from "./components/Header";
 import Navbar from "./components/Navbar";
 import ChatRoom from "./pages/ChatRoom";
 
