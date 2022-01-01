@@ -20,10 +20,11 @@ const FreeBoardList = () => {
   const skiresort = params.skiresort;
   const dispatch = useDispatch();
   const boardList = useSelector((state) => state.freeboard.list);
-  const page = useSelector((state) => state.carpool.page);
-  const is_loading = useSelector((state) => state.carpool.is_loading);
+  // const page = useSelector((state) => state.carpool.page);
+  // const is_loading = useSelector((state) => state.freeboard.is_loading);
   console.log(boardList);
   const is_login = localStorage.getItem("nickname");
+
 
   // 게시글 작성 페이지 이동 판단
   const moveWritePage = () => {
@@ -43,7 +44,7 @@ const FreeBoardList = () => {
 
   React.useEffect(() => {
     if (boardList.length === 0) {
-      dispatch(boardActions.loadBoardDB(skiresort, page));
+      dispatch(boardActions.loadBoardDB(skiresort));//page
     }
   }, []);
 
@@ -56,12 +57,12 @@ const FreeBoardList = () => {
       <CarpoolMenuBar />
       <Grid padding="20px" height="384px" overflow="scroll">
         <Text>전체</Text>
-        <InfinityScroll
+        {/* <InfinityScroll
           callNext={() => {
             dispatch(boardActions.loadBoardDB(skiresort, page));
           }}
           is_loading={is_loading}
-        >
+        > */}
           {boardList.map((post) => {
             return (
               <Grid is_flex justify="space-between" key={post.postId}>
@@ -89,7 +90,7 @@ const FreeBoardList = () => {
               </Grid>
             );
           })}
-        </InfinityScroll>
+        {/* </InfinityScroll> */}
       </Grid>
 
       <Grid >

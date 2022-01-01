@@ -85,7 +85,7 @@ const deleteCarpoolDB = (skiResort, postId) => {
       await apis.deleteCarpool(postId);
 
       dispatch(deleteCarpool(postId));
-      history.push(`/carpool/${skiResort}`);
+      // history.push(`/carpool/${skiResort}`);
     } catch (err) {
       console.log(err);
     }

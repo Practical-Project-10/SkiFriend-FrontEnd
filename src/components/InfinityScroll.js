@@ -4,8 +4,8 @@ import { useSelector } from 'react-redux'
 
 const InfinityScroll = (props) => {
   const { children, callNext, loading } = props
-  const is_next = useSelector((state) => state.carpool.is_next)
-  console.log(is_next)
+  const carpool_next = useSelector((state) => state.carpool.is_next);
+  // const freeBoard_next = useSelector((state) => state.freeboard.is_next)
 
   const _handleScroll = _.throttle(() => {
     if (loading) {
@@ -19,7 +19,7 @@ const InfinityScroll = (props) => {
       document.body.scrollTop
 
     if (scrollHeight - innerHeight - scrollTop < 100) {
-      if (is_next) {
+      if (carpool_next) {
         callNext()
       }
     }

@@ -10,15 +10,12 @@ import {carpoolActions} from '../redux/modules/carpool';
 const Card = (props) => {
   const dispatch = useDispatch();
 
-  const nickname = localStorage.getItem('nickname');
-  const is_mine = props.nickname === nickname;
-
   return (
     <CarpoolCard
       status={!props.status}
       small={props.small}
     >
-      {is_mine
+      {props.is_mine
         ?<Grid>
           <Button _onClick={() => dispatch(carpoolActions.deleteCarpoolDB(props.skiResort, props.postId))}>삭제</Button>
           <Button _onClick={() => history.push(`/carpoolwrite/${props.skiResort}/${props.postId}`)}>수정</Button>

@@ -18,6 +18,8 @@ const Carpool = (props, { location }) => {
   const history = props.history;
   const dispatch = useDispatch();
 
+  const nickname = localStorage.getItem('nickname');
+  const is_mine = props.nickname === nickname;
   const is_profile = localStorage.getItem("is_profile");
   const carpool_list = useSelector((state) => state.carpool.list);
   const page = useSelector((state) => state.carpool.page);
@@ -56,7 +58,10 @@ const Carpool = (props, { location }) => {
         {carpool_list.map((l) => {
           return (
             <Grid key={l.postId} width="100%">
-              <Card {...l} skiResort={skiResort} />
+              {is_mine
+                ? <Card {...l} skiResort={skiResort} is_mine />
+                : <Card {...l} skiResort={skiResort} />
+              }
             </Grid>
           )
         })}

@@ -1,4 +1,5 @@
 import axios from "axios";
+import { getCookie } from "./cookie";
 
 const api = axios.create({
   baseURL: "http://13.125.249.172/",
@@ -118,7 +119,7 @@ export const apis = {
   // 자유게시글
   getFreePost: (skiResort, page) =>
     api.get(`/board/freeBoard/${skiResort}`, {
-      params: {page: page, size: 17}
+      // params: {page: page, size: 17}
     }),
 
   writeFreePost: (skiResort, datas) =>
