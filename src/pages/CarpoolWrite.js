@@ -1,9 +1,9 @@
-import React, {useState, useRef, useEffect} from "react";
+import React, { useState, useRef, useEffect } from "react";
 
-import {useDispatch, useSelector} from 'react-redux';
-import {carpoolActions} from '../redux/modules/carpool'
+import { useDispatch, useSelector } from "react-redux";
+import { carpoolActions } from "../redux/modules/carpool";
 
-import styled from 'styled-components'
+import styled from "styled-components";
 import { Grid, Text, Button, Input } from "../elements/index";
 import "../elements/styles.css";
 
@@ -12,31 +12,48 @@ import InduceProfile from "../components/InduceProfile";
 
 const CarpoolWrite = (props) => {
   const dispatch = useDispatch();
-  const carpool_list = useSelector(state => state.carpool.list);
+  const carpool_list = useSelector((state) => state.carpool.list);
   const [state, setState] = useState(false);
 
   const skiResort = props.match.params.skiresort;
   const startLoca = useRef();
   const endLoca = useRef();
-  
+  const city_name = [
+    "서울",
+    "부산",
+    "대구",
+    "인천",
+    "광주",
+    "대전",
+    "울산",
+    "강원",
+    "경기",
+    "경남",
+    "경북",
+    "전남",
+    "전북",
+    "제주",
+    "충남",
+    "충북",
+  ];
   //수정페이지
   const postId = props.match.params.postId;
-  const is_edit = postId? true: false;
-  const carpool = is_edit? carpool_list.find(l => l.postId === Number(postId)): null;
+  const is_edit = postId ? true : false;
+  const carpool = is_edit
+    ? carpool_list.find((l) => l.postId === Number(postId))
+    : null;
 
-  const [form, setForm] = React.useState(
-    {
-      carpoolType: `${carpool? carpool.carpoolType: ''}`,
-      startLocation: `${carpool? carpool.startLocation: ''}`,
-      endLocation: `${carpool? carpool.endLocation: skiResort}`,
-      date: `${carpool? carpool.date: ''}`,
-      time: `${carpool? carpool.time: ''}`,
-      title: `${carpool? carpool.title: ''}`,
-      price: `${carpool? carpool.price: ''}`,
-      memberNum: `${carpool? carpool.memberNum: ''}`,
-      notice: `${carpool? carpool.notice: ''}`,
-    }
-  );
+  const [form, setForm] = React.useState({
+    carpoolType: `${carpool ? carpool.carpoolType : ""}`,
+    startLocation: `${carpool ? carpool.startLocation : ""}`,
+    endLocation: `${carpool ? carpool.endLocation : skiResort}`,
+    date: `${carpool ? carpool.date : ""}`,
+    time: `${carpool ? carpool.time : ""}`,
+    title: `${carpool ? carpool.title : ""}`,
+    price: `${carpool ? carpool.price : ""}`,
+    memberNum: `${carpool ? carpool.memberNum : ""}`,
+    notice: `${carpool ? carpool.notice : ""}`,
+  });
   const {
     carpoolType,
     startLocation,
@@ -49,63 +66,54 @@ const CarpoolWrite = (props) => {
     notice,
   } = form;
 
-  const handleChange = e => {
-    const{ name, value } = e.target;
+  const handleChange = (e) => {
+    const { name, value } = e.target;
 
-    setForm(
-      {
-        ...form,
-        [name]: value,
-      }
-    )
-  }
+    setForm({
+      ...form,
+      [name]: value,
+    });
+  };
 
   const locationChange = () => {
-    if(!state) {
-      console.log(startLoca.current.value)
+    if (!state) {
+      console.log(startLoca.current.value);
       setState(true);
-      setForm(
-        {
-          ...form,
-          startLocation: skiResort,
-          endLocation: startLoca.current.value,
-        }
-      )
+      setForm({
+        ...form,
+        startLocation: skiResort,
+        endLocation: startLoca.current.value,
+      });
     } else {
       setState(false);
-      setForm(
-        {
-          ...form,
-          startLocation: endLoca.current.value,
-          endLocation: skiResort,
-        }
-      )
+      setForm({
+        ...form,
+        startLocation: endLoca.current.value,
+        endLocation: skiResort,
+      });
     }
   };
 
   const selectDate = (date) => {
-    console.log(date)
-    setForm(
-      {
-        ...form,
-        date,
-      }
-    )
-  }
+    console.log(date);
+    setForm({
+      ...form,
+      date,
+    });
+  };
 
   console.log(form);
-  
+
   const addCarpool = () => {
-    dispatch(carpoolActions.addCarpoolDB(skiResort, form))
-  }
+    dispatch(carpoolActions.addCarpoolDB(skiResort, form));
+  };
   const editCarpool = () => {
-    dispatch(carpoolActions.editCarpoolDB(postId, form))
-  }
-  
+    dispatch(carpoolActions.editCarpoolDB(postId, form));
+  };
+
   return (
     <React.Fragment>
       <Grid justify="column">
-        
         <Grid
           is_flex
           borderB="1px solid #CACACA"
@@ -121,51 +129,101 @@ const CarpoolWrite = (props) => {
           </Grid>
           <Grid is_flex margin="10px 15px">
             <form onChange={handleChange}>
-              <input
-                type='radio'
-                name='carpoolType'
-                value='카풀 요청'
-              />카풀 요청
-              <input
-                type='radio'
-                name='carpoolType'
-                value='카풀 제공'
-              />카풀 제공
+              <input type="radio" name="carpoolType" value="카풀 요청" />
+              카풀 요청
+              <input type="radio" name="carpoolType" value="카풀 제공" />
+              카풀 제공
             </form>
           </Grid>
         </Grid>
 
         {/* 출발도착지역 셀렉박스 */}
-        <Grid is_flex justify='space-around' selectBox position='relative' direction={state? 'row-reverse': ''} >
+        <Grid
+          is_flex
+          justify="space-around"
+          selectBox
+          position="relative"
+          direction={state ? "row-reverse" : ""}
+        >
           <Grid>
-            <select name={state? 'endLocation': 'startLocation'}  value={state? endLocation: startLocation} onChange={handleChange} ref={startLoca}>
-              <option value='지방'>지방</option>
-              <option value='서울'>서울</option>
+            <select
+              name={state ? "endLocation" : "startLocation"}
+              value={state ? endLocation : startLocation}
+              ref={startLoca}
+              onChange={handleChange}
+            >
+              <option value="" disabled>
+                지역선택
+              </option>
+              ;
+              {city_name.map((city, idx) => {
+                return (
+                  <React.Fragment key={"bigCity" + idx}>
+                    <option value={city}>{city}</option>;
+                  </React.Fragment>
+                );
+              })}
             </select>
           </Grid>
-          <Cross state onClick={locationChange}>교차</Cross>
-          <label htmlFor="endLocation" style={{ border:'1px solid #000'}}>{skiResort}</label>
-          <input type='text' id="endLocation" name='endLocation' value={endLocation} style={{display:"none"}} ref={endLoca}/>
+          <Cross state onClick={locationChange}>
+            교차
+          </Cross>
+          <label htmlFor="endLocation" style={{ border: "1px solid #000" }}>
+            {skiResort}
+          </label>
+          <input
+            type="text"
+            id="endLocation"
+            name="endLocation"
+            value={endLocation}
+            style={{ display: "none" }}
+            ref={endLoca}
+          />
         </Grid>
 
         <Grid is_flex width="300px">
-          <DateSelector _value={date} _selectDate={selectDate}/>
-          <Input type='time' _name='time' _value={time} _onChange={handleChange}/>
+          <DateSelector _value={date} _selectDate={selectDate} />
+          <Input
+            type="time"
+            _name="time"
+            _value={time}
+            _onChange={handleChange}
+          />
         </Grid>
         <Grid margin="10px">
           <Text>제목</Text>
-          <Input type='text' _maxLength='15' _name='title' _value={title} _onChange={handleChange}/>
-          <input type='text' maxLength='15'/>
+          <Input
+            type="text"
+            _maxLength="15"
+            _name="title"
+            _value={title}
+            _onChange={handleChange}
+          />
+          <input type="text" maxLength="15" />
           <Text>가격</Text>
-          <Input _name='price' _value={price} _onChange={handleChange}/>원
+          <Input _name="price" _value={price} _onChange={handleChange} />원
           <Text>모집인원</Text>
-          <Input _name='memberNum' _value={memberNum} _onChange={handleChange}/>
+          <Input
+            _name="memberNum"
+            _value={memberNum}
+            _onChange={handleChange}
+          />
           <Text>주의사항</Text>
-          <Input type='text' _maxLength='15' _name='notice' _value={notice} _onChange={handleChange}/>
+          <Input
+            type="text"
+            _maxLength="15"
+            _name="notice"
+            _value={notice}
+            _onChange={handleChange}
+          />
         </Grid>
         <Grid margin="10px">
-          <Button width="100%" padding="10px" _onClick={is_edit? editCarpool: addCarpool}>
-            {is_edit? '수정': '작성'}
+          <Button
+            width="100%"
+            padding="10px"
+            _onClick={is_edit ? editCarpool : addCarpool}
+          >
+            {is_edit ? "수정" : "작성"}
           </Button>
         </Grid>
       </Grid>
@@ -179,7 +237,6 @@ const Cross = styled.div`
   border: 1px solid #000;
   cursor: pointer;
   position: absolute;
-  
-`
+`;
 
 export default CarpoolWrite;

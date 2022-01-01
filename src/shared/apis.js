@@ -75,8 +75,8 @@ export const apis = {
 
   //카풀
   getCarpool: (skiResort, page) =>
-    api.get(`/board/carpool/${skiResort}`,{
-      params: {page: page, size: 3}
+    api.get(`/board/carpool/${skiResort}`, {
+      params: { page: page, size: 3 },
     }),
 
   addCarpool: (skiResort, carpool) =>
@@ -118,7 +118,7 @@ export const apis = {
   // 자유게시글
   getFreePost: (skiResort, page) =>
     api.get(`/board/freeBoard/${skiResort}`, {
-      params: {page: page, size: 17}
+      params: { page: page, size: 10 },
     }),
 
   writeFreePost: (skiResort, datas) =>

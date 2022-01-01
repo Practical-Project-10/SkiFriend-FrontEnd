@@ -8,8 +8,8 @@ const ADD_CARPOOL = "ADD_CARPOOL";
 const EDIT_CARPOOL = "EDIT_CARPOOL";
 const DELETE_CARPOOL = "DELETE_CARPOOL";
 const GET_MYCARPOOL = "GET_MYCARPOOL";
-const IS_LOADING = 'IS_LOADING';
-const IS_NEXT = 'IS_NEXT'
+const IS_LOADING = "IS_LOADING";
+const IS_NEXT = "IS_NEXT";
 
 // acrtion creators
 const getCarpool = createAction(GET_CARPOOL, (list) => ({ list }));
@@ -22,18 +22,17 @@ const deleteCarpool = createAction(DELETE_CARPOOL, (postId) => ({ postId }));
 const getMyCarpool = createAction(GET_MYCARPOOL, (myCarpools) => ({
   myCarpools,
 }));
-const isLoading = createAction(IS_LOADING, (state) => ({state}));
-const isNext = createAction(IS_NEXT, (state) => ({state}));
+const isLoading = createAction(IS_LOADING, (state) => ({ state }));
+const isNext = createAction(IS_NEXT, (state) => ({ state }));
 
 // middlewares
 const getCarpoolDB = (skiResort, page) => {
   return async function (dispatch) {
-    dispatch(isLoading(true))
+    dispatch(isLoading(true));
 
     try {
       const response = await apis.getCarpool(skiResort, page);
-      console.log(response.data.length)
-      if(response.data.length === 3) {
+      if (response.data.length === 3) {
         dispatch(getCarpool(response.data));
         dispatch(isNext(true));
       } else {
@@ -107,10 +106,10 @@ const completeCarpoolDB = (skiResort, postId) => {
 
 const filterCarpoolDB = (skiResort, datas) => {
   return async function (dispatch, getState, { history }) {
-    console.log(skiResort, datas)
+    console.log(skiResort, datas);
     try {
       const response = await apis.filterCarpool(skiResort, datas);
-      
+
       if (response.data.length === 0) {
         window.alert("필터에 맞는 정보가 없습니다");
         return null;
