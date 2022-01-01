@@ -8,6 +8,8 @@ const ADD_CARPOOL = "ADD_CARPOOL";
 const EDIT_CARPOOL = "EDIT_CARPOOL";
 const DELETE_CARPOOL = "DELETE_CARPOOL";
 const GET_MYCARPOOL = "GET_MYCARPOOL";
+const IS_LOADING = 'IS_LOADING';
+const IS_NEXT = 'IS_NEXT'
 
 // acrtion creators
 const getCarpool = createAction(GET_CARPOOL, (list) => ({ list }));
@@ -20,18 +22,24 @@ const deleteCarpool = createAction(DELETE_CARPOOL, (postId) => ({ postId }));
 const getMyCarpool = createAction(GET_MYCARPOOL, (myCarpools) => ({
   myCarpools,
 }));
+const isLoading = createAction(IS_LOADING, (state) => ({state}));
+const isNext = createAction(IS_NEXT, (state) => ({state}));
 
 // middlewares
-const getCarpoolDB = (skiResort) => {
+const getCarpoolDB = (skiResort, page) => {
   return async function (dispatch) {
-    console.log(skiResort);
-    console.log("성공");
-    try {
-      const response = await apis.getCarpool(skiResort);
-      const carpool_list = response.data;
-      console.log(response.data);
+    dispatch(isLoading(true))
 
-      response && dispatch(getCarpool(carpool_list));
+    try {
+      const response = await apis.getCarpool(skiResort, page);
+      console.log(response.data.length)
+      if(response.data.length === 3) {
+        dispatch(getCarpool(response.data));
+        dispatch(isNext(true));
+      } else {
+        dispatch(getCarpool(response.data));
+        dispatch(isNext(false));
+      }
     } catch (err) {
       console.log(err);
     }
@@ -42,20 +50,8 @@ const addCarpoolDB = (skiResort, carpool) => {
   return async function (dispatch, getState, { history }) {
     console.log(skiResort, carpool);
 
-    const carpool_form = {
-      carpoolType: carpool.carpoolType,
-      startLocation: carpool.startLocation,
-      endLocation: carpool.endLocation,
-      date: carpool.date,
-      time: carpool.time,
-      title: carpool.title,
-      price: carpool.price,
-      memberNum: carpool.memberNum,
-      notice: carpool.notice,
-    };
-
     try {
-      const response = await apis.addCarpool(skiResort, carpool_form);
+      const response = await apis.addCarpool(skiResort, carpool);
       console.log(response.data);
 
       response && history.push(`/carpool/${skiResort}`);
@@ -70,20 +66,8 @@ const editCarpoolDB = (postId, carpool) => {
   return async function (dispatch, getState, { history }) {
     console.log(postId, carpool);
 
-    const carpool_form = {
-      carpoolType: carpool.carpoolType,
-      startLocation: carpool.startLocation,
-      endLocation: carpool.endLocation,
-      date: carpool.date,
-      time: carpool.time,
-      title: carpool.title,
-      price: carpool.price,
-      memberNum: carpool.memberNum,
-      notice: carpool.notice,
-    };
-
     try {
-      const response = await apis.editCarpool(postId, carpool_form);
+      const response = await apis.editCarpool(postId, carpool);
 
       response && history.goBack();
       dispatch(editCarpool(response.data));
@@ -128,7 +112,8 @@ const filterCarpoolDB = (skiResort, datas) => {
       console.log(response.data);
       if (response.data.content.length === 0) {
         window.alert("필터에 맞는 정보가 없습니다");
-        history.push(`/carpool/${skiResort}`);
+        // history.push(`/carpool/${skiResort}`);
+        return null;
       } else {
         dispatch(getCarpool(response.data.content));
         history.push(`/filter/${skiResort}`);
@@ -156,6 +141,9 @@ const getMyCarpoolDB = () => {
 const initialState = {
   list: [],
   myList: [],
+  page: 1,
+  is_loading: false,
+  is_next: false,
 };
 
 // reducer
@@ -164,7 +152,9 @@ export default handleActions(
     [GET_CARPOOL]: (state, action) =>
       produce(state, (draft) => {
         console.log(action.payload.list);
-        draft.list = action.payload.list;
+        draft.loading = false;
+        draft.page += 1;
+        draft.list.push(...action.payload.list);
       }),
 
     [ADD_CARPOOL]: (state, action) =>
@@ -178,7 +168,6 @@ export default handleActions(
         const idx = draft.list.findIndex(
           (l) => l.postId === action.payload.postId
         );
-        console.log(idx);
 
         draft.list[idx] = { ...draft.list[idx], ...action.payload.carpool };
       }),
@@ -195,6 +184,16 @@ export default handleActions(
     [GET_MYCARPOOL]: (state, action) =>
       produce(state, (draft) => {
         draft.myList = action.payload.myCarpools;
+      }),
+
+    [IS_LOADING]: (state, action) =>
+      produce(state, (draft) => {
+        draft.is_loading = action.payload.state;
+      }),
+
+    [IS_NEXT]: (state, action) =>
+      produce(state, (draft) => {
+        draft.is_next = action.payload.state;
       }),
   },
   initialState

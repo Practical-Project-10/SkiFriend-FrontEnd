@@ -114,7 +114,7 @@ const CarpoolFilter = ({ history }) => {
       <Grid is_flex justify="center" direction={state ? "row-reverse" : ""}>
         <select
           name={state ? "endLocation" : "startLocation"}
-          value={datas.startLocation}
+          value={state? datas.endLocation: datas.startLocation}
           ref={departureLoca}
           onChange={valueChange}
         >

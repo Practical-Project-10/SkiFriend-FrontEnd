@@ -15,11 +15,17 @@ const FilterList = (props, { location }) => {
   const history = props.history;
   const is_profile = localStorage.getItem("is_profile");
   console.log(is_profile);
-  const carpool_list = useSelector((state) => state.carpool.filter);
+  const carpool_list = useSelector((state) => state.carpool.list);
   console.log(carpool_list);
 
   const skiResort = props.match.params.skiresort;
 
+  React.useEffect(() => {
+    if (carpool_list.length === 0) {
+      history.push(`/carpool/${skiResort}`);
+    }
+  }, []);
+  
   const induceProfile = () => {
     if (!is_profile) {
       window.alert("프로필 작성 후 이용할 수 있는 서비스 입니다.");
@@ -28,11 +34,6 @@ const FilterList = (props, { location }) => {
     history.push(`/carpoolwrite/${skiResort}`);
   };
 
-  React.useEffect(() => {
-    if (carpool_list.length === 0) {
-      history.push(`/carpool/${skiResort}`);
-    }
-  }, []);
 
   return (
     <Grid is_flex align="center" direction="column">
