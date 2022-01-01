@@ -76,8 +76,8 @@ export const apis = {
 
   //카풀
   getCarpool: (skiResort, page) =>
-    api.get(`/board/carpool/${skiResort}`,{
-      params: {page: page, size: 3}
+    api.get(`/board/carpool/${skiResort}`, {
+      params: { page: page, size: 3 },
     }),
 
   addCarpool: (skiResort, carpool) =>

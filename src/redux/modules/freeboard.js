@@ -6,9 +6,6 @@ import produce from "immer";
 const initialState = {
   list: [],
   detail: [],
-  page: 1,
-  is_loading: false,
-  is_next: false,
 };
 
 // action
@@ -141,6 +138,7 @@ export default handleActions(
     [LOAD]: (state, action) =>
       produce(state, (draft) => {
         // draft.page += 1
+
         draft.list.push(...action.payload.postList);
 
         draft.list = draft.list.reduce((prev, now) => {

@@ -8,12 +8,11 @@ import { Grid, Text } from "../elements/index";
 import Header from "../components/Header";
 import CarpoolMenuBar from "../components/CarpoolMenuBar";
 import FloatButton from "../components/FloatButton";
-import InfinityScroll from "../components/InfinityScroll";
 
 import { AiOutlineHeart } from "react-icons/ai";
 import { BsChat } from "react-icons/bs";
-import Pagination from "@mui/material/Pagination";
-import Stack from "@mui/material/Stack";
+// import Pagination from "@mui/material/Pagination";
+// import Stack from "@mui/material/Stack";
 
 const FreeBoardList = () => {
   const params = useParams();
@@ -93,11 +92,11 @@ const FreeBoardList = () => {
         {/* </InfinityScroll> */}
       </Grid>
 
-      <Grid >
+      {/* <Grid>
         <Stack spacing={2}>
           <Pagination count={5} />
         </Stack>
-      </Grid>
+      </Grid> */}
 
       <Grid _onClick={moveWritePage}>
         <FloatButton />
