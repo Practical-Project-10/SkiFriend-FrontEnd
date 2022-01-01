@@ -1,7 +1,5 @@
 import React from "react";
-
-import { useDispatch, useSelector } from "react-redux";
-import { carpoolActions } from "../redux/modules/carpool";
+import { useSelector } from "react-redux";
 
 import CarpoolMenuBar from "../components/CarpoolMenuBar";
 import CarpoolControl from "../components/CarpoolControl";
@@ -9,17 +7,17 @@ import Card from "../components/Card";
 import FloatButton from "../components/FloatButton";
 
 import "../elements/styles.css";
-import { Grid, Button } from "../elements/index";
+import { Grid } from "../elements/index";
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
 
 const FilterList = (props, { location }) => {
   const history = props.history;
-  const dispatch = useDispatch();
   const is_profile = localStorage.getItem("is_profile");
   console.log(is_profile);
   const carpool_list = useSelector((state) => state.carpool.filter);
   console.log(carpool_list);
+
   const skiResort = props.match.params.skiresort;
 
   const induceProfile = () => {
@@ -29,6 +27,12 @@ const FilterList = (props, { location }) => {
     }
     history.push(`/carpoolwrite/${skiResort}`);
   };
+
+  React.useEffect(() => {
+    if (carpool_list.length === 0) {
+      history.push(`/carpool/${skiResort}`);
+    }
+  }, []);
 
   return (
     <Grid is_flex align="center" direction="column">
