@@ -19,7 +19,11 @@ const FreeBoardList = () => {
   const skiresort = params.skiresort;
   const dispatch = useDispatch();
   const boardList = useSelector((state) => state.freeboard.list);
+  // const page = useSelector((state) => state.carpool.page);
+  // const is_loading = useSelector((state) => state.freeboard.is_loading);
+  console.log(boardList);
   const is_login = localStorage.getItem("nickname");
+
 
   // 게시글 작성 페이지 이동 판단
   const moveWritePage = () => {
@@ -39,7 +43,7 @@ const FreeBoardList = () => {
 
   React.useEffect(() => {
     if (boardList.length === 0) {
-      dispatch(boardActions.loadBoardDB(skiresort));
+      dispatch(boardActions.loadBoardDB(skiresort));//page
     }
   }, []);
 
@@ -52,33 +56,40 @@ const FreeBoardList = () => {
       <CarpoolMenuBar />
       <Grid padding="20px" height="384px" overflow="scroll">
         <Text>전체</Text>
-        {boardList.map((post) => {
-          return (
-            <Grid is_flex justify="space-between" key={post.postId}>
-              <Grid is_flex>
-                <Text margin="0 10px 0 0">{post.nickname}</Text>
-                <Text
-                  margin="0 10px 0 0"
-                  cursor="pointer"
-                  _onClick={() => {
-                    history.push(
-                      `/freeboarddetail/${skiresort}/${post.postId}`
-                    );
-                  }}
-                >
-                  {post.title}
-                </Text>
+        {/* <InfinityScroll
+          callNext={() => {
+            dispatch(boardActions.loadBoardDB(skiresort, page));
+          }}
+          is_loading={is_loading}
+        > */}
+          {boardList.map((post) => {
+            return (
+              <Grid is_flex justify="space-between" key={post.postId}>
+                <Grid is_flex>
+                  <Text margin="0 10px 0 0">{post.nickname}</Text>
+                  <Text
+                    margin="0 10px 0 0"
+                    cursor="pointer"
+                    _onClick={() => {
+                      history.push(
+                        `/freeboarddetail/${skiresort}/${post.postId}`
+                      );
+                    }}
+                  >
+                    {post.title}
+                  </Text>
+                </Grid>
+                <Grid is_flex>
+                  <AiOutlineHeart size="17" />
+                  <Text margin="0 5px 0 0">{post.likeCnt}</Text>
+                  <BsChat size="15" />
+                  <Text margin="0 5px 0 0">{post.commentCnt}</Text>
+                  <Text>{post.createdAt}</Text>
+                </Grid>
               </Grid>
-              <Grid is_flex>
-                <AiOutlineHeart size="17" />
-                <Text margin="0 5px 0 0">{post.likeCnt}</Text>
-                <BsChat size="15" />
-                <Text margin="0 5px 0 0">{post.commentCnt}</Text>
-                <Text>{post.createdAt}</Text>
-              </Grid>
-            </Grid>
-          );
-        })}
+            );
+          })}
+        {/* </InfinityScroll> */}
       </Grid>
 
       {/* <Grid>
