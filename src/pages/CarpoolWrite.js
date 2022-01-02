@@ -5,7 +5,6 @@ import { carpoolActions } from "../redux/modules/carpool";
 
 import styled from "styled-components";
 import { Grid, Text, Button, Input } from "../elements/index";
-import "../elements/styles.css";
 
 import DateSelector from "../components/DateSelector";
 import InduceProfile from "../components/InduceProfile";
