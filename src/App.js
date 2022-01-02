@@ -30,7 +30,7 @@ function App() {
     <React.Fragment>
       {/* <Container> */}
       <GlobalStyleds />
-      <Grid mainFrame>
+      <Grid mainFrame >
         {/* <Header/> */}
         <Route exact path="/" component={Home}></Route>
         <Route path="/phoneauth" component={PhoneAuth}></Route>

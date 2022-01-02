@@ -20,6 +20,7 @@ const Button = (props) => {
     floatBtn,
     placeBtn,
     normalBtn,
+    className,
   } = props;
 
   const styles = {
@@ -62,10 +63,17 @@ const Button = (props) => {
       </React.Fragment>
     );
   }
+  if (className === "bigBtn") {
+    return (
+      <React.Fragment>
+        <BigBtn onClick={_onClick}>{text ? text : children}</BigBtn>
+      </React.Fragment>
+    );
+  }
 
   return (
     <React.Fragment>
-      <ElButton {...styles} onClick={_onClick} name={_name} >
+      <ElButton {...styles} onClick={_onClick} name={_name}>
         {text ? text : children}
       </ElButton>
     </React.Fragment>
@@ -87,6 +95,14 @@ const ElButton = styled.button`
   border: ${(props) => props.border};
   box-sizing: border-box;
   ${(props) => (props.className ? `className: ${props.className}` : "")};
+  cursor: pointer;
+`;
+
+const BigBtn = styled.button`
+  width: 100%;
+  padding: ${(props) => props.padding};
+  margin: ${(props) => props.margin};
+  background-color: ${(props) => props.bgColor};
   cursor: pointer;
 `;
 

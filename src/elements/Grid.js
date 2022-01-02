@@ -152,7 +152,7 @@ const GridBox = styled.div`
 
 const MainFrame = styled.div`
   max-width: 412px;
-  min-height: 100vh;
+  max-height: 915px;
   padding: 42px 16px 48px;
   border: 1px solid #000;
   box-sizing: border-box;
