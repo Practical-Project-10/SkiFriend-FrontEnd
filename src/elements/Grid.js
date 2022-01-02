@@ -155,7 +155,7 @@ const MainFrame = styled.div`
   width: 100%;
   height: 100%;
   max-width: 412px;
-  min-height: 100vh;
+  max-height: 915px;
   padding: 42px 16px 48px;
   border: 1px solid #000;
   box-sizing: border-box;

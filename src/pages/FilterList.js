@@ -6,7 +6,6 @@ import CarpoolControl from "../components/CarpoolControl";
 import Card from "../components/Card";
 import FloatButton from "../components/FloatButton";
 
-import "../elements/styles.css";
 import { Grid } from "../elements/index";
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";

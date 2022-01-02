@@ -27,7 +27,7 @@ function App() {
   return (
     <React.Fragment>
       <GlobalStyleds />
-      <Grid mainFrame>
+      <Grid mainFrame >
         {/* <Header/> */}
         <Route exact path="/" component={Home}></Route>
         <Route path="/phoneauth" component={PhoneAuth}></Route>
