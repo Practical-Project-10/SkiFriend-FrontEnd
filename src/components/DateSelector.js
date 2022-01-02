@@ -3,7 +3,6 @@ import DatePicker from "react-datepicker";
 import { ko } from "date-fns/esm/locale";
 
 import { Grid } from "../elements/index";
-import "../elements/styles.css";
 import "react-datepicker/dist/react-datepicker.css";
 
 const DateSelector = (props) => {

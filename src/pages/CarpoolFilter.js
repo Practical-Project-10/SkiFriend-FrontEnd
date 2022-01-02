@@ -12,7 +12,6 @@ import { GrFormPrevious } from "react-icons/gr";
 import { BsArrowLeftRight } from "react-icons/bs";
 import { BsArrowRight } from "react-icons/bs";
 
-import "../elements/styles.css";
 
 const CarpoolFilter = ({ history }) => {
   const dispatch = useDispatch();

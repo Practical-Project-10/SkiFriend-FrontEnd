@@ -5,7 +5,6 @@ import { carpoolActions } from "../redux/modules/carpool";
 
 import styled from "styled-components";
 import { Grid, Text, Button, Input } from "../elements/index";
-import "../elements/styles.css";
 
 import DateSelector from "../components/DateSelector";
 import InduceProfile from "../components/InduceProfile";
@@ -219,8 +218,10 @@ const CarpoolWrite = (props) => {
         </Grid>
         <Grid margin="10px">
           <Button
-            width="100%"
-            padding="10px"
+          bgColor='#000'
+          color='red'
+            // width="100%"
+            // padding="10px"
             _onClick={is_edit ? editCarpool : addCarpool}
           >
             {is_edit ? "수정" : "작성"}
