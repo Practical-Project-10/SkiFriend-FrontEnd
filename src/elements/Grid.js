@@ -58,7 +58,6 @@ const Grid = (props) => {
     borderB,
     wrap,
     cursor,
-    mainFrame,
   };
 
   if (mainFrame) {
@@ -152,13 +151,21 @@ const GridBox = styled.div`
 `;
 
 const MainFrame = styled.div`
-  width: 100%;
-  height: 100%;
   max-width: 412px;
   max-height: 915px;
   padding: 42px 16px 48px;
   border: 1px solid #000;
   box-sizing: border-box;
+  /* position: relative;
+  width: 100%;
+  max-width: 412px;
+  min-height: 100vh;
+  padding: 42px 16px 48px;
+  border: 1px solid red;
+  height: 100%;
+  z-index: 1;
+  overflow: scroll;
+  background-color: #fff; */
 `;
 
 const Navbar = styled.div`

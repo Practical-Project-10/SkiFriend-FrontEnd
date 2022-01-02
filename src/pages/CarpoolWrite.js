@@ -218,8 +218,10 @@ const CarpoolWrite = (props) => {
         </Grid>
         <Grid margin="10px">
           <Button
-            width="100%"
-            padding="10px"
+          bgColor='#000'
+          color='red'
+            // width="100%"
+            // padding="10px"
             _onClick={is_edit ? editCarpool : addCarpool}
           >
             {is_edit ? "수정" : "작성"}

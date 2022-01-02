@@ -23,9 +23,12 @@ import ChatList from "./pages/ChatList";
 import Navbar from "./components/Navbar";
 import ChatRoom from "./pages/ChatRoom";
 
+import styled from "styled-components";
+
 function App() {
   return (
     <React.Fragment>
+      {/* <Container> */}
       <GlobalStyleds />
       <Grid mainFrame >
         {/* <Header/> */}
@@ -68,8 +71,20 @@ function App() {
         <Route path="/chatlist" component={ChatList} />
         <Navbar />
       </Grid>
+      {/* </Container> */}
     </React.Fragment>
   );
 }
+
+// const Container = styled.div`
+//   display: flex;
+//   flex-direction: column;
+//   justify-content: flex-start;
+//   align-items: center;
+//   height: 100%;
+//   box-sizing: border-box;
+//   background-color: #f7fbfe;
+//   overflow: hidden;
+// `
 
 export default App;
