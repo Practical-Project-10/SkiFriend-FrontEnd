@@ -10,6 +10,7 @@ import Carpool from "./modules/carpool";
 import Profile from "./modules/profile";
 import Image from "./modules/image";
 import Main from "./modules/main";
+import Chat from "./modules/chat";
 
 //---- history----
 export const history = createBrowserHistory();
@@ -22,6 +23,7 @@ const rootReducer = combineReducers({
   profile: Profile,
   image: Image,
   main: Main,
+  chat: Chat,
   router: connectRouter(history),
 });
 

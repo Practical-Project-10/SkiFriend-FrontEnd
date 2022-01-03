@@ -16,8 +16,8 @@ import Stack from "@mui/material/Stack";
 const Carpool = (props, { location }) => {
   const history = props.history;
   const dispatch = useDispatch();
-
-  const nickname = localStorage.getItem('nickname');
+  console.log(props);
+  const nickname = localStorage.getItem("nickname");
   const is_mine = props.nickname === nickname;
   const is_profile = localStorage.getItem("is_profile");
   const carpool_list = useSelector((state) => state.carpool.list);
@@ -40,7 +40,7 @@ const Carpool = (props, { location }) => {
   };
 
   return (
-    <Grid is_flex align="center" direction="column" heigth='100px'>
+    <Grid is_flex align="center" direction="column" heigth="100px">
       <Grid bg="#C4C4C4"></Grid>
 
       {/* 카풀/게시글 네비게이션 바 */}
@@ -50,19 +50,20 @@ const Carpool = (props, { location }) => {
 
       <InfinityScroll
         callNext={() => {
-          dispatch(carpoolActions.getCarpoolDB(skiResort, page))
+          dispatch(carpoolActions.getCarpoolDB(skiResort, page));
         }}
         is_loading={is_loading}
       >
         {carpool_list.map((l) => {
           return (
             <Grid key={l.postId} width="100%">
-              {is_mine
-                ? <Card {...l} skiResort={skiResort} is_mine />
-                : <Card {...l} skiResort={skiResort} />
-              }
+              {is_mine ? (
+                <Card {...l} skiResort={skiResort} is_mine />
+              ) : (
+                <Card {...l} skiResort={skiResort} />
+              )}
             </Grid>
-          )
+          );
         })}
       </InfinityScroll>
 

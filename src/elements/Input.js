@@ -4,29 +4,62 @@ import styled from "styled-components";
 import { Text, Grid, Button } from "./index";
 
 const Input = (props) => {
-  const { label, placeholder, _onChange, type, multiLine, value, writePage, dupButton } = props;
+  const {
+    label,
+    placeholder,
+    _onChange,
+    type,
+    multiLine,
+    value,
+    writePage,
+    dupButton,
+    _value,
+    _onBlur,
+    _name,
+  } = props;
 
   const style = {
     writePage,
   };
 
-  if(dupButton) {
-    return(
+  if (dupButton) {
+    return (
       <Grid>
-        {label && <Text size='14px' margin="0 0 7px 0">{label}</Text>}
-        <Grid is_flex justify='space-between'>
-          <DupButton {...style} type={type} placeholder={placeholder} onChange={_onChange} />
-          <Button width='27%'>중복확인</Button>
+        {label && (
+          <Text size="14px" margin="0 0 7px 0">
+            {label}
+          </Text>
+        )}
+        <Grid is_flex justify="space-between">
+          <DupButton
+            {...style}
+            type={type}
+            placeholder={placeholder}
+            onChange={_onChange}
+          />
+          <Button width="27%">중복확인</Button>
         </Grid>
       </Grid>
     );
-  };
-  
+  }
+
   return (
     <React.Fragment>
       <Grid>
-        {label && <Text size='14px' margin="0 0 7px 0">{label}</Text>}
-        <ElInput {...style} type={type} placeholder={placeholder} onChange={_onChange} />
+        {label && (
+          <Text size="14px" margin="0 0 7px 0">
+            {label}
+          </Text>
+        )}
+        <ElInput
+          {...style}
+          type={type}
+          placeholder={placeholder}
+          onChange={_onChange}
+          value={_value}
+          onBlur={_onBlur}
+          name={_name}
+        />
       </Grid>
     </React.Fragment>
   );
@@ -45,8 +78,8 @@ const ElInput = styled.input`
   border: 1px solid #212121;
   width: 100%;
   padding: 12px 8px;
-  margin: ${props => props.writePage? '0 0 49px 0': '0 0 64px 0'};
-  border: 1px solid #6195CF;
+  margin: ${(props) => (props.writePage ? "0 0 49px 0" : "0 0 64px 0")};
+  border: 1px solid #6195cf;
   border-radius: 6px;
   box-sizing: border-box;
 `;
@@ -55,16 +88,13 @@ const DupButton = styled.input`
   border: 1px solid #212121;
   width: 70%;
   padding: 12px 8px;
-  margin: ${props => props.writePage? '0 0 51px 0': '0 11px 64px 0'};
-  border: 1px solid #6195CF;
+  margin: ${(props) => (props.writePage ? "0 0 51px 0" : "0 11px 64px 0")};
+  border: 1px solid #6195cf;
   border-radius: 6px;
   box-sizing: border-box;
 `;
 
 export default Input;
-
-
-
 
 // import React from "react";
 // import styled from "styled-components";
@@ -92,7 +122,7 @@ export default Input;
 //     _disabled,
 //     _maxLength,
 //   } = props;
-  
+
 //   const style = {
 //     inline,
 //   };
@@ -170,15 +200,12 @@ export default Input;
 // };
 
 // Input.defaultProps = {
-  
+
 // }
 
 // const ElInput = styled.input`
 
 // `
-
-
-
 
 // // const ElInput = styled.input`
 // //   width: ${(props) => props.width};

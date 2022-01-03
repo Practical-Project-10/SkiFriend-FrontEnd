@@ -40,12 +40,29 @@ const PlaceInfo = () => {
     "https://www.konjiamresort.co.kr/ski/sloPe.dev",
   ];
 
-  const fare_info = [];
+  const fare_info = [
+    "https://www.high1.com/ski/contents.do?key=750",
+    "https://www.yongpyong.co.kr/kor/skiNboard/utilizationFee/rentCharge.do",
+    "https://www.sonohotelsresorts.com/daemyung.vp.skiworld.04_04_01.ds/dmparse.dm",
+    "https://phoenixhnr.co.kr/static/pyeongchang/guide/price/snowpark",
+    "https://www.wellihillipark.com/home/guide/pay/snowpark)",
+    "https://www.konjiamresort.co.kr/funny/useChargeSkiMeTimePass.dev",
+  ];
 
-  const weather_info = [];
+  const weather_info = [
+    "http://www.high1.com/www/contents.do?key=622",
+    "https://www.yongpyong.co.kr/kor/skiNboard/live.do",
+    "https://www.kweather.co.kr/forecast/forecast_sports.html?index=6&area=42720370%7C212&rname=Xff3UAv5Ux72VicBTAj8Uv73ZOYN&idx=ski",
+    "https://phoenixhnr.co.kr/static/pyeongchang/guide/weather/weather1",
+    "https://www.wellihillipark.com/home/guide/weather",
+    "https://www.konjiamresort.co.kr/contact/weather.dev",
+  ];
+
   return (
     <React.Fragment>
-      <Grid header>스키장정보</Grid>
+      <Grid header height>
+        스키장정보
+      </Grid>
       <Grid align="center">
         {/* 하이원 정보 */}
         <Grid id="tabHighOne" _onClick={toggleMenu}>
