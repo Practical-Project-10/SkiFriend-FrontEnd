@@ -43,8 +43,8 @@ const Navbar = ({ location }) => {
               <AiOutlineInfoCircle size="25" />
             )}
           </NavLink>
-          <NavLink to="/chatroom" className="navLink">
-            {location.pathname === "/chatroom" ? (
+          <NavLink to="/chatlist" className="navLink">
+            {location.pathname === "/chatlist" ? (
               <BsChatFill size="25" />
             ) : (
               <BsChat size="25" />

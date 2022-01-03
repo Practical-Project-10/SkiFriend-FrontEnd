@@ -68,8 +68,8 @@ function App() {
           path="/profilewrite/:username/pwdchange"
           component={PwdChange}
         ></Route>
-        <Route path="/chatroom" component={ChatRoom} />
         <Route path="/chatlist" component={ChatList} />
+        <Route path="/chatroom/:roomName" component={ChatRoom} />
         {/* <Navbar /> */}
       </Grid>
     </React.Fragment>

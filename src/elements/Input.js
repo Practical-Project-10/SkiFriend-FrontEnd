@@ -18,8 +18,8 @@ const Input = forwardRef((props, ref) => {
         <Button _name={_name} width='27%' bg='#B5CCE5' color='#474D56' padding='13px 0px' _onClick={_onClick}>{buttonText}</Button>
       </React.Fragment>
     );
-  };
-  
+  }
+
   return (
     <React.Fragment>
       {label && <Text size='14px' margin="0 0 7px 0">{label}</Text>}
@@ -59,9 +59,6 @@ const DupButton = styled.input`
 
 export default Input;
 
-
-
-
 // import React from "react";
 // import styled from "styled-components";
 // import Text from "./Text";
@@ -88,7 +85,7 @@ export default Input;
 //     _disabled,
 //     _maxLength,
 //   } = props;
-  
+
 //   const style = {
 //     inline,
 //   };
@@ -166,15 +163,12 @@ export default Input;
 // };
 
 // Input.defaultProps = {
-  
+
 // }
 
 // const ElInput = styled.input`
 
 // `
-
-
-
 
 // // const ElInput = styled.input`
 // //   width: ${(props) => props.width};
