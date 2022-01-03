@@ -1,5 +1,4 @@
 import axios from "axios";
-import { getCookie } from "./cookie";
 
 const api = axios.create({
   baseURL: "http://13.125.249.172/",
@@ -116,6 +115,9 @@ export const apis = {
   filterCarpool: (skiResort, datas) =>
     api.post(`/board/carpool/${skiResort}/category`, datas),
 
+  // 메인페이지 HOT게시물
+  hotPost: api.get("/main"),
+
   // 자유게시글
   getFreePost: (skiResort, page) =>
     api.get(`/board/freeBoard/${skiResort}?size=10&page=1`, {
@@ -153,6 +155,12 @@ export const apis = {
   //좋아요
   changeLike: (postId) => api.post(`/board/freeBoard/${postId}/likes`, {}),
 
-  // 메인페이지 HOT게시물
-  hotPost: api.get("/main"),
+  //채팅
+  chatRoom: (postId) => api.post(`/chat/room/${postId}`, {}),
+
+  chatRoomList: () => api.get(`/chat/rooms`, {}),
+
+  chatMSG: (roomId) => api.get(`/chat/message/${roomId}`),
+
+  chatShowProfile: (longRoomId) => api.get(`/user/introduction/${longRoomId}`),
 };

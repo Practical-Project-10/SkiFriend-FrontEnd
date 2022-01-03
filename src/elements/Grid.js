@@ -178,10 +178,9 @@ const Navbar = styled.div`
 
 const Header = styled.div`
   width: 100%;
-  height: 50px;
+  height: 80px;
+  background: #d9e3ee;
   text-align: center;
-  padding-top: 10px;
-  background: orange;
 `;
 
 const Menubar = styled.div`

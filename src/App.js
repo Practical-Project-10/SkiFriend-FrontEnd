@@ -30,7 +30,7 @@ function App() {
     <React.Fragment>
       {/* <Container> */}
       <GlobalStyleds />
-      <Grid mainFrame >
+      <Grid mainFrame>
         {/* <Header/> */}
         <Route exact path="/" component={Home}></Route>
         <Route path="/phoneauth" component={PhoneAuth}></Route>
@@ -67,8 +67,8 @@ function App() {
           path="/profilewrite/:username/pwdchange"
           component={PwdChange}
         ></Route>
-        <Route path="/chatroom" component={ChatRoom} />
         <Route path="/chatlist" component={ChatList} />
+        <Route path="/chatroom/:roomName" component={ChatRoom} />
         <Navbar />
       </Grid>
       {/* </Container> */}
