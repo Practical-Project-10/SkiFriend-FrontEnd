@@ -30,11 +30,13 @@ const Grid = (props) => {
     navbar,
     header,
     menubar,
-    skiIcon,
     link,
     href,
     target,
     id,
+    src,
+    gap,
+    phoneSize,
   } = props;
 
   const styles = {
@@ -58,10 +60,13 @@ const Grid = (props) => {
     borderB,
     wrap,
     cursor,
+    src,
+    gap,
+    phoneSize,
   };
 
   if (mainFrame) {
-    return <MainFrame>{children}</MainFrame>;
+    return <MainFrame src={src}>{children}</MainFrame>;
   }
   if (header) {
     return <Header {...styles}>{children}</Header>;
@@ -72,13 +77,7 @@ const Grid = (props) => {
   if (menubar) {
     return <Menubar {...styles}>{children}</Menubar>;
   }
-  if (skiIcon) {
-    return (
-      <SkiIcon {...styles} onClick={_onClick}>
-        {children}
-      </SkiIcon>
-    );
-  }
+
   if (className === "modalBackground") {
     return (
       <ModalBackground {...styles} onClick={_onClick}>
@@ -131,41 +130,41 @@ const GridBox = styled.div`
   display: ${(props) => props.display};
   padding: ${(props) => props.padding};
   margin: ${(props) => props.margin};
+  background: ${(props) => `url(${props.src})`} no-repeat;
+  background-size: cover;
   background-color: ${(props) => props.bg};
   position: ${(props) => props.position};
   border: ${(props) => props.border};
   border-bottom: ${(props) => props.borderB};
   border-radius: ${(props) => props.radius};
+  box-sizing: border-box;
   overflow: ${(props) => props.overflow};
   text-align: ${(props) => props.align};
-  flex-wrap: ${(props) => props.wrap};
+  flex-wrap: ${(props) => props.wrap? 'wrap': ''};
   flex-direction: ${(props) => props.direction};
   cursor: ${(props) => props.cursor};
   box-sizing: border-box;
-  ${(props) => (props.is_flex ? "display: flex; align-items: center;" : "")}
+  ${(props) => (props.is_flex ? "display: flex; align-items: center; justify-content: center;" : "")}
   ${(props) => (props.className ? `className: ${props.className};` : "")}
   &::-webkit-scrollbar {
     display: none;
   }
   border: 1px solid black;
+  gap: ${(props) => props.gap};
+  ${(props) => (props.phoneSize ? "padding: 0 16px 0;" : "")}
 `;
 
 const MainFrame = styled.div`
+  position: relative;
   max-width: 412px;
-  max-height: 915px;
-  padding: 42px 16px 48px;
+  min-height: 825px;
+  height: 825px;
   border: 1px solid #000;
   box-sizing: border-box;
-  /* position: relative;
-  width: 100%;
-  max-width: 412px;
-  min-height: 100vh;
-  padding: 42px 16px 48px;
-  border: 1px solid red;
-  height: 100%;
-  z-index: 1;
   overflow: scroll;
-  background-color: #fff; */
+  background: #D9E3EE;
+  /* background: ${(props) => `url(${props.src})`} no-repeat;
+  background-size: cover; */
 `;
 
 const Navbar = styled.div`
@@ -190,14 +189,6 @@ const Menubar = styled.div`
   border-bottom: 2px solid black;
   justify-content: space-around;
   ${(props) => (props.is_flex ? "display: flex; align-items: center;" : "")};
-`;
-
-const SkiIcon = styled.div`
-  width: 33%;
-  height: 70px;
-  display: flex;
-  flex-direction: column;
-  background: red;
 `;
 
 const ModalBackground = styled.div`

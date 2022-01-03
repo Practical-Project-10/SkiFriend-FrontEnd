@@ -1,11 +1,13 @@
 import React from "react";
 
 import { Grid, Text, Input, Button } from "../elements/index";
+import background from '../assets/login/login.png';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { userActions } from '../redux/modules/user';
 
 const Login = (props) => {
+  const history = props.history;
   const dispatch = useDispatch();
   const user = useSelector(state => state.user.user);
   console.log(user);
@@ -30,33 +32,21 @@ const Login = (props) => {
   console.log(localStorage.getItem('user'));
 
   return (
-    <React.Fragment>
-      <Grid width="70%" margin="auto" align="center">
-        <Grid margin="10px 0">
-          <Text size="20px" weight="bold">
-            로그인
-          </Text>
-        </Grid>
-        <Grid>
-          <input type='text' ref={ldInput}/>
-          <input type='password' ref={pwdInput}/>
-          {/* <Input label="로그인" type="text"/>
-          <Input label="비밀번호" type="password"/> */}
-        </Grid>
-        <Grid width="130px" margin="15px auto">
-          <Button _onClick={join}>로그인</Button>
-          <Button>회원가입</Button>
-        </Grid>
-        <Grid width="160px" margin="15px auto">
-          <Button width="160px" margin="5px auto" padding="5px 0">
-            네이버 로그인
-          </Button>
-          <Button width="160px" margin="5px auto" padding="5px 0">
-            카카오 로그인
-          </Button>
-        </Grid>
+    <Grid phoneSize>
+      <Grid height='73px' margin='89px 0 108px'>
+        로고
       </Grid>
-    </React.Fragment>
+
+      <Grid>
+        <Input type='text' ref={ldInput} label='아이디'/>
+        <Input type='password' ref={pwdInput} label='비밀번호'/>
+      </Grid>
+
+      <Grid margin="127px 0 0">
+        <Button _onClick={join} bg='#6195CF'>회원가입</Button>
+        <Button _onClick={() => history.push('/phoneauth')} text='회원가입'>로그인</Button>
+      </Grid>
+    </Grid>
   );
 };
 
