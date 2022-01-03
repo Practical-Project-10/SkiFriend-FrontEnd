@@ -9,7 +9,7 @@ const Text = (props) => {
     margin,
     marginB,
     align,
-    weight,
+    bold,
     link,
     padding,
     _onClick,
@@ -22,7 +22,7 @@ const Text = (props) => {
     size,
     margin,
     marginB,
-    weight,
+    bold,
     align,
     link,
     padding,
@@ -46,13 +46,14 @@ const Text = (props) => {
 const P = styled.p`
   color: ${(props) => props.color};
   font-size: ${(props) => props.size};
-  font-weight: ${(props) => props.weight};
+  font-weight: ${(props) => props.bold? 700: 400};
   margin: ${(props) => props.margin};
   margin-bottom: ${(props) => props.marginB};
   padding: ${(props) => props.padding};
   text-align: ${(props) => props.align};
   cursor: ${(props) => props.cursor};
-  ${(props) => (props.className ? `className: ${props.className};` : "")}
+  ${(props) => (props.className ? `className: ${props.className};` : "")};
+  line-height: 17px;
 `;
 
 Text.defaultProps = {

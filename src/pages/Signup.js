@@ -37,23 +37,20 @@ const SignupOne = (props) => {
   const handleBlur = (e) => {
     const { name } = e.target;
 
-    console.log(name);
     if (name === "id") {
       if (!idRegExp.test(id)) {
         console.log("실패");
         setCheckId(false);
         return null;
       } else {
-        console.log("성공");
-        dispatch(userActions.isIdDB(id));
         setCheckId(true);
       };
     };
 
-    if (name === "nickname") {
-      console.log("성공");
-      dispatch(userActions.isNicknameDB(nickname));
-    };
+    // if (name === "nickname") {
+    //   console.log("성공");
+    //   dispatch(userActions.isNicknameDB(nickname));
+    // };
 
     if (name === "pwd") {
       if (!pwdRegExp.test(pwd)) {
@@ -78,6 +75,29 @@ const SignupOne = (props) => {
     };
   };
 
+  const handleClick = (e) => {
+    const {name} = e.target;
+    
+    if(name === 'id') {
+      if(checkId && id !== '') {
+        console.log("성공");
+        dispatch(userActions.isIdDB(id));
+      } else {
+        window.alert('올바른 아이디를 입력해주세요.')
+      }
+    }
+
+    if (name === "nickname") {
+      if(nickname !== '') {
+        console.log("성공");
+        console.log(nickname)
+        dispatch(userActions.isNicknameDB(nickname));
+      } else {
+        window.alert('닉네임을 입력해주세요.')
+      }
+    };
+  }
+
   const join = () => {
     const userInfo = {
       id: id,
@@ -91,45 +111,30 @@ const SignupOne = (props) => {
   };
 
   return (
-    <React.Fragment>
-      <Grid width="70%" margin="auto" align="center">
-        <Grid margin="10px 0">
-          <Text size="20px" weight="bold">
-            회원가입
-          </Text>
+    <Grid phoneSize>
+        <Grid margin='132px 0 145px'>
+          <Input more4 dupButton buttonText='중복확인' _name='id' label='로그인' type='text' placeholder='영소문자, 숫자를 포함한 5자리 이상' _onBlur={handleBlur} _onChange={handleChange} _onClick={handleClick}/>
+          {!checkId &&
+            <Text color='red'>올바른 형식의 아이디가 아닙니다.</Text>
+          }
+          
+          <Input more4 dupButton buttonText='중복확인'  _name='nickname' label='닉네임' type='text' placeholder='1자리 이상' _onBlur={handleBlur} _onChange={handleChange} _onClick={handleClick}/>
+          
+          <Input more4 _name='pwd' _onBlur={handleBlur} _onChange={handleChange} label='비밀번호' type='password'/>
+          {!checkPwd &&
+            <Text color='red'>올바른 형식의 비밀번호가 아닙니다.</Text>
+          }
+
+          <Input more4 _name='rePwd' _onBlur={handleBlur} _onChange={handleChange} label='비밀번호 확인' type='password'/>
+            {!checkRePwd &&
+              <Text color='red'>비밀번호가 일치하지 않습니다.</Text>
+            }
         </Grid>
+          
         <Grid>
-          <Grid>
-            <Grid>
-              <Input signup _name='id' _onBlur={handleBlur} _onChange={handleChange} label='로그인' type='text'/>
-              {!checkId &&
-                <Text color='red'>올바른 형식의 아이디가 아닙니다.</Text>
-              }
-              {/* {is_id && <Text color='red'>이미 사용 중인 아이디 입니다.</Text>} */}
-            </Grid>
-            <Grid className='dup'>
-              <Input signup _name='nickname' _onBlur={handleBlur} _onChange={handleChange} label='닉네임' type='text'/>
-            </Grid>
-            <Grid>
-              <Input signup _name='pwd' _onBlur={handleBlur} _onChange={handleChange} label='비밀번호' type='password'/>
-              {!checkPwd &&
-                <Text color='red'>올바른 형식의 비밀번호가 아닙니다.</Text>
-              }
-            </Grid>
-            <Grid>
-            <Input signup _name='rePwd' _onBlur={handleBlur} _onChange={handleChange} label='비밀번호 확인' type='password'/>
-              {!checkRePwd &&
-                <Text color='red'>비밀번호가 일치하지 않습니다.</Text>
-              }
-            </Grid>
-            
-          </Grid>
-          <Grid>
-            <Button _onClick={join}>가입</Button>
-          </Grid>
+          <Button _onClick={join}>가입</Button>
         </Grid>
-      </Grid>
-    </React.Fragment>
+    </Grid>
   );
 };
 

@@ -17,6 +17,7 @@
     "immer": "^9.0.7",
     "lodash": "^4.17.21",
     "moment": "^2.29.1",
+    "pretendard": "^1.2.1",
     "prop-types": "^15.7.2",
     "react": "^17.0.2",
     "react-datepicker": "3.8.0",

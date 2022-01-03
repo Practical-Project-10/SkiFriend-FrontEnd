@@ -1,7 +1,8 @@
 import React from "react";
-import "../App.css";
 
 import { NavLink, withRouter } from "react-router-dom";
+
+import styled from "styled-components";
 import { Grid, Text } from "../elements/index";
 
 // react-icons
@@ -11,9 +12,22 @@ import { BsChatFill, BsChat } from "react-icons/bs";
 import { AiFillAppstore, AiOutlineAppstore } from "react-icons/ai";
 
 const Navbar = ({ location }) => {
+
+  if(location.pathname === '/login') {
+    return null;
+  }
+
+  if(location.pathname === '/phoneauth') {
+    return null;
+  }
+
+  if(location.pathname === '/signup') {
+    return null;
+  }
+
   return (
     <React.Fragment>
-      <Grid>
+      <FixedNav>
         <Grid is_flex navbar>
           <NavLink to="/" className="navLink">
             {location.pathname === "/" ? (
@@ -50,8 +64,16 @@ const Navbar = ({ location }) => {
           <Text>채팅</Text>
           <Text margin="0 3px 0 0">마이페이지</Text>
         </Grid>
-      </Grid>
+      </FixedNav>
     </React.Fragment>
   );
 };
+
+const FixedNav = styled.div`
+  /* position: absolute;
+  width: 100%;
+  bottom: 0;
+  left: 0; */
+`
+
 export default withRouter(Navbar);

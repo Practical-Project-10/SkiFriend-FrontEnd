@@ -1,6 +1,7 @@
 import React from 'react';
 
 import styled from 'styled-components';
+import {Grid, Button, Input} from '../elements';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { userActions } from '../redux/modules/user';
@@ -17,7 +18,7 @@ const PhoneAuth = (props) => {
 
   const numSend = () => {
     const phoneNum = phoneNumInput.current.value;
-
+    console.log(phoneNum)
     if(!phoneNumExp.test(phoneNum)) {
       console.log('실패');
       return null;
@@ -40,12 +41,15 @@ const PhoneAuth = (props) => {
   }
 
   return(
-    <React.Fragment>
-      <input type='text' ref={phoneNumInput}/>
-      <button onClick={numSend}>인증번호 전송</button>
-      <input type='text' ref={smsNumInput}/>
-      <button onClick={nextStep}>다음</button>
-    </React.Fragment>
+    <Grid phoneSize>
+      <Grid margin='130px 0 341px'>
+        <Input dupButton type='text' ref={phoneNumInput} _onClick={numSend} label='휴대폰 번호' buttonText='인증번호'/>
+        <Input type='text' ref={smsNumInput} _onClick={nextStep} label='인증번호' buttonText='다음'/>
+      </Grid>
+      <Grid>
+        <Button _onClick={nextStep}>다음</Button>
+      </Grid>
+    </Grid> 
   );
 };
 

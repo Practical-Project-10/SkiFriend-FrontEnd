@@ -4,6 +4,7 @@ import GlobalStyleds from "./shared/globalStyles";
 import { Grid } from "./elements/index";
 import { Route } from "react-router-dom";
 //pages import
+import Header from "./components/Header";
 import Home from "./pages/Home";
 import PhoneAuth from "./pages/PhoneAuth";
 import Signup from "./pages/Signup";
@@ -26,12 +27,12 @@ import ChatRoom from "./pages/ChatRoom";
 import styled from "styled-components";
 
 function App() {
+
   return (
     <React.Fragment>
-      {/* <Container> */}
-      <GlobalStyleds />
       <Grid mainFrame>
-        {/* <Header/> */}
+        <GlobalStyleds/>
+        <Header/>
         <Route exact path="/" component={Home}></Route>
         <Route path="/phoneauth" component={PhoneAuth}></Route>
         <Route path="/signup" component={Signup}></Route>
@@ -69,22 +70,10 @@ function App() {
         ></Route>
         <Route path="/chatlist" component={ChatList} />
         <Route path="/chatroom/:roomName" component={ChatRoom} />
-        <Navbar />
+        {/* <Navbar /> */}
       </Grid>
-      {/* </Container> */}
     </React.Fragment>
   );
 }
-
-// const Container = styled.div`
-//   display: flex;
-//   flex-direction: column;
-//   justify-content: flex-start;
-//   align-items: center;
-//   height: 100%;
-//   box-sizing: border-box;
-//   background-color: #f7fbfe;
-//   overflow: hidden;
-// `
 
 export default App;
