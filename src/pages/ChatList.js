@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { chatCreators as chatActions } from "../redux/modules/chat";
 
@@ -8,7 +8,6 @@ import { history } from "../redux/ConfigStore";
 const ChatList = (props) => {
   const dispatch = useDispatch();
   const chatRoomList = useSelector((state) => state.chat.roomList);
-
   const is_login = localStorage.getItem("is_login");
 
   //채팅방 목록으로 나타내기
@@ -21,9 +20,8 @@ const ChatList = (props) => {
   }, []);
 
   //채팅목록에서 클릭한 채팅방 대화내용 가져오기
-  const EnterChatRoom = (roomId) => {
-    history.push(`/chatroom/${roomId}`);
-    dispatch(chatActions.getContentChatDB(roomId));
+  const EnterChatRoom = (roomId, longRoomId) => {
+    history.push(`/chatroom/${roomId}/${longRoomId}`);
   };
 
   return (
@@ -41,7 +39,7 @@ const ChatList = (props) => {
               padding="10px"
               key={list.roomId}
               _onClick={() => {
-                EnterChatRoom(list.roomId);
+                EnterChatRoom(list.roomId, list.longRoomId);
               }}
             >
               <Grid is_flex>
