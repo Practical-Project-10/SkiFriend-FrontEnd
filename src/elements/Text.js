@@ -15,6 +15,7 @@ const Text = (props) => {
     cursor,
     boardlink,
     opacity,
+    line,
   } = props;
 
   const styles = {
@@ -27,6 +28,7 @@ const Text = (props) => {
     padding,
     cursor,
     opacity,
+    line,
   };
 
   if (boardlink) {
@@ -48,11 +50,13 @@ Text.defaultProps = {
   children: null,
   _onClick: () => {},
   size: '14px',
+  color: '#474D56',
 }
 
 const P = styled.p`
   color: ${(props) => props.color};
   font-size: ${(props) => props.size};
+  line-height: ${(props) => props.line};
   font-weight: ${(props) => props.bold? 700: 400};
   margin: ${(props) => props.margin};
   margin-bottom: 0;
