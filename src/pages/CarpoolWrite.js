@@ -7,7 +7,6 @@ import styled from "styled-components";
 import { Grid, Text, Button, Input } from "../elements/index";
 import CarpoolSelect from "../components/CarpoolSelect";
 
-
 const CarpoolWrite = (props) => {
   const dispatch = useDispatch();
   const carpool_list = useSelector((state) => state.carpool.list);
@@ -100,14 +99,19 @@ const CarpoolWrite = (props) => {
 
   return (
     <React.Fragment>
-      <Grid bg='#FFF'>
-        
-        <CarpoolSelect bringForm={bringForm} bringDate={bringDate}/>
+      <Grid bg="#FFF">
+        <CarpoolSelect bringForm={bringForm} bringDate={bringDate} />
 
         {/* <div style={{border: '5px solid #edeeef'}}></div> */}
-        <hr/>
+        <hr />
 
-        <Grid phoneSize margin="50px 0 0" display='flex' direction='column' gap='33px'>
+        <Grid
+          phoneSize
+          margin="50px 0 0"
+          display="flex"
+          direction="column"
+          gap="33px"
+        >
           <Input
             blue
             type="text"
@@ -115,23 +119,25 @@ const CarpoolWrite = (props) => {
             _name="title"
             _value={title}
             _onChange={handleChange}
-            placeholder='제목을 입력해주세요.'
-            padding='19px 8px'
+            placeholder="제목을 입력해주세요."
+            padding="19px 8px"
           />
 
-          <Input 
+          <Input
             blue
             type="number"
-            label='가격' 
-            _name="price" 
-            _value={price} 
-            _onChange={handleChange} 
-            placeholder='숫자만 입력해주세요.'
-            padding='19px 8px'
+            label="가격"
+            _name="price"
+            _value={price}
+            _onChange={handleChange}
+            placeholder="숫자만 입력해주세요."
+            padding="19px 8px"
           />
 
           <Grid>
-            <Text size='12px' color='#6195CF'>모집인원</Text>
+            <Text size="12px" color="#6195CF">
+              모집인원
+            </Text>
             <Select
               name="memberNum"
               defaultValue="default"
@@ -147,21 +153,19 @@ const CarpoolWrite = (props) => {
           </Grid>
 
           <Input
-            blue 
-            label='주의사항'
+            blue
+            label="주의사항"
             type="text"
             _maxLength="15"
             _name="notice"
             _value={notice}
             _onChange={handleChange}
-            placeholder='주의사항을 입력해주세요.'
-            padding='19px 8px'
+            placeholder="주의사항을 입력해주세요."
+            padding="19px 8px"
           />
-        
-          <Grid padding='0 0 16px'>
-            <Button
-              _onClick={is_edit ? editCarpool : addCarpool}
-            >
+
+          <Grid padding="0 0 16px">
+            <Button _onClick={is_edit ? editCarpool : addCarpool}>
               {is_edit ? "수정" : "작성"}
             </Button>
           </Grid>
@@ -175,6 +179,6 @@ const Select = styled.select`
   width: 100%;
   padding: 18px 5px;
   border-radius: 6px;
-`
+`;
 
 export default CarpoolWrite;

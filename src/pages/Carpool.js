@@ -11,7 +11,6 @@ import InfinityScroll from "../components/InfinityScroll";
 
 import { Grid, Button, Image } from "../elements/index";
 
-
 const Carpool = (props, { location }) => {
   const history = props.history;
   const dispatch = useDispatch();
@@ -31,10 +30,10 @@ const Carpool = (props, { location }) => {
   }, []);
 
   const induceProfile = () => {
-    if (!is_profile) {
-      window.alert("프로필 작성 후 이용할 수 있는 서비스 입니다.");
-      return null;
-    }
+    // if (!is_profile) {
+    //   window.alert("프로필 작성 후 이용할 수 있는 서비스 입니다.");
+    //   return null;
+    // }
     history.push(`/carpoolwrite/${skiResort}`);
   };
 

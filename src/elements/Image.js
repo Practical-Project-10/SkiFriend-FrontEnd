@@ -32,7 +32,7 @@ const Image = (props) => {
       </React.Fragment>
     );
   }
-  
+
   return (
     <React.Fragment>
       <ElImage {...styles} onClick={_onClick} />
@@ -53,7 +53,7 @@ const MyIcon = styled.div`
   margin-right: 10px;
   background-size: cover;
   background-position: center;
-  background: ${props => `url(${props.src}) no-repeat center`};
+  background: ${(props) => `url(${props.src}) no-repeat center`};
 `;
 
 const ElImage = styled.div`
@@ -61,7 +61,8 @@ const ElImage = styled.div`
   height: ${(props) => props.height};
   margin: ${(props) => props.margin};
   border-radius: ${(props) => props.radius};
-  background: ${props => props.src? `url(${props.src}) no-repeat center`: ''};
+  background: ${(props) =>
+    props.src ? `url(${props.src}) no-repeat center` : ""};
   background-size: ${(props) => props.size};
 `;
 

@@ -7,14 +7,14 @@ import produce from "immer";
 const initialState = {
   chatList: [],
   roomList: [],
+  profileList: [],
 };
 
 // action
-const GET_CHATLIST = "chat/GET";
-const GET_ROOMLIST = "chat/GET";
-const ADD = "chat/POST";
-// const LOADING = "chat/LOADING";
-// const NEXT = "chat/NEXT";
+const GET_CHATLIST = "chat/GET_CHATLIST";
+const GET_ROOMLIST = "chat/GET_ROOMLIST";
+const GET_PROFILELIST = "chat/GET_PROFILELIST";
+const ADD = "chat/ADD";
 
 // action creater
 export const getChatList = createAction(GET_CHATLIST, (chatList) => ({
@@ -23,9 +23,10 @@ export const getChatList = createAction(GET_CHATLIST, (chatList) => ({
 export const getChatRoomList = createAction(GET_ROOMLIST, (roomList) => ({
   roomList,
 }));
+export const getProfileList = createAction(GET_PROFILELIST, (profile) => ({
+  profile,
+}));
 export const addChat = createAction(ADD, (chatData) => ({ chatData }));
-// export const loadingBoard = createAction(LOADING, (state) => ({ state }));
-// export const nextBoard = createAction(NEXT, (state) => ({ state }));
 
 // thunk
 // 채팅방 만들기(연락하기)
@@ -38,6 +39,8 @@ export const makeRoomChatDB =
         // const nickname = localStorage.getItem("nickname");
         // const datas = { ...res.data, nickname: nickname };
         // dispatch(addChat(datas));
+        localStorage.setItem("longRoomId", res.data.longRoomId);
+        console.log(res);
         history.push(`/chatroom/${res.data.roomId}`);
       })
       .catch((error) => {
@@ -98,19 +101,34 @@ export const sendChatDB =
     await socket.chatSendMSG(content);
   };
 
+//프로필 정보
+export const getProfileInfoDB =
+  (longRoomId) =>
+  async (dispatch, getState, { history }) => {
+    await apis
+      .chatShowProfile(longRoomId)
+      .then((res) => {
+        console.log("요청 성공");
+        console.log(res);
+        dispatch(getProfileList(res.data));
+      })
+      .catch((error) => {
+        console.log(`불러오기 실패${error}`);
+      });
+  };
+
 // reducer
 export default handleActions(
   {
     [GET_CHATLIST]: (state, action) =>
       produce(state, (draft) => {
-        // draft.page += 1
         draft.chatList.push(...action.payload.chatList);
 
         draft.chatList = draft.chatList.reduce((prev, now) => {
-          if (prev.findIndex((a) => a.roomId === now.roomId) === -1) {
+          if (prev.findIndex((a) => a.messageId === now.messageId) === -1) {
             return [...prev, now];
           } else {
-            prev[prev.findIndex((a) => a.roomId === now.roomId)] = now;
+            prev[prev.findIndex((a) => a.messageId === now.messageId)] = now;
             return prev;
           }
         }, []);
@@ -118,32 +136,18 @@ export default handleActions(
 
     [GET_ROOMLIST]: (state, action) =>
       produce(state, (draft) => {
-        // draft.page += 1
-        draft.roomList.push(...action.payload.roomList);
+        draft.roomList = action.payload.roomList;
+      }),
 
-        draft.roomList = draft.roomList.reduce((prev, now) => {
-          if (prev.findIndex((a) => a.roomId === now.roomId) === -1) {
-            return [...prev, now];
-          } else {
-            prev[prev.findIndex((a) => a.roomId === now.roomId)] = now;
-            return prev;
-          }
-        }, []);
+    [GET_PROFILELIST]: (state, action) =>
+      produce(state, (draft) => {
+        draft.profileList = action.payload.profile;
       }),
 
     [ADD]: (state, action) =>
       produce(state, (draft) => {
         draft.chatList.unshift(action.payload.chatData);
       }),
-    // [LOADING]: (state, action) =>
-    //   produce(state, (draft) => {
-    //     draft.is_loading = action.payload.state;
-    //   }),
-
-    // [NEXT]: (state, action) =>
-    //   produce(state, (draft) => {
-    //     draft.is_next = action.payload.state;
-    //   }),
   },
   initialState
 );
@@ -155,6 +159,7 @@ const chatCreators = {
   getContentChatDB,
   connectChatDB,
   sendChatDB,
+  getProfileInfoDB,
 };
 
 export { chatCreators };
