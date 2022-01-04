@@ -8,6 +8,7 @@ import { Grid, Text } from "../elements/index";
 import Header from "../components/Header";
 import CarpoolMenuBar from "../components/CarpoolMenuBar";
 import FloatButton from "../components/FloatButton";
+import Board from "../components/Board";
 
 import { AiOutlineHeart } from "react-icons/ai";
 import { BsChat } from "react-icons/bs";
@@ -48,58 +49,45 @@ const FreeBoardList = () => {
 
   return (
     <React.Fragment>
-      <Header />
-      <Grid height="13em" bg="red">
-        {skiresort}
-      </Grid>
-      <CarpoolMenuBar />
-      <Grid padding="20px" height="384px" overflow="scroll">
-        <Text>전체</Text>
-        {/* <InfinityScroll
-          callNext={() => {
-            dispatch(boardActions.loadBoardDB(skiresort, page));
-          }}
-          is_loading={is_loading}
-        > */}
-        {boardList.map((post) => {
-          return (
-            <Grid is_flex justify="space-between" key={post.postId}>
-              <Grid is_flex>
-                <Text margin="0 10px 0 0">{post.nickname}</Text>
-                <Text
-                  margin="0 10px 0 0"
-                  cursor="pointer"
+      <Grid bg='#FFF'>
+        <Grid height='291px'>
+          {/* <Image/> */}
+        </Grid>
+
+        <CarpoolMenuBar />
+
+        <Grid padding='16px'>
+          
+          {/* <InfinityScroll
+            callNext={() => {
+              dispatch(boardActions.loadBoardDB(skiresort, page));
+            }}
+            is_loading={is_loading}
+          > */}
+            <Board />
+            {/* {boardList.map(l => {
+              return(
+                <Grid 
+                  key={l.postId}
                   _onClick={() => {
                     history.push(
                       `/freeboarddetail/${skiresort}/${post.postId}`
                     );
-                  }}
                 >
-                  {post.title}
-                </Text>
-              </Grid>
-              <Grid is_flex>
-                <AiOutlineHeart size="17" />
-                <Text margin="0 5px 0 0">{post.likeCnt}</Text>
-                <BsChat size="15" />
-                <Text margin="0 5px 0 0">{post.commentCnt}</Text>
-                <Text>{post.createdAt}</Text>
-              </Grid>
-            </Grid>
-          );
-        })}
-        {/* </InfinityScroll> */}
-      </Grid>
+                  <Board {...l}/>
+                </Grid>
+              )
+            })} */}
+          {/* </InfinityScroll> */}
+        </Grid>
 
-      {/* <Grid>
-        <Stack spacing={2}>
-          <Pagination count={5} />
-        </Stack>
-      </Grid> */}
-
-      <Grid _onClick={moveWritePage}>
         <FloatButton />
+
       </Grid>
+
+      {/* <Grid _onClick={moveWritePage}>
+        <FloatButton />
+      </Grid> */}
     </React.Fragment>
   );
 };

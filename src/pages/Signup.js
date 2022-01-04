@@ -112,7 +112,7 @@ const SignupOne = (props) => {
 
   return (
     <Grid phoneSize>
-        <Grid margin='132px 0 145px'>
+        <Grid padding='132px 0 195px' display='flex' direction='column' gap='33px'>
           <Input more4 dupButton buttonText='중복확인' _name='id' label='로그인' type='text' placeholder='영소문자, 숫자를 포함한 5자리 이상' _onBlur={handleBlur} _onChange={handleChange} _onClick={handleClick}/>
           {!checkId &&
             <Text color='red'>올바른 형식의 아이디가 아닙니다.</Text>
@@ -131,7 +131,7 @@ const SignupOne = (props) => {
             }
         </Grid>
           
-        <Grid>
+        <Grid padding='0 0 16px'>
           <Button _onClick={join}>가입</Button>
         </Grid>
     </Grid>

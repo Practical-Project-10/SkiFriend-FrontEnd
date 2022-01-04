@@ -7,7 +7,6 @@ const Text = (props) => {
     size,
     children,
     margin,
-    marginB,
     align,
     bold,
     link,
@@ -15,18 +14,19 @@ const Text = (props) => {
     _onClick,
     cursor,
     boardlink,
+    opacity,
   } = props;
 
   const styles = {
     color,
     size,
     margin,
-    marginB,
     bold,
     align,
     link,
     padding,
     cursor,
+    opacity,
   };
 
   if (boardlink) {
@@ -36,6 +36,7 @@ const Text = (props) => {
       </List>
     );
   }
+
   return (
     <P {...styles} onClick={_onClick}>
       {children}
@@ -43,23 +44,24 @@ const Text = (props) => {
   );
 };
 
+Text.defaultProps = {
+  children: null,
+  _onClick: () => {},
+  size: '14px',
+}
+
 const P = styled.p`
   color: ${(props) => props.color};
   font-size: ${(props) => props.size};
   font-weight: ${(props) => props.bold? 700: 400};
   margin: ${(props) => props.margin};
-  margin-bottom: ${(props) => props.marginB};
+  margin-bottom: 0;
   padding: ${(props) => props.padding};
   text-align: ${(props) => props.align};
-  cursor: ${(props) => props.cursor};
+  opacity: ${(props) => props.opacity};
+  cursor: ${(props) => props.cursor? 'pointer': ''};
   ${(props) => (props.className ? `className: ${props.className};` : "")};
-  line-height: 17px;
 `;
-
-Text.defaultProps = {
-  children: null,
-  _onClick: () => {},
-};
 
 const List = styled.p`
   border-bottom: 2px solid red;
@@ -68,5 +70,7 @@ const List = styled.p`
     opacity: 0.8;
   }
 `;
+
+
 
 export default Text;

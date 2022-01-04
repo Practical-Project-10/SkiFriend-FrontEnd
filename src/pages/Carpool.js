@@ -9,9 +9,8 @@ import Card from "../components/Card";
 import FloatButton from "../components/FloatButton";
 import InfinityScroll from "../components/InfinityScroll";
 
-import { Grid, Button } from "../elements/index";
-import Pagination from "@mui/material/Pagination";
-import Stack from "@mui/material/Stack";
+import { Grid, Button, Image } from "../elements/index";
+
 
 const Carpool = (props, { location }) => {
   const history = props.history;
@@ -41,9 +40,16 @@ const Carpool = (props, { location }) => {
 
   return (
     <Grid is_flex align="center" direction="column" heigth="100px">
+      {/* <Grid height='291px'>
+        <Image/>
+      </Grid>
+
+      <Grid>
+        <CarpoolMenuBar match={props.match} />
+      </Grid> */}
+
       <Grid bg="#C4C4C4"></Grid>
 
-      {/* 카풀/게시글 네비게이션 바 */}
       <CarpoolMenuBar match={props.match} />
 
       <CarpoolControl />

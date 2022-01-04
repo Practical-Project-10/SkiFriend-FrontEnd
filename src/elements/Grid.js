@@ -149,7 +149,7 @@ const GridBox = styled.div`
   &::-webkit-scrollbar {
     display: none;
   }
-  border: 1px solid black;
+  /* border: 1px solid black; */
   gap: ${(props) => props.gap};
   ${(props) => (props.phoneSize ? "padding: 0 16px 0;" : "")}
 `;

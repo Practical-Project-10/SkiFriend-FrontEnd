@@ -1,8 +1,9 @@
+/* eslint-disable react/jsx-pascal-case */
 import React from "react";
 import DatePicker from "react-datepicker";
 import { ko } from "date-fns/esm/locale";
 
-import { Grid } from "../elements/index";
+import styled from 'styled-components'
 import "react-datepicker/dist/react-datepicker.css";
 
 const DateSelector = (props) => {
@@ -24,8 +25,8 @@ const DateSelector = (props) => {
 
   // value 다시 손보기
   return (
-    <Grid is_flex justify="center">
-      <DatePicker
+    <React.Fragment>
+      <DatePicker_
         locale={ko}
         dateFormat="yyyy-MM-dd"
         selected={date_}
@@ -34,8 +35,16 @@ const DateSelector = (props) => {
         }}
         minDate={new Date()}
       />
-    </Grid>
+    </React.Fragment>
   );
 };
+
+const DatePicker_ = styled(DatePicker)`
+  width: 100%;
+  padding: 19px;
+  margin-right: 24px;
+  border-radius: 6px;
+  border: 1px solid #474D56;
+`
 
 export default DateSelector;

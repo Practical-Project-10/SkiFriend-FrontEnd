@@ -104,11 +104,12 @@ const completeCarpoolDB = (skiResort, postId) => {
   };
 };
 
-const filterCarpoolDB = (skiResort, datas) => {
+const filterCarpoolDB = (skiResort, form) => {
   return async function (dispatch, getState, { history }) {
-    console.log(skiResort, datas);
+    console.log(skiResort, form);
+
     try {
-      const response = await apis.filterCarpool(skiResort, datas);
+      const response = await apis.filterCarpool(skiResort, form);
 
       if (response.data.length === 0) {
         window.alert("필터에 맞는 정보가 없습니다");
