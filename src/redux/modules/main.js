@@ -21,7 +21,7 @@ export const hotPostsDB =
   () =>
   async (dispatch, getState, { history }) => {
     await axios
-      .get("http://13.125.249.172/main")
+      .get("http://13.125.35.82/main")
       // .hotPost
       .then((res) => {
         console.log(res);
