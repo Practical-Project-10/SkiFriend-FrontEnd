@@ -2,11 +2,11 @@ import React from "react";
 import { useSelector } from "react-redux";
 
 import CarpoolMenuBar from "../components/CarpoolMenuBar";
-import CarpoolControl from "../components/CarpoolControl";
 import Card from "../components/Card";
 import FloatButton from "../components/FloatButton";
 
-import { Grid } from "../elements/index";
+import { Grid, Image, Text } from "../elements/index";
+import filter from "../assets/carpoolList/filter.svg"
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
 
@@ -37,8 +37,17 @@ const FilterList = (props) => {
 
       {/* 카풀/게시글 네비게이션 바 */}
       <CarpoolMenuBar match={props.match} />
-      <CarpoolControl />
+
+      <Grid cursor is_flex justify='center' width='66px' height='30px' margin='16px 0' border='2px solid #6195CF' radius='6px'
+          _onClick={() => {
+            history.push(`/carpoolfilter/${skiResort}`);
+          }}
+        >
+          <Image src={filter} width='20px' height='20px'/>
+          <Text bold color='#6195CF'>필터</Text>
+        </Grid>
       <Grid>
+
         {carpool_list.map((l) => {
           return (
             <Grid key={l.postId} width="100%">

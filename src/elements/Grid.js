@@ -142,7 +142,7 @@ const GridBox = styled.div`
   text-align: ${(props) => props.align};
   flex-wrap: ${(props) => props.wrap? 'wrap': ''};
   flex-direction: ${(props) => props.direction};
-  cursor: ${(props) => props.cursor};
+  cursor: ${(props) => props.cursor? 'pointer': ''};
   box-sizing: border-box;
   ${(props) => (props.is_flex ? "display: flex; align-items: center;" : "")}
   ${(props) => (props.className ? `className: ${props.className};` : "")}

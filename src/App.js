@@ -27,12 +27,11 @@ import ChatRoom from "./pages/ChatRoom";
 import styled from "styled-components";
 
 function App() {
-
   return (
     <React.Fragment>
       <Grid mainFrame>
-        <GlobalStyleds/>
-        <Header/>
+        <GlobalStyleds />
+        <Header />
         <Route exact path="/" component={Home}></Route>
         <Route path="/phoneauth" component={PhoneAuth}></Route>
         <Route path="/signup" component={Signup}></Route>
@@ -69,7 +68,7 @@ function App() {
           component={PwdChange}
         ></Route>
         <Route path="/chatlist" component={ChatList} />
-        <Route path="/chatroom/:roomName" component={ChatRoom} />
+        <Route path="/chatroom/:roomId" component={ChatRoom} />
         {/* <Navbar /> */}
       </Grid>
     </React.Fragment>

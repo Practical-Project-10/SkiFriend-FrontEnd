@@ -47,7 +47,7 @@ const CarpoolFilter = (props) => {
     <Grid bg='#FFF'>
       <CarpoolSelect is_filter bringForm={bringForm} bringDate={bringDate}/>
       
-      <Grid padding='293px 0 16px 0'>
+      <Grid padding='293px 16px 16px'>
         <Button smallBtn size="20px" _onClick={filterSubmit}>
           필터적용
         </Button>

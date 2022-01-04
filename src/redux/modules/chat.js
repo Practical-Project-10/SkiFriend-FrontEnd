@@ -5,34 +5,40 @@ import produce from "immer";
 
 // initialState
 const initialState = {
-  list: [],
+  chatList: [],
+  roomList: [],
 };
 
 // action
-const GET = "chat/GET";
+const GET_CHATLIST = "chat/GET";
+const GET_ROOMLIST = "chat/GET";
 const ADD = "chat/POST";
 // const LOADING = "chat/LOADING";
 // const NEXT = "chat/NEXT";
 
 // action creater
-export const getChatList = createAction(GET, (chatList) => ({ chatList }));
-export const addChatRoom = createAction(ADD, (chatData) => ({ chatData }));
+export const getChatList = createAction(GET_CHATLIST, (chatList) => ({
+  chatList,
+}));
+export const getChatRoomList = createAction(GET_ROOMLIST, (roomList) => ({
+  roomList,
+}));
+export const addChat = createAction(ADD, (chatData) => ({ chatData }));
 // export const loadingBoard = createAction(LOADING, (state) => ({ state }));
 // export const nextBoard = createAction(NEXT, (state) => ({ state }));
 
 // thunk
-// 상대방에게 채팅걸기
+// 채팅방 만들기(연락하기)
 export const makeRoomChatDB =
   (postId) =>
   async (dispatch, getState, { history }) => {
     await apis
       .chatRoom(postId)
       .then((res) => {
-        localStorage.setItem("roomId", res.data.roomId);
-        const nickname = localStorage.getItem("nickname");
-        const datas = { ...res.data, nickname: nickname };
-        dispatch(addChatRoom(datas));
-        history.push(`/chatroom/${datas.roomName}`);
+        // const nickname = localStorage.getItem("nickname");
+        // const datas = { ...res.data, nickname: nickname };
+        // dispatch(addChat(datas));
+        history.push(`/chatroom/${res.data.roomId}`);
       })
       .catch((error) => {
         console.log(`불러오기 실패${error}`);
@@ -48,7 +54,7 @@ export const getListChatDB =
       .then((res) => {
         console.log("요청 성공");
         console.log(res);
-        dispatch(getChatList(res.data));
+        dispatch(getChatRoomList(res.data));
       })
       .catch((error) => {
         console.log(`불러오기 실패${error}`);
@@ -64,7 +70,7 @@ export const getContentChatDB =
       .then((res) => {
         console.log("요청 성공");
         console.log(res);
-        dispatch(getChatList(res));
+        dispatch(getChatList(res.data));
       })
       .catch((error) => {
         console.log(`불러오기 실패${error}`);
@@ -76,31 +82,47 @@ export const connectChatDB =
   (roomId) =>
   async (dispatch, getState, { history }) => {
     await socket.chatConnect(() => {
-      socket
-        .chatRoomSubscribe(roomId)
-        .then((res) => {
-          console.log("요청 성공");
-          console.log(res);
-        })
-        .catch((error) => {
-          console.log(`불러오기 실패${error}`);
-        });
+      socket.chatRoomSubscribe(roomId);
     });
+  };
+
+//메세지 보내기
+export const sendChatDB =
+  (roomId, message) =>
+  async (dispatch, getState, { history }) => {
+    const content = JSON.stringify({
+      type: "TALK",
+      rommId: roomId,
+      message: message,
+    });
+    await socket.chatSendMSG(content);
   };
 
 // reducer
 export default handleActions(
   {
-    [GET]: (state, action) =>
+    [GET_CHATLIST]: (state, action) =>
       produce(state, (draft) => {
         // draft.page += 1
-        draft.list.push(...action.payload.chatList);
+        draft.chatList.push(...action.payload.chatList);
 
-        draft.list = draft.list.reduce((prev, now) => {
+        draft.chatList = draft.chatList.reduce((prev, now) => {
           if (prev.findIndex((a) => a.roomId === now.roomId) === -1) {
-            console.log(draft.list);
-            console.log(prev);
-            console.log(now);
+            return [...prev, now];
+          } else {
+            prev[prev.findIndex((a) => a.roomId === now.roomId)] = now;
+            return prev;
+          }
+        }, []);
+      }),
+
+    [GET_ROOMLIST]: (state, action) =>
+      produce(state, (draft) => {
+        // draft.page += 1
+        draft.roomList.push(...action.payload.roomList);
+
+        draft.roomList = draft.roomList.reduce((prev, now) => {
+          if (prev.findIndex((a) => a.roomId === now.roomId) === -1) {
             return [...prev, now];
           } else {
             prev[prev.findIndex((a) => a.roomId === now.roomId)] = now;
@@ -111,7 +133,7 @@ export default handleActions(
 
     [ADD]: (state, action) =>
       produce(state, (draft) => {
-        draft.list.unshift(action.payload.chatData);
+        draft.chatList.unshift(action.payload.chatData);
       }),
     // [LOADING]: (state, action) =>
     //   produce(state, (draft) => {
@@ -127,10 +149,12 @@ export default handleActions(
 );
 
 const chatCreators = {
+  addChat,
   makeRoomChatDB,
   getListChatDB,
   getContentChatDB,
   connectChatDB,
+  sendChatDB,
 };
 
 export { chatCreators };

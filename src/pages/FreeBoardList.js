@@ -81,7 +81,7 @@ const FreeBoardList = () => {
           {/* </InfinityScroll> */}
         </Grid>
 
-        <FloatButton />
+        <FloatButton _onClick={moveWritePage}/>
 
       </Grid>
 
