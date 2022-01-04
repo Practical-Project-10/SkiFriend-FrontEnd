@@ -24,6 +24,7 @@ const Image = (props) => {
     radius,
     className,
   };
+
   if (myIcon) {
     return (
       <React.Fragment>
@@ -31,9 +32,10 @@ const Image = (props) => {
       </React.Fragment>
     );
   }
+  
   return (
     <React.Fragment>
-      <MyProfile {...styles} onClick={_onClick} />
+      <ElImage {...styles} onClick={_onClick} />
     </React.Fragment>
   );
 };
@@ -51,17 +53,16 @@ const MyIcon = styled.div`
   margin-right: 10px;
   background-size: cover;
   background-position: center;
-  ${(props) => (props.src ? `background-image: url(${props.src});` : "")}
+  background: ${props => `url(${props.src}) no-repeat center`};
 `;
 
-const MyProfile = styled.div`
+const ElImage = styled.div`
   width: ${(props) => props.width};
   height: ${(props) => props.height};
   margin: ${(props) => props.margin};
   border-radius: ${(props) => props.radius};
-  background-size: cover;
-  background-position: center;
-  ${(props) => (props.src ? `background-image: url(${props.src});` : "")}
+  background: ${props => props.src? `url(${props.src}) no-repeat center`: ''};
+  background-size: ${(props) => props.size};
 `;
 
 export default Image;

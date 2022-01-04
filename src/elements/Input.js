@@ -4,45 +4,61 @@ import styled from "styled-components";
 import { Text, Grid, Button } from "./index";
 
 const Input = forwardRef((props, ref) => {
-  const { label, placeholder, _onChange, type, _value, more4, dupButton, _name, _onBlur, _onClick, buttonText } = props;
+  const { label, placeholder, _onChange, type, _value, more4, dupButton, _name, _onBlur, _onClick, buttonText, width, border, padding, blue} = props;
 
   const style = {
     more4,
+    width,
+    border,
+    padding,
   };
   
   if(dupButton) {
     return(
-      <React.Fragment>
-        {label && <Text size='14px' margin="0 0 7px 0">{label}</Text>}
-        <DupButton {...style} ref={ref} type={type} name={_name} value={_value} onBlur={_onBlur} placeholder={placeholder} onChange={_onChange} />
-        <Button _name={_name} width='27%' bg='#B5CCE5' color='#474D56' padding='13px 0px' _onClick={_onClick}>{buttonText}</Button>
-      </React.Fragment>
+      <Grid>
+        {label && <Text margin="0 0 7px 0">{label}</Text>}
+        <Grid display='flex' gap='11px'>
+          <DupButton {...style} ref={ref} type={type} name={_name} value={_value} onBlur={_onBlur} placeholder={placeholder} onChange={_onChange} />
+          <Button _name={_name} width='27%' bg='#B5CCE5' color='#474D56' padding='13px 0px' _onClick={_onClick}>{buttonText}</Button>
+        </Grid>
+      </Grid>
+    );
+  }
+
+  if(blue) {
+    return(
+      <Grid>
+        {label && <Text size='12px' color='#6195CF' margin="0 0 7px 0">{label}</Text>}
+        <ElInput {...style} border='1px solid #474D56' ref={ref} name={_name} value={_value} onBlur={_onBlur} type={type} placeholder={placeholder} onChange={_onChange} />
+      </Grid>
     );
   }
 
   return (
-    <React.Fragment>
-      {label && <Text size='14px' margin="0 0 7px 0">{label}</Text>}
+    <Grid>
+      {label && <Text margin="0 0 7px 0">{label}</Text>}
       <ElInput {...style} ref={ref} name={_name} value={_value} onBlur={_onBlur} type={type} placeholder={placeholder} onChange={_onChange} />
-    </React.Fragment>
+    </Grid>
   );
 });
 
 Input.defaultProps = {
   multiLine: false,
   label: false,
-  placeholder: "텍스트를 입력해주세요.",
   type: "text",
   value: "",
+  width: '100%',
+  padding: '14px 8px',
+  border: '1px solid #6195CF',
   _onChange: () => {},
 };
 
 const ElInput = styled.input`
   border: 1px solid #212121;
-  width: 100%;
-  padding: 14px 8px;
-  margin: ${props => props.more4? '0 0 33px 0': '0 0 41px 0'};
-  border: 1px solid #6195CF;
+  width: ${props => props.width};
+  padding: ${props => props.padding};
+  /* margin: ${props => props.more4? '0 0 33px 0': '0 0 41px 0'}; */
+  border: ${props => props.border};
   border-radius: 6px;
   box-sizing: border-box;
 `;
@@ -51,7 +67,7 @@ const DupButton = styled.input`
   border: 1px solid #212121;
   width: 70%;
   padding: 14px 8px;
-  margin: ${props => props.more4? '0 11px 33px 0': '0 11px 41px 0'};
+  /* margin: ${props => props.more4? '0 11px 33px 0': '0 11px 41px 0'}; */
   border: 1px solid #6195CF;
   border-radius: 6px;
   box-sizing: border-box;

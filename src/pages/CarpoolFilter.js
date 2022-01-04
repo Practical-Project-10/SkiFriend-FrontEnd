@@ -1,47 +1,16 @@
 import React, { useState, useRef } from "react";
-import { useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { carpoolActions } from "../redux/modules/carpool";
 
-import { Grid, Text, Button, Input } from "../elements/index";
-import DateSelector from "../components/DateSelector";
-import RegionSelector from "../components/RegionSelector";
-
-//react icons
-import { GrFormPrevious } from "react-icons/gr";
-import { BsArrowLeftRight } from "react-icons/bs";
-import { BsArrowRight } from "react-icons/bs";
+import { Grid, Button } from "../elements/index";
+import CarpoolSelect from "../components/CarpoolSelect";
 
 
-const CarpoolFilter = ({ history }) => {
+const CarpoolFilter = (props) => {
   const dispatch = useDispatch();
-  const params = useParams();
-  const skiresort = params.skiresort;
-  const city_name = [
-    "서울",
-    "부산",
-    "대구",
-    "인천",
-    "광주",
-    "대전",
-    "울산",
-    "강원",
-    "경기",
-    "경남",
-    "경북",
-    "전남",
-    "전북",
-    "제주",
-    "충남",
-    "충북",
-  ];
-  // useRef
-  const departureLoca = useRef();
-  const arrivalLoca = useRef();
+  const skiresort = props.match.params.skiresort;
 
-  // useState관리
-  const [state, setState] = useState(0);
-  const [datas, setDatas] = useState({
+  const [form, setForm] = useState({
     carpoolType: "",
     memberNum: "",
     startLocation: "",
@@ -49,156 +18,41 @@ const CarpoolFilter = ({ history }) => {
     date: "",
   });
 
-  // datas useState값 바꾸기
-  const valueChange = (e) => {
-    const { name, value } = e.target;
-    console.log(name, value);
-
-    setDatas({
-      ...datas,
-      [name]: value,
+  const bringDate = (date) => {
+    console.log(date);
+    setForm({
+      ...form,
+      date,
     });
   };
 
-  // 출발 도착 지역 바꾸기
-  const locationChange = () => {
-    if (!state) {
-      console.log(departureLoca.current.value);
-      console.log(arrivalLoca.value);
-      setState(1);
-      setDatas({
-        ...datas,
-        startLocation: skiresort,
-        endLocation: departureLoca.current.value,
-      });
-    } else {
-      setState(0);
-      setDatas({
-        ...datas,
-        startLocation: arrivalLoca.current.value,
-        endLocation: skiresort,
-      });
-    }
-  };
-
-  // 날짜 선택
-  const selectDate = (date) => {
-    console.log(date);
-    setDatas({
-      ...datas,
-      date,
+  const bringForm = (name, value) => {
+    console.log(name, value);
+    setForm({
+      ...form,
+      [name]: value,
     });
   };
 
   // 데이터 전송
   const filterSubmit = async () => {
-    // if (datas.startLocation === "" || datas.endLocation === "") {
-    //   return window.alert("지역선택은 필수입니다.");
-    // }
-    dispatch(carpoolActions.filterCarpoolDB(skiresort, datas));
+    if (form.startLocation === "" || form.endLocation === "") {
+      return window.alert("지역선택은 필수입니다.");
+    }
+    dispatch(carpoolActions.filterCarpoolDB(skiresort, form));
   };
-  console.log(datas);
+  console.log(form);
 
   return (
-    <React.Fragment>
-      <Grid header>검색필터</Grid>
-      <Grid>
-        <GrFormPrevious
-          size="30"
-          cursor="pointer"
-          onClick={() => history.goBack()}
-        />
-      </Grid>
-
-      {/* 출발 도착지역 셀렉박스 */}
-      <Grid is_flex justify="center">
-        <Text>출발지역</Text>
-        <Button smallBtn margin="0 10px">
-          <BsArrowLeftRight size="15" state onClick={locationChange} />
-        </Button>
-        <Text>도착지역</Text>
-      </Grid>
-
-      <Grid is_flex justify="center" direction={state ? "row-reverse" : ""}>
-        {/* <RegionSelector/> */}
-        <select
-          name={state ? "endLocation" : "startLocation"}
-          value={state ? datas.endLocation : datas.startLocation}
-          ref={departureLoca}
-          onChange={valueChange}
-        >
-          <option value="" disabled>
-            지역선택
-          </option>
-          ;
-          {city_name.map((city, idx) => {
-            return (
-              <React.Fragment key={"bigCity" + idx}>
-                <option value={city}>{city}</option>;
-              </React.Fragment>
-            );
-          })}
-        </select>
-        <span>
-          <BsArrowRight style={{ margin: "0px 20px" }} />
-        </span>
-        <span
-          className="skiResort"
-          name="endLocation"
-          value={skiresort}
-          ref={arrivalLoca}
-        >
-          {skiresort}
-        </span>
-      </Grid>
-
-      <Grid is_flex justify="center">
-        {/* 날짜선택 */}
-        <Grid>
-          <Text>날짜 선택</Text>
-          <DateSelector _value={datas.date} _selectDate={selectDate} />
-        </Grid>
-
-        {/* 최대 수용가능한 인원 */}
-        <Grid>
-          <Text margin="0 5px">수용가능인원</Text>
-          <select
-            name="memberNum"
-            defaultValue="default"
-            onChange={valueChange}
-          >
-            <option value="0">선택</option>
-            <option value="1">1명</option>
-            <option value="2">2명</option>
-            <option value="3">3명</option>
-            <option value="4">4명</option>
-            <option value="5">5인이상</option>
-          </select>
-        </Grid>
-      </Grid>
-      {/* 카풀요청 필터 */}
-      <Grid is_flex justify="center" margin="30px">
-        <Input
-          type="radio"
-          _name="carpoolType"
-          _value="카풀 요청"
-          _onClick={valueChange}
-          label="카풀 요청만 보기"
-        />
-        <Input
-          type="radio"
-          _name="carpoolType"
-          _value="카풀 제공"
-          _onClick={valueChange}
-          label="카풀 제공만 보기"
-        />
-      </Grid>
-      <Grid align="center">
+    <Grid bg='#FFF'>
+      <CarpoolSelect is_filter bringForm={bringForm} bringDate={bringDate}/>
+      
+      <Grid padding='293px 0 16px 0'>
         <Button smallBtn size="20px" _onClick={filterSubmit}>
           필터적용
         </Button>
       </Grid>
-    </React.Fragment>
+    </Grid>
   );
 };
 

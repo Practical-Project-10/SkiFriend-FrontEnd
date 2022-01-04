@@ -37,12 +37,12 @@ const Login = (props) => {
         로고
       </Grid>
 
-      <Grid>
+      <Grid display='flex' direction='column' gap='41px'>
         <Input type='text' ref={ldInput} label='아이디'/>
         <Input type='password' ref={pwdInput} label='비밀번호'/>
       </Grid>
 
-      <Grid margin="127px 0 0">
+      <Grid margin="186px 0 0" display='flex' direction='column' gap='16px'>
         <Button _onClick={join} bg='#6195CF'>회원가입</Button>
         <Button _onClick={() => history.push('/phoneauth')} text='회원가입'>로그인</Button>
       </Grid>

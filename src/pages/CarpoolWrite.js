@@ -5,9 +5,8 @@ import { carpoolActions } from "../redux/modules/carpool";
 
 import styled from "styled-components";
 import { Grid, Text, Button, Input } from "../elements/index";
+import CarpoolSelect from "../components/CarpoolSelect";
 
-import DateSelector from "../components/DateSelector";
-import InduceProfile from "../components/InduceProfile";
 
 const CarpoolWrite = (props) => {
   const dispatch = useDispatch();
@@ -74,30 +73,19 @@ const CarpoolWrite = (props) => {
     });
   };
 
-  const locationChange = () => {
-    if (!state) {
-      console.log(startLoca.current.value);
-      setState(true);
-      setForm({
-        ...form,
-        startLocation: skiResort,
-        endLocation: startLoca.current.value,
-      });
-    } else {
-      setState(false);
-      setForm({
-        ...form,
-        startLocation: endLoca.current.value,
-        endLocation: skiResort,
-      });
-    }
-  };
-
-  const selectDate = (date) => {
+  const bringDate = (date) => {
     console.log(date);
     setForm({
       ...form,
       date,
+    });
+  };
+
+  const bringForm = (name, value) => {
+    console.log(name, value);
+    setForm({
+      ...form,
+      [name]: value,
     });
   };
 
@@ -112,132 +100,81 @@ const CarpoolWrite = (props) => {
 
   return (
     <React.Fragment>
-      <Grid justify="column">
-        <Grid
-          is_flex
-          borderB="1px solid #CACACA"
-          padding="10px"
-          margin="0 0 20px 0"
-        >
-          <Text margin="0 auto">카풀 작성 페이지</Text>
-        </Grid>
+      <Grid bg='#FFF'>
+        
+        <CarpoolSelect bringForm={bringForm} bringDate={bringDate}/>
 
-        <Grid borderB="1px solid #CACACA">
-          <Grid align="center" border="1px solid #000" padding="10px">
-            {skiResort}
-          </Grid>
-          <Grid is_flex margin="10px 15px">
-            <form onChange={handleChange}>
-              <input type="radio" name="carpoolType" value="카풀 요청" />
-              카풀 요청
-              <input type="radio" name="carpoolType" value="카풀 제공" />
-              카풀 제공
-            </form>
-          </Grid>
-        </Grid>
+        {/* <div style={{border: '5px solid #edeeef'}}></div> */}
+        <hr/>
 
-        {/* 출발도착지역 셀렉박스 */}
-        <Grid
-          is_flex
-          justify="space-around"
-          selectBox
-          position="relative"
-          direction={state ? "row-reverse" : ""}
-        >
-          <Grid>
-            <select
-              name={state ? "endLocation" : "startLocation"}
-              value={state ? endLocation : startLocation}
-              ref={startLoca}
-              onChange={handleChange}
-            >
-              <option value="" disabled>
-                지역선택
-              </option>
-              ;
-              {city_name.map((city, idx) => {
-                return (
-                  <React.Fragment key={"bigCity" + idx}>
-                    <option value={city}>{city}</option>;
-                  </React.Fragment>
-                );
-              })}
-            </select>
-          </Grid>
-          <Cross state onClick={locationChange}>
-            교차
-          </Cross>
-          <label htmlFor="endLocation" style={{ border: "1px solid #000" }}>
-            {skiResort}
-          </label>
-          <input
-            type="text"
-            id="endLocation"
-            name="endLocation"
-            value={endLocation}
-            style={{ display: "none" }}
-            ref={endLoca}
-          />
-        </Grid>
-
-        <Grid is_flex width="300px">
-          <DateSelector _value={date} _selectDate={selectDate} />
+        <Grid phoneSize margin="50px 0 0" display='flex' direction='column' gap='33px'>
           <Input
-            type="time"
-            _name="time"
-            _value={time}
-            _onChange={handleChange}
-          />
-        </Grid>
-        <Grid margin="10px">
-          <Text>제목</Text>
-          <Input
+            blue
             type="text"
             _maxLength="15"
             _name="title"
             _value={title}
             _onChange={handleChange}
+            placeholder='제목을 입력해주세요.'
+            padding='19px 8px'
           />
-          <input type="text" maxLength="15" />
-          <Text>가격</Text>
-          <Input _name="price" _value={price} _onChange={handleChange} />원
-          <Text>모집인원</Text>
-          <Input
-            _name="memberNum"
-            _value={memberNum}
-            _onChange={handleChange}
+
+          <Input 
+            blue
+            type="number"
+            label='가격' 
+            _name="price" 
+            _value={price} 
+            _onChange={handleChange} 
+            placeholder='숫자만 입력해주세요.'
+            padding='19px 8px'
           />
-          <Text>주의사항</Text>
+
+          <Grid>
+            <Text size='12px' color='#6195CF'>모집인원</Text>
+            <Select
+              name="memberNum"
+              defaultValue="default"
+              onChange={handleChange}
+            >
+              <option value="0">선택</option>
+              <option value="1">1명</option>
+              <option value="2">2명</option>
+              <option value="3">3명</option>
+              <option value="4">4명</option>
+              <option value="5">5인이상</option>
+            </Select>
+          </Grid>
+
           <Input
+            blue 
+            label='주의사항'
             type="text"
             _maxLength="15"
             _name="notice"
             _value={notice}
             _onChange={handleChange}
+            placeholder='주의사항을 입력해주세요.'
+            padding='19px 8px'
           />
-        </Grid>
-        <Grid margin="10px">
-          <Button
-          bgColor='#000'
-          color='red'
-            // width="100%"
-            // padding="10px"
-            _onClick={is_edit ? editCarpool : addCarpool}
-          >
-            {is_edit ? "수정" : "작성"}
-          </Button>
+        
+          <Grid padding='0 0 16px'>
+            <Button
+              _onClick={is_edit ? editCarpool : addCarpool}
+            >
+              {is_edit ? "수정" : "작성"}
+            </Button>
+          </Grid>
         </Grid>
       </Grid>
     </React.Fragment>
   );
 };
 
-const Cross = styled.div`
-  width: 30px;
-  height: 20px;
-  border: 1px solid #000;
-  cursor: pointer;
-  position: absolute;
-`;
+const Select = styled.select`
+  width: 100%;
+  padding: 18px 5px;
+  border-radius: 6px;
+`
 
 export default CarpoolWrite;
