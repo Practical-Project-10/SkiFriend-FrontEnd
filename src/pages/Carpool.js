@@ -9,8 +9,8 @@ import FloatButton from "../components/FloatButton";
 import InfinityScroll from "../components/InfinityScroll";
 
 import { Grid, Button, Image, Text } from "../elements/index";
-import High from "../assets/skiImage/HighOne/HighOne3.png"
-import filter from "../assets/carpoolList/filter.svg"
+import High from "../assets/skiImage/HighOne/HighOne3.png";
+import filter from "../assets/carpoolList/filter.svg";
 
 const Carpool = (props, { location }) => {
   const history = props.history;
@@ -20,7 +20,7 @@ const Carpool = (props, { location }) => {
   const is_mine = props.nickname === nickname;
   const is_profile = localStorage.getItem("is_profile");
   const carpool_list = useSelector((state) => state.carpool.list);
-  console.log(carpool_list)
+  console.log(carpool_list);
   const page = useSelector((state) => state.carpool.page);
   const is_loading = useSelector((state) => state.carpool.is_loading);
   const skiResort = props.match.params.skiresort;
@@ -40,24 +40,33 @@ const Carpool = (props, { location }) => {
   };
 
   return (
-    <Grid height="100%" bg='#FFF'>
-
-      <Grid width='100%' height='291px'>
-        <Image src={High} size='cover' width='100%' height='100%'/>
+    <Grid height="100%" bg="#FFF">
+      <Grid width="100%" height="291px">
+        <Image src={High} size="cover" width="100%" height="100%" />
       </Grid>
 
-      <Grid width='100%'>
+      <Grid width="100%">
         <CarpoolMenuBar match={props.match} />
       </Grid>
 
       <Grid phoneSize>
-        <Grid cursor is_flex justify='center' width='66px' height='30px' margin='16px 0' border='2px solid #6195CF' radius='6px'
+        <Grid
+          cursor
+          is_flex
+          justify="center"
+          width="66px"
+          height="30px"
+          margin="16px 0"
+          border="2px solid #6195CF"
+          radius="6px"
           _onClick={() => {
             history.push(`/carpoolfilter/${skiResort}`);
           }}
         >
-          <Image src={filter} width='20px' height='20px'/>
-          <Text bold color='#6195CF'>필터</Text>
+          <Image src={filter} width="20px" height="20px" />
+          <Text bold color="#6195CF">
+            필터
+          </Text>
         </Grid>
 
         <InfinityScroll
@@ -80,7 +89,7 @@ const Carpool = (props, { location }) => {
         </InfinityScroll>
       </Grid>
 
-      {/* <FloatButton _onClick={induceProfile} />  dd*/}
+      <FloatButton _onClick={induceProfile} />
     </Grid>
   );
 };
