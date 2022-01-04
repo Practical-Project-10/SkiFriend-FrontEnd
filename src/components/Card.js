@@ -20,6 +20,8 @@ const Card = (props) => {
   const is_login = localStorage.getItem("is_login");
   const repuest = props.carpoolType === '카풀 요청'
   console.log(repuest)
+  const nickname = localStorage.getItem("nickname");
+  const is_mine = props.nickname === nickname;
 
   //------useState관리-------
   const [showmodal, setShowModal] = React.useState();
@@ -47,7 +49,7 @@ const Card = (props) => {
   };
 
   return (
-    <CarpoolCard repuest={repuest} status={!props.status} small={props.small}>
+    <CarpoolCard repuest={repuest} status={!props.status}>
       <Grid>
         <Grid margin="0 0 3px">
           <Text bold color={repuest? '#7281D1': '#6195CF'}>{props.carpoolType}</Text>
@@ -81,73 +83,75 @@ const Card = (props) => {
         </Text>
       </Grid>
 
-      <Grid is_flex>
-        {/* 게시글 수정 삭제 modal 시작 */}
-        {/* 게시글을 조회한사람이 작성한 사람과 일치할 경우 모달 선택창이 보이게 하기 */}
-        {props.is_mine ?
-          <SubMenu width='27px' height='27px' line='41px'>
-            <Grid _onClick={() => {setShowModal(true)}}>
-              <Image src={etc} width='27px' height='27px'/>
-            </Grid>
-          </SubMenu> : 
-          <SubMenu width='78px' height='27px' line='29px'>
-            <Text 
-              bold 
-              color={repuest? '#7281D1': '#6195CF'}
-              _onClick={() => {connectRoom(props.postId)}} 
-            >연락하기&gt;</Text>
-          </SubMenu>
-        }
-        <div showmodal={showmodal} />
-        {showmodal ?
-          <Grid className="modalBackground" _onClick={closemodal}>
-            <Grid
-              className="modalContainer"
-              _onClick={(e) => e.stopPropagation()}
-            >
-              {/* <Grid margin="25px 0">
-                <BsFillExclamationCircleFill size="30" />
-              </Grid> */}
-              <Grid margin="10px 0">
-                <Text size="20px" cursor="pointer"
-                  _onClick={() => {
-                    history.push(`/carpoolwrite/${props.skiResort}/${props.postId}`)
-                }}>
-                  수정하기
-                </Text>
+      {props.status ? 
+        <Grid is_flex>
+          {/* 게시글 수정 삭제 modal 시작 */}
+          {/* 게시글을 조회한사람이 작성한 사람과 일치할 경우 모달 선택창이 보이게 하기 */}
+          {is_mine ?
+            <SubMenu width='27px' height='27px' line='41px'>
+              <Grid _onClick={() => {setShowModal(true)}}>
+                <Image src={etc} width='27px' height='27px'/>
               </Grid>
-              <Grid margin="10px 0">
-                <Text size="20px" cursor="pointer"
-                  _onClick={() => {
-                    dispatch(
-                      carpoolActions.deleteCarpoolDB(props.skiResort, props.postId)
-                    )
-                }}>
-                  삭제하기
-                </Text>
-              </Grid>
-              <Grid margin="10px 0">
-                <Text size="20px" cursor="pointer"
-                  _onClick={() => {
-                    dispatch(
-                      carpoolActions.completeCarpoolDB(props.skiResort, props.postId)
-                    )
-                }}>
-                  모집 완료
-                </Text>
-              </Grid>
-              <Text
-                _onClick={closemodal}
-                size="18px"
-                margin="20px 0"
-                cursor="pointer"
+            </SubMenu> : 
+            <SubMenu width='78px' height='27px' line='29px'>
+              <Text 
+                bold 
+                color={repuest? '#7281D1': '#6195CF'}
+                _onClick={() => {connectRoom(props.postId)}} 
+              >연락하기&gt;</Text>
+            </SubMenu>
+          }
+          <div showmodal={showmodal} />
+          {showmodal ?
+            <Grid className="modalBackground" _onClick={closemodal}>
+              <Grid
+                className="modalContainer"
+                _onClick={(e) => e.stopPropagation()}
               >
-                취소
-              </Text>
+                {/* <Grid margin="25px 0">
+                  <BsFillExclamationCircleFill size="30" />
+                </Grid> */}
+                <Grid margin="10px 0">
+                  <Text size="20px" cursor="pointer"
+                    _onClick={() => {
+                      history.push(`/carpoolwrite/${props.skiResort}/${props.postId}`)
+                  }}>
+                    수정하기
+                  </Text>
+                </Grid>
+                <Grid margin="10px 0">
+                  <Text size="20px" cursor="pointer"
+                    _onClick={() => {
+                      dispatch(
+                        carpoolActions.deleteCarpoolDB(props.skiResort, props.postId)
+                      )
+                  }}>
+                    삭제하기
+                  </Text>
+                </Grid>
+                <Grid margin="10px 0">
+                  <Text size="20px" cursor="pointer"
+                    _onClick={() => {
+                      dispatch(
+                        carpoolActions.completeCarpoolDB(props.skiResort, props.postId)
+                      )
+                  }}>
+                    모집 완료
+                  </Text>
+                </Grid>
+                <Text
+                  _onClick={closemodal}
+                  size="18px"
+                  margin="20px 0"
+                  cursor="pointer"
+                >
+                  취소
+                </Text>
+              </Grid>
             </Grid>
-          </Grid>
-          : null}
+            : null}
       </Grid>
+      : null}
 
     </CarpoolCard>
   );

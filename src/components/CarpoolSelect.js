@@ -182,11 +182,11 @@ const CarpoolFilter = (props) => {
               </Grid>
             </Grid>
           : <Grid display='flex' margin='0 0 50px 0' gap='24px'>
-              <Grid width='70%'>
+              <Grid width='60%'>
                 <Text size='12px' color='#6195CF'>날짜</Text>
                 <DateSelector _value={date} _selectDate={selectDate} />
               </Grid>
-              <Grid width='30%'>
+              <Grid width='40%'>
                 <Input
                   blue
                   label='시간'
