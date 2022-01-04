@@ -4,12 +4,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { carpoolActions } from "../redux/modules/carpool";
 
 import CarpoolMenuBar from "../components/CarpoolMenuBar";
-import CarpoolControl from "../components/CarpoolControl";
 import Card from "../components/Card";
 import FloatButton from "../components/FloatButton";
 import InfinityScroll from "../components/InfinityScroll";
 
-import { Grid, Button, Image } from "../elements/index";
+import { Grid, Button, Image, Text } from "../elements/index";
+import High from "../assets/skiImage/HighOne/HighOne3.png"
+import filter from "../assets/carpoolList/filter.svg"
 
 const Carpool = (props, { location }) => {
   const history = props.history;
@@ -19,6 +20,7 @@ const Carpool = (props, { location }) => {
   const is_mine = props.nickname === nickname;
   const is_profile = localStorage.getItem("is_profile");
   const carpool_list = useSelector((state) => state.carpool.list);
+  console.log(carpool_list)
   const page = useSelector((state) => state.carpool.page);
   const is_loading = useSelector((state) => state.carpool.is_loading);
   const skiResort = props.match.params.skiresort;
@@ -38,41 +40,47 @@ const Carpool = (props, { location }) => {
   };
 
   return (
-    <Grid is_flex align="center" direction="column" heigth="100px">
-      {/* <Grid height='291px'>
-        <Image/>
+    <Grid height="100%" bg='#FFF'>
+
+      <Grid width='100%' height='291px'>
+        <Image src={High} size='cover' width='100%' height='100%'/>
       </Grid>
 
-      <Grid>
+      <Grid width='100%'>
         <CarpoolMenuBar match={props.match} />
-      </Grid> */}
+      </Grid>
 
-      <Grid bg="#C4C4C4"></Grid>
+      <Grid phoneSize>
+        <Grid cursor is_flex justify='center' width='66px' height='30px' margin='16px 0' border='2px solid #6195CF' radius='6px'
+          _onClick={() => {
+            history.push(`/carpoolfilter/${skiResort}`);
+          }}
+        >
+          <Image src={filter} width='20px' height='20px'/>
+          <Text bold color='#6195CF'>필터</Text>
+        </Grid>
 
-      <CarpoolMenuBar match={props.match} />
+        <InfinityScroll
+          callNext={() => {
+            dispatch(carpoolActions.getCarpoolDB(skiResort, page));
+          }}
+          is_loading={is_loading}
+        >
+          {carpool_list.map((l) => {
+            return (
+              <Grid key={l.postId} width="100%">
+                {is_mine ? (
+                  <Card {...l} skiResort={skiResort} is_mine />
+                ) : (
+                  <Card {...l} skiResort={skiResort} />
+                )}
+              </Grid>
+            );
+          })}
+        </InfinityScroll>
+      </Grid>
 
-      <CarpoolControl />
-
-      <InfinityScroll
-        callNext={() => {
-          dispatch(carpoolActions.getCarpoolDB(skiResort, page));
-        }}
-        is_loading={is_loading}
-      >
-        {carpool_list.map((l) => {
-          return (
-            <Grid key={l.postId} width="100%">
-              {is_mine ? (
-                <Card {...l} skiResort={skiResort} is_mine />
-              ) : (
-                <Card {...l} skiResort={skiResort} />
-              )}
-            </Grid>
-          );
-        })}
-      </InfinityScroll>
-
-      <FloatButton _onClick={induceProfile} />
+      {/* <FloatButton _onClick={induceProfile} />  dd*/}
     </Grid>
   );
 };

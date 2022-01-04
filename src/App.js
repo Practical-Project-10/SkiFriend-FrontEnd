@@ -69,7 +69,7 @@ function App() {
         ></Route>
         <Route path="/chatlist" component={ChatList} />
         <Route path="/chatroom/:roomId" component={ChatRoom} />
-        <Navbar />
+        {/* <Navbar /> */}
       </Grid>
     </React.Fragment>
   );

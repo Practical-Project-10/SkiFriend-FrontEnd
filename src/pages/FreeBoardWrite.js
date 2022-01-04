@@ -5,7 +5,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { boardCreators as boardActions } from "../redux/modules/freeboard";
 import { imageActions } from "../redux/modules/image";
 
+import styled from 'styled-components';
 import { Grid, Button, Text, Input, Image } from "../elements/index";
+import UnderArrow from "../assets/freeBoard/underArrow.svg"
 
 //react icons
 import { GrFormPrevious } from "react-icons/gr";
@@ -94,12 +96,28 @@ const FreeBoardWrite = () => {
 
   return (
     <React.Fragment>
-      {is_edit ? (
+      <Grid bg='#FFF'>
+
+        <Grid is_flex justify='space-between' bg='#C6D2E0' padding='8px 16px'>
+          <Text>작성 전 꼭 읽어주세요!</Text>
+          <Image src={UnderArrow} width='13px' height='8px'/>
+        </Grid>
+
+        <Grid phoneSize>
+          <Title placeholder="제목을 작성해주세요."/>
+
+          
+        </Grid>
+
+      </Grid>
+
+
+      {/* {is_edit ? (
         <Grid header>게시글 수정하기</Grid>
       ) : (
         <Grid header>게시글 작성하기</Grid>
-      )}
-      <Grid is_flex justify="space-between">
+      )} */}
+      {/* <Grid is_flex justify="space-between">
         <Grid
           cursor="pointer"
           _onClick={() => {
@@ -160,8 +178,23 @@ const FreeBoardWrite = () => {
           accept="image/*"
           onChange={uploadImg}
         />
-      </Grid>
+      </Grid> */}
     </React.Fragment>
   );
 };
+
+const Title = styled.input`
+  width: 100%;
+  padding: 22px 0;
+  border: none;
+  border-bottom: 1px solid black;
+  font-size: 20px;
+  font-weight: 700;
+  &:focus {
+    outline: none;
+  }
+  /* &::-webkit-input-placeholder { font-size: 20px; } */
+}
+`;
+
 export default FreeBoardWrite;

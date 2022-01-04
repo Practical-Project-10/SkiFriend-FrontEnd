@@ -120,7 +120,7 @@ const Home = (props) => {
             <HotPost/>
             {/* {hotPosts.map(p => {
               return(
-                <Grid>
+                <Grid key={p.postId}>
                   <HotPost {...p}/>
                 </Grid>
               )

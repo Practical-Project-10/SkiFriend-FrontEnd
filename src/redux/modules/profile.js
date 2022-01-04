@@ -50,6 +50,7 @@ const addProfileDB = (profile) => {
 
     try {
       const response = await apis.addProfile(formData);
+      console.log(response)
       const _profile = response.data;
       response && history.push("/mypage");
       dispatch(addProfile(_profile));
