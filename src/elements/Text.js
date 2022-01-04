@@ -8,6 +8,8 @@ const Text = (props) => {
     children,
     margin,
     align,
+    radius,
+    bg,
     bold,
     link,
     padding,
@@ -23,6 +25,8 @@ const Text = (props) => {
     size,
     margin,
     bold,
+    radius,
+    bg,
     align,
     link,
     padding,
@@ -62,6 +66,8 @@ const P = styled.p`
   margin-bottom: 0;
   padding: ${(props) => props.padding};
   text-align: ${(props) => props.align};
+  background-color: ${(props) => props.bg};
+  border-radius: ${(props) => props.radius};
   opacity: ${(props) => props.opacity};
   cursor: ${(props) => props.cursor? 'pointer': ''};
   ${(props) => (props.className ? `className: ${props.className};` : "")};

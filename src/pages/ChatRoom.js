@@ -11,7 +11,6 @@ import MessageBox from "../components/MessageBox";
 //icons
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import { Grid, Button, Text, Input } from "../elements/index";
-import { reverse } from "lodash";
 
 const ChatRoom = () => {
   // const dispatch = useDispatch();
@@ -129,7 +128,7 @@ const ChatRoom = () => {
       <Grid height="300px">
         {/* 채팅말풍선 */}
         {messageList.map((msg) => {
-          return <MessageBox chatInfo={msg} />;
+          return <MessageBox key={msg.messageId} chatInfo={msg} />;
         })}
       </Grid>
       {/* 하단부 버튼들 */}

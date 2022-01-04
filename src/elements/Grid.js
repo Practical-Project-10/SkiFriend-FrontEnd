@@ -140,9 +140,9 @@ const GridBox = styled.div`
   box-sizing: border-box;
   overflow: ${(props) => props.overflow};
   text-align: ${(props) => props.align};
-  flex-wrap: ${(props) => props.wrap? 'wrap': ''};
+  flex-wrap: ${(props) => (props.wrap ? "wrap" : "")};
   flex-direction: ${(props) => props.direction};
-  cursor: ${(props) => props.cursor? 'pointer': ''};
+  cursor: ${(props) => (props.cursor ? "pointer" : "")};
   box-sizing: border-box;
   ${(props) => (props.is_flex ? "display: flex; align-items: center;" : "")}
   ${(props) => (props.className ? `className: ${props.className};` : "")}
@@ -162,7 +162,7 @@ const MainFrame = styled.div`
   border: 1px solid #000;
   box-sizing: border-box;
   overflow: scroll;
-  background: #D9E3EE;
+  background: #d9e3ee;
   /* background: ${(props) => `url(${props.src})`} no-repeat;
   background-size: cover; */
 `;
@@ -205,9 +205,9 @@ const ModalContainer = styled.div`
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  max-height: 225px;
+  max-height: 250px;
   width: 25rem;
-  height: 225px;
+  height: 250px;
   background: #ffffff;
   border-radius: 10px;
   text-align: center;

@@ -39,7 +39,6 @@ export const makeRoomChatDB =
         // const nickname = localStorage.getItem("nickname");
         // const datas = { ...res.data, nickname: nickname };
         // dispatch(addChat(datas));
-        localStorage.setItem("longRoomId", res.data.longRoomId);
         console.log(res);
         history.push(`/chatroom/${res.data.roomId}`);
       })
@@ -73,7 +72,7 @@ export const getContentChatDB =
       .then((res) => {
         console.log("요청 성공");
         console.log(res);
-        dispatch(getChatList(res.data));
+        dispatch(getChatList(...res.data));
       })
       .catch((error) => {
         console.log(`불러오기 실패${error}`);
@@ -122,16 +121,7 @@ export default handleActions(
   {
     [GET_CHATLIST]: (state, action) =>
       produce(state, (draft) => {
-        draft.chatList.push(...action.payload.chatList);
-
-        draft.chatList = draft.chatList.reduce((prev, now) => {
-          if (prev.findIndex((a) => a.messageId === now.messageId) === -1) {
-            return [...prev, now];
-          } else {
-            prev[prev.findIndex((a) => a.messageId === now.messageId)] = now;
-            return prev;
-          }
-        }, []);
+        draft.chatList = action.payload.chatList;
       }),
 
     [GET_ROOMLIST]: (state, action) =>

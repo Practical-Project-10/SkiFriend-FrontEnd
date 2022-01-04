@@ -68,7 +68,7 @@ function App() {
           component={PwdChange}
         ></Route>
         <Route path="/chatlist" component={ChatList} />
-        <Route path="/chatroom/:roomId" component={ChatRoom} />
+        <Route path="/chatroom/:roomId/:longRoomId" component={ChatRoom} />
         {/* <Navbar /> */}
       </Grid>
     </React.Fragment>
