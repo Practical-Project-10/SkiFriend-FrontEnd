@@ -1,22 +1,24 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { chatCreators as chatActions } from "../redux/modules/chat";
 import { history } from "../redux/ConfigStore";
 import { useParams } from "react-router-dom";
 
+import axios from "axios";
 import SockJS from "sockjs-client";
 import Stomp from "stompjs";
 import MessageBox from "../components/MessageBox";
 //icons
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import { Grid, Button, Text, Input } from "../elements/index";
+import { reverse } from "lodash";
 
 const ChatRoom = () => {
-  const dispatch = useDispatch();
-  const datas = useSelector((state) => state.chat.chatList);
-  console.log(datas);
+  // const dispatch = useDispatch();
+  // const datas = useSelector((state) => state.chat.chatList);
   const params = useParams();
   const roomId = params.roomId;
+  const nowMSG = useRef();
 
   //토큰
   const accessToken = document.cookie.split("=")[1];
@@ -30,34 +32,49 @@ const ChatRoom = () => {
   const [message, setMessage] = useState("");
   const [messageList, setMessageList] = useState([]);
 
+  const messageDatas = (recv) => {
+    setMessageList((prev) => [...prev, recv]);
+  };
   //메세지 내용
   const messageChat = (e) => {
     const content = e.target.value;
     setMessage(content);
   };
 
-  //응답받을 메세지
-  const respondMSG = (content) => {
-    setMessageList((prev) => [content, ...prev]);
-  };
-
   //메세지 보내기
   const sendMessage = async () => {
-    const datas = { type: "TALK", roomId: roomId, message: message };
+    const datas = {
+      type: "TALK",
+      roomId: roomId,
+      message: message,
+    };
     await stomp.send("/pub/chat/message", token, JSON.stringify(datas));
     // dispatch(chatActions.sendChatDB(roomId, message));
     setMessage("");
+    console.log(message);
+    console.log(nowMSG);
   };
 
-  //채팅룸 연결, 대화내용 가져오기
+  //채팅룸 연결
   React.useEffect(() => {
     chatConnect();
     // dispatch(chatActions.connectChatDB(roomId));
-    dispatch(chatActions.getContentChatDB(roomId));
 
     return () => {
       chatDisconnect();
     };
+  }, []);
+
+  // 대화내용 가져오기
+  React.useEffect(() => {
+    axios
+      .get(`http://13.125.35.82/chat/message/${roomId}`, { headers: token })
+      .then((res) => {
+        const prevChatData = res.data;
+        console.log("response : ", prevChatData);
+        setMessageList(prevChatData);
+      });
+    // dispatch(chatActions.getContentChatDB(roomId));
   }, []);
 
   // stomp연결
@@ -69,7 +86,8 @@ const ChatRoom = () => {
           (message) => {
             const responseData = JSON.parse(message.body);
             console.log(responseData);
-            dispatch(chatActions.addChat(responseData));
+            messageDatas(responseData);
+            // dispatch(chatActions.addChat(responseData));
           },
           token
         );
@@ -88,13 +106,6 @@ const ChatRoom = () => {
       console.log(err);
     }
   };
-
-  //채팅방 나가기
-  const exitChatRoom = () => {
-    history.push("/chatlist");
-    chatDisconnect();
-  };
-  console.log(message);
 
   return (
     <React.Fragment>
@@ -117,7 +128,7 @@ const ChatRoom = () => {
       {/* 채팅이 들어갈 공간 */}
       <Grid height="300px">
         {/* 채팅말풍선 */}
-        {datas.map((msg) => {
+        {messageList.map((msg) => {
           return <MessageBox chatInfo={msg} />;
         })}
       </Grid>
@@ -132,7 +143,7 @@ const ChatRoom = () => {
           <Button width="20%">이미지업로드버튼</Button>
         </Grid>
         <Grid justify="flex-end" bg="#414141" padding="20px" align="right">
-          <Input _onChange={messageChat}></Input>
+          <Input _value={message} _onChange={messageChat}></Input>
           <Button width="30%" padding="20px" _onClick={sendMessage}>
             전송
           </Button>
