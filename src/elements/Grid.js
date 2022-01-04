@@ -144,7 +144,7 @@ const GridBox = styled.div`
   flex-direction: ${(props) => props.direction};
   cursor: ${(props) => props.cursor};
   box-sizing: border-box;
-  ${(props) => (props.is_flex ? "display: flex; align-items: center; justify-content: center;" : "")}
+  ${(props) => (props.is_flex ? "display: flex; align-items: center;" : "")}
   ${(props) => (props.className ? `className: ${props.className};` : "")}
   &::-webkit-scrollbar {
     display: none;

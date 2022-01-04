@@ -7,8 +7,7 @@ import { history } from "../redux/ConfigStore";
 
 const ChatList = (props) => {
   const dispatch = useDispatch();
-  const chatList = useSelector((state) => state.chat.list);
-  console.log(chatList);
+  const chatRoomList = useSelector((state) => state.chat.roomList);
 
   const is_login = localStorage.getItem("is_login");
 
@@ -22,8 +21,8 @@ const ChatList = (props) => {
   }, []);
 
   //채팅목록에서 클릭한 채팅방 대화내용 가져오기
-  const EnterChatRoom = (roomId, roomName) => {
-    history.push(`/chatroom/${roomName}`);
+  const EnterChatRoom = (roomId) => {
+    history.push(`/chatroom/${roomId}`);
     dispatch(chatActions.getContentChatDB(roomId));
   };
 
@@ -34,29 +33,35 @@ const ChatList = (props) => {
           채팅목록
         </Grid>
 
-        {chatList.map((list) => {
+        {chatRoomList.map((list) => {
           return (
             <Grid
               is_flex
               justify="space-between"
               padding="10px"
               key={list.roomId}
-              _onClick={EnterChatRoom(list.roomId, list.roomName)}
+              _onClick={() => {
+                EnterChatRoom(list.roomId);
+              }}
             >
               <Grid is_flex>
-                <Image width="40px" height="40px" radius="50%" />
+                <Image
+                  width="40px"
+                  height="40px"
+                  radius="50%"
+                  margin="0 10px 0 0"
+                />
                 <Grid>
-                  <Text size="12px" padding="2px 0" margin="0"></Text>
-                  <Text
-                    size="12px"
-                    padding="2px 0"
-                    margin="0"
-                    color="#999"
-                  ></Text>
+                  <Text size="12px" padding="2px 0" margin="0">
+                    {list.roomName}
+                  </Text>
+                  <Text size="12px" padding="2px 0" margin="0" color="#999">
+                    {list.lastMsg}
+                  </Text>
                 </Grid>
               </Grid>
               <Grid height="42px">
-                <Text>14:24</Text>
+                <Text>{list.lastMsgTime}</Text>
               </Grid>
             </Grid>
           );
