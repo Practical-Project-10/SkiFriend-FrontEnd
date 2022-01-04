@@ -10,10 +10,20 @@ import { chatCreators as chatActions } from "../redux/modules/chat";
 
 const Card = (props) => {
   const dispatch = useDispatch();
-
+  const is_login = localStorage.getItem("is_login");
   //연락하기 기능
   const connectRoom = (postId) => {
-    dispatch(chatActions.makeRoomChatDB(postId));
+    if (!is_login) {
+      const ask = window.confirm(
+        "로그인한 회원만 사용 가능합니다. 로그인 페이지로 이동하시겠습니까?"
+      );
+      if (ask) {
+        return history.push(`/login`);
+      } else {
+        return;
+      }
+    }
+    return dispatch(chatActions.makeRoomChatDB(postId));
   };
 
   return (
