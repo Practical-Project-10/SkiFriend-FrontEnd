@@ -59,6 +59,7 @@ const addProfileDB = (profile) => {
   // };
 };
 
+
 const editProfileDB = (profile) => {
   return async (dispatch, getState, { history }) => {
     const _profile = getState().profile.user_profile;
