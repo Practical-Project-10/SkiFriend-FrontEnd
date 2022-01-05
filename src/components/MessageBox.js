@@ -50,22 +50,20 @@ const MessageBox = (props) => {
           {chatInfo.senderImg ? (
             <Grid
               src={chatInfo.senderImg}
-              radius="50%"
               cursor="pointer"
               margin="0 5px"
               _onClick={showProfile}
             >
-              <Image width="35px" height="35px" />
+              <Image width="35px" height="35px" size='cover' radius="50%"/>
             </Grid>
           ) : (
             <Grid
               src={defaultIMG}
-              radius="50%"
               cursor="pointer"
               margin="0 5px"
               _onClick={showProfile}
             >
-              <Image width="35px" height="35px" />
+              <Image width="35px" height="35px" size='cover' radius="50%"/>
             </Grid>
           )}
           <Grid>
@@ -98,6 +96,7 @@ const MessageBox = (props) => {
                   width="110px"
                   height="110px"
                   radius="50%"
+
                 />
               </Grid>
             ) : (
