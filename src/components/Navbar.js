@@ -12,16 +12,12 @@ import { BsChatFill, BsChat } from "react-icons/bs";
 import { AiFillAppstore, AiOutlineAppstore } from "react-icons/ai";
 
 const Navbar = ({ location }) => {
-
-  if(location.pathname === '/login') {
-    return null;
-  }
-
-  if(location.pathname === '/phoneauth') {
-    return null;
-  }
-
-  if(location.pathname === '/signup') {
+  if (
+    location.pathname === "/login" ||
+    location.pathname === "/phoneauth" ||
+    location.pathname === "/signup" ||
+    location.pathname.includes("/chatroom")
+  ) {
     return null;
   }
 
@@ -74,6 +70,6 @@ const FixedNav = styled.div`
   width: 100%;
   bottom: 0;
   left: 0; */
-`
+`;
 
 export default withRouter(Navbar);

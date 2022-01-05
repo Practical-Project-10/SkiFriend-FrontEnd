@@ -44,17 +44,17 @@ const Button = (props) => {
 Button.defaultProps = {
   children: null,
   _onClick: () => {},
-  width: '100%',
-  padding: '21px 0',
-  color: '#FFF',
+  width: "100%",
+  padding: "21px 0",
+  color: "#FFF",
 };
 
 const ElButton = styled.button`
-  width: ${props => props.width};
-  margin: ${props => props.margin};
-  padding: ${props => props.padding}; 
-  color: ${props => props.color}; 
-  background-color: ${props => props.bg? props.bg: '#474D56'};
+  width: ${(props) => props.width};
+  margin: ${(props) => props.margin};
+  padding: ${(props) => props.padding};
+  color: ${(props) => props.color};
+  background-color: ${(props) => (props.bg ? props.bg : "#474D56")};
   border: none;
   border-radius: 8px;
   box-sizing: border-box;
@@ -123,5 +123,3 @@ export default Button;
 //   padding: 5px 0;
 //   margin: 5px auto;
 // `;
-
-
