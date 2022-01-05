@@ -49,13 +49,14 @@ export const apis = {
   //마이페이지
   getProfile: () => api.get("/user/info"),
 
-  addProfile: (profile) =>
-    {console.log(profile)
+  addProfile: (profile) => {
+    console.log(profile);
     api.post("/user/profile", profile, {
       headers: {
         "Content-Type": "multipart/form-data",
       },
-    })},
+    });
+  },
 
   editProfile: (profile) =>
     api.put("/user/info", profile, {

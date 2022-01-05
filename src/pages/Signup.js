@@ -9,8 +9,8 @@ import { userActions } from "../redux/modules/user";
 
 const SignupOne = (props) => {
   const dispatch = useDispatch();
-  const is_id = useSelector(state => state.user.is_id);
-  const is_nickname = useSelector(state => state.user.is_nickname);
+  const is_id = useSelector((state) => state.user.is_id);
+  const is_nickname = useSelector((state) => state.user.is_nickname);
   console.log(is_id, is_nickname);
 
   // 유효성검사 상태
@@ -44,8 +44,8 @@ const SignupOne = (props) => {
         return null;
       } else {
         setCheckId(true);
-      };
-    };
+      }
+    }
 
     if (name === "pwd") {
       if (!pwdRegExp.test(pwd)) {
@@ -55,8 +55,8 @@ const SignupOne = (props) => {
       } else {
         console.log("성공");
         setCheckPwd(true);
-      };
-    };
+      }
+    }
 
     if (name === "rePwd") {
       if (pwd !== rePwd) {
@@ -66,32 +66,32 @@ const SignupOne = (props) => {
       } else {
         console.log("성공");
         setCheckRePwd(true);
-      };
-    };
+      }
+    }
   };
 
   const handleClick = (e) => {
-    const {name} = e.target;
-    
-    if(name === 'id') {
-      if(checkId && id !== '') {
+    const { name } = e.target;
+
+    if (name === "id") {
+      if (checkId && id !== "") {
         console.log("성공");
         dispatch(userActions.isIdDB(id));
       } else {
-        window.alert('올바른 아이디를 입력해주세요.')
+        window.alert("올바른 아이디를 입력해주세요.");
       }
     }
 
     if (name === "nickname") {
-      if(nickname !== '') {
+      if (nickname.length >= 1 && nickname.length <= 7) {
         console.log("성공");
-        console.log(nickname)
+        console.log(nickname);
         dispatch(userActions.isNicknameDB(nickname));
       } else {
-        window.alert('닉네임을 입력해주세요.')
+        window.alert("닉네임은 1글자 이상 7글자 이하로 정해주세요.");
       }
-    };
-  }
+    }
+  };
 
   const join = () => {
     const userInfo = {
@@ -100,35 +100,73 @@ const SignupOne = (props) => {
       nickname: nickname,
     };
 
-    if(checkId && checkPwd && checkRePwd) {
+    if (checkId && checkPwd && checkRePwd) {
       dispatch(userActions.signupDB(userInfo));
-    };
+    }
   };
 
   return (
     <Grid phoneSize>
-        <Grid padding='132px 0 195px' display='flex' direction='column' gap='33px'>
-          <Input more4 dupButton buttonText='중복확인' _name='id' label='로그인' type='text' placeholder='영소문자, 숫자를 포함한 5자리 이상' _onBlur={handleBlur} _onChange={handleChange} _onClick={handleClick}/>
-          {!checkId &&
-            <Text color='red'>올바른 형식의 아이디가 아닙니다.</Text>
-          }
-          
-          <Input more4 dupButton buttonText='중복확인'  _name='nickname' label='닉네임' type='text' placeholder='1자리 이상' _onChange={handleChange} _onClick={handleClick}/>
-          
-          <Input more4 _name='pwd' _onBlur={handleBlur} _onChange={handleChange} label='비밀번호' type='password' placeholder='영대소문자와 특수문자를 포함한 8자리 이상'/>
-          {!checkPwd &&
-            <Text color='red'>올바른 형식의 비밀번호가 아닙니다.</Text>
-          }
+      <Grid
+        padding="132px 0 195px"
+        display="flex"
+        direction="column"
+        gap="33px"
+      >
+        <Input
+          more4
+          dupButton
+          buttonText="중복확인"
+          _name="id"
+          label="로그인"
+          type="text"
+          placeholder="영소문자, 숫자를 포함한 5자리 이상"
+          _onBlur={handleBlur}
+          _onChange={handleChange}
+          _onClick={handleClick}
+        />
+        {!checkId && <Text color="red">올바른 형식의 아이디가 아닙니다.</Text>}
 
-          <Input more4 _name='rePwd' _onBlur={handleBlur} _onChange={handleChange} label='비밀번호 확인' type='password' placeholder='비밀번호를 다시 입력해주세요.'/>
-            {!checkRePwd &&
-              <Text color='red'>비밀번호가 일치하지 않습니다.</Text>
-            }
-        </Grid>
-          
-        <Grid padding='0 0 16px'>
-          <Button _onClick={join}>가입</Button>
-        </Grid>
+        <Input
+          more4
+          dupButton
+          buttonText="중복확인"
+          _name="nickname"
+          label="닉네임"
+          type="text"
+          placeholder="1자리 이상 7자리 이하"
+          _onChange={handleChange}
+          _onClick={handleClick}
+        />
+
+        <Input
+          more4
+          _name="pwd"
+          _onBlur={handleBlur}
+          _onChange={handleChange}
+          label="비밀번호"
+          type="password"
+          placeholder="영대소문자와 특수문자를 포함한 8자리 이상"
+        />
+        {!checkPwd && (
+          <Text color="red">올바른 형식의 비밀번호가 아닙니다.</Text>
+        )}
+
+        <Input
+          more4
+          _name="rePwd"
+          _onBlur={handleBlur}
+          _onChange={handleChange}
+          label="비밀번호 확인"
+          type="password"
+          placeholder="비밀번호를 다시 입력해주세요."
+        />
+        {!checkRePwd && <Text color="red">비밀번호가 일치하지 않습니다.</Text>}
+      </Grid>
+
+      <Grid padding="0 0 16px">
+        <Button _onClick={join}>가입</Button>
+      </Grid>
     </Grid>
   );
 };

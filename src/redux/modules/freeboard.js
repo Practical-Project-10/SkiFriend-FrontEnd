@@ -124,7 +124,7 @@ export const deleteBoardDB =
       .then((res) => {
         console.log("삭제 성공!!");
         window.alert("게시물이 정상적으로 삭제되었습니다.");
-        // dispatch(deleteBoard(postId));
+        dispatch(loadBoardDB());
         history.push(`/freeboardlist/${skiresort}`);
       })
       .catch((error) => {
@@ -139,7 +139,7 @@ export default handleActions(
       produce(state, (draft) => {
         // draft.page += 1
 
-        draft.list.push(...action.payload.postList);
+        draft.list = action.payload.postList;
 
         draft.list = draft.list.reduce((prev, now) => {
           if (prev.findIndex((a) => a.postId === now.postId) === -1) {

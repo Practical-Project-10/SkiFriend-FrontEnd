@@ -18,13 +18,13 @@ import High from "../assets/skiImage/HighOne/HighOne3.png";
 const FreeBoardList = () => {
   const params = useParams();
   const skiresort = params.skiresort;
+  console.log(skiresort);
   const dispatch = useDispatch();
   const boardList = useSelector((state) => state.freeboard.list);
   const page = useSelector((state) => state.carpool.page);
   const is_loading = useSelector((state) => state.freeboard.is_loading);
   console.log(boardList);
   const is_login = localStorage.getItem("nickname");
-  console.log(boardList);
   // 게시글 작성 페이지 이동 판단
   const moveWritePage = () => {
     if (is_login) {
@@ -42,9 +42,7 @@ const FreeBoardList = () => {
   };
 
   React.useEffect(() => {
-    if (boardList.length === 0) {
-      dispatch(boardActions.loadBoardDB(skiresort));
-    }
+    dispatch(boardActions.loadBoardDB(skiresort));
   }, []);
 
   return (

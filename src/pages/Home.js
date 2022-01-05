@@ -3,22 +3,22 @@ import { useDispatch, useSelector } from "react-redux";
 import { mainCreators as mainActions } from "../redux/modules/main";
 
 import { Grid, Image, Text } from "../elements/index";
-import SkiIcon from "../components/SkiIcon"
+import SkiIcon from "../components/SkiIcon";
 import HotPost from "../components/HotPost";
 import Header from "../components/Header";
 
 import High1 from "../assets/skiInfo/high1_logo.png";
-import High1_ from "../assets/skiImage/HighOne/HighOne3.png"
+import High1_ from "../assets/skiImage/HighOne/HighOne3.png";
 import YongPyong from "../assets/skiInfo/yongpyong_logo.png";
-import YongPyong_ from "../assets/skiImage/YongPyong/YongPyong2.png"
+import YongPyong_ from "../assets/skiImage/YongPyong/YongPyong2.png";
 import VivaldiPark from "../assets/skiInfo/vivaldi_logo.png";
-import VivaldiPark_ from "../assets/skiImage/Vivaldi/Vivaldi1.png"
+import VivaldiPark_ from "../assets/skiImage/Vivaldi/Vivaldi1.png";
 import Phoenix from "../assets/skiInfo/phoenix_logo.png";
-import Phoenix_ from "../assets/skiImage/Phoenix/Phoenix2.png"
+import Phoenix_ from "../assets/skiImage/Phoenix/Phoenix2.png";
 import WellihilliPark from "../assets/skiInfo/welli_logo.png";
-import WellihilliPark_ from "../assets/skiImage/Wellihilli/Wellihilli1.png"
+import WellihilliPark_ from "../assets/skiImage/Wellihilli/Wellihilli1.png";
 import Konjiam from "../assets/skiInfo/kongiam_logo.png";
-import Konjiam_ from "../assets/skiImage/Konjiam/Konjiam1.png"
+import Konjiam_ from "../assets/skiImage/Konjiam/Konjiam1.png";
 import Banner from "../assets/mainPage/Home_banner.png";
 //스키장 이미지도 서버에서 받아야한다.
 
@@ -94,20 +94,24 @@ const Home = (props) => {
           <Image src={Banner} size='cover' width='100%' height='100%'/>
         </Grid>
 
-        <Grid align='center' padding='4px 0' bg="#474D56">
-          <Text bold color="#fff">카풀과 스키장이 처음이라면? 가이드 읽어보기</Text>
+        <Grid align="center" padding="4px 0" bg="#474D56">
+          <Text bold color="#fff">
+            카풀과 스키장이 처음이라면? 가이드 읽어보기
+          </Text>
         </Grid>
 
-        <Grid display='flex' wrap padding='26px 8%' gap='30px 50px'> {/* padding='26px' 적용이 안 됨*/}
+        <Grid display="flex" wrap padding="26px 8%" gap="30px 50px">
+          {" "}
+          {/* padding='26px' 적용이 안 됨*/}
           {skiResort.map((r) => {
             return (
               <Grid
                 skiIcon
                 key={r.resortNum}
                 _onClick={() => history.push(`/carpool/${r.name}`)}
-                align='center'
+                align="center"
               >
-                <SkiIcon src={r.logo}/>
+                <SkiIcon src={r.logo} />
                 <Text>{r.resort}</Text>
               </Grid>
             );
@@ -116,16 +120,17 @@ const Home = (props) => {
 
         <Grid bg='#FFF' height='448px' radius='22px 22px 0 0' padding='26px 0 0 0'>
           <Grid phoneSize>
-             <Text bold size="18px">인기게시글</Text>
+            <Text bold size="18px">
+              인기게시글
+            </Text>
           </Grid>
           <Grid phoneSize>
-
             {hotPosts.map(p => {
               return(
                 <Grid key={p.postId}>
-                  <HotPost {...p}/>
+                  <HotPost {...p} />
                 </Grid>
-              )
+              );
             })}
           </Grid>
         </Grid>

@@ -1,7 +1,7 @@
-import React from 'react';
+import React from "react";
 
-import styled from 'styled-components';
-import { Grid, Text, Image } from '../elements';
+import styled from "styled-components";
+import { Grid, Text, Image } from "../elements";
 
 import Heart from "../assets/freeBoard/heart.svg";
 import Comment from "../assets/freeBoard/comment.svg";
@@ -16,8 +16,7 @@ const HotPost = (props) => {
   //   '곤지암'
   // ]
 
-
-  return(
+  return (
     <React.Fragment>
       {/* {skiResort.map(r => {
         return( */}
@@ -40,32 +39,34 @@ const HotPost = (props) => {
                 </Grid>
               </Grid>
             </Grid>
-            <hr/>
-          </Posts>
-        {/* )
+          </Grid>
+        </Grid>
+        <hr />
+      </Posts>
+      {/* )
       })} */}
     </React.Fragment>
-  )
-}
+  );
+};
 
 const ResortName = styled.div`
   width: 75px;
   height: 21px;
   margin-right: 11px;
-  background: #6195CF;
+  background: #6195cf;
   border-radius: 140px;
   font-weight: bold;
   font-size: 12px;
   line-height: 20px;
-  color: #FFF;
+  color: #fff;
   text-align: center;
   vertical-align: middle;
-`
+`;
 
 const Posts = styled.div`
   &:last-child > hr {
     display: none;
   }
-`
+`;
 
 export default HotPost;
