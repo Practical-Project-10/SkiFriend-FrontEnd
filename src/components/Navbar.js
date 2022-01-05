@@ -77,7 +77,7 @@ const FixedNav = styled.div`
   left: 0;
   border-top: 1px solid #000;
   width: 100%;
-  /* background: #FFF; */
+  background: #FFF;
 `;
 
 export default withRouter(Navbar);

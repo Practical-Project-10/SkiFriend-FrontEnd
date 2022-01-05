@@ -12,9 +12,13 @@ const Header = (props) => {
 
   if(goBack) {
     return(
-      <GoBack>
+      <GoBack >
         <Image src={back} _onClick={() => history.goBack()} width='20px' height='17px'/>
-        <Text bold block width='140px' margin='0 0 0 97px' size='18px' >카풀{children}</Text>
+        <Text bold block width='140px' margin='0 0 0 100px' size='18px'>카풀 수정 페이지{children}</Text>
+        {complete
+        ? <Button>완료</Button>
+        : null
+        }
       </GoBack>
     )
   }
@@ -42,6 +46,20 @@ const GoBack = styled.div`
   display: flex;
   align-items: center;
   text-align: center;
+  position: relative;
+`
+
+const Button = styled.div`
+  width: 50px;
+  height: 23px;
+  color: #FFF;
+  background: #6195CF;
+  border-radius: 140px;
+  text-align: center;
+  line-height: 23px;
+  position: absolute;
+  top: 16px;
+  right: 16px;
 `
 
 export default Header;
