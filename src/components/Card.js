@@ -62,19 +62,19 @@ const Card = (props) => {
         </Posts>
         <Grid is_flex justify='space-between' margin='0 0 7px'>
           <Small repuest={repuest} width="101px">
-            <Image src={calendar} width='12px' height='15px'/>
+            <Image src={calendar} width='11px' height='15px'/>
             <Text>{props.date}</Text>
           </Small>
           <Small repuest={repuest} width="61px">
-            <Image src={clock} width='12px' height='15px'/>
+            <Image src={clock} width='11px' height='15px'/>
             <Text>{props.time}</Text>
           </Small>
           <Small repuest={repuest} width="49px">
-            <Image src={person} width='12px' height='15px'/>
+            <Image src={person} width='11px' height='15px'/>
             <Text>{props.memberNum}명</Text>
           </Small>
           <Small repuest={repuest} width="80px">
-            <Image src={price} width='12px' height='15px'/>
+            <Image src={price} width='11px' height='15px'/>
             <Text>{props.price}원</Text>
           </Small>
         </Grid>

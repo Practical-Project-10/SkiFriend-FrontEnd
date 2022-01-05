@@ -7,7 +7,7 @@ const Image = (props) => {
     size,
     height,
     width,
-    margin,
+    padding,
     _onClick,
     radius,
     className,
@@ -19,7 +19,7 @@ const Image = (props) => {
     size,
     width,
     height,
-    margin,
+    padding,
     _onClick,
     radius,
     className,
@@ -58,7 +58,7 @@ const MyIcon = styled.div`
 const ElImage = styled.div`
   width: ${(props) => props.width};
   height: ${(props) => props.height};
-  margin: ${(props) => props.margin};
+  padding: ${(props) => props.padding};
   border-radius: ${(props) => props.radius};
   background: ${(props) =>
     props.src ? `url(${props.src}) no-repeat center` : ""};

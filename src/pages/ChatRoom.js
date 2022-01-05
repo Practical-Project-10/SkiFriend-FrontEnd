@@ -18,6 +18,7 @@ const ChatRoom = () => {
   const params = useParams();
   const roomId = params.roomId;
   const nowMSG = useRef();
+  console.log(roomId);
 
   //토큰
   const accessToken = document.cookie.split("=")[1];

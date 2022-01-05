@@ -33,6 +33,7 @@ export const addChat = createAction(ADD, (chatData) => ({ chatData }));
 export const makeRoomChatDB =
   (postId) =>
   async (dispatch, getState, { history }) => {
+    console.log(postId)
     await apis
       .chatRoom(postId)
       .then((res) => {
@@ -40,7 +41,7 @@ export const makeRoomChatDB =
         // const datas = { ...res.data, nickname: nickname };
         // dispatch(addChat(datas));
         console.log(res);
-        history.push(`/chatroom/${res.data.roomId}`);
+        history.push(`/chatroom/${res.data.roomId}/${res.data.longRoomId}`);
       })
       .catch((error) => {
         console.log(`불러오기 실패${error}`);

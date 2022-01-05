@@ -73,7 +73,7 @@ const Carpool = (props, { location }) => {
         >
           {carpool_list.map((l) => {
             return (
-              <Grid key={l.postId} width="100%" margin-bottom='16px' >
+              <Grid key={l.postId} margin='0 0 16px 0' >
                 <Card {...l} skiResort={skiResort}/>
               </Grid>
             );

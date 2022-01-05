@@ -36,19 +36,36 @@ const MyPage = (props) => {
     dispatch(userActions.deleteUserInfoDB());
   }
 
-  if (!is_login) {
-    return (
-      //로그인 안한 경우
-      <React.Fragment>
-        <Grid >
-          <Grid phoneSize>
-            <Grid display='flex' margin='30px 0 22px'>
-              <Grid width='75px' height='75px' margin='0 12px 0 0'>
-                <Image src={profile} width='100%' height='100%' size='cover' radius='999px'/>
+  return (
+    //로그인 안 했을 때
+    <Grid >
+      <Grid phoneSize>
+        {!is_login
+        ? <Grid display='flex' justify='space-between' margin='30px 0 22px'>
+            <Grid padding='12px 0'>
+              <Text bold size='18px' line>로그인 후 이용해주세요.</Text>
+            </Grid>
+
+            <Grid padding='6px 0 0'>
+              <Grid cursor width='107px' padding='5px 6px' bg='#FFF' radius='4px' align='center'
+                _onClick={() => {history.push('/login')}}
+              >
+                <Text size='12px' color='#474D56'>로그인</Text>
+              </Grid>
+            </Grid>
+          </Grid>
+          // 로그인 했을 때
+        : <Grid>
+            <Grid display='flex' justify='space-between' margin='30px 0 22px'>
+              <Grid width='75px' height='75px'>
+                <Image
+                  width='75px' height='75px' size='cover' radius='999px'
+                  src={user_profile.profileImg === null? profile: user_profile.profileImg} 
+                />
               </Grid>
 
-              <Grid padding='12px 0' margin='0 17px 0 0'>
-                <Text bold size='18px' line>환영해요! ㅇㅇㅇ님</Text>
+              <Grid width='179px' padding='12px 0' margin=''>
+                <Text bold size='18px' line>환영해요! {user_profile.nickname}님</Text>
                 <Grid margin='10px 0 0'>
                   <Small>
                     <Text bold size='12px' color='#FFF'>20대</Text>
@@ -58,15 +75,15 @@ const MyPage = (props) => {
 
               <Grid padding='6px 0 0'>
                 {is_profile
-                ? <Grid cursor width='107px' padding='5px 6px' bg='#FFF' radius='4px' align='center'
+                ? <Grid cursor width='66px' padding='6px' bg='#FFF' radius='4px' align='center'
                     _onClick={() => {history.push(`/profilewrite/${user_profile.username}`)}}
                   >
-                    <Text size='12px' color='#474D56'>내 정보 수정하기</Text>
+                    <Text size='12px' color='#474D56'>수정하기</Text>
                   </Grid>
-                : <Grid  cursor width='107px' padding='5px 6px' bg='#FFF' radius='4px' align='center'
+                : <Grid  cursor width='66px' padding='6px' bg='#FFF' radius='4px' align='center'
                     _onClick={() => {history.push('/profilewrite')}}
                   >
-                    <Text size='12px' color='#474D56'>내 정보 등록하기</Text>
+                    <Text size='12px' color='#474D56'>등록하기</Text>
                   </Grid>
                 }
               </Grid>
@@ -79,77 +96,38 @@ const MyPage = (props) => {
               <Text >스키와 커피를 즐길 줄 아는 남자</Text>
             </Grid>
           </Grid>
+        }
+      </Grid>
 
-          <Grid phoneSize height='483px' bg='#FFF' radius='22px 22px 0 0'>
-            <Grid cursor width='100%' height='143px' margin='16px 0 26px'>
-              <Image src={banner} width='100%' height='100%' size='cover'/>
-              {/* 구글 폼으로 이동 */}
-            </Grid>
-
-            <Grid>
-              <Text bold size='12px'>내가 쓴 카풀</Text>
-              {myCarpool.map(l => {
-                return(
-                  <Grid key={l.createdAt} width='270px'>
-                    <SmallCard {...l}/>
-                  </Grid>
-                )
-              })}
-            </Grid>
-
-          </Grid>
-
-          {/* <Grid is_flex justify="space-between" borderB="1px solid #dbdbdb">
-            <Grid is_flex>
-              <Image myIcon />
-              <Text>로그인을 해주세요</Text>
-            </Grid>
-            <Grid>
-              <Button smallBtn _onClick={() => history.push('/login')}>로그인</Button>
-            </Grid>
-          </Grid> */}
+      <Grid phoneSize height='483px' bg='#FFF' radius='22px 22px 0 0'>
+        <Grid cursor width='100%' height='143px' margin='16px 0 26px'>
+          <Image src={banner} width='100%' height='100%' size='cover'/>
+          {/* 구글 폼으로 이동 */}
         </Grid>
 
-      </React.Fragment>
-    );
-  }
-  return (
-    //로그인 한 경우
-    <React.Fragment>
-      <Grid bg="yellow">
-        <Grid header> 마이페이지</Grid>
-        <Grid is_flex justify="space-between" borderB="1px solid #dbdbdb">
-          <Grid is_flex>
-            {/* <Image myIcon src={user_profile.profileImg === null? basicImage: user_profile.profileImg}/> */}
-            <Text>{user_profile.nickname}</Text>
-          </Grid>
-          <Grid>
-            {is_profile
-              ? <Button smallBtn _onClick={() => {history.push(`/profilewrite/${user_profile.username}`)}}>프로필 수정</Button>
-              : <Button smallBtn _onClick={() => {history.push('/profilewrite')}}>등록하기</Button>
-            }
-            <Button smallBtn _onClick={deleteUser}>회원탈퇴</Button>
-          </Grid>
+        <Grid>
+          <Text bold size='12px'>내가 쓴 카풀</Text>
+          {myCarpool.map(l => {
+            return(
+              <Grid key={l.createdAt} width='270px'>
+                <SmallCard {...l}/>
+              </Grid>
+            )
+          })}
+        </Grid>
+
+      </Grid>
+
+      {/* <Grid is_flex justify="space-between" borderB="1px solid #dbdbdb">
+        <Grid is_flex>
+          <Image myIcon />
+          <Text>로그인을 해주세요</Text>
         </Grid>
         <Grid>
-          <Text>자기소개</Text>
-          <Text>스키와 커피를 즐기는 남자</Text>
+          <Button smallBtn _onClick={() => history.push('/login')}>로그인</Button>
         </Grid>
-      </Grid>
-
-      <Grid>
-        <Text>사용자 피드백을 남겨주세요.</Text>
-      </Grid>
-      <Grid is_flex>
-        {myCarpool.map(l => {
-          return(
-            <Grid key={l.createdAt} width='270px'>
-              <SmallCard small {...l}/>
-            </Grid>
-          )
-        })}
-      </Grid>
-    </React.Fragment>
+      </Grid> */}
+    </Grid>
   );
 };
 
