@@ -97,7 +97,7 @@ const Container = styled.div`
     margin: 0 auto;
     padding: 0 auto;
     box-sizing: border-box;
-    background-color: #fff;
+    background-color: #D9E3EE;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
     position: relative;
 

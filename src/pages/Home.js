@@ -88,8 +88,8 @@ const Home = (props) => {
 
   return (
     <React.Fragment>
-      <Header/>
-      <Grid margin='54px 0'>
+      <Header goBack complete/>
+      <Grid margin='0 0 54px'>
         <Grid height='210px'>
           <Image src={Banner} size='cover' width='100%' height='100%'/>
         </Grid>
@@ -114,11 +114,16 @@ const Home = (props) => {
           })}
         </Grid>
 
-        <Grid bg='#FFF' height='467px' radius='22px 22px 0 0' padding='26px 0 0 0'>
+        <Grid bg='#FFF' height='447px' radius='22px 22px 0 0' padding='26px 0 0 0'>
           <Grid phoneSize>
              <Text bold size="18px">인기게시글</Text>
           </Grid>
           <Grid phoneSize>
+            <HotPost/>
+            <HotPost/>
+            <HotPost/>
+            <HotPost/>
+            <HotPost/>
             <HotPost/>
             {/* {hotPosts.map(p => {
               return(
