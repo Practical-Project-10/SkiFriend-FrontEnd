@@ -1,7 +1,18 @@
 import React from "react";
-import styled from 'styled-components';
+import styled from "styled-components";
+import { withRouter } from "react-router-dom";
 
-const Header = () => {
+const Header = ({ location }) => {
+  if (
+    location.pathname === "/login" ||
+    location.pathname === "/phoneauth" ||
+    location.pathname === "/signup" ||
+    location.pathname.includes("/chatroom") ||
+    location.pathname === "/chatlist"
+  ) {
+    return null;
+  }
+
   return (
     <React.Fragment>
       <Head>스키프렌드</Head>
@@ -16,6 +27,6 @@ const Head = styled.div`
   font-size: 22px;
   line-height: 26px;
   border: 1px solid #000;
-`
+`;
 
-export default Header;
+export default withRouter(Header);

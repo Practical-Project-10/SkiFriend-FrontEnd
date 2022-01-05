@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { chatCreators as chatActions } from "../redux/modules/chat";
 import { history } from "../redux/ConfigStore";
@@ -9,14 +9,17 @@ import SockJS from "sockjs-client";
 import Stomp from "stompjs";
 import MessageBox from "../components/MessageBox";
 //icons
-import { AiOutlineArrowLeft } from "react-icons/ai";
-import { Grid, Button, Text, Input } from "../elements/index";
+import { IoIosArrowBack } from "react-icons/io";
+import { AiOutlineCamera } from "react-icons/ai";
+import { Grid, Text, Input } from "../elements/index";
+import sendBtn from "../assets/chat/send.png";
 
 const ChatRoom = () => {
   // const dispatch = useDispatch();
   // const datas = useSelector((state) => state.chat.chatList);
   const params = useParams();
   const roomId = params.roomId;
+  const scrollRef = useRef();
 
   //토큰
   const accessToken = document.cookie.split("=")[1];
@@ -33,6 +36,7 @@ const ChatRoom = () => {
   const messageDatas = (recv) => {
     setMessageList((prev) => [...prev, recv]);
   };
+
   //메세지 내용
   const messageChat = (e) => {
     const content = e.target.value;
@@ -47,6 +51,12 @@ const ChatRoom = () => {
       message: message,
     };
     await stomp.send("/pub/chat/message", token, JSON.stringify(datas));
+    //메세지 보내면 스크롤 자동내림
+    scrollRef.current.scrollIntoView({
+      behavior: "smooth",
+      block: "end",
+      // inline: "start",
+    });
     // dispatch(chatActions.sendChatDB(roomId, message));
     setMessage("");
   };
@@ -106,43 +116,61 @@ const ChatRoom = () => {
   return (
     <React.Fragment>
       {/* 상단부  */}
-      <Grid
-        borderB="1px solid #CACACA"
-        is_flex
-        padding="10px"
-        margin="0 0 20px 0"
-      >
-        <Text margin="0 auto">채팅</Text>
+      <Grid is_flex height="87px" padding="20px 0 0">
+        <IoIosArrowBack
+          onClick={() => {
+            history.push("/chatlist");
+          }}
+          style={{ cursor: "pointer" }}
+          size="30"
+        />
+        <Text size="18px" bold color="#474D56" margin="0 auto">
+          채팅
+        </Text>
       </Grid>
-      <AiOutlineArrowLeft
-        onClick={() => {
-          history.push("/chatlist");
-        }}
-        style={{ cursor: "pointer" }}
-        size="30"
-      />
       {/* 채팅이 들어갈 공간 */}
-      <Grid height="300px">
-        {/* 채팅말풍선 */}
-        {messageList.map((msg) => {
-          return <MessageBox chatInfo={msg} />;
-        })}
+      <Grid height="518px" overflow="scroll">
+        <div ref={scrollRef}>
+          {/* 채팅말풍선 */}
+          {messageList.map((msg) => {
+            return <MessageBox chatInfo={msg} />;
+          })}
+        </div>
       </Grid>
       {/* 하단부 버튼들 */}
-      <Grid>
-        <Grid
-          justify="flex-end"
-          bg="#414141"
-          borderB="1px solid #fff"
-          padding="5px"
-        >
-          <Button width="20%">이미지업로드버튼</Button>
-        </Grid>
-        <Grid justify="flex-end" bg="#414141" padding="20px" align="right">
-          <Input _value={message} _onChange={messageChat}></Input>
-          <Button width="30%" padding="20px" _onClick={sendMessage}>
-            전송
-          </Button>
+      <Grid height="220px" bg="#474D56">
+        {/* <Grid justify="flex-end" borderB="1px solid #fff" padding="5px">
+          <Grid
+            align="center"
+            width="45px"
+            height=" 24px"
+            radius="33px"
+            bg="#ffffff"
+            cursor="pointer"
+            // _onClick={uploadPhoto}
+          >
+            <AiOutlineCamera size="20" />
+          </Grid>
+        </Grid> */}
+        <Grid is_flex padding="20px">
+          <Input
+            free
+            width="360px"
+            height="40px"
+            radius="40px"
+            _value={message}
+            _onChange={messageChat}
+          />
+          <Grid
+            src={sendBtn}
+            width="30px"
+            height="30px"
+            bg="#6195CF"
+            radius="50%"
+            margin="0 -40px 0"
+            cursor="pointer"
+            _onClick={sendMessage}
+          />
         </Grid>
       </Grid>
     </React.Fragment>
