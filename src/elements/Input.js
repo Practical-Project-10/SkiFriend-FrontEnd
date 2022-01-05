@@ -25,6 +25,9 @@ const Input = forwardRef((props, ref) => {
     _maxLength,
     free,
     radius,
+    title,
+    textarea,
+    _defaultValue,
   } = props;
 
   const style = {
@@ -109,6 +112,24 @@ const Input = forwardRef((props, ref) => {
       </React.Fragment>
     );
   }
+  if (title) {
+    return (
+      <Title
+        placeholder={placeholder}
+        onChange={_onChange}
+        value={_value}
+      ></Title>
+    );
+  }
+  if (textarea) {
+    return (
+      <Textarea
+        placeholder={placeholder}
+        onChange={_onChange}
+        value={_value}
+      ></Textarea>
+    );
+  }
   return (
     <Grid>
       {label && <Text margin="0 0 7px 0">{label}</Text>}
@@ -116,6 +137,7 @@ const Input = forwardRef((props, ref) => {
         {...style}
         ref={ref}
         name={_name}
+        defaultValue={_defaultValue}
         value={_value}
         onBlur={_onBlur}
         type={type}
@@ -166,6 +188,30 @@ const FreeInput = styled.input`
   border-radius: ${(props) => props.radius};
 `;
 
+const Title = styled.input`
+  width: 100%;
+  padding: 22px 0;
+  border: none;
+  border-bottom: 1px solid black;
+  font-size: 20px;
+  font-weight: 700;
+  &:focus {
+    outline: none;
+  }
+`;
+
+const Textarea = styled.textarea`
+  width: 90%;
+  height: 300px;
+  max-width: 400px;
+  padding: 10px 0;
+  border: none;
+  &:focus {
+    outline: none;
+    resize: none;
+  }
+`;
+
 export default Input;
 
 // import React from "react";
@@ -208,15 +254,7 @@ export default Input;
 //       ></Title>
 //     );
 //   }
-//   if (textarea) {
-//     return (
-//       <Textarea
-//         placeholder={placeholder}
-//         onChange={_onChange}
-//         value={_value}
-//       ></Textarea>
-//     );
-//   }
+
 //   if (signup) {
 //     return (
 //       <React.Fragment>
@@ -287,14 +325,6 @@ export default Input;
 // //   margin: ${(props) => props.margin};
 // // `;
 
-// const Title = styled.input`
-//   width: 80%;
-//   border: none;
-//   border-bottom: 1px solid black;
-//   &:focus {
-//     outline: none;
-//   }
-// `;
 // const Textarea = styled.textarea`
 //   width: 90%;
 //   height: 400px;

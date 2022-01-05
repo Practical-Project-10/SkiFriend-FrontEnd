@@ -5,18 +5,16 @@ import { useDispatch, useSelector } from "react-redux";
 import { boardCreators as boardActions } from "../redux/modules/freeboard";
 import { imageActions } from "../redux/modules/image";
 
-import styled from "styled-components";
 import { Grid, Button, Text, Input, Image } from "../elements/index";
 import UnderArrow from "../assets/freeBoard/underArrow.svg";
 
 //react icons
-import { GrFormPrevious } from "react-icons/gr";
 import { AiOutlineCamera } from "react-icons/ai";
+import { IoIosArrowBack } from "react-icons/io";
 
 const FreeBoardWrite = () => {
   const dispatch = useDispatch();
   const emptyFile = new File([""], "empty");
-  const [toggleState, setToggleState] = useState(0);
 
   // 주소 경로값
   const params = useParams();
@@ -98,109 +96,110 @@ const FreeBoardWrite = () => {
   return (
     <React.Fragment>
       <Grid bg="#FFF">
+        <Grid
+          is_flex
+          justify="space-around"
+          height="87px"
+          bg="#d9e3ee"
+          padding="30px 0 0 0"
+        >
+          <Grid cursor="pointer" hoverOpacity="0.8">
+            <IoIosArrowBack
+              onClick={() => {
+                history.goBack();
+              }}
+              size="30"
+            />
+          </Grid>
+          <Grid margin="0 50px">
+            {is_edit ? (
+              <Text size="18px" bold>
+                게시글 수정하기
+              </Text>
+            ) : (
+              <Text size="18px" bold>
+                게시글 작성하기
+              </Text>
+            )}
+          </Grid>
+          <Grid>
+            {is_edit ? (
+              <Button smallBtn _onClick={editPostBtn}>
+                수정
+              </Button>
+            ) : (
+              <Button smallBtn _onClick={addPostBtn}>
+                완료
+              </Button>
+            )}
+          </Grid>
+        </Grid>
         <Grid is_flex justify="space-between" bg="#C6D2E0" padding="8px 16px">
           <Text>작성 전 꼭 읽어주세요!</Text>
-          {toggleState === 1 ? (
-            <Grid>
-              <Image src={UnderArrow} width="13px" height="8px" />
-              <Grid>hello</Grid>
-            </Grid>
-          ) : (
-            <Grid>
-              <Image src={UnderArrow} width="13px" height="8px" />
-              <Grid>bye</Grid>
-            </Grid>
-          )}
+          <Image src={UnderArrow} width="13px" height="8px" />
         </Grid>
-
-        <Grid phoneSize>
-          <Title placeholder="제목을 작성해주세요." />
-        </Grid>
-      </Grid>
-
-      {/* {is_edit ? (
-        <Grid header>게시글 수정하기</Grid>
-      ) : (
-        <Grid header>게시글 작성하기</Grid>
-      )} */}
-      {/* <Grid is_flex justify="space-between">
-        <Grid
-          cursor="pointer"
-          _onClick={() => {
-            history.goBack();
-          }}
-        >
-          <GrFormPrevious size="40" />
-        </Grid>
-        {is_edit ? (
-          <Button smallBtn _onClick={editPostBtn}>
-            수정
-          </Button>
-        ) : (
-          <Button smallBtn _onClick={addPostBtn}>
-            완료
-          </Button>
-        )}
-      </Grid>
-      <Grid align="center">
-        <Grid is_flex padding="20px">
-          <Text>제목</Text>
+        <Grid phoneSize height="705px">
+          {/* 제목작성 */}
           {is_edit ? (
-            <Input title _value={title} _onChange={postTitle} />
+            <Input
+              title
+              _value={title}
+              placeholder="제목을 작성해주세요."
+              _onChange={postTitle}
+            />
           ) : (
-            <Input title _onChange={postTitle} />
+            <Input
+              title
+              placeholder="제목을 작성해주세요."
+              _onChange={postTitle}
+            />
           )}
+          {/* 내용작성 */}
+          {is_edit ? (
+            <Input
+              textarea
+              _value={content}
+              placeholder="내용을 입력하세요"
+              _onChange={postContent}
+            />
+          ) : (
+            <Input
+              textarea
+              placeholder="내용을 입력하세요"
+              _onChange={postContent}
+            />
+          )}
+          {/* 사진미리보기 */}
+          <Grid is_flex width="100%" height="200px">
+            {is_edit ? (
+              <Image src={preview ? preview : ""} width="100%" height="100%" />
+            ) : (
+              <Image src={uploadURL} width="100%" height="100%" />
+            )}
+          </Grid>
+          <Grid
+            margin="20px auto"
+            padding="20px 0"
+            align="center"
+            borderT="1px solid grey"
+            cursor="pointer"
+            hoverOpacity="0.8"
+          >
+            <label htmlFor="myFile" style={{ cursor: "pointer" }}>
+              <AiOutlineCamera size="25" />
+            </label>
+            <input
+              type="file"
+              id="myFile"
+              style={{ display: "none" }}
+              accept="image/*"
+              onChange={uploadImg}
+            />
+          </Grid>
         </Grid>
-        {is_edit ? (
-          <Input
-            textarea
-            _value={content}
-            placeholder="내용을 입력하세요"
-            _onChange={postContent}
-          />
-        ) : (
-          <Input
-            textarea
-            placeholder="내용을 입력하세요"
-            _onChange={postContent}
-          />
-        )}
       </Grid>
-      <Grid is_flex width="100%" height="200px">
-        {is_edit ? (
-          <Image src={preview ? preview : ""} width="100%" height="100%" />
-        ) : (
-          <Image src={uploadURL} width="100%" height="100%" />
-        )}
-      </Grid>
-      <Grid>
-        <label htmlFor="myFile" style={{ cursor: "pointer" }}>
-          <AiOutlineCamera size="25" />
-        </label>
-        <input
-          type="file"
-          id="myFile"
-          style={{ display: "none" }}
-          accept="image/*"
-          onChange={uploadImg}
-        />
-      </Grid> */}
     </React.Fragment>
   );
 };
-
-const Title = styled.input`
-  width: 100%;
-  padding: 22px 0;
-  border: none;
-  border-bottom: 1px solid black;
-  font-size: 20px;
-  font-weight: 700;
-  &:focus {
-    outline: none;
-  }
-  /* &::-webkit-input-placeholder { font-size: 20px; } */
-}
-`;
 
 export default FreeBoardWrite;

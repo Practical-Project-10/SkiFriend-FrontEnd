@@ -12,6 +12,7 @@ const Button = (props) => {
     height,
     color,
     margin,
+    smallBtn,
   } = props;
 
   const styles = {
@@ -22,7 +23,14 @@ const Button = (props) => {
     color,
     margin,
   };
-
+  if (smallBtn)
+    return (
+      <React.Fragment>
+        <SmallBtn onClick={_onClick} name={_name}>
+          {children}
+        </SmallBtn>
+      </React.Fragment>
+    );
   return (
     <React.Fragment>
       <ElButton {...styles} onClick={_onClick} name={_name}>
@@ -56,6 +64,21 @@ const ElButton = styled.button`
   cursor: pointer;
 `;
 
+const SmallBtn = styled.button`
+  color: white;
+  background: #6195cf;
+  font-weight: 800;
+  width: 50px;
+  height: 21px;
+  border: none;
+  border-radius: 40px;
+  margin: ${(props) => props.margin};
+  font-size: ${(props) => props.size};
+  &:hover {
+    opacity: 0.8;
+    cursor: pointer;
+  }
+`;
 export default Button;
 
 // //---- 기본 return Button ----
@@ -76,18 +99,6 @@ export default Button;
 //   padding: ${(props) => props.padding};
 //   margin: ${(props) => props.margin};
 //   background-color: ${(props) => props.bgColor};
-//   cursor: pointer;
-// `;
-
-// const SmallBtn = styled.button`
-//   color: white;
-//   background: orange;
-//   font-weight: 800;
-//   width: 4.5em;
-//   border: none;
-//   border-radius: 5px;
-//   margin: ${(props) => props.margin};
-//   font-size: ${(props) => props.size};
 //   cursor: pointer;
 // `;
 

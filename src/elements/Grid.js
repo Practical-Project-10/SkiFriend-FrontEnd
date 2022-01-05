@@ -16,6 +16,7 @@ const Grid = (props) => {
     justify,
     display,
     alignItems,
+    borderT,
     line,
     height,
     minHeight,
@@ -54,6 +55,7 @@ const Grid = (props) => {
     margin,
     padding,
     alignItems,
+    borderT,
     bg,
     color,
     direction,
@@ -148,6 +150,7 @@ const GridBox = styled.div`
   background-color: ${(props) => props.bg};
   position: ${(props) => props.position};
   border: ${(props) => props.border};
+  border-top: ${(props) => props.borderT};
   border-bottom: ${(props) => props.borderB};
   border-radius: ${(props) => props.radius};
   box-sizing: border-box;
@@ -262,5 +265,7 @@ const Header2 = styled.div`
   background: #d9e3ee;
   padding: 0 16px;
   text-align: ${(props) => props.align};
+  justify-content: ${(props) => props.justify};
+  ${(props) => (props.is_flex ? "display: flex; align-items: center;" : "")}
 `;
 export default Grid;
