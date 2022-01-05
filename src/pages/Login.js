@@ -38,14 +38,20 @@ const Login = (props) => {
       </Grid>
 
       <Grid>
-        <Input type="text" ref={ldInput} label="아이디" />
-        <Input type="password" ref={pwdInput} label="비밀번호" />
+        <Grid margin='0 0 41px'>
+          <Input type="text" ref={ldInput} label="아이디"/>
+        </Grid>
+        <Grid>
+          <Input type="password" ref={pwdInput} label="비밀번호" />
+        </Grid>
       </Grid>
 
-      <Grid margin="127px 0 0">
-        <Button _onClick={() => history.push("/phoneauth")} bg="#6195CF">
-          회원가입
-        </Button>
+      <Grid margin="166px 0 16px">
+        <Button 
+          bg="#6195CF"
+          margin='0 0 16px'
+          _onClick={() => history.push("/phoneauth")}
+        >회원가입</Button>
         <Button _onClick={join}>로그인</Button>
       </Grid>
     </Grid>

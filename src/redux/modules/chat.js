@@ -33,6 +33,7 @@ export const addChat = createAction(ADD, (chatData) => ({ chatData }));
 export const makeRoomChatDB =
   (postId) =>
   async (dispatch, getState, { history }) => {
+    console.log(postId)
     await apis
       .chatRoom(postId)
       .then((res) => {

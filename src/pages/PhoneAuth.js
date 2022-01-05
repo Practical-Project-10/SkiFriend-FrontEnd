@@ -42,9 +42,13 @@ const PhoneAuth = (props) => {
 
   return(
     <Grid phoneSize>
-      <Grid padding='159px 0 362px'>
+      <Grid padding='159px 0 352px'>
+        <Grid margin='0 0 41px'>
         <Input dupButton type='text' ref={phoneNumInput} _onClick={numSend} label='휴대폰 번호' buttonText='인증번호'/>
+        </Grid>
+        <Grid>
         <Input type='text' ref={smsNumInput} _onClick={nextStep} label='인증번호' buttonText='다음'/>
+        </Grid>
       </Grid>
       <Grid padding='0 0 16px'>
         <Button _onClick={nextStep}>다음</Button>
