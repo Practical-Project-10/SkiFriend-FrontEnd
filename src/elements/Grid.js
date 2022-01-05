@@ -15,6 +15,8 @@ const Grid = (props) => {
     position,
     justify,
     display,
+    alignItems,
+    line,
     height,
     minHeight,
     overflow,
@@ -25,6 +27,8 @@ const Grid = (props) => {
     wrap,
     direction,
     cursor,
+    hoverOpacity,
+    hoverBg,
     className,
     mainFrame,
     navbar,
@@ -37,22 +41,27 @@ const Grid = (props) => {
     src,
     gap,
     phoneSize,
+    header2,
   } = props;
 
   const styles = {
     is_flex,
     width,
     maxWidth,
+    line,
     height,
     minHeight,
     margin,
     padding,
+    alignItems,
     bg,
     color,
     direction,
     position,
     justify,
     display,
+    hoverOpacity,
+    hoverBg,
     overflow,
     border,
     radius,
@@ -70,6 +79,9 @@ const Grid = (props) => {
   }
   if (header) {
     return <Header {...styles}>{children}</Header>;
+  }
+  if (header2) {
+    return <Header2 {...styles}>{children}</Header2>;
   }
   if (navbar) {
     return <Navbar {...styles}>{children}</Navbar>;
@@ -123,6 +135,7 @@ Grid.defaultProps = {
 const GridBox = styled.div`
   width: ${(props) => props.width};
   height: ${(props) => props.height};
+  line-height: ${(props) => props.line};
   color: ${(props) => props.color};
   max-width: ${(props) => props.maxWidth};
   min-height: ${(props) => props.minHeight};
@@ -140,9 +153,14 @@ const GridBox = styled.div`
   box-sizing: border-box;
   overflow: ${(props) => props.overflow};
   text-align: ${(props) => props.align};
+  align-items: ${(props) => props.alignItems};
   flex-wrap: ${(props) => (props.wrap ? "wrap" : "")};
   flex-direction: ${(props) => props.direction};
   cursor: ${(props) => (props.cursor ? "pointer" : "")};
+  &:hover {
+    opacity: ${(props) => props.hoverOpacity};
+    background: ${(props) => props.hoverBg};
+  }
   box-sizing: border-box;
   ${(props) => (props.is_flex ? "display: flex; align-items: center;" : "")}
   ${(props) => (props.className ? `className: ${props.className};` : "")}
@@ -152,7 +170,7 @@ const GridBox = styled.div`
   /* border: 1px solid black; */
   gap: ${(props) => props.gap};
   ${(props) => (props.phoneSize ? "padding: 0 16px 0;" : "")}
-  border: 1px solid black;
+  /* border: 1px solid black; */
 `;
 
 const MainFrame = styled.div`
@@ -235,4 +253,13 @@ const Dropdown = styled.div`
   z-index: 1;
 `;
 
+const Header2 = styled.div`
+  width: 100%;
+  height: 87px;
+  font-size: 22px;
+  line-height: 5;
+  font-weight: 700;
+  background: #d9e3ee;
+  padding: 0 16px;
+`;
 export default Grid;

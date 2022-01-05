@@ -4,11 +4,11 @@ import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { boardCreators as boardActions } from "../redux/modules/freeboard";
 
-import { Grid, Text } from "../elements/index";
-import Header from "../components/Header";
+import { Grid, Image } from "../elements/index";
 import CarpoolMenuBar from "../components/CarpoolMenuBar";
 import FloatButton from "../components/FloatButton";
 import Board from "../components/Board";
+import High from "../assets/skiImage/HighOne/HighOne3.png";
 
 import { AiOutlineHeart } from "react-icons/ai";
 import { BsChat } from "react-icons/bs";
@@ -49,23 +49,22 @@ const FreeBoardList = () => {
 
   return (
     <React.Fragment>
-      <Grid bg='#FFF'>
-        <Grid height='291px'>
-          {/* <Image/> */}
+      <Grid bg="#FFF">
+        <Grid height="291px">
+          <Image src={High} size="cover" width="100%" height="100%" />
         </Grid>
 
         <CarpoolMenuBar />
 
-        <Grid padding='16px'>
-          
+        <Grid padding="16px">
           {/* <InfinityScroll
             callNext={() => {
               dispatch(boardActions.loadBoardDB(skiresort, page));
             }}
             is_loading={is_loading}
           > */}
-            <Board />
-            {/* {boardList.map(l => {
+          <Board />
+          {/* {boardList.map(l => {
               return(
                 <Grid 
                   key={l.postId}
@@ -81,8 +80,7 @@ const FreeBoardList = () => {
           {/* </InfinityScroll> */}
         </Grid>
 
-        <FloatButton _onClick={moveWritePage}/>
-
+        <FloatButton _onClick={moveWritePage} />
       </Grid>
 
       {/* <Grid _onClick={moveWritePage}>
