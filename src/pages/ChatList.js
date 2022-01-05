@@ -1,6 +1,9 @@
 import React from "react";
+
 import { useDispatch, useSelector } from "react-redux";
 import { chatCreators as chatActions } from "../redux/modules/chat";
+
+import Header from "../components/Header";
 
 import { Grid, Image, Text } from "../elements/index";
 import { history } from "../redux/ConfigStore";
@@ -29,13 +32,14 @@ const ChatList = (props) => {
   return (
     <React.Fragment>
       <Grid>
-        <Grid header2>채팅목록</Grid>
+        <Header>채팅목록</Header>
         <Grid
           bg="#FFF"
           height="675px"
           radius="22px 22px 0 0"
           padding="26px 0 0 0"
           overflow="scroll"
+          minHeight='calc( 100vh - 124px )'
         >
           {chatRoomList.map((list) => {
             return (
@@ -54,9 +58,10 @@ const ChatList = (props) => {
                 <Grid is_flex>
                   <Grid
                     src={list.userProfile}
-                    width="40px"
-                    height="40px"
+                    width="50px"
+                    height="50px"
                     radius="50%"
+                    border='2px solid #6195CF'
                     margin="0 10px 0 0"
                   ></Grid>
                   <Grid>

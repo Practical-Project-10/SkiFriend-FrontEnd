@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+
 import { history } from "../redux/ConfigStore";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -7,6 +8,8 @@ import { imageActions } from "../redux/modules/image";
 
 import { Grid, Button, Text, Input, Image } from "../elements/index";
 import UnderArrow from "../assets/freeBoard/underArrow.svg";
+
+import Header from "../components/Header";
 
 //react icons
 import { AiOutlineCamera } from "react-icons/ai";
@@ -95,49 +98,13 @@ const FreeBoardWrite = () => {
 
   return (
     <React.Fragment>
-      <Grid bg="#FFF">
-        <Grid
-          is_flex
-          justify="space-around"
-          height="87px"
-          bg="#d9e3ee"
-          padding="30px 0 0 0"
-        >
-          <Grid cursor="pointer" hoverOpacity="0.8">
-            <IoIosArrowBack
-              onClick={() => {
-                history.goBack();
-              }}
-              size="30"
-            />
-          </Grid>
-          <Grid margin="0 50px">
-            {is_edit ? (
-              <Text size="18px" bold>
-                게시글 수정하기
-              </Text>
-            ) : (
-              <Text size="18px" bold>
-                게시글 작성하기
-              </Text>
-            )}
-          </Grid>
-          <Grid>
-            {is_edit ? (
-              <Button smallBtn _onClick={editPostBtn}>
-                수정
-              </Button>
-            ) : (
-              <Button smallBtn _onClick={addPostBtn}>
-                완료
-              </Button>
-            )}
-          </Grid>
-        </Grid>
+      <Header goBack>게시글 {is_edit? "수정": "수정"}하기</Header>
+      <Grid minHeight='calc( 100vh - 55px )' bg="#FFF">
         <Grid is_flex justify="space-between" bg="#C6D2E0" padding="8px 16px">
           <Text>작성 전 꼭 읽어주세요!</Text>
           <Image src={UnderArrow} width="13px" height="8px" />
         </Grid>
+
         <Grid phoneSize height="705px">
           {/* 제목작성 */}
           {is_edit ? (

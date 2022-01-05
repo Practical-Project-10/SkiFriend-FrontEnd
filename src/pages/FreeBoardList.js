@@ -9,6 +9,7 @@ import CarpoolMenuBar from "../components/CarpoolMenuBar";
 import FloatButton from "../components/FloatButton";
 import Board from "../components/Board";
 import InfinityScroll from "../components/InfinityScroll";
+import Header from "../components/Header";
 
 import High from "../assets/skiImage/HighOne/HighOne3.png";
 // import Pagination from "@mui/material/Pagination";
@@ -46,17 +47,15 @@ const FreeBoardList = () => {
 
   return (
     <React.Fragment>
-      <Grid bg="#FFF">
-        <Grid header2 align="center">
-          {skiresort}
-        </Grid>
+      <Header goBack>{skiresort}</Header>
+      <Grid bg="#FFF" minHeight='calc( 100vh - 124px )'>
         <Grid height="291px">
           <Image src={High} size="cover" width="100%" height="100%" />
         </Grid>
 
         <CarpoolMenuBar />
 
-        <Grid padding="16px" height="300px" overflow="scroll">
+        <Grid margin="16px" height="300px" overflow="scroll">
           <InfinityScroll
             callNext={() => {
               dispatch(boardActions.loadBoardDB(skiresort, page));
@@ -66,12 +65,13 @@ const FreeBoardList = () => {
             {boardList.map((l) => {
               return (
                 <Grid
+                  cursor
                   key={l.postId}
                   _onClick={() => {
                     history.push(`/freeboarddetail/${skiresort}/${l.postId}`);
                   }}
                 >
-                  <Board {...l} />
+                  <Board skiresort={skiresort} {...l} />
                 </Grid>
               );
             })}
