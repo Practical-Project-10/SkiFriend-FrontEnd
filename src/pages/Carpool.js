@@ -36,7 +36,7 @@ const Carpool = (props, { location }) => {
   };
 
   return (
-    <Grid minHeight='calc( 100vh - 200px )' bg="#FFF">
+    <Grid bg="#FFF">
       <Grid width="100%" height="291px">
         <Image src={High} size="cover" width="100%" height="100%" />
       </Grid>

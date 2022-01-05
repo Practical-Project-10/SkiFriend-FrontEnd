@@ -25,11 +25,14 @@ const Header = ({ location }) => {
 
 const Head = styled.div`
   width: 100%;
-  padding: 13px 16px;
+  height: 54px;
+  background-color: #fff;
   font-weight: bold;
   font-size: 22px;
-  line-height: 26px;
+  text-align: center;
+  line-height: 50px;
   border: 1px solid #000;
+  position: absolute;
 `;
 
 export default withRouter(Header);
