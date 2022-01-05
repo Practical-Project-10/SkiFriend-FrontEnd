@@ -36,8 +36,8 @@ export const loadBoardDB =
       .then((res) => {
         console.log(res.data.length);
         // if(res.data.length === 17) {
-          dispatch(loadBoard(res.data));
-          // dispatch(nextBoard(true));
+        dispatch(loadBoard(res.data));
+        // dispatch(nextBoard(true));
         // } else {
         //   dispatch(loadBoard(res.data));
         //   dispatch(nextBoard(false));
@@ -124,7 +124,7 @@ export const deleteBoardDB =
       .then((res) => {
         console.log("삭제 성공!!");
         window.alert("게시물이 정상적으로 삭제되었습니다.");
-        dispatch(deleteBoard(postId));
+        // dispatch(deleteBoard(postId));
         history.push(`/freeboardlist/${skiresort}`);
       })
       .catch((error) => {
