@@ -15,10 +15,11 @@ const HotPost = (props) => {
   //   '웰리힐리',
   //   '곤지암'
   // ]
-
+  console.log(props);
   return (
     <React.Fragment>
       <Posts>
+
         <Grid is_flex padding='20px 0'>
           <ResortName>{props.skiResort}</ResortName>
           <Grid is_flex justify='space-between' width='100%' gap='66px'>

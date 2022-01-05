@@ -71,6 +71,7 @@ export const addProfileDB =
       'requestDto',
       new Blob([JSON.stringify(profile)], { type: 'application/json' })
     );
+
     //formdata 객체 내용 확인
     // for (let pair of formData.entries()) {
     //   console.log(pair[0] + “, ” + pair[1]);
@@ -111,7 +112,7 @@ const editProfileDB = (profile) => {
 
     try {
       const response = await apis.editProfile(formData);
-      console.log(response.data)
+      console.log(response.data);
 
       response && history.push("/mypage");
       dispatch(editProfile(response.data));
