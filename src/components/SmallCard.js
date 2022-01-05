@@ -14,9 +14,12 @@ const SmallCard = (props) => {
 
   if(notLogin) {
     return (
-      <NotLogin>
-        최근 카풀 내역이 없어요!
-      </NotLogin>
+      <Grid margin='25px 0 0'>
+        <Text>내가 쓴 카풀</Text>
+        <NotLogin>
+          최근 카풀 내역이 없어요!
+        </NotLogin>
+      </Grid>
     )
   }
 

@@ -8,6 +8,7 @@ import axios from "axios";
 import SockJS from "sockjs-client";
 import Stomp from "stompjs";
 import MessageBox from "../components/MessageBox";
+import Header from "../components/Header";
 //icons
 import { IoIosArrowBack } from "react-icons/io";
 import { AiOutlineCamera } from "react-icons/ai";
@@ -112,65 +113,58 @@ const ChatRoom = () => {
       console.log(err);
     }
   };
-
+//minHeight='calc( 100vh - 55px )'
   return (
     <React.Fragment>
       {/* 상단부  */}
-      <Grid is_flex bg="#D9E3EE" height="87px" padding="20px 0 0">
-        <IoIosArrowBack
-          onClick={() => {
-            history.push("/chatlist");
-          }}
-          style={{ cursor: "pointer" }}
-          size="30"
-        />
-        <Text size="18px" bold color="#474D56" margin="0 auto">
-          채팅
-        </Text>
-      </Grid>
-      {/* 채팅이 들어갈 공간 */}
-      <Grid height="518px" overflow="scroll">
-        <div ref={scrollRef}>
-          {/* 채팅말풍선 */}
-          {messageList.map((msg) => {
-            return <MessageBox chatInfo={msg} />;
-          })}
-        </div>
-      </Grid>
-      {/* 하단부 버튼들 */}
-      <Grid height="220px" bg="#474D56">
-        {/* <Grid justify="flex-end" borderB="1px solid #fff" padding="5px">
-          <Grid
-            align="center"
-            width="45px"
-            height=" 24px"
-            radius="33px"
-            bg="#ffffff"
-            cursor="pointer"
-            // _onClick={uploadPhoto}
-          >
-            <AiOutlineCamera size="20" />
+      <Grid>
+        <Header goBack>sender</Header> {/* 리덕스에서 데이터 불러와서 sender 넣으면 됩니다. */}
+        <Grid  display='flex' direction='column' justify='space-between'>
+          {/* 채팅이 들어갈 공간 */}
+          <Grid height="518px" overflow="scroll">
+            <div ref={scrollRef}>
+              {/* 채팅말풍선 */}
+              {messageList.map((msg) => {
+                return <MessageBox chatInfo={msg} />;
+              })}
+            </div>
           </Grid>
-        </Grid> */}
-        <Grid is_flex padding="20px">
-          <Input
-            free
-            width="360px"
-            height="40px"
-            radius="40px"
-            _value={message}
-            _onChange={messageChat}
-          />
-          <Grid
-            src={sendBtn}
-            width="30px"
-            height="30px"
-            bg="#6195CF"
-            radius="50%"
-            margin="0 -40px 0"
-            cursor="pointer"
-            _onClick={sendMessage}
-          />
+          {/* 하단부 버튼들 */}
+          <Grid height="220px" bg="#474D56">
+            {/* <Grid justify="flex-end" borderB="1px solid #fff" padding="5px">
+              <Grid
+                align="center"
+                width="45px"
+                height=" 24px"
+                radius="33px"
+                bg="#ffffff"
+                cursor="pointer"
+                // _onClick={uploadPhoto}
+              >
+                <AiOutlineCamera size="20" />
+              </Grid>
+            </Grid> */}
+            <Grid is_flex padding="20px">
+              <Input
+                free
+                width="360px"
+                height="40px"
+                radius="40px"
+                _value={message}
+                _onChange={messageChat}
+              />
+              <Grid
+                src={sendBtn}
+                width="30px"
+                height="30px"
+                bg="#6195CF"
+                radius="50%"
+                margin="0 -40px 0"
+                cursor="pointer"
+                _onClick={sendMessage}
+              />
+            </Grid>
+          </Grid>
         </Grid>
       </Grid>
     </React.Fragment>

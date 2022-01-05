@@ -31,11 +31,11 @@ const HotPost = (props) => {
                 <Grid is_flex width='25%'>
                   <Grid is_flex margin='0 11px 0 0'>
                     <Image src={Heart} width='15px' height='13px'/>
-                    <Text>7{props.likeCnt}</Text>
+                    <Text>{props.likeCnt}</Text>
                   </Grid>
                   <Grid is_flex>
                     <Image src={Comment} width='15px' height='13px'/>
-                    <Text>7{props.commentCnt}</Text>
+                    <Text>{props.commentCnt}</Text>
                   </Grid>
                 </Grid>
               </Grid>

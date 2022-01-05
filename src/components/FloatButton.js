@@ -12,7 +12,7 @@ const FloatButton = (props) => {
   return (
     <React.Fragment>
       <Float>
-        <Button _onClick={_onClick}></Button>
+        <Button _onClick={_onClick}>+</Button>
       </Float>
     </React.Fragment>
   );
@@ -20,7 +20,7 @@ const FloatButton = (props) => {
 
 const Float = styled.div`
   position: absolute;
-  bottom: 16px;
+  bottom: 90px;
   right: 16px;
   width: 53px;
   height: 53px;

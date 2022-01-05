@@ -68,7 +68,7 @@ const SmallBtn = styled.button`
   color: white;
   background: #6195cf;
   font-weight: 800;
-  width: 50px;
+  /* width: 50px; */
   height: 21px;
   border: none;
   border-radius: 40px;
