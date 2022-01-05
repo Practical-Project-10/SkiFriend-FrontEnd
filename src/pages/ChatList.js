@@ -8,6 +8,7 @@ import { history } from "../redux/ConfigStore";
 const ChatList = (props) => {
   const dispatch = useDispatch();
   const chatRoomList = useSelector((state) => state.chat.roomList);
+  console.log(chatRoomList)
   const is_login = localStorage.getItem("is_login");
 
   //채팅방 목록으로 나타내기

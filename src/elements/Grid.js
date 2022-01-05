@@ -152,6 +152,7 @@ const GridBox = styled.div`
   /* border: 1px solid black; */
   gap: ${(props) => props.gap};
   ${(props) => (props.phoneSize ? "padding: 0 16px 0;" : "")}
+  border: 1px solid black;
 `;
 
 const MainFrame = styled.div`
@@ -163,6 +164,7 @@ const MainFrame = styled.div`
   box-sizing: border-box;
   overflow: scroll;
   background: #d9e3ee;
+  margin: 0 auto;
   /* background: ${(props) => `url(${props.src})`} no-repeat;
   background-size: cover; */
 `;
