@@ -24,8 +24,6 @@ import ChatList from "./pages/ChatList";
 import Navbar from "./components/Navbar";
 import ChatRoom from "./pages/ChatRoom";
 
-import styled from "styled-components";
-
 function App() {
   return (
     <React.Fragment>
@@ -69,7 +67,9 @@ function App() {
         ></Route>
         <Route path="/chatlist" component={ChatList} />
         <Route path="/chatroom/:roomId/:longRoomId" component={ChatRoom} />
-        {/* <Navbar /> */}
+        <Grid bg="#ffffff">
+          <Navbar />
+        </Grid>
       </Grid>
     </React.Fragment>
   );

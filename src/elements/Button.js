@@ -46,9 +46,9 @@ const Button = (props) => {
 Button.defaultProps = {
   children: null,
   _onClick: () => {},
-  width: '100%',
-  padding: '21px 0',
-  color: '#FFF',
+  width: "100%",
+  padding: "21px 0",
+  color: "#FFF",
 };
 
 const ElButton = styled.button`
@@ -126,5 +126,3 @@ export default Button;
 //   padding: 5px 0;
 //   margin: 5px auto;
 // `;
-
-
