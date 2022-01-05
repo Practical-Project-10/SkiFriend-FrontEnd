@@ -3,9 +3,13 @@ import React from "react";
 import { NavLink, withRouter } from "react-router-dom";
 
 import styled from "styled-components";
-import { Grid, Text } from "../elements/index";
+import { Grid, Text, Image } from "../elements/index";
 
-// react-icons
+import home from "../assets/navBar/nav_home_icon.png"
+import info from "../assets/navBar/nav_info_icon.png"
+import chat from "../assets/navBar/nav_chat_icon.png"
+import mypage from "../assets/navBar/nav_mypage_icon.png"
+
 import { AiTwotoneHome, AiOutlineHome } from "react-icons/ai";
 import { AiFillInfoCircle, AiOutlineInfoCircle } from "react-icons/ai";
 import { BsChatFill, BsChat } from "react-icons/bs";
@@ -68,10 +72,12 @@ const Navbar = ({ location }) => {
 };
 
 const FixedNav = styled.div`
-  /* position: absolute;
-  width: 100%;
+  position: absolute;
   bottom: 0;
-  left: 0; */
+  left: 0;
+  border-top: 1px solid #000;
+  width: 100%;
+  /* background: #FFF; */
 `;
 
 export default withRouter(Navbar);

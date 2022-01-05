@@ -1,38 +1,47 @@
 import React from "react";
-import styled from "styled-components";
-import { withRouter } from "react-router-dom";
 
-const Header = ({ location }) => {
-  if (
-    location.pathname === "/login" ||
-    location.pathname === "/phoneauth" ||
-    location.pathname === "/signup" ||
-    location.pathname === "/chatlist" ||
-    location.pathname.includes("/chatroom") ||
-    location.pathname.includes("/freeboardlist") ||
-    location.pathname.includes("/freeboardwrite") ||
-    location.pathname.includes("/freeboarddetail")
-  ) {
-    return null;
+import {history} from "../redux/ConfigStore"
+
+import styled from "styled-components";
+
+import { Grid, Image, Text } from "../elements";
+import back from "../assets/carpoolWrite/back.svg";
+
+const Header = (props) => {
+  const {complete, goBack, children, _onClick} = props;
+
+  if(goBack) {
+    return(
+      <GoBack>
+        <Image src={back} _onClick={() => history.goBack()} width='20px' height='17px'/>
+        <Text bold block width='140px' margin='0 0 0 97px' size='18px' >카풀{children}</Text>
+      </GoBack>
+    )
   }
 
   return (
-    <React.Fragment>
-      <Head>스키프렌드</Head>
-    </React.Fragment>
+    <Head>
+      <Text bold size='22px' line='50px'>{children}</Text>
+    </Head>
   );
 };
 
 const Head = styled.div`
   width: 100%;
   height: 54px;
-  background-color: #fff;
-  font-weight: bold;
-  font-size: 22px;
-  text-align: center;
-  line-height: 50px;
-  border: 1px solid #000;
-  position: absolute;
+  padding: 0 16px;
+  box-sizing: border-box;
+  background-color: #D9E3EE;
 `;
 
-export default withRouter(Header);
+const GoBack = styled.div`
+  width: 100%;
+  height: 54px;
+  padding: 0 16px;
+  background-color: #D9E3EE;
+  display: flex;
+  align-items: center;
+  text-align: center;
+`
+
+export default Header;
