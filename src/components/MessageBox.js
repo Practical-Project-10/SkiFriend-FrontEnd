@@ -4,7 +4,7 @@ import { chatCreators as chatActions } from "../redux/modules/chat";
 
 import { Grid, Text, Image } from "../elements/index";
 import { useParams } from "react-router-dom";
-import defaultIMG from "../assets/profileWrite/profile picture.png";
+import defaultIMG from "../assets/myPage/profilePicture.png";
 
 const MessageBox = (props) => {
   const { chatInfo } = props;

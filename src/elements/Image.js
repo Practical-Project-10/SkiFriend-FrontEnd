@@ -1,5 +1,7 @@
-import styled from "styled-components";
 import React from "react";
+
+import styled from "styled-components";
+import defaultIMG from "../assets/myPage/profilePicture.png";
 
 const Image = (props) => {
   const {
@@ -43,8 +45,9 @@ const Image = (props) => {
 };
 
 Image.defaultProps = {
-  shape: "myIcon",
+  // shape: "myIcon",
   _onClick: () => {},
+  src: defaultIMG,
 };
 
 const MyIcon = styled.div`

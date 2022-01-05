@@ -50,8 +50,9 @@ const addProfileDB = (profile) => {
 
     try {
       const response = await apis.addProfile(formData);
-      console.log(response)
+      console.log(response.data)
       const _profile = response.data;
+
       response && history.push("/mypage");
       dispatch(addProfile(_profile));
       dispatch(imageActions.setPreview(null));
@@ -84,6 +85,7 @@ const editProfileDB = (profile) => {
 
     try {
       const response = await apis.editProfile(formData);
+      console.log(response.data)
 
       response && history.push("/mypage");
       dispatch(editProfile(response.data));

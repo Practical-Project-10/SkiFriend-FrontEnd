@@ -19,6 +19,8 @@ import { BsArrowRight } from "react-icons/bs";
 
 const CarpoolFilter = (props) => {
   const [state, setState] = useState(false);
+  const [reqSelect, setReqSelect] = useState(false);
+  const [ofSelect, setOfSelect] = useState(false);
 
   const params = useParams();
   const skiResort = params.skiresort;
@@ -204,11 +206,25 @@ const CarpoolFilter = (props) => {
         <form onChange={handleChange}>
           <Grid display='flex' gap='20px' margin='0 0 50px 0'>
             <Grid width='50%'>
-              <Label htmlFor="request" width='100%' border='none' bg='#6195CF' color='#FFF'>카풀 요청</Label>
+              <Label
+                htmlFor="request"
+                select={reqSelect}
+                onClick={() => {
+                  setReqSelect(true)
+                  setOfSelect(false)
+                }}
+              >카풀 요청</Label>
               <input id='request' type="radio" name="carpoolType" value="카풀 요청" style={{ display: "none" }}/>
             </Grid>
             <Grid width='50%'>
-              <Label htmlFor="offer" width='100%' border='1px solid #474D56'>카풀 제공</Label>
+              <Label
+                htmlFor="offer"
+                select={ofSelect}
+                onClick={() => {
+                  setOfSelect(true)
+                  setReqSelect(false)
+                }} 
+              >카풀 제공</Label>
               <input id='offer' type="radio" name="carpoolType" value="카풀 제공" style={{ display: "none" }}/>
             </Grid>
           </Grid>
@@ -240,13 +256,13 @@ const Select = styled.select`
 `
 
 const Label = styled.label`
-  width: ${props => props.width? props.width: '144px'};
+  width: 100%;
   height: 55px;
-  background: ${props => props.bg? props.bg: '#FFF'};
-  border: ${props => props.border? props.border: '2px solid #6195CF'};
+  background: ${props => props.select? '#6195CF': '#FFF'};
+  border: ${props => props.select? 'none': '2px solid #6195CF'};
   box-sizing: border-box;
   border-radius: 6px;
-  color: ${props => props.color? props.color: '#6195CF'};
+  color: ${props => props.select? '#FFF': '#6195CF'};
   font-weight: bold;
   font-size: 20px;
   line-height: 49px;
