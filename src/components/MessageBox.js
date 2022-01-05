@@ -93,7 +93,7 @@ const MessageBox = (props) => {
             {profileList.profileImg ? (
               <Grid>
                 <Image
-                  src={defaultIMG}
+                  src={profileList.profileImg}
                   margin="auto"
                   width="110px"
                   height="110px"

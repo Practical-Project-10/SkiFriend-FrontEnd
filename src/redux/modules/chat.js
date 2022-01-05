@@ -40,7 +40,7 @@ export const makeRoomChatDB =
         // const datas = { ...res.data, nickname: nickname };
         // dispatch(addChat(datas));
         console.log(res);
-        history.push(`/chatroom/${res.data.roomId}`);
+        history.push(`/chatroom/${res.data.roomId}/${res.data.longRoomId}`);
       })
       .catch((error) => {
         console.log(`불러오기 실패${error}`);

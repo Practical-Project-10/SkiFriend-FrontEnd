@@ -17,7 +17,6 @@ const ChatRoom = () => {
   // const datas = useSelector((state) => state.chat.chatList);
   const params = useParams();
   const roomId = params.roomId;
-  const nowMSG = useRef();
 
   //토큰
   const accessToken = document.cookie.split("=")[1];
@@ -50,8 +49,6 @@ const ChatRoom = () => {
     await stomp.send("/pub/chat/message", token, JSON.stringify(datas));
     // dispatch(chatActions.sendChatDB(roomId, message));
     setMessage("");
-    console.log(message);
-    console.log(nowMSG);
   };
 
   //채팅룸 연결
@@ -128,7 +125,7 @@ const ChatRoom = () => {
       <Grid height="300px">
         {/* 채팅말풍선 */}
         {messageList.map((msg) => {
-          return <MessageBox key={msg.messageId} chatInfo={msg} />;
+          return <MessageBox chatInfo={msg} />;
         })}
       </Grid>
       {/* 하단부 버튼들 */}
