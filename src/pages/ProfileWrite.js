@@ -5,6 +5,8 @@ import { profileActions } from "../redux/modules/profile";
 import { imageActions } from "../redux/modules/image";
 import { userActions } from "../redux/modules/user";
 
+import Header from "../components/Header";
+
 import styled from "styled-components";
 import { Grid, Image, Text, Input, Button } from "../elements/index";
 import defaultIMG from "../assets/myPage/profilePicture.png";
@@ -160,6 +162,7 @@ const ProfileWrite = (props) => {
   console.log(profile);
   return (
     <React.Fragment>
+      <Header goBack complete _onClick={is_edit ? editProfile : addProfile}>내 프로필</Header>
       <Grid phoneSize position="relative">
         <Grid
           width="150px"
@@ -310,17 +313,6 @@ const ProfileWrite = (props) => {
             _onClick={deleteUser}
           >
             회원탈퇴
-          </Button>
-        </Grid>
-
-        <Grid align="center">
-          <Button
-            width="100px"
-            padding="7px"
-            margin="25px auto"
-            _onClick={is_edit ? editProfile : addProfile}
-          >
-            {is_edit ? "수정 완료" : "작성 완료"}
           </Button>
         </Grid>
       </Grid>

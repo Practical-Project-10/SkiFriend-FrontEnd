@@ -16,7 +16,7 @@ const Header = (props) => {
         <Image src={back} _onClick={() => history.goBack()} width='20px' height='17px'/>
         <Text bold block width='140px' margin='0 0 0 100px' size='18px'>{children}</Text>
         {complete
-        ? <Button _onClick={_onClick}>완료</Button>
+        ? <Button onClick={_onClick}>완료</Button>
         : null
         }
       </GoBack>
