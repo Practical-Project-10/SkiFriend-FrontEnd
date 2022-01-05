@@ -36,7 +36,7 @@ const Carpool = (props, { location }) => {
   };
 
   return (
-    <Grid bg="#FFF">
+    <Grid minHeight='calc( 100vh - 200px )' bg="#FFF">
       <Grid width="100%" height="291px">
         <Image src={High} size="cover" width="100%" height="100%" />
       </Grid>
@@ -73,7 +73,7 @@ const Carpool = (props, { location }) => {
         >
           {carpool_list.map((l) => {
             return (
-              <Grid key={l.postId} margin='0 0 16px 0' >
+              <Grid key={l.postId} padding='0 0 16px 0' >
                 <Card {...l} skiResort={skiResort}/>
               </Grid>
             );

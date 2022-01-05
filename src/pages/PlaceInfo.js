@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+
+import styled from "styled-components";
 import { Grid, Button, Image, Text } from "../elements/index";
 
 import SkiIcon from "../components/SkiIcon"
@@ -20,21 +22,47 @@ const PlaceInfo = () => {
     tabWellihilliPark: false,
     tabKonjiam: false,
   });
+  const list = Object.entries(toggleState);
+  const info = 
+  ['소개', '슬로프 안내', '요금정보', '날씨'];
 
   const toggleMenu = (e) => {
-    const newToggleState = { ...toggleState };
-    const activeToggleState = e.currentTarget.id;
-    for (let key in newToggleState) {
-      key === activeToggleState
-        ? (newToggleState[key] = true)
-        : (newToggleState[key] = false);
-    }
-    setToggleState(newToggleState);
+    const {id} = e.currentTarget;
+    const state = list.filter(t => t[0] === id);
+    console.log(state[0][1]);
+
+    if(state[0][1] === false) {
+      console.log('o')
+      setToggleState(
+        {
+          ...toggleState,
+          [id]: true,
+        }
+      )
+    };
+
+    if(state[0][1] === true) {
+      setToggleState(
+        {
+          ...toggleState,
+          [id]: false,
+        }
+      )
+    };
+    // const newToggleState = { ...toggleState };
+    // const activeToggleState = e.currentTarget.id;
+    // for (let key in newToggleState) {
+    //   key === activeToggleState
+    //     ? (newToggleState[key] = true)
+    //     : (newToggleState[key] = false);
+    // }
+    // setToggleState(newToggleState);
   };
 
   const resortInfo = [
     {// 하이원
       resort: '하이원',
+      id: 'tabHighOne',
       logo: High1,
       intro: "https://www.high1.com/ski/contents.do?key=730",
       slope: "https://www.high1.com/ski/slopeView.do?key=748&mode=p",
@@ -43,6 +71,7 @@ const PlaceInfo = () => {
     },
     {// 용평
       resort: '용평',
+      id: 'tabYongPyong',
       logo: YongPyong,
       intro: "https://www.yongpyong.co.kr/kor/skiNboard/introduce.do",
       slope: "https://www.yongpyong.co.kr/kor/skiNboard/slope/introduce.do",
@@ -51,6 +80,7 @@ const PlaceInfo = () => {
     },
     {// 비발디
       resort: '비발디',
+      id: 'tabVivaldiPark',
       logo: VivaldiPark,
       intro: "https://www.sonohotelsresorts.com/daemyung.vp.skiworld.index.ds/dmparse.dm",
       slope: "https://www.sonohotelsresorts.com/daemyung.vp.skiworld.04_02_01.ds/dmparse.dm",
@@ -59,6 +89,7 @@ const PlaceInfo = () => {
     },
     {// 휘닉스
       resort: '휘닉스',
+      id: 'tabPhoenix',
       logo: Phoenix,
       intro: "https://phoenixhnr.co.kr/static/pyeongchang/guide/intro",
       slope: "https://phoenixhnr.co.kr/static/pyeongchang/snowpark/slope-lift",
@@ -67,6 +98,7 @@ const PlaceInfo = () => {
     },
     {// 웰리힐리
       resort: '웰리힐리',
+      id: 'tabWellihilliPark',
       logo: WellihilliPark,
       intro: "https://www.wellihillipark.com/snowpark/snowpark/intro",
       slope: "https://www.wellihillipark.com/snowpark/snowpark/slope-guide",
@@ -75,41 +107,86 @@ const PlaceInfo = () => {
     },
     {// 곤지암
       resort: '곤지암',
+      id: 'tabKonjiam',
       logo: Konjiam,
       intro: "https://www.konjiamresort.co.kr/ski/useInfo.dev",
       slope: "https://www.konjiamresort.co.kr/ski/sloPe.dev",
       fare: "https://www.konjiamresort.co.kr/funny/useChargeSkiMeTimePass.dev",
       weather: "https://www.konjiamresort.co.kr/contact/weather.dev",
     },
-  ]
+  ];
 
   return (
     <React.Fragment>
       <Grid phoneSize>
         {/* 하이원 정보 */}
-        <Grid _onClick={toggleMenu}>
-          {resortInfo.map(r => {
-            return(
-              <Grid>
-                <Grid is_flex>
-                  <Grid padding='16px 0' margin='0 13px 0 0'>
-                    <SkiIcon border='2px solid #6195CF' src={r.logo}/>
+        {resortInfo.map((r, i) => {
+          
+          return(
+            <Grid id={r.id} _onClick={toggleMenu}>
+              <Grid is_flex>
+                <Grid padding='16px 0' margin='0 13px 0 0'>
+                  <SkiIcon border='2px solid #6195CF' src={r.logo}/>
+                </Grid>
+                <Grid width='100%' is_flex justify='space-between'>
+                  <Grid width='70px' align='center'>
+                    <Text size='17px'>{r.resort}</Text>
                   </Grid>
-                  <Grid width='100%' is_flex justify='space-between'>
-                    <Grid width='70px' align='center'>
-                      <Text size='17px'>{r.resort}</Text>
-                    </Grid>
-                    <Image src={drop} width='20px' height='19px'/>
+                  <Grid>
+                    <Image src={drop} width='46px' height='46px'/>
                   </Grid>
                 </Grid>
-                <div style={{border: '1px solid #adb6c1'}}></div>
               </Grid>
-            )
-          })}
 
-        </Grid>
+              {/* 토글 메뉴 */}
+              {list[i][1] &&
+                <Grid is_flex direction='column' justify='center'>
+                  <Info
+                    
+                    link
+                    href={r.intro}
+                    target="_blank"
+                  >
+                    소개
+                  </Info>
+
+                  <Info
+                    link
+                    href={r.slope}
+                    target="_blank"
+                  >
+                    슬로프안내
+                  </Info>
+
+                  <Info
+                    link
+                    href={r.fare}
+                    target="_blank"
+                  >
+                    요금정보
+                  </Info>
+
+                  <Info
+                    link
+                    href={r.weather}
+                    target="_blank"
+                  >
+                    날씨
+                  </Info>
+                </Grid>
+              }
+              <div style={{border: '1px solid #adb6c1'}}></div>
+            </Grid>
+          )
+        })}
+
       </Grid>
     </React.Fragment>
   );
 };
+
+const Info = styled.div`
+  border: 1px solid #6195CF;
+`
+
 export default PlaceInfo;

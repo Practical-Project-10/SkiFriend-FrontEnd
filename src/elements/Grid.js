@@ -174,14 +174,14 @@ const GridBox = styled.div`
 `;
 
 const MainFrame = styled.div`
-  position: relative;
+  /* position: relative; */
   max-width: 412px;
   min-height: 100%;
   height: 825px;
   border: 1px solid #000;
   box-sizing: border-box;
   overflow: scroll;
-  background: #d9e3ee;
+  /* background: #d9e3ee; */
   margin: 0 auto;
   /* background: ${(props) => `url(${props.src})`} no-repeat;
   background-size: cover; */
