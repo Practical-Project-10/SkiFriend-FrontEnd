@@ -15,20 +15,19 @@ const Board = (props) => {
             {props.title}
           </Text>
 
-          <Grid is_flex justify="space-between">
-            <Text size="12px" opacity="0.5" margin="0 18px 0 0">
-              {props.createdAt}
-            </Text>
-            <Text size="12px" opacity="0.5" margin="0 204px 0 0">
-              {props.nickname}
-            </Text>
-            <Grid is_flex>
-              <Grid is_flex margin="0 11px 0 0">
-                <Image src={Heart} width="15px" height="13px" />
+
+          <Grid is_flex justify='space-between'>
+            <Grid is_flex justify='space-between'>
+              <Text size='12px' opacity='0.5' margin='0 18px 0 0'>{props.createdAt}</Text>
+              <Text size='12px' opacity='0.5' >{props.nickname}</Text>
+            </Grid>
+            <Grid is_flex >
+              <Grid is_flex margin='0 11px 0 0'>
+                <Image src={Heart} width='15px' height='13px' margin='0 3px 0 0'/>
                 <Text>{props.likeCnt}</Text>
               </Grid>
               <Grid is_flex>
-                <Image src={Comment} width="15px" height="13px" />
+                <Image src={Comment} width='15px' height='13px' margin='0 3px 0 0'/>
                 <Text>{props.commentCnt}</Text>
               </Grid>
             </Grid>

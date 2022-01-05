@@ -31,7 +31,7 @@ function App() {
       {/* <Grid mainFrame> */}
       <Container>
         <div className="wrap">
-      {/* <Header /> */}
+          <Header />
           <GlobalStyleds />
           <CardList>
           <Route exact path="/" component={Home}></Route>
@@ -71,9 +71,9 @@ function App() {
           ></Route>
           <Route path="/chatlist" component={ChatList} />
           <Route path="/chatroom/:roomId/:longRoomId" component={ChatRoom} />
-          {/* <Grid bg="#ffffff">
+          <Grid bg="#ffffff">
             <Navbar />
-          </Grid> */}
+          </Grid>
           </CardList>
         </div>
       </Container>
@@ -117,6 +117,7 @@ const CardList = styled.div`
   height: auto;
   max-height: 100vh;
   overflow-y: scroll;
+  margin-top: 54px;
 `;
 
 export default App;
