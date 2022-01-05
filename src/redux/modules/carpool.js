@@ -7,6 +7,7 @@ const GET_CARPOOL = "GET_CARPOOL";
 const ADD_CARPOOL = "ADD_CARPOOL";
 const EDIT_CARPOOL = "EDIT_CARPOOL";
 const DELETE_CARPOOL = "DELETE_CARPOOL";
+const FILTER_CARPOOL = "FILTER_CARPOOL";
 const GET_MYCARPOOL = "GET_MYCARPOOL";
 const IS_LOADING = "IS_LOADING";
 const IS_NEXT = "IS_NEXT";
@@ -22,6 +23,7 @@ const deleteCarpool = createAction(DELETE_CARPOOL, (postId) => ({ postId }));
 const getMyCarpool = createAction(GET_MYCARPOOL, (myCarpools) => ({
   myCarpools,
 }));
+const filterCarpool = createAction(FILTER_CARPOOL, (carpool) => ({carpool}))
 const isLoading = createAction(IS_LOADING, (state) => ({ state }));
 const isNext = createAction(IS_NEXT, (state) => ({ state }));
 
@@ -68,10 +70,9 @@ const editCarpoolDB = (postId, carpool) => {
 
     try {
       const response = await apis.editCarpool(postId, carpool);
-      console.log(response)
 
       response && history.goBack();
-      dispatch(editCarpool(response.data));
+      dispatch(editCarpool(postId, response.data));
     } catch (err) {
       console.log(err);
     }
@@ -117,7 +118,7 @@ const filterCarpoolDB = (skiResort, form) => {
         window.alert("필터에 맞는 정보가 없습니다");
         return null;
       } else {
-        dispatch(getCarpool(response.data));
+        dispatch(filterCarpool(response.data));
         history.push(`/filter/${skiResort}`);
       }
     } catch (err) {
@@ -125,6 +126,7 @@ const filterCarpoolDB = (skiResort, form) => {
     }
   };
 };
+
 const getMyCarpoolDB = () => {
   return async function (dispatch, getState, { history }) {
     console.log("내가 쓴 카풀");
@@ -142,6 +144,7 @@ const getMyCarpoolDB = () => {
 // initialState
 const initialState = {
   list: [],
+  filterList: [],
   myList: [],
   page: 1,
   is_loading: false,
@@ -168,9 +171,9 @@ export default handleActions(
     [EDIT_CARPOOL]: (state, action) =>
       produce(state, (draft) => {
         const idx = draft.list.findIndex(
-          (l) => l.postId === action.payload.postId
+          (l) => l.postId === Number(action.payload.postId)
         );
-
+          console.log(idx)
         draft.list[idx] = { ...draft.list[idx], ...action.payload.carpool };
       }),
 
@@ -181,6 +184,11 @@ export default handleActions(
         );
 
         draft.list = deleted_list;
+      }),
+
+    [FILTER_CARPOOL]: (state, action) =>
+      produce(state, (draft) => {
+        draft.filterList = action.payload.carpool;
       }),
 
     [GET_MYCARPOOL]: (state, action) =>

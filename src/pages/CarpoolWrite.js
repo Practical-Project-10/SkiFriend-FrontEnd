@@ -11,29 +11,9 @@ import Header from "../components/Header";
 const CarpoolWrite = (props) => {
   const dispatch = useDispatch();
   const carpool_list = useSelector((state) => state.carpool.list);
-  const [state, setState] = useState(false);
 
   const skiResort = props.match.params.skiresort;
-  const startLoca = useRef();
-  const endLoca = useRef();
-  const city_name = [
-    "서울",
-    "부산",
-    "대구",
-    "인천",
-    "광주",
-    "대전",
-    "울산",
-    "강원",
-    "경기",
-    "경남",
-    "경북",
-    "전남",
-    "전북",
-    "제주",
-    "충남",
-    "충북",
-  ];
+
   //수정페이지
   const postId = props.match.params.postId;
   const is_edit = postId ? true : false;
