@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "http://13.125.35.82/",
+  baseURL: "http://3.34.52.2:8080/",
   headers: {
     "content-type": "application/json;charset=UTF-8",
     accept: "application/json,",
@@ -49,13 +49,14 @@ export const apis = {
   //마이페이지
   getProfile: () => api.get("/user/info"),
 
-  addProfile: (profile) =>
-    {console.log(profile)
+  addProfile: (profile) => {
+    console.log(profile);
     api.post("/user/profile", profile, {
       headers: {
         "Content-Type": "multipart/form-data",
       },
-    })},
+    });
+  },
 
   editProfile: (profile) =>
     api.put("/user/info", profile, {

@@ -14,7 +14,7 @@ import { IoIosArrowBack } from "react-icons/io";
 
 const FreeBoardWrite = () => {
   const dispatch = useDispatch();
-  const emptyFile = new File([""], "empty");
+  // const emptyFile = new File([""], "empty");
 
   // 주소 경로값
   const params = useParams();
@@ -32,8 +32,8 @@ const FreeBoardWrite = () => {
   const [title, setTitle] = useState(postData ? postData.title : "");
   const [content, setContet] = useState(postData ? postData.content : "");
   const [uploadURL, setUploadURL] = useState([]);
-  const [uploadFiles, setUploadFiles] = useState(emptyFile);
-
+  const [uploadFiles, setUploadFiles] = useState(null);
+  console.log(uploadFiles);
   // 제목
   const postTitle = (e) => {
     const currentTitle = e.target.value;
