@@ -23,6 +23,7 @@ const Input = forwardRef((props, ref) => {
     margin,
     height,
     _maxLength,
+    _disabled,
     free,
     radius,
     title,
@@ -143,6 +144,7 @@ const Input = forwardRef((props, ref) => {
         onBlur={_onBlur}
         type={type}
         placeholder={placeholder}
+        disabled={_disabled}
         onChange={_onChange}
       />
     </Grid>

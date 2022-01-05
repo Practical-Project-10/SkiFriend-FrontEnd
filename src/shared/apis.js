@@ -50,7 +50,6 @@ export const apis = {
   getProfile: () => api.get("/user/info"),
 
   addProfile: (profile) => {
-    console.log(profile);
     api.post("/user/profile", profile, {
       headers: {
         "Content-Type": "multipart/form-data",
