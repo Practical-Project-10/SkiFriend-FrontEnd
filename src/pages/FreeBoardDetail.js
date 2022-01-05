@@ -21,7 +21,7 @@ const FreeBoardDetail = ({ history }, props) => {
   const skiresort = params.skiresort;
   const postData = useSelector((state) => state.freeboard.detail);
   const nickname = localStorage.getItem("nickname");
-
+  console.log(postData);
   //------useState관리-------
   const [showmodal, setShowModal] = useState();
 

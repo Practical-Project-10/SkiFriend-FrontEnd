@@ -116,7 +116,7 @@ const ChatRoom = () => {
   return (
     <React.Fragment>
       {/* 상단부  */}
-      <Grid is_flex height="87px" padding="20px 0 0">
+      <Grid is_flex bg="#D9E3EE" height="87px" padding="20px 0 0">
         <IoIosArrowBack
           onClick={() => {
             history.push("/chatlist");

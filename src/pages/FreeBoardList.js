@@ -23,7 +23,7 @@ const FreeBoardList = () => {
   const is_loading = useSelector((state) => state.freeboard.is_loading);
   console.log(boardList);
   const is_login = localStorage.getItem("nickname");
-
+  console.log(boardList);
   // 게시글 작성 페이지 이동 판단
   const moveWritePage = () => {
     if (is_login) {
@@ -58,26 +58,25 @@ const FreeBoardList = () => {
 
         <CarpoolMenuBar />
 
-        <Grid padding="16px">
+        <Grid padding="16px" height="300px" overflow="scroll">
           <InfinityScroll
             callNext={() => {
               dispatch(boardActions.loadBoardDB(skiresort, page));
             }}
             is_loading={is_loading}
           >
-          {boardList.map(l => {
-              return(
-                <Grid 
+            {boardList.map((l) => {
+              return (
+                <Grid
                   key={l.postId}
                   _onClick={() => {
-                    history.push(
-                      `/freeboarddetail/${skiresort}/${l.postId}`
-                    )}}
+                    history.push(`/freeboarddetail/${skiresort}/${l.postId}`);
+                  }}
                 >
-                  <Board {...l}/>
+                  <Board {...l} />
                 </Grid>
-              )
-          })}
+              );
+            })}
           </InfinityScroll>
         </Grid>
         <FloatButton _onClick={moveWritePage} />
