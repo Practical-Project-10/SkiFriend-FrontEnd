@@ -11,12 +11,6 @@ import Change from "../assets/carpoolWrite/change.svg"
 import Arrow from "../assets/carpoolWrite/arrow.svg"
 
 
-//react icons
-import { GrFormPrevious } from "react-icons/gr";
-import { BsArrowLeftRight } from "react-icons/bs";
-import { BsArrowRight } from "react-icons/bs";
-
-
 const CarpoolFilter = (props) => {
   const [state, setState] = useState(false);
   const [reqSelect, setReqSelect] = useState(false);
@@ -149,7 +143,7 @@ const CarpoolFilter = (props) => {
           </Select>
           <Image src={Arrow} width='50px' height='10px'/>
           {/* value속성이 고정값이 아니라 나는 에러임 */}
-          <Label htmlFor="endLocation">{skiResort}</Label>
+          <Label htmlFor="endLocation" width='144px'>{skiResort}</Label>
           <input
             type="text"
             id="endLocation"
@@ -209,6 +203,7 @@ const CarpoolFilter = (props) => {
               <Label
                 htmlFor="request"
                 select={reqSelect}
+                width='100%'
                 onClick={() => {
                   setReqSelect(true)
                   setOfSelect(false)
@@ -220,6 +215,7 @@ const CarpoolFilter = (props) => {
               <Label
                 htmlFor="offer"
                 select={ofSelect}
+                width='100%'
                 onClick={() => {
                   setOfSelect(true)
                   setReqSelect(false)
@@ -256,10 +252,10 @@ const Select = styled.select`
 `
 
 const Label = styled.label`
-  width: 100%;
+  width: ${props => props.width};
   height: 55px;
   background: ${props => props.select? '#6195CF': '#FFF'};
-  border: ${props => props.select? 'none': '2px solid #6195CF'};
+  border: 2px solid #6195CF;
   box-sizing: border-box;
   border-radius: 6px;
   color: ${props => props.select? '#FFF': '#6195CF'};

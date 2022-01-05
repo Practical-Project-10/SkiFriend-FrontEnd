@@ -12,11 +12,11 @@ const Board = (props) => {
     <React.Fragment>
       <Grid>
         <Grid padding='9px' display='flex' direction='column' gap='3px'>
-          <Text bold size='16px'>dfdf{props.title}</Text>
+          <Text bold size='16px'>{props.title}</Text>
 
           <Grid is_flex justify='space-between'>
-            <Text size='12px' opacity='0.5' margin='0 18px 0 0'>dfd{props.createdAt}</Text>
-            <Text size='12px' opacity='0.5' margin='0 204px 0 0'>fdf{props.nickname}</Text>
+            <Text size='12px' opacity='0.5' margin='0 18px 0 0'>{props.createdAt}</Text>
+            <Text size='12px' opacity='0.5' margin='0 204px 0 0'>{props.nickname}</Text>
             <Grid is_flex >
               <Grid is_flex margin='0 11px 0 0'>
                 <Image src={Heart} width='15px' height='13px'/>

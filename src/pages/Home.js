@@ -96,7 +96,7 @@ const Home = (props) => {
           <Text bold color="#fff">카풀과 스키장이 처음이라면? 가이드 읽어보기</Text>
         </Grid>
 
-        <Grid display='flex' wrap padding='26px 33px' gap='38px 50px'> {/* padding='26px' 적용이 안 됨*/}
+        <Grid display='flex' wrap padding='26px 8%' gap='30px 50px'> {/* padding='26px' 적용이 안 됨*/}
           {skiResort.map((r) => {
             return (
               <Grid

@@ -8,10 +8,9 @@ import { Grid, Image } from "../elements/index";
 import CarpoolMenuBar from "../components/CarpoolMenuBar";
 import FloatButton from "../components/FloatButton";
 import Board from "../components/Board";
-import High from "../assets/skiImage/HighOne/HighOne3.png";
+import InfinityScroll from "../components/InfinityScroll";
 
-import { AiOutlineHeart } from "react-icons/ai";
-import { BsChat } from "react-icons/bs";
+import High from "../assets/skiImage/HighOne/HighOne3.png";
 // import Pagination from "@mui/material/Pagination";
 // import Stack from "@mui/material/Stack";
 
@@ -20,8 +19,8 @@ const FreeBoardList = () => {
   const skiresort = params.skiresort;
   const dispatch = useDispatch();
   const boardList = useSelector((state) => state.freeboard.list);
-  // const page = useSelector((state) => state.carpool.page);
-  // const is_loading = useSelector((state) => state.freeboard.is_loading);
+  const page = useSelector((state) => state.carpool.page);
+  const is_loading = useSelector((state) => state.freeboard.is_loading);
   console.log(boardList);
   const is_login = localStorage.getItem("nickname");
 
@@ -60,27 +59,26 @@ const FreeBoardList = () => {
         <CarpoolMenuBar />
 
         <Grid padding="16px">
-          {/* <InfinityScroll
+          <InfinityScroll
             callNext={() => {
               dispatch(boardActions.loadBoardDB(skiresort, page));
             }}
             is_loading={is_loading}
-          > */}
-          <Board />
-          {/* {boardList.map(l => {
+          >
+          {boardList.map(l => {
               return(
                 <Grid 
                   key={l.postId}
                   _onClick={() => {
                     history.push(
-                      `/freeboarddetail/${skiresort}/${post.postId}`
-                    );
+                      `/freeboarddetail/${skiresort}/${l.postId}`
+                    )}}
                 >
                   <Board {...l}/>
                 </Grid>
               )
-            })} */}
-          {/* </InfinityScroll> */}
+          })}
+          </InfinityScroll>
         </Grid>
 
         <FloatButton _onClick={moveWritePage} />
