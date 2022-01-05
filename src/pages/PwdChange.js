@@ -67,45 +67,45 @@ const PwdChange = (props) => {
   }
 
   return(
-    <React.Fragment>
-        <Grid width="70%" margin="auto">
-          <Grid>
-            <Input
-              signup
-              type='password'
-              label='기존 비밀번호'
-              placeholder='기존 비밀번호'
-              _name='pwd'
-              _onChange={handleChange}
-            />
-          </Grid>
-          <Grid>
-            <Input
-              signup
-              type='password'
-              label='새 비밀번호'
-              placeholder='새 비밀번호'
-              _name='newPwd'
-              _onChange={handleChange}
-              _onBlur={handleBlur}
-            />
-          </Grid>
-          <Grid>
-            <Input
-              signup
-              type='password'
-              label='새 비밀번호 확인'
-              placeholder='새 비밀번호 확인'
-              _name='reNewPwd'
-              _onChange={handleChange}
-              _onBlur={handleBlur}
-            />
-          </Grid>
-          <Grid>
-            <Button _onClick={changePwd}>변경하기</Button>
-          </Grid>
+    <Grid phoneSize display='flex' direction='column' gap='40px'>
+      <Grid margin='139px 0 230px' display='flex' direction='column' gap='40px'>
+        <Grid>
+          <Input
+            signup
+            type='password'
+            label='기존 비밀번호'
+            placeholder='기존 비밀번호'
+            _name='pwd'
+            _onChange={handleChange}
+          />
         </Grid>
-    </React.Fragment>
+        <Grid>
+          <Input
+            signup
+            type='password'
+            label='새 비밀번호'
+            placeholder='새 비밀번호'
+            _name='newPwd'
+            _onChange={handleChange}
+            _onBlur={handleBlur}
+          />
+        </Grid>
+        <Grid>
+          <Input
+            signup
+            type='password'
+            label='새 비밀번호 확인'
+            placeholder='새 비밀번호 확인'
+            _name='reNewPwd'
+            _onChange={handleChange}
+            _onBlur={handleBlur}
+          />
+        </Grid>
+      </Grid>
+      <Grid padding='0 0 16px'>
+        <Button _onClick={changePwd}>변경하기</Button>
+      </Grid>
+    </Grid>
   );
 };
 

@@ -11,6 +11,7 @@ const Button = (props) => {
     padding,
     bg,
     width,
+    height,
     color,
     margin,
     // floatting,
@@ -20,6 +21,7 @@ const Button = (props) => {
     bg,
     padding,
     width,
+    height,
     color,
     margin,
   };
@@ -51,6 +53,7 @@ Button.defaultProps = {
 
 const ElButton = styled.button`
   width: ${props => props.width};
+  height: ${props => props.height};
   margin: ${props => props.margin};
   padding: ${props => props.padding}; 
   color: ${props => props.color}; 

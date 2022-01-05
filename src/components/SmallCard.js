@@ -7,8 +7,18 @@ import calendar from "../assets/carpoolList/calendar_icon.svg";
 import clock from "../assets/carpoolList/clock_icon.svg";
 
 const SmallCard = (props) => {
+  const {notLogin} = props;
+
   const repuest = props.carpoolType === '카풀 요청'
   console.log(repuest)
+
+  if(notLogin) {
+    return (
+      <NotLogin>
+        최근 카풀 내역이 없어요!
+      </NotLogin>
+    )
+  }
 
   return(
     <CarpoolCard repuest={repuest}>
@@ -17,11 +27,11 @@ const SmallCard = (props) => {
           <Text bold size='12px' color={repuest? '#7281D1': '#6195CF'}>{props.carpoolType}</Text>
         </Grid>
         <Text bold size='16px'>{props.title}</Text>
-        <Posts>
+        <Location>
           <Text bold size='12px'>{props.startLocation}</Text>
           <Image src={arrow} width='50px' height='10px'/>
           <Text bold size='12px' color={repuest? '#7281D1': '#6195CF'}>{props.endLocation}</Text>
-        </Posts>
+        </Location>
         <Grid>
           <Small repuest={repuest} >
             <Image src={calendar} width='12px' height='15px'/>
@@ -38,31 +48,19 @@ const SmallCard = (props) => {
 }
 
 const CarpoolCard = styled.div`
-  width: 229px;
+  width: 180px;
   height: 152px;
-  padding: 12px 14px;
+  padding: 12px 12px;
   background: ${(props) => (props.repuest ? "#D3DBEE" : "#D9E4EE")};
   border-radius: 15px;
-
-  &::before {
-    content: "";
-    width: ${(props) => (props.status ? "100%" : "")};
-    height: ${(props) => (props.status ? "100%" : "")};
-    border-radius: ${(props) => (props.status ? "10px" : "")};
-    background: ${(props) => (props.status ? "rgba(0,0,0,0.5)" : "")};
-    position: ${(props) => (props.status ? "absolute" : "")};
-    top: ${(props) => (props.status ? 0 : "")};
-    left: ${(props) => (props.status ? 0 : "")};
-  }
 `;
 
-const Posts = styled.div`
-  width: 160px;
+const Location = styled.div`
+  width: 145px;
   height: 30px;
   margin: 7px 0;
   background: #FFF;
   border: 1px solid #6195CF;
-  box-sizing: border-box;
   border-radius: 5px;
   display: flex;
   justify-content: center;
@@ -77,6 +75,20 @@ const Small = styled.div`
   align-items: center;
   gap: 5px;
   color: #FFF;
+`
+
+const NotLogin = styled.div`
+  width: 229px;
+  height: 152px;
+  padding: 12px 12px;
+  background: #EDEDEE;
+  border-radius: 10px;
+  color: #474D56;
+  font-weight: 700;
+  font-size: 16px;
+  opacity: 0.5;
+  text-align: center;
+  line-height: 124px;
 `
 
 export default SmallCard;

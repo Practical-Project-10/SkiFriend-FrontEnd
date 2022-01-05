@@ -47,11 +47,6 @@ const SignupOne = (props) => {
       };
     };
 
-    // if (name === "nickname") {
-    //   console.log("성공");
-    //   dispatch(userActions.isNicknameDB(nickname));
-    // };
-
     if (name === "pwd") {
       if (!pwdRegExp.test(pwd)) {
         console.log("실패");
@@ -118,14 +113,14 @@ const SignupOne = (props) => {
             <Text color='red'>올바른 형식의 아이디가 아닙니다.</Text>
           }
           
-          <Input more4 dupButton buttonText='중복확인'  _name='nickname' label='닉네임' type='text' placeholder='1자리 이상' _onBlur={handleBlur} _onChange={handleChange} _onClick={handleClick}/>
+          <Input more4 dupButton buttonText='중복확인'  _name='nickname' label='닉네임' type='text' placeholder='1자리 이상' _onChange={handleChange} _onClick={handleClick}/>
           
-          <Input more4 _name='pwd' _onBlur={handleBlur} _onChange={handleChange} label='비밀번호' type='password'/>
+          <Input more4 _name='pwd' _onBlur={handleBlur} _onChange={handleChange} label='비밀번호' type='password' placeholder='영대소문자와 특수문자를 포함한 8자리 이상'/>
           {!checkPwd &&
             <Text color='red'>올바른 형식의 비밀번호가 아닙니다.</Text>
           }
 
-          <Input more4 _name='rePwd' _onBlur={handleBlur} _onChange={handleChange} label='비밀번호 확인' type='password'/>
+          <Input more4 _name='rePwd' _onBlur={handleBlur} _onChange={handleChange} label='비밀번호 확인' type='password' placeholder='비밀번호를 다시 입력해주세요.'/>
             {!checkRePwd &&
               <Text color='red'>비밀번호가 일치하지 않습니다.</Text>
             }

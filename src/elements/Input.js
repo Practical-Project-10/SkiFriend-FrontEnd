@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { Text, Grid, Button } from "./index";
 
 const Input = forwardRef((props, ref) => {
-  const { label, placeholder, _onChange, type, _value, more4, dupButton, _name, _onBlur, _onClick, buttonText, width, border, padding, blue} = props;
+  const { label, placeholder, _onChange, type, _value, more4, dupButton, _name, _onBlur, _onClick, buttonText, width, border, padding, blue, size} = props;
 
   const style = {
     more4,
@@ -28,7 +28,7 @@ const Input = forwardRef((props, ref) => {
   if(blue) {
     return(
       <Grid>
-        {label && <Text size='12px' color='#6195CF' margin="0 0 7px 0">{label}</Text>}
+        {label && <Text size={size} color='#6195CF' margin="0 0 7px 0">{label}</Text>}
         <ElInput {...style} border='1px solid #474D56' ref={ref} name={_name} value={_value} onBlur={_onBlur} type={type} placeholder={placeholder} onChange={_onChange} />
       </Grid>
     );
