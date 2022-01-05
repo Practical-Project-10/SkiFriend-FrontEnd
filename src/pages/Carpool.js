@@ -38,8 +38,8 @@ const Carpool = (props, { location }) => {
 
   return (
     <Grid>
-      <Header goBack/>
-      <Grid bg="#FFF" margin='54px 0'>
+      <Header goBack>{skiResort}</Header>
+      <Grid bg="#FFF" minHeight='calc( 100vh - 124px )' margin='0 0 70px'>
         <Grid width="100%" height="291px">
           <Image src={High} size="cover" width="100%" height="100%" />
         </Grid>

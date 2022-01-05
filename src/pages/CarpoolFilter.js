@@ -1,9 +1,12 @@
 import React, { useState, useRef } from "react";
+
 import { useDispatch } from "react-redux";
 import { carpoolActions } from "../redux/modules/carpool";
 
+import styled from 'styled-components';
 import { Grid, Button } from "../elements/index";
 import CarpoolSelect from "../components/CarpoolSelect";
+import Header from "../components/Header";
 
 
 const CarpoolFilter = (props) => {
@@ -44,16 +47,26 @@ const CarpoolFilter = (props) => {
   console.log(form);
 
   return (
-    <Grid bg='#FFF'>
-      <CarpoolSelect is_filter bringForm={bringForm} bringDate={bringDate}/>
-      
-      <Grid padding='293px 16px 16px'>
-        <Button smallBtn size="20px" _onClick={filterSubmit}>
-          필터적용
-        </Button>
+    <React.Fragment>
+      <Header goBack>검색필터</Header>
+      <Grid 
+        display='flex' direction='column' justify='space-between'
+        bg='#FFF' minHeight='calc( 100vh - 124px )' margin='0 0 70px 0'
+      >
+        <CarpoolSelect is_filter bringForm={bringForm} bringDate={bringDate}/>
+        
+        <Grid padding='0 16px 16px'>
+          <Button size="20px" _onClick={filterSubmit}>
+            필터적용
+          </Button>
+        </Grid>
       </Grid>
-    </Grid>
+    </React.Fragment>
   );
 };
+
+const Filter = styled(Button)`
+ position: absolute;
+`
 
 export default CarpoolFilter;

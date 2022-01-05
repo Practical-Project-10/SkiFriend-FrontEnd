@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { Grid, Button, Image, Text } from "../elements/index";
 
 import SkiIcon from "../components/SkiIcon"
+import Header from "../components/Header";
 
 import High1 from "../assets/skiInfo/high1_logo.png";
 import YongPyong from "../assets/skiInfo/yongpyong_logo.png";
@@ -118,74 +119,81 @@ const PlaceInfo = () => {
 
   return (
     <React.Fragment>
-      <Grid phoneSize>
-        {/* 하이원 정보 */}
-        {resortInfo.map((r, i) => {
-          
-          return(
-            <Grid id={r.id} _onClick={toggleMenu}>
-              <Grid is_flex>
-                <Grid padding='16px 0' margin='0 13px 0 0'>
-                  <SkiIcon border='2px solid #6195CF' src={r.logo}/>
-                </Grid>
-                <Grid width='100%' is_flex justify='space-between'>
-                  <Grid width='70px' align='center'>
-                    <Text size='17px'>{r.resort}</Text>
+      <Grid>
+        <Header>스키장 정보</Header>
+        <Grid phoneSize bg='#FFF' minHeight='calc( 100vh - 124px )' radius='22px 22px 0 0'>
+          {/* 하이원 정보 */}
+          {resortInfo.map((r, i) => {
+            
+            return(
+              <Grid id={r.id} _onClick={toggleMenu}>
+                <Grid is_flex>
+                  <Grid padding='16px 0' margin='0 13px 0 0'>
+                    <SkiIcon border='2px solid #6195CF' src={r.logo}/>
                   </Grid>
-                  <Grid>
-                    <Image src={drop} width='46px' height='46px'/>
+                  <Grid width='100%' is_flex justify='space-between'>
+                    <Grid width='70px' align='center'>
+                      <Text size='17px'>{r.resort}</Text>
+                    </Grid>
+                    <Grid>
+                      <Image src={drop} width='46px' height='46px'/>
+                    </Grid>
                   </Grid>
                 </Grid>
+
+                {/* 토글 메뉴 */}
+                {list[i][1] &&
+                  <Toggle width="100px" align='center' margin='0 auto'>
+                    <Info
+                      href={r.intro}
+                      target="_blank"
+                    >
+                      소개
+                    </Info>
+
+                    <Info
+                      href={r.slope}
+                      target="_blank"
+                    >
+                      슬로프안내
+                    </Info>
+
+                    <Info
+                      href={r.fare}
+                      target="_blank"
+                    >
+                      요금정보
+                    </Info>
+
+                    <Info
+                      href={r.weather}
+                      target="_blank"
+                    >
+                      날씨
+                    </Info>
+                  </Toggle>
+                }
+                <div style={{border: '1px solid #adb6c1'}}></div>
               </Grid>
+            )
+          })}
 
-              {/* 토글 메뉴 */}
-              {list[i][1] &&
-                <Grid is_flex direction='column' justify='center'>
-                  <Info
-                    
-                    link
-                    href={r.intro}
-                    target="_blank"
-                  >
-                    소개
-                  </Info>
-
-                  <Info
-                    link
-                    href={r.slope}
-                    target="_blank"
-                  >
-                    슬로프안내
-                  </Info>
-
-                  <Info
-                    link
-                    href={r.fare}
-                    target="_blank"
-                  >
-                    요금정보
-                  </Info>
-
-                  <Info
-                    link
-                    href={r.weather}
-                    target="_blank"
-                  >
-                    날씨
-                  </Info>
-                </Grid>
-              }
-              <div style={{border: '1px solid #adb6c1'}}></div>
-            </Grid>
-          )
-        })}
-
+        </Grid>
       </Grid>
     </React.Fragment>
   );
 };
 
-const Info = styled.div`
+const Toggle = styled.div`
+  width: 100%;
+  text-align: center;
+  margin: 0 auto;
+`
+
+const Info = styled.a`
+  display: block;
+  margin-bottom: 3px;
+  font-size: 16px;
   border: 1px solid #6195CF;
 `
 
