@@ -4,6 +4,7 @@ import { chatCreators as chatActions } from "../redux/modules/chat";
 
 import { Grid, Image, Text } from "../elements/index";
 import { history } from "../redux/ConfigStore";
+import { multiply } from "lodash";
 
 const ChatList = (props) => {
   const dispatch = useDispatch();
@@ -51,6 +52,7 @@ const ChatList = (props) => {
                 }}
               >
                 <Grid is_flex>
+                  {/* asd */}
                   <Grid
                     src={list.userProfile}
                     width="40px"
