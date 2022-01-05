@@ -1,11 +1,9 @@
 import React from "react";
 import styled from "styled-components";
-import { Grid } from ".";
 
 const Button = (props) => {
   const {
     _name,
-    text,
     _onClick,
     children,
     padding,
@@ -14,7 +12,6 @@ const Button = (props) => {
     height,
     color,
     margin,
-    // floatting,
   } = props;
 
   const styles = {
@@ -25,14 +22,6 @@ const Button = (props) => {
     color,
     margin,
   };
-
-  // if(floatting) {
-  //   return(
-  //     <Grid>
-
-  //     </Grid>
-  //   )
-  // }
 
   return (
     <React.Fragment>
@@ -52,12 +41,12 @@ Button.defaultProps = {
 };
 
 const ElButton = styled.button`
-  width: ${props => props.width};
-  height: ${props => props.height};
-  margin: ${props => props.margin};
-  padding: ${props => props.padding}; 
-  color: ${props => props.color}; 
-  background-color: ${props => props.bg? props.bg: '#474D56'};
+  width: ${(props) => props.width};
+  height: ${(props) => props.height};
+  margin: ${(props) => props.margin};
+  padding: ${(props) => props.padding};
+  color: ${(props) => props.color};
+  background-color: ${(props) => (props.bg ? props.bg : "#474D56")};
   border: none;
   border-radius: 8px;
   box-sizing: border-box;
@@ -102,6 +91,18 @@ export default Button;
 //   cursor: pointer;
 // `;
 
+// const PlaceBtn = styled.button`
+//   width: 90%;
+//   margin: 10px auto;
+//   padding: 10px;
+// `;
+
+// const NormalButton = styled.button`
+//   width: 120px;
+//   padding: 5px 0;
+//   margin: 5px auto;
+// `;
+
 // const FloatButton = styled.button`
 //   font-size: 30px;
 //   width: 50px;
@@ -113,16 +114,4 @@ export default Button;
 //     opacity: 0.9;
 //     cursor: pointer;
 //   }
-// `;
-
-// const PlaceBtn = styled.button`
-//   width: 90%;
-//   margin: 10px auto;
-//   padding: 10px;
-// `;
-
-// const NormalButton = styled.button`
-//   width: 120px;
-//   padding: 5px 0;
-//   margin: 5px auto;
 // `;

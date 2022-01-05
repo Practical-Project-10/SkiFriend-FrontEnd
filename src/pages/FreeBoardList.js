@@ -43,13 +43,16 @@ const FreeBoardList = () => {
 
   React.useEffect(() => {
     if (boardList.length === 0) {
-      dispatch(boardActions.loadBoardDB(skiresort)); //page
+      dispatch(boardActions.loadBoardDB(skiresort));
     }
   }, []);
 
   return (
     <React.Fragment>
       <Grid bg="#FFF">
+        <Grid header2 align="center">
+          {skiresort}
+        </Grid>
         <Grid height="291px">
           <Image src={High} size="cover" width="100%" height="100%" />
         </Grid>
@@ -82,10 +85,6 @@ const FreeBoardList = () => {
 
         <FloatButton _onClick={moveWritePage} />
       </Grid>
-
-      {/* <Grid _onClick={moveWritePage}>
-        <FloatButton />
-      </Grid> */}
     </React.Fragment>
   );
 };
