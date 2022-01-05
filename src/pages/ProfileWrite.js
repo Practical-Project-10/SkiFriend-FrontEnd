@@ -114,7 +114,6 @@ const ProfileWrite = (props) => {
     };
 
     if(vacImgFile) {
-      console.log('vasine2222')
       setProfile(
         {
           ...profile,

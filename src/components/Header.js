@@ -8,6 +8,7 @@ const Header = ({ location }) => {
     location.pathname === "/phoneauth" ||
     location.pathname === "/signup" ||
     location.pathname.includes("/chatroom") ||
+    location.pathname.includes("/freeboardlist") ||
     location.pathname === "/chatlist"
   ) {
     return null;

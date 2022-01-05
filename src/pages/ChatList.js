@@ -52,7 +52,6 @@ const ChatList = (props) => {
                 }}
               >
                 <Grid is_flex>
-                  {/* asd */}
                   <Grid
                     src={list.userProfile}
                     width="40px"
