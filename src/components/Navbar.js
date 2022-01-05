@@ -16,7 +16,9 @@ const Navbar = ({ location }) => {
     location.pathname === "/login" ||
     location.pathname === "/phoneauth" ||
     location.pathname === "/signup" ||
-    location.pathname.includes("/chatroom")
+    location.pathname.includes("/chatroom") ||
+    location.pathname.includes("/freeboardwrite") ||
+    location.pathname.includes("/freeboarddetail")
   ) {
     return null;
   }

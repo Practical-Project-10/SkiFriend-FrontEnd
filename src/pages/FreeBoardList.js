@@ -80,7 +80,6 @@ const FreeBoardList = () => {
           })}
           </InfinityScroll>
         </Grid>
-
         <FloatButton _onClick={moveWritePage} />
       </Grid>
     </React.Fragment>

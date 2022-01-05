@@ -7,9 +7,11 @@ const Header = ({ location }) => {
     location.pathname === "/login" ||
     location.pathname === "/phoneauth" ||
     location.pathname === "/signup" ||
+    location.pathname === "/chatlist" ||
     location.pathname.includes("/chatroom") ||
     location.pathname.includes("/freeboardlist") ||
-    location.pathname === "/chatlist"
+    location.pathname.includes("/freeboardwrite") ||
+    location.pathname.includes("/freeboarddetail")
   ) {
     return null;
   }
