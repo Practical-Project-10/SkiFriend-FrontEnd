@@ -45,7 +45,7 @@ const Image = (props) => {
 };
 
 Image.defaultProps = {
-  // shape: "myIcon",
+  shape: "myIcon",
   _onClick: () => {},
   src: defaultIMG,
 };
