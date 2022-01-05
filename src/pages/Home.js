@@ -5,6 +5,7 @@ import { mainCreators as mainActions } from "../redux/modules/main";
 import { Grid, Image, Text } from "../elements/index";
 import SkiIcon from "../components/SkiIcon"
 import HotPost from "../components/HotPost";
+import Header from "../components/Header";
 
 import High1 from "../assets/skiInfo/high1_logo.png";
 import High1_ from "../assets/skiImage/HighOne/HighOne3.png"
@@ -87,7 +88,8 @@ const Home = (props) => {
 
   return (
     <React.Fragment>
-      <Grid>
+      <Header/>
+      <Grid margin='54px 0'>
         <Grid height='210px'>
           <Image src={Banner} size='cover' width='100%' height='100%'/>
         </Grid>

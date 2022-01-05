@@ -7,6 +7,7 @@ import CarpoolMenuBar from "../components/CarpoolMenuBar";
 import Card from "../components/Card";
 import FloatButton from "../components/FloatButton";
 import InfinityScroll from "../components/InfinityScroll";
+import Header from "../components/Header";
 
 import { Grid, Button, Image, Text } from "../elements/index";
 import High from "../assets/skiImage/HighOne/HighOne3.png";
@@ -36,53 +37,56 @@ const Carpool = (props, { location }) => {
   };
 
   return (
-    <Grid bg="#FFF">
-      <Grid width="100%" height="291px">
-        <Image src={High} size="cover" width="100%" height="100%" />
-      </Grid>
-
-      <Grid width="100%">
-        <CarpoolMenuBar match={props.match} />
-      </Grid>
-
-      <Grid phoneSize>
-        <Grid
-          cursor
-          is_flex
-          justify="center"
-          width="66px"
-          height="30px"
-          margin="16px 0"
-          border="2px solid #6195CF"
-          radius="6px"
-          _onClick={() => {
-            history.push(`/carpoolfilter/${skiResort}`);
-          }}
-        >
-          <Image src={filter} width="20px" height="20px" />
-          <Text bold color="#6195CF">
-            필터
-          </Text>
+    <Grid>
+      <Header goBack/>
+      <Grid bg="#FFF" margin='54px 0'>
+        <Grid width="100%" height="291px">
+          <Image src={High} size="cover" width="100%" height="100%" />
         </Grid>
 
-        <InfinityScroll
-          callNext={() => {
-            dispatch(carpoolActions.getCarpoolDB(skiResort, page));
-          }}
-          is_loading={is_loading}
-        >
-          {carpool_list.map((l) => {
-            return (
-              <Grid key={l.postId} padding='0 0 16px 0' >
-                <Card {...l} skiResort={skiResort}/>
-              </Grid>
-            );
-          })}
-        </InfinityScroll>
+        <Grid width="100%">
+          <CarpoolMenuBar match={props.match} />
+        </Grid>
+
+        <Grid phoneSize>
+          <Grid
+            cursor
+            is_flex
+            justify="center"
+            width="66px"
+            height="30px"
+            margin="16px 0"
+            border="2px solid #6195CF"
+            radius="6px"
+            _onClick={() => {
+              history.push(`/carpoolfilter/${skiResort}`);
+            }}
+          >
+            <Image src={filter} width="20px" height="20px" />
+            <Text bold color="#6195CF">
+              필터
+            </Text>
+          </Grid>
+
+          <InfinityScroll
+            callNext={() => {
+              dispatch(carpoolActions.getCarpoolDB(skiResort, page));
+            }}
+            is_loading={is_loading}
+          >
+            {carpool_list.map((l) => {
+              return (
+                <Grid key={l.postId} padding='0 0 16px 0' >
+                  <Card {...l} skiResort={skiResort}/>
+                </Grid>
+              );
+            })}
+          </InfinityScroll>
+        </Grid>
+
+        <FloatButton _onClick={induceProfile} /> 
+
       </Grid>
-
-      <FloatButton _onClick={induceProfile} /> 
-
     </Grid>
   );
 };

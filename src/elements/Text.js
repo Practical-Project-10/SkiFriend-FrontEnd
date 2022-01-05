@@ -18,6 +18,8 @@ const Text = (props) => {
     boardlink,
     opacity,
     line,
+    block,
+    width,
   } = props;
 
   const styles = {
@@ -33,6 +35,8 @@ const Text = (props) => {
     cursor,
     opacity,
     line,
+    block,
+    width,
   };
 
   if (boardlink) {
@@ -58,6 +62,7 @@ Text.defaultProps = {
 }
 
 const P = styled.p`
+  width: ${(props) => props.width};
   color: ${(props) => props.color};
   font-size: ${(props) => props.size};
   line-height: ${(props) => props.line};
@@ -69,6 +74,7 @@ const P = styled.p`
   background-color: ${(props) => props.bg};
   border-radius: ${(props) => props.radius};
   opacity: ${(props) => props.opacity};
+  display: ${(props) => props.block? 'block': ''};
   cursor: ${(props) => props.cursor? 'pointer': ''};
   ${(props) => (props.className ? `className: ${props.className};` : "")};
 `;
