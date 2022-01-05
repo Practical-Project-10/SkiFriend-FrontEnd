@@ -1,18 +1,20 @@
-import React from 'react';
+import React from "react";
 
-import { Grid, Text, Image } from '../elements';
+import { Grid, Text, Image } from "../elements";
 import Heart from "../assets/freeBoard/heart.svg";
 import Comment from "../assets/freeBoard/comment.svg";
 
 const Board = (props) => {
-  console.log(props)
+  console.log(props);
 
-
-  return(
+  return (
     <React.Fragment>
       <Grid>
-        <Grid padding='9px' display='flex' direction='column' gap='3px'>
-          <Text bold size='16px'>{props.title}</Text>
+        <Grid padding="9px" display="flex" direction="column" gap="3px">
+          <Text bold size="16px">
+            {props.title}
+          </Text>
+
 
           <Grid is_flex justify='space-between'>
             <Grid is_flex justify='space-between'>
@@ -31,10 +33,10 @@ const Board = (props) => {
             </Grid>
           </Grid>
         </Grid>
-        <hr/>
+        <hr />
       </Grid>
     </React.Fragment>
-  )
-}
+  );
+};
 
 export default Board;

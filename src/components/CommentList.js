@@ -26,6 +26,11 @@ const CommentList = () => {
     setCommentValue(currentComment);
   };
 
+  const postEditComment = (e) => {
+    const currentComment = e.target.value;
+    setCommentEditValue(currentComment);
+  };
+
   //-------댓글 작성-------
   const addCommentBtn = () => {
     dispatch(commentActions.addCommentDB(postId, commentValue));
@@ -41,7 +46,7 @@ const CommentList = () => {
   const updateSubmitCommentBtn = () => {
     setEditCommentNo(0);
     dispatch(
-      commentActions.updateCommentDB(postId, editCommentNo, commentValue)
+      commentActions.updateCommentDB(postId, editCommentNo, commentEditValue)
     );
   };
   //-------댓글 삭제--------
@@ -148,7 +153,8 @@ const CommentList = () => {
                       height="3px"
                       radius="40px"
                       _defaultValue={comment.content}
-                      _onChange={postComment}
+                      _value={commentEditValue}
+                      _onChange={postEditComment}
                     />
                   ) : (
                     <Text>{comment.content}</Text>
