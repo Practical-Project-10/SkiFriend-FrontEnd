@@ -79,7 +79,7 @@ const Home = (props) => {
 
   React.useEffect(() => {
     const mainHotPosts = async () => {
-      const response = await (await fetch("http://13.125.35.82/main")).json();
+      const response = await (await fetch("http://3.34.52.2:8080/main")).json();
       dispatch(mainActions.loadPosts(response));
     };
     mainHotPosts();
@@ -89,9 +89,9 @@ const Home = (props) => {
   return (
     <React.Fragment>
       <Header>홈</Header>
-      <Grid margin='0 0 70px'>
-        <Grid height='210px'>
-          <Image src={Banner} size='cover' width='100%' height='100%'/>
+      <Grid margin="0 0 70px">
+        <Grid height="210px">
+          <Image src={Banner} size="cover" width="100%" height="100%" />
         </Grid>
 
         <Grid align="center" padding="4px 0" bg="#474D56">
@@ -118,15 +118,20 @@ const Home = (props) => {
           })}
         </Grid>
 
-        <Grid bg='#FFF' height='448px' radius='22px 22px 0 0' padding='26px 0 0 0'>
+        <Grid
+          bg="#FFF"
+          height="448px"
+          radius="22px 22px 0 0"
+          padding="26px 0 0 0"
+        >
           <Grid phoneSize>
             <Text bold size="18px">
               인기게시글
             </Text>
           </Grid>
           <Grid phoneSize>
-            {hotPosts.map(p => {
-              return(
+            {hotPosts.map((p) => {
+              return (
                 <Grid key={p.postId}>
                   <HotPost {...p} />
                 </Grid>

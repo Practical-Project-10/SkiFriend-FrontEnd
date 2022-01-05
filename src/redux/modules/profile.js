@@ -50,7 +50,7 @@ const addProfileDB = (profile) => {
 
     try {
       const response = await apis.addProfile(formData);
-      console.log(response.data)
+      console.log(response.data);
       const _profile = response.data;
 
       response && history.push("/mypage");
@@ -85,7 +85,7 @@ const editProfileDB = (profile) => {
 
     try {
       const response = await apis.editProfile(formData);
-      console.log(response.data)
+      console.log(response.data);
 
       response && history.push("/mypage");
       dispatch(editProfile(response.data));

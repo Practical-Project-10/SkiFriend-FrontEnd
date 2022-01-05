@@ -27,7 +27,7 @@ const ChatRoom = () => {
   const token = { Authorization: `${accessToken}` };
 
   //소켓
-  const sock = new SockJS("http://13.125.35.82/ws-stomp");
+  const sock = new SockJS("http://3.34.52.2:8080/ws-stomp");
   const stomp = Stomp.over(sock);
 
   // useState관리
@@ -75,7 +75,7 @@ const ChatRoom = () => {
   // 대화내용 가져오기
   React.useEffect(() => {
     axios
-      .get(`http://13.125.35.82/chat/message/${roomId}`, { headers: token })
+      .get(`http://3.34.52.2:8080/chat/message/${roomId}`, { headers: token })
       .then((res) => {
         const prevChatData = res.data;
         console.log("response : ", prevChatData);
@@ -113,13 +113,14 @@ const ChatRoom = () => {
       console.log(err);
     }
   };
-//minHeight='calc( 100vh - 55px )'
+  //minHeight='calc( 100vh - 55px )'
   return (
     <React.Fragment>
       {/* 상단부  */}
       <Grid>
-        <Header goBack>sender</Header> {/* 리덕스에서 데이터 불러와서 sender 넣으면 됩니다. */}
-        <Grid  display='flex' direction='column' justify='space-between'>
+        <Header goBack>sender</Header>{" "}
+        {/* 리덕스에서 데이터 불러와서 sender 넣으면 됩니다. */}
+        <Grid display="flex" direction="column" justify="space-between">
           {/* 채팅이 들어갈 공간 */}
           <Grid height="518px" overflow="scroll">
             <div ref={scrollRef}>
