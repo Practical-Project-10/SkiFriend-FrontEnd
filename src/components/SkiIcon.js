@@ -3,12 +3,13 @@ import React from "react";
 import styled from 'styled-components'
 import { Grid } from "../elements";
 
-const SkiIcon = ({src}) => {
-
+const SkiIcon = (props) => {
+  const {border, src} = props;
+  const style = {border, src};
   
   return(
     <Grid>
-      <Circle src={src}></Circle>
+      <Circle {...style}></Circle>
     </Grid>
   )
 }
@@ -16,8 +17,9 @@ const SkiIcon = ({src}) => {
 const Circle = styled.div`
   width: 76px;
   height: 76px;
+  border: ${props => props.border};
   border-radius: 999px;
-  background: ${props => `url(${props.src}) no-repeat center`};
+  background: ${props => props.src? `url(${props.src}) no-repeat center`: ''};
   background-size: 60px 25px;
   background-color: #fff;
 `

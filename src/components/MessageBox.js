@@ -96,6 +96,7 @@ console.log(chatInfo)
                   width="110px"
                   height="110px"
                   radius="50%"
+
                 />
               </Grid>
             ) : (

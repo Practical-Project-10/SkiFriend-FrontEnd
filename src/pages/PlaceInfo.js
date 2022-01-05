@@ -1,5 +1,15 @@
 import React, { useState } from "react";
-import { Grid, Button } from "../elements/index";
+import { Grid, Button, Image, Text } from "../elements/index";
+
+import SkiIcon from "../components/SkiIcon"
+
+import High1 from "../assets/skiInfo/high1_logo.png";
+import YongPyong from "../assets/skiInfo/yongpyong_logo.png";
+import VivaldiPark from "../assets/skiInfo/vivaldi_logo.png";
+import Phoenix from "../assets/skiInfo/phoenix_logo.png";
+import WellihilliPark from "../assets/skiInfo/welli_logo.png";
+import Konjiam from "../assets/skiInfo/kongiam_logo.png";
+import drop from "../assets/skiInfo/drop.svg"
 
 const PlaceInfo = () => {
   const [toggleState, setToggleState] = useState({
@@ -22,323 +32,81 @@ const PlaceInfo = () => {
     setToggleState(newToggleState);
   };
 
-  const intro = [
-    "https://www.high1.com/ski/contents.do?key=730",
-    "https://www.yongpyong.co.kr/kor/skiNboard/introduce.do",
-    "https://www.sonohotelsresorts.com/daemyung.vp.skiworld.index.ds/dmparse.dm",
-    "https://phoenixhnr.co.kr/static/pyeongchang/guide/intro",
-    "https://www.wellihillipark.com/snowpark/snowpark/intro",
-    "https://www.konjiamresort.co.kr/ski/useInfo.dev",
-  ];
-
-  const slope_info = [
-    "https://www.high1.com/ski/slopeView.do?key=748&mode=p",
-    "https://www.yongpyong.co.kr/kor/skiNboard/slope/introduce.do",
-    "https://www.sonohotelsresorts.com/daemyung.vp.skiworld.04_02_01.ds/dmparse.dm",
-    "https://phoenixhnr.co.kr/static/pyeongchang/snowpark/slope-lift",
-    "https://www.wellihillipark.com/snowpark/snowpark/slope-guide",
-    "https://www.konjiamresort.co.kr/ski/sloPe.dev",
-  ];
-
-  const fare_info = [
-    "https://www.high1.com/ski/contents.do?key=750",
-    "https://www.yongpyong.co.kr/kor/skiNboard/utilizationFee/rentCharge.do",
-    "https://www.sonohotelsresorts.com/daemyung.vp.skiworld.04_04_01.ds/dmparse.dm",
-    "https://phoenixhnr.co.kr/static/pyeongchang/guide/price/snowpark",
-    "https://www.wellihillipark.com/home/guide/pay/snowpark)",
-    "https://www.konjiamresort.co.kr/funny/useChargeSkiMeTimePass.dev",
-  ];
-
-  const weather_info = [
-    "http://www.high1.com/www/contents.do?key=622",
-    "https://www.yongpyong.co.kr/kor/skiNboard/live.do",
-    "https://www.kweather.co.kr/forecast/forecast_sports.html?index=6&area=42720370%7C212&rname=Xff3UAv5Ux72VicBTAj8Uv73ZOYN&idx=ski",
-    "https://phoenixhnr.co.kr/static/pyeongchang/guide/weather/weather1",
-    "https://www.wellihillipark.com/home/guide/weather",
-    "https://www.konjiamresort.co.kr/contact/weather.dev",
-  ];
+  const resortInfo = [
+    {// 하이원
+      resort: '하이원',
+      logo: High1,
+      intro: "https://www.high1.com/ski/contents.do?key=730",
+      slope: "https://www.high1.com/ski/slopeView.do?key=748&mode=p",
+      fare: "https://www.high1.com/ski/contents.do?key=750",
+      weather: "http://www.high1.com/www/contents.do?key=622",
+    },
+    {// 용평
+      resort: '용평',
+      logo: YongPyong,
+      intro: "https://www.yongpyong.co.kr/kor/skiNboard/introduce.do",
+      slope: "https://www.yongpyong.co.kr/kor/skiNboard/slope/introduce.do",
+      fare: "https://www.yongpyong.co.kr/kor/skiNboard/utilizationFee/rentCharge.do",
+      weather: "https://www.yongpyong.co.kr/kor/skiNboard/live.do",
+    },
+    {// 비발디
+      resort: '비발디',
+      logo: VivaldiPark,
+      intro: "https://www.sonohotelsresorts.com/daemyung.vp.skiworld.index.ds/dmparse.dm",
+      slope: "https://www.sonohotelsresorts.com/daemyung.vp.skiworld.04_02_01.ds/dmparse.dm",
+      fare: "https://www.sonohotelsresorts.com/daemyung.vp.skiworld.04_04_01.ds/dmparse.dm",
+      weather: "https://www.kweather.co.kr/forecast/forecast_sports.html?index=6&area=42720370%7C212&rname=Xff3UAv5Ux72VicBTAj8Uv73ZOYN&idx=ski",
+    },
+    {// 휘닉스
+      resort: '휘닉스',
+      logo: Phoenix,
+      intro: "https://phoenixhnr.co.kr/static/pyeongchang/guide/intro",
+      slope: "https://phoenixhnr.co.kr/static/pyeongchang/snowpark/slope-lift",
+      fare: "https://phoenixhnr.co.kr/static/pyeongchang/guide/price/snowpark",
+      weather: "https://phoenixhnr.co.kr/static/pyeongchang/guide/weather/weather1",
+    },
+    {// 웰리힐리
+      resort: '웰리힐리',
+      logo: WellihilliPark,
+      intro: "https://www.wellihillipark.com/snowpark/snowpark/intro",
+      slope: "https://www.wellihillipark.com/snowpark/snowpark/slope-guide",
+      fare: "https://www.wellihillipark.com/home/guide/pay/snowpark)",
+      weather: "https://www.wellihillipark.com/home/guide/weather",
+    },
+    {// 곤지암
+      resort: '곤지암',
+      logo: Konjiam,
+      intro: "https://www.konjiamresort.co.kr/ski/useInfo.dev",
+      slope: "https://www.konjiamresort.co.kr/ski/sloPe.dev",
+      fare: "https://www.konjiamresort.co.kr/funny/useChargeSkiMeTimePass.dev",
+      weather: "https://www.konjiamresort.co.kr/contact/weather.dev",
+    },
+  ]
 
   return (
     <React.Fragment>
-      <Grid header height>
-        스키장정보
-      </Grid>
-      <Grid align="center">
+      <Grid phoneSize>
         {/* 하이원 정보 */}
-        <Grid id="tabHighOne" _onClick={toggleMenu}>
-          <Button placeBtn>하이윈</Button>
-          {toggleState.tabHighOne ? (
-            <React.Fragment>
+        <Grid _onClick={toggleMenu}>
+          {resortInfo.map(r => {
+            return(
               <Grid>
-                <Grid
-                  link
-                  href="https://www.high1.com/ski/contents.do?key=730"
-                  target="_blank"
-                >
-                  소개
+                <Grid is_flex>
+                  <Grid padding='16px 0' margin='0 13px 0 0'>
+                    <SkiIcon border='2px solid #6195CF' src={r.logo}/>
+                  </Grid>
+                  <Grid width='100%' is_flex justify='space-between'>
+                    <Grid width='70px' align='center'>
+                      <Text size='17px'>{r.resort}</Text>
+                    </Grid>
+                    <Image src={drop} width='20px' height='19px'/>
+                  </Grid>
                 </Grid>
+                <div style={{border: '1px solid #adb6c1'}}></div>
               </Grid>
-              <Grid>
-                <Grid
-                  link
-                  href="https://www.high1.com/ski/slopeView.do?key=748&mode=p"
-                  target="_blank"
-                >
-                  슬로프안내
-                </Grid>
-              </Grid>
-              <Grid>
-                <Grid
-                  link
-                  href="https://www.high1.com/ski/contents.do?key=750"
-                  target="_blank"
-                >
-                  요금정보
-                </Grid>
-              </Grid>
-              <Grid>
-                <Grid
-                  link
-                  href="http://www.high1.com/www/contents.do?key=622"
-                  target="_blank"
-                >
-                  날씨
-                </Grid>
-              </Grid>
-            </React.Fragment>
-          ) : (
-            ""
-          )}
-        </Grid>
-        {/* 용평정보 */}
-        <Grid id="tabYongPyong" _onClick={toggleMenu}>
-          <Button placeBtn>용평</Button>
-          {toggleState.tabYongPyong ? (
-            <React.Fragment>
-              <Grid>
-                <Grid
-                  link
-                  href="https://www.yongpyong.co.kr/kor/skiNboard/introduce.do"
-                  target="_blank"
-                >
-                  소개
-                </Grid>
-              </Grid>
-              <Grid>
-                <Grid
-                  link
-                  href="https://www.yongpyong.co.kr/kor/skiNboard/slope/introduce.do"
-                  target="_blank"
-                >
-                  슬로프안내
-                </Grid>
-              </Grid>
-              <Grid>
-                <Grid
-                  link
-                  href="https://www.yongpyong.co.kr/kor/skiNboard/utilizationFee/rentCharge.do"
-                  target="_blank"
-                >
-                  요금정보
-                </Grid>
-              </Grid>
-              <Grid>
-                <Grid
-                  link
-                  href="https://www.yongpyong.co.kr/kor/skiNboard/live.do"
-                  target="_blank"
-                >
-                  날씨
-                </Grid>
-              </Grid>
-            </React.Fragment>
-          ) : (
-            ""
-          )}
-        </Grid>
-        {/* 비발디정보 */}
-        <Grid id="tabVivaldiPark" _onClick={toggleMenu}>
-          <Button placeBtn>비발디</Button>
-          {toggleState.tabVivaldiPark ? (
-            <React.Fragment>
-              <Grid>
-                <Grid
-                  link
-                  href="https://www.sonohotelsresorts.com/daemyung.vp.skiworld.index.ds/dmparse.dm"
-                  target="_blank"
-                >
-                  소개
-                </Grid>
-              </Grid>
-              <Grid>
-                <Grid
-                  link
-                  href="https://www.sonohotelsresorts.com/daemyung.vp.skiworld.04_02_01.ds/dmparse.dm"
-                  target="_blank"
-                >
-                  슬로프안내
-                </Grid>
-              </Grid>
-              <Grid>
-                <Grid
-                  link
-                  href="https://www.sonohotelsresorts.com/daemyung.vp.skiworld.04_04_01.ds/dmparse.dm"
-                  target="_blank"
-                >
-                  요금정보
-                </Grid>
-              </Grid>
-              <Grid>
-                <Grid
-                  link
-                  href="https://www.kweather.co.kr/forecast/forecast_sports.html?index=6&area=42720370%7C212&rname=Xff3UAv5Ux72VicBTAj8Uv73ZOYN&idx=ski"
-                  target="_blank"
-                >
-                  날씨
-                </Grid>
-              </Grid>
-            </React.Fragment>
-          ) : (
-            ""
-          )}
-        </Grid>
-        {/* 휘닉스정보 */}
-        <Grid id="tabPhoenix" _onClick={toggleMenu}>
-          <Button placeBtn>휘닉스</Button>
-          {toggleState.tabPhoenix ? (
-            <React.Fragment>
-              <Grid>
-                <Grid
-                  link
-                  href="https://phoenixhnr.co.kr/static/pyeongchang/guide/intro"
-                  target="_blank"
-                >
-                  소개
-                </Grid>
-              </Grid>
-              <Grid>
-                <Grid
-                  link
-                  href="https://phoenixhnr.co.kr/static/pyeongchang/snowpark/slope-lift"
-                  target="_blank"
-                >
-                  슬로프안내
-                </Grid>
-              </Grid>
-              <Grid>
-                <Grid
-                  link
-                  href="https://phoenixhnr.co.kr/static/pyeongchang/guide/price/snowpark"
-                  target="_blank"
-                >
-                  요금정보
-                </Grid>
-              </Grid>
-              <Grid>
-                <Grid
-                  link
-                  href="https://phoenixhnr.co.kr/static/pyeongchang/guide/weather/weather1"
-                  target="_blank"
-                >
-                  날씨
-                </Grid>
-              </Grid>
-            </React.Fragment>
-          ) : (
-            ""
-          )}
-        </Grid>
-        {/* 윌리휠리정보 */}
-        <Grid id="tabWellihilliPark" _onClick={toggleMenu}>
-          <Button placeBtn>윌리휠리</Button>
-          {toggleState.tabWellihilliPark ? (
-            <React.Fragment>
-              <Grid>
-                <Grid
-                  link
-                  href="https://www.wellihillipark.com/snowpark/snowpark/intro"
-                  target="_blank"
-                >
-                  소개
-                </Grid>
-              </Grid>
-              <Grid>
-                <Grid
-                  link
-                  href="https://www.wellihillipark.com/snowpark/snowpark/slope-guide"
-                  target="_blank"
-                >
-                  슬로프안내
-                </Grid>
-              </Grid>
-              <Grid>
-                <Grid
-                  link
-                  href="https://www.wellihillipark.com/home/guide/pay/snowpark"
-                  target="_blank"
-                >
-                  요금정보
-                </Grid>
-              </Grid>
-              <Grid>
-                <Grid
-                  link
-                  href="https://www.wellihillipark.com/home/guide/weather"
-                  target="_blank"
-                >
-                  날씨
-                </Grid>
-              </Grid>
-            </React.Fragment>
-          ) : (
-            ""
-          )}
-        </Grid>
-        {/* 곤지암정보 */}
-        <Grid id="tabKonjiam" _onClick={toggleMenu}>
-          <Button placeBtn>곤지암</Button>
-          {toggleState.tabKonjiam ? (
-            <React.Fragment>
-              <Grid>
-                <Grid
-                  link
-                  href="https://www.konjiamresort.co.kr/ski/useInfo.dev"
-                  target="_blank"
-                >
-                  소개
-                </Grid>
-              </Grid>
-              <Grid>
-                <Grid
-                  link
-                  href="https://www.konjiamresort.co.kr/ski/sloPe.dev"
-                  target="_blank"
-                >
-                  슬로프안내
-                </Grid>
-              </Grid>
-              <Grid>
-                <Grid
-                  link
-                  href="https://www.konjiamresort.co.kr/funny/useChargeSkiMeTimePass.dev"
-                  target="_blank"
-                >
-                  요금정보
-                </Grid>
-              </Grid>
-              <Grid>
-                <Grid
-                  link
-                  href="https://www.konjiamresort.co.kr/contact/weather.dev"
-                  target="_blank"
-                >
-                  날씨
-                </Grid>
-              </Grid>
-            </React.Fragment>
-          ) : (
-            ""
-          )}
+            )
+          })}
+
         </Grid>
       </Grid>
     </React.Fragment>
