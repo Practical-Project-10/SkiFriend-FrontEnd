@@ -110,8 +110,8 @@ const MyPage = (props) => {
         }
       </Grid>
 
-      <Grid phoneSize height='543px' bg='#FFF' radius='22px 22px 0 0'>
-        <Grid cursor width='100%' height='143px' margin='16px 0 26px'>
+      <Grid height='543px' bg='#FFF' radius='22px 22px 0 0' padding='16px'>
+        <Grid cursor width='100%' height='143px' >
           <Image src={banner} width='100%' height='100%' size='cover'/>
           {/* 구글 폼으로 이동 */}
         </Grid>
@@ -160,7 +160,6 @@ const RowDiv = styled.div`
     padding: 16px 0;
     box-sizing: border-box;
   }
-
 `
 
 export default MyPage;
