@@ -19,13 +19,12 @@ const Carpool = (props, { location }) => {
   console.log(props);
   const carpool_list = useSelector((state) => state.carpool.list);
   const page = useSelector((state) => state.carpool.page);
+  console.log(page);
   const is_loading = useSelector((state) => state.carpool.is_loading);
   const skiResort = props.match.params.skiresort;
 
   React.useEffect(() => {
-    if (carpool_list.length === 0) {
-      dispatch(carpoolActions.getCarpoolDB(skiResort, page));
-    }
+    dispatch(carpoolActions.getCarpoolDB(skiResort, page));
   }, []);
 
   const induceProfile = () => {

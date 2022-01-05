@@ -79,9 +79,9 @@ export const addProfileDB =
       .addProfile(formData)
       .then((res) => {
         const _profile = res.data;
-      res && history.push('/mypage');
-      dispatch(addProfile(_profile));
-      dispatch(imageActions.setPreview(null));
+        res && history.push('/mypage');
+        dispatch(addProfile(_profile));
+        dispatch(imageActions.setPreview(null));
       })
       .catch((error) => {
         console.log(`오류 발생!${error}`);

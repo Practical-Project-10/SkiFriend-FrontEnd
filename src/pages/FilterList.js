@@ -13,7 +13,7 @@ import Stack from "@mui/material/Stack";
 const FilterList = (props) => {
   const history = props.history;
   const is_profile = localStorage.getItem("is_profile");
-  const carpool_list = useSelector((state) => state.carpool.list);
+  const carpool_list = useSelector((state) => state.carpool.filterList);
   const skiResort = props.match.params.skiresort;
 
   React.useEffect(() => {
@@ -51,7 +51,7 @@ const FilterList = (props) => {
 
         {carpool_list.map((l) => {
           return (
-            <Grid key={l.postId} width="100%">
+            <Grid key={l.postId} width="100%" padding='0 0 16px'>
               <Card {...l} skiResort={skiResort} />
             </Grid>
           );
