@@ -32,6 +32,7 @@ const getCarpoolDB = (skiResort, page) => {
 
     try {
       const response = await apis.getCarpool(skiResort, page);
+      console.log(response)
       if (response.data.length === 3) {
         dispatch(getCarpool(response.data));
         dispatch(isNext(true));
@@ -67,6 +68,7 @@ const editCarpoolDB = (postId, carpool) => {
 
     try {
       const response = await apis.editCarpool(postId, carpool);
+      console.log(response)
 
       response && history.goBack();
       dispatch(editCarpool(response.data));
