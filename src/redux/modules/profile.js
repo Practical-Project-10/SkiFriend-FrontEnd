@@ -29,65 +29,36 @@ const getProfileDB = () => {
   };
 };
 
-// const addProfileDB = (profile) => {
-//   return async (dispatch, getState, { history }) => {
-//     console.log(profile.selfIntro);
+const addProfileDB = (profile) => {
+  // return async (dispatch, getState, { history }) => {
+  //   const new_profile = {
+  //     gender: profile.gender,
+  //     ageRange: profile.ageRange,
+  //     career: profile.career,
+  //     selfIntro: profile.selfIntro,
+  //   };
+  //   console.log(new_profile);
+  //   console.log(profile);
+  //   const formData = new FormData();
+  //   formData.append("profileImg", profile.profileImg);
+  //   formData.append("vacImg", profile.vacImg);
+  //   formData.append(
+  //     "requestDto",
+  //     new Blob([JSON.stringify(new_profile)], { type: "application/json" })
+  //   );
+  //   try {
+  //     const response = await apis.addProfile(formData);
+  //     console.log(response);
+  //     const _profile = response.data;
+  //     response && history.push("/mypage");
+  //     dispatch(addProfile(_profile));
+  //     dispatch(imageActions.setPreview(null));
+  //   } catch (err) {
+  //     console.log("addProfileDB", err);
+  //   }
+  // };
+};
 
-//     const new_profile = {
-//       gender: profile.gender,
-//       ageRange: profile.ageRange,
-//       career: profile.career,
-//       selfIntro: profile.selfIntro,
-//     };
-
-//     const formData = new FormData();
-//     formData.append("profileImg", profile.profileImg);
-//     formData.append("vacImg", profile.vacImg);
-//     formData.append(
-//       "requestDto",
-//       new Blob([JSON.stringify(new_profile)], { type: "application/json" })
-//     );
-    
-//     try {
-//       const response = await apis.addProfile(formData);
-//       console.log(response)
-//       const _profile = response.data;
-
-//       response && history.push("/mypage");
-//       dispatch(addProfile(_profile));
-//       dispatch(imageActions.setPreview(null));
-//     } catch (err) {
-//       console.log("addProfileDB", err);
-//     }
-//   };
-// };
-export const addProfileDB =
-  (profile) =>
-  async (dispatch, getState, { history }) => {
-    let formData = new FormData();
-    formData.append('profileImg', profile.profileImg);
-    formData.append('vacImg', profile.vacImg);
-    formData.append(
-      'requestDto',
-      new Blob([JSON.stringify(profile)], { type: 'application/json' })
-    );
-
-    //formdata 객체 내용 확인
-    // for (let pair of formData.entries()) {
-    //   console.log(pair[0] + “, ” + pair[1]);
-    // }
-    await apis
-      .addProfile(formData)
-      .then((res) => {
-        const _profile = res.data;
-        res && history.push('/mypage');
-        dispatch(addProfile(_profile));
-        dispatch(imageActions.setPreview(null));
-      })
-      .catch((error) => {
-        console.log(`오류 발생!${error}`);
-      });
-  };
 
 const editProfileDB = (profile) => {
   return async (dispatch, getState, { history }) => {

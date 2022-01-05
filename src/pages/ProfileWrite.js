@@ -11,6 +11,7 @@ import styled from "styled-components";
 import { Grid, Image, Text, Input, Button } from "../elements/index";
 import defaultIMG from "../assets/myPage/profilePicture.png";
 import shield from "../assets/myPage/profile_shield.svg";
+import axios from "axios";
 
 const ProfileWrite = (props) => {
   const history = props.history;
@@ -39,6 +40,7 @@ const ProfileWrite = (props) => {
     phoneNum: user_profile.phoneNum,
     vacImg: emptyFile,
   });
+  console.log(profile);
   const {
     nickname,
     profileImg,
@@ -121,8 +123,6 @@ const ProfileWrite = (props) => {
 
   const deleteImg = (e) => {
     const { id } = e.target;
-    console.log(e.target);
-    console.log(e.target.id);
     if (id === "deleteProfile") {
       setProfile({
         ...profile,
@@ -140,8 +140,36 @@ const ProfileWrite = (props) => {
     }
   };
 
-  const addProfile = () => {
-    dispatch(profileActions.addProfileDB(profile));
+  const addProfile = async () => {
+    // dispatch(profileActions.addProfileDB(profile));
+    const accessToken = document.cookie.split("=")[1];
+    const token = {
+      headers: {
+        "Content-Type": "multipart/form-data",
+        Authorization: `${accessToken}`,
+      },
+    };
+    const new_profile = {
+      gender: profile.gender,
+      ageRange: profile.ageRange,
+      career: profile.career,
+      selfIntro: profile.selfIntro,
+    };
+    const formData = new FormData();
+    formData.append("profileImg", profile.profileImg);
+    formData.append("vacImg", profile.vacImg);
+    formData.append(
+      "requestDto",
+      new Blob([JSON.stringify(new_profile)], { type: "application/json" })
+    );
+
+    return axios
+      .post(`http://3.34.52.2:8080/user/profile`, formData, token)
+      .then((response) => {
+        alert("정상적으로 프로필사진이 변경되었습니다.");
+        console.log(response);
+      })
+      .catch((e) => alert(e));
   };
 
   const editProfile = () => {
@@ -159,10 +187,12 @@ const ProfileWrite = (props) => {
     dispatch(userActions.logout());
     history.replace("/");
   };
-  console.log(profile);
+
   return (
     <React.Fragment>
-      <Header goBack complete _onClick={is_edit ? editProfile : addProfile}>내 프로필</Header>
+      <Header goBack complete _onClick={is_edit ? editProfile : addProfile}>
+        내 프로필
+      </Header>
       <Grid phoneSize position="relative">
         <Grid
           width="150px"
@@ -213,14 +243,25 @@ const ProfileWrite = (props) => {
               />
             </Grid>
 
-            <Grid width="100%">
-              <Text size="12px">자기소개</Text>
-              <Select name="gender" value={gender} onChange={handleChange}>
-                <option>선택</option>
-                <option value="남">남자</option>
-                <option value="여">여자</option>
-              </Select>
-            </Grid>
+            {is_edit ? (
+              <Grid width="100%">
+                <Text size="12px">성별</Text>
+                <Input
+                  name="gender"
+                  value={user_profile.gender}
+                  _disabled
+                ></Input>
+              </Grid>
+            ) : (
+              <Grid width="100%">
+                <Text size="12px">성별</Text>
+                <Select name="gender" value={gender} onChange={handleChange}>
+                  <option>선택</option>
+                  <option value="남">남자</option>
+                  <option value="여">여자</option>
+                </Select>
+              </Grid>
+            )}
 
             <Grid width="100%">
               <Text size="12px">나이</Text>
