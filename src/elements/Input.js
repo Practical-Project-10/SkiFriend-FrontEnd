@@ -104,6 +104,7 @@ const Input = forwardRef((props, ref) => {
           onBlur={_onBlur}
           onChange={_onChange}
           onClick={_onClick}
+          defaultValue={_defaultValue}
           value={_value}
           name={_name}
           maxLength={_maxLength}

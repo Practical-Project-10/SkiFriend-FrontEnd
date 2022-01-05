@@ -153,7 +153,6 @@ const CommentList = () => {
                       height="3px"
                       radius="40px"
                       _defaultValue={comment.content}
-                      _value={commentEditValue}
                       _onChange={postEditComment}
                     />
                   ) : (
