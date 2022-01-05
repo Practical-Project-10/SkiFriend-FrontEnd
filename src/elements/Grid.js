@@ -169,8 +169,8 @@ const GridBox = styled.div`
   }
   /* border: 1px solid black; */
   gap: ${(props) => props.gap};
-  ${(props) => (props.phoneSize ? "padding: 0 16px 0;" : "")}
-  /* border: 1px solid black; */
+  ${(props) =>
+    props.phoneSize ? "padding: 0 16px 0;" : ""}/* border: 1px solid black; */
 `;
 
 const MainFrame = styled.div`
@@ -261,5 +261,6 @@ const Header2 = styled.div`
   font-weight: 700;
   background: #d9e3ee;
   padding: 0 16px;
+  text-align: ${(props) => props.align};
 `;
 export default Grid;

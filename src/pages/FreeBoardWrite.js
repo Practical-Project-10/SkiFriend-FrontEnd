@@ -5,9 +5,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { boardCreators as boardActions } from "../redux/modules/freeboard";
 import { imageActions } from "../redux/modules/image";
 
-import styled from 'styled-components';
+import styled from "styled-components";
 import { Grid, Button, Text, Input, Image } from "../elements/index";
-import UnderArrow from "../assets/freeBoard/underArrow.svg"
+import UnderArrow from "../assets/freeBoard/underArrow.svg";
 
 //react icons
 import { GrFormPrevious } from "react-icons/gr";
@@ -16,6 +16,7 @@ import { AiOutlineCamera } from "react-icons/ai";
 const FreeBoardWrite = () => {
   const dispatch = useDispatch();
   const emptyFile = new File([""], "empty");
+  const [toggleState, setToggleState] = useState(0);
 
   // 주소 경로값
   const params = useParams();
@@ -96,21 +97,26 @@ const FreeBoardWrite = () => {
 
   return (
     <React.Fragment>
-      <Grid bg='#FFF'>
-
-        <Grid is_flex justify='space-between' bg='#C6D2E0' padding='8px 16px'>
+      <Grid bg="#FFF">
+        <Grid is_flex justify="space-between" bg="#C6D2E0" padding="8px 16px">
           <Text>작성 전 꼭 읽어주세요!</Text>
-          <Image src={UnderArrow} width='13px' height='8px'/>
+          {toggleState === 1 ? (
+            <Grid>
+              <Image src={UnderArrow} width="13px" height="8px" />
+              <Grid>hello</Grid>
+            </Grid>
+          ) : (
+            <Grid>
+              <Image src={UnderArrow} width="13px" height="8px" />
+              <Grid>bye</Grid>
+            </Grid>
+          )}
         </Grid>
 
         <Grid phoneSize>
-          <Title placeholder="제목을 작성해주세요."/>
-
-          
+          <Title placeholder="제목을 작성해주세요." />
         </Grid>
-
       </Grid>
-
 
       {/* {is_edit ? (
         <Grid header>게시글 수정하기</Grid>
