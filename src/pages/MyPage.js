@@ -41,7 +41,7 @@ const MyPage = (props) => {
     //로그인 안 했을 때
     <Grid >
       <Header>마이페이지</Header>
-      <Grid minHeight='calc( 100vh - 124px )'>
+      <Grid margin='0 0 70px 0' minHeight='calc( 100vh - 124px )'>
         <Grid phoneSize>
           {!is_login
           ? <Grid>
@@ -125,28 +125,30 @@ const MyPage = (props) => {
             {/* 구글 폼으로 이동 */}
           </Grid>
 
-          {is_login
-          ? <RowDiv>
-              <Text bold size='12px'>내가 쓴 카풀</Text>
-              <Swiper
-                className="scroll-container"
-                slidesPerView={2}
-                spaceBetween={10}
-                initialSlide={1}
-              >
-                {myCarpool.map(l => {
-                  return(
-                    <SwiperSlide>
-                      <Grid key={l.createdAt} width='100%'>
-                      <SmallCard {...l}/>
-                      </Grid>
-                    </SwiperSlide>
-                  )
-                })}
-              </Swiper>
-            </RowDiv>
-          : <SmallCard notLogin/>
-          }
+          <Grid margin='25px 0 0'>
+            {is_login
+            ? <RowDiv>
+                <Text bold size='12px'>내가 쓴 카풀</Text>
+                <Swiper
+                  className="scroll-container"
+                  slidesPerView={2}
+                  spaceBetween={10}
+                  initialSlide={1}
+                >
+                  {myCarpool.map(l => {
+                    return(
+                      <SwiperSlide>
+                        <Grid key={l.createdAt} width='100%'>
+                        <SmallCard {...l}/>
+                        </Grid>
+                      </SwiperSlide>
+                    )
+                  })}
+                </Swiper>
+              </RowDiv>
+            : <SmallCard notLogin/>
+            }
+          </Grid>
 
         </Grid>
       </Grid>

@@ -25,6 +25,8 @@ import ChatList from "./pages/ChatList";
 import Navbar from "./components/Navbar";
 import ChatRoom from "./pages/ChatRoom";
 
+import background from "./assets/background.png.jpg"
+
 function App() {
   return (
     <React.Fragment>
@@ -35,41 +37,46 @@ function App() {
           <GlobalStyleds />
           <CardList>
             <Route exact path="/" component={Home} />
-            <Route path="/phoneauth" component={PhoneAuth} />
-            <Route path="/signup" component={Signup} />
-            <Route path="/login" component={Login} />
-            <Route path="/carpool/:skiresort" component={Carpool} />
-            <Route path="/filter/:skiresort" component={FilterList} />
+            <Route exact path="/phoneauth" component={PhoneAuth} />
+            <Route exact path="/signup" component={Signup} />
+            <Route exact path="/login" component={Login} />
+            <Route exact path="/carpool/:skiresort" component={Carpool} />
+            <Route exact path="/filter/:skiresort" component={FilterList} />
             <Route exact path="/carpoolwrite" component={CarpoolWrite} />
-            <Route path="/carpoolwrite/:skiresort" component={CarpoolWrite} />
+            <Route exact path="/carpoolwrite/:skiresort" component={CarpoolWrite} />
             <Route
+              exact
               path="/carpoolwrite/:skiresort/:postId"
               component={CarpoolWrite}
             />
-            <Route path="/carpoolfilter/:skiresort" component={CarpoolFilter} />
-            <Route path="/freeboardlist/:skiresort" component={FreeBoardList} />
+            <Route exact path="/carpoolfilter/:skiresort" component={CarpoolFilter} />
+            <Route exact path="/freeboardlist/:skiresort" component={FreeBoardList} />
             <Route
+               exact
               path="/freeboardwrite/:skiresort"
               component={FreeBoardWrite}
             />
             <Route
+              exact
               path="/freeboardedit/:skiresort/:postId"
               component={FreeBoardWrite}
             />
             <Route
+              exact
               path="/freeboarddetail/:skiresort/:postId"
               component={FreeBoardDetail}
             />
-            <Route path="/placeinfo" component={PlaceInfo} />
-            <Route path="/mypage" component={MyPage} />
-            <Route path="/profilewrite" component={ProfileWrite} />
-            <Route path="/profilewrite/:username" component={ProfileWrite} />
+            <Route exact path="/placeinfo" component={PlaceInfo} />
+            <Route exact path="/mypage" component={MyPage} />
+            <Route exact path="/profilewrite" component={ProfileWrite} />
+            <Route exact path="/profilewrite/:username" component={ProfileWrite} />
             <Route
+              exact
               path="/profilewrite/:username/pwdchange"
               component={PwdChange}
             />
-            <Route path="/chatlist" component={ChatList} />
-            <Route path="/chatroom/:roomId/:longRoomId" component={ChatRoom} />
+            <Route exact path="/chatlist" component={ChatList} />
+            <Route exact path="/chatroom/:roomId/:longRoomId" component={ChatRoom} />
             <Navbar />
           </CardList>
         </div>
@@ -85,8 +92,10 @@ const Container = styled.div`
   justify-content: flex-start;
   align-items: center;
   height: 100%;
-  background-color: #d9e3ee; // 배경이미지 삽입
+  background: url(${background}) no-repeat;
+  background-size: cover;
   overflow: hidden;
+  position: relative;
 
   .wrap {
     width: 100%;
@@ -98,11 +107,11 @@ const Container = styled.div`
     box-sizing: border-box;
     background-color: #d9e3ee;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-    position: relative;
+    position: relative;  
 
     @media screen and (min-width: 1024px) {
       position: relative;
-      left: 11%;
+      left: 27%;
       top: 0%;
       overflow: auto;
     }

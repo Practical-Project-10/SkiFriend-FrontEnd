@@ -2,6 +2,8 @@ import React, { useState } from "react";
 
 import { Grid, Text, Input, Button } from "../elements/index";
 
+import Header from "../components/Header";
+
 import { idRegExp, pwdRegExp } from "../shared/validation";
 
 import { useDispatch, useSelector } from "react-redux";
@@ -106,66 +108,72 @@ const SignupOne = (props) => {
   };
 
   return (
-    <Grid phoneSize>
+    <Grid>
+      <Header goBack>회원가입</Header>
       <Grid
-        padding="132px 0 195px"
-        display="flex"
-        direction="column"
-        gap="33px"
+        phoneSize minHeight='calc( 100vh - 55px )'
+        display='flex' direction='column' justify='space-between'
       >
-        <Input
-          more4
-          dupButton
-          buttonText="중복확인"
-          _name="id"
-          label="로그인"
-          type="text"
-          placeholder="영소문자, 숫자를 포함한 5자리 이상"
-          _onBlur={handleBlur}
-          _onChange={handleChange}
-          _onClick={handleClick}
-        />
-        {!checkId && <Text color="red">올바른 형식의 아이디가 아닙니다.</Text>}
+        <Grid
+          margin="132px 0 195px"
+          display="flex"
+          direction="column"
+          gap="33px"
+        >
+          <Input
+            more4
+            dupButton
+            buttonText="중복확인"
+            _name="id"
+            label="로그인"
+            type="text"
+            placeholder="영소문자, 숫자를 포함한 5자리 이상"
+            _onBlur={handleBlur}
+            _onChange={handleChange}
+            _onClick={handleClick}
+          />
+          {!checkId && <Text color="red">올바른 형식의 아이디가 아닙니다.</Text>}
 
-        <Input
-          more4
-          dupButton
-          buttonText="중복확인"
-          _name="nickname"
-          label="닉네임"
-          type="text"
-          placeholder="1자리 이상 7자리 이하"
-          _onChange={handleChange}
-          _onClick={handleClick}
-        />
+          <Input
+            more4
+            dupButton
+            buttonText="중복확인"
+            _name="nickname"
+            label="닉네임"
+            type="text"
+            placeholder="1자리 이상 7자리 이하"
+            _onChange={handleChange}
+            _onClick={handleClick}
+          />
 
-        <Input
-          more4
-          _name="pwd"
-          _onBlur={handleBlur}
-          _onChange={handleChange}
-          label="비밀번호"
-          type="password"
-          placeholder="영대소문자와 특수문자를 포함한 8자리 이상"
-        />
-        {!checkPwd && (
-          <Text color="red">올바른 형식의 비밀번호가 아닙니다.</Text>
-        )}
+          <Input
+            more4
+            _name="pwd"
+            _onBlur={handleBlur}
+            _onChange={handleChange}
+            label="비밀번호"
+            type="password"
+            placeholder="영대소문자와 특수문자를 포함한 8자리 이상"
+          />
+          {!checkPwd && (
+            <Text color="red">올바른 형식의 비밀번호가 아닙니다.</Text>
+          )}
 
-        <Input
-          more4
-          _name="rePwd"
-          _onBlur={handleBlur}
-          _onChange={handleChange}
-          label="비밀번호 확인"
-          type="password"
-          placeholder="비밀번호를 다시 입력해주세요."
-        />
-        {!checkRePwd && <Text color="red">비밀번호가 일치하지 않습니다.</Text>}
-      </Grid>
+          <Input
+            more4
+            _name="rePwd"
+            _onBlur={handleBlur}
+            _onChange={handleChange}
+            label="비밀번호 확인"
+            type="password"
+            placeholder="비밀번호를 다시 입력해주세요."
+          />
+          {!checkRePwd && <Text color="red">비밀번호가 일치하지 않습니다.</Text>}
+        </Grid>
 
-      <Grid padding="0 0 16px">
-        <Button _onClick={join}>가입</Button>
+        <Grid padding="0 0 16px">
+          <Button _onClick={join}>가입</Button>
+        </Grid>
       </Grid>
     </Grid>
   );

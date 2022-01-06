@@ -88,8 +88,8 @@ const CarpoolWrite = (props) => {
 
   return (
     <React.Fragment>
-      <Header goBack>카풀 {is_edit ? "수정" : "등록"} 페이지</Header>
-      <Grid bg="#FFF" minHeight="calc( 100vh - 124px )">
+      <Header goBack>카풀 {is_edit ? "수정" : "작성"} 페이지</Header>
+      <Grid bg="#FFF" margin='0 0 70px 0' minHeight="calc( 100vh - 124px )">
         <CarpoolSelect bringForm={bringForm} bringDate={bringDate} />
 
         {/* <div style={{border: '5px solid #edeeef'}}></div> */}
@@ -132,6 +132,7 @@ const CarpoolWrite = (props) => {
               name="memberNum"
               defaultValue="default"
               onChange={handleChange}
+              value={memberNum}
             >
               <option value="0">선택</option>
               <option value="1">1명</option>
@@ -146,7 +147,7 @@ const CarpoolWrite = (props) => {
             blue
             label="주의사항"
             type="text"
-            _maxLength="15"
+            _maxLength="25"
             _name="notice"
             _value={notice}
             _onChange={handleChange}

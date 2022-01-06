@@ -116,7 +116,6 @@ const changePwdDB = (password, newPassword) => {
 
 //initialState
 const initialState = {
-  is_profile: false,
   user_profile: [],
 };
 
@@ -127,9 +126,9 @@ export default handleActions(
       produce(state, (draft) => {
         draft.user_profile = action.payload.profile;
         const user_gender = action.payload.profile.gender;
+
         if (user_gender !== null) {
-          localStorage.setItem("is_profile", true);
-          draft.is_profile = true;
+          localStorage.setItem("profile", true);
         }
       }),
     [ADD_PROFILE]: (state, action) =>
