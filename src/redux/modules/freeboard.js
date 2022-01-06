@@ -32,7 +32,6 @@ export const loadBoardDB =
     await apis
       .getFreePost(skiResort, page)
       .then((res) => {
-        console.log(res.data.length);
         // if(res.data.length === 17) {
         dispatch(loadBoard(res.data));
         // dispatch(nextBoard(true));
@@ -63,7 +62,6 @@ export const addBoardDB =
     await apis
       .writeFreePost(skiResort, formData)
       .then((res) => {
-        console.log("등록 완료~");
         history.push(`/freeboardlist/${skiResort}`);
         dispatch(addBoard(res.data));
       })
@@ -78,8 +76,6 @@ export const getOneBoardDB =
     await apis
       .getOneFreePost(postId)
       .then((res) => {
-        console.log(res);
-        console.log("데이터 가져오기 성공");
         dispatch(getOneBoard(res.data));
       })
       .catch((error) => {
@@ -101,11 +97,9 @@ export const updateBoardDB =
       "requestDto",
       new Blob([JSON.stringify(datas)], { type: "application/json" })
     );
-    console.log(formdata);
     await apis
       .updateFreePost(postId, formdata)
       .then((res) => {
-        console.log("수정 완료~");
         dispatch(updateBoard(res.config.data));
         history.push(`/freeboarddetail/${skiResort}/${postId}`);
       })
@@ -120,7 +114,6 @@ export const deleteBoardDB =
     await apis
       .deleteFreePost(postId)
       .then((res) => {
-        console.log("삭제 성공!!");
         window.alert("게시물이 정상적으로 삭제되었습니다.");
         dispatch(loadBoardDB());
         history.push(`/freeboardlist/${skiresort}`);
@@ -136,9 +129,7 @@ export default handleActions(
     [LOAD]: (state, action) =>
       produce(state, (draft) => {
         // draft.page += 1
-
         draft.list = action.payload.postList;
-
         draft.list = draft.list.reduce((prev, now) => {
           if (prev.findIndex((a) => a.postId === now.postId) === -1) {
             return [...prev, now];

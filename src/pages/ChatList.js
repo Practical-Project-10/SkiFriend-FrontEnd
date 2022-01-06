@@ -5,16 +5,13 @@ import { chatCreators as chatActions } from "../redux/modules/chat";
 
 import Header from "../components/Header";
 
-import { Grid, Image, Text } from "../elements/index";
+import { Grid, Text } from "../elements/index";
 import { history } from "../redux/ConfigStore";
-import { multiply } from "lodash";
 
 const ChatList = (props) => {
   const dispatch = useDispatch();
   const chatRoomList = useSelector((state) => state.chat.roomList);
-  console.log(chatRoomList);
   const is_login = localStorage.getItem("is_login");
-
   //채팅방 목록으로 나타내기
   React.useEffect(() => {
     if (!is_login) {
@@ -39,7 +36,7 @@ const ChatList = (props) => {
           radius="22px 22px 0 0"
           padding="26px 0 0 0"
           overflow="scroll"
-          minHeight='calc( 100vh - 124px )'
+          minHeight="calc( 100vh - 124px )"
         >
           {chatRoomList.map((list) => {
             return (
@@ -61,7 +58,7 @@ const ChatList = (props) => {
                     width="50px"
                     height="50px"
                     radius="50%"
-                    border='2px solid #6195CF'
+                    border="2px solid #6195CF"
                     margin="0 10px 0 0"
                   ></Grid>
                   <Grid>

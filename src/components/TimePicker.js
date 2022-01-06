@@ -2,13 +2,6 @@ import React from "react";
 import { Grid } from "../elements/index";
 
 const TimePicker = (props) => {
-  const {
-    _name,
-    _value,
-    _onChange,
-  } = props;
-
-  const [time, setTime] = React.useState();
   const hourRef = React.useRef();
   const minuteRef = React.useRef();
 
@@ -21,11 +14,11 @@ const TimePicker = (props) => {
   const sendTime = () => {
     const hour = hourRef.current.value;
     const minute = minuteRef.current.value;
-    
-    if(hour && minute) {
+
+    if (hour && minute) {
       props.selectTime(`${hour}:${minute}`);
     }
-  }
+  };
 
   return (
     <Grid is_flex align="center">
@@ -37,7 +30,8 @@ const TimePicker = (props) => {
             </option>
           );
         })}
-      </select>시
+      </select>
+      시
       <select onChange={sendTime} ref={minuteRef}>
         {MinuteArray.map((m, idx) => {
           return (
@@ -46,7 +40,8 @@ const TimePicker = (props) => {
             </option>
           );
         })}
-      </select>분
+      </select>
+      분
     </Grid>
   );
 };

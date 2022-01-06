@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React from "react";
 
 import { useDispatch, useSelector } from "react-redux";
 import { carpoolActions } from "../redux/modules/carpool";
@@ -34,21 +34,10 @@ const CarpoolWrite = (props) => {
     memberNum: `${carpool ? carpool.memberNum : ""}`,
     notice: `${carpool ? carpool.notice : ""}`,
   });
-  const {
-    carpoolType,
-    startLocation,
-    endLocation,
-    date,
-    time,
-    title,
-    price,
-    memberNum,
-    notice,
-  } = form;
+  const { title, price, memberNum, notice } = form;
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    console.log(name, value);
     setForm({
       ...form,
       [name]: value,
@@ -56,7 +45,6 @@ const CarpoolWrite = (props) => {
   };
 
   const bringDate = (date) => {
-    console.log(date);
     setForm({
       ...form,
       date,
@@ -64,18 +52,14 @@ const CarpoolWrite = (props) => {
   };
 
   const bringForm = (name, value) => {
-    console.log(name, value);
     setForm({
       ...form,
       [name]: value,
     });
   };
 
-  console.log(form);
-
   const addCarpool = () => {
     if (is_login) {
-      //프로필작성한 사람확인 여부 추가해야함
       return dispatch(carpoolActions.addCarpoolDB(skiResort, form));
     } else {
       window.alert("로그인 및 프로필작성한 회원만 작성가능합니다.");
@@ -89,10 +73,10 @@ const CarpoolWrite = (props) => {
   return (
     <React.Fragment>
       <Header goBack>카풀 {is_edit ? "수정" : "작성"} 페이지</Header>
-      <Grid bg="#FFF" margin='0 0 70px 0' minHeight="calc( 100vh - 124px )">
+      <Grid bg="#FFF" margin="0 0 70px 0" minHeight="calc( 100vh - 124px )">
         <CarpoolSelect bringForm={bringForm} bringDate={bringDate} />
 
-        <div style={{border: '5px solid #edeeef'}}></div>
+        <div style={{ border: "5px solid #edeeef" }}></div>
 
         <Grid
           phoneSize
@@ -103,7 +87,7 @@ const CarpoolWrite = (props) => {
         >
           <Input
             blue
-            label='제목'
+            label="제목"
             _maxLength="15"
             _name="title"
             _value={title}

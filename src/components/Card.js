@@ -22,7 +22,6 @@ const Card = (props) => {
   const is_profile = localStorage.getItem("is_profile");
   // const profile_check = is_profile ? true : false;
   const repuest = props.carpoolType === "카풀 요청";
-  console.log(is_profile);
   const nickname = localStorage.getItem("nickname");
   const is_mine = props.nickname === nickname;
 
@@ -36,8 +35,7 @@ const Card = (props) => {
 
   //연락하기 기능
   const connectRoom = (postId) => {
-    console.log("성공");
-    if (is_login !== 'true') {
+    if (is_login !== "true") {
       const login_ask = window.confirm(
         "로그인한 회원만 사용 가능합니다. 로그인 페이지로 이동하시겠습니까?"
       );
@@ -47,7 +45,7 @@ const Card = (props) => {
         return;
       }
     }
-    if (is_profile !== 'true') {
+    if (is_profile !== "true") {
       const profile_ask = window.confirm(
         "프로필 작성한 회원만 사용 가능합니다. 마이페이지로 이동하시겠습니까?"
       );
@@ -81,7 +79,7 @@ const Card = (props) => {
         <Grid is_flex justify="space-between" margin="0 0 7px">
           <Small repuest={repuest} width="101px">
             <Image src={calendar} width="11px" height="15px" />
-            <Text>{props.date}</Text>
+            <Text size="11px">{props.date}</Text>
           </Small>
           <Small repuest={repuest} width="61px">
             <Image src={clock} width="11px" height="15px" />
@@ -93,7 +91,7 @@ const Card = (props) => {
           </Small>
           <Small repuest={repuest} width="80px">
             <Image src={price} width="11px" height="15px" />
-            <Text>{props.price}원</Text>
+            <Text size="11px">{props.price}원</Text>
           </Small>
         </Grid>
         <Text>

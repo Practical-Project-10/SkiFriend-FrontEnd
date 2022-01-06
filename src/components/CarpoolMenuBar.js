@@ -4,7 +4,7 @@ import { NavLink, withRouter } from "react-router-dom";
 import { useParams } from "react-router-dom";
 
 import styled from 'styled-components';
-import { Grid, Text } from "../elements/index";
+import { Grid } from "../elements/index";
 
 const CarpoolMenuBar = ({ match, location }) => {
   const params = useParams();

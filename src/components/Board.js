@@ -5,7 +5,6 @@ import Heart from "../assets/freeBoard/heart.svg";
 import Comment from "../assets/freeBoard/comment.svg";
 
 const Board = (props) => {
-  console.log(props);
 
   return (
     <React.Fragment>

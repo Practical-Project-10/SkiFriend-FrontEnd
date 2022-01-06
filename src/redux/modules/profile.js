@@ -19,8 +19,6 @@ const getProfileDB = () => {
   return async (dispatch, getState, { history }) => {
     try {
       const response = await apis.getProfile();
-      console.log(response.data);
-
       dispatch(getProfile(response.data));
     } catch (err) {
       console.log("getProfileDB", err);
@@ -61,16 +59,11 @@ const addProfileDB = (profile) => {
 const editProfileDB = (profile) => {
   return async (dispatch, getState, { history }) => {
     const _profile = getState().profile.user_profile;
-    console.log(_profile);
-
     const new_profile = {
       nickname: profile.nickname,
       career: profile.career,
       selfIntro: profile.selfIntro,
     };
-    console.log(profile.profileImg);
-    console.log(profile.vacImg);
-
     const formData = new FormData();
     formData.append("profileImg", profile.profileImg);
     formData.append("vacImg", profile.vacImg);
@@ -81,8 +74,6 @@ const editProfileDB = (profile) => {
 
     try {
       const response = await apis.editProfile(formData);
-      console.log(response.data);
-
       response && history.push("/mypage");
       dispatch(editProfile(response.data));
       dispatch(imageActions.setPreview(null));
@@ -96,8 +87,6 @@ const editProfileDB = (profile) => {
 
 const changePwdDB = (password, newPassword) => {
   return async (dispatch, getState, { history }) => {
-    console.log(password, newPassword);
-
     try {
       await apis.changePwd(password, newPassword);
       window.alert(
@@ -131,9 +120,7 @@ export default handleActions(
       }),
     [ADD_PROFILE]: (state, action) =>
       produce(state, (draft) => {
-        console.log("액션1");
         draft.user_profile = action.payload.profile;
-        console.log("액션2");
       }),
     [EDIT_PROFILE]: (state, action) =>
       produce(state, (draft) => {

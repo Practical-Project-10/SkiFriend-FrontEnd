@@ -1,8 +1,6 @@
 import { createAction, handleActions } from "redux-actions";
 import { produce } from "immer";
-
 import { apis } from "../../shared/apis";
-
 import { setCookie, deleteCookie } from "../../shared/cookie";
 
 //action
@@ -29,14 +27,12 @@ const phoneNum = createAction(PHONENUM_CHECK, (num) => ({ num }));
 const signupDB = (userInfo) => {
   return async (dispatch, getState, { history }) => {
     const _phoneNum = getState().user.user.phoneNum;
-    console.log(_phoneNum);
     const _userInfo = {
       username: userInfo.id,
       password: userInfo.password,
       phoneNum: _phoneNum,
       nickname: userInfo.nickname,
     };
-    console.log(_userInfo);
     try {
       await apis.signup(_userInfo);
       window.alert("회원가입이 완료되었습니다.");
@@ -49,10 +45,8 @@ const signupDB = (userInfo) => {
 
 const isIdDB = (id) => {
   return async (dispatch) => {
-    console.log(id);
     try {
       await apis.idCheck(id);
-
       window.alert("사용 가능한 아이디 입니다.");
       dispatch(idCheck(true));
     } catch (err) {
@@ -65,10 +59,8 @@ const isIdDB = (id) => {
 
 const isNicknameDB = (nickname) => {
   return async (dispatch) => {
-    console.log(nickname);
     try {
       await apis.nicknameCheck(nickname);
-
       window.alert("사용 가능한 닉네임 입니다.");
       dispatch(nicknameCheck(true));
     } catch (err) {
@@ -80,10 +72,8 @@ const isNicknameDB = (nickname) => {
 
 const isPhoneNumDB = (_phoneNum) => {
   return async (dispatch, getState, { history }) => {
-    console.log(_phoneNum);
     try {
       const response = await apis.phoneNumCheck(_phoneNum);
-      console.log(response);
       window.alert("인증번호가 전송되었습니다.");
       dispatch(phoneNum(_phoneNum));
     } catch (err) {
@@ -95,11 +85,9 @@ const isPhoneNumDB = (_phoneNum) => {
 
 const isSmsCheckDB = (phoneNum, randomNum) => {
   return async (dispatch, getState, { history }) => {
-    console.log(phoneNum, randomNum);
     try {
       await apis.smsNumCheck(phoneNum, randomNum);
       window.alert("인증이 완료되었습니다.");
-
       history.push("/signup");
       // dispatch(smsCheck(true));
     } catch (err) {
@@ -111,13 +99,10 @@ const isSmsCheckDB = (phoneNum, randomNum) => {
 
 const loginDB = (id, pwd) => {
   return async (dispatch, getState, { history }) => {
-    console.log(id, pwd);
     try {
       const response = await apis.login(id, pwd);
-      console.log(response);
       const user = response.data;
       const token = response.headers.authorization;
-
       response && history.push("/");
       setCookie("token", token);
       localStorage.setItem("nickname", response.data.nickname);
@@ -139,7 +124,6 @@ const editUserInfoDB = (userInfo) => {
       const newUserInfo = { ...oldUserInfo, userInfo };
       const response = await apis.editUserInfo(newUserInfo);
       const _userInfo = response.data;
-
       response && history.push("/freeboarddetail");
       dispatch(editUserInfo(_userInfo));
     } catch (err) {
@@ -152,7 +136,6 @@ const deleteUserInfoDB = () => {
   return async (dispatch, getState, { history }) => {
     try {
       await apis.deleteUser();
-      console.log("탈퇴완료");
       window.alert("회원탈퇴 요청이 정상적으로 처리되었습니다.");
       history.push("/");
       dispatch(logout());

@@ -1,14 +1,12 @@
 import React from "react";
-
 import { history } from "../redux/ConfigStore";
-
 import styled from "styled-components";
 
-import { Grid, Image, Text } from "../elements";
+import { Image, Text } from "../elements";
 import back from "../assets/carpoolWrite/back.svg";
 
 const Header = (props) => {
-  const { complete, goBack, children, _onClick, center } = props;
+  const { complete, goBack, children, _onClick } = props;
 
   if (goBack) {
     return (

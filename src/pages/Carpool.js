@@ -6,18 +6,16 @@ import { carpoolActions } from "../redux/modules/carpool";
 import CarpoolMenuBar from "../components/CarpoolMenuBar";
 import Card from "../components/Card";
 import FloatButton from "../components/FloatButton";
-import InfinityScroll from "../components/InfinityScroll";
+// import InfinityScroll from "../components/InfinityScroll";
 import Header from "../components/Header";
 
-import { Grid, Button, Image, Text } from "../elements/index";
-import High from "../assets/skiImage/HighOne/HighOne3.png";
+import { Grid, Image, Text } from "../elements/index";
 import filter from "../assets/carpoolList/filter.svg";
 
 const Carpool = (props, { location }) => {
   const history = props.history;
   const dispatch = useDispatch();
   const carpool_list = useSelector((state) => state.carpool.list);
-  console.log(carpool_list)
   // const page = useSelector((state) => state.carpool.page);
   // const is_loading = useSelector((state) => state.carpool.is_loading);
   const resortImg = useSelector((state) => state.carpool.resortImg);

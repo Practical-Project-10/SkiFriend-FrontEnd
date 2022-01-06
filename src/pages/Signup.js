@@ -11,9 +11,6 @@ import { userActions } from "../redux/modules/user";
 
 const SignupOne = (props) => {
   const dispatch = useDispatch();
-  const is_id = useSelector((state) => state.user.is_id);
-  const is_nickname = useSelector((state) => state.user.is_nickname);
-  console.log(is_id, is_nickname);
 
   // 유효성검사 상태
   const [checkId, setCheckId] = useState(true);
@@ -41,7 +38,6 @@ const SignupOne = (props) => {
 
     if (name === "id") {
       if (!idRegExp.test(id)) {
-        console.log("실패");
         setCheckId(false);
         return null;
       } else {
@@ -51,7 +47,6 @@ const SignupOne = (props) => {
 
     if (name === "pwd") {
       if (!pwdRegExp.test(pwd)) {
-        console.log("실패");
         setCheckPwd(
           <Text color="red" margin="-20px 5px">
             올바른 형식의 비밀번호가 아닙니다.
@@ -59,7 +54,6 @@ const SignupOne = (props) => {
         );
         return null;
       } else {
-        console.log("성공");
         setCheckPwd(
           <Text color="green" margin="-20px 5px">
             사용가능한 비밀번호입니다.
@@ -70,7 +64,6 @@ const SignupOne = (props) => {
 
     if (name === "rePwd") {
       if (pwd !== rePwd) {
-        console.log("실패");
         setCheckRePwd(
           <Text color="red" margin="-20px 5px">
             비밀번호가 일치하지 않습니다.
@@ -78,7 +71,6 @@ const SignupOne = (props) => {
         );
         return null;
       } else {
-        console.log("성공");
         setCheckRePwd(
           <Text color="green" margin="-20px 5px">
             비밀번호가 일치합니다.
@@ -93,7 +85,6 @@ const SignupOne = (props) => {
 
     if (name === "id") {
       if (checkId && id !== "") {
-        console.log("성공");
         dispatch(userActions.isIdDB(id));
       } else {
         window.alert("올바른 아이디를 입력해주세요.");
@@ -102,8 +93,6 @@ const SignupOne = (props) => {
 
     if (name === "nickname") {
       if (nickname.length >= 1 && nickname.length <= 7) {
-        console.log("성공");
-        console.log(nickname);
         dispatch(userActions.isNicknameDB(nickname));
       } else {
         window.alert("닉네임은 1글자 이상 7글자 이하로 정해주세요.");

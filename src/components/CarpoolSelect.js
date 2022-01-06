@@ -1,12 +1,9 @@
 import React, { useState, useRef } from "react";
 import { useParams } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { carpoolActions } from "../redux/modules/carpool";
 
 import styled from 'styled-components';
-import { Grid, Text, Button, Input, Image } from "../elements/index";
+import { Grid, Text, Input, Image } from "../elements/index";
 import DateSelector from "../components/DateSelector";
-import CarpoolSelect from "../components/CarpoolSelect";
 import Change from "../assets/carpoolWrite/change.svg"
 import Arrow from "../assets/carpoolWrite/arrow.svg"
 
@@ -50,8 +47,6 @@ const CarpoolFilter = (props) => {
   });
 
   const {
-    carpoolType,
-    memberNum,
     startLocation,
     endLocation,
     date,
@@ -60,7 +55,6 @@ const CarpoolFilter = (props) => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    console.log(name, value);
 
     setForm({
       ...form,
@@ -72,7 +66,6 @@ const CarpoolFilter = (props) => {
   // 출발 도착 지역 바꾸기
   const locationChange = () => {
     if (!state) {
-      console.log(startLoca.current.value);
       setState(true);
       setForm({
         ...form,
@@ -91,15 +84,12 @@ const CarpoolFilter = (props) => {
 
   // 날짜 선택
   const selectDate = (date) => {
-    console.log(date);
     setForm({
       ...form,
       date,
     });
     props.bringDate(date)
   };
-
-  console.log(form);
 
   return (
     <React.Fragment>

@@ -11,7 +11,6 @@ import Header from "../components/Header";
 import { Grid, Button, Text, Image } from "../elements/index";
 
 //react icons
-import { GrFormPrevious } from "react-icons/gr";
 import { AiOutlineHeart } from "react-icons/ai";
 import { BsChat } from "react-icons/bs";
 import { BsFillExclamationCircleFill } from "react-icons/bs";

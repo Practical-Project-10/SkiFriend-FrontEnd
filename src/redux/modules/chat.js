@@ -33,14 +33,12 @@ export const addChat = createAction(ADD, (chatData) => ({ chatData }));
 export const makeRoomChatDB =
   (postId) =>
   async (dispatch, getState, { history }) => {
-    console.log(postId)
     await apis
       .chatRoom(postId)
       .then((res) => {
         // const nickname = localStorage.getItem("nickname");
         // const datas = { ...res.data, nickname: nickname };
         // dispatch(addChat(datas));
-        console.log(res);
         history.push(`/chatroom/${res.data.roomId}/${res.data.longRoomId}`);
       })
       .catch((error) => {
@@ -55,8 +53,6 @@ export const getListChatDB =
     await apis
       .chatRoomList()
       .then((res) => {
-        console.log("요청 성공");
-        console.log(res);
         dispatch(getChatRoomList(res.data));
       })
       .catch((error) => {
@@ -71,8 +67,6 @@ export const getContentChatDB =
     await apis
       .chatMSG(roomId)
       .then((res) => {
-        console.log("요청 성공");
-        console.log(res);
         dispatch(getChatList(...res.data));
       })
       .catch((error) => {
@@ -108,8 +102,6 @@ export const getProfileInfoDB =
     await apis
       .chatShowProfile(longRoomId)
       .then((res) => {
-        console.log("요청 성공");
-        console.log(res);
         dispatch(getProfileList(res.data));
       })
       .catch((error) => {

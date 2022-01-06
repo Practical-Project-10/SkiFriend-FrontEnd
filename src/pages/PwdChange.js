@@ -28,15 +28,12 @@ const PwdChange = (props) => {
       [name]: value,
     });
   };
-  console.log(form);
 
   const handleBlur = (e) => {
     const { name } = e.target;
-    console.log(name);
 
     if (name === "newPwd") {
       if (!pwdRegExp.test(newPwd)) {
-        console.log("실패");
         setCheckPwd(
           <Text color="red" margin="-20px 5px">
             올바른 형식의 비밀번호가 아닙니다.
@@ -44,7 +41,6 @@ const PwdChange = (props) => {
         );
         return null;
       } else {
-        console.log("성공");
         setCheckPwd(
           <Text color="green" margin="-20px 5px">
             사용가능한 비밀번호입니다.
@@ -55,7 +51,6 @@ const PwdChange = (props) => {
 
     if (name === "reNewPwd") {
       if (newPwd !== reNewPwd) {
-        console.log("실패");
         setCheckRePwd(
           <Text color="red" margin="-20px 5px">
             비밀번호가 일치하지 않습니다.
@@ -63,7 +58,6 @@ const PwdChange = (props) => {
         );
         return null;
       } else {
-        console.log("성공");
         setCheckRePwd(
           <Text color="green" margin="-20px 5px">
             비밀번호가 일치합니다.
@@ -72,8 +66,6 @@ const PwdChange = (props) => {
       }
     }
   };
-
-  console.log(checkPwd);
 
   const changePwd = () => {
     if (checkPwd && checkRePwd) {

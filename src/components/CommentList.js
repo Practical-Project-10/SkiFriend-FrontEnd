@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { commentCreators as commentActions } from "../redux/modules/comment";
 
-import { Grid, Button, Input, Text } from "../elements/index";
+import { Grid, Input, Text } from "../elements/index";
 import sendBtn from "../assets/chat/send.png";
 
 const CommentList = () => {

@@ -1,20 +1,18 @@
 import React from "react";
 
 import styled from "styled-components";
-import { Grid, Text, Input, Button, Image } from "../elements/index";
+import { Grid, Input, Button, Image } from "../elements/index";
 import background from "../assets/login/login.png";
 import logo from "../assets/login/logo.svg"
 
 import Header from "../components/Header";
 
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { userActions } from "../redux/modules/user";
 
 const Login = (props) => {
   const history = props.history;
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.user.user);
-  console.log(user);
   const ldInput = React.useRef();
   const pwdInput = React.useRef();
 
@@ -32,8 +30,6 @@ const Login = (props) => {
 
     dispatch(userActions.loginDB(id, pwd));
   };
-
-  console.log(localStorage.getItem("user"));
 
   return (
     <React.Fragment>
@@ -71,13 +67,5 @@ const Login = (props) => {
     </React.Fragment>
   );
 };
-
-const Frame = styled.div`
-  width: 100%;
-  height: 100%;
-  min-height: calc(100vh - 55px);
-  padding: 0 16px;
-  background: url(${background});
-`;
 
 export default Login;
