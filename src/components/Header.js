@@ -8,7 +8,7 @@ import { Grid, Image, Text } from "../elements";
 import back from "../assets/carpoolWrite/back.svg";
 
 const Header = (props) => {
-  const {complete, goBack, children, _onClick} = props;
+  const {complete, goBack, children, _onClick, center} = props;
 
   if(goBack) {
     return(

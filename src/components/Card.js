@@ -157,16 +157,16 @@ const Card = (props) => {
   );
 };
 
-Card.defaultProps = {
-  carpoolType: "카풀제공",
-  startLocation: "하이원",
-  endLocation: "서울",
-  date: "2021-12-01",
-  time: "17시",
-  price: 10000,
-  memberNum: 4,
-  notice: "장비 가능하지만 5000원 추가입니다^^",
-};
+// Card.defaultProps = {
+//   carpoolType: "카풀제공",
+//   startLocation: "하이원",
+//   endLocation: "서울",
+//   date: "2021-12-01",
+//   time: "17시",
+//   price: 10000,
+//   memberNum: 4,
+//   notice: "장비 가능하지만 5000원 추가입니다^^",
+// };
 
 const CarpoolCard = styled.div`
   height: 173px;

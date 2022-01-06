@@ -16,11 +16,13 @@ import filter from "../assets/carpoolList/filter.svg";
 const Carpool = (props, { location }) => {
   const history = props.history;
   const dispatch = useDispatch();
-  console.log(props);
   const carpool_list = useSelector((state) => state.carpool.list);
+  // const carpool_list = resort_carpool.filter(l)
+  console.log(carpool_list)
   const page = useSelector((state) => state.carpool.page);
-  console.log(page);
   const is_loading = useSelector((state) => state.carpool.is_loading);
+  const is_login = localStorage.getItem('is_login');
+  const is_profile = localStorage.getItem('is_profile');
   const skiResort = props.match.params.skiresort;
 
   React.useEffect(() => {
@@ -28,10 +30,15 @@ const Carpool = (props, { location }) => {
   }, []);
 
   const induceProfile = () => {
-    // if (!is_profile) {
-    //   window.alert("프로필 작성 후 이용할 수 있는 서비스 입니다.");
-    //   return null;
-    // }
+    if (!is_login) {
+      window.alert("로그인 후 이용할 수 있는 서비스 입니다.");
+      return null;
+    }
+
+    if (!is_profile) {
+      window.alert("프로필 작성 후 이용할 수 있는 서비스 입니다.");
+      return null;
+    }
     history.push(`/carpoolwrite/${skiResort}`);
   };
 
@@ -40,7 +47,7 @@ const Carpool = (props, { location }) => {
       <Header goBack>{skiResort}</Header>
       <Grid bg="#FFF" minHeight='calc( 100vh - 124px )' margin='0 0 70px'>
         <Grid width="100%" height="291px">
-          <Image src={High} size="cover" width="100%" height="100%" />
+          {/* <Image src={High} size="cover" width="100%" height="100%" /> */}
         </Grid>
 
         <Grid width="100%">
@@ -67,12 +74,12 @@ const Carpool = (props, { location }) => {
             </Text>
           </Grid>
 
-          <InfinityScroll
+          {/* <InfinityScroll
             callNext={() => {
               dispatch(carpoolActions.getCarpoolDB(skiResort, page));
             }}
             is_loading={is_loading}
-          >
+          > */}
             {carpool_list.map((l) => {
               return (
                 <Grid key={l.postId} padding='0 0 16px 0' >
@@ -80,7 +87,7 @@ const Carpool = (props, { location }) => {
                 </Grid>
               );
             })}
-          </InfinityScroll>
+          {/* </InfinityScroll> */}
         </Grid>
 
         <FloatButton _onClick={induceProfile} /> 

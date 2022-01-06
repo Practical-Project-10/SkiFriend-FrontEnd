@@ -4,11 +4,10 @@ import { useSelector } from "react-redux";
 import CarpoolMenuBar from "../components/CarpoolMenuBar";
 import Card from "../components/Card";
 import FloatButton from "../components/FloatButton";
+import Header from "../components/Header";
 
 import { Grid, Image, Text } from "../elements/index";
 import filter from "../assets/carpoolList/filter.svg"
-import Pagination from "@mui/material/Pagination";
-import Stack from "@mui/material/Stack";
 
 const FilterList = (props) => {
   const history = props.history;
@@ -32,35 +31,49 @@ const FilterList = (props) => {
 
 
   return (
-    
-    <Grid is_flex align="center" direction="column">
-      <Grid bg="#C4C4C4"></Grid>
-
-      {/* 카풀/게시글 네비게이션 바 */}
-      <CarpoolMenuBar match={props.match} />
-
-      <Grid cursor is_flex justify='center' width='66px' height='30px' margin='16px 0' border='2px solid #6195CF' radius='6px'
-          _onClick={() => {
-            history.push(`/carpoolfilter/${skiResort}`);
-          }}
-        >
-          <Image src={filter} width='20px' height='20px'/>
-          <Text bold color='#6195CF'>필터</Text>
+    <Grid>
+      <Header goBack>{skiResort}</Header>
+      <Grid bg="#FFF" minHeight='calc( 100vh - 124px )' margin='0 0 70px'>
+        <Grid width="100%" height="291px">
+          {/* <Image src={High} size="cover" width="100%" height="100%" /> */}
         </Grid>
-      <Grid>
 
-        {carpool_list.map((l) => {
-          return (
-            <Grid key={l.postId} width="100%" padding='0 0 16px'>
-              <Card {...l} skiResort={skiResort} />
-            </Grid>
-          );
-        })}
+        <Grid width="100%">
+          <CarpoolMenuBar match={props.match} />
+        </Grid>
+
+        <Grid phoneSize>
+          <Grid
+            cursor
+            is_flex
+            justify="center"
+            width="66px"
+            height="30px"
+            margin="16px 0"
+            border="2px solid #6195CF"
+            radius="6px"
+            _onClick={() => {
+              history.push(`/carpoolfilter/${skiResort}`);
+            }}
+          >
+            <Image src={filter} width="20px" height="20px" />
+            <Text bold color="#6195CF">
+              필터
+            </Text>
+          </Grid>
+
+            {carpool_list.map((l) => {
+              return (
+                <Grid key={l.postId} width="100%" padding='0 0 16px'>
+                  <Card {...l} skiResort={skiResort} />
+                </Grid>
+              );
+            })}
+        </Grid>
+
+        <FloatButton _onClick={induceProfile} /> 
+
       </Grid>
-      {/* <Stack spacing={2}>
-        <Pagination count={5} />
-      </Stack> */}
-      <FloatButton _onClick={induceProfile} />
     </Grid>
   );
 };

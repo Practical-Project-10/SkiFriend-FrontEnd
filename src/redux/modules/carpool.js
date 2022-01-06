@@ -13,7 +13,10 @@ const IS_LOADING = "IS_LOADING";
 const IS_NEXT = "IS_NEXT";
 
 // acrtion creators
-const getCarpool = createAction(GET_CARPOOL, (list) => ({ list }));
+const getCarpool = createAction(GET_CARPOOL, (skiResort, list) => ({ 
+  skiResort,
+  list,
+}));
 const addCarpool = createAction(ADD_CARPOOL, (carpool) => ({ carpool }));
 const editCarpool = createAction(EDIT_CARPOOL, (postId, carpool) => ({
   postId,
@@ -36,10 +39,10 @@ const getCarpoolDB = (skiResort, page) => {
       const response = await apis.getCarpool(skiResort, page);
       console.log(response)
       if (response.data.length === 3) {
-        dispatch(getCarpool(response.data));
+        dispatch(getCarpool(skiResort, response.data));
         dispatch(isNext(true));
       } else {
-        dispatch(getCarpool(response.data));
+        dispatch(getCarpool(skiResort, response.data));
         dispatch(isNext(false));
       }
     } catch (err) {
@@ -157,9 +160,11 @@ export default handleActions(
     [GET_CARPOOL]: (state, action) =>
       produce(state, (draft) => {
         console.log(action.payload.list);
+        const skiResort = action.payload.skiResort;
         draft.loading = false;
-        draft.page += 1;
-        draft.list.push(...action.payload.list);
+        // draft.page += 1;
+        draft.list = action.payload.list;
+        // draft.list.push(...draft.list, {[skiResort]: action.payload.list});
       }),
 
     [ADD_CARPOOL]: (state, action) =>

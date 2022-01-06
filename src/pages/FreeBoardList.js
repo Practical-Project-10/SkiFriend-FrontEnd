@@ -47,7 +47,7 @@ const FreeBoardList = () => {
   return (
     <React.Fragment>
       <Header goBack>{skiresort}</Header>
-      <Grid bg="#FFF" minHeight='calc( 100vh - 124px )'>
+      <Grid bg="#FFF" margin='0 0 70px 0' minHeight='calc( 100vh - 124px )'>
         <Grid height="291px">
           <Image src={High} size="cover" width="100%" height="100%" />
         </Grid>

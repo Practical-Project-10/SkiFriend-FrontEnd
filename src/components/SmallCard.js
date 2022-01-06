@@ -8,13 +8,13 @@ import clock from "../assets/carpoolList/clock_icon.svg";
 
 const SmallCard = (props) => {
   const {notLogin} = props;
-
+  console.log(notLogin)
   const repuest = props.carpoolType === '카풀 요청'
   console.log(repuest)
 
   if(notLogin) {
     return (
-      <Grid margin='25px 0 0'>
+      <Grid>
         <Text>내가 쓴 카풀</Text>
         <NotLogin>
           최근 카풀 내역이 없어요!

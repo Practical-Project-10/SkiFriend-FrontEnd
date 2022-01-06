@@ -123,6 +123,7 @@ const loginDB = (id, pwd) => {
       setCookie("token", token);
       localStorage.setItem("nickname", response.data.nickname);
       localStorage.setItem("userId", response.data.userId);
+      localStorage.setItem("is_profile", response.data.profile);
       localStorage.setItem("is_login", true);
       dispatch(setUser(user));
     } catch (err) {
