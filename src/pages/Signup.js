@@ -17,8 +17,8 @@ const SignupOne = (props) => {
 
   // 유효성검사 상태
   const [checkId, setCheckId] = useState(true);
-  const [checkPwd, setCheckPwd] = useState(true);
-  const [checkRePwd, setCheckRePwd] = useState(true);
+  const [checkPwd, setCheckPwd] = useState(null);
+  const [checkRePwd, setCheckRePwd] = useState(null);
   const [inputs, setInputs] = useState({
     id: "",
     nickname: "",
@@ -52,22 +52,38 @@ const SignupOne = (props) => {
     if (name === "pwd") {
       if (!pwdRegExp.test(pwd)) {
         console.log("실패");
-        setCheckPwd(false);
+        setCheckPwd(
+          <Text color="red" margin="-20px 5px">
+            올바른 형식의 비밀번호가 아닙니다.
+          </Text>
+        );
         return null;
       } else {
         console.log("성공");
-        setCheckPwd(true);
+        setCheckPwd(
+          <Text color="green" margin="-20px 5px">
+            사용가능한 비밀번호입니다.
+          </Text>
+        );
       }
     }
 
     if (name === "rePwd") {
       if (pwd !== rePwd) {
         console.log("실패");
-        setCheckRePwd(false);
+        setCheckRePwd(
+          <Text color="red" margin="-20px 5px">
+            비밀번호가 일치하지 않습니다.
+          </Text>
+        );
         return null;
       } else {
         console.log("성공");
-        setCheckRePwd(true);
+        setCheckRePwd(
+          <Text color="green" margin="-20px 5px">
+            비밀번호가 일치합니다.
+          </Text>
+        );
       }
     }
   };
@@ -111,8 +127,11 @@ const SignupOne = (props) => {
     <Grid>
       <Header goBack>회원가입</Header>
       <Grid
-        phoneSize minHeight='calc( 100vh - 55px )'
-        display='flex' direction='column' justify='space-between'
+        phoneSize
+        minHeight="calc( 100vh - 55px )"
+        display="flex"
+        direction="column"
+        justify="space-between"
       >
         <Grid
           margin="132px 0 195px"
@@ -132,7 +151,11 @@ const SignupOne = (props) => {
             _onChange={handleChange}
             _onClick={handleClick}
           />
-          {!checkId && <Text color="red">올바른 형식의 아이디가 아닙니다.</Text>}
+          {!checkId && (
+            <Text color="red" margin="-20px 5px">
+              올바른 형식의 아이디가 아닙니다.
+            </Text>
+          )}
 
           <Input
             more4
@@ -155,9 +178,7 @@ const SignupOne = (props) => {
             type="password"
             placeholder="영대소문자와 특수문자를 포함한 8자리 이상"
           />
-          {!checkPwd && (
-            <Text color="red">올바른 형식의 비밀번호가 아닙니다.</Text>
-          )}
+          {checkPwd}
 
           <Input
             more4
@@ -168,7 +189,7 @@ const SignupOne = (props) => {
             type="password"
             placeholder="비밀번호를 다시 입력해주세요."
           />
-          {!checkRePwd && <Text color="red">비밀번호가 일치하지 않습니다.</Text>}
+          {checkRePwd}
         </Grid>
 
         <Grid padding="0 0 16px">

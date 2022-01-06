@@ -1,9 +1,8 @@
 import { createAction, handleActions } from "redux-actions";
 import { produce } from "immer";
-
 import { imageActions } from "./image";
-
 import { apis } from "../../shared/apis";
+import { userActions } from "../modules/user";
 
 //action
 const GET_PROFILE = "GET_PROFILE";
@@ -101,14 +100,14 @@ const changePwdDB = (password, newPassword) => {
 
     try {
       await apis.changePwd(password, newPassword);
-
-      window.alert("비밀번호가 변경되었습니다.");
-      history.goBack();
+      window.alert(
+        "비밀번호가 정상적으로 변경되었습니다. 변경된 비밀번호로 다시 로그인 해주시기 바랍니다."
+      );
+      dispatch(userActions.logout());
+      history.push(`/login`);
     } catch (err) {
+      window.alert("비밀번호를 잘못입력하셨습니다.");
       console.log(err);
-      //에러에 따라
-      //기존비밀번호가 틀렸는지
-      //새비밀번호가 조건에 맞지 않았는지
     }
   };
 };
