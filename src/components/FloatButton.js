@@ -2,12 +2,10 @@ import React from "react";
 
 import styled from "styled-components";
 import { Grid, Button } from "../elements/index";
-import write from "../assets/freeBoard/write_icon.png"
+import write from "../assets/freeBoard/write_icon.png";
 
 const FloatButton = (props) => {
-  const {
-    _onClick,
-  } = props;
+  const { _onClick } = props;
 
   return (
     <React.Fragment>
@@ -25,19 +23,11 @@ const Float = styled.div`
   width: 53px;
   height: 53px;
   border-radius: 50%;
-  /* background: url(${write}) no-repeat center; */
+  background: url(${write}) no-repeat center;
   border: 1px solid red;
-`
+`;
 
 export default FloatButton;
-
-
-
-
-
-
-
-
 
 // import React from "react";
 

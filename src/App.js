@@ -34,44 +34,43 @@ function App() {
           {/* <Header /> */}
           <GlobalStyleds />
           <CardList>
-          <Route exact path="/" component={Home}></Route>
-          <Route path="/phoneauth" component={PhoneAuth}></Route>
-          <Route path="/signup" component={Signup}></Route>
-          <Route path="/login" component={Login} />
-          <Route path="/carpool/:skiresort" component={Carpool} />
-          <Route path="/filter/:skiresort" component={FilterList} />
-          <Route exact path="/carpoolwrite" component={CarpoolWrite} />
-          <Route exact path="/carpoolwrite/:skiresort" component={CarpoolWrite} />
-          <Route
-            path="/carpoolwrite/:skiresort/:postId"
-            component={CarpoolWrite}
-          />
-          <Route path="/carpoolfilter/:skiresort" component={CarpoolFilter} />
-          <Route path="/freeboardlist/:skiresort" component={FreeBoardList} />
-          <Route path="/freeboardwrite/:skiresort" component={FreeBoardWrite} />
-          <Route
-            path="/freeboardedit/:skiresort/:postId"
-            component={FreeBoardWrite}
-          />
-          <Route
-            path="/freeboarddetail/:skiresort/:postId"
-            component={FreeBoardDetail}
-          />
-          <Route path="/placeinfo" component={PlaceInfo} />
-          <Route path="/mypage" component={MyPage} />
-          <Route exact path="/profilewrite" component={ProfileWrite}></Route>
-          <Route
-            exact
-            path="/profilewrite/:username"
-            component={ProfileWrite}
-          ></Route>
-          <Route
-            path="/profilewrite/:username/pwdchange"
-            component={PwdChange}
-          ></Route>
-          <Route path="/chatlist" component={ChatList} />
-          <Route path="/chatroom/:roomId/:longRoomId" component={ChatRoom} />
-          <Navbar />
+            <Route exact path="/" component={Home} />
+            <Route path="/phoneauth" component={PhoneAuth} />
+            <Route path="/signup" component={Signup} />
+            <Route path="/login" component={Login} />
+            <Route path="/carpool/:skiresort" component={Carpool} />
+            <Route path="/filter/:skiresort" component={FilterList} />
+            <Route exact path="/carpoolwrite" component={CarpoolWrite} />
+            <Route path="/carpoolwrite/:skiresort" component={CarpoolWrite} />
+            <Route
+              path="/carpoolwrite/:skiresort/:postId"
+              component={CarpoolWrite}
+            />
+            <Route path="/carpoolfilter/:skiresort" component={CarpoolFilter} />
+            <Route path="/freeboardlist/:skiresort" component={FreeBoardList} />
+            <Route
+              path="/freeboardwrite/:skiresort"
+              component={FreeBoardWrite}
+            />
+            <Route
+              path="/freeboardedit/:skiresort/:postId"
+              component={FreeBoardWrite}
+            />
+            <Route
+              path="/freeboarddetail/:skiresort/:postId"
+              component={FreeBoardDetail}
+            />
+            <Route path="/placeinfo" component={PlaceInfo} />
+            <Route path="/mypage" component={MyPage} />
+            <Route path="/profilewrite" component={ProfileWrite} />
+            <Route path="/profilewrite/:username" component={ProfileWrite} />
+            <Route
+              path="/profilewrite/:username/pwdchange"
+              component={PwdChange}
+            />
+            <Route path="/chatlist" component={ChatList} />
+            <Route path="/chatroom/:roomId/:longRoomId" component={ChatRoom} />
+            <Navbar />
           </CardList>
         </div>
       </Container>
@@ -97,7 +96,7 @@ const Container = styled.div`
     margin: 0 auto;
     padding: 0 auto;
     box-sizing: border-box;
-    background-color: #D9E3EE;
+    background-color: #d9e3ee;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
     position: relative;
 

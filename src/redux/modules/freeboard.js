@@ -13,7 +13,6 @@ const LOAD = "freeboard/LOAD";
 const ADD = "freeboard/POST";
 const GETONE = "freeboard/GETONE";
 const UPDATE = "freeboard/UPDATE";
-const DELETE = "freeboard/DELETE";
 // const LOADING = "freeboard/LOADING";
 // const NEXT = "freeboard/NEXT";
 
@@ -22,7 +21,6 @@ export const loadBoard = createAction(LOAD, (postList) => ({ postList }));
 export const addBoard = createAction(ADD, (postData) => ({ postData }));
 export const getOneBoard = createAction(GETONE, (postData) => ({ postData }));
 export const updateBoard = createAction(UPDATE, (postData) => ({ postData }));
-export const deleteBoard = createAction(DELETE, (postId) => ({ postId }));
 // export const loadingBoard = createAction(LOADING, (state) => ({ state }));
 // export const nextBoard = createAction(NEXT, (state) => ({ state }));
 
@@ -168,15 +166,6 @@ export default handleActions(
         );
         draft.list[idx] = { ...draft.list[idx], ...action.payload.detail };
       }),
-
-    [DELETE]: (state, action) => {
-      return {
-        ...state,
-        list: state.list.filter(
-          (list) => list.postId !== action.payload.postId
-        ),
-      };
-    },
 
     // [LOADING]: (state, action) =>
     //   produce(state, (draft) => {

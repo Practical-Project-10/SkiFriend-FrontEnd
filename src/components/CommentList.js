@@ -15,6 +15,7 @@ const CommentList = () => {
   );
   const postData = useSelector((state) => state.freeboard.detail);
   const nickname = localStorage.getItem("nickname");
+  const is_login = nickname ? true : false;
   //------useState관리-------
   const [commentValue, setCommentValue] = useState();
   const [commentEditValue, setCommentEditValue] = useState();
@@ -33,8 +34,13 @@ const CommentList = () => {
 
   //-------댓글 작성-------
   const addCommentBtn = () => {
-    dispatch(commentActions.addCommentDB(postId, commentValue));
-    setCommentValue("");
+    if (is_login) {
+      dispatch(commentActions.addCommentDB(postId, commentValue));
+      return setCommentValue("");
+    } else {
+      window.alert("로그인한 회원만 이용가능합니다.");
+      return;
+    }
   };
 
   //-------댓글수정-------
