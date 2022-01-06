@@ -35,41 +35,66 @@ function App() {
           <GlobalStyleds />
           <CardList>
             <Route exact path="/" component={Home} />
-            <Route path="/phoneauth" component={PhoneAuth} />
-            <Route path="/signup" component={Signup} />
-            <Route path="/login" component={Login} />
-            <Route path="/carpool/:skiresort" component={Carpool} />
-            <Route path="/filter/:skiresort" component={FilterList} />
+            <Route exact path="/phoneauth" component={PhoneAuth} />
+            <Route exact path="/signup" component={Signup} />
+            <Route exact path="/login" component={Login} />
+            <Route exact path="/carpool/:skiresort" component={Carpool} />
+            <Route exact path="/filter/:skiresort" component={FilterList} />
             <Route exact path="/carpoolwrite" component={CarpoolWrite} />
-            <Route path="/carpoolwrite/:skiresort" component={CarpoolWrite} />
             <Route
+              exact
+              path="/carpoolwrite/:skiresort"
+              component={CarpoolWrite}
+            />
+            <Route
+              exact
               path="/carpoolwrite/:skiresort/:postId"
               component={CarpoolWrite}
             />
-            <Route path="/carpoolfilter/:skiresort" component={CarpoolFilter} />
-            <Route path="/freeboardlist/:skiresort" component={FreeBoardList} />
             <Route
+              exact
+              path="/carpoolfilter/:skiresort"
+              component={CarpoolFilter}
+            />
+            <Route
+              exact
+              path="/freeboardlist/:skiresort"
+              component={FreeBoardList}
+            />
+            <Route
+              exact
               path="/freeboardwrite/:skiresort"
               component={FreeBoardWrite}
             />
             <Route
+              exact
               path="/freeboardedit/:skiresort/:postId"
               component={FreeBoardWrite}
             />
             <Route
+              exact
               path="/freeboarddetail/:skiresort/:postId"
               component={FreeBoardDetail}
             />
-            <Route path="/placeinfo" component={PlaceInfo} />
-            <Route path="/mypage" component={MyPage} />
-            <Route path="/profilewrite" component={ProfileWrite} />
-            <Route path="/profilewrite/:username" component={ProfileWrite} />
+            <Route exact path="/placeinfo" component={PlaceInfo} />
+            <Route exact path="/mypage" component={MyPage} />
+            <Route exact path="/profilewrite" component={ProfileWrite} />
             <Route
+              exact
+              path="/profilewrite/:username"
+              component={ProfileWrite}
+            />
+            <Route
+              exact
               path="/profilewrite/:username/pwdchange"
               component={PwdChange}
             />
-            <Route path="/chatlist" component={ChatList} />
-            <Route path="/chatroom/:roomId/:longRoomId" component={ChatRoom} />
+            <Route exact path="/chatlist" component={ChatList} />
+            <Route
+              exact
+              path="/chatroom/:roomId/:longRoomId"
+              component={ChatRoom}
+            />
             <Navbar />
           </CardList>
         </div>

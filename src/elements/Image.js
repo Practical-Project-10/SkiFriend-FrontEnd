@@ -74,6 +74,3 @@ const ElImage = styled.div`
 `;
 
 export default Image;
-
-/* background: ${(props) => */
-// props.src ? `url(${props.src}) no-repeat center` : ""};

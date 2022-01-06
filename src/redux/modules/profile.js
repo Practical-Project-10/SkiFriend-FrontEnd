@@ -22,7 +22,7 @@ const getProfileDB = () => {
       const response = await apis.getProfile();
       console.log(response.data);
 
-      response && dispatch(getProfile(response.data));
+      dispatch(getProfile(response.data));
     } catch (err) {
       console.log("getProfileDB", err);
     }
@@ -58,7 +58,6 @@ const addProfileDB = (profile) => {
   //   }
   // };
 };
-
 
 const editProfileDB = (profile) => {
   return async (dispatch, getState, { history }) => {
@@ -134,9 +133,9 @@ export default handleActions(
       }),
     [ADD_PROFILE]: (state, action) =>
       produce(state, (draft) => {
-        console.log('액션1')
+        console.log("액션1");
         draft.user_profile = action.payload.profile;
-        console.log('액션2')
+        console.log("액션2");
       }),
     [EDIT_PROFILE]: (state, action) =>
       produce(state, (draft) => {
