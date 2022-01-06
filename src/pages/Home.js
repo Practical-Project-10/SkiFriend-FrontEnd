@@ -2,6 +2,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { mainCreators as mainActions } from "../redux/modules/main";
 
+import styled from 'styled-components';
 import { Grid, Image, Text } from "../elements/index";
 import SkiIcon from "../components/SkiIcon";
 import HotPost from "../components/HotPost";
@@ -29,7 +30,7 @@ import { AiOutlineHeart } from "react-icons/ai";
 const Home = (props) => {
   const dispatch = useDispatch();
   const hotPosts = useSelector((state) => state.main.list);
-  console.log(hotPosts);
+  const history = props.history;
 
   const skiResort = [
     {
@@ -75,7 +76,6 @@ const Home = (props) => {
       img: Konjiam_,
     },
   ];
-  const history = props.history;
 
   React.useEffect(() => {
     const mainHotPosts = async () => {
@@ -100,13 +100,13 @@ const Home = (props) => {
           </Text>
         </Grid>
 
-        <Grid display="flex" wrap padding="26px 8%" gap="30px 50px">
-          {" "}
+        <IconWrap>
           {/* padding='26px' 적용이 안 됨*/}
           {skiResort.map((r) => {
             return (
               <Grid
-                skiIcon
+                cursor
+                hoverOpacity='0.8'
                 key={r.resortNum}
                 _onClick={() => history.push(`/carpool/${r.name}`)}
                 align="center"
@@ -116,7 +116,7 @@ const Home = (props) => {
               </Grid>
             );
           })}
-        </Grid>
+        </IconWrap>
 
         <Grid
           bg="#FFF"
@@ -143,5 +143,16 @@ const Home = (props) => {
     </React.Fragment>
   );
 };
+
+const IconWrap = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  padding: 26px 42px;
+  gap: 30px 50px;
+
+  @media screen and (min-width: 1024px) {
+    gap:   
+  }
+`
 
 export default Home;
