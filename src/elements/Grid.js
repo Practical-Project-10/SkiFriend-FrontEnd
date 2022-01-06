@@ -157,7 +157,7 @@ const GridBox = styled.div`
   overflow: ${(props) => props.overflow};
   text-align: ${(props) => props.align};
   align-items: ${(props) => props.alignItems};
-  flex-wrap: ${(props) => (props.wrap ? "wrap" : "")};
+  flex-wrap: ${(props) => props.wrap};
   flex-direction: ${(props) => props.direction};
   cursor: ${(props) => (props.cursor ? "pointer" : "")};
   &:hover {

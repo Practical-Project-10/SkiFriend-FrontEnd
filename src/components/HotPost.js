@@ -1,5 +1,7 @@
 import React from "react";
 
+import {history} from "../redux/ConfigStore"
+
 import styled from "styled-components";
 import { Grid, Text, Image } from "../elements";
 import { history } from "../redux/ConfigStore";
@@ -8,28 +10,16 @@ import Heart from "../assets/freeBoard/heart.svg";
 import Comment from "../assets/freeBoard/comment.svg";
 
 const HotPost = (props) => {
-  // const skiResort = [
-  //   '하이원',
-  //   '용평',
-  //   '비발디',
-  //   '휘닉스',
-  //   '웰리힐리',
-  //   '곤지암'
-  // ]
+
+
   return (
     <React.Fragment>
       <Posts>
-        <Grid is_flex padding="20px 0">
+        <Grid is_flex padding='20px 0'>
           <ResortName>{props.skiResort}</ResortName>
-          <Grid is_flex justify="space-between" width="100%" gap="66px">
-            <Grid width="80%">
-              <Text
-                _onClick={() => {
-                  history.push(``);
-                }}
-              >
-                {props.title}
-              </Text>
+          <Grid is_flex justify='space-between' width='100%' gap='66px'>
+            <Grid width='80%'>
+              <Underline deco _onClick={() => history.push(`/freeboarddetail/${props.skiResort}/${props.postId}`)}>{props.title}</Underline>
             </Grid>
             <Grid is_flex width="25%">
               <Grid is_flex margin="0 11px 0 0">
@@ -50,8 +40,7 @@ const HotPost = (props) => {
 };
 
 const ResortName = styled.div`
-  width: 75px;
-  height: 21px;
+  padding: 0 7px;
   margin-right: 11px;
   background: #6195cf;
   border-radius: 140px;
@@ -65,8 +54,15 @@ const ResortName = styled.div`
 
 const Posts = styled.div`
   &:last-child > hr {
-    display: none;
+    /* display: none; */
   }
 `;
+
+const Underline = styled.div`
+  &:hover {
+    cursor: pointer;
+    text-decoration: underline;
+  }
+`
 
 export default HotPost;

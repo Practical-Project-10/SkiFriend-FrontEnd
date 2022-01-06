@@ -9,9 +9,10 @@ const EDIT_CARPOOL = "EDIT_CARPOOL";
 const DELETE_CARPOOL = "DELETE_CARPOOL";
 const FILTER_CARPOOL = "FILTER_CARPOOL";
 const GET_MYCARPOOL = "GET_MYCARPOOL";
+const IMAGE_RESORT = 'IMAGE_RESORT';
 // const IS_LOADING = "IS_LOADING";
 // const IS_NEXT = "IS_NEXT";
-const IMAGE_RESORT = "IMAGE_RESORT";
+
 
 // acrtion creators
 const getCarpool = createAction(GET_CARPOOL, (skiResort, list) => ({
@@ -27,10 +28,11 @@ const deleteCarpool = createAction(DELETE_CARPOOL, (postId) => ({ postId }));
 const getMyCarpool = createAction(GET_MYCARPOOL, (myCarpools) => ({
   myCarpools,
 }));
-const filterCarpool = createAction(FILTER_CARPOOL, (carpool) => ({ carpool }));
+
+const filterCarpool = createAction(FILTER_CARPOOL, (carpool) => ({carpool}))
+const imageResort = createAction(IMAGE_RESORT, (url) => ({url}))
 // const isLoading = createAction(IS_LOADING, (state) => ({ state }));
 // const isNext = createAction(IS_NEXT, (state) => ({ state }));
-const imageResort = createAction(IMAGE_RESORT, (url) => ({ url }));
 
 // middlewares
 const imageResortDB = (skiResort) => {
@@ -149,9 +151,10 @@ export default handleActions(
     [GET_CARPOOL]: (state, action) =>
       produce(state, (draft) => {
         const skiResort = action.payload.skiResort;
+
         draft.loading = false;
-        // draft.page += 1;
         draft.list = action.payload.list;
+        // draft.page += 1;
         // draft.list.push(...draft.list, {[skiResort]: action.payload.list});
       }),
 
@@ -186,6 +189,11 @@ export default handleActions(
         draft.myList = action.payload.myCarpools;
       }),
 
+      [IMAGE_RESORT]: (state, action) =>
+        produce(state, (draft) => {
+          console.log(action.payload.url)
+          draft.resortImg = action.payload.url;
+        }),
     // [IS_LOADING]: (state, action) =>
     //   produce(state, (draft) => {
     //     draft.is_loading = action.payload.state;
@@ -196,10 +204,7 @@ export default handleActions(
     //     draft.is_next = action.payload.state;
     //   }),
 
-    [IMAGE_RESORT]: (state, action) =>
-      produce(state, (draft) => {
-        draft.resortImg = action.payload.url;
-      }),
+
   },
   initialState
 );
