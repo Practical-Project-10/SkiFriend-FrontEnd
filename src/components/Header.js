@@ -60,6 +60,7 @@ const Button = styled.div`
   position: absolute;
   top: 17px;
   right: 16px;
+  cursor: pointer;
 `
 
 export default Header;

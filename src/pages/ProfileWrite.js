@@ -254,7 +254,7 @@ const ProfileWrite = (props) => {
                 <Text size="12px">성별</Text>
                 <Input
                   name="gender"
-                  value={user_profile.gender}
+                  _value={gender}
                   _disabled
                 ></Input>
               </Grid>

@@ -23,7 +23,6 @@ const MyPage = (props) => {
   const dispatch = useDispatch();
   const is_login = localStorage.getItem("is_login");
   const is_profile = localStorage.getItem('is_profile');
-  console.log(is_profile)
   const user_profile = useSelector((state) => state.profile.user_profile);
   const myCarpool = useSelector((state) => state.carpool.myList);
   console.log(user_profile);
@@ -117,24 +116,8 @@ const MyPage = (props) => {
                   </Grid>
                 </Grid>
 
-                {/* <Grid
-                  cursor
-                  width="66px"
-                  padding="6px"
-                  bg="#FFF"
-                  radius="4px"
-                  align="center"
-                  _onClick={() => {
-                    history.push("/profilewrite");
-                  }}
-                >
-                  <Text size="12px" color="#474D56">
-                    등록하기
-                  </Text>
-                </Grid> */}
-
                 <Grid padding='6px 0 0'>
-                  {is_profile
+                  {is_profile === 'true'
                   ? <Grid cursor width='66px' padding='6px' bg='#FFF' radius='4px' align='center'
                       _onClick={() => {history.push(`/profilewrite/${user_profile.username}`)}}
                     >
