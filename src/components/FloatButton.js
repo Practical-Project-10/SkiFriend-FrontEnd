@@ -9,8 +9,7 @@ const FloatButton = (props) => {
 
   return (
     <React.Fragment>
-      <Float>
-        <Button _onClick={_onClick}>+</Button>
+      <Float onClick={_onClick}>
       </Float>
     </React.Fragment>
   );
@@ -24,7 +23,13 @@ const Float = styled.div`
   height: 53px;
   border-radius: 50%;
   background: url(${write}) no-repeat center;
-  border: 1px solid red;
+  background-color: #474D56;
+  background-size: 25px;
+
+  &:hover {
+    opacity: 0.8;
+    cursor: pointer;
+  }
 `;
 
 export default FloatButton;
