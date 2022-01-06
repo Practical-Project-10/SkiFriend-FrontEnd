@@ -68,10 +68,12 @@ const ElImage = styled.div`
   padding: ${(props) => props.padding};
   margin: ${(props) => props.margin};
   border-radius: ${(props) => props.radius};
-  background: ${(props) =>
-    props.src ? `url(${props.src}) no-repeat center` : ""};
+  background: ${(props) => `url(${props.src}) no-repeat center`};
   background: ${(props) => props.bg};
   background-size: ${(props) => props.size};
 `;
 
 export default Image;
+
+/* background: ${(props) => */
+// props.src ? `url(${props.src}) no-repeat center` : ""};

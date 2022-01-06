@@ -17,6 +17,8 @@ const CarpoolWrite = (props) => {
   //수정페이지
   const postId = props.match.params.postId;
   const is_edit = postId ? true : false;
+  const nickname = localStorage.getItem("nickname");
+  const is_login = nickname ? true : false;
   const carpool = is_edit
     ? carpool_list.find((l) => l.postId === Number(postId))
     : null;
@@ -72,7 +74,13 @@ const CarpoolWrite = (props) => {
   console.log(form);
 
   const addCarpool = () => {
-    dispatch(carpoolActions.addCarpoolDB(skiResort, form));
+    if (is_login) {
+      //프로필작성한 사람확인 여부 추가해야함
+      return dispatch(carpoolActions.addCarpoolDB(skiResort, form));
+    } else {
+      window.alert("로그인 및 프로필작성한 회원만 작성가능합니다.");
+      return;
+    }
   };
   const editCarpool = () => {
     dispatch(carpoolActions.editCarpoolDB(postId, form));
@@ -80,8 +88,8 @@ const CarpoolWrite = (props) => {
 
   return (
     <React.Fragment>
-      <Header goBack>카풀 {is_edit? '수정': '등록'} 페이지</Header>
-      <Grid bg="#FFF" minHeight='calc( 100vh - 124px )'>
+      <Header goBack>카풀 {is_edit ? "수정" : "등록"} 페이지</Header>
+      <Grid bg="#FFF" minHeight="calc( 100vh - 124px )">
         <CarpoolSelect bringForm={bringForm} bringDate={bringDate} />
 
         {/* <div style={{border: '5px solid #edeeef'}}></div> */}
