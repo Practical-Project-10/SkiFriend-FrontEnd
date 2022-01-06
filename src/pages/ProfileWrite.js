@@ -32,13 +32,13 @@ const ProfileWrite = (props) => {
   // const [vacSelect, setVacSelect] = useState(false);
   const [profile, setProfile] = useState({
     nickname: user_profile.nickname,
-    profileImg: emptyFile,
+    profileImg: null,
     gender: is_edit ? user_profile.gender : "",
     ageRange: is_edit ? user_profile.ageRange : "",
     career: is_edit ? user_profile.career : "",
     selfIntro: is_edit ? user_profile.selfIntro : "",
     phoneNum: user_profile.phoneNum,
-    vacImg: emptyFile,
+    vacImg: null,
   });
   console.log(profile);
   const {
@@ -167,6 +167,7 @@ const ProfileWrite = (props) => {
       .post(`http://3.34.52.2:8080/user/profile`, formData, token)
       .then((response) => {
         alert("정상적으로 프로필사진이 변경되었습니다.");
+
         console.log(response);
         history.push('/mypage')
 

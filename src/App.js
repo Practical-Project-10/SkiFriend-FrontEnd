@@ -43,16 +43,29 @@ function App() {
             <Route exact path="/carpool/:skiresort" component={Carpool} />
             <Route exact path="/filter/:skiresort" component={FilterList} />
             <Route exact path="/carpoolwrite" component={CarpoolWrite} />
-            <Route exact path="/carpoolwrite/:skiresort" component={CarpoolWrite} />
+            <Route
+              exact
+              path="/carpoolwrite/:skiresort"
+              component={CarpoolWrite}
+            />
             <Route
               exact
               path="/carpoolwrite/:skiresort/:postId"
               component={CarpoolWrite}
             />
-            <Route exact path="/carpoolfilter/:skiresort" component={CarpoolFilter} />
-            <Route exact path="/freeboardlist/:skiresort" component={FreeBoardList} />
             <Route
-               exact
+              exact
+              path="/carpoolfilter/:skiresort"
+              component={CarpoolFilter}
+            />
+            <Route
+              exact
+              path="/freeboardlist/:skiresort"
+              component={FreeBoardList}
+            />
+            <Route
+              exact
+
               path="/freeboardwrite/:skiresort"
               component={FreeBoardWrite}
             />
@@ -69,14 +82,24 @@ function App() {
             <Route exact path="/placeinfo" component={PlaceInfo} />
             <Route exact path="/mypage" component={MyPage} />
             <Route exact path="/profilewrite" component={ProfileWrite} />
-            <Route exact path="/profilewrite/:username" component={ProfileWrite} />
+            <Route
+              exact
+              path="/profilewrite/:username"
+              component={ProfileWrite}
+            />
+
             <Route
               exact
               path="/profilewrite/:username/pwdchange"
               component={PwdChange}
             />
             <Route exact path="/chatlist" component={ChatList} />
-            <Route exact path="/chatroom/:roomId/:longRoomId" component={ChatRoom} />
+            <Route
+              exact
+              path="/chatroom/:roomId/:longRoomId"
+              component={ChatRoom}
+            />
+
             <Navbar />
           </CardList>
         </div>
