@@ -98,8 +98,10 @@ const FreeBoardWrite = () => {
 
   return (
     <React.Fragment>
-      <Header goBack>게시글 {is_edit? "수정": "수정"}하기</Header>
-      <Grid minHeight='calc( 100vh - 55px )' bg="#FFF">
+      <Header goBack complete>
+        게시글 {is_edit ? "수정" : "작성"}하기
+      </Header>
+      <Grid minHeight="calc( 100vh - 55px )" bg="#FFF">
         <Grid is_flex justify="space-between" bg="#C6D2E0" padding="8px 16px">
           <Text>작성 전 꼭 읽어주세요!</Text>
           <Image src={UnderArrow} width="13px" height="8px" />

@@ -24,10 +24,9 @@ const FreeBoardDetail = ({ history }, props) => {
   const skiresort = params.skiresort;
   const postData = useSelector((state) => state.freeboard.detail);
   const nickname = localStorage.getItem("nickname");
-  console.log(postData.image);
+  const is_login = nickname ? true : false;
   //------useState관리-------
   const [showmodal, setShowModal] = useState();
-
   //-------Modal-------
   const closemodal = () => {
     setShowModal(false);
@@ -51,7 +50,12 @@ const FreeBoardDetail = ({ history }, props) => {
 
   //-------좋아요 변경---------
   const likeChange = () => {
-    dispatch(likeActions.addLikeDB(postId));
+    if (is_login) {
+      return dispatch(likeActions.addLikeDB(postId));
+    } else {
+      window.alert("로그인한 회원만 가능합니다.");
+      return;
+    }
   };
 
   React.useEffect(() => {
@@ -61,7 +65,7 @@ const FreeBoardDetail = ({ history }, props) => {
   return (
     <React.Fragment>
       <Header goBack>자유게시글</Header>
-      <Grid bg="#FFF"  minHeight='calc( 100vh - 55px )'>
+      <Grid bg="#FFF" minHeight="calc( 100vh - 55px )">
         <Grid bg="#ffffff">
           <Grid is_flex justify="space-between" borderB="1px solid #474D56">
             <Grid is_flex margin="15px">
@@ -95,12 +99,20 @@ const FreeBoardDetail = ({ history }, props) => {
                       <BsFillExclamationCircleFill size="30" />
                     </Grid>
                     <Grid margin="10px 0">
-                      <Text size="20px" cursor="pointer" _onClick={updatePostBtn}>
+                      <Text
+                        size="20px"
+                        cursor="pointer"
+                        _onClick={updatePostBtn}
+                      >
                         게시글 수정하기
                       </Text>
                     </Grid>
                     <Grid margin="10px 0">
-                      <Text size="20px" cursor="pointer" _onClick={deletePostBtn}>
+                      <Text
+                        size="20px"
+                        cursor="pointer"
+                        _onClick={deletePostBtn}
+                      >
                         게시글 삭제하기
                       </Text>
                     </Grid>
@@ -135,9 +147,9 @@ const FreeBoardDetail = ({ history }, props) => {
             </Grid>
           </Grid>
           {/* 사진 및 게시글 */}
-          <Grid height="230px">
+          <Grid height="230px" overflow="scroll">
             <Grid>
-              <Image src={postData.image} />
+              <Image width="100%" height="180px" src={postData.image} />
             </Grid>
             <Grid margin="10px 5px">
               <Text margin="10px">{postData.content}</Text>
@@ -150,7 +162,7 @@ const FreeBoardDetail = ({ history }, props) => {
           </Grid>
         </Grid>
 
-        <div style={{border:'5px solid #edeeef'}}></div>
+        <div style={{ border: "5px solid #edeeef" }}></div>
 
         <CommentList />
       </Grid>
