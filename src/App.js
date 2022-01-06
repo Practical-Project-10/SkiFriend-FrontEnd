@@ -2,10 +2,8 @@ import React from "react";
 import GlobalStyleds from "./shared/globalStyles";
 
 import styled from "styled-components";
-import { Grid } from "./elements/index";
 import { Route } from "react-router-dom";
 //pages import
-import Header from "./components/Header";
 import Home from "./pages/Home";
 import PhoneAuth from "./pages/PhoneAuth";
 import Signup from "./pages/Signup";

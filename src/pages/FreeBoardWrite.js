@@ -1,19 +1,17 @@
 import React, { useState } from "react";
 
-import { history } from "../redux/ConfigStore";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { boardCreators as boardActions } from "../redux/modules/freeboard";
 import { imageActions } from "../redux/modules/image";
 
-import { Grid, Button, Text, Input, Image } from "../elements/index";
+import { Grid, Text, Input, Image } from "../elements/index";
 import UnderArrow from "../assets/freeBoard/underArrow.svg";
 
 import Header from "../components/Header";
 
 //react icons
 import { AiOutlineCamera } from "react-icons/ai";
-import { IoIosArrowBack } from "react-icons/io";
 
 const FreeBoardWrite = () => {
   const dispatch = useDispatch();

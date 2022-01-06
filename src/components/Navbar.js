@@ -3,12 +3,7 @@ import React from "react";
 import { NavLink, withRouter } from "react-router-dom";
 
 import styled from "styled-components";
-import { Grid, Text, Image } from "../elements/index";
-
-import home from "../assets/navBar/nav_home_icon.png"
-import info from "../assets/navBar/nav_info_icon.png"
-import chat from "../assets/navBar/nav_chat_icon.png"
-import mypage from "../assets/navBar/nav_mypage_icon.png"
+import { Grid, Text } from "../elements/index";
 
 import { AiTwotoneHome, AiOutlineHome } from "react-icons/ai";
 import { AiFillInfoCircle, AiOutlineInfoCircle } from "react-icons/ai";

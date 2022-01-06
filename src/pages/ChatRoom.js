@@ -1,7 +1,4 @@
-import React, { useState, useRef, useCallback } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { chatCreators as chatActions } from "../redux/modules/chat";
-import { history } from "../redux/ConfigStore";
+import React, { useState, useRef } from "react";
 import { useParams } from "react-router-dom";
 
 import axios from "axios";
@@ -10,9 +7,7 @@ import Stomp from "stompjs";
 import MessageBox from "../components/MessageBox";
 import Header from "../components/Header";
 //icons
-import { IoIosArrowBack } from "react-icons/io";
-import { AiOutlineCamera } from "react-icons/ai";
-import { Grid, Text, Input } from "../elements/index";
+import { Grid, Input } from "../elements/index";
 import sendBtn from "../assets/chat/send.png";
 
 const ChatRoom = () => {

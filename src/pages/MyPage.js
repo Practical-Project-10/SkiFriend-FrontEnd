@@ -2,7 +2,6 @@ import React from "react";
 
 import { useDispatch, useSelector } from "react-redux";
 import { profileActions } from "../redux/modules/profile";
-import { userActions } from "../redux/modules/user";
 import { carpoolActions } from "../redux/modules/carpool";
 
 //swiper
@@ -13,7 +12,7 @@ import SmallCard from "../components/SmallCard";
 import Header from "../components/Header";
 
 import styled from "styled-components";
-import { Grid, Button, Image, Text } from "../elements/index";
+import { Grid, Image, Text } from "../elements/index";
 import basicProfile from "../assets/myPage/profilePicture.png";
 import notLoginProfile from "../assets/myPage/profile_default_img.png";
 import banner from "../assets/myPage/mypage_banner.png";
@@ -26,7 +25,6 @@ const MyPage = (props) => {
   const is_profile = localStorage.getItem("is_profile");
   const user_profile = useSelector((state) => state.profile.user_profile);
   const myCarpool = useSelector((state) => state.carpool.myList);
-  console.log(user_profile);
   // console.log(user_profile.profileImg);
 
   React.useEffect(() => {

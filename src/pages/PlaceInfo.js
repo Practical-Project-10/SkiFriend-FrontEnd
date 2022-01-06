@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 import styled from "styled-components";
-import { Grid, Button, Image, Text } from "../elements/index";
+import { Grid, Image, Text } from "../elements/index";
 
 import SkiIcon from "../components/SkiIcon"
 import Header from "../components/Header";
@@ -24,16 +24,12 @@ const PlaceInfo = () => {
     tabKonjiam: false,
   });
   const list = Object.entries(toggleState);
-  const info = 
-  ['소개', '슬로프 안내', '요금정보', '날씨'];
 
   const toggleMenu = (e) => {
     const {id} = e.currentTarget;
     const state = list.filter(t => t[0] === id);
-    console.log(state[0][1]);
 
     if(state[0][1] === false) {
-      console.log('o')
       setToggleState(
         {
           ...toggleState,

@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 
 import { useDispatch } from "react-redux";
 import { carpoolActions } from "../redux/modules/carpool";
@@ -65,8 +65,5 @@ const CarpoolFilter = (props) => {
   );
 };
 
-const Filter = styled(Button)`
- position: absolute;
-`
 
 export default CarpoolFilter;

@@ -1,31 +1,24 @@
 import React from "react";
-
-import styled from "styled-components";
+import { useDispatch, useSelector } from "react-redux";
+import { userActions } from "../redux/modules/user";
 import { Grid, Button, Input } from "../elements";
 
 import Header from "../components/Header";
-
-import { useDispatch, useSelector } from "react-redux";
-import { userActions } from "../redux/modules/user";
-
 import { phoneNumExp } from "../shared/validation";
 
 const PhoneAuth = (props) => {
   const dispatch = useDispatch();
   const userInfo = useSelector((state) => state.user.user);
   // const isSms = useSelector(state => state.user.is_sms);
-  console.log(userInfo);
   const phoneNumInput = React.useRef("");
   const smsNumInput = React.useRef("");
 
   const numSend = () => {
     const phoneNum = phoneNumInput.current.value;
-    console.log(phoneNum);
     if (!phoneNumExp.test(phoneNum)) {
       window.alert("핸드폰 번호를 올바르게 입력해주세요.");
       return null;
     } else {
-      console.log("성공");
       dispatch(userActions.isPhoneNumDB(phoneNum));
     }
   };
@@ -37,7 +30,6 @@ const PhoneAuth = (props) => {
       window.alert("인증번호를 입력해주세요");
       return null;
     } else {
-      console.log("성공");
       dispatch(userActions.isSmsCheckDB(userInfo.phoneNum, smsNum));
     }
   };

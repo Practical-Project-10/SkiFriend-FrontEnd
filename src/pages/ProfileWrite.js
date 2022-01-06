@@ -18,7 +18,6 @@ const ProfileWrite = (props) => {
   const dispatch = useDispatch();
   const preview = useSelector((state) => state.image.preview);
   const user_profile = useSelector((state) => state.profile.user_profile);
-  console.log(user_profile);
 
   const pfImgFile = useRef();
   const vImgFile = useRef();
@@ -40,16 +39,13 @@ const ProfileWrite = (props) => {
     phoneNum: user_profile.phoneNum,
     vacImg: null,
   });
-  console.log(profile);
   const {
     nickname,
-    profileImg,
     gender,
     ageRange,
     career,
     selfIntro,
     phoneNum,
-    vacImg,
   } = profile;
 
   useEffect(() => {
@@ -92,9 +88,6 @@ const ProfileWrite = (props) => {
     const reader = new FileReader();
     const profileImgFile = pfImgFile.current.files[0];
     const vacImgFile = vImgFile.current.files[0];
-    const selectedFild = vacImgFile !== emptyFile;
-    console.log(profileImgFile);
-    console.log(vacImgFile);
 
     if (profileImgFile) {
       reader.readAsDataURL(profileImgFile);
@@ -168,7 +161,6 @@ const ProfileWrite = (props) => {
       .then((response) => {
         alert("정상적으로 프로필사진이 변경되었습니다.");
 
-        console.log(response);
         history.push('/mypage')
 
         dispatch(imageActions.setPreview(null));

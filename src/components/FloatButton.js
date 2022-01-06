@@ -1,7 +1,6 @@
 import React from "react";
 
 import styled from "styled-components";
-import { Grid, Button } from "../elements/index";
 import write from "../assets/freeBoard/write_icon.png";
 
 const FloatButton = (props) => {

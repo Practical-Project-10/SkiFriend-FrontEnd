@@ -8,8 +8,6 @@ export const addCommentDB =
     await apis
       .addPostComment(postId, content)
       .then((res) => {
-        console.log("댓글달기 성공");
-        console.log(res);
         dispatch(getOneBoardDB(postId));
       })
       .catch((e) => console.log(e));
@@ -21,7 +19,6 @@ export const updateCommentDB =
     await apis
       .updatePostComment(commentId, content)
       .then((res) => {
-        console.log("댓글수정 성공");
         dispatch(getOneBoardDB(postId));
       })
       .catch((error) => {
@@ -36,7 +33,6 @@ export const deleteCommentDB =
       .deletePostComment(commentId)
       .then((res) => {
         dispatch(getOneBoardDB(postId));
-        console.log("댓글 삭제");
       })
       .catch((error) => {
         console.log(`댓글삭제 실패${error}`);

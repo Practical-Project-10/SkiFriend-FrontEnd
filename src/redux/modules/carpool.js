@@ -11,10 +11,10 @@ const FILTER_CARPOOL = "FILTER_CARPOOL";
 const GET_MYCARPOOL = "GET_MYCARPOOL";
 // const IS_LOADING = "IS_LOADING";
 // const IS_NEXT = "IS_NEXT";
-const IMAGE_RESORT = 'IMAGE_RESORT';
+const IMAGE_RESORT = "IMAGE_RESORT";
 
 // acrtion creators
-const getCarpool = createAction(GET_CARPOOL, (skiResort, list) => ({ 
+const getCarpool = createAction(GET_CARPOOL, (skiResort, list) => ({
   skiResort,
   list,
 }));
@@ -27,33 +27,26 @@ const deleteCarpool = createAction(DELETE_CARPOOL, (postId) => ({ postId }));
 const getMyCarpool = createAction(GET_MYCARPOOL, (myCarpools) => ({
   myCarpools,
 }));
-const filterCarpool = createAction(FILTER_CARPOOL, (carpool) => ({carpool}))
+const filterCarpool = createAction(FILTER_CARPOOL, (carpool) => ({ carpool }));
 // const isLoading = createAction(IS_LOADING, (state) => ({ state }));
 // const isNext = createAction(IS_NEXT, (state) => ({ state }));
-const imageResort = createAction(IMAGE_RESORT, (url) => ({url}))
+const imageResort = createAction(IMAGE_RESORT, (url) => ({ url }));
 
 // middlewares
 const imageResortDB = (skiResort) => {
-  return async function(dispatch) {
-    console.log(skiResort)
+  return async function (dispatch) {
     try {
       const response = await apis.imageResort(skiResort);
-      console.log(response.data.resortImg);
-
-      response && dispatch(imageResort(response.data.resortImg))
-    } catch(err) {
-      console.log(err)
-    }
-  }
-}
+      response && dispatch(imageResort(response.data.resortImg));
+    } catch (err) {}
+  };
+};
 
 const getCarpoolDB = (skiResort, page) => {
   return async function (dispatch) {
     // dispatch(isLoading(true));
-
     try {
       const response = await apis.getCarpool(skiResort, page);
-      console.log(response)
       response && dispatch(getCarpool(skiResort, response.data));
       // if (response.data.length === 3) {
       //   dispatch(getCarpool(skiResort, response.data));
@@ -62,50 +55,36 @@ const getCarpoolDB = (skiResort, page) => {
       //   dispatch(getCarpool(skiResort, response.data));
       //   dispatch(isNext(false));
       // }
-    } catch (err) {
-      console.log(err);
-    }
+    } catch (err) {}
   };
 };
 
 const addCarpoolDB = (skiResort, carpool) => {
   return async function (dispatch, getState, { history }) {
-    console.log(skiResort, carpool);
-
     try {
       const response = await apis.addCarpool(skiResort, carpool);
-      console.log(response.data);
-
       response && history.push(`/carpool/${skiResort}`);
       dispatch(addCarpool(response.data));
     } catch (err) {
-      console.log(err);
+      window.alert("모든 사항을 기재해 주세요.");
     }
   };
 };
 
 const editCarpoolDB = (postId, carpool) => {
   return async function (dispatch, getState, { history }) {
-    console.log(postId, carpool);
-
     try {
       const response = await apis.editCarpool(postId, carpool);
-
       response && history.goBack();
       dispatch(editCarpool(postId, response.data));
-    } catch (err) {
-      console.log(err);
-    }
+    } catch (err) {}
   };
 };
 
 const deleteCarpoolDB = (skiResort, postId) => {
   return async function (dispatch, getState, { history }) {
-    console.log(skiResort, postId);
-
     try {
       await apis.deleteCarpool(postId);
-
       dispatch(deleteCarpool(postId));
       // history.push(`/carpool/${skiResort}`);
     } catch (err) {
@@ -118,8 +97,6 @@ const completeCarpoolDB = (skiResort, postId) => {
   return async function (dispatch, getState, { history }) {
     try {
       await apis.completeCarpool(postId);
-      console.log("모집완료");
-
       dispatch(getCarpoolDB(skiResort));
     } catch (err) {
       console.log(err);
@@ -129,11 +106,8 @@ const completeCarpoolDB = (skiResort, postId) => {
 
 const filterCarpoolDB = (skiResort, form) => {
   return async function (dispatch, getState, { history }) {
-    console.log(skiResort, form);
-
     try {
       const response = await apis.filterCarpool(skiResort, form);
-
       if (response.data.length === 0) {
         window.alert("필터에 맞는 정보가 없습니다");
         return null;
@@ -149,11 +123,8 @@ const filterCarpoolDB = (skiResort, form) => {
 
 const getMyCarpoolDB = () => {
   return async function (dispatch, getState, { history }) {
-    console.log("내가 쓴 카풀");
     try {
       const response = await apis.getMyCarpool();
-      console.log(response.data);
-
       response && dispatch(getMyCarpool(response.data));
     } catch (err) {
       console.log(err);
@@ -163,7 +134,7 @@ const getMyCarpoolDB = () => {
 
 // initialState
 const initialState = {
-  resortImg: '',
+  resortImg: "",
   list: [],
   filterList: [],
   myList: [],
@@ -177,7 +148,6 @@ export default handleActions(
   {
     [GET_CARPOOL]: (state, action) =>
       produce(state, (draft) => {
-        console.log(action.payload.list);
         const skiResort = action.payload.skiResort;
         draft.loading = false;
         // draft.page += 1;
@@ -187,7 +157,6 @@ export default handleActions(
 
     [ADD_CARPOOL]: (state, action) =>
       produce(state, (draft) => {
-        console.log(action.payload.carpool);
         draft.list.unshift(action.payload.carpool);
       }),
 
@@ -196,7 +165,6 @@ export default handleActions(
         const idx = draft.list.findIndex(
           (l) => l.postId === Number(action.payload.postId)
         );
-          console.log(idx)
         draft.list[idx] = { ...draft.list[idx], ...action.payload.carpool };
       }),
 
@@ -205,7 +173,6 @@ export default handleActions(
         let deleted_list = draft.list.filter(
           (l) => l.postId !== action.payload.postId
         );
-
         draft.list = deleted_list;
       }),
 
@@ -231,7 +198,6 @@ export default handleActions(
 
     [IMAGE_RESORT]: (state, action) =>
       produce(state, (draft) => {
-        console.log(action.payload.url)
         draft.resortImg = action.payload.url;
       }),
   },

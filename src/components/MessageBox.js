@@ -11,7 +11,6 @@ const MessageBox = (props) => {
   const dispatch = useDispatch();
   const params = useParams();
   const longRoomId = params.longRoomId;
-console.log(chatInfo)
   const nickname = localStorage.getItem("nickname");
   const profileList = useSelector((state) => state.chat.profileList);
 
@@ -49,21 +48,28 @@ console.log(chatInfo)
         <Grid is_flex justify="left" margin="5px">
           {chatInfo.senderImg ? (
             <Grid
-              src={chatInfo.senderImg}
               cursor="pointer"
               margin="0 5px"
+              radius="50%"
               _onClick={showProfile}
             >
-              <Image width="35px" height="35px" size="cover" radius="50%" />
+              <Image
+                src={chatInfo.senderImg}
+                width="35px"
+                height="35px"
+                size="cover"
+                radius="50%"
+              />
             </Grid>
           ) : (
-            <Grid
-              src={defaultIMG}
-              cursor="pointer"
-              margin="0 5px"
-              _onClick={showProfile}
-            >
-              <Image width="35px" height="35px" size="cover" radius="50%" />
+            <Grid cursor="pointer" margin="0 5px" _onClick={showProfile}>
+              <Image
+                src={defaultIMG}
+                width="35px"
+                height="35px"
+                size="cover"
+                radius="50%"
+              />
             </Grid>
           )}
           <Grid>
@@ -96,7 +102,7 @@ console.log(chatInfo)
                   width="110px"
                   height="110px"
                   radius="50%"
-
+                  size="cover"
                 />
               </Grid>
             ) : (
@@ -107,6 +113,7 @@ console.log(chatInfo)
                   width="110px"
                   height="110px"
                   radius="50%"
+                  size="cover"
                 />
               </Grid>
             )}

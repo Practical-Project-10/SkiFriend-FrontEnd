@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useRef } from "react";
 import "../elements/citySelection.css";
 import { CSSTransition } from "react-transition-group";
 import { Grid } from "../elements/index";
@@ -9,8 +9,6 @@ const RegionSelector = () => {
   //시군구 정하는 useState
   const [city, setCity] = useState([]);
   const [region, setRegion] = useState([]);
-
-  const dropdownRef = useRef(null);
 
   function Navbar(props) {
     return (

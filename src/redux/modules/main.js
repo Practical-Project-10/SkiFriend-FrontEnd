@@ -1,6 +1,5 @@
 import produce from "immer";
 import { handleActions, createAction } from "redux-actions";
-import { apis } from "../../shared/apis";
 import axios from "axios";
 // initialState
 const initialState = {
@@ -24,8 +23,6 @@ export const hotPostsDB =
       .get("http://3.34.52.2:8080/main")
       // .hotPost
       .then((res) => {
-        console.log(res);
-        console.log(`hot게시물 가져오기 성공`);
         dispatch(loadPosts(res));
       })
       .catch((error) => {

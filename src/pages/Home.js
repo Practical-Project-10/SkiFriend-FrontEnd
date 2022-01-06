@@ -20,16 +20,11 @@ import WellihilliPark_ from "../assets/skiImage/Wellihilli/Wellihilli1.png";
 import Konjiam from "../assets/skiInfo/kongiam_logo.png";
 import Konjiam_ from "../assets/skiImage/Konjiam/Konjiam1.png";
 import Banner from "../assets/mainPage/Home_banner.png";
-//스키장 이미지도 서버에서 받아야한다.
-
-//react icons
-import { AiOutlineHeart } from "react-icons/ai";
 
 // 메인 페이지 기능 완성 후 map으로 바꾸기
 const Home = (props) => {
   const dispatch = useDispatch();
   const hotPosts = useSelector((state) => state.main.list);
-  console.log(hotPosts);
 
   const skiResort = [
     {
@@ -118,12 +113,7 @@ const Home = (props) => {
           })}
         </Grid>
 
-        <Grid
-          bg="#FFF"
-          height="415px"
-          radius="22px"
-          padding="26px 0"
-        >
+        <Grid bg="#FFF" height="415px" radius="22px" padding="26px 0">
           <Grid phoneSize>
             <Text bold size="18px">
               인기게시글

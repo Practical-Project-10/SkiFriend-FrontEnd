@@ -2,6 +2,7 @@ import React from "react";
 
 import styled from "styled-components";
 import { Grid, Text, Image } from "../elements";
+import { history } from "../redux/ConfigStore";
 
 import Heart from "../assets/freeBoard/heart.svg";
 import Comment from "../assets/freeBoard/comment.svg";
@@ -15,24 +16,28 @@ const HotPost = (props) => {
   //   '웰리힐리',
   //   '곤지암'
   // ]
-  console.log(props);
   return (
     <React.Fragment>
       <Posts>
-
-        <Grid is_flex padding='20px 0'>
+        <Grid is_flex padding="20px 0">
           <ResortName>{props.skiResort}</ResortName>
-          <Grid is_flex justify='space-between' width='100%' gap='66px'>
-            <Grid width='80%'>
-              <Text>{props.title}</Text>
+          <Grid is_flex justify="space-between" width="100%" gap="66px">
+            <Grid width="80%">
+              <Text
+                _onClick={() => {
+                  history.push(``);
+                }}
+              >
+                {props.title}
+              </Text>
             </Grid>
-            <Grid is_flex width='25%'>
-              <Grid is_flex margin='0 11px 0 0'>
-                <Image src={Heart} width='15px' height='13px'/>
+            <Grid is_flex width="25%">
+              <Grid is_flex margin="0 11px 0 0">
+                <Image src={Heart} width="15px" height="13px" />
                 <Text>{props.likeCnt}</Text>
               </Grid>
               <Grid is_flex>
-                <Image src={Comment} width='15px' height='13px'/>
+                <Image src={Comment} width="15px" height="13px" />
                 <Text>{props.commentCnt}</Text>
               </Grid>
             </Grid>
