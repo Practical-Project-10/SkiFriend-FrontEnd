@@ -38,9 +38,8 @@ const signupDB = (userInfo) => {
     };
     console.log(_userInfo);
     try {
-      const response = await apis.signup(_userInfo);
-
-      response && window.alert("회원가입이 완료되었습니다.");
+      await apis.signup(_userInfo);
+      window.alert("회원가입이 완료되었습니다.");
       history.push("/login");
     } catch (err) {
       console.log(err);
