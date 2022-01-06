@@ -127,7 +127,7 @@ export default handleActions(
         const user_gender = action.payload.profile.gender;
 
         if (user_gender !== null) {
-          localStorage.setItem("profile", true);
+          localStorage.setItem("is_profile", true);
         }
       }),
     [ADD_PROFILE]: (state, action) =>
