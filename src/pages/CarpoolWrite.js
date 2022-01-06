@@ -92,8 +92,7 @@ const CarpoolWrite = (props) => {
       <Grid bg="#FFF" margin='0 0 70px 0' minHeight="calc( 100vh - 124px )">
         <CarpoolSelect bringForm={bringForm} bringDate={bringDate} />
 
-        {/* <div style={{border: '5px solid #edeeef'}}></div> */}
-        <hr />
+        <div style={{border: '5px solid #edeeef'}}></div>
 
         <Grid
           phoneSize
@@ -104,7 +103,7 @@ const CarpoolWrite = (props) => {
         >
           <Input
             blue
-            type="text"
+            label='제목'
             _maxLength="15"
             _name="title"
             _value={title}
@@ -146,7 +145,6 @@ const CarpoolWrite = (props) => {
           <Input
             blue
             label="주의사항"
-            type="text"
             _maxLength="25"
             _name="notice"
             _value={notice}

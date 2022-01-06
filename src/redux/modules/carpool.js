@@ -38,13 +38,14 @@ const getCarpoolDB = (skiResort, page) => {
     try {
       const response = await apis.getCarpool(skiResort, page);
       console.log(response)
-      if (response.data.length === 3) {
-        dispatch(getCarpool(skiResort, response.data));
-        dispatch(isNext(true));
-      } else {
-        dispatch(getCarpool(skiResort, response.data));
-        dispatch(isNext(false));
-      }
+      response && dispatch(getCarpool(skiResort, response.data));
+      // if (response.data.length === 3) {
+      //   dispatch(getCarpool(skiResort, response.data));
+      //   dispatch(isNext(true));
+      // } else {
+      //   dispatch(getCarpool(skiResort, response.data));
+      //   dispatch(isNext(false));
+      // }
     } catch (err) {
       console.log(err);
     }
