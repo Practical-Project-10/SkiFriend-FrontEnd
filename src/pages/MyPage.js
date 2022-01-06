@@ -22,6 +22,7 @@ const MyPage = (props) => {
   const history = props.history;
   const dispatch = useDispatch();
   const is_login = localStorage.getItem("is_login");
+
   const is_profile = localStorage.getItem('is_profile');
   const user_profile = useSelector((state) => state.profile.user_profile);
   const myCarpool = useSelector((state) => state.carpool.myList);
@@ -41,7 +42,7 @@ const MyPage = (props) => {
     <Grid>
       <Header>마이페이지</Header>
 
-      <Grid margin='0 0 70px 0' minHeight='calc( 100vh - 124px )'>
+      <Grid margin="0 0 70px 0" minHeight="calc( 100vh - 124px )">
         <Grid phoneSize>
           {!is_login ? (
             <Grid>
@@ -116,19 +117,33 @@ const MyPage = (props) => {
                   </Grid>
                 </Grid>
 
+
                 <Grid padding='6px 0 0'>
                   {is_profile === 'true'
                   ? <Grid cursor width='66px' padding='6px' bg='#FFF' radius='4px' align='center'
                       _onClick={() => {history.push(`/profilewrite/${user_profile.username}`)}}
                     >
-                      <Text size='12px' color='#474D56'>수정하기</Text>
+                      <Text size="12px" color="#474D56">
+                        수정하기
+                      </Text>
                     </Grid>
-                  : <Grid cursor width='66px' padding='6px' bg='#FFF' radius='4px' align='center'
-                      _onClick={() => {history.push('/profilewrite')}}
+                  ) : (
+                    <Grid
+                      cursor
+                      width="66px"
+                      padding="6px"
+                      bg="#FFF"
+                      radius="4px"
+                      align="center"
+                      _onClick={() => {
+                        history.push("/profilewrite");
+                      }}
                     >
-                      <Text size='12px' color='#474D56'>등록하기</Text>
+                      <Text size="12px" color="#474D56">
+                        등록하기
+                      </Text>
                     </Grid>
-                  }
+                  )}
                 </Grid>
               </Grid>
 
@@ -155,32 +170,33 @@ const MyPage = (props) => {
             {/* 구글 폼으로 이동 */}
           </Grid>
 
-
-          <Grid margin='25px 0 0'>
-            {is_login
-            ? <RowDiv>
-                <Text bold size='12px'>내가 쓴 카풀</Text>
+          <Grid margin="25px 0 0">
+            {is_login ? (
+              <RowDiv>
+                <Text bold size="12px">
+                  내가 쓴 카풀
+                </Text>
                 <Swiper
                   className="scroll-container"
                   slidesPerView={2}
                   spaceBetween={10}
                   initialSlide={1}
                 >
-                  {myCarpool.map(l => {
-                    return(
+                  {myCarpool.map((l) => {
+                    return (
                       <SwiperSlide>
-                        <Grid key={l.createdAt} width='100%'>
-                        <SmallCard {...l}/>
+                        <Grid key={l.createdAt} width="100%">
+                          <SmallCard {...l} />
                         </Grid>
                       </SwiperSlide>
-                    )
+                    );
                   })}
                 </Swiper>
               </RowDiv>
-            : <SmallCard notLogin/>
-            }
+            ) : (
+              <SmallCard notLogin />
+            )}
           </Grid>
-
         </Grid>
       </Grid>
     </Grid>
