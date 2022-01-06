@@ -139,9 +139,9 @@ const FreeBoardWrite = () => {
           {/* 사진미리보기 */}
           <Grid is_flex width="100%" height="200px">
             {is_edit ? (
-              <Image src={preview ? preview : ""} width="100%" height="100%" />
+              <Image src={preview ? preview : ""} width="100%" height="100%" size='contain'/>
             ) : (
-              <Image src={uploadURL} width="100%" height="100%" />
+              <Image src={uploadURL} width="100%" height="100%" size='contain'/>
             )}
           </Grid>
           <Grid

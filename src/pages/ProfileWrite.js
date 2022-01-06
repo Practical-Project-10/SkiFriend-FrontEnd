@@ -269,16 +269,28 @@ const ProfileWrite = (props) => {
               </Grid>
             )}
 
-            <Grid width="100%">
-              <Text size="12px">나이</Text>
-              <Select name="ageRange" value={ageRange} onChange={handleChange}>
-                <option>선택</option>
-                <option value="10대">10대</option>
-                <option value="20대">20대</option>
-                <option value="30대">30대</option>
-                <option value="40대이상">40대 이상</option>
-              </Select>
-            </Grid>
+
+            {is_edit ? 
+              <Grid width="100%">
+                <Text size="12px">나이</Text>
+                <Input
+                  name="gender"
+                  _value={ageRange}
+                  _disabled
+                ></Input>
+              </Grid>
+              : 
+              <Grid width="100%">
+                <Text size="12px">나이</Text>
+                <Select name="ageRange" value={ageRange} onChange={handleChange}>
+                  <option>선택</option>
+                  <option value="10대">10대</option>
+                  <option value="20대">20대</option>
+                  <option value="30대">30대</option>
+                  <option value="40대이상">40대 이상</option>
+                </Select>
+              </Grid>
+            }
 
             <Grid width="100%">
               <Text size="12px">스키 / 스노우보드 경력</Text>

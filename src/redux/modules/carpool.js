@@ -9,8 +9,9 @@ const EDIT_CARPOOL = "EDIT_CARPOOL";
 const DELETE_CARPOOL = "DELETE_CARPOOL";
 const FILTER_CARPOOL = "FILTER_CARPOOL";
 const GET_MYCARPOOL = "GET_MYCARPOOL";
-const IS_LOADING = "IS_LOADING";
-const IS_NEXT = "IS_NEXT";
+// const IS_LOADING = "IS_LOADING";
+// const IS_NEXT = "IS_NEXT";
+const IMAGE_RESORT = 'IMAGE_RESORT';
 
 // acrtion creators
 const getCarpool = createAction(GET_CARPOOL, (skiResort, list) => ({ 
@@ -27,13 +28,28 @@ const getMyCarpool = createAction(GET_MYCARPOOL, (myCarpools) => ({
   myCarpools,
 }));
 const filterCarpool = createAction(FILTER_CARPOOL, (carpool) => ({carpool}))
-const isLoading = createAction(IS_LOADING, (state) => ({ state }));
-const isNext = createAction(IS_NEXT, (state) => ({ state }));
+// const isLoading = createAction(IS_LOADING, (state) => ({ state }));
+// const isNext = createAction(IS_NEXT, (state) => ({ state }));
+const imageResort = createAction(IMAGE_RESORT, (url) => ({url}))
 
 // middlewares
+const imageResortDB = (skiResort) => {
+  return async function(dispatch) {
+    console.log(skiResort)
+    try {
+      const response = await apis.imageResort(skiResort);
+      console.log(response.data.resortImg);
+
+      response && dispatch(imageResort(response.data.resortImg))
+    } catch(err) {
+      console.log(err)
+    }
+  }
+}
+
 const getCarpoolDB = (skiResort, page) => {
   return async function (dispatch) {
-    dispatch(isLoading(true));
+    // dispatch(isLoading(true));
 
     try {
       const response = await apis.getCarpool(skiResort, page);
@@ -147,6 +163,7 @@ const getMyCarpoolDB = () => {
 
 // initialState
 const initialState = {
+  resortImg: '',
   list: [],
   filterList: [],
   myList: [],
@@ -202,14 +219,20 @@ export default handleActions(
         draft.myList = action.payload.myCarpools;
       }),
 
-    [IS_LOADING]: (state, action) =>
-      produce(state, (draft) => {
-        draft.is_loading = action.payload.state;
-      }),
+    // [IS_LOADING]: (state, action) =>
+    //   produce(state, (draft) => {
+    //     draft.is_loading = action.payload.state;
+    //   }),
 
-    [IS_NEXT]: (state, action) =>
+    // [IS_NEXT]: (state, action) =>
+    //   produce(state, (draft) => {
+    //     draft.is_next = action.payload.state;
+    //   }),
+
+    [IMAGE_RESORT]: (state, action) =>
       produce(state, (draft) => {
-        draft.is_next = action.payload.state;
+        console.log(action.payload.url)
+        draft.resortImg = action.payload.url;
       }),
   },
   initialState
@@ -227,6 +250,7 @@ const carpoolActions = {
   completeCarpoolDB,
   filterCarpoolDB,
   getMyCarpoolDB,
+  imageResortDB,
 };
 
 export { carpoolActions };

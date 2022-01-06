@@ -108,10 +108,15 @@ const MyPage = (props) => {
                   <Text bold size="18px" line>
                     환영해요! {user_profile.nickname}님
                   </Text>
-                  <Grid margin="10px 0 0">
+                  <Grid margin="10px 0 0" is_flex>
                     <Small>
                       <Text bold size="12px" color="#FFF">
-                        20대
+                        {user_profile.ageRange}
+                      </Text>
+                    </Small>
+                    <Small>
+                      <Text bold size="12px" color="#FFF">
+                        {user_profile.gender}
                       </Text>
                     </Small>
                   </Grid>
@@ -157,10 +162,10 @@ const MyPage = (props) => {
               <div style={{ border: "1px solid #adb6c1" }}></div>
 
               <Grid margin="22px 0 31px">
-                <Text bold="800" size="12px" margin="0 0 8px 0">
+                <Text block margin='0 0 6px 0' bold="800" size="12px">
                   자기소개
                 </Text>
-                <Text>스키와 커피를 즐길 줄 아는 남자</Text>
+                <Text>{user_profile.selfIntro}</Text>
               </Grid>
             </Grid>
           )}
@@ -213,6 +218,7 @@ const MyPage = (props) => {
 const Small = styled.div`
   width: 46px;
   height: 19px;
+  margin-right: 5px;
   background: #6195cf;
   border-radius: 140px;
   text-align: center;
