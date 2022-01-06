@@ -11,7 +11,7 @@ const MessageBox = (props) => {
   const dispatch = useDispatch();
   const params = useParams();
   const longRoomId = params.longRoomId;
-console.log(chatInfo)
+  console.log(chatInfo.senderImg)
   const nickname = localStorage.getItem("nickname");
   const profileList = useSelector((state) => state.chat.profileList);
 
@@ -47,7 +47,7 @@ console.log(chatInfo)
         </Grid>
       ) : (
         <Grid is_flex justify="left" margin="5px">
-          {chatInfo.senderImg ? (
+          {chatInfo.senderImg === 'null' ? (
             <Grid
               src={chatInfo.senderImg}
               cursor="pointer"

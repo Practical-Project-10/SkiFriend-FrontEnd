@@ -42,7 +42,7 @@ const MyPage = (props) => {
     <Grid>
       <Header>마이페이지</Header>
 
-      <Grid margin="0 0 70px 0" minHeight="calc( 100vh - 124px )">
+      <Grid margin="0 0 70px 0" minHeight="calc( 100vh - 154px )">
         <Grid phoneSize>
           {!is_login ? (
             <Grid>
@@ -108,18 +108,22 @@ const MyPage = (props) => {
                   <Text bold size="18px" line>
                     환영해요! {user_profile.nickname}님
                   </Text>
-                  <Grid margin="10px 0 0" is_flex>
-                    <Small>
-                      <Text bold size="12px" color="#FFF">
-                        {user_profile.ageRange}
-                      </Text>
-                    </Small>
-                    <Small>
-                      <Text bold size="12px" color="#FFF">
-                        {user_profile.gender}
-                      </Text>
-                    </Small>
-                  </Grid>
+
+                  {is_profile === "true"
+                  ? <Grid margin="10px 0 0" is_flex>
+                      <Small>
+                        <Text bold size="12px" color="#FFF">
+                          {user_profile.ageRange}
+                        </Text>
+                      </Small>
+                      <Small>
+                        <Text bold size="12px" color="#FFF">
+                          {user_profile.gender}
+                        </Text>
+                      </Small>
+                    </Grid>
+                  : null
+                  }
                 </Grid>
 
                 <Grid padding="6px 0 0">
@@ -172,7 +176,7 @@ const MyPage = (props) => {
         </Grid>
 
         <Grid
-          height="800px"
+          height="645px"
           bg="#FFF"
           radius="22px 22px 0 0"
           padding="16px 16px 0"
