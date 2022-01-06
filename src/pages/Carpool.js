@@ -31,12 +31,12 @@ const Carpool = (props, { location }) => {
   }, []);
 
   const induceProfile = () => {
-    if (!is_login) {
+    if (is_login !== 'true') {
       window.alert("로그인 후 이용할 수 있는 서비스 입니다.");
       return null;
     }
 
-    if (!is_profile) {
+    if (is_profile !== 'true') {
       window.alert("프로필 작성 후 이용할 수 있는 서비스 입니다.");
       return null;
     }

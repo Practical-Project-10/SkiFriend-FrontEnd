@@ -18,9 +18,9 @@ import etc from "../assets/carpoolList/etc_icon.svg";
 const Card = (props) => {
   const dispatch = useDispatch();
   const is_login = localStorage.getItem("is_login");
-  const login_check = is_login ? true : false;
+  // const login_check = is_login ? true : false;
   const is_profile = localStorage.getItem("is_profile");
-  const profile_check = is_profile ? true : false;
+  // const profile_check = is_profile ? true : false;
   const repuest = props.carpoolType === "카풀 요청";
   console.log(is_profile);
   const nickname = localStorage.getItem("nickname");
@@ -37,7 +37,7 @@ const Card = (props) => {
   //연락하기 기능
   const connectRoom = (postId) => {
     console.log("성공");
-    if (login_check) {
+    if (is_login !== 'true') {
       const login_ask = window.confirm(
         "로그인한 회원만 사용 가능합니다. 로그인 페이지로 이동하시겠습니까?"
       );
@@ -47,7 +47,7 @@ const Card = (props) => {
         return;
       }
     }
-    if (profile_check) {
+    if (is_profile !== 'true') {
       const profile_ask = window.confirm(
         "프로필 작성한 회원만 사용 가능합니다. 마이페이지로 이동하시겠습니까?"
       );

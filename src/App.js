@@ -139,6 +139,7 @@ const Container = styled.div`
       overflow: auto;
     }
   }
+
 `;
 
 const CardList = styled.div`

@@ -171,6 +171,7 @@ const ProfileWrite = (props) => {
         console.log(response);
         history.push('/mypage')
 
+        dispatch(imageActions.setPreview(null));
         dispatch(profileActions.addProfile(response.data));
       })
       .catch((e) => {
