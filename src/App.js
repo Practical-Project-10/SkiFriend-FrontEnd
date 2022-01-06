@@ -25,6 +25,8 @@ import ChatList from "./pages/ChatList";
 import Navbar from "./components/Navbar";
 import ChatRoom from "./pages/ChatRoom";
 
+import background from "./assets/background.png.jpg"
+
 function App() {
   return (
     <React.Fragment>
@@ -63,6 +65,7 @@ function App() {
             />
             <Route
               exact
+
               path="/freeboardwrite/:skiresort"
               component={FreeBoardWrite}
             />
@@ -84,6 +87,7 @@ function App() {
               path="/profilewrite/:username"
               component={ProfileWrite}
             />
+
             <Route
               exact
               path="/profilewrite/:username/pwdchange"
@@ -95,6 +99,7 @@ function App() {
               path="/chatroom/:roomId/:longRoomId"
               component={ChatRoom}
             />
+
             <Navbar />
           </CardList>
         </div>
@@ -110,8 +115,10 @@ const Container = styled.div`
   justify-content: flex-start;
   align-items: center;
   height: 100%;
-  background-color: #d9e3ee; // 배경이미지 삽입
+  background: url(${background}) no-repeat;
+  background-size: cover;
   overflow: hidden;
+  position: relative;
 
   .wrap {
     width: 100%;
@@ -123,11 +130,11 @@ const Container = styled.div`
     box-sizing: border-box;
     background-color: #d9e3ee;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-    position: relative;
+    position: relative;  
 
     @media screen and (min-width: 1024px) {
       position: relative;
-      left: 11%;
+      left: 27%;
       top: 0%;
       overflow: auto;
     }

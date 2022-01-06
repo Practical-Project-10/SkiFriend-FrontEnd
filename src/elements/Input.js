@@ -89,6 +89,7 @@ const Input = forwardRef((props, ref) => {
           type={type}
           placeholder={placeholder}
           onChange={_onChange}
+          maxLength={_maxLength}
         />
       </Grid>
     );

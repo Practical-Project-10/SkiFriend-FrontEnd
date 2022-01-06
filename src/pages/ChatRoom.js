@@ -120,7 +120,10 @@ const ChatRoom = () => {
       <Grid>
         <Header goBack>sender</Header>{" "}
         {/* 리덕스에서 데이터 불러와서 sender 넣으면 됩니다. */}
-        <Grid display="flex" direction="column" justify="space-between">
+        <Grid 
+          margin='0 0 70px 0' minHeight='calc( 100vh - 124px )'
+          display="flex" direction="column" justify="space-between"
+        >
           {/* 채팅이 들어갈 공간 */}
           <Grid height="518px" overflow="scroll">
             <div ref={scrollRef}>

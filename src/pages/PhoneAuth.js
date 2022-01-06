@@ -3,6 +3,8 @@ import React from 'react';
 import styled from 'styled-components';
 import {Grid, Button, Input} from '../elements';
 
+import Header from '../components/Header';
+
 import { useDispatch, useSelector } from 'react-redux';
 import { userActions } from '../redux/modules/user';
 
@@ -41,19 +43,25 @@ const PhoneAuth = (props) => {
   }
 
   return(
-    <Grid phoneSize>
-      <Grid padding='159px 0 352px'>
-        <Grid margin='0 0 41px'>
-        <Input dupButton type='text' ref={phoneNumInput} _onClick={numSend} label='휴대폰 번호' buttonText='인증번호'/>
+    <Grid>
+      <Header>회원가입</Header>
+      <Grid 
+        phoneSize minHeight='calc( 100vh - 55px )'
+        display='flex' direction='column' justify='space-between'
+      >
+        <Grid margin='159px 0 0'>
+          <Grid margin='0 0 41px'>
+          <Input dupButton type='text' ref={phoneNumInput} _onClick={numSend} label='휴대폰 번호' buttonText='인증번호'/>
+          </Grid>
+          <Grid>
+          <Input type='text' ref={smsNumInput} _onClick={nextStep} label='인증번호' buttonText='다음'/>
+          </Grid>
         </Grid>
-        <Grid>
-        <Input type='text' ref={smsNumInput} _onClick={nextStep} label='인증번호' buttonText='다음'/>
+        <Grid padding='0 0 16px'>
+          <Button _onClick={nextStep}>다음</Button>
         </Grid>
-      </Grid>
-      <Grid padding='0 0 16px'>
-        <Button _onClick={nextStep}>다음</Button>
-      </Grid>
-    </Grid> 
+      </Grid> 
+    </Grid>
   );
 };
 

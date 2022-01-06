@@ -121,7 +121,7 @@ const PlaceInfo = () => {
     <React.Fragment>
       <Grid>
         <Header>스키장 정보</Header>
-        <Grid phoneSize bg='#FFF' minHeight='calc( 100vh - 124px )' radius='22px 22px 0 0'>
+        <Grid phoneSize bg='#FFF' margin='0 0 70px 0' minHeight='calc( 100vh - 124px )' radius='22px 22px 0 0'>
           {/* 하이원 정보 */}
           {resortInfo.map((r, i) => {
             
