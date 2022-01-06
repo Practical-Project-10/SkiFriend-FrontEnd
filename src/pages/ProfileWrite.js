@@ -168,6 +168,8 @@ const ProfileWrite = (props) => {
       .then((response) => {
         alert("정상적으로 프로필사진이 변경되었습니다.");
         console.log(response);
+        // history.push('/mypage')
+        dispatch(profileActions.addProfile(response.data))
       })
       .catch((e) => alert(e));
   };
