@@ -16,6 +16,7 @@ const Image = (props) => {
     radius,
     className,
     myIcon,
+    fit,
   } = props;
 
   const styles = {
@@ -29,6 +30,7 @@ const Image = (props) => {
     radius,
     bg,
     className,
+    fit,
   };
 
   if (myIcon) {

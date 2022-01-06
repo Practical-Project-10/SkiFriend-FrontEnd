@@ -149,7 +149,7 @@ const FreeBoardDetail = ({ history }, props) => {
           {/* 사진 및 게시글 */}
           <Grid height="230px" overflow="scroll">
             <Grid>
-              <Image width="100%" height="180px" src={postData.image} />
+              <Image width="100%" height="180px" size='contain' src={postData.image} />
             </Grid>
             <Grid margin="10px 5px">
               <Text margin="10px">{postData.content}</Text>

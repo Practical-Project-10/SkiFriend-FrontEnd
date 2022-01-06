@@ -3,6 +3,7 @@ import React from "react";
 import styled from "styled-components";
 import { Grid, Text, Input, Button, Image } from "../elements/index";
 import background from "../assets/login/login.png";
+import logo from "../assets/login/logo.svg"
 
 import Header from "../components/Header";
 
@@ -39,7 +40,7 @@ const Login = (props) => {
       <Header>로그인</Header>
       <Grid phoneSize minHeight='calc( 100vh - 55px )'>
         <Grid height="73px" margin="69px 0 119px">
-          로고
+          <Image src={logo} width='100%' height='100%'/>
         </Grid>
 
         <Grid>

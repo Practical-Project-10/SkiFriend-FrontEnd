@@ -68,7 +68,6 @@ const P = styled.p`
   line-height: ${(props) => props.line};
   font-weight: ${(props) => props.bold? 700: 400};
   margin: ${(props) => props.margin};
-  margin-bottom: 0;
   padding: ${(props) => props.padding};
   text-align: ${(props) => props.align};
   background-color: ${(props) => props.bg};

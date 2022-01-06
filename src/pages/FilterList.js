@@ -13,6 +13,7 @@ const FilterList = (props) => {
   const history = props.history;
   const is_profile = localStorage.getItem("is_profile");
   const carpool_list = useSelector((state) => state.carpool.filterList);
+  const resortImg = useSelector((state) => state.carpool.resortImg);
   const skiResort = props.match.params.skiresort;
 
   React.useEffect(() => {
@@ -35,7 +36,7 @@ const FilterList = (props) => {
       <Header goBack>{skiResort}</Header>
       <Grid bg="#FFF" minHeight='calc( 100vh - 124px )' margin='0 0 70px'>
         <Grid width="100%" height="291px">
-          {/* <Image src={High} size="cover" width="100%" height="100%" /> */}
+          <Image src={resortImg} size="cover" width="100%" height="100%" />
         </Grid>
 
         <Grid width="100%">

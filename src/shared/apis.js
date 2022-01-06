@@ -75,6 +75,8 @@ export const apis = {
   deleteUser: () => api.delete("/user/info"),
 
   //카풀
+  imageResort: (skiResort) => api.get(`/board/carpool/${skiResort}/banner`),
+
   getCarpool: (skiResort, page) =>
     api.get(`/board/carpool/${skiResort}`, {
       // params: { page: page, size: 3 },

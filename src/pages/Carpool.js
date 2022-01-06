@@ -17,16 +17,17 @@ const Carpool = (props, { location }) => {
   const history = props.history;
   const dispatch = useDispatch();
   const carpool_list = useSelector((state) => state.carpool.list);
-  // const carpool_list = resort_carpool.filter(l)
   console.log(carpool_list)
-  const page = useSelector((state) => state.carpool.page);
-  const is_loading = useSelector((state) => state.carpool.is_loading);
+  // const page = useSelector((state) => state.carpool.page);
+  // const is_loading = useSelector((state) => state.carpool.is_loading);
+  const resortImg = useSelector((state) => state.carpool.resortImg);
   const is_login = localStorage.getItem('is_login');
   const is_profile = localStorage.getItem('is_profile');
   const skiResort = props.match.params.skiresort;
 
   React.useEffect(() => {
-    dispatch(carpoolActions.getCarpoolDB(skiResort, page));
+    dispatch(carpoolActions.imageResortDB(skiResort));
+    dispatch(carpoolActions.getCarpoolDB(skiResort)); //page
   }, []);
 
   const induceProfile = () => {
@@ -47,7 +48,7 @@ const Carpool = (props, { location }) => {
       <Header goBack>{skiResort}</Header>
       <Grid bg="#FFF" minHeight='calc( 100vh - 124px )' margin='0 0 70px'>
         <Grid width="100%" height="291px">
-          {/* <Image src={High} size="cover" width="100%" height="100%" /> */}
+          <Image src={resortImg} size="cover" width="100%" height="100%" />
         </Grid>
 
         <Grid width="100%">
