@@ -117,18 +117,7 @@ const changePwdDB = (password, newPassword) => {
 //initialState
 const initialState = {
   is_profile: false,
-  user_profile: {
-    username: "",
-    nickname: "",
-    password: "",
-    phoneNum: "",
-    profileImg: "",
-    vacImg: "",
-    gender: "",
-    ageRange: "",
-    career: "",
-    selfIntro: "",
-  },
+  user_profile: [],
 };
 
 //reducer
@@ -145,7 +134,9 @@ export default handleActions(
       }),
     [ADD_PROFILE]: (state, action) =>
       produce(state, (draft) => {
+        console.log('액션1')
         draft.user_profile = action.payload.profile;
+        console.log('액션2')
       }),
     [EDIT_PROFILE]: (state, action) =>
       produce(state, (draft) => {

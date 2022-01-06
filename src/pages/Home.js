@@ -120,9 +120,9 @@ const Home = (props) => {
 
         <Grid
           bg="#FFF"
-          height="448px"
-          radius="22px 22px 0 0"
-          padding="26px 0 0 0"
+          height="415px"
+          radius="22px"
+          padding="26px 0"
         >
           <Grid phoneSize>
             <Text bold size="18px">
