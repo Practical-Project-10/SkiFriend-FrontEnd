@@ -38,26 +38,33 @@ const Login = (props) => {
   return (
     <React.Fragment>
       <Header>로그인</Header>
-      <Grid phoneSize minHeight='calc( 100vh - 55px )'>
+      <Grid phoneSize minHeight="calc( 100vh - 55px )">
         <Grid height="73px" margin="69px 0 119px">
           <Image src={logo} width='100%' height='100%'/>
         </Grid>
 
         <Grid>
-          <Grid margin='0 0 41px'>
-            <Input type="text" ref={ldInput} label="아이디"/>
+          <Grid margin="0 0 41px">
+            <Input type="text" ref={ldInput} label="아이디" />
           </Grid>
           <Grid>
-            <Input type="password" ref={pwdInput} label="비밀번호" />
+            <Input
+              type="password"
+              placeholder="영소문자, 숫자를 포함한 5자리 이상"
+              ref={pwdInput}
+              label="비밀번호"
+            />
           </Grid>
         </Grid>
 
         <Grid margin="319px 0 16px">
-          <Button 
+          <Button
             bg="#6195CF"
-            margin='0 0 16px'
+            margin="0 0 16px"
             _onClick={() => history.push("/phoneauth")}
-          >회원가입</Button>
+          >
+            회원가입
+          </Button>
           <Button _onClick={join}>로그인</Button>
         </Grid>
       </Grid>
@@ -68,9 +75,9 @@ const Login = (props) => {
 const Frame = styled.div`
   width: 100%;
   height: 100%;
-  min-height: calc( 100vh - 55px );
+  min-height: calc(100vh - 55px);
   padding: 0 16px;
   background: url(${background});
-`
+`;
 
 export default Login;
