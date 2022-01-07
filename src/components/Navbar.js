@@ -4,7 +4,7 @@ import { NavLink, withRouter } from "react-router-dom";
 
 import styled from "styled-components";
 import { Grid, Text } from "../elements/index";
-
+//react icons
 import { AiTwotoneHome, AiOutlineHome } from "react-icons/ai";
 import { AiFillInfoCircle, AiOutlineInfoCircle } from "react-icons/ai";
 import { BsChatFill, BsChat } from "react-icons/bs";

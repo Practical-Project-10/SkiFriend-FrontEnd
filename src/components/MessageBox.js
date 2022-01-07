@@ -5,13 +5,14 @@ import { chatCreators as chatActions } from "../redux/modules/chat";
 import { Grid, Text, Image } from "../elements/index";
 import { useParams } from "react-router-dom";
 import defaultIMG from "../assets/myPage/profilePicture.png";
+import { BsTelephoneOutbound } from "react-icons/bs";
 
 const MessageBox = (props) => {
   const { chatInfo } = props;
   const dispatch = useDispatch();
   const params = useParams();
   const longRoomId = params.longRoomId;
-
+  console.log(chatInfo);
   const nickname = localStorage.getItem("nickname");
   const profileList = useSelector((state) => state.chat.profileList);
 
@@ -41,9 +42,30 @@ const MessageBox = (props) => {
           <Text size="10px" margin="0 10px">
             {chatInfo.createdAt}
           </Text>
-          <Text bg="#6195CF" color="white" radius="10px" padding="2px 10px">
-            {chatInfo.message}
-          </Text>
+          {/* 전화번호 공개 할 때와 일반 말풍선일 경우 */}
+          {chatInfo.type === "PHONE_NUM" ? (
+            <Grid
+              bg="#474D56"
+              width="150px"
+              height="60px"
+              radius="10px"
+              align="center"
+            >
+              <Grid color="#C4C4C4" padding="5px" borderB="1px solid #C4C4C4">
+                연락처를 보냈습니다.
+              </Grid>
+              <Grid is_flex justify="center" color="#C4C4C4">
+                <BsTelephoneOutbound />
+                <Text color="#ffffff" margin="5px 20px" bold>
+                  {chatInfo.message}
+                </Text>
+              </Grid>
+            </Grid>
+          ) : (
+            <Text bg="#6195CF" color="white" radius="10px" padding="2px 10px">
+              {chatInfo.message}
+            </Text>
+          )}
         </Grid>
       ) : (
         <Grid is_flex justify="left" margin="5px">

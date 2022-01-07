@@ -160,6 +160,7 @@ export default handleActions(
 
 const chatCreators = {
   addChat,
+  getPhoneInfo,
   makeRoomChatDB,
   getListChatDB,
   getContentChatDB,
