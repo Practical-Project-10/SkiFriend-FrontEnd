@@ -68,7 +68,7 @@ const FreeBoardDetail = ({ history }, props) => {
 
   return (
     <React.Fragment>
-      <Header goBack>자유게시글</Header>
+      <Header goBack push _onClick={()=>{history.push(`/freeboardlist/${skiresort}`)}}>자유게시글</Header>
       <Grid bg="#FFF" minHeight="calc( 100vh - 55px )">
         <Grid phoneSize >
           <Grid is_flex justify="space-between" padding='13px 0' borderB="1px solid #474D56">

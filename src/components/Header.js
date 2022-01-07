@@ -6,23 +6,37 @@ import { Image, Text } from "../elements";
 import back from "../assets/carpoolWrite/back.svg";
 
 const Header = (props) => {
-  const { complete, goBack, children, _onClick, phone } = props;
+  const { complete, goBack, children, _onClick, phone, push } = props;
 
   if (goBack) {
     return (
       <GoBack>
-        <Image
-          src={back}
-          _onClick={() => history.goBack()}
-          width="20px"
-          height="17px"
-          cursor="pointer"
-        />
+        {push ? (
+          <Image
+            src={back}
+            _onClick={_onClick}
+            width="20px"
+            height="17px"
+            cursor="pointer"
+          />
+        ) : (
+          <Image
+            src={back}
+            _onClick={() => history.goBack()}
+            width="20px"
+            height="17px"
+            cursor="pointer"
+          />
+        )}
         <Text bold block width="140px" margin="0 0 0 100px" size="18px">
           {children}
         </Text>
         {complete ? <Button onClick={_onClick}>완료</Button> : null}
-        {phone ? <Button long_width onClick={_onClick}>전화번호 공개</Button> : null}
+        {phone ? (
+          <Button long_width onClick={_onClick}>
+            전화번호 공개
+          </Button>
+        ) : null}
       </GoBack>
     );
   }
