@@ -189,10 +189,10 @@ const ProfileWrite = (props) => {
 
   return (
     <React.Fragment>
-      <Header goBack complete _onClick={is_edit ? editProfile : addProfile}>
+      <Header goBack complete fixed _onClick={is_edit ? editProfile : addProfile}>
         내 프로필
       </Header>
-      <Grid phoneSize position="relative">
+      <Grid phoneSize position="relative" margin='70px 0 0'>
         <Grid
           width="150px"
           height="182px"
@@ -354,18 +354,18 @@ const ProfileWrite = (props) => {
           </Grid>
         </Grid>
 
-        <Grid display="flex" direction="column" gap="16px">
+        <Grid display="flex" direction="column" gap="16px" padding='0 0 16px'>
           <Button height="61px" _onClick={logout}>
             로그아웃
           </Button>
-          <Button
+          {/* <Button
             height="61px"
             color="#474D56"
             bg="#E2B9B9"
             _onClick={deleteUser}
           >
             회원탈퇴
-          </Button>
+          </Button> */}
         </Grid>
       </Grid>
     </React.Fragment>
@@ -389,6 +389,7 @@ const ProfileLabel = styled.label`
   left: 0;
   right: 0;
   margin: auto;
+  cursor: pointer;
 `;
 
 const DeletePic = styled.div`

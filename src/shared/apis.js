@@ -23,7 +23,6 @@ export const apis = {
     }),
 
   signup: (userInfo) => {
-    console.log(userInfo);
     api.post("/user/signup", {
       username: userInfo.username,
       password: userInfo.password,

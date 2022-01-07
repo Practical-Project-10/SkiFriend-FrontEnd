@@ -14,7 +14,6 @@ const MessageBox = (props) => {
   const dispatch = useDispatch();
   const params = useParams();
   const longRoomId = params.longRoomId;
-  console.log(chatInfo);
   const nickname = localStorage.getItem("nickname");
   const profileList = useSelector((state) => state.chat.profileList);
 
@@ -144,7 +143,7 @@ const MessageBox = (props) => {
       <div showmodal={showmodal} />
       {showmodal ? (
         <Modal
-          height="500px"
+          height='256px'
           profile
           closeModal={closeModal}
           profileImg={profileList.profileImg}

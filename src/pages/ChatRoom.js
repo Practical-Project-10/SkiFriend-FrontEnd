@@ -143,9 +143,9 @@ const ChatRoom = () => {
     <React.Fragment>
       {/* 상단부  */}
       <Grid>
-        <Header goBack phone _onClick={getPhoneNum}>
+        <Header goBack phone fixed _onClick={getPhoneNum}>
           {roomName}
-        </Header>{" "}
+        </Header>
         {/* 리덕스에서 데이터 불러와서 sender 넣으면 됩니다. */}
         <Grid
           margin="0 0 70px 0"

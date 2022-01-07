@@ -6,28 +6,18 @@ import { Image, Text } from "../elements";
 import back from "../assets/carpoolWrite/back.svg";
 
 const Header = (props) => {
-  const { complete, goBack, children, _onClick, phone, push } = props;
+  const { complete, goBack, children, _onClick, phone, fixed } = props;
 
   if (goBack) {
     return (
-      <GoBack>
-        {push ? (
-          <Image
-            src={back}
-            _onClick={_onClick}
-            width="20px"
-            height="17px"
-            cursor="pointer"
-          />
-        ) : (
-          <Image
-            src={back}
-            _onClick={() => history.goBack()}
-            width="20px"
-            height="17px"
-            cursor="pointer"
-          />
-        )}
+      <GoBack fixed={fixed}>
+        <Image
+          src={back}
+          _onClick={() => history.goBack()}
+          width="20px"
+          height="17px"
+          cursor="pointer"
+        />
         <Text bold block width="140px" margin="0 0 0 100px" size="18px">
           {children}
         </Text>
@@ -66,7 +56,8 @@ const GoBack = styled.div`
   display: flex;
   align-items: center;
   text-align: center;
-  position: relative;
+  position: ${props => props.fixed? 'absolute': 'relative'};
+  ${props => props.fixed? 'top: 0; left: 0; z-index: 9;': ''}
 `;
 
 const Button = styled.div`
