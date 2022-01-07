@@ -22,8 +22,8 @@ const ChatList = (props) => {
   }, []);
 
   //채팅목록에서 클릭한 채팅방 대화내용 가져오기
-  const EnterChatRoom = (roomId, longRoomId) => {
-    history.push(`/chatroom/${roomId}/${longRoomId}`);
+  const EnterChatRoom = (roomId, roomName, longRoomId) => {
+    history.push(`/chatroom/${roomId}/${roomName}/${longRoomId}`);
   };
 
   return (
@@ -49,7 +49,7 @@ const ChatList = (props) => {
                 hoverBg="aliceblue"
                 key={list.roomId}
                 _onClick={() => {
-                  EnterChatRoom(list.roomId, list.longRoomId);
+                  EnterChatRoom(list.roomId, list.roomName, list.longRoomId);
                 }}
               >
                 <Grid is_flex>
