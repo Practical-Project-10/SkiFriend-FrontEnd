@@ -24,6 +24,7 @@ const MyPage = (props) => {
 
   const is_profile = localStorage.getItem("is_profile");
   const user_profile = useSelector((state) => state.profile.user_profile);
+  console.log(user_profile)
   const myCarpool = useSelector((state) => state.carpool.myList);
   // console.log(user_profile.profileImg);
 
@@ -94,11 +95,7 @@ const MyPage = (props) => {
                     height="75px"
                     size="cover"
                     radius="999px"
-                    src={
-                      user_profile.profileImg === null
-                        ? basicProfile
-                        : user_profile.profileImg
-                    }
+                    src={user_profile.profileImg}
                   />
                 </Grid>
 

@@ -8,6 +8,8 @@ import { history } from "../redux/ConfigStore";
 import { carpoolActions } from "../redux/modules/carpool";
 import { chatCreators as chatActions } from "../redux/modules/chat";
 
+import Modal from "../components/Modal"
+
 import arrow from "../assets/carpoolList/arrow_icon.svg";
 import calendar from "../assets/carpoolList/calendar_icon.svg";
 import clock from "../assets/carpoolList/clock_icon.svg";
@@ -31,6 +33,18 @@ const Card = (props) => {
   //-------Modal-------
   const closemodal = () => {
     setShowModal(false);
+  };
+
+  const editCard = () => {
+    history.push(`/carpoolwrite/${props.skiResort}/${props.postId}`);
+  };
+
+  const deleteCard = () => {
+    dispatch(carpoolActions.deleteCarpoolDB(props.skiResort, props.postId));
+  };
+
+  const completeCard = () => {
+    dispatch(carpoolActions.completeCarpoolDB(props.skiResort, props.postId));
   };
 
   //연락하기 기능
@@ -59,142 +73,90 @@ const Card = (props) => {
   };
 
   return (
-    <CarpoolCard repuest={repuest} status={!props.status}>
-      <Grid>
-        <Grid margin="0 0 3px">
-          <Text bold color={repuest ? "#7281D1" : "#6195CF"}>
-            {props.carpoolType}
+    <Grid>
+      <CarpoolCard repuest={repuest} status={!props.status}>
+        <Grid>
+          <Grid margin="0 0 3px">
+            <Text bold color={repuest ? "#7281D1" : "#6195CF"}>
+              {props.carpoolType}
+            </Text>
+          </Grid>
+          <Text bold size="20px">
+            {props.title}
+          </Text>
+          <Posts>
+            <Text bold>{props.startLocation}</Text>
+            <Image src={arrow} width="50px" height="10px" />
+            <Text bold color={repuest ? "#7281D1" : "#6195CF"}>
+              {props.endLocation}
+            </Text>
+          </Posts>
+          <Grid is_flex justify="space-between" margin="0 0 7px">
+            <Small repuest={repuest} width="101px">
+              <Image src={calendar} width="11px" height="15px" />
+              <Text size="12px">{props.date}</Text>
+            </Small>
+            <Small repuest={repuest} width="61px">
+              <Image src={clock} width="11px" height="15px" />
+              <Text size="12px">{props.time}</Text>
+            </Small>
+            <Small repuest={repuest} width="49px">
+              <Image src={person} width="11px" height="15px" />
+              <Text size="12px">{props.memberNum}명</Text>
+            </Small>
+            <Small repuest={repuest} width="80px">
+              <Image src={price} width="11px" height="15px" />
+              <Text size="12px">{props.price}원</Text>
+            </Small>
+          </Grid>
+          <Text>
+            <span style={{ fontWeight: "700" }}>주의사항</span> : {props.notice}
           </Text>
         </Grid>
-        <Text bold size="20px">
-          {props.title}
-        </Text>
-        <Posts>
-          <Text bold>{props.startLocation}</Text>
-          <Image src={arrow} width="50px" height="10px" />
-          <Text bold color={repuest ? "#7281D1" : "#6195CF"}>
-            {props.endLocation}
-          </Text>
-        </Posts>
-        <Grid is_flex justify="space-between" margin="0 0 7px">
-          <Small repuest={repuest} width="101px">
-            <Image src={calendar} width="11px" height="15px" />
-            <Text size="12px">{props.date}</Text>
-          </Small>
-          <Small repuest={repuest} width="61px">
-            <Image src={clock} width="11px" height="15px" />
-            <Text size="12px">{props.time}</Text>
-          </Small>
-          <Small repuest={repuest} width="49px">
-            <Image src={person} width="11px" height="15px" />
-            <Text size="12px">{props.memberNum}명</Text>
-          </Small>
-          <Small repuest={repuest} width="80px">
-            <Image src={price} width="11px" height="15px" />
-            <Text size="12px">{props.price}원</Text>
-          </Small>
-        </Grid>
-        <Text>
-          <span style={{ fontWeight: "700" }}>주의사항</span> : {props.notice}
-        </Text>
-      </Grid>
 
-      {props.status ? (
-        <Grid is_flex>
-          {/* 게시글 수정 삭제 modal 시작 */}
-          {/* 게시글을 조회한사람이 작성한 사람과 일치할 경우 모달 선택창이 보이게 하기 */}
-          {is_mine ? (
-            <SubMenu width="27px" height="27px" line="41px">
-              <Grid
-                _onClick={() => {
-                  setShowModal(true);
-                }}
-              >
-                <Image src={etc} width="27px" height="27px" />
-              </Grid>
-            </SubMenu>
-          ) : (
-            <SubMenu width="78px" height="27px" line="29px">
-              <Text
-                bold
-                color={repuest ? "#7281D1" : "#6195CF"}
-                _onClick={() => {
-                  connectRoom(props.postId);
-                }}
-              >
-                연락하기&gt;
-              </Text>
-            </SubMenu>
-          )}
-          <div showmodal={showmodal} />
-          {showmodal ? (
-            <Grid className="modalBackground" _onClick={closemodal}>
-              <Grid
-                className="modalContainer"
-                _onClick={(e) => e.stopPropagation()}
-              >
-                {/* <Grid margin="25px 0">
-                  <BsFillExclamationCircleFill size="30" />
-                </Grid> */}
-                <Grid margin="10px 0">
-                  <Text
-                    size="20px"
-                    cursor="pointer"
-                    _onClick={() => {
-                      history.push(
-                        `/carpoolwrite/${props.skiResort}/${props.postId}`
-                      );
-                    }}
-                  >
-                    수정하기
-                  </Text>
-                </Grid>
-                <Grid margin="10px 0">
-                  <Text
-                    size="20px"
-                    cursor="pointer"
-                    _onClick={() => {
-                      dispatch(
-                        carpoolActions.deleteCarpoolDB(
-                          props.skiResort,
-                          props.postId
-                        )
-                      );
-                    }}
-                  >
-                    삭제하기
-                  </Text>
-                </Grid>
-                <Grid margin="10px 0">
-                  <Text
-                    size="20px"
-                    cursor="pointer"
-                    _onClick={() => {
-                      dispatch(
-                        carpoolActions.completeCarpoolDB(
-                          props.skiResort,
-                          props.postId
-                        )
-                      );
-                    }}
-                  >
-                    모집 완료
-                  </Text>
-                </Grid>
-                <Text
-                  _onClick={closemodal}
-                  size="18px"
-                  margin="20px 0"
-                  cursor="pointer"
+        {props.status ? (
+          <Grid is_flex>
+            {/* 게시글 수정 삭제 modal 시작 */}
+            {/* 게시글을 조회한사람이 작성한 사람과 일치할 경우 모달 선택창이 보이게 하기 */}
+            {is_mine ? (
+              <SubMenu width="27px" height="27px" line="41px">
+                <Grid
+                  _onClick={() => {
+                    setShowModal(true);
+                  }}
                 >
-                  취소
+                  <Image src={etc} width="27px" height="27px" />
+                </Grid>
+              </SubMenu>
+            ) : (
+              <SubMenu width="78px" height="27px" line="29px">
+                <Text
+                  bold
+                  color={repuest ? "#7281D1" : "#6195CF"}
+                  _onClick={() => {
+                    connectRoom(props.postId);
+                  }}
+                >
+                  연락하기&gt;
                 </Text>
-              </Grid>
-            </Grid>
-          ) : null}
-        </Grid>
-      ) : null}
-    </CarpoolCard>
+              </SubMenu>
+            )}
+            <div showmodal={showmodal} />
+
+          </Grid>
+        ) : null}
+      </CarpoolCard>
+      {showmodal 
+      ? <Modal
+          height='256px'
+          closeModal={closemodal}
+          edit={editCard}
+          delete={deleteCard}
+          _onClick={completeCard}
+        />
+      : null
+      }
+    </Grid>
   );
 };
 

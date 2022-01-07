@@ -73,7 +73,7 @@ const CarpoolWrite = (props) => {
   return (
     <React.Fragment>
       <Header goBack>카풀 {is_edit ? "수정" : "작성"} 페이지</Header>
-      <Grid bg="#FFF" margin="0 0 70px 0" minHeight="calc( 100vh - 124px )">
+      <Grid bg="#FFF" minHeight="calc( 100vh - 124px )">
         <CarpoolSelect bringForm={bringForm} bringDate={bringDate} />
 
         <div style={{ border: "5px solid #edeeef" }}></div>

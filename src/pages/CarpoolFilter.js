@@ -37,9 +37,9 @@ const CarpoolFilter = (props) => {
 
   // 데이터 전송
   const filterSubmit = async () => {
-    // if (form.startLocation === "" || form.endLocation === "") {
-    //   return window.alert("지역선택은 필수입니다.");
-    // }
+    if (form.startLocation === "" || form.endLocation === "") {
+      return window.alert("지역선택은 필수입니다.");
+    }
     dispatch(carpoolActions.filterCarpoolDB(skiresort, form));
   };
 

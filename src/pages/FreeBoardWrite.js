@@ -104,7 +104,7 @@ const FreeBoardWrite = () => {
           <Image src={UnderArrow} width="13px" height="8px" />
         </Grid>
 
-        <Grid phoneSize height="450px">
+        <Grid phoneSize height="430px">
           {/* 제목작성 */}
           {is_edit ? (
             <Input
@@ -136,13 +136,12 @@ const FreeBoardWrite = () => {
         </Grid>
 
         {/* 사진미리보기 */}
-        <Grid is_flex  width="100%" height="310px">
+        <Grid is_flex  width="100%" height="380px" padding='0 16px 5px'>
           <Image src={is_edit && preview ? preview : uploadURL} width="100%" height="100%" size='contain'/>
         </Grid>
 
         <Grid
-          margin="20px auto"
-          padding="16px 0"
+          padding="20px 0"
           align="center"
           borderT="1px solid grey"
           cursor="pointer"
