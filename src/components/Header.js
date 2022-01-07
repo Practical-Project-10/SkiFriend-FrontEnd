@@ -6,11 +6,11 @@ import { Image, Text } from "../elements";
 import back from "../assets/carpoolWrite/back.svg";
 
 const Header = (props) => {
-  const { complete, goBack, children, _onClick, phone } = props;
+  const { complete, goBack, children, _onClick, phone, fixed } = props;
 
   if (goBack) {
     return (
-      <GoBack>
+      <GoBack fixed={fixed}>
         <Image
           src={back}
           _onClick={() => history.goBack()}
@@ -52,7 +52,8 @@ const GoBack = styled.div`
   display: flex;
   align-items: center;
   text-align: center;
-  position: relative;
+  position: ${props => props.fixed? 'absolute': 'relative'};
+  ${props => props.fixed? 'top: 0; left: 0; z-index: 9;': ''}
 `;
 
 const Button = styled.div`

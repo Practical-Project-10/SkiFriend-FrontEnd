@@ -8,14 +8,11 @@ import defaultIMG from "../assets/myPage/profilePicture.png";
 
 const Modal = (props) => {
   const {profile} = props;
-
+  console.log(props.height)
   if(profile) {
     return(
-      <Grid className="modalBackground" _onClick={props.closeModal}>
-        <Grid
-          className="modalContainer"
-          _onClick={(e) => e.stopPropagation()}
-        >
+      <ModalBackground onClick={props.closeModal}>
+        <ModalContainer height={props.height} onClick={(e) => e.stopPropagation()}>
           {/* 프로필사진정보 */}
           <Grid>
             <Image
@@ -30,44 +27,46 @@ const Modal = (props) => {
           </Grid>
 
           {/* 닉네임정보 */}
-          <Text size="20px" margin="0 10px">
-            닉네임: {props.nickname}
+          <Text block bold size="20px" color="#6195cf" margin='8px 0'>
+            {props.nickname}
           </Text>
 
             {/* 성별정보 */}
-          <Menu is_flex margin="10px 0" justify="center">
-            <Text size="20px" margin="0 10px">
-              성별: {props.gender? props.gender: '미등록'}
-            </Text>
-            {/* 나이정보 */}
-            <Text size="20px" margin="0 10px">
-              나이: {props.ageRange? props.ageRange: '미등록'}
-            </Text>
-            {/* 경력정보 */}
-              <Text size="20px" margin="0 10px">
-                경력: {props.career? props.career: '미등록'}
+          <Grid is_flex margin='5px 0' justify="center">
+            <Small>
+              <Text bold size="16px" color='#FFF' margin="0 10px">
+                {props.gender? props.gender: '미등록'}
               </Text>
-          </Menu>
-          <Grid is_flex justify="center">
-            {/* 자기소개정보 */}
-            <Text size="15px">자기소개: {props.selfIntro? props.selfIntro: '미등록'}</Text>
+            </Small>
+            {/* 나이정보 */}
+            <Small>
+              <Text bold size="16px" color='#FFF' margin="0 10px">
+                {props.ageRange? props.ageRange: '미등록'}
+              </Text>
+            </Small>
+            {/* 경력정보 */}
+            <Small>
+              <Text bold size="16px" color='#FFF' margin="0 10px">
+                {props.career? props.career: '미등록'}
+              </Text>
+            </Small>
           </Grid>
+          {/* 자기소개정보 */}
+          <Text block margin='5px 0' size="16px" >
+            {props.selfIntro? props.selfIntro: '미등록'}
+          </Text>
           <Menu>
             <Text
-              // _onClick={props.closemodal}
-              // size="16px"
-              // opacity='0.5'
-              // cursor="pointer"
-              size="20px"
-              padding="30px 0 0 0"
+              _onClick={props.closemodal}
+              size="16px"
+              opacity='0.5'
               cursor="pointer"
-              _onClick={props.closeModal}
             >
               닫기
             </Text>
           </Menu>
-        </Grid>
-      </Grid>
+        </ModalContainer>
+      </ModalBackground>
     )
   }
 
@@ -167,6 +166,17 @@ const Menu = styled.div`
   }
 `
 
-// const
+const Small = styled.div`
+  height: 22px;
+  margin-right: 5px;
+  background: #6195cf;
+  border-radius: 140px;
+  text-align: center;
+  line-height: 21px;
+
+  &:last-child {
+    margin: 0;
+  }
+`;
 
 export default Modal

@@ -141,7 +141,7 @@ const GridBox = styled.div`
   background: ${(props) => `url(${props.src})`} no-repeat;
   background-size: cover;
   background-color: ${(props) => props.bg};
-  background-position: ${(props) => props.position};
+  /* background-position: ${(props) => props.position}; */
   border: ${(props) => props.border};
   border-top: ${(props) => props.borderT};
   border-bottom: ${(props) => props.borderB};
@@ -162,7 +162,7 @@ const GridBox = styled.div`
   &::-webkit-scrollbar {
     display: none;
   }
-  border: 1px solid black;
+  /* border: 1px solid black; */
   gap: ${(props) => props.gap};
   ${(props) =>
     props.phoneSize ? "padding: 0 16px 0;" : ""}/* border: 1px solid black; */

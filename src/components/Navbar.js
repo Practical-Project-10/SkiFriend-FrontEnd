@@ -19,7 +19,8 @@ const Navbar = ({ location }) => {
     location.pathname.includes("/freeboardwrite") ||
     location.pathname.includes("/freeboarddetail") ||
     location.pathname.includes("/carpoolwrite") ||
-    location.pathname.includes("/freeboardedit")
+    location.pathname.includes("/freeboardedit") ||
+    location.pathname.includes("/profilewrite")
   ) {
     return null;
   }
