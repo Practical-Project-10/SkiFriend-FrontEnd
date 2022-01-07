@@ -23,7 +23,7 @@ import ChatList from "./pages/ChatList";
 import Navbar from "./components/Navbar";
 import ChatRoom from "./pages/ChatRoom";
 
-import background from "./assets/background.png.jpg"
+import background from "./assets/background.png.jpg";
 
 function App() {
   return (
@@ -63,7 +63,6 @@ function App() {
             />
             <Route
               exact
-
               path="/freeboardwrite/:skiresort"
               component={FreeBoardWrite}
             />
@@ -94,7 +93,7 @@ function App() {
             <Route exact path="/chatlist" component={ChatList} />
             <Route
               exact
-              path="/chatroom/:roomId/:longRoomId"
+              path="/chatroom/:roomId/:roomName/:longRoomId"
               component={ChatRoom}
             />
 
@@ -128,7 +127,7 @@ const Container = styled.div`
     box-sizing: border-box;
     background-color: #d9e3ee;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-    position: relative;  
+    position: relative;
 
     @media screen and (min-width: 1024px) {
       position: relative;
@@ -137,7 +136,6 @@ const Container = styled.div`
       overflow: auto;
     }
   }
-
 `;
 
 const CardList = styled.div`

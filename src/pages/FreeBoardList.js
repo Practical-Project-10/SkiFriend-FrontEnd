@@ -23,14 +23,14 @@ const FreeBoardList = () => {
   const page = useSelector((state) => state.carpool.page);
   const is_loading = useSelector((state) => state.freeboard.is_loading);
   const is_login = localStorage.getItem("nickname");
-  
+
   // 게시글 작성 페이지 이동 판단
   const moveWritePage = () => {
     if (is_login) {
       return history.push(`/freeboardwrite/${skiresort}`);
     } else {
       const ask = window.confirm(
-        `게시물 등록은 로그인한 회원만 가능합니다. \n 로그인 페지로 이동하시겠습니까?`
+        `게시물 등록은 로그인한 회원만 가능합니다. \n 로그인 페이지로 이동하시겠습니까?`
       );
       if (ask) {
         return history.push("/login");
@@ -47,7 +47,7 @@ const FreeBoardList = () => {
   return (
     <React.Fragment>
       <Header goBack>{skiresort}</Header>
-      <Grid bg="#FFF" margin='0 0 70px 0' minHeight='calc( 100vh - 124px )'>
+      <Grid bg="#FFF" margin="0 0 70px 0" minHeight="calc( 100vh - 124px )">
         <Grid height="291px">
           <Image src={High} size="cover" width="100%" height="100%" />
         </Grid>

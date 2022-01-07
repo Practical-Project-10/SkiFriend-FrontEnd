@@ -9,10 +9,9 @@ const EDIT_CARPOOL = "EDIT_CARPOOL";
 const DELETE_CARPOOL = "DELETE_CARPOOL";
 const FILTER_CARPOOL = "FILTER_CARPOOL";
 const GET_MYCARPOOL = "GET_MYCARPOOL";
-const IMAGE_RESORT = 'IMAGE_RESORT';
+const IMAGE_RESORT = "IMAGE_RESORT";
 // const IS_LOADING = "IS_LOADING";
 // const IS_NEXT = "IS_NEXT";
-
 
 // acrtion creators
 const getCarpool = createAction(GET_CARPOOL, (skiResort, list) => ({
@@ -29,8 +28,8 @@ const getMyCarpool = createAction(GET_MYCARPOOL, (myCarpools) => ({
   myCarpools,
 }));
 
-const filterCarpool = createAction(FILTER_CARPOOL, (carpool) => ({carpool}))
-const imageResort = createAction(IMAGE_RESORT, (url) => ({url}))
+const filterCarpool = createAction(FILTER_CARPOOL, (carpool) => ({ carpool }));
+const imageResort = createAction(IMAGE_RESORT, (url) => ({ url }));
 // const isLoading = createAction(IS_LOADING, (state) => ({ state }));
 // const isNext = createAction(IS_NEXT, (state) => ({ state }));
 
@@ -109,6 +108,7 @@ const completeCarpoolDB = (skiResort, postId) => {
 const filterCarpoolDB = (skiResort, form) => {
   return async function (dispatch, getState, { history }) {
     try {
+      console.log(form);
       const response = await apis.filterCarpool(skiResort, form);
       if (response.data.length === 0) {
         window.alert("필터에 맞는 정보가 없습니다");
@@ -189,11 +189,11 @@ export default handleActions(
         draft.myList = action.payload.myCarpools;
       }),
 
-      [IMAGE_RESORT]: (state, action) =>
-        produce(state, (draft) => {
-          console.log(action.payload.url)
-          draft.resortImg = action.payload.url;
-        }),
+    [IMAGE_RESORT]: (state, action) =>
+      produce(state, (draft) => {
+        console.log(action.payload.url);
+        draft.resortImg = action.payload.url;
+      }),
     // [IS_LOADING]: (state, action) =>
     //   produce(state, (draft) => {
     //     draft.is_loading = action.payload.state;
@@ -203,8 +203,6 @@ export default handleActions(
     //   produce(state, (draft) => {
     //     draft.is_next = action.payload.state;
     //   }),
-
-
   },
   initialState
 );

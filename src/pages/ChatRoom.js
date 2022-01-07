@@ -1,5 +1,7 @@
 import React, { useState, useRef } from "react";
 import { useParams } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { chatCreators as chatActions } from "../redux/modules/chat";
 
 import axios from "axios";
 import SockJS from "sockjs-client";
@@ -11,10 +13,11 @@ import { Grid, Input } from "../elements/index";
 import sendBtn from "../assets/chat/send.png";
 
 const ChatRoom = () => {
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch;
   // const datas = useSelector((state) => state.chat.chatList);
   const params = useParams();
   const roomId = params.roomId;
+  const roomName = params.roomName;
   const scrollRef = useRef();
 
   //토큰
@@ -28,7 +31,6 @@ const ChatRoom = () => {
   // useState관리
   const [message, setMessage] = useState("");
   const [messageList, setMessageList] = useState([]);
-
   const messageDatas = (recv) => {
     setMessageList((prev) => [...prev, recv]);
   };
@@ -51,12 +53,11 @@ const ChatRoom = () => {
     scrollRef.current.scrollIntoView({
       behavior: "smooth",
       block: "end",
-      // inline: "start",
+      inline: "start",
     });
     // dispatch(chatActions.sendChatDB(roomId, message));
     setMessage("");
   };
-
   //채팅룸 연결
   React.useEffect(() => {
     chatConnect();
@@ -73,7 +74,7 @@ const ChatRoom = () => {
       .get(`http://3.34.52.2:8080/chat/message/${roomId}`, { headers: token })
       .then((res) => {
         const prevChatData = res.data;
-        console.log("response : ", prevChatData);
+        // console.log("response : ", prevChatData);
         setMessageList(prevChatData);
       });
     // dispatch(chatActions.getContentChatDB(roomId));
@@ -87,7 +88,6 @@ const ChatRoom = () => {
           `/sub/chat/room/${roomId}`,
           (message) => {
             const responseData = JSON.parse(message.body);
-            console.log(responseData);
             messageDatas(responseData);
             // dispatch(chatActions.addChat(responseData));
           },
@@ -108,16 +108,26 @@ const ChatRoom = () => {
       console.log(err);
     }
   };
-  //minHeight='calc( 100vh - 55px )'
+
+  const showPhoneNum = () => {
+    
+    // dispatch(chatActions.getPhoneNumDB());
+  };
+
   return (
     <React.Fragment>
       {/* 상단부  */}
       <Grid>
-        <Header goBack>sender</Header>{" "}
+        <Header goBack phone _onClick={showPhoneNum}>
+          {roomName}
+        </Header>{" "}
         {/* 리덕스에서 데이터 불러와서 sender 넣으면 됩니다. */}
-        <Grid 
-          margin='0 0 70px 0' minHeight='calc( 100vh - 124px )'
-          display="flex" direction="column" justify="space-between"
+        <Grid
+          margin="0 0 70px 0"
+          minHeight="calc( 100vh - 124px )"
+          display="flex"
+          direction="column"
+          justify="space-between"
         >
           {/* 채팅이 들어갈 공간 */}
           <Grid height="518px" overflow="scroll">

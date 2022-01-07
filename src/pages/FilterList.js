@@ -7,7 +7,7 @@ import FloatButton from "../components/FloatButton";
 import Header from "../components/Header";
 
 import { Grid, Image, Text } from "../elements/index";
-import filter from "../assets/carpoolList/filter.svg"
+import filter from "../assets/carpoolList/filter.svg";
 
 const FilterList = (props) => {
   const history = props.history;
@@ -15,13 +15,12 @@ const FilterList = (props) => {
   const carpool_list = useSelector((state) => state.carpool.filterList);
   const resortImg = useSelector((state) => state.carpool.resortImg);
   const skiResort = props.match.params.skiresort;
-
   React.useEffect(() => {
     if (carpool_list.length === 0) {
       history.push(`/carpool/${skiResort}`);
     }
   }, []);
-  
+
   const induceProfile = () => {
     if (!is_profile) {
       window.alert("프로필 작성 후 이용할 수 있는 서비스 입니다.");
@@ -30,11 +29,10 @@ const FilterList = (props) => {
     history.push(`/carpoolwrite/${skiResort}`);
   };
 
-
   return (
     <Grid>
       <Header goBack>{skiResort}</Header>
-      <Grid bg="#FFF" minHeight='calc( 100vh - 124px )' margin='0 0 70px'>
+      <Grid bg="#FFF" minHeight="calc( 100vh - 124px )" margin="0 0 70px">
         <Grid width="100%" height="291px">
           <Image src={resortImg} size="cover" width="100%" height="100%" />
         </Grid>
@@ -63,17 +61,16 @@ const FilterList = (props) => {
             </Text>
           </Grid>
 
-            {carpool_list.map((l) => {
-              return (
-                <Grid key={l.postId} width="100%" padding='0 0 16px'>
-                  <Card {...l} skiResort={skiResort} />
-                </Grid>
-              );
-            })}
+          {carpool_list.map((l) => {
+            return (
+              <Grid key={l.postId} width="100%" padding="0 0 16px">
+                <Card {...l} skiResort={skiResort} />
+              </Grid>
+            );
+          })}
         </Grid>
 
-        <FloatButton _onClick={induceProfile} /> 
-
+        <FloatButton _onClick={induceProfile} />
       </Grid>
     </Grid>
   );

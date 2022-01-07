@@ -6,7 +6,7 @@ import { Image, Text } from "../elements";
 import back from "../assets/carpoolWrite/back.svg";
 
 const Header = (props) => {
-  const { complete, goBack, children, _onClick } = props;
+  const { complete, goBack, children, _onClick, phone } = props;
 
   if (goBack) {
     return (
@@ -22,6 +22,7 @@ const Header = (props) => {
           {children}
         </Text>
         {complete ? <Button onClick={_onClick}>완료</Button> : null}
+        {phone ? <Button long_width onClick={_onClick}>전화번호 공개</Button> : null}
       </GoBack>
     );
   }
@@ -55,8 +56,9 @@ const GoBack = styled.div`
 `;
 
 const Button = styled.div`
-  width: 50px;
+  ${(props) => (props.long_width ? "width: 90px;" : "width: 50px;")};
   height: 23px;
+  font-weight: 700;
   color: #fff;
   background: #6195cf;
   border-radius: 140px;
@@ -65,7 +67,10 @@ const Button = styled.div`
   position: absolute;
   top: 17px;
   right: 16px;
-  cursor: pointer;
+  &:hover {
+    opacity: 0.8;
+    cursor: pointer;
+  }
 `;
 
 export default Header;

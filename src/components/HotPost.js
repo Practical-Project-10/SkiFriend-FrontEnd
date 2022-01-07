@@ -1,25 +1,32 @@
 import React from "react";
 
-import {history} from "../redux/ConfigStore"
+import { history } from "../redux/ConfigStore";
 
 import styled from "styled-components";
 import { Grid, Text, Image } from "../elements";
-import { history } from "../redux/ConfigStore";
 
 import Heart from "../assets/freeBoard/heart.svg";
 import Comment from "../assets/freeBoard/comment.svg";
 
 const HotPost = (props) => {
-
-
+  console.log(props);
   return (
     <React.Fragment>
       <Posts>
-        <Grid is_flex padding='20px 0'>
+        <Grid is_flex padding="20px 0">
           <ResortName>{props.skiResort}</ResortName>
-          <Grid is_flex justify='space-between' width='100%' gap='66px'>
-            <Grid width='80%'>
-              <Underline deco _onClick={() => history.push(`/freeboarddetail/${props.skiResort}/${props.postId}`)}>{props.title}</Underline>
+          <Grid is_flex justify="space-between" width="100%" gap="66px">
+            <Grid width="80%">
+              <Underline
+                deco
+                onClick={() =>
+                  history.push(
+                    `/freeboarddetail/${props.skiResort}/${props.postId}`
+                  )
+                }
+              >
+                {props.title}
+              </Underline>
             </Grid>
             <Grid is_flex width="25%">
               <Grid is_flex margin="0 11px 0 0">
@@ -63,6 +70,6 @@ const Underline = styled.div`
     cursor: pointer;
     text-decoration: underline;
   }
-`
+`;
 
 export default HotPost;
