@@ -12,6 +12,7 @@ const Image = (props) => {
     margin,
     padding,
     bg,
+    border,
     _onClick,
     radius,
     className,
@@ -31,6 +32,7 @@ const Image = (props) => {
     radius,
     bg,
     className,
+    border,
   };
 
   if (myIcon) {
@@ -70,6 +72,7 @@ const ElImage = styled.div`
   padding: ${(props) => props.padding};
   margin: ${(props) => props.margin};
   cursor: ${(props) => props.cursor};
+  border: ${(props) => props.border};
   border-radius: ${(props) => props.radius};
   background: ${(props) => `url(${props.src}) no-repeat center`};
   background: ${(props) => props.bg};

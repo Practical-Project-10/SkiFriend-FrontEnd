@@ -7,11 +7,13 @@ import { likeCreators as likeActions } from "../redux/modules/like";
 
 import CommentList from "../components/CommentList";
 import Header from "../components/Header";
+import Modal from "../components/Modal";
 
 import styled from 'styled-components';
 import { Grid, Button, Text, Image } from "../elements/index";
 import heart from "../assets/freeBoard/heart.svg";
 import whiteHeart from "../assets/freeBoard/whiteHeart.svg";
+import fillHeart from "../assets/freeBoard/white_heart_fill.svg"
 
 //react icons
 import { AiOutlineHeart } from "react-icons/ai";
@@ -35,12 +37,12 @@ const FreeBoardDetail = ({ history }, props) => {
   };
 
   //-------게시글 수정-------
-  const updatePostBtn = () => {
+  const editPost = () => {
     history.push(`/freeboardedit/${skiresort}/${postId}`);
   };
 
   //-------게시글 삭제--------
-  const deletePostBtn = () => {
+  const deletePost = () => {
     const ask = window.confirm("정말 삭제하시겠습니까?");
     if (ask) {
       return dispatch(boardActions.deleteBoardDB(postId, skiresort));
@@ -92,44 +94,14 @@ const FreeBoardDetail = ({ history }, props) => {
               ) : null}
               {/* 게시글 수정 삭제 modal 시작 */}
               <div showmodal={showmodal} />
-              {showmodal ? (
-                <Grid className="modalBackground" _onClick={closemodal}>
-                  <Grid
-                    className="modalContainer"
-                    _onClick={(e) => e.stopPropagation()}
-                  >
-                    <Grid margin="25px 0">
-                      <BsFillExclamationCircleFill size="30" />
-                    </Grid>
-                    <Grid margin="10px 0">
-                      <Text
-                        size="20px"
-                        cursor="pointer"
-                        _onClick={updatePostBtn}
-                      >
-                        게시글 수정하기
-                      </Text>
-                    </Grid>
-                    <Grid margin="10px 0">
-                      <Text
-                        size="20px"
-                        cursor="pointer"
-                        _onClick={deletePostBtn}
-                      >
-                        게시글 삭제하기
-                      </Text>
-                    </Grid>
-                    <Text
-                      _onClick={closemodal}
-                      size="18px"
-                      margin="20px 0"
-                      cursor="pointer"
-                    >
-                      취소
-                    </Text>
-                  </Grid>
-                </Grid>
-              ) : null}
+              {showmodal
+              ? <Modal 
+                height='222px'
+                closeModal={closemodal}
+                edit={editPost}
+                delete={deletePost}
+              />
+              : null}
               {/* modal 끝 */}
             </Grid>
           </Grid>

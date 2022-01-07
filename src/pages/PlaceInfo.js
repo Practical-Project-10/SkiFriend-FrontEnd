@@ -183,16 +183,27 @@ const PlaceInfo = () => {
 };
 
 const Toggle = styled.div`
-  width: 100%;
+  width: 380px;
+  height: 218px;
+  padding: 9px;
+  background-color: #D9E3EE;
   text-align: center;
-  margin: 0 auto;
+  border-top: 2px solid #adb6c1;
 `
 
 const Info = styled.a`
   display: block;
-  margin-bottom: 3px;
-  font-size: 16px;
+  height: 43px;
+  margin-bottom: 9px;
+  background-color: #FFF;
+  font-size: 14px;
+  line-height: 42px;
   border: 1px solid #6195CF;
+  border-radius: 6px;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
 `
 
 export default PlaceInfo;
