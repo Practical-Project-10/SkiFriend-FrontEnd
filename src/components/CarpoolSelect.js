@@ -188,6 +188,7 @@ const CarpoolSelect = (props) => {
                 blue
                 label="시간"
                 type="time"
+                step="3600000"
                 padding="16.5px 8px"
                 _name="time"
                 _value={time}

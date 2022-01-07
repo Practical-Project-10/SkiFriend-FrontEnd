@@ -58,6 +58,7 @@ const GoBack = styled.div`
 
 const Button = styled.div`
   height: 23px;
+  padding: 0 7px;
   font-weight: 700;
   padding: 0 7px;
   color: #fff;

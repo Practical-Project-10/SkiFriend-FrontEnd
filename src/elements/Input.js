@@ -30,6 +30,7 @@ const Input = forwardRef((props, ref) => {
     textarea,
     _defaultValue,
     size,
+    step
   } = props;
 
   const style = {
@@ -88,6 +89,7 @@ const Input = forwardRef((props, ref) => {
           value={_value}
           onBlur={_onBlur}
           type={type}
+          step={step}
           placeholder={placeholder}
           onChange={_onChange}
           maxLength={_maxLength}
