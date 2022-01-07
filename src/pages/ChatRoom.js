@@ -1,7 +1,7 @@
 import React, { useState, useRef } from "react";
 import { useParams } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { chatCreators as chatActions } from "../redux/modules/chat";
+// import { useDispatch, useSelector } from "react-redux";
+// import { chatCreators as chatActions } from "../redux/modules/chat";
 
 import axios from "axios";
 import SockJS from "sockjs-client";
@@ -13,8 +13,9 @@ import { Grid, Input } from "../elements/index";
 import sendBtn from "../assets/chat/send.png";
 
 const ChatRoom = () => {
-  const dispatch = useDispatch;
+  // const dispatch = useDispatch;
   // const datas = useSelector((state) => state.chat.chatList);
+  // const phoneInfo = useSelector((state) => state.chat.phoneInfo);
   const params = useParams();
   const roomId = params.roomId;
   const roomName = params.roomName;
@@ -31,6 +32,7 @@ const ChatRoom = () => {
   // useState관리
   const [message, setMessage] = useState("");
   const [messageList, setMessageList] = useState([]);
+  const [phoneInfo, setPhoneInfo] = useState();
   const messageDatas = (recv) => {
     setMessageList((prev) => [...prev, recv]);
   };
@@ -41,43 +43,13 @@ const ChatRoom = () => {
     setMessage(content);
   };
 
-  //메세지 보내기
-  const sendMessage = async () => {
-    const datas = {
-      type: "TALK",
-      roomId: roomId,
-      message: message,
-    };
-    await stomp.send("/pub/chat/message", token, JSON.stringify(datas));
-    //메세지 보내면 스크롤 자동내림
-    scrollRef.current.scrollIntoView({
-      behavior: "smooth",
-      block: "end",
-      inline: "start",
-    });
-    // dispatch(chatActions.sendChatDB(roomId, message));
-    setMessage("");
-  };
   //채팅룸 연결
   React.useEffect(() => {
     chatConnect();
     // dispatch(chatActions.connectChatDB(roomId));
-
     return () => {
       chatDisconnect();
     };
-  }, []);
-
-  // 대화내용 가져오기
-  React.useEffect(() => {
-    axios
-      .get(`http://3.34.52.2:8080/chat/message/${roomId}`, { headers: token })
-      .then((res) => {
-        const prevChatData = res.data;
-        // console.log("response : ", prevChatData);
-        setMessageList(prevChatData);
-      });
-    // dispatch(chatActions.getContentChatDB(roomId));
   }, []);
 
   // stomp연결
@@ -109,16 +81,69 @@ const ChatRoom = () => {
     }
   };
 
-  const showPhoneNum = () => {
-    
-    // dispatch(chatActions.getPhoneNumDB());
+  // 대화내용 가져오기
+  React.useEffect(() => {
+    axios
+      .get(`http://3.34.52.2:8080/chat/message/${roomId}`, { headers: token })
+      .then((res) => {
+        const prevChatData = res.data;
+        // console.log("response : ", prevChatData);
+        setMessageList(prevChatData);
+      });
+    // dispatch(chatActions.getContentChatDB(roomId));
+  }, []);
+
+  //메세지 보내기
+  const sendMessage = async () => {
+    const datas = {
+      type: "TALK",
+      roomId: roomId,
+      message: message,
+    };
+    await stomp.send("/pub/chat/message", token, JSON.stringify(datas));
+    //메세지 보내면 스크롤 자동내림
+    scrollRef.current.scrollIntoView({
+      behavior: "smooth",
+      block: "end",
+      inline: "start",
+    });
+    // dispatch(chatActions.sendChatDB(roomId, message));
+    setMessage("");
+  };
+
+  //전화번호 정보받기
+  const getPhoneNum = () => {
+    axios
+      .get(`http://3.34.52.2:8080/user/info/phoneNum`, { headers: token })
+      .then((res) => {
+        // dispatch(chatActions.getPhoneNumDB());
+        // setPhoneInfo(res.data.phoneNumber);
+        showPhoneNum(res.data.phoneNumber);
+      });
+  };
+
+  const showPhoneNum = async (phoneInfo) => {
+    const datas = {
+      type: "PHONE_NUM",
+      roomId: roomId,
+      message: "전화번호 공개" + phoneInfo,
+    };
+    await stomp.send("/pub/chat/message", token, JSON.stringify(datas));
+    //메세지 보내면 스크롤 자동내림
+    scrollRef.current.scrollIntoView({
+      behavior: "smooth",
+      block: "end",
+      inline: "start",
+    });
+    // dispatch(chatActions.sendChatDB(roomId, message));
+    setPhoneInfo("");
   };
 
   return (
     <React.Fragment>
       {/* 상단부  */}
       <Grid>
-        <Header goBack phone _onClick={showPhoneNum}>
+        <Header goBack phone _onClick={getPhoneNum}>
           {roomName}
         </Header>{" "}
         {/* 리덕스에서 데이터 불러와서 sender 넣으면 됩니다. */}

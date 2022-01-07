@@ -11,6 +11,7 @@ import { history } from "../redux/ConfigStore";
 const ChatList = (props) => {
   const dispatch = useDispatch();
   const chatRoomList = useSelector((state) => state.chat.roomList);
+  console.log(chatRoomList);
   const is_login = localStorage.getItem("is_login");
   //채팅방 목록으로 나타내기
   React.useEffect(() => {
@@ -76,8 +77,21 @@ const ChatList = (props) => {
                     </Text>
                   </Grid>
                 </Grid>
-                <Grid>
-                  <Text size="11px" height="15px">
+                <Grid is_flex align="center">
+                  {list.notVerifiedMsgCnt > 0 && (
+                    <Text
+                      width="25px"
+                      height="25px"
+                      bold
+                      bg="red"
+                      color="white"
+                      size="13px"
+                      radius="50%"
+                    >
+                      {list.notVerifiedMsgCnt}
+                    </Text>
+                  )}
+                  <Text size="11px" height="15px" margin="0 5px">
                     {list.lastMsgTime}
                   </Text>
                 </Grid>
