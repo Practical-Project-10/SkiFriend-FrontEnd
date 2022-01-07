@@ -35,7 +35,7 @@ const CarpoolWrite = (props) => {
     notice: `${carpool ? carpool.notice : ""}`,
   });
   const { title, price, memberNum, notice } = form;
-
+  console.log(form);
   const handleChange = (e) => {
     const { name, value } = e.target;
     setForm({

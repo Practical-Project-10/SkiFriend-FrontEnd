@@ -1,13 +1,11 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { mainCreators as mainActions } from "../redux/modules/main";
-
-import styled from 'styled-components';
+import styled from "styled-components";
 import { Grid, Image, Text } from "../elements/index";
 import SkiIcon from "../components/SkiIcon";
 import HotPost from "../components/HotPost";
 import Header from "../components/Header";
-
 import High1 from "../assets/skiInfo/high1_logo.png";
 import High1_ from "../assets/skiImage/HighOne/HighOne3.png";
 import YongPyong from "../assets/skiInfo/yongpyong_logo.png";
@@ -21,14 +19,11 @@ import WellihilliPark_ from "../assets/skiImage/Wellihilli/Wellihilli1.png";
 import Konjiam from "../assets/skiInfo/kongiam_logo.png";
 import Konjiam_ from "../assets/skiImage/Konjiam/Konjiam1.png";
 import Banner from "../assets/mainPage/Home_banner.png";
-
 // 메인 페이지 기능 완성 후 map으로 바꾸기
 const Home = (props) => {
   const dispatch = useDispatch();
   const hotPosts = useSelector((state) => state.main.list);
-
   const history = props.history;
-
   const skiResort = [
     {
       resortNum: 1,
@@ -73,7 +68,6 @@ const Home = (props) => {
       img: Konjiam_,
     },
   ];
-
   React.useEffect(() => {
     const mainHotPosts = async () => {
       const response = await (await fetch("http://3.34.52.2:8080/main")).json();
@@ -82,7 +76,6 @@ const Home = (props) => {
     mainHotPosts();
     // dispatch(mainActions.hotPostsDB());
   }, []);
-
   return (
     <React.Fragment>
       <Header>홈</Header>
@@ -90,13 +83,11 @@ const Home = (props) => {
         <Grid height="210px">
           <Image src={Banner} size="cover" width="100%" height="100%" />
         </Grid>
-
         <Grid align="center" padding="4px 0" bg="#474D56">
           <Text bold color="#fff">
             카풀과 스키장이 처음이라면? 가이드 읽어보기
           </Text>
         </Grid>
-
         <IconWrap>
           {/* padding='26px' 적용이 안 됨*/}
           {skiResort.map((r) => {
@@ -104,7 +95,7 @@ const Home = (props) => {
               <Grid
                 width='calc((100% - 100px) / 3)'
                 cursor
-                hoverOpacity='0.8'
+                hoverOpacity="0.8"
                 key={r.resortNum}
                 _onClick={() => history.push(`/carpool/${r.name}`)}
                 align="center"
@@ -115,7 +106,6 @@ const Home = (props) => {
             );
           })}
         </IconWrap>
-
         <Grid bg="#FFF" height="415px" radius="22px" padding="26px 0" margin='0 0 20px'>
           <Grid phoneSize>
             <Text bold size="18px">
@@ -136,7 +126,6 @@ const Home = (props) => {
     </React.Fragment>
   );
 };
-
 const IconWrap = styled.div`
   display: flex;
   flex-wrap: wrap;

@@ -47,7 +47,7 @@ const MessageBox = (props) => {
         </Grid>
       ) : (
         <Grid is_flex justify="left" margin="5px">
-          {chatInfo.senderImg === 'null' ? (
+          {chatInfo.senderImg === "null" ? (
             <Grid
               cursor="pointer"
               margin="0 5px"
@@ -65,7 +65,7 @@ const MessageBox = (props) => {
           ) : (
             <Grid cursor="pointer" margin="0 5px" _onClick={showProfile}>
               <Image
-                src={defaultIMG}
+                src={chatInfo.senderImg}
                 width="35px"
                 height="35px"
                 size="cover"

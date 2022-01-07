@@ -25,7 +25,7 @@ const FreeBoardList = () => {
   const is_loading = useSelector((state) => state.freeboard.is_loading);
   const resortImg = useSelector((state) => state.carpool.resortImg);
   const is_login = localStorage.getItem("nickname");
-  
+
   // 게시글 작성 페이지 이동 판단
   const moveWritePage = () => {
     if (is_login) {
@@ -50,7 +50,7 @@ const FreeBoardList = () => {
   return (
     <React.Fragment>
       <Header goBack>{skiresort}</Header>
-      <Grid bg="#FFF" margin='0 0 70px 0' minHeight='calc( 100vh - 124px )'>
+      <Grid bg="#FFF" margin="0 0 70px 0" minHeight="calc( 100vh - 124px )">
         <Grid height="291px">
           <Image src={resortImg} size="cover" width="100%" height="100%" />
         </Grid>
