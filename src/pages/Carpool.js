@@ -19,9 +19,9 @@ const Carpool = (props, { location }) => {
   // const page = useSelector((state) => state.carpool.page);
   const is_loading = useSelector((state) => state.carpool.is_loading);
   const resortImg = useSelector((state) => state.carpool.resortImg);
-  console.log(resortImg)
-  const is_login = localStorage.getItem('is_login');
-  const is_profile = localStorage.getItem('is_profile');
+  console.log(resortImg);
+  const is_login = localStorage.getItem("is_login");
+  const is_profile = localStorage.getItem("is_profile");
   const skiResort = props.match.params.skiresort;
 
   React.useEffect(() => {
@@ -30,13 +30,23 @@ const Carpool = (props, { location }) => {
   }, []);
 
   const induceProfile = () => {
-    if (is_login !== 'true') {
-      window.alert("로그인 후 이용할 수 있는 서비스 입니다.");
+    if (is_login !== "true") {
+      const ask = window.confirm(
+        "로그인 후 이용할 수 있는 서비스 입니다. 로그인 페이지로 이동하시겠습니까?"
+      );
+      if (ask) {
+        return history.push(`/login`);
+      }
       return null;
     }
 
-    if (is_profile !== 'true') {
-      window.alert("프로필 작성 후 이용할 수 있는 서비스 입니다.");
+    if (is_profile !== "true") {
+      const ask = window.confirm(
+        "프로필 작성 후 이용할 수 있는 서비스 입니다. 마이페이지로 이동하시겠습니까?"
+      );
+      if (ask) {
+        return history.push(`/mypage`);
+      }
       return null;
     }
     history.push(`/carpoolwrite/${skiResort}`);
@@ -45,7 +55,7 @@ const Carpool = (props, { location }) => {
   return (
     <Grid>
       <Header goBack>{skiResort}</Header>
-      <Grid bg="#FFF" minHeight='calc( 100vh - 124px )' margin='0 0 70px'>
+      <Grid bg="#FFF" minHeight="calc( 100vh - 124px )" margin="0 0 70px">
         <Grid width="100%" height="291px">
           <Image src={resortImg} size="cover" width="100%" height="100%" />
         </Grid>
@@ -80,18 +90,17 @@ const Carpool = (props, { location }) => {
             }}
             is_loading={is_loading}
           > */}
-            {carpool_list.map((l) => {
-              return (
-                <Grid key={l.postId} padding='0 0 16px 0' >
-                  <Card {...l} skiResort={skiResort}/>
-                </Grid>
-              );
-            })}
+          {carpool_list.map((l) => {
+            return (
+              <Grid key={l.postId} padding="0 0 16px 0">
+                <Card {...l} skiResort={skiResort} />
+              </Grid>
+            );
+          })}
           {/* </InfinityScroll> */}
         </Grid>
 
-        <FloatButton _onClick={induceProfile} /> 
-
+        <FloatButton _onClick={induceProfile} />
       </Grid>
     </Grid>
   );

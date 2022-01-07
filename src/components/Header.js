@@ -22,7 +22,11 @@ const Header = (props) => {
           {children}
         </Text>
         {complete ? <Button onClick={_onClick}>완료</Button> : null}
-        {phone ? <Button long_width onClick={_onClick}>전화번호 공개</Button> : null}
+        {phone ? (
+          <Button long_width onClick={_onClick}>
+            전화번호 공개
+          </Button>
+        ) : null}
       </GoBack>
     );
   }
