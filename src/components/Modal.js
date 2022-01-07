@@ -3,63 +3,66 @@ import React from "react";
 import styled from "styled-components";
 import { Grid, Text, Image } from "../elements/index";
 
-import modal from "../assets/modal.svg"
+import modal from "../assets/modal.svg";
 import defaultIMG from "../assets/myPage/profilePicture.png";
 
 const Modal = (props) => {
-  const {profile} = props;
-  console.log(props.height)
-  if(profile) {
-    return(
+  const { profile } = props;
+  console.log(props.height);
+  if (profile) {
+    return (
       <ModalBackground onClick={props.closeModal}>
-        <ModalContainer height={props.height} onClick={(e) => e.stopPropagation()}>
+        <ModalContainer
+          height={props.height}
+          onClick={(e) => e.stopPropagation()}
+        >
           {/* 프로필사진정보 */}
           <Grid>
             <Image
-              src={props.profileImg? props.profileImg: defaultIMG}
+              src={props.profileImg ? props.profileImg : defaultIMG}
               margin="0 auto"
               width="95px"
               height="95px"
               radius="50%"
               size="cover"
-              border='1px solid #000'
+              border="1px solid #000"
             />
           </Grid>
 
           {/* 닉네임정보 */}
-          <Text block bold size="20px" color="#6195cf" margin='8px 0'>
+          <Text block bold size="20px" color="#6195cf" margin="8px 0">
             {props.nickname}
           </Text>
 
-            {/* 성별정보 */}
-          <Grid is_flex margin='5px 0' justify="center">
+          {/* 성별정보 */}
+          <Grid is_flex margin="5px 0" justify="center">
             <Small>
-              <Text bold size="16px" color='#FFF' margin="0 10px">
-                {props.gender? props.gender: '미등록'}
+              <Text bold size="16px" color="#FFF" margin="0 10px">
+                {props.gender ? props.gender : "미등록"}
               </Text>
             </Small>
             {/* 나이정보 */}
             <Small>
-              <Text bold size="16px" color='#FFF' margin="0 10px">
-                {props.ageRange? props.ageRange: '미등록'}
+              <Text bold size="16px" color="#FFF" margin="0 10px">
+                {props.ageRange ? props.ageRange : "미등록"}
               </Text>
             </Small>
             {/* 경력정보 */}
             <Small>
-              <Text bold size="16px" color='#FFF' margin="0 10px">
-                {props.career? props.career: '미등록'}
+              <Text bold size="16px" color="#FFF" margin="0 10px">
+                {props.career ? props.career : "미등록"}
               </Text>
             </Small>
           </Grid>
           {/* 자기소개정보 */}
-          <Text block margin='5px 0' size="16px" >
-            {props.selfIntro? props.selfIntro: '미등록'}
+          <Text block margin="5px 0" size="16px">
+            {props.selfIntro ? props.selfIntro : "미등록"}
           </Text>
           <Menu>
             <Text
               _onClick={props.closeModal}
               size="16px"
-              opacity='0.5'
+              opacity="0.5"
               cursor="pointer"
             >
               닫기
@@ -67,7 +70,7 @@ const Modal = (props) => {
           </Menu>
         </ModalContainer>
       </ModalBackground>
-    )
+    );
   }
 
   return (
@@ -75,46 +78,30 @@ const Modal = (props) => {
       <ModalBackground onClick={props.closeModal}>
         <ModalContainer height={props.height}>
           <Menu>
-            <Image src={modal} width="25px" height="25px" margin='0 auto' />
+            <Image src={modal} width="25px" height="25px" margin="0 auto" />
           </Menu>
           <Menu>
-            <Text
-              bold
-              size="16px"
-              cursor="pointer"
-              _onClick={props.edit}
-            >
+            <Text bold size="16px" cursor="pointer" _onClick={props.edit}>
               수정하기
             </Text>
           </Menu>
           <Menu>
-            <Text
-              bold
-              size="16px"
-              cursor="pointer"
-              _onClick={props.delete}
-            >
+            <Text bold size="16px" cursor="pointer" _onClick={props.delete}>
               삭제하기
             </Text>
           </Menu>
-          {props._onClick
-          ? <Menu>
-              <Text
-                bold
-                size="16px"
-                cursor="pointer"
-                _onClick={props._onClick}
-              >
+          {props._onClick ? (
+            <Menu>
+              <Text bold size="16px" cursor="pointer" _onClick={props._onClick}>
                 모집 완료
               </Text>
             </Menu>
-          : null
-          }
+          ) : null}
           <Menu>
             <Text
               _onClick={props.closemodal}
               size="16px"
-              opacity='0.5'
+              opacity="0.5"
               cursor="pointer"
             >
               취소
@@ -123,8 +110,8 @@ const Modal = (props) => {
         </ModalContainer>
       </ModalBackground>
     </React.Fragment>
-  )
-}
+  );
+};
 
 const ModalBackground = styled.div`
   width: 100%;
@@ -139,9 +126,9 @@ const ModalBackground = styled.div`
 
 const ModalContainer = styled.div`
   width: 372px;
-  height: ${props => props.height};
+  height: ${(props) => props.height};
   padding: 0 17px;
-  background: #FFF;
+  background: #fff;
   border-radius: 10px;
   display: flex;
   flex-direction: column;
@@ -164,7 +151,7 @@ const Menu = styled.div`
   &:last-child {
     border-bottom: none;
   }
-`
+`;
 
 const Small = styled.div`
   height: 22px;
@@ -179,4 +166,4 @@ const Small = styled.div`
   }
 `;
 
-export default Modal
+export default Modal;

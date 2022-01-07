@@ -17,9 +17,8 @@ const CarpoolFilter = (props) => {
     startLocation: "",
     endLocation: skiresort,
     date: "",
-    status: "",
+    status: false,
   });
-  console.log(form);
 
   const bringDate = (date) => {
     setForm({

@@ -35,8 +35,9 @@ const CarpoolSelect = (props) => {
     endLocation: skiResort,
     date: "",
     time: "",
-    status: "",
+    status: false,
   });
+
   const { startLocation, endLocation, date, time } = form;
 
   const handleChange = (e) => {
@@ -62,8 +63,8 @@ const CarpoolSelect = (props) => {
       [name]: value,
     });
     props.bringForm(name, value);
-    console.log(value);
   };
+  
   // 출발 도착 지역 바꾸기
   const locationChange = () => {
     if (!state) {
