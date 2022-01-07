@@ -7,7 +7,7 @@ import DateSelector from "../components/DateSelector";
 import Change from "../assets/carpoolWrite/change.svg";
 import Arrow from "../assets/carpoolWrite/arrow.svg";
 
-const CarpoolFilter = (props) => {
+const CarpoolSelect = (props) => {
   const [state, setState] = useState(false);
   const [reqSelect, setReqSelect] = useState(false);
   const [ofSelect, setOfSelect] = useState(false);
@@ -187,6 +187,7 @@ const CarpoolFilter = (props) => {
                 blue
                 label="시간"
                 type="time"
+                step="3600000"
                 padding="16.5px 8px"
                 _name="time"
                 _value={time}
@@ -314,4 +315,4 @@ const CheckLabel = styled.label`
   cursor: pointer;
 `;
 
-export default CarpoolFilter;
+export default CarpoolSelect;

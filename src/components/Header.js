@@ -23,7 +23,7 @@ const Header = (props) => {
         </Text>
         {complete ? <Button onClick={_onClick}>완료</Button> : null}
         {phone ? (
-          <Button long_width onClick={_onClick}>
+          <Button onClick={_onClick}>
             전화번호 공개
           </Button>
         ) : null}
@@ -61,8 +61,8 @@ const GoBack = styled.div`
 `;
 
 const Button = styled.div`
-  ${(props) => (props.long_width ? "width: 90px;" : "width: 50px;")};
   height: 23px;
+  padding: 0 7px;
   font-weight: 700;
   color: #fff;
   background: #6195cf;

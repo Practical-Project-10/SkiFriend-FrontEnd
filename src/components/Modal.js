@@ -57,7 +57,7 @@ const Modal = (props) => {
           </Text>
           <Menu>
             <Text
-              _onClick={props.closemodal}
+              _onClick={props.closeModal}
               size="16px"
               opacity='0.5'
               cursor="pointer"

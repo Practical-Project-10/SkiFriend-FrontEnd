@@ -148,7 +148,8 @@ const ChatRoom = () => {
         </Header>
         {/* 리덕스에서 데이터 불러와서 sender 넣으면 됩니다. */}
         <Grid
-          margin="0 0 70px 0"
+          phoneSize
+          margin="54px 0 70px 0"
           minHeight="calc( 100vh - 124px )"
           display="flex"
           direction="column"
