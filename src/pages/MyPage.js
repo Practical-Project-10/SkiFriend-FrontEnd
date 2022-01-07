@@ -108,7 +108,12 @@ const MyPage = (props) => {
                   </Text>
 
                   {is_profile === "true"
-                  ? <Grid margin="10px 0 0" is_flex>
+                  ? <Grid margin="10px 0 0" display='flex' justify='space-between'>
+                      <Small>
+                        <Text bold size="12px" color="#FFF">
+                          {user_profile.gender}
+                        </Text>
+                      </Small>
                       <Small>
                         <Text bold size="12px" color="#FFF">
                           {user_profile.ageRange}
@@ -116,7 +121,7 @@ const MyPage = (props) => {
                       </Small>
                       <Small>
                         <Text bold size="12px" color="#FFF">
-                          {user_profile.gender}
+                          {user_profile.career}
                         </Text>
                       </Small>
                     </Grid>
@@ -218,13 +223,17 @@ const MyPage = (props) => {
 };
 
 const Small = styled.div`
-  width: 46px;
+  width: 50px;
   height: 19px;
   margin-right: 5px;
   background: #6195cf;
   border-radius: 140px;
   text-align: center;
   line-height: 18px;
+
+  &:last-child {
+    margin: 0;
+  }
 `;
 
 const RowDiv = styled.div`

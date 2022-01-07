@@ -39,29 +39,21 @@ const Login = (props) => {
           <Image src={logo} width='100%' height='100%'/>
         </Grid>
 
-        <Grid>
-          <Grid margin="0 0 41px">
-            <Input type="text" ref={ldInput} label="아이디" />
-          </Grid>
-          <Grid>
+        <Grid display='flex' direction='column' gap='300px'>
+          <Grid display='flex' direction='column' gap='41px'>
+            <Input type="text" placeholder="아이디" ref={ldInput} label="아이디" />
             <Input
               type="password"
-              placeholder="영소문자, 숫자를 포함한 5자리 이상"
+              placeholder="비밀번호"
               ref={pwdInput}
               label="비밀번호"
             />
           </Grid>
-        </Grid>
 
-        <Grid margin="319px 0 16px">
-          <Button
-            bg="#6195CF"
-            margin="0 0 16px"
-            _onClick={() => history.push("/phoneauth")}
-          >
-            회원가입
-          </Button>
-          <Button _onClick={join}>로그인</Button>
+          <Grid padding='0 0 16px 0'>
+            <Button margin="0 0 16px" _onClick={join}>로그인</Button>
+            <Button bg="#6195CF" _onClick={() => history.push("/phoneauth")}>회원가입</Button>
+          </Grid>
         </Grid>
       </Grid>
     </React.Fragment>

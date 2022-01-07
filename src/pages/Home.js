@@ -79,7 +79,7 @@ const Home = (props) => {
   return (
     <React.Fragment>
       <Header>홈</Header>
-      <Grid margin="0 0 70px">
+      <Grid width='100%' margin="0 0 70px">
         <Grid height="210px">
           <Image src={Banner} size="cover" width="100%" height="100%" />
         </Grid>
@@ -93,6 +93,7 @@ const Home = (props) => {
           {skiResort.map((r) => {
             return (
               <Grid
+                width='calc((100% - 100px) / 3)'
                 cursor
                 hoverOpacity="0.8"
                 key={r.resortNum}
@@ -105,13 +106,7 @@ const Home = (props) => {
             );
           })}
         </IconWrap>
-        <Grid
-          bg="#FFF"
-          height="415px"
-          radius="22px"
-          padding="26px 0"
-          margin="0 0 20px"
-        >
+        <Grid bg="#FFF" height="415px" radius="22px" padding="26px 0" margin='0 0 20px'>
           <Grid phoneSize>
             <Text bold size="18px">
               인기게시글
@@ -136,12 +131,6 @@ const IconWrap = styled.div`
   flex-wrap: wrap;
   padding: 26px 42px;
   gap: 30px 50px;
-  /* &:last-child > div > hr:last-child {
-    display: none;
-  } */
-  @media screen and (max-width: 412px) {
-    padding: 27px 40px;
-    gap: 30px 33px;
-  }
-`;
+`
+
 export default Home;

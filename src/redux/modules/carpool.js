@@ -137,7 +137,24 @@ const getMyCarpoolDB = () => {
 // initialState
 const initialState = {
   resortImg: "",
-  list: [],
+  list: [
+    // {하이원: [
+    //     {},
+    //     {},
+    //   ]
+    // },
+    // {비발디: [
+    //     {},
+    //     {},
+    //   ]
+    // },
+    // {곤지암: [
+    //     {},
+    //     {},
+    //   ]
+    // },
+  ],
+  
   filterList: [],
   myList: [],
   page: 1,
@@ -149,13 +166,12 @@ const initialState = {
 export default handleActions(
   {
     [GET_CARPOOL]: (state, action) =>
-      produce(state, (draft) => {
-        const skiResort = action.payload.skiResort;
-
-        draft.loading = false;
-        draft.list = action.payload.list;
-        // draft.page += 1;
-        // draft.list.push(...draft.list, {[skiResort]: action.payload.list});
+    produce(state, (draft) => {
+      draft.list = action.payload.list;
+      // draft.loading = false;
+      // draft.page += 1;
+      // const skiResort = action.payload.skiResort;
+      // draft.list.push(...draft.list, {[skiResort]: action.payload.list});
       }),
 
     [ADD_CARPOOL]: (state, action) =>
@@ -188,12 +204,13 @@ export default handleActions(
       produce(state, (draft) => {
         draft.myList = action.payload.myCarpools;
       }),
-
+    
     [IMAGE_RESORT]: (state, action) =>
       produce(state, (draft) => {
         console.log(action.payload.url);
         draft.resortImg = action.payload.url;
       }),
+    
     // [IS_LOADING]: (state, action) =>
     //   produce(state, (draft) => {
     //     draft.is_loading = action.payload.state;

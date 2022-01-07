@@ -23,10 +23,12 @@ const PlaceInfo = () => {
     tabWellihilliPark: false,
     tabKonjiam: false,
   });
+  //객체를 배열로 변경 -- 142줄 
   const list = Object.entries(toggleState);
 
   const toggleMenu = (e) => {
     const {id} = e.currentTarget;
+    //id와 일치하는 요소를 반환
     const state = list.filter(t => t[0] === id);
 
     if(state[0][1] === false) {

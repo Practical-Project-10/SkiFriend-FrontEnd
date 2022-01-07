@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { boardCreators as boardActions } from "../redux/modules/freeboard";
 import { imageActions } from "../redux/modules/image";
 
+import styled from 'styled-components';
 import { Grid, Text, Input, Image } from "../elements/index";
 import UnderArrow from "../assets/freeBoard/underArrow.svg";
 
@@ -103,7 +104,7 @@ const FreeBoardWrite = () => {
           <Image src={UnderArrow} width="13px" height="8px" />
         </Grid>
 
-        <Grid phoneSize height="705px">
+        <Grid phoneSize height="450px">
           {/* 제목작성 */}
           {is_edit ? (
             <Input
@@ -121,50 +122,55 @@ const FreeBoardWrite = () => {
           )}
           {/* 내용작성 */}
           {is_edit ? (
-            <Input
-              textarea
-              _value={content}
-              placeholder="내용을 입력하세요"
-              _onChange={postContent}
-            />
+            <Content 
+            placeholder="내용을 입력하세요"
+            value={content}
+            onChange={postContent}
+            ></Content>
           ) : (
-            <Input
-              textarea
-              placeholder="내용을 입력하세요"
-              _onChange={postContent}
-            />
+            <Content 
+            placeholder="내용을 입력하세요"
+            onChange={postContent}
+            ></Content>
           )}
-          {/* 사진미리보기 */}
-          <Grid is_flex width="100%" height="200px">
-            {is_edit ? (
-              <Image src={preview ? preview : ""} width="100%" height="100%" size='contain'/>
-            ) : (
-              <Image src={uploadURL} width="100%" height="100%" size='contain'/>
-            )}
-          </Grid>
-          <Grid
-            margin="20px auto"
-            padding="20px 0"
-            align="center"
-            borderT="1px solid grey"
-            cursor="pointer"
-            hoverOpacity="0.8"
-          >
-            <label htmlFor="myFile" style={{ cursor: "pointer" }}>
-              <AiOutlineCamera size="25" />
-            </label>
-            <input
-              type="file"
-              id="myFile"
-              style={{ display: "none" }}
-              accept="image/*"
-              onChange={uploadImg}
-            />
-          </Grid>
+        </Grid>
+
+        {/* 사진미리보기 */}
+        <Grid is_flex  width="100%" height="310px">
+          <Image src={is_edit && preview ? preview : uploadURL} width="100%" height="100%" size='contain'/>
+        </Grid>
+
+        <Grid
+          margin="20px auto"
+          padding="16px 0"
+          align="center"
+          borderT="1px solid grey"
+          cursor="pointer"
+          hoverOpacity="0.8"
+        >
+          <label htmlFor="myFile" style={{ cursor: "pointer" }}>
+            <AiOutlineCamera size="25" />
+          </label>
+          <input
+            type="file"
+            id="myFile"
+            style={{ display: "none" }}
+            accept="image/*"
+            onChange={uploadImg}
+          />
         </Grid>
       </Grid>
     </React.Fragment>
   );
 };
+
+const Content = styled.textarea`
+  width: 100%;
+  height: 380px;
+  padding: 22px 0;
+  border: none;
+  outline: none;
+  resize: none;
+`
 
 export default FreeBoardWrite;
