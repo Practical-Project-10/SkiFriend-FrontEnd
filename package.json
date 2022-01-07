@@ -26,6 +26,7 @@
     "react-redux": "^7.2.6",
     "react-router-dom": "5.2.1",
     "react-scripts": "5.0.0",
+    "react-snowflakes": "^1.0.0",
     "react-transition-group": "^4.4.2",
     "redux": "^4.1.2",
     "redux-actions": "^2.6.5",

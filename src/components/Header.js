@@ -22,11 +22,7 @@ const Header = (props) => {
           {children}
         </Text>
         {complete ? <Button onClick={_onClick}>완료</Button> : null}
-        {phone ? (
-          <Button long_width onClick={_onClick}>
-            전화번호 공개
-          </Button>
-        ) : null}
+        {phone ? <Button onClick={_onClick}>전화번호 공개</Button> : null}
       </GoBack>
     );
   }
@@ -56,14 +52,14 @@ const GoBack = styled.div`
   display: flex;
   align-items: center;
   text-align: center;
-  position: ${props => props.fixed? 'absolute': 'relative'};
-  ${props => props.fixed? 'top: 0; left: 0; z-index: 9;': ''}
+  position: ${(props) => (props.fixed ? "absolute" : "relative")};
+  ${(props) => (props.fixed ? "top: 0; left: 0; z-index: 9;" : "")}
 `;
 
 const Button = styled.div`
-  ${(props) => (props.long_width ? "width: 90px;" : "width: 50px;")};
   height: 23px;
   font-weight: 700;
+  padding: 0 7px;
   color: #fff;
   background: #6195cf;
   border-radius: 140px;

@@ -7,7 +7,7 @@ import DateSelector from "../components/DateSelector";
 import Change from "../assets/carpoolWrite/change.svg";
 import Arrow from "../assets/carpoolWrite/arrow.svg";
 
-const CarpoolFilter = (props) => {
+const CarpoolSelect = (props) => {
   const [state, setState] = useState(false);
   const [reqSelect, setReqSelect] = useState(false);
   const [ofSelect, setOfSelect] = useState(false);
@@ -35,8 +35,9 @@ const CarpoolFilter = (props) => {
     endLocation: skiResort,
     date: "",
     time: "",
-    status: "",
+    status: false,
   });
+
   const { startLocation, endLocation, date, time } = form;
 
   const handleChange = (e) => {
@@ -62,8 +63,8 @@ const CarpoolFilter = (props) => {
       [name]: value,
     });
     props.bringForm(name, value);
-    console.log(value);
   };
+  
   // 출발 도착 지역 바꾸기
   const locationChange = () => {
     if (!state) {
@@ -314,4 +315,4 @@ const CheckLabel = styled.label`
   cursor: pointer;
 `;
 
-export default CarpoolFilter;
+export default CarpoolSelect;

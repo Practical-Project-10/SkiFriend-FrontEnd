@@ -123,7 +123,7 @@ const SignupOne = (props) => {
             dupButton
             buttonText="중복확인"
             _name="id"
-            label="로그인"
+            label="아이디"
             type="text"
             placeholder="영소문자, 숫자를 포함한 5자리 이상"
             _onBlur={handleBlur}

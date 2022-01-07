@@ -22,6 +22,7 @@ import PwdChange from "./pages/PwdChange";
 import ChatList from "./pages/ChatList";
 import Navbar from "./components/Navbar";
 import ChatRoom from "./pages/ChatRoom";
+import Snowflakes from "./components/Snowflakes";
 
 import background from "./assets/background.png.jpg";
 
@@ -29,6 +30,7 @@ function App() {
   return (
     <React.Fragment>
       {/* <Grid mainFrame> */}
+      {/* <Snowflakes /> */}
       <Container>
         <div className="wrap">
           {/* <Header /> */}
