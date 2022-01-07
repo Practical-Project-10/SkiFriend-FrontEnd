@@ -31,9 +31,6 @@ const Grid = (props) => {
     hoverOpacity,
     hoverBg,
     className,
-    mainFrame,
-    navbar,
-    header,
     menubar,
     link,
     href,
@@ -76,18 +73,10 @@ const Grid = (props) => {
     phoneSize,
   };
 
-  if (mainFrame) {
-    return <MainFrame src={src}>{children}</MainFrame>;
-  }
-  if (header) {
-    return <Header {...styles}>{children}</Header>;
-  }
   if (header2) {
     return <Header2 {...styles}>{children}</Header2>;
   }
-  if (navbar) {
-    return <Navbar {...styles}>{children}</Navbar>;
-  }
+
   if (menubar) {
     return <Menubar {...styles}>{children}</Menubar>;
   }
@@ -99,6 +88,7 @@ const Grid = (props) => {
       </ModalBackground>
     );
   }
+
   if (className === "modalContainer") {
     return (
       <ModalContainer {...styles} onClick={_onClick}>
@@ -106,6 +96,7 @@ const Grid = (props) => {
       </ModalContainer>
     );
   }
+
   if (link) {
     return (
       <Link {...styles} href={href} target={target}>
@@ -113,6 +104,7 @@ const Grid = (props) => {
       </Link>
     );
   }
+
   if (className === "dropdown") {
     return (
       <Dropdown {...styles} onClick={_onClick}>
@@ -145,10 +137,11 @@ const GridBox = styled.div`
   display: ${(props) => props.display};
   padding: ${(props) => props.padding};
   margin: ${(props) => props.margin};
+  position: ${(props) => props.position};
   background: ${(props) => `url(${props.src})`} no-repeat;
   background-size: cover;
   background-color: ${(props) => props.bg};
-  position: ${(props) => props.position};
+  background-position: ${(props) => props.position};
   border: ${(props) => props.border};
   border-top: ${(props) => props.borderT};
   border-bottom: ${(props) => props.borderB};
@@ -164,7 +157,6 @@ const GridBox = styled.div`
     opacity: ${(props) => props.hoverOpacity};
     background: ${(props) => props.hoverBg};
   }
-  box-sizing: border-box;
   ${(props) => (props.is_flex ? "display: flex; align-items: center;" : "")}
   ${(props) => (props.className ? `className: ${props.className};` : "")}
   &::-webkit-scrollbar {
@@ -174,35 +166,6 @@ const GridBox = styled.div`
   gap: ${(props) => props.gap};
   ${(props) =>
     props.phoneSize ? "padding: 0 16px 0;" : ""}/* border: 1px solid black; */
-`;
-
-const MainFrame = styled.div`
-  /* position: relative; */
-  max-width: 412px;
-  min-height: 100%;
-  height: 825px;
-  border: 1px solid #000;
-  box-sizing: border-box;
-  overflow: scroll;
-  background: #d9e3ee;
-  margin: 0 auto;
-  /* background: ${(props) => `url(${props.src})`} no-repeat;
-  background-size: cover; */
-`;
-
-const Navbar = styled.div`
-  width: 100%;
-  height: 30px;
-  justify-content: space-around;
-  ${(props) => (props.is_flex ? "display: flex; align-items: center;" : "")};
-  margin: ${(props) => props.margin};
-`;
-
-const Header = styled.div`
-  width: 100%;
-  height: 80px;
-  background: #d9e3ee;
-  text-align: center;
 `;
 
 const Menubar = styled.div`

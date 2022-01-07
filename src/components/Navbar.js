@@ -25,42 +25,36 @@ const Navbar = ({ location }) => {
   return (
     <React.Fragment>
       <FixedNav>
-        <Grid is_flex navbar>
+        <Menu>
           <NavLink to="/" className="navLink">
             {location.pathname === "/" ? (
-              <AiTwotoneHome size="25" />
+              <AiTwotoneHome size="30" />
             ) : (
-              <AiOutlineHome size="25" />
+              <AiOutlineHome size="30" />
             )}
           </NavLink>
           <NavLink to="/placeinfo" className="navLink">
             {location.pathname === "/placeinfo" ? (
-              <AiFillInfoCircle size="25" />
+              <AiFillInfoCircle size="30" />
             ) : (
-              <AiOutlineInfoCircle size="25" />
+              <AiOutlineInfoCircle size="30" />
             )}
           </NavLink>
           <NavLink to="/chatlist" className="navLink">
             {location.pathname === "/chatlist" ? (
-              <BsChatFill size="25" />
+              <BsChatFill size="30" />
             ) : (
-              <BsChat size="25" />
+              <BsChat size="30" />
             )}
           </NavLink>
           <NavLink to="/mypage" className="navLink">
             {location.pathname === "/mypage" ? (
-              <AiFillAppstore size="25" />
+              <AiFillAppstore size="30" />
             ) : (
-              <AiOutlineAppstore size="25" />
+              <AiOutlineAppstore size="30" />
             )}
           </NavLink>
-        </Grid>
-        <Grid is_flex navbar margin="0 0 0 15px">
-          <Text>홈</Text>
-          <Text margin="0 0 0 3px">스키장정보</Text>
-          <Text>채팅</Text>
-          <Text margin="0 3px 0 0">마이페이지</Text>
-        </Grid>
+        </Menu>
       </FixedNav>
     </React.Fragment>
   );
@@ -70,10 +64,18 @@ const FixedNav = styled.div`
   position: absolute;
   bottom: 0;
   left: 0;
-  border-top: 1px solid #000;
+  border-top: 2px solid #edeeef;
   width: 100%;
   height: 70px;
   background: #FFF;
 `;
+
+const Menu = styled.div`
+  padding: 22px 28px;
+  display: flex;
+  align-items: center;
+  gap: 79px;
+
+`
 
 export default withRouter(Navbar);

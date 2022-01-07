@@ -6,7 +6,7 @@ import { carpoolActions } from "../redux/modules/carpool";
 import CarpoolMenuBar from "../components/CarpoolMenuBar";
 import Card from "../components/Card";
 import FloatButton from "../components/FloatButton";
-// import InfinityScroll from "../components/InfinityScroll";
+import InfinityScroll from "../components/InfinityScroll";
 import Header from "../components/Header";
 
 import { Grid, Image, Text } from "../elements/index";
@@ -17,8 +17,9 @@ const Carpool = (props, { location }) => {
   const dispatch = useDispatch();
   const carpool_list = useSelector((state) => state.carpool.list);
   // const page = useSelector((state) => state.carpool.page);
-  // const is_loading = useSelector((state) => state.carpool.is_loading);
+  const is_loading = useSelector((state) => state.carpool.is_loading);
   const resortImg = useSelector((state) => state.carpool.resortImg);
+  console.log(resortImg)
   const is_login = localStorage.getItem('is_login');
   const is_profile = localStorage.getItem('is_profile');
   const skiResort = props.match.params.skiresort;

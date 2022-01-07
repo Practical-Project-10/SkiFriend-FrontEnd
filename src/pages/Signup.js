@@ -14,8 +14,9 @@ const SignupOne = (props) => {
 
   // 유효성검사 상태
   const [checkId, setCheckId] = useState(true);
-  const [checkPwd, setCheckPwd] = useState(null);
-  const [checkRePwd, setCheckRePwd] = useState(null);
+  const [checkNick, setCheckNick] = useState(true);
+  const [checkPwd, setCheckPwd] = useState(true);
+  const [checkRePwd, setCheckRePwd] = useState(true);
   const [inputs, setInputs] = useState({
     id: "",
     nickname: "",
@@ -39,43 +40,32 @@ const SignupOne = (props) => {
     if (name === "id") {
       if (!idRegExp.test(id)) {
         setCheckId(false);
-        return null;
       } else {
         setCheckId(true);
       }
     }
 
+    if (name === "nickname") {
+      if (nickname.length <= 7) {
+        setCheckNick(true);
+      } else {
+        setCheckNick(false);
+      }
+    }
+
     if (name === "pwd") {
       if (!pwdRegExp.test(pwd)) {
-        setCheckPwd(
-          <Text color="red" margin="-20px 5px">
-            올바른 형식의 비밀번호가 아닙니다.
-          </Text>
-        );
-        return null;
+        setCheckPwd(false);
       } else {
-        setCheckPwd(
-          <Text color="green" margin="-20px 5px">
-            사용가능한 비밀번호입니다.
-          </Text>
-        );
+        setCheckPwd(true);
       }
     }
 
     if (name === "rePwd") {
       if (pwd !== rePwd) {
-        setCheckRePwd(
-          <Text color="red" margin="-20px 5px">
-            비밀번호가 일치하지 않습니다.
-          </Text>
-        );
-        return null;
+        setCheckRePwd(false);
       } else {
-        setCheckRePwd(
-          <Text color="green" margin="-20px 5px">
-            비밀번호가 일치합니다.
-          </Text>
-        );
+        setCheckRePwd(true);
       }
     }
   };
@@ -92,10 +82,10 @@ const SignupOne = (props) => {
     }
 
     if (name === "nickname") {
-      if (nickname.length >= 1 && nickname.length <= 7) {
+      if (checkNick && nickname !== "") {
         dispatch(userActions.isNicknameDB(nickname));
       } else {
-        window.alert("닉네임은 1글자 이상 7글자 이하로 정해주세요.");
+        window.alert("올바른 닉네임을 입력해주세요.");
       }
     }
   };
@@ -107,7 +97,7 @@ const SignupOne = (props) => {
       nickname: nickname,
     };
 
-    if (checkId && checkPwd && checkRePwd) {
+    if (checkId && checkNick && checkPwd && checkRePwd) {
       dispatch(userActions.signupDB(userInfo));
     }
   };
@@ -154,9 +144,15 @@ const SignupOne = (props) => {
             label="닉네임"
             type="text"
             placeholder="1자리 이상 7자리 이하"
+            _onBlur={handleBlur}
             _onChange={handleChange}
             _onClick={handleClick}
           />
+          {!checkNick && (
+            <Text color="red" margin="-20px 5px">
+              올바른 형식의 닉네임이 아닙니다.
+            </Text>
+          )}
 
           <Input
             more4
@@ -167,7 +163,11 @@ const SignupOne = (props) => {
             type="password"
             placeholder="영대소문자와 특수문자를 포함한 8자리 이상"
           />
-          {checkPwd}
+          {!checkPwd &&
+            <Text color="red" margin="-20px 5px">
+              올바른 형식의 비밀번호가 아닙니다.
+            </Text>
+          }
 
           <Input
             more4
@@ -178,7 +178,11 @@ const SignupOne = (props) => {
             type="password"
             placeholder="비밀번호를 다시 입력해주세요."
           />
-          {checkRePwd}
+          {!checkRePwd &&
+            <Text color="red" margin="-20px 5px">
+              비밀번호가 일치하지 않습니다.
+            </Text>
+          }
         </Grid>
 
         <Grid padding="0 0 16px">

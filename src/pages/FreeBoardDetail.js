@@ -8,7 +8,10 @@ import { likeCreators as likeActions } from "../redux/modules/like";
 import CommentList from "../components/CommentList";
 import Header from "../components/Header";
 
+import styled from 'styled-components';
 import { Grid, Button, Text, Image } from "../elements/index";
+import heart from "../assets/freeBoard/heart.svg";
+import whiteHeart from "../assets/freeBoard/whiteHeart.svg";
 
 //react icons
 import { AiOutlineHeart } from "react-icons/ai";
@@ -65,25 +68,26 @@ const FreeBoardDetail = ({ history }, props) => {
     <React.Fragment>
       <Header goBack>자유게시글</Header>
       <Grid bg="#FFF" minHeight="calc( 100vh - 55px )">
-        <Grid bg="#ffffff">
-          <Grid is_flex justify="space-between" borderB="1px solid #474D56">
-            <Grid is_flex margin="15px">
-              <Text size="14px">{postData.nickname} |</Text>
-              <Text size="16px" bold margin="0 15px">
+        <Grid phoneSize >
+          <Grid is_flex justify="space-between" padding='13px 0' borderB="1px solid #474D56">
+            <Grid is_flex >
+              <Text block size="14px">{postData.nickname}</Text>
+              <div style={{height: '13px',  margin: '0 12px', border: '1px solid #6195CF'}}></div>
+              <Text size="16px" bold margin="">
                 {postData.title}
               </Text>
             </Grid>
+
             <Grid>
               {/* 게시글을 조회한사람이 작성한 사람과 일치할 경우 모달 선택창이 보이게 하기 */}
               {nickname === postData.nickname ? (
                 <Grid
-                  margin="0 15px"
                   cursor="pointer"
                   _onClick={() => {
                     setShowModal(true);
                   }}
                 >
-                  <BiDotsHorizontalRounded size="30" />
+                  <BiDotsHorizontalRounded size="25" />
                 </Grid>
               ) : null}
               {/* 게시글 수정 삭제 modal 시작 */}
@@ -129,35 +133,36 @@ const FreeBoardDetail = ({ history }, props) => {
               {/* modal 끝 */}
             </Grid>
           </Grid>
+
           {/* 좋아요 댓글 시간 */}
-          <Grid is_flex justify="space-between">
-            <Grid margin="10px">
-              <Text>{postData.createdAt}</Text>
+          <Grid padding='16px 0' is_flex justify="space-between">
+            <Grid>
+              <Text size='12px'>{postData.createdAt}</Text>
             </Grid>
-            <Grid is_flex justify="flex-end">
-              <Grid is_flex>
-                <AiOutlineHeart size="18" color="#6195CF" />
+            <Grid is_flex>
+              <Grid is_flex margin="0 11px 0 0">
+                <AiOutlineHeart size="15" color="#6195CF"/>
                 <Text size="14px">{postData.likeCnt}</Text>
               </Grid>
-              <Grid is_flex margin="10px">
-                <BsChat size="16" color="#6195CF" />
+              <Grid is_flex>
+                <BsChat size="15" color="#6195CF"/>
                 <Text size="14px">{postData.commentCnt}</Text>
               </Grid>
             </Grid>
           </Grid>
+
           {/* 사진 및 게시글 */}
-          <Grid height="230px" overflow="scroll">
-            <Grid>
-              <Image width="100%" height="180px" size='contain' src={postData.image} />
+          <Grid>
+            <Grid padding='16px 0'>
+              <Text>{postData.content}</Text>
             </Grid>
-            <Grid margin="10px 5px">
-              <Text margin="10px">{postData.content}</Text>
+            <Grid width='100%' height='380px'>
+              <Image width="100%" height="100%" size='contain' src={postData.image} />
             </Grid>
-          </Grid>
-          <Grid padding="16px 10px">
-            <Button smallBtn _onClick={likeChange}>
-              ♡공감
-            </Button>
+            <Small onClick={likeChange}>
+              <Image src={whiteHeart} width='17px' height='20px'/>
+              <Text color='#FFF' size='12px'>공감</Text>
+            </Small>
           </Grid>
         </Grid>
 
@@ -169,4 +174,17 @@ const FreeBoardDetail = ({ history }, props) => {
   );
 };
 
+const Small = styled.div`
+  width: 55px;
+  height: 19px;
+  margin: 16px 0;
+  background: #6195cf;
+  border-radius: 140px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: default;
+`;
+
 export default FreeBoardDetail;
+

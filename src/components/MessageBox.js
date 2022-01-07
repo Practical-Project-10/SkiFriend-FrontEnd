@@ -55,7 +55,7 @@ const MessageBox = (props) => {
               _onClick={showProfile}
             >
               <Image
-                src={chatInfo.senderImg}
+                src={defaultIMG}
                 width="35px"
                 height="35px"
                 size="cover"

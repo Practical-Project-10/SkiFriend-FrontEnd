@@ -79,19 +79,19 @@ const Card = (props) => {
         <Grid is_flex justify="space-between" margin="0 0 7px">
           <Small repuest={repuest} width="101px">
             <Image src={calendar} width="11px" height="15px" />
-            <Text size="11px">{props.date}</Text>
+            <Text size="12px">{props.date}</Text>
           </Small>
           <Small repuest={repuest} width="61px">
             <Image src={clock} width="11px" height="15px" />
-            <Text>{props.time}</Text>
+            <Text size="12px">{props.time}</Text>
           </Small>
           <Small repuest={repuest} width="49px">
             <Image src={person} width="11px" height="15px" />
-            <Text>{props.memberNum}명</Text>
+            <Text size="12px">{props.memberNum}명</Text>
           </Small>
           <Small repuest={repuest} width="80px">
             <Image src={price} width="11px" height="15px" />
-            <Text size="11px">{props.price}원</Text>
+            <Text size="12px">{props.price}원</Text>
           </Small>
         </Grid>
         <Text>
@@ -197,17 +197,6 @@ const Card = (props) => {
     </CarpoolCard>
   );
 };
-
-// Card.defaultProps = {
-//   carpoolType: "카풀제공",
-//   startLocation: "하이원",
-//   endLocation: "서울",
-//   date: "2021-12-01",
-//   time: "17시",
-//   price: 10000,
-//   memberNum: 4,
-//   notice: "장비 가능하지만 5000원 추가입니다^^",
-// };
 
 const CarpoolCard = styled.div`
   height: 173px;
