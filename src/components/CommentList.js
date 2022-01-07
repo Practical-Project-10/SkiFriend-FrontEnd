@@ -25,7 +25,7 @@ const CommentList = () => {
   //------댓글 입력한 내용 가져오기------
   const postComment = (e) => {
     const currentComment = e.target.value;
-    console.log(currentComment)
+    console.log(currentComment);
     setCommentValue(currentComment);
   };
 
@@ -70,13 +70,13 @@ const CommentList = () => {
 
   return (
     <React.Fragment>
-      <Grid bg="#FFF" margin='0 0 80px 0'>
+      <Grid bg="#FFF" margin="0 0 80px 0">
         <Grid phoneSize height="40px" borderB="1px solid #ededed">
           <Text padding="10px 0" color="#474D56">
             댓글 {postData.commentCnt}
           </Text>
         </Grid>
-        <Grid height="230px">
+        <Grid height="100%">
           {/* 댓글 */}
           {commentArray &&
             commentArray.map((comment, idx) => {
@@ -170,7 +170,7 @@ const CommentList = () => {
               );
             })}
         </Grid>
-        
+
         {/* 댓글작성창 */}
         <CommentWrite>
           <CommentInput
@@ -183,8 +183,8 @@ const CommentList = () => {
               src={sendBtn}
               width="30px"
               height="30px"
-              position='center'
-              size='19px 20px'
+              position="center"
+              size="19px 20px"
               cursor="default"
             />
           </Send>
@@ -200,10 +200,10 @@ const CommentWrite = styled.div`
   position: absolute;
   bottom: 0;
   left: 0;
-  background: #FFF;
+  background: #fff;
   /* text-align: center; */
-`
-  
+`;
+
 const CommentInput = styled.input`
   width: 100%;
   height: 40px;
@@ -212,16 +212,16 @@ const CommentInput = styled.input`
   border: 2px solid #edeeef;
   border-radius: 40px;
   outline: none;
-`
+`;
 
 const Send = styled.div`
   width: 30px;
   height: 30px;
-  background: #6195CF;
+  background: #6195cf;
   border-radius: 50%;
   position: absolute;
   top: 25px;
   right: 27px;
-`
+`;
 
 export default CommentList;
