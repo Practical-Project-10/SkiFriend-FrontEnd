@@ -30,8 +30,8 @@ function App() {
   return (
     <React.Fragment>
       {/* <Grid mainFrame> */}
-      {/* <Snowflakes /> */}
       <Container>
+        <Snowflakes />
         <div className="wrap">
           {/* <Header /> */}
           <GlobalStyleds />
@@ -114,8 +114,8 @@ const Container = styled.div`
   justify-content: flex-start;
   align-items: center;
   height: 100%;
-  background: url(${background}) no-repeat;
-  background-size: cover;
+  background: #d9e3ee;
+  /* background-size: contain; */
   overflow: hidden;
   position: relative;
 
@@ -138,6 +138,10 @@ const Container = styled.div`
       overflow: auto;
     }
   }
+
+  @media screen and (min-width: 1200px) {
+      background: url(${background}) no-repeat;
+    }
 `;
 
 const CardList = styled.div`

@@ -7,9 +7,9 @@ const Snowflakes = () => {
       <Snowfall
         count={50}
         style={{
-          position: "relative",
-          width: "1500px",
-          height: "700px",
+          position: "absolute",
+          width: "100%",
+          height: "100%",
         }}
         snowflakeFactory={(index) => {
           const size = index / 50; // 50 is the number of snowflakes.
