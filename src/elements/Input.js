@@ -8,6 +8,7 @@ const Input = forwardRef((props, ref) => {
     label,
     placeholder,
     _onChange,
+    _onKeyPress,
     type,
     _value,
     more4,
@@ -30,7 +31,7 @@ const Input = forwardRef((props, ref) => {
     textarea,
     _defaultValue,
     size,
-    step
+    step,
   } = props;
 
   const style = {
@@ -46,7 +47,11 @@ const Input = forwardRef((props, ref) => {
   if (dupButton) {
     return (
       <Grid>
-        {label && <Text block margin='0 0 7px 0' size={size}>{label}</Text>}
+        {label && (
+          <Text block margin="0 0 7px 0" size={size}>
+            {label}
+          </Text>
+        )}
         <Grid display="flex" gap="11px">
           <DupButton
             {...style}
@@ -77,7 +82,7 @@ const Input = forwardRef((props, ref) => {
     return (
       <Grid>
         {label && (
-          <Text block margin='0 0 7px 0' size="12px" color="#6195CF">
+          <Text block margin="0 0 7px 0" size="12px" color="#6195CF">
             {label}
           </Text>
         )}
@@ -113,8 +118,11 @@ const Input = forwardRef((props, ref) => {
           value={_value}
           name={_name}
           maxLength={_maxLength}
+          onKeyPress={_onKeyPress}
         />
-        <Text block margin='0 0 7px 0' size="12px">{label}</Text>
+        <Text block margin="0 0 7px 0" size="12px">
+          {label}
+        </Text>
       </React.Fragment>
     );
   }
@@ -138,7 +146,11 @@ const Input = forwardRef((props, ref) => {
   }
   return (
     <Grid>
-      {label && <Text block margin='0 0 7px 0' size={size}>{label}</Text>}
+      {label && (
+        <Text block margin="0 0 7px 0" size={size}>
+          {label}
+        </Text>
+      )}
       <ElInput
         {...style}
         ref={ref}

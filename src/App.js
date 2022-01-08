@@ -30,8 +30,8 @@ function App() {
   return (
     <React.Fragment>
       {/* <Grid mainFrame> */}
-      {/* <Snowflakes /> */}
       <Container>
+        <Snowflakes />
         <div className="wrap">
           {/* <Header /> */}
           <GlobalStyleds />

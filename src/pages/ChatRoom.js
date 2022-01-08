@@ -32,11 +32,10 @@ const ChatRoom = () => {
   // useState관리
   const [message, setMessage] = useState("");
   const [messageList, setMessageList] = useState([]);
-  const [phoneInfo, setPhoneInfo] = useState();
   const messageDatas = (recv) => {
     setMessageList((prev) => [...prev, recv]);
   };
-
+  console.log(message);
   //메세지 내용
   const messageChat = (e) => {
     const content = e.target.value;
@@ -93,6 +92,13 @@ const ChatRoom = () => {
     // dispatch(chatActions.getContentChatDB(roomId));
   }, []);
 
+  //엔터치면 메세지 보내지게 하기
+  const onKeyPress = (e) => {
+    if (e.key === "Enter") {
+      sendMessage();
+    }
+  };
+
   //메세지 보내기
   const sendMessage = async () => {
     const datas = {
@@ -121,7 +127,7 @@ const ChatRoom = () => {
         showPhoneNum(res.data.phoneNumber);
       });
   };
-
+  //전화번호 보여주기
   const showPhoneNum = async (phoneInfo) => {
     const datas = {
       type: "PHONE_NUM",
@@ -136,7 +142,6 @@ const ChatRoom = () => {
       inline: "start",
     });
     // dispatch(chatActions.sendChatDB(roomId, message));
-    setPhoneInfo("");
   };
 
   return (
@@ -186,6 +191,7 @@ const ChatRoom = () => {
                 height="40px"
                 radius="40px"
                 _value={message}
+                _onKeyPress={onKeyPress}
                 _onChange={messageChat}
               />
               <Grid
