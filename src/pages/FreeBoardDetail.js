@@ -28,7 +28,7 @@ const FreeBoardDetail = ({ history }, props) => {
   //------useState관리-------
   const [showmodal, setShowModal] = useState();
   const [heart, setHeart] = useState(true);
-  
+  console.log(postData);
   //-------heart-------
   const changeHeart = () => {
     if (heart === false) {
