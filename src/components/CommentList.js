@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { commentCreators as commentActions } from "../redux/modules/comment";
+import { history } from "../redux/ConfigStore";
 
 import styled from "styled-components";
 import { Grid, Input, Text, Image } from "../elements/index";
@@ -40,8 +41,12 @@ const CommentList = () => {
       dispatch(commentActions.addCommentDB(postId, commentValue));
       return setCommentValue("");
     } else {
-      window.alert("로그인한 회원만 이용가능합니다.");
-      return;
+      const ask = window.confirm(
+        "로그인한 회원만 이용가능합니다. 로그인 페이지로 이동하시겠습니까?"
+      );
+      if (ask) {
+        return history.push(`/login`);
+      }
     }
   };
 
@@ -159,6 +164,7 @@ const CommentList = () => {
                         width="390px"
                         height="3px"
                         radius="40px"
+                        autocomplete="off"
                         _defaultValue={comment.content}
                         _onChange={postEditComment}
                       />
@@ -176,6 +182,7 @@ const CommentList = () => {
           <CommentInput
             placeholder="댓글작성"
             value={commentValue}
+            autoComplete="off"
             onChange={postComment}
           />
           <Send onClick={addCommentBtn}>
@@ -185,7 +192,7 @@ const CommentList = () => {
               height="30px"
               position="center"
               size="19px 20px"
-              cursor="default"
+              cursor="pointer"
             />
           </Send>
         </CommentWrite>

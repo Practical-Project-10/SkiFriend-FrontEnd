@@ -64,7 +64,7 @@ const CarpoolSelect = (props) => {
     });
     props.bringForm(name, value);
   };
-  
+
   // 출발 도착 지역 바꾸기
   const locationChange = () => {
     if (!state) {
@@ -83,7 +83,7 @@ const CarpoolSelect = (props) => {
       });
     }
   };
-
+  console.log(form);
   // 날짜 선택
   const selectDate = (date) => {
     setForm({

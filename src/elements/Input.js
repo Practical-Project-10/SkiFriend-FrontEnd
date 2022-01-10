@@ -35,7 +35,6 @@ const Input = forwardRef((props, ref) => {
     _defaultValue,
     size,
     step,
-    autocomplete,
   } = props;
 
   const style = {
@@ -99,6 +98,7 @@ const Input = forwardRef((props, ref) => {
           onBlur={_onBlur}
           type={type}
           step={step}
+          autoComplete={autocomplete}
           placeholder={placeholder}
           onChange={_onChange}
           maxLength={_maxLength}
@@ -124,7 +124,6 @@ const Input = forwardRef((props, ref) => {
           name={_name}
           maxLength={_maxLength}
           onKeyPress={_onKeyPress}
-          autocomplete={autocomplete}
         />
         <Text block margin="0 0 7px 0" size="12px">
           {label}
@@ -136,6 +135,7 @@ const Input = forwardRef((props, ref) => {
   if (title) {
     return (
       <Title
+        autoComplete={autocomplete}
         placeholder={placeholder}
         onChange={_onChange}
         value={_value}
