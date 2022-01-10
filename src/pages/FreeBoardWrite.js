@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { boardCreators as boardActions } from "../redux/modules/freeboard";
 import { imageActions } from "../redux/modules/image";
 
-import styled from 'styled-components';
+import styled from "styled-components";
 import { Grid, Text, Input, Image } from "../elements/index";
 import UnderArrow from "../assets/freeBoard/underArrow.svg";
 
@@ -35,7 +35,6 @@ const FreeBoardWrite = () => {
   const [content, setContet] = useState(postData ? postData.content : "");
   const [uploadURL, setUploadURL] = useState([]);
   const [uploadFiles, setUploadFiles] = useState(null);
-  console.log(uploadFiles);
   // 제목
   const postTitle = (e) => {
     const currentTitle = e.target.value;
@@ -78,7 +77,6 @@ const FreeBoardWrite = () => {
   // 데이터 수정 (완료 버튼)
   const editPostBtn = () => {
     const requestDto = { title: title, content: content };
-    console.log(requestDto);
     const ask = window.confirm("게시물을 등록하시겠습니까?");
     if (ask) {
       return dispatch(
@@ -97,14 +95,16 @@ const FreeBoardWrite = () => {
 
   return (
     <React.Fragment>
-      <Header goBack complete _onClick={is_edit? editPostBtn: addPostBtn}>게시글 {is_edit? "수정": "작성"}하기</Header>
-      <Grid minHeight='calc( 100vh - 55px )' bg="#FFF">
+      <Header goBack complete _onClick={is_edit ? editPostBtn : addPostBtn}>
+        게시글 {is_edit ? "수정" : "작성"}하기
+      </Header>
+      <Grid minHeight="calc( 100vh - 55px )" bg="#FFF">
         <Grid is_flex justify="space-between" bg="#C6D2E0" padding="8px 16px">
           <Text>작성 전 꼭 읽어주세요!</Text>
           <Image src={UnderArrow} width="13px" height="8px" />
         </Grid>
 
-        <Grid phoneSize height="430px">
+        <Grid phoneSize height="330px">
           {/* 제목작성 */}
           {is_edit ? (
             <Input
@@ -122,22 +122,27 @@ const FreeBoardWrite = () => {
           )}
           {/* 내용작성 */}
           {is_edit ? (
-            <Content 
-            placeholder="내용을 입력하세요"
-            value={content}
-            onChange={postContent}
+            <Content
+              placeholder="내용을 입력하세요"
+              value={content}
+              onChange={postContent}
             ></Content>
           ) : (
-            <Content 
-            placeholder="내용을 입력하세요"
-            onChange={postContent}
+            <Content
+              placeholder="내용을 입력하세요"
+              onChange={postContent}
             ></Content>
           )}
         </Grid>
 
         {/* 사진미리보기 */}
-        <Grid is_flex  width="100%" height="380px" padding='0 16px 5px'>
-          <Image src={is_edit && preview ? preview : uploadURL} width="100%" height="100%" size='contain'/>
+        <Grid is_flex width="100%" height="280px" padding="0 16px 5px">
+          <Image
+            src={is_edit && preview ? preview : uploadURL}
+            width="100%"
+            height="100%"
+            size="contain"
+          />
         </Grid>
 
         <Grid
@@ -170,6 +175,6 @@ const Content = styled.textarea`
   border: none;
   outline: none;
   resize: none;
-`
+`;
 
 export default FreeBoardWrite;

@@ -104,6 +104,7 @@ const CarpoolWrite = (props) => {
             _name="price"
             _value={price}
             _onChange={handleChange}
+            autocomplete="off"
             placeholder="숫자만 입력해주세요."
             padding="19px 8px"
           />
@@ -134,6 +135,7 @@ const CarpoolWrite = (props) => {
             _name="notice"
             _value={notice}
             _onChange={handleChange}
+            autocomplete="off"
             placeholder="주의사항을 입력해주세요."
             padding="19px 8px"
           />

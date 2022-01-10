@@ -76,6 +76,7 @@ const ChatList = (props) => {
                     </Text>
                   </Grid>
                 </Grid>
+                {/* 안읽은 메세지 표시 */}
                 <Grid is_flex align="center">
                   {list.notVerifiedMsgCnt > 0 && (
                     <Text

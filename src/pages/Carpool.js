@@ -54,7 +54,15 @@ const Carpool = (props) => {
 
   return (
     <Grid>
-      <Header goBack>{skiResort}</Header>
+      <Header
+        goBack
+        push
+        _onClick={() => {
+          history.push("/");
+        }}
+      >
+        {skiResort}
+      </Header>
       <Grid bg="#FFF" minHeight="calc( 100vh - 124px )" margin="0 0 70px">
         <Grid width="100%" height="291px">
           <Image src={resortImg} size="cover" width="100%" height="100%" />
