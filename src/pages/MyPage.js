@@ -238,7 +238,6 @@ const RowDiv = styled.div`
     height: 100%;
     display: flex;
     padding: 16px 0;
-    margin-top: 25px;
     box-sizing: border-box;
   }
 `;

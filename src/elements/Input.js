@@ -28,10 +28,10 @@ const Input = forwardRef((props, ref) => {
     free,
     radius,
     title,
-    textarea,
     _defaultValue,
     size,
     step,
+    autocomplete,
   } = props;
 
   const style = {
@@ -119,6 +119,7 @@ const Input = forwardRef((props, ref) => {
           name={_name}
           maxLength={_maxLength}
           onKeyPress={_onKeyPress}
+          autocomplete={autocomplete}
         />
         <Text block margin="0 0 7px 0" size="12px">
           {label}
@@ -126,6 +127,7 @@ const Input = forwardRef((props, ref) => {
       </React.Fragment>
     );
   }
+
   if (title) {
     return (
       <Title
@@ -135,15 +137,17 @@ const Input = forwardRef((props, ref) => {
       ></Title>
     );
   }
-  if (textarea) {
-    return (
-      <Textarea
-        placeholder={placeholder}
-        onChange={_onChange}
-        value={_value}
-      ></Textarea>
-    );
-  }
+
+  // if (textarea) {
+  //   return (
+  //     <Textarea
+  //       placeholder={placeholder}
+  //       onChange={_onChange}
+  //       value={_value}
+  //     ></Textarea>
+  //   );
+  // }
+
   return (
     <Grid>
       {label && (
@@ -162,6 +166,7 @@ const Input = forwardRef((props, ref) => {
         placeholder={placeholder}
         disabled={_disabled}
         onChange={_onChange}
+        autocomplete={autocomplete}
       />
     </Grid>
   );
@@ -219,16 +224,16 @@ const Title = styled.input`
   }
 `;
 
-const Textarea = styled.textarea`
-  width: 90%;
-  height: 300px;
-  max-width: 400px;
-  padding: 10px 0;
-  border: none;
-  &:focus {
-    outline: none;
-    resize: none;
-  }
-`;
+// const Textarea = styled.textarea`
+//   width: 90%;
+//   height: 300px;
+//   max-width: 400px;
+//   padding: 10px 0;
+//   border: none;
+//   &:focus {
+//     outline: none;
+//     resize: none;
+//   }
+// `;
 
 export default Input;

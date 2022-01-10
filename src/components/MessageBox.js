@@ -38,6 +38,7 @@ const MessageBox = (props) => {
   return (
     <React.Fragment>
       {/* 내가 메세지 보낼때 보이는 위치와 상대방이 나에게 보낼때 위치 */}
+      <Grid>
       {nickname === chatInfo.sender ? (
         <Grid is_flex justify="flex-end" margin="5px">
           <Text size="10px" margin="0 10px">
@@ -154,6 +155,7 @@ const MessageBox = (props) => {
           selfIntro={profileList.selfIntro}
         />
       ) : null}
+      </Grid>
     </React.Fragment>
   );
 };

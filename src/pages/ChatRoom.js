@@ -153,14 +153,13 @@ const ChatRoom = () => {
         </Header>
         {/* 리덕스에서 데이터 불러와서 sender 넣으면 됩니다. */}
         <Grid
-          margin="54px 0 70px 0"
+          margin="54px 0 0 0"
           minHeight="calc( 100vh - 124px )"
           display="flex"
           direction="column"
-          justify="space-between"
         >
           {/* 채팅이 들어갈 공간 */}
-          <Grid phoneSize height="518px" overflow="scroll">
+          <Grid phoneSize height="744px" overflow="scroll">
             <div ref={scrollRef}>
               {/* 채팅말풍선 */}
               {messageList.map((msg) => {
@@ -169,7 +168,7 @@ const ChatRoom = () => {
             </div>
           </Grid>
           {/* 하단부 버튼들 */}
-          <Grid height="220px" bg="#474D56">
+          <Grid height="170px" bg="#474D56">
             {/* <Grid justify="flex-end" borderB="1px solid #fff" padding="5px">
               <Grid
                 align="center"
@@ -186,6 +185,7 @@ const ChatRoom = () => {
             <Grid is_flex padding="20px 16px">
               <Input
                 free
+                autocomplete="off"
                 width="360px"
                 height="40px"
                 radius="40px"

@@ -9,6 +9,13 @@ import Heart from "../assets/freeBoard/heart.svg";
 import Comment from "../assets/freeBoard/comment.svg";
 
 const HotPost = (props) => {
+
+  console.log(props);
+
+  if(props.l === '') {
+    
+  }
+
   return (
     <React.Fragment>
       <Posts>

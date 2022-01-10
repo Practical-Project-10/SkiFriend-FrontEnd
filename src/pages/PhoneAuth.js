@@ -48,7 +48,7 @@ const PhoneAuth = (props) => {
           <Grid margin="0 0 41px">
             <Input
               dupButton
-              type="text"
+              type="tel"
               ref={phoneNumInput}
               _onClick={numSend}
               placeholder="'-'를 제외한 숫자를 입력해 주세요."
@@ -59,10 +59,10 @@ const PhoneAuth = (props) => {
           <Grid>
             <Input
               type="text"
+              autocomplete="one-time-code"
               ref={smsNumInput}
               _onClick={nextStep}
               label="인증번호"
-              buttonText="다음"
             />
           </Grid>
         </Grid>

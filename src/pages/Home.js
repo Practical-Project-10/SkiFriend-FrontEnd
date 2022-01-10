@@ -23,6 +23,7 @@ import Banner from "../assets/mainPage/Home_banner.png";
 const Home = (props) => {
   const dispatch = useDispatch();
   const hotPosts = useSelector((state) => state.main.list);
+  console.log(hotPosts);
   const history = props.history;
   const skiResort = [
     {
