@@ -10,7 +10,7 @@ const DateSelector = (props) => {
   // 데이터 넘겨주기 위해 지정
   const { _selectDate } = props;
   // 화면에 보여지는 날짜
-  const [date_, setDate_] = React.useState(new Date('2021-12-12'));
+  const [date_, setDate_] = React.useState(new Date());
   console.log(date_)
   function sendDate(date) {
     setDate_(date);
@@ -34,6 +34,8 @@ const DateSelector = (props) => {
           sendDate(date);
         }}
         minDate={new Date()}
+        // popperPlacement="auto"
+        placeholderText="날짜를 선택하세요."
       />
     </React.Fragment>
   );

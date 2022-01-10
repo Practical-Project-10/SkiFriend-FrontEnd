@@ -3,12 +3,13 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { profileActions } from "../redux/modules/profile";
 import { carpoolActions } from "../redux/modules/carpool";
+import { userActions } from "../redux/modules/user";
 
 //swiper
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/swiper.min.css";
 
-import SmallCard from "../components/SmallCard";
+import Card from "../components/Card";
 import Header from "../components/Header";
 
 import styled from "styled-components";
@@ -21,12 +22,10 @@ const MyPage = (props) => {
   const history = props.history;
   const dispatch = useDispatch();
   const is_login = localStorage.getItem("is_login");
-
   const is_profile = localStorage.getItem("is_profile");
   const user_profile = useSelector((state) => state.profile.user_profile);
-  console.log(user_profile)
   const myCarpool = useSelector((state) => state.carpool.myList);
-  // console.log(user_profile.profileImg);
+  console.log(myCarpool);
 
   React.useEffect(() => {
     if (!is_login) {
@@ -35,6 +34,11 @@ const MyPage = (props) => {
     dispatch(profileActions.getProfileDB());
     dispatch(carpoolActions.getMyCarpoolDB());
   }, []);
+
+  const logout = () => {
+    dispatch(userActions.logout());
+    history.replace("/");
+  };
 
   return (
     //로그인 안 했을 때
@@ -63,21 +67,11 @@ const MyPage = (props) => {
                 </Grid>
 
                 <Grid padding="6px 0 0">
-                  <Grid
-                    cursor
-                    width="66px"
-                    padding="5px 6px"
-                    bg="#FFF"
-                    radius="4px"
-                    align="center"
-                    _onClick={() => {
-                      history.push("/login");
-                    }}
-                  >
+                  <SubButton onClick={() => {history.push("/login");}}>
                     <Text size="12px" color="#474D56">
                       로그인
                     </Text>
-                  </Grid>
+                  </SubButton>
                 </Grid>
               </Grid>
 
@@ -128,38 +122,23 @@ const MyPage = (props) => {
 
                 <Grid padding="6px 0 0">
                   {is_profile === "true" ? (
-                    <Grid
-                      cursor
-                      width="66px"
-                      padding="6px"
-                      bg="#FFF"
-                      radius="4px"
-                      align="center"
-                      _onClick={() => {
-                        history.push(`/profilewrite/${user_profile.username}`);
-                      }}
-                    >
+                    <SubButton onClick={() => {history.push(`/profilewrite/${user_profile.username}`);}}>
                       <Text size="12px" color="#474D56">
                         수정하기
                       </Text>
-                    </Grid>
+                    </SubButton>
                   ) : (
-                    <Grid
-                      cursor
-                      width="66px"
-                      padding="6px"
-                      bg="#FFF"
-                      radius="4px"
-                      align="center"
-                      _onClick={() => {
-                        history.push("/profilewrite");
-                      }}
-                    >
+                    <SubButton onClick={() => {history.push("/profilewrite");}}>
                       <Text size="12px" color="#474D56">
                         등록하기
                       </Text>
-                    </Grid>
+                    </SubButton>
                   )}
+                  <SubButton onClick={logout}>
+                    <Text size="12px" color="#474D56">
+                      로그아웃
+                    </Text>
+                  </SubButton>
                 </Grid>
               </Grid>
 
@@ -202,7 +181,7 @@ const MyPage = (props) => {
                     return (
                       <SwiperSlide>
                         <Grid key={l.createdAt} width="100%">
-                          <SmallCard {...l} />
+                          <Card myPage {...l} />
                         </Grid>
                       </SwiperSlide>
                     );
@@ -210,7 +189,7 @@ const MyPage = (props) => {
                 </Swiper>
               </RowDiv>
             ) : (
-              <SmallCard notLogin />
+              <Card notLogin />
             )}
           </Grid>
         </Grid>
@@ -241,5 +220,15 @@ const RowDiv = styled.div`
     box-sizing: border-box;
   }
 `;
+
+const SubButton = styled.div`
+  width: 66px;
+  padding: 6px;
+  margin-bottom: 5px;
+  background-color: #FFF;
+  border-radius: 4px;
+  text-align: center;
+  cursor: pointer;
+`
 
 export default MyPage;

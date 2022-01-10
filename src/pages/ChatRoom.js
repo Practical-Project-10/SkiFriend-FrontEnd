@@ -156,8 +156,8 @@ const ChatRoom = () => {
           direction="column"
         >
           {/* 채팅이 들어갈 공간 */}
-//           <Grid phoneSize height="744px" overflow="scroll">
-//             <div ref={scrollRef}>
+        {/* <Grid phoneSize height="744px" overflow="scroll">
+          <div ref={scrollRef}> */}
 
           <Grid phoneSize height="802px" overflow="scroll">
             <div style={{ padding: "30px 0" }} ref={scrollRef}>
@@ -169,7 +169,7 @@ const ChatRoom = () => {
             </div>
           </Grid>
           {/* 하단부 버튼들 */}
-//           <Grid height="170px" bg="#474D56">
+          {/* <Grid height="170px" bg="#474D56"> */}
 
           <Grid height="120px" bg="#474D56">
 

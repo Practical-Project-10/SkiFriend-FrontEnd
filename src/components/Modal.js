@@ -7,8 +7,8 @@ import modal from "../assets/modal.svg";
 import defaultIMG from "../assets/myPage/profilePicture.png";
 
 const Modal = (props) => {
-  const { profile } = props;
-  console.log(props.height);
+  const { profile, _onClick, complete } = props;
+  console.log(complete)
   if (profile) {
     return (
       <ModalBackground onClick={props.closeModal}>
@@ -75,39 +75,42 @@ const Modal = (props) => {
 
   return (
     <React.Fragment>
-      <ModalBackground onClick={props.closeModal}>
-        <ModalContainer height={props.height}>
-          <Menu>
-            <Image src={modal} width="25px" height="25px" margin="0 auto" />
-          </Menu>
-          <Menu>
-            <Text bold size="16px" cursor="pointer" _onClick={props.edit}>
-              수정하기
-            </Text>
-          </Menu>
-          <Menu>
-            <Text bold size="16px" cursor="pointer" _onClick={props.delete}>
-              삭제하기
-            </Text>
-          </Menu>
-          {props._onClick ? (
+      <ModalBackground onClick={props.closeModal} radius={props.radius}>
+        {/* 모집완료 후 뜨는 모달 */}
+        {complete
+        ? <ModalContainer width={props.width} height={props.height}>
             <Menu>
-              <Text bold size="16px" cursor="pointer" _onClick={props._onClick}>
-                모집 완료
-              </Text>
+              <Image src={modal} width="25px" height="25px" margin="0 auto" />
             </Menu>
-          ) : null}
-          <Menu>
-            <Text
-              _onClick={props.closemodal}
-              size="16px"
-              opacity="0.5"
-              cursor="pointer"
-            >
+            <Menu fontS={props.fontS} onClick={props.delete}>
+              삭제하기
+            </Menu>
+            <Menu fontS={props.fontS} opacity onClick={props.closemodal}>
               취소
-            </Text>
-          </Menu>
-        </ModalContainer>
+            </Menu>
+          </ModalContainer>
+
+          // 모집완료 전 뜨는 모달
+        : <ModalContainer width={props.width} height={props.height}>
+            <Menu padding={props.padding}>
+              <Image src={modal} width="25px" height="25px" margin="0 auto" />
+            </Menu>
+            <Menu fontS={props.fontS} padding={props.padding} onClick={props.edit}>
+              수정하기
+            </Menu>
+            <Menu fontS={props.fontS} padding={props.padding} onClick={props.delete}>
+              삭제하기
+            </Menu>
+            {_onClick ? (
+              <Menu fontS={props.fontS} padding={props.padding} onClick={props._onClick}>
+                모집 완료
+              </Menu>
+            ) : null}
+            <Menu fontS={props.fontS} padding={props.padding} opacity onClick={props.closemodal}>
+              취소
+            </Menu>
+          </ModalContainer>
+        }
       </ModalBackground>
     </React.Fragment>
   );
@@ -117,6 +120,7 @@ const ModalBackground = styled.div`
   width: 100%;
   height: 100%;
   padding: 0 20px;
+  border-radius: ${props => props.radius? props.radius: ''};
   position: absolute;
   top: 0;
   left: 0;
@@ -125,11 +129,11 @@ const ModalBackground = styled.div`
 `;
 
 const ModalContainer = styled.div`
-  width: 372px;
-  height: ${(props) => props.height};
+  width: ${(props) => props.width? props.width: '372px'};
+  height: ${(props) => props.height? props.height: '256px'};
   padding: 0 17px;
   background: #fff;
-  border-radius: 10px;
+  border-radius: 15px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -137,12 +141,18 @@ const ModalContainer = styled.div`
   position: absolute;
   top: 0;
   bottom: 0;
+  left: 0;
+  right: 0;
   margin: auto;
 `;
 
 const Menu = styled.div`
-  padding: 15px;
+  padding: ${props => props.padding? props.padding: '15px'};
   border-bottom: 1px solid #edeeef;
+  font-size: ${props => props.fontS? props.fontS: '16px'};
+  font-weight: 700;
+  cursor: pointer;
+  ${props => props.opacity? 'opacity: 0.5;': ''}
 
   &:first-child {
     border-bottom: none;

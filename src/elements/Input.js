@@ -35,7 +35,6 @@ const Input = forwardRef((props, ref) => {
     _defaultValue,
     size,
     step,
-    autocomplete,
   } = props;
 
   const style = {

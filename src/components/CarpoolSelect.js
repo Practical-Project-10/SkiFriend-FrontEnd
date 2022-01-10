@@ -38,17 +38,18 @@ const CarpoolSelect = (props) => {
     status: false,
   });
 
-  const { startLocation, endLocation, date, time } = form;
+  const { memberNum, startLocation, endLocation, date, time } = form;
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-
+    console.log(e.target)
     setForm({
       ...form,
       [name]: value,
     });
     props.bringForm(name, value);
   };
+  console.log(form);
 
   const hiddenChange = (e) => {
     const { name, value } = e.target;
@@ -164,6 +165,7 @@ const CarpoolSelect = (props) => {
               <Select
                 name="memberNum"
                 defaultValue="default"
+                value={memberNum}
                 onChange={handleChange}
               >
                 <option value="0">선택</option>
@@ -184,11 +186,14 @@ const CarpoolSelect = (props) => {
               <DateSelector _value={date} _selectDate={selectDate} />
             </Grid>
             <Grid width="40%">
+              <Text size="12px" color="#6195CF">
+                시간
+              </Text>
+              <input style={{width:'138px'}}  type='time' min="11:00" max="21:00" step="900" required/>
               <Input
                 blue
-                label="시간"
                 type="time"
-                step="3600000"
+                step="900"
                 padding="16.5px 8px"
                 _name="time"
                 _value={time}

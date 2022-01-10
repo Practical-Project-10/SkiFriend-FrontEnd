@@ -62,6 +62,7 @@ const getCarpoolDB = (skiResort, page) => {
 
 const addCarpoolDB = (skiResort, carpool) => {
   return async function (dispatch, getState, { history }) {
+    console.log(carpool)
     try {
       const response = await apis.addCarpool(skiResort, carpool);
       response && history.push(`/carpool/${skiResort}`);
@@ -207,7 +208,6 @@ export default handleActions(
     
     [IMAGE_RESORT]: (state, action) =>
       produce(state, (draft) => {
-        console.log(action.payload.url);
         draft.resortImg = action.payload.url;
       }),
     
