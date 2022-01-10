@@ -23,7 +23,7 @@ const Snowflakes = () => {
                 width: w,
                 height: w,
                 borderRadius: "50%",
-                backgroundColor: "#ffffff",
+                backgroundColor: "#FFF",
                 opacity: 0.2 + 0.8 * size,
                 filter: `blur(${Math.round(Math.max(size - 0.5, 0) * 15)}px)`,
               }}

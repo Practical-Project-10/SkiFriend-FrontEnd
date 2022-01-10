@@ -74,7 +74,7 @@ const FixedNav = styled.div`
 `;
 
 const Menu = styled.div`
-  padding: 22px 28px;
+  padding: 17px 28px;
   display: flex;
   align-items: center;
   gap: 79px;

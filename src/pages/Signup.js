@@ -124,7 +124,7 @@ const SignupOne = (props) => {
             buttonText="중복확인"
             _name="id"
             label="아이디"
-            type="text"
+            type="id"
             placeholder="영소문자, 숫자를 포함한 5자리 이상"
             _onBlur={handleBlur}
             _onChange={handleChange}
@@ -142,7 +142,7 @@ const SignupOne = (props) => {
             buttonText="중복확인"
             _name="nickname"
             label="닉네임"
-            type="text"
+            type="id"
             placeholder="1자리 이상 7자리 이하"
             _onBlur={handleBlur}
             _onChange={handleChange}

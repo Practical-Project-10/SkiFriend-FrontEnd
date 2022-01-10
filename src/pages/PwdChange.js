@@ -103,6 +103,7 @@ const PwdChange = (props) => {
             <Input
               signup
               type="password"
+              autocomplete="new-password"
               label="새 비밀번호"
               placeholder="새 비밀번호 (영소문자, 숫자를 포함한 5자리 이상)"
               _name="newPwd"

@@ -35,13 +35,13 @@ const Login = (props) => {
     <React.Fragment>
       <Header>로그인</Header>
       <Grid phoneSize minHeight="calc( 100vh - 55px )">
-        <Grid height="73px" margin="69px 0 119px">
-          <Image src={logo} width='100%' height='100%'/>
+        <Grid width='100%' height="73px" padding='89px 0 168px'>
+          <Image src={logo} width='100%' height='73px'/>
         </Grid>
 
-        <Grid display='flex' direction='column' gap='300px'>
+        <Grid display='flex' direction='column' gap='314px'>
           <Grid display='flex' direction='column' gap='41px'>
-            <Input type="text" placeholder="아이디" ref={ldInput} label="아이디" />
+            <Input type="id" placeholder="아이디" ref={ldInput} label="아이디" />
             <Input
               type="password"
               placeholder="비밀번호"
