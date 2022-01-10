@@ -48,7 +48,7 @@ const PhoneAuth = (props) => {
           <Grid margin="0 0 41px">
             <Input
               dupButton
-              type="tel"
+              type="tel" //tel로 입력해야한다(모바일 사용위해) 숫자키보드가 나올수 있다.
               ref={phoneNumInput}
               _onClick={numSend}
               placeholder="'-'를 제외한 숫자를 입력해 주세요."
@@ -59,9 +59,10 @@ const PhoneAuth = (props) => {
           <Grid>
             <Input
               type="text"
-              autocomplete="one-time-code"
+              pattern="[0-9]"
+              inputMode="numeric"
+              autocomplete="one-time-code" //autocomplete one-time-code 문자가 오면 클릭했을 시 바로 입력이 된다. (모바일에 편리하다) html5기능
               ref={smsNumInput}
-              _onClick={nextStep}
               label="인증번호"
             />
           </Grid>
