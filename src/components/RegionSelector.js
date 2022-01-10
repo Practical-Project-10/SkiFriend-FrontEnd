@@ -1,50 +1,12 @@
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import "../elements/citySelection.css";
 import { CSSTransition } from "react-transition-group";
 import { Grid } from "../elements/index";
 //지역선택 셀렉박스 css 는 import 경로에 쓰여져 있습니다!
 const RegionSelector = () => {
-  //다음 메뉴로 넘겨주는 usestate
-  const [activeMenu, setActiveMenu] = useState("main");
-  //시군구 정하는 useState
-  const [city, setCity] = useState([]);
-  const [region, setRegion] = useState([]);
+  const [city, setCity] = React.useState();
 
-  function Navbar(props) {
-    return (
-      <nav>
-        {" "}
-        <ul className="navbar-nav">{props.children}</ul>
-      </nav>
-    );
-  }
-  function NavItem(props) {
-    const [open, setOpen] = useState(false);
-    return (
-      <li>
-        <select onClick={() => setOpen(!open)}>지역선택</select>
-        {open && props.children}
-      </li>
-    );
-  }
-
-  const calcHeight = (el) => {
-    const height = el.offsetHeight;
-  };
-
-  const DropdownItem = (props) => {
-    return (
-      <option
-        className="menu-item"
-        value={props.children}
-        onClick={(e) => {
-          props.goToMenu && setActiveMenu(props.goToMenu);
-        }}
-      >
-        {props.children}
-      </option>
-    );
-  };
+  const regionSelect = (e) => {};
 
   const city_name = [
     "서울",
@@ -60,7 +22,6 @@ const RegionSelector = () => {
     "경북",
     "전남",
     "전북",
-    "제주",
     "충남",
     "충북",
   ];
@@ -286,8 +247,7 @@ const RegionSelector = () => {
     "장수군",
     "진안군",
   ];
-  region_name[13] = ["서귀포시", "제주시", "남제주군", "북제주군"];
-  region_name[14] = [
+  region_name[13] = [
     "공주시",
     "논산시",
     "보령시",
@@ -304,7 +264,7 @@ const RegionSelector = () => {
     "태안군",
     "홍성군",
   ];
-  region_name[15] = [
+  region_name[14] = [
     "제천시",
     "청주시 상당구",
     "청주시 흥덕구",
@@ -320,74 +280,22 @@ const RegionSelector = () => {
   ];
 
   return (
-    <Grid width="120px">
-      <Navbar>
-        <Grid margin="0 5px">{city}</Grid>
-        <Grid>{region}</Grid>
-        <NavItem>
-          <Grid
-            className="dropdown"
-            // style={{ height: menuHeight }}
-            // ref={dropdownRef}
-          >
-            <CSSTransition
-              in={activeMenu === "main"}
-              timeout={500}
-              unmountOnExit
-              onEnter={calcHeight}
-            >
-              <Grid
-                _onClick={(e) => {
-                  setCity(e.target.value);
-                  console.log(e.target.value);
-                }}
-              >
-                {city_name.map((c, idx) => {
-                  return (
-                    <DropdownItem
-                      value={c}
-                      key={"cityName" + idx}
-                      goToMenu={"city" + idx}
-                    >
-                      {c}
-                    </DropdownItem>
-                  );
-                })}
-              </Grid>
-            </CSSTransition>
-            {city_name.map((c, idx) => {
-              return (
-                <CSSTransition
-                  in={activeMenu === "city" + idx}
-                  key={"cityName" + idx}
-                  timeout={500}
-                  classNames="menu-secondary"
-                  unmountOnExit
-                  onEnter={calcHeight}
-                >
-                  <Grid
-                    _onClick={(e) => {
-                      setRegion(e.target.value);
-                      console.log(e.target.value);
-                    }}
-                  >
-                    <DropdownItem value="" goToMenu="main">
-                      뒤로가기
-                    </DropdownItem>
-                    {region_name[idx].map((r, idx) => {
-                      return (
-                        <DropdownItem value={r} key={"region"}>
-                          {r}
-                        </DropdownItem>
-                      );
-                    })}
-                  </Grid>
-                </CSSTransition>
-              );
-            })}
-          </Grid>
-        </NavItem>
-      </Navbar>
+    <Grid is_flex width="144px" height="55px">
+      <select
+        name="startLocation"
+        style={{ width: "60px" }}
+        value={city}
+        onChange={regionSelect}
+      >
+        도시선택
+        {city_name.map((c, idx) => {
+          return (
+            <option value={c} key={"cityName" + idx}>
+              {c}
+            </option>
+          );
+        })}
+      </select>
     </Grid>
   );
 };

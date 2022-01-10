@@ -1,4 +1,4 @@
-body {
+/* body {
     margin: 0;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -26,18 +26,18 @@ body {
   /* Top Navigation Bar */
   
   /* <ul> */
-  .navbar-nav {
+  /* .navbar-nav {
     max-width: 100%;
     height: 100%;
     display: flex;
     justify-content: flex-end;
 
-  }
+  } */
   
   /* Dropdown Menu */
  
   
-  .menu-item {
+  /* .menu-item {
     height: 10px;
     display: flex;
     align-items: center;
@@ -52,10 +52,10 @@ body {
   
   .icon-right {
     margin-left: auto;
-  }
+  } */
   
   /* CSSTransition classes  */
-  .menu-primary-enter {
+  /* .menu-primary-enter {
     position: absolute;
     transform: translateX(-110%);
   }
@@ -83,4 +83,4 @@ body {
   .menu-secondary-exit-active {
     transform: translateX(110%);
     transition: all var(--speed) ease;
-  }
+  } */ 

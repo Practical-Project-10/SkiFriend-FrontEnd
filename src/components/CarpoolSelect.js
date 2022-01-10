@@ -7,6 +7,8 @@ import DateSelector from "../components/DateSelector";
 import Change from "../assets/carpoolWrite/change.svg";
 import Arrow from "../assets/carpoolWrite/arrow.svg";
 
+import RegionSelector from "./RegionSelector";
+
 const CarpoolSelect = (props) => {
   const [state, setState] = useState(false);
   const [reqSelect, setReqSelect] = useState(false);
@@ -42,7 +44,7 @@ const CarpoolSelect = (props) => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    console.log(e.target)
+    console.log(e.target);
     setForm({
       ...form,
       [name]: value,
@@ -134,6 +136,7 @@ const CarpoolSelect = (props) => {
               );
             })}
           </Select>
+          {/* <RegionSelector /> */}
           <Image src={Arrow} width="50px" height="10px" />
           {/* value속성이 고정값이 아니라 나는 에러임 */}
           <Label htmlFor="endLocation" width="144px">
@@ -189,7 +192,14 @@ const CarpoolSelect = (props) => {
               <Text size="12px" color="#6195CF">
                 시간
               </Text>
-              <input style={{width:'138px'}}  type='time' min="11:00" max="21:00" step="900" required/>
+              <input
+                style={{ width: "138px" }}
+                type="time"
+                min="11:00"
+                max="21:00"
+                step="900"
+                required
+              />
               <Input
                 blue
                 type="time"

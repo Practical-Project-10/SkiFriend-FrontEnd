@@ -39,14 +39,7 @@ const ProfileWrite = (props) => {
     phoneNum: user_profile.phoneNum,
     vacImg: null,
   });
-  const {
-    nickname,
-    gender,
-    ageRange,
-    career,
-    selfIntro,
-    phoneNum,
-  } = profile;
+  const { nickname, gender, ageRange, career, selfIntro, phoneNum } = profile;
 
   useEffect(() => {
     if (is_edit && user_profile.gender === null) {
@@ -161,13 +154,13 @@ const ProfileWrite = (props) => {
       .then((response) => {
         alert("정상적으로 프로필이 등록되었습니다.");
 
-        history.push('/mypage')
+        history.push("/mypage");
 
         dispatch(imageActions.setPreview(null));
         dispatch(profileActions.addProfile(response.data));
       })
       .catch((e) => {
-        window.alert('프로필을 다시 확인해 주세요!');
+        window.alert("프로필을 다시 확인해 주세요!");
       });
   };
 
@@ -184,10 +177,15 @@ const ProfileWrite = (props) => {
 
   return (
     <React.Fragment>
-      <Header goBack complete fixed _onClick={is_edit ? editProfile : addProfile}>
+      <Header
+        goBack
+        complete
+        fixed
+        _onClick={is_edit ? editProfile : addProfile}
+      >
         내 프로필
       </Header>
-      <Grid phoneSize position="relative" margin='70px 0 0'>
+      <Grid phoneSize position="relative" margin="70px 0 0">
         <Grid
           width="150px"
           height="182px"
@@ -240,11 +238,7 @@ const ProfileWrite = (props) => {
             {is_edit ? (
               <Grid width="100%">
                 <Text size="12px">성별</Text>
-                <Input
-                  name="gender"
-                  _value={gender}
-                  _disabled
-                ></Input>
+                <Input name="gender" _value={gender} _disabled></Input>
               </Grid>
             ) : (
               <Grid width="100%">
@@ -257,20 +251,19 @@ const ProfileWrite = (props) => {
               </Grid>
             )}
 
-
-            {is_edit ? 
+            {is_edit ? (
               <Grid width="100%">
                 <Text size="12px">나이</Text>
-                <Input
-                  name="gender"
-                  _value={ageRange}
-                  _disabled
-                ></Input>
+                <Input name="gender" _value={ageRange} _disabled></Input>
               </Grid>
-              : 
+            ) : (
               <Grid width="100%">
                 <Text size="12px">나이</Text>
-                <Select name="ageRange" value={ageRange} onChange={handleChange}>
+                <Select
+                  name="ageRange"
+                  value={ageRange}
+                  onChange={handleChange}
+                >
                   <option>선택</option>
                   <option value="10대">10대</option>
                   <option value="20대">20대</option>
@@ -278,7 +271,7 @@ const ProfileWrite = (props) => {
                   <option value="40대이상">40대 이상</option>
                 </Select>
               </Grid>
-            }
+            )}
 
             <Grid width="100%">
               <Text size="12px">스키 / 스노우보드 경력</Text>
@@ -327,6 +320,7 @@ const ProfileWrite = (props) => {
               </Button>
             </Grid>
           </Grid>
+
 
         </Grid>
 
