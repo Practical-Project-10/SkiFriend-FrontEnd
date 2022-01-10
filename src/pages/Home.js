@@ -19,10 +19,12 @@ import WellihilliPark_ from "../assets/skiImage/Wellihilli/Wellihilli1.png";
 import Konjiam from "../assets/skiInfo/kongiam_logo.png";
 import Konjiam_ from "../assets/skiImage/Konjiam/Konjiam1.png";
 import Banner from "../assets/mainPage/Home_banner.png";
-// 메인 페이지 기능 완성 후 map으로 바꾸기
+
 const Home = (props) => {
   const dispatch = useDispatch();
   const hotPosts = useSelector((state) => state.main.list);
+  const carpool_list = useSelector((state) => state.carpool.list);
+  console.log(carpool_list)
   console.log(hotPosts);
   const history = props.history;
   const skiResort = [

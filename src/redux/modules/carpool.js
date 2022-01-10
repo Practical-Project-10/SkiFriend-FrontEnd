@@ -9,7 +9,9 @@ const EDIT_CARPOOL = "EDIT_CARPOOL";
 const DELETE_CARPOOL = "DELETE_CARPOOL";
 const FILTER_CARPOOL = "FILTER_CARPOOL";
 const GET_MYCARPOOL = "GET_MYCARPOOL";
+const COMPLETE_CARPOOL = "COMPLETE_CARPOOL";
 const IMAGE_RESORT = "IMAGE_RESORT";
+const RESET_LIST = 'RESET_LIST';
 // const IS_LOADING = "IS_LOADING";
 // const IS_NEXT = "IS_NEXT";
 
@@ -27,9 +29,10 @@ const deleteCarpool = createAction(DELETE_CARPOOL, (postId) => ({ postId }));
 const getMyCarpool = createAction(GET_MYCARPOOL, (myCarpools) => ({
   myCarpools,
 }));
-
+const completeMycarpool = createAction(COMPLETE_CARPOOL, (postId, carpool) => ({postId, carpool}));
 const filterCarpool = createAction(FILTER_CARPOOL, (carpool) => ({ carpool }));
 const imageResort = createAction(IMAGE_RESORT, (url) => ({ url }));
+const resetList = createAction(RESET_LIST, () => ({}));
 // const isLoading = createAction(IS_LOADING, (state) => ({ state }));
 // const isNext = createAction(IS_NEXT, (state) => ({ state }));
 
@@ -98,8 +101,9 @@ const deleteCarpoolDB = (skiResort, postId) => {
 const completeCarpoolDB = (skiResort, postId) => {
   return async function (dispatch, getState, { history }) {
     try {
-      await apis.completeCarpool(postId);
-      dispatch(getCarpoolDB(skiResort));
+      const response = await apis.completeCarpool(postId);
+
+      response && dispatch(completeMycarpool(postId, response.data));
     } catch (err) {
       console.log(err);
     }
@@ -155,9 +159,7 @@ const initialState = {
     //   ]
     // },
   ],
-  
   filterList: [],
-  myList: [],
   page: 1,
   is_loading: false,
   is_next: false,
@@ -182,8 +184,8 @@ export default handleActions(
 
     [EDIT_CARPOOL]: (state, action) =>
       produce(state, (draft) => {
-        const idx = draft.list.findIndex(
-          (l) => l.postId === Number(action.payload.postId)
+        const idx = draft.list.findIndex((l) => 
+          l.postId === Number(action.payload.postId)
         );
         draft.list[idx] = { ...draft.list[idx], ...action.payload.carpool };
       }),
@@ -203,14 +205,27 @@ export default handleActions(
 
     [GET_MYCARPOOL]: (state, action) =>
       produce(state, (draft) => {
-        draft.myList = action.payload.myCarpools;
+        draft.list = action.payload.myCarpools;
       }),
     
+    [COMPLETE_CARPOOL]: (state, action) =>
+      produce(state, (draft) => {
+        const idx = draft.list.findIndex((l) => 
+          l.postId === Number(action.payload.postId)
+        );
+        draft.list[idx] = { ...draft.list[idx], ...action.payload.carpool}
+      }),
+
     [IMAGE_RESORT]: (state, action) =>
       produce(state, (draft) => {
         draft.resortImg = action.payload.url;
       }),
     
+    [RESET_LIST]: (state, action) =>
+      produce(state, (draft) => {
+        console.log('성공')
+        draft.list = [];
+      }),
     // [IS_LOADING]: (state, action) =>
     //   produce(state, (draft) => {
     //     draft.is_loading = action.payload.state;
@@ -229,6 +244,7 @@ const carpoolActions = {
   addCarpool,
   editCarpool,
   deleteCarpool,
+  resetList,
   getCarpoolDB,
   addCarpoolDB,
   editCarpoolDB,

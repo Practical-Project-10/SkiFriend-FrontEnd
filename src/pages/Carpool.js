@@ -6,7 +6,7 @@ import { carpoolActions } from "../redux/modules/carpool";
 import CarpoolMenuBar from "../components/CarpoolMenuBar";
 import Card from "../components/Card";
 import FloatButton from "../components/FloatButton";
-import InfinityScroll from "../components/InfinityScroll";
+// import InfinityScroll from "../components/InfinityScroll";
 import Header from "../components/Header";
 
 import { Grid, Image, Text } from "../elements/index";
@@ -27,6 +27,10 @@ const Carpool = (props) => {
   React.useEffect(() => {
     dispatch(carpoolActions.imageResortDB(skiResort));
     dispatch(carpoolActions.getCarpoolDB(skiResort)); //page
+
+    return(
+      dispatch(carpoolActions.resetList())
+    );
   }, []);
 
   const induceProfile = () => {
