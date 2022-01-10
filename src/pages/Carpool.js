@@ -19,7 +19,6 @@ const Carpool = (props, { location }) => {
   // const page = useSelector((state) => state.carpool.page);
   const is_loading = useSelector((state) => state.carpool.is_loading);
   const resortImg = useSelector((state) => state.carpool.resortImg);
-  console.log(resortImg);
   const is_login = localStorage.getItem("is_login");
   const is_profile = localStorage.getItem("is_profile");
   const skiResort = props.match.params.skiresort;
@@ -54,7 +53,15 @@ const Carpool = (props, { location }) => {
 
   return (
     <Grid>
-      <Header goBack>{skiResort}</Header>
+      <Header
+        goBack
+        push
+        _onClick={() => {
+          history.push("/");
+        }}
+      >
+        {skiResort}
+      </Header>
       <Grid bg="#FFF" minHeight="calc( 100vh - 124px )" margin="0 0 70px">
         <Grid width="100%" height="291px">
           <Image src={resortImg} size="cover" width="100%" height="100%" />

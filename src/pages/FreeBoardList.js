@@ -12,7 +12,6 @@ import Board from "../components/Board";
 import InfinityScroll from "../components/InfinityScroll";
 import Header from "../components/Header";
 
-import High from "../assets/skiImage/HighOne/HighOne3.png";
 // import Pagination from "@mui/material/Pagination";
 // import Stack from "@mui/material/Stack";
 
@@ -25,6 +24,7 @@ const FreeBoardList = () => {
   const is_loading = useSelector((state) => state.freeboard.is_loading);
   const resortImg = useSelector((state) => state.carpool.resortImg);
   const is_login = localStorage.getItem("nickname");
+
 
   // 게시글 작성 페이지 이동 판단
   const moveWritePage = () => {
@@ -75,11 +75,12 @@ const FreeBoardList = () => {
             {boardList.map((l) => {
               return (
                 <Grid
-                  cursor
+                  // cursor
                   key={l.postId}
-                  _onClick={() => {
-                    history.push(`/freeboarddetail/${skiresort}/${l.postId}`);
-                  }}
+                //   _onClick={() => {
+                //     history.push(`/freeboarddetail/${skiresort}/${l.postId}`);
+                //   }
+                // }
                 >
                   <Board skiresort={skiresort} {...l} />
                 </Grid>

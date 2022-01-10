@@ -9,16 +9,12 @@ import CommentList from "../components/CommentList";
 import Header from "../components/Header";
 import Modal from "../components/Modal";
 
-import styled from 'styled-components';
-import { Grid, Button, Text, Image } from "../elements/index";
-import heart from "../assets/freeBoard/heart.svg";
-import whiteHeart from "../assets/freeBoard/whiteHeart.svg";
-import fillHeart from "../assets/freeBoard/white_heart_fill.svg"
+import styled from "styled-components";
+import { Grid, Text, Image } from "../elements/index";
 
 //react icons
-import { AiOutlineHeart } from "react-icons/ai";
+import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import { BsChat } from "react-icons/bs";
-import { BsFillExclamationCircleFill } from "react-icons/bs";
 import { BiDotsHorizontalRounded } from "react-icons/bi";
 
 const FreeBoardDetail = ({ history }, props) => {
@@ -31,6 +27,17 @@ const FreeBoardDetail = ({ history }, props) => {
   const is_login = nickname ? true : false;
   //------useState관리-------
   const [showmodal, setShowModal] = useState();
+  const [heart, setHeart] = useState(true);
+  
+  //-------heart-------
+  const changeHeart = () => {
+    if (heart === false) {
+      return setHeart(true);
+    } else {
+      return setHeart(false);
+    }
+  };
+
   //-------Modal-------
   const closemodal = () => {
     setShowModal(false);
@@ -55,10 +62,15 @@ const FreeBoardDetail = ({ history }, props) => {
   //-------좋아요 변경---------
   const likeChange = () => {
     if (is_login) {
+      changeHeart();
       return dispatch(likeActions.addLikeDB(postId));
     } else {
-      window.alert("로그인한 회원만 가능합니다.");
-      return;
+      const ask = window.confirm(
+        "로그인한 회원만 가능합니다. 로그인 페이지로 이동하시겠습니까?"
+      );
+      if (ask) {
+        return history.push(`/login`);
+      }
     }
   };
 
@@ -68,13 +80,35 @@ const FreeBoardDetail = ({ history }, props) => {
 
   return (
     <React.Fragment>
-      <Header goBack push _onClick={()=>{history.push(`/freeboardlist/${skiresort}`)}}>자유게시글</Header>
+      <Header
+        goBack
+        push
+        _onClick={() => {
+          history.push(`/freeboardlist/${skiresort}`);
+        }}
+        heart={heart}
+      >
+        자유게시글
+      </Header>
       <Grid bg="#FFF" minHeight="calc( 100vh - 55px )">
-        <Grid phoneSize >
-          <Grid is_flex justify="space-between" padding='13px 0' borderB="1px solid #474D56">
-            <Grid is_flex >
-              <Text block size="14px">{postData.nickname}</Text>
-              <div style={{height: '13px',  margin: '0 12px', border: '1px solid #6195CF'}}></div>
+        <Grid phoneSize>
+          <Grid
+            is_flex
+            justify="space-between"
+            padding="13px 0"
+            borderB="1px solid #474D56"
+          >
+            <Grid is_flex>
+              <Text block size="14px">
+                {postData.nickname}
+              </Text>
+              <div
+                style={{
+                  height: "13px",
+                  margin: "0 12px",
+                  border: "1px solid #6195CF",
+                }}
+              ></div>
               <Text size="16px" bold margin="">
                 {postData.title}
               </Text>
@@ -94,30 +128,34 @@ const FreeBoardDetail = ({ history }, props) => {
               ) : null}
               {/* 게시글 수정 삭제 modal 시작 */}
               <div showmodal={showmodal} />
-              {showmodal
-              ? <Modal 
-                height='222px'
-                closeModal={closemodal}
-                edit={editPost}
-                delete={deletePost}
-              />
-              : null}
+              {showmodal ? (
+                <Modal
+                  height="222px"
+                  closeModal={closemodal}
+                  edit={editPost}
+                  delete={deletePost}
+                />
+              ) : null}
               {/* modal 끝 */}
             </Grid>
           </Grid>
 
           {/* 좋아요 댓글 시간 */}
-          <Grid padding='16px 0' is_flex justify="space-between">
+          <Grid padding="16px 0" is_flex justify="space-between">
             <Grid>
-              <Text size='12px'>{postData.createdAt}</Text>
+              <Text size="12px">{postData.createdAt}</Text>
             </Grid>
             <Grid is_flex>
               <Grid is_flex margin="0 11px 0 0">
-                <AiOutlineHeart size="15" color="#6195CF"/>
+                {heart === false ? (
+                  <AiOutlineHeart size="16" color="#6195CF" />
+                ) : (
+                  <AiFillHeart size="16" color="red" />
+                )}
                 <Text size="14px">{postData.likeCnt}</Text>
               </Grid>
               <Grid is_flex>
-                <BsChat size="15" color="#6195CF"/>
+                <BsChat size="15" color="#6195CF" />
                 <Text size="14px">{postData.commentCnt}</Text>
               </Grid>
             </Grid>
@@ -125,15 +163,26 @@ const FreeBoardDetail = ({ history }, props) => {
 
           {/* 사진 및 게시글 */}
           <Grid>
-            <Grid padding='16px 0'>
+            <Grid padding="16px 0">
               <Text>{postData.content}</Text>
             </Grid>
-            <Grid width='100%' height='380px'>
-              <Image width="100%" height="100%" size='contain' src={postData.image} />
+            <Grid width="100%" height="380px">
+              <Image
+                width="100%"
+                height="100%"
+                size="contain"
+                src={postData.image}
+              />
             </Grid>
             <Small onClick={likeChange}>
-              <Image src={whiteHeart} width='17px' height='20px'/>
-              <Text color='#FFF' size='12px'>공감</Text>
+              {heart === false ? (
+                <AiOutlineHeart size="16" color="#FFF" />
+              ) : (
+                <AiFillHeart size="16" color="red" />
+              )}
+              <Text color="#FFF" size="12px">
+                공감
+              </Text>
             </Small>
           </Grid>
         </Grid>
@@ -155,8 +204,7 @@ const Small = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  cursor: default;
+  cursor: pointer;
 `;
 
 export default FreeBoardDetail;
-

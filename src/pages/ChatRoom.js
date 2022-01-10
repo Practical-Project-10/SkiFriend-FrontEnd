@@ -91,27 +91,29 @@ const ChatRoom = () => {
 
   //엔터치면 메세지 보내지게 하기
   const onKeyPress = (e) => {
-    if (e.key === "Enter") {
+    if (e.key === "Enter" && message.replace(/\s|/gi, "").length !== 0) {
       sendMessage();
     }
   };
 
   //메세지 보내기
   const sendMessage = async () => {
-    const datas = {
-      type: "TALK",
-      roomId: roomId,
-      message: message,
-    };
-    await stomp.send("/pub/chat/message", token, JSON.stringify(datas));
-    //메세지 보내면 스크롤 자동내림
-    scrollRef.current.scrollIntoView({
-      behavior: "smooth",
-      block: "end",
-      inline: "start",
-    });
-    // dispatch(chatActions.sendChatDB(roomId, message));
-    setMessage("");
+    if (message.replace(/\s|/gi, "").length !== 0) {
+      const datas = {
+        type: "TALK",
+        roomId: roomId,
+        message: message,
+      };
+      await stomp.send("/pub/chat/message", token, JSON.stringify(datas));
+      //메세지 보내면 스크롤 자동내림
+      scrollRef.current.scrollIntoView({
+        behavior: "smooth",
+        block: "end",
+        inline: "start",
+      });
+      // dispatch(chatActions.sendChatDB(roomId, message));
+      setMessage("");
+    }
   };
 
   //전화번호 정보받기
@@ -155,24 +157,16 @@ const ChatRoom = () => {
           display="flex"
           direction="column"
         >
-          {/* 채팅이 들어갈 공간 */}
-//           <Grid phoneSize height="744px" overflow="scroll">
-//             <div ref={scrollRef}>
-
-          <Grid phoneSize height="802px" overflow="scroll">
-            <div style={{ padding: "30px 0" }} ref={scrollRef}>
-              
+          <Grid phoneSize height="622px" overflow="scroll">
+            <div style={{ padding: "70px 0" }} ref={scrollRef}>
               {/* 채팅말풍선 */}
-              {messageList.map((msg) => {
+              {messageList.map((msg, idx) => {
                 return <MessageBox chatInfo={msg} />;
               })}
             </div>
           </Grid>
           {/* 하단부 버튼들 */}
-//           <Grid height="170px" bg="#474D56">
-
-          <Grid height="120px" bg="#474D56">
-
+          <Grid height="100%" bg="#474D56">
             {/* <Grid justify="flex-end" borderB="1px solid #fff" padding="5px">
               <Grid
                 align="center"
@@ -189,12 +183,7 @@ const ChatRoom = () => {
             <Grid is_flex padding="20px 16px">
               <Input
                 free
-
-//                 autocomplete="off"
-//                 width="360px"
-
                 width="100%"
-
                 height="40px"
                 radius="40px"
                 autocomplete="off"
