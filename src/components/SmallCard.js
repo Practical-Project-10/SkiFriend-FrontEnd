@@ -7,10 +7,10 @@ import calendar from "../assets/carpoolList/calendar_icon.svg";
 import clock from "../assets/carpoolList/clock_icon.svg";
 
 const SmallCard = (props) => {
-  const {notLogin} = props;
+  console.log(props)
   const repuest = props.carpoolType === '카풀 요청'
 
-  if(notLogin) {
+  if(props.notLogin) {
     return (
       <Grid>
         <Text>내가 쓴 카풀</Text>
@@ -22,8 +22,7 @@ const SmallCard = (props) => {
   }
 
   return(
-    <CarpoolCard repuest={repuest}>
-      <Grid>
+    <CarpoolCard repuest={repuest} status={!props.status} >
         <Grid>
           <Text bold size='12px' color={repuest? '#7281D1': '#6195CF'}>{props.carpoolType}</Text>
         </Grid>
@@ -43,17 +42,27 @@ const SmallCard = (props) => {
             <Text size='12px'>{props.time}</Text>
           </Small>
         </Grid>
-      </Grid>
     </CarpoolCard>
   )
 }
 
 const CarpoolCard = styled.div`
-  width: 180px;
+  width: 185px;
   height: 152px;
-  padding: 12px 12px;
+  padding: 12px;
   background: ${(props) => (props.repuest ? "#D3DBEE" : "#D9E4EE")};
   border-radius: 15px;
+
+  &::after {
+    content: "";
+    width: ${(props) => (props.status ? "100%" : "")};
+    height: ${(props) => (props.status ? "100%" : "")};
+    border-radius: ${(props) => (props.status ? "15px" : "")};
+    background: ${(props) => (props.status ? "rgba(0,0,0,0.5)" : "")};
+    position: ${(props) => (props.status ? "absolute" : "")};
+    top: ${(props) => (props.status ? 0 : "")};
+    left: ${(props) => (props.status ? 0 : "")};
+  }
 `;
 
 const Location = styled.div`

@@ -182,11 +182,6 @@ const ProfileWrite = (props) => {
     }
   };
 
-  const logout = () => {
-    dispatch(userActions.logout());
-    history.replace("/");
-  };
-
   return (
     <React.Fragment>
       <Header goBack complete fixed _onClick={is_edit ? editProfile : addProfile}>
@@ -355,9 +350,6 @@ const ProfileWrite = (props) => {
         </Grid>
 
         <Grid display="flex" direction="column" gap="16px" padding='0 0 16px'>
-          <Button height="61px" _onClick={logout}>
-            로그아웃
-          </Button>
           {/* <Button
             height="61px"
             color="#474D56"

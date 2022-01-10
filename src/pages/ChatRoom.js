@@ -157,6 +157,7 @@ const ChatRoom = () => {
           display="flex"
           direction="column"
         >
+
           <Grid phoneSize height="622px" overflow="scroll">
             <div style={{ padding: "70px 0" }} ref={scrollRef}>
               {/* 채팅말풍선 */}
@@ -166,6 +167,7 @@ const ChatRoom = () => {
             </div>
           </Grid>
           {/* 하단부 버튼들 */}
+
           <Grid height="100%" bg="#474D56">
             {/* <Grid justify="flex-end" borderB="1px solid #fff" padding="5px">
               <Grid
