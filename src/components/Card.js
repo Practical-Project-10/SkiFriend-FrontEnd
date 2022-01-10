@@ -88,7 +88,7 @@ const Card = (props) => {
           <Grid>
             <Text bold size='12px' color={repuest? '#7281D1': '#6195CF'}>{props.carpoolType}</Text>
           </Grid>
-          <Text bold size='16px'>{props.title}</Text>
+          <Text block bold width='130px' size='16px'>{props.title}</Text>
           <Posts width='145px' height='30px' margin='7px 0'>
             <Text bold size='12px'>{props.startLocation}</Text>
             <Image src={arrow} width='50px' height='10px'/>

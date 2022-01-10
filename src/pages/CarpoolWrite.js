@@ -89,7 +89,7 @@ const CarpoolWrite = (props) => {
           <Input
             blue
             label="제목"
-            _maxLength="15"
+            _maxLength="16"
             _name="title"
             _value={title}
             _onChange={handleChange}
@@ -100,6 +100,7 @@ const CarpoolWrite = (props) => {
           <Input
             blue
             type="number"
+            _maxLength="5"
             label="가격"
             _name="price"
             _value={price}
@@ -131,7 +132,7 @@ const CarpoolWrite = (props) => {
           <Input
             blue
             label="주의사항"
-            _maxLength="25"
+            _maxLength="45"
             _name="notice"
             _value={notice}
             _onChange={handleChange}

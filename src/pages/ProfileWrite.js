@@ -22,7 +22,7 @@ const ProfileWrite = (props) => {
   const pfImgFile = useRef();
   const vImgFile = useRef();
 
-  const emptyFile = new File([""], "empty");
+  // const emptyFile = new File([""], "empty");
   const deleteFile = new File(["delete"], "delete");
 
   const username = props.match.params.username;
@@ -321,24 +321,10 @@ const ProfileWrite = (props) => {
             </Grid>
           </Grid>
 
-          {/* <Grid width="100%" margin="0 0 63px">
-            <VacPic htmlFor="vac">
-              <div className="vac">
-                <Image src={shield} width="19px" height="22px" />
-                백신 인증 사진 추가하기
-              </div>
-            </VacPic>
-            <input
-              id="vac"
-              type="file"
-              onChange={selectFile}
-              ref={vImgFile}
-              style={{ display: "none" }}
-            />
-          </Grid> */}
+
         </Grid>
 
-        <Grid display="flex" direction="column" gap="16px" padding="0 0 16px">
+        <Grid display="flex" direction="column" gap="16px" padding='0 0 16px'>
           <Button
             height="61px"
             color="#474D56"
