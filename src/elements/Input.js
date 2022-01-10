@@ -9,7 +9,11 @@ const Input = forwardRef((props, ref) => {
     placeholder,
     _onChange,
     _onKeyPress,
+    autocomplete,
+    contentType,
     type,
+    pattern,
+    inputMode,
     _value,
     more4,
     dupButton,
@@ -114,6 +118,7 @@ const Input = forwardRef((props, ref) => {
           onBlur={_onBlur}
           onChange={_onChange}
           onClick={_onClick}
+          autoComplete={autocomplete}
           defaultValue={_defaultValue}
           value={_value}
           name={_name}
@@ -155,6 +160,10 @@ const Input = forwardRef((props, ref) => {
         {...style}
         ref={ref}
         name={_name}
+        textContentType={contentType}
+        autoComplete={autocomplete}
+        pattern={pattern}
+        inputMode={inputMode}
         defaultValue={_defaultValue}
         value={_value}
         onBlur={_onBlur}

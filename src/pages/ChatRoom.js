@@ -20,7 +20,6 @@ const ChatRoom = () => {
   const roomId = params.roomId;
   const roomName = params.roomName;
   const scrollRef = useRef();
-
   //토큰
   const accessToken = document.cookie.split("=")[1];
   const token = { Authorization: `${accessToken}` };
@@ -35,7 +34,6 @@ const ChatRoom = () => {
   const messageDatas = (recv) => {
     setMessageList((prev) => [...prev, recv]);
   };
-  console.log(message);
   //메세지 내용
   const messageChat = (e) => {
     const content = e.target.value;
@@ -60,7 +58,6 @@ const ChatRoom = () => {
           (message) => {
             const responseData = JSON.parse(message.body);
             messageDatas(responseData);
-            // dispatch(chatActions.addChat(responseData));
           },
           token
         );
@@ -153,15 +150,15 @@ const ChatRoom = () => {
         </Header>
         {/* 리덕스에서 데이터 불러와서 sender 넣으면 됩니다. */}
         <Grid
-          margin="54px 0 70px 0"
+          margin="54px 0 0 0"
           minHeight="calc( 100vh - 124px )"
           display="flex"
           direction="column"
           justify="space-between"
         >
           {/* 채팅이 들어갈 공간 */}
-          <Grid phoneSize height="518px" overflow="scroll">
-            <div ref={scrollRef}>
+          <Grid phoneSize height="802px" overflow="scroll">
+            <div style={{ padding: "30px 0" }} ref={scrollRef}>
               {/* 채팅말풍선 */}
               {messageList.map((msg) => {
                 return <MessageBox chatInfo={msg} />;
@@ -169,7 +166,7 @@ const ChatRoom = () => {
             </div>
           </Grid>
           {/* 하단부 버튼들 */}
-          <Grid height="220px" bg="#474D56">
+          <Grid height="120px" bg="#474D56">
             {/* <Grid justify="flex-end" borderB="1px solid #fff" padding="5px">
               <Grid
                 align="center"
@@ -186,9 +183,10 @@ const ChatRoom = () => {
             <Grid is_flex padding="20px 16px">
               <Input
                 free
-                width="360px"
+                width="100%"
                 height="40px"
                 radius="40px"
+                autocomplete="off"
                 _value={message}
                 _onKeyPress={onKeyPress}
                 _onChange={messageChat}
