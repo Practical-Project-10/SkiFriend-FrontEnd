@@ -10,7 +10,6 @@ import Header from "../components/Header";
 import styled from "styled-components";
 import { Grid, Image, Text, Input, Button } from "../elements/index";
 import defaultIMG from "../assets/myPage/profilePicture.png";
-import shield from "../assets/myPage/profile_shield.svg";
 import axios from "axios";
 
 const ProfileWrite = (props) => {
@@ -20,7 +19,7 @@ const ProfileWrite = (props) => {
   const user_profile = useSelector((state) => state.profile.user_profile);
 
   const pfImgFile = useRef();
-  const vImgFile = useRef();
+  // const vImgFile = useRef();
 
   // const emptyFile = new File([""], "empty");
   const deleteFile = new File(["delete"], "delete");
@@ -80,12 +79,13 @@ const ProfileWrite = (props) => {
   const selectFile = () => {
     const reader = new FileReader();
     const profileImgFile = pfImgFile.current.files[0];
-    const vacImgFile = vImgFile.current.files[0];
+    // const vacImgFile = vImgFile.current.files[0];
 
     if (profileImgFile) {
       reader.readAsDataURL(profileImgFile);
 
       reader.onloadend = () => {
+        console.log('url', reader.result)
         dispatch(imageActions.setPreview(reader.result));
       };
 
@@ -95,16 +95,16 @@ const ProfileWrite = (props) => {
       });
     }
 
-    if (vacImgFile) {
-      setProfile({
-        ...profile,
-        vacImg: vacImgFile,
-      });
-      // if(selectedFild) {
-      //   console.log('vasine')
-      //   setVacSelect(true);
-      // }
-    }
+    // if (vacImgFile) {
+    //   setProfile({
+    //     ...profile,
+    //     vacImg: vacImgFile,
+    //   });
+    //   // if(selectedFild) {
+    //   //   console.log('vasine')
+    //   //   setVacSelect(true);
+    //   // }
+    // }
   };
 
   const deleteImg = (e) => {

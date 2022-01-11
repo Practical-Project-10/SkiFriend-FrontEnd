@@ -10,6 +10,7 @@ export const addLikeDB =
       .then((res) => {
         console.log(`좋아요 성공`);
         dispatch(boardActions.getOneBoardDB(postId))
+        console.log(res)
       })
       .catch((error) => {
         console.log(`좋아요 변경 실패${error}`);

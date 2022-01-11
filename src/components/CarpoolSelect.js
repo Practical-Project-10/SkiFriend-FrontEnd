@@ -10,6 +10,7 @@ import Arrow from "../assets/carpoolWrite/arrow.svg";
 import RegionSelector from "./RegionSelector";
 
 const CarpoolSelect = (props) => {
+  const { memberNum, startLocation, endLocation, date, time, carpoolType } = props.form;
   const [state, setState] = useState(false);
   const [reqSelect, setReqSelect] = useState(false);
   const [ofSelect, setOfSelect] = useState(false);
@@ -17,82 +18,50 @@ const CarpoolSelect = (props) => {
   const params = useParams();
   const skiResort = params.skiresort;
   const startLoca = useRef();
+  const subLoca = useRef();
   const endLoca = useRef();
-
-  const city_name = [
-    "서울",
-    "부산",
-    "대구",
-    "인천",
-    "광주",
-    "대전",
-    "울산",
-    "강원",
-  ];
-
-  const [form, setForm] = useState({
-    carpoolType: "",
-    memberNum: "",
-    startLocation: "",
-    endLocation: skiResort,
-    date: "",
-    time: "",
-    status: false,
-  });
-
-  const { memberNum, startLocation, endLocation, date, time } = form;
+  console.log(subLoca.current);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    console.log(e.target);
-    setForm({
-      ...form,
-      [name]: value,
-    });
+
+
     props.bringForm(name, value);
   };
-  console.log(form);
 
   const hiddenChange = (e) => {
     const { name, value } = e.target;
+
 
     if (noneSelect) {
       e.target.value = setNoneSelect(false);
     } else {
       e.target.value = setNoneSelect(true);
     }
-    setForm({
-      ...form,
-      [name]: value,
-    });
+
     props.bringForm(name, value);
   };
 
   // 출발 도착 지역 바꾸기
-  const locationChange = () => {
+  const locationChange = (e) => {
+    const _startLoca = startLoca.current.value;
+    const _subLoca = subLoca.current.value;
+    const _endLoca = endLoca.current.value;
+
+    const _startLocation = `${_startLoca} ${_subLoca}`;
+
+    console.log('select', state)
     if (!state) {
       setState(true);
-      setForm({
-        ...form,
-        startLocation: skiResort,
-        endLocation: startLoca.current.value,
-      });
+      props.location(_startLocation);
     } else {
       setState(false);
-      setForm({
-        ...form,
-        startLocation: endLoca.current.value,
-        endLocation: skiResort,
-      });
+      props.location(_endLoca);
     }
   };
-  console.log(form);
+
   // 날짜 선택
   const selectDate = (date) => {
-    setForm({
-      ...form,
-      date,
-    });
     props.bringDate(date);
   };
 
@@ -118,24 +87,7 @@ const CarpoolSelect = (props) => {
           margin="0 0 32px 0"
           direction={state ? "row-reverse" : ""}
         >
-          <Select
-            name={state ? "endLocation" : "startLocation"}
-            value={state ? endLocation : startLocation}
-            ref={startLoca}
-            onChange={handleChange}
-          >
-            <option value="" disabled>
-              지역선택
-            </option>
-            ;
-            {city_name.map((city, idx) => {
-              return (
-                <React.Fragment key={"bigCity" + idx}>
-                  <option value={city}>{city}</option>;
-                </React.Fragment>
-              );
-            })}
-          </Select>
+          <RegionSelector ref={startLoca} subLoca={subLoca} _onClick={handleChange}/>
           {/* <RegionSelector /> */}
           <Image src={Arrow} width="50px" height="10px" />
           {/* value속성이 고정값이 아니라 나는 에러임 */}
@@ -192,14 +144,6 @@ const CarpoolSelect = (props) => {
               <Text size="12px" color="#6195CF">
                 시간
               </Text>
-              <input
-                style={{ width: "138px" }}
-                type="time"
-                min="11:00"
-                max="21:00"
-                step="900"
-                required
-              />
               <Input
                 blue
                 type="time"
@@ -219,7 +163,7 @@ const CarpoolSelect = (props) => {
             <Grid width="50%">
               <Label
                 htmlFor="request"
-                select={reqSelect}
+                select={carpoolType === '카풀 요청'? true: reqSelect}
                 width="100%"
                 onClick={() => {
                   setReqSelect(true);
@@ -239,7 +183,7 @@ const CarpoolSelect = (props) => {
             <Grid width="50%">
               <Label
                 htmlFor="offer"
-                select={ofSelect}
+                select={carpoolType === '카풀 제공'? true: ofSelect}
                 width="100%"
                 onClick={() => {
                   setOfSelect(true);
