@@ -23,20 +23,14 @@ const FreeBoardDetail = ({ history }, props) => {
   const postId = params.postId;
   const skiresort = params.skiresort;
   const postData = useSelector((state) => state.freeboard.detail);
+  const likeData = postData.likesDtoList;
   const nickname = localStorage.getItem("nickname");
+  const login_userId = localStorage.getItem("userId");
   const is_login = nickname ? true : false;
+
   //------useState관리-------
   const [showmodal, setShowModal] = useState();
-  const [heart, setHeart] = useState(true);
-  console.log(postData);
-  //-------heart-------
-  const changeHeart = () => {
-    if (heart === false) {
-      return setHeart(true);
-    } else {
-      return setHeart(false);
-    }
-  };
+  const [heart, setHeart] = useState(false);
 
   //-------Modal-------
   const closemodal = () => {
@@ -62,8 +56,7 @@ const FreeBoardDetail = ({ history }, props) => {
   //-------좋아요 변경---------
   const likeChange = () => {
     if (is_login) {
-      changeHeart();
-      return dispatch(likeActions.addLikeDB(postId));
+      dispatch(likeActions.addLikeDB(postId));
     } else {
       const ask = window.confirm(
         "로그인한 회원만 가능합니다. 로그인 페이지로 이동하시겠습니까?"
@@ -76,8 +69,18 @@ const FreeBoardDetail = ({ history }, props) => {
 
   React.useEffect(() => {
     dispatch(boardActions.getOneBoardDB(postId));
+    if (is_login) {
+      for (let i = 0; i < likeData.length; i++) {
+        if (likeData[i].userId === parseInt(login_userId)) {
+          return setHeart(true);
+        } else {
+          return setHeart(false);
+        }
+      }
+    }
   }, []);
 
+  console.log(heart);
   return (
     <React.Fragment>
       <Header
@@ -147,11 +150,12 @@ const FreeBoardDetail = ({ history }, props) => {
             </Grid>
             <Grid is_flex>
               <Grid is_flex margin="0 11px 0 0">
-                {heart === false ? (
-                  <AiOutlineHeart size="16" color="#6195CF" />
-                ) : (
+                {heart === true ? (
                   <AiFillHeart size="16" color="red" />
+                ) : (
+                  <AiOutlineHeart size="16" color="#6195CF" />
                 )}
+
                 <Text size="14px">{postData.likeCnt}</Text>
               </Grid>
               <Grid is_flex>
@@ -175,11 +179,18 @@ const FreeBoardDetail = ({ history }, props) => {
               />
             </Grid>
             <Small onClick={likeChange}>
-              {heart === false ? (
-                <AiOutlineHeart size="16" color="#FFF" />
-              ) : (
-                <AiFillHeart size="16" color="red" />
-              )}
+              {likeData &&
+                likeData.map((c) => {
+                  return (
+                    <React.Fragment key={c.userId}>
+                      {login_userId && heart === true ? (
+                        <AiFillHeart size="16" color="red" />
+                      ) : (
+                        <AiOutlineHeart size="16" color="#FFF" />
+                      )}
+                    </React.Fragment>
+                  );
+                })}
               <Text color="#FFF" size="12px">
                 공감
               </Text>

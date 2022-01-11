@@ -8,6 +8,7 @@ import SockJS from "sockjs-client";
 import Stomp from "stompjs";
 import MessageBox from "../components/MessageBox";
 import Header from "../components/Header";
+import ChatRoomCard from "../components/ChatRoomCard";
 //icons
 import { Grid, Input } from "../elements/index";
 import sendBtn from "../assets/chat/send.png";
@@ -16,10 +17,12 @@ const ChatRoom = () => {
   // const dispatch = useDispatch;
   // const datas = useSelector((state) => state.chat.chatList);
   // const phoneInfo = useSelector((state) => state.chat.phoneInfo);
+  // const roomInfo = useSelector((state) => state.chat.roomInfo);
   const params = useParams();
   const roomId = params.roomId;
   const roomName = params.roomName;
   const scrollRef = useRef();
+
   //토큰
   const accessToken = document.cookie.split("=")[1];
   const token = { Authorization: `${accessToken}` };
@@ -31,6 +34,7 @@ const ChatRoom = () => {
   // useState관리
   const [message, setMessage] = useState("");
   const [messageList, setMessageList] = useState([]);
+  const [roomInfo, setRoomInfo] = useState([]);
   const messageDatas = (recv) => {
     setMessageList((prev) => [...prev, recv]);
   };
@@ -143,6 +147,20 @@ const ChatRoom = () => {
     // dispatch(chatActions.sendChatDB(roomId, message));
   };
 
+  //방정보 가져오기
+  React.useEffect(() => {
+    axios
+      .get(`http://3.34.52.2:8080/chat/room/${roomId}/carpool`, {
+        headers: token,
+      })
+      .then((res) => {
+        console.log("불러오기 성공");
+        setRoomInfo(res.data);
+        // dispatch(chatActions.getRoomInfo(res.data));
+      });
+    // dispatch(chatActions.getRoomInfoDB(roomId));
+  }, []);
+  console.log(roomInfo);
   return (
     <React.Fragment>
       {/* 상단부  */}
@@ -150,19 +168,18 @@ const ChatRoom = () => {
         <Header goBack phone fixed _onClick={getPhoneNum}>
           {roomName}
         </Header>
-        {/* 리덕스에서 데이터 불러와서 sender 넣으면 됩니다. */}
         <Grid
           margin="54px 0 0 0"
           minHeight="calc( 100vh - 124px )"
           display="flex"
           direction="column"
         >
-
+          <ChatRoomCard roomInfo={roomInfo} />
           <Grid phoneSize height="622px" overflow="scroll">
-            <div style={{ padding: "70px 0" }} ref={scrollRef}>
+            <div style={{ padding: "0 0 70px 0" }} ref={scrollRef}>
               {/* 채팅말풍선 */}
               {messageList.map((msg, idx) => {
-                return <MessageBox chatInfo={msg} />;
+                return <MessageBox key={"message" + idx} chatInfo={msg} />;
               })}
             </div>
           </Grid>
