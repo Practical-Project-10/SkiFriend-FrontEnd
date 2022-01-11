@@ -93,6 +93,7 @@ const FreeBoardDetail = ({ history }, props) => {
 
   React.useEffect(() => {
     dispatch(boardActions.getOneBoardDB(postId));
+
   }, []);
 
   return (
