@@ -1,5 +1,5 @@
 import { apis } from "../../shared/apis";
-import { boardCreators as boardActions } from './freeboard';
+import { boardCreators as boardActions } from "./freeboard";
 
 // thunk
 export const addLikeDB =
@@ -8,9 +8,7 @@ export const addLikeDB =
     await apis
       .changeLike(postId)
       .then((res) => {
-        console.log(`좋아요 성공`);
-        dispatch(boardActions.getOneBoardDB(postId))
-        console.log(res)
+        dispatch(boardActions.getOneBoardDB(postId));
       })
       .catch((error) => {
         console.log(`좋아요 변경 실패${error}`);
@@ -24,7 +22,7 @@ export const addListLikeDB =
       .changeLike(postId)
       .then((res) => {
         console.log(`좋아요 성공`);
-        dispatch(boardActions.loadBoardDB(skiresort))
+        dispatch(boardActions.loadBoardDB(skiresort));
       })
       .catch((error) => {
         console.log(`좋아요 변경 실패${error}`);

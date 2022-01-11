@@ -165,4 +165,6 @@ export const apis = {
   chatShowProfile: (longRoomId) => api.get(`/user/introduction/${longRoomId}`),
 
   chatPhoneNum: () => api.get(`/user/info/phoneNum`),
+
+  chatRoomInfo: (roomId) => api.get(`/chat/room/${roomId}/carpool`),
 };

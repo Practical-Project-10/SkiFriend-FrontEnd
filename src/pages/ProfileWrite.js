@@ -100,10 +100,10 @@ const ProfileWrite = (props) => {
     //     ...profile,
     //     vacImg: vacImgFile,
     //   });
-    //   // if(selectedFild) {
-    //   //   console.log('vasine')
-    //   //   setVacSelect(true);
-    //   // }
+    //   if(selectedFild) {
+    //     console.log('vasine')
+    //     setVacSelect(true);
+    //   }
     // }
   };
 
@@ -320,11 +320,9 @@ const ProfileWrite = (props) => {
               </Button>
             </Grid>
           </Grid>
-
-
         </Grid>
 
-        <Grid display="flex" direction="column" gap="16px" padding='0 0 16px'>
+        <Grid display="flex" direction="column" gap="16px" padding="0 0 16px">
           <Button
             height="61px"
             color="#474D56"

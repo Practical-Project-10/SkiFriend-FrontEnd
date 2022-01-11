@@ -25,7 +25,6 @@ const FreeBoardList = () => {
   const resortImg = useSelector((state) => state.carpool.resortImg);
   const is_login = localStorage.getItem("nickname");
 
-
   // 게시글 작성 페이지 이동 판단
   const moveWritePage = () => {
     if (is_login) {
@@ -77,10 +76,10 @@ const FreeBoardList = () => {
                 <Grid
                   // cursor
                   key={l.postId}
-                //   _onClick={() => {
-                //     history.push(`/freeboarddetail/${skiresort}/${l.postId}`);
-                //   }
-                // }
+                  //   _onClick={() => {
+                  //     history.push(`/freeboarddetail/${skiresort}/${l.postId}`);
+                  //   }
+                  // }
                 >
                   <Board skiresort={skiresort} {...l} />
                 </Grid>
