@@ -26,7 +26,7 @@ const Float = styled.div`
   background-size: 25px;
 
   &:hover {
-    opacity: 0.8;
+    opacity: 0.9;
     cursor: pointer;
   }
 `;

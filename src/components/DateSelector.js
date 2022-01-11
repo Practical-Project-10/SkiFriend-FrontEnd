@@ -34,7 +34,7 @@ const DateSelector = (props) => {
           sendDate(date);
         }}
         minDate={new Date()}
-        placeholderText="날짜를 선택하세요."
+        placeholderText={props._value? props._value: "날짜를 선택하세요."}
       />
     </React.Fragment>
   );

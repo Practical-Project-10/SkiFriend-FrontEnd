@@ -10,7 +10,6 @@ import Header from "../components/Header";
 import styled from "styled-components";
 import { Grid, Image, Text, Input, Button } from "../elements/index";
 import defaultIMG from "../assets/myPage/profilePicture.png";
-import shield from "../assets/myPage/profile_shield.svg";
 import axios from "axios";
 
 const ProfileWrite = (props) => {
@@ -86,6 +85,7 @@ const ProfileWrite = (props) => {
       reader.readAsDataURL(profileImgFile);
 
       reader.onloadend = () => {
+        console.log('url', reader.result)
         dispatch(imageActions.setPreview(reader.result));
       };
 

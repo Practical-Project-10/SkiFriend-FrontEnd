@@ -22,14 +22,13 @@ export const apis = {
       password: pwd,
     }),
 
-  signup: (userInfo) => {
+  signup: (userInfo) => 
     api.post("/user/signup", {
       username: userInfo.username,
       password: userInfo.password,
       phoneNum: userInfo.phoneNum,
       nickname: userInfo.nickname,
-    });
-  },
+    }),
 
   idCheck: (id) => api.post("/user/signup/idcheck", { username: id }),
 

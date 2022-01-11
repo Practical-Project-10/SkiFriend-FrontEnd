@@ -280,7 +280,7 @@ const CarpoolCard = styled.div`
 `;
 
 const Posts = styled.div`
-  width: ${props => props.width? props.width: '160px'};
+  width: ${props => props.width? props.width: '275px'};
   height: 30px;
   margin: ${props => props.margin? props.margin: '10px 0 12px'};
   background: #FFF;
@@ -334,16 +334,17 @@ const SubMenu = styled.div`
 
 const NotLogin = styled.div`
   width: 185px;
-  height: 152px;
+  height: 120px;
+  margin: 12px 0;
   padding: 12px;
   background: #EDEDEE;
   border-radius: 10px;
   color: #474D56;
   font-weight: 700;
-  font-size: 16px;
+  font-size: 14px;
   opacity: 0.5;
   text-align: center;
-  line-height: 124px;
+  line-height: 90px;
 `
 
 export default Card;

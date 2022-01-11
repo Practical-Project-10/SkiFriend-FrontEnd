@@ -35,6 +35,7 @@ const FreeBoardWrite = () => {
   const [content, setContet] = useState(postData ? postData.content : "");
   const [uploadURL, setUploadURL] = useState([]);
   const [uploadFiles, setUploadFiles] = useState(null);
+  
   // 제목
   const postTitle = (e) => {
     const currentTitle = e.target.value;

@@ -11,8 +11,8 @@ import Header from "../components/Header";
 const CarpoolWrite = (props) => {
   const dispatch = useDispatch();
   const carpool_list = useSelector((state) => state.carpool.list);
-
   const skiResort = props.match.params.skiresort;
+  const [state, setState] = React.useState(false);
 
   //수정페이지
   const postId = props.match.params.postId;
@@ -53,10 +53,32 @@ const CarpoolWrite = (props) => {
   };
 
   const bringForm = (name, value) => {
+
     setForm({
       ...form,
       [name]: value,
     });
+  };
+
+  // 출발 도착 지역 바꾸기
+  const location = (startLoca) => {
+    console.log(startLoca)
+
+    if (!state) {
+      setState(true);
+      setForm({
+        ...form,
+        startLocation: skiResort,
+        endLocation: startLoca,
+      });
+    } else {
+      setState(false);
+      setForm({
+        ...form,
+        startLocation: startLoca,
+        endLocation: skiResort,
+      });
+    }
   };
 
   const addCarpool = () => {
@@ -75,7 +97,7 @@ const CarpoolWrite = (props) => {
     <React.Fragment>
       <Header goBack>카풀 {is_edit ? "수정" : "작성"} 페이지</Header>
       <Grid bg="#FFF" minHeight="calc( 100vh - 124px )">
-        <CarpoolSelect bringForm={bringForm} bringDate={bringDate} />
+        <CarpoolSelect form={form} bringForm={bringForm} bringDate={bringDate} location={location}/>
 
         <div style={{ border: "5px solid #edeeef" }}></div>
 
