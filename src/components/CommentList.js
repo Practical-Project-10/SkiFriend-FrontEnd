@@ -26,18 +26,25 @@ const CommentList = () => {
   //------댓글 입력한 내용 가져오기------
   const postComment = (e) => {
     const currentComment = e.target.value;
-    console.log(currentComment);
     setCommentValue(currentComment);
   };
 
+  //-----댓글 수정 내용 가져오기----------
   const postEditComment = (e) => {
     const currentComment = e.target.value;
     setCommentEditValue(currentComment);
   };
 
+  //엔터치면 메세지 보내지게 하기
+  const onKeyPress = (e) => {
+    if (e.key === "Enter" && commentValue.replace(/\s|/gi, "").length !== 0) {
+      addCommentBtn();
+    }
+  };
+
   //-------댓글 작성-------
   const addCommentBtn = () => {
-    if (is_login) {
+    if (is_login && commentValue.replace(/\s|/gi, "").length !== 0) {
       dispatch(commentActions.addCommentDB(postId, commentValue));
       return setCommentValue("");
     } else {
@@ -183,6 +190,7 @@ const CommentList = () => {
             placeholder="댓글작성"
             value={commentValue}
             autoComplete="off"
+            onKeyPress={onKeyPress}
             onChange={postComment}
           />
           <Send onClick={addCommentBtn}>

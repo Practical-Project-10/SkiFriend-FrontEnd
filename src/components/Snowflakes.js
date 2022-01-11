@@ -12,7 +12,7 @@ const Snowflakes = () => {
           height: "100%",
         }}
         snowflakeFactory={(index) => {
-          const size = index / 50; // 50 is the number of snowflakes.
+          const size = index / 30;
           const w = 5 + 10 * size + "px";
           return (
             <Snowflake
