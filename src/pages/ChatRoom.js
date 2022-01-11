@@ -169,13 +169,13 @@ const ChatRoom = () => {
           {roomName}
         </Header>
         <Grid
-          margin="54px 0 0 0"
+          margin="1em 0 0 0"
           minHeight="calc( 100vh - 124px )"
           display="flex"
           direction="column"
         >
           <ChatRoomCard roomInfo={roomInfo} />
-          <Grid phoneSize height="622px" overflow="scroll">
+          <Grid phoneSize height="532px" overflow="scroll">
             <div style={{ padding: "0 0 70px 0" }} ref={scrollRef}>
               {/* 채팅말풍선 */}
               {messageList.map((msg, idx) => {

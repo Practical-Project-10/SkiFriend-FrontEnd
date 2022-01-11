@@ -73,14 +73,7 @@ const FreeBoardList = () => {
           >
             {boardList.map((l) => {
               return (
-                <Grid
-                  // cursor
-                  key={l.postId}
-                  //   _onClick={() => {
-                  //     history.push(`/freeboarddetail/${skiresort}/${l.postId}`);
-                  //   }
-                  // }
-                >
+                <Grid key={l.postId}>
                   <Board skiresort={skiresort} {...l} />
                 </Grid>
               );

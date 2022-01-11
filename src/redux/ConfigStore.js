@@ -11,6 +11,7 @@ import Profile from "./modules/profile";
 import Image from "./modules/image";
 import Main from "./modules/main";
 import Chat from "./modules/chat";
+import Like from "./modules/like";
 
 //---- history----
 export const history = createBrowserHistory();
@@ -24,6 +25,7 @@ const rootReducer = combineReducers({
   image: Image,
   main: Main,
   chat: Chat,
+  like: Like,
   router: connectRouter(history),
 });
 

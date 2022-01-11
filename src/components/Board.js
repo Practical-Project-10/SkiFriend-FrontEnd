@@ -1,40 +1,13 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { likeCreators as likeActions } from "../redux/modules/like";
+import React from "react";
 import { history } from "../redux/ConfigStore";
 
 import { Grid, Text, Image } from "../elements";
 import Comment from "../assets/freeBoard/comment.svg";
+
 // react icons
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
+
 const Board = (props) => {
-  const dispatch = useDispatch();
-  const [heart, setHeart] = useState(true);
-  const is_login = localStorage.getItem("nickname");
-
-  //-------heart-------
-  const changeHeart = () => {
-    if (heart === false) {
-      return setHeart(true);
-    } else {
-      return setHeart(false);
-    }
-  };
-
-  //-------좋아요 변경---------
-  const likeChange = (postId) => {
-    if (is_login) {
-      // changeHeart();
-      return dispatch(likeActions.addListLikeDB(postId, props.skiresort));
-    } else {
-      const ask = window.confirm(
-        "로그인한 회원만 가능합니다. 로그인 페이지로 이동하시겠습니까?"
-      );
-      if (ask) {
-        return history.push(`/login`);
-      }
-    }
-  };
   return (
     <React.Fragment>
       <Grid>
@@ -63,12 +36,7 @@ const Board = (props) => {
             </Grid>
             <Grid is_flex>
               <Grid is_flex margin="0 11px 0 0">
-                <Grid
-                  cursor
-                  _onClick={() => {
-                    likeChange(props.postId);
-                  }}
-                >
+                <Grid>
                   <AiOutlineHeart size="16" color="#6195CF" />
                 </Grid>
 
