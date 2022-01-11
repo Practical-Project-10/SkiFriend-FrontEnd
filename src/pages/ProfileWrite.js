@@ -20,7 +20,7 @@ const ProfileWrite = (props) => {
   const user_profile = useSelector((state) => state.profile.user_profile);
 
   const pfImgFile = useRef();
-  const vImgFile = useRef();
+  // const vImgFile = useRef();
 
   // const emptyFile = new File([""], "empty");
   const deleteFile = new File(["delete"], "delete");
@@ -80,7 +80,7 @@ const ProfileWrite = (props) => {
   const selectFile = () => {
     const reader = new FileReader();
     const profileImgFile = pfImgFile.current.files[0];
-    const vacImgFile = vImgFile.current.files[0];
+    // const vacImgFile = vImgFile.current.files[0];
 
     if (profileImgFile) {
       reader.readAsDataURL(profileImgFile);
@@ -95,16 +95,16 @@ const ProfileWrite = (props) => {
       });
     }
 
-    if (vacImgFile) {
-      setProfile({
-        ...profile,
-        vacImg: vacImgFile,
-      });
-      // if(selectedFild) {
-      //   console.log('vasine')
-      //   setVacSelect(true);
-      // }
-    }
+    // if (vacImgFile) {
+    //   setProfile({
+    //     ...profile,
+    //     vacImg: vacImgFile,
+    //   });
+    //   if(selectedFild) {
+    //     console.log('vasine')
+    //     setVacSelect(true);
+    //   }
+    // }
   };
 
   const deleteImg = (e) => {
@@ -320,11 +320,9 @@ const ProfileWrite = (props) => {
               </Button>
             </Grid>
           </Grid>
-
-
         </Grid>
 
-        <Grid display="flex" direction="column" gap="16px" padding='0 0 16px'>
+        <Grid display="flex" direction="column" gap="16px" padding="0 0 16px">
           <Button
             height="61px"
             color="#474D56"

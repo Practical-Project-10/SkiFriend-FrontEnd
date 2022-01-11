@@ -8,7 +8,8 @@ const initialState = {
   chatList: [],
   roomList: [],
   profileList: [],
-  phoneInfo: [],
+  phoneInfoList: [],
+  roomInfoList: [],
 };
 
 // action
@@ -16,6 +17,7 @@ const GET_CHATLIST = "chat/GET_CHATLIST";
 const GET_ROOMLIST = "chat/GET_ROOMLIST";
 const GET_PROFILELIST = "chat/GET_PROFILELIST";
 const GET_PHONE_INFO = "chat/GET_PHONE_INFO";
+const GET_ROOM_INFO = "chat/GET_ROOM_INFO";
 const ADD = "chat/ADD";
 
 // action creater
@@ -30,6 +32,9 @@ export const getProfileList = createAction(GET_PROFILELIST, (profile) => ({
 }));
 export const getPhoneInfo = createAction(GET_PHONE_INFO, (phoneInfo) => ({
   phoneInfo,
+}));
+export const getRoomInfo = createAction(GET_ROOM_INFO, (roomInfo) => ({
+  roomInfo,
 }));
 export const addChat = createAction(ADD, (chatData) => ({ chatData }));
 
@@ -112,6 +117,7 @@ export const getProfileInfoDB =
         console.log(`불러오기 실패${error}`);
       });
   };
+
 //전화번호 가져오기
 export const getPhoneNumDB =
   () =>
@@ -121,6 +127,21 @@ export const getPhoneNumDB =
       .then((res) => {
         console.log(res.data);
         dispatch(getPhoneInfo(res.data));
+      })
+      .catch((error) => {
+        console.log(`불러오기 실패${error}`);
+      });
+  };
+
+//카풀정보 가져오기
+export const getRoomInfoDB =
+  (roomId) =>
+  async (dispatch, getState, { history }) => {
+    await apis
+      .chatRoomInfo(roomId)
+      .then((res) => {
+        console.log("불러오기 성공");
+        dispatch(getRoomInfo(res.data));
       })
       .catch((error) => {
         console.log(`불러오기 실패${error}`);
@@ -147,7 +168,12 @@ export default handleActions(
 
     [GET_PHONE_INFO]: (state, action) =>
       produce(state, (draft) => {
-        draft.phoneInfo = action.payload.phoneInfo;
+        draft.phoneInfoList = action.payload.phoneInfo;
+      }),
+
+    [GET_ROOM_INFO]: (state, action) =>
+      produce(state, (draft) => {
+        draft.roomInfoList = action.payload.roomInfo;
       }),
 
     [ADD]: (state, action) =>
@@ -161,6 +187,7 @@ export default handleActions(
 const chatCreators = {
   addChat,
   getPhoneInfo,
+  getRoomInfo,
   makeRoomChatDB,
   getListChatDB,
   getContentChatDB,
@@ -168,6 +195,7 @@ const chatCreators = {
   sendChatDB,
   getProfileInfoDB,
   getPhoneNumDB,
+  getRoomInfoDB,
 };
 
 export { chatCreators };
