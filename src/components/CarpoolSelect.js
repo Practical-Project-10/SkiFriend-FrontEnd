@@ -5,13 +5,14 @@ import styled from "styled-components";
 import { Grid, Text, Input, Image } from "../elements/index";
 import DateSelector from "../components/DateSelector";
 import Change from "../assets/carpoolWrite/change.svg";
-import Arrow from "../assets/carpoolWrite/arrow.svg";
+import arrow from "../assets/carpoolWrite/arrow.svg";
 
 import RegionSelector from "./RegionSelector";
 
 const CarpoolSelect = (props) => {
-  console.log(props);
+  const {is_edit} = props;
   const { memberNum, startLocation, endLocation, date, time, carpoolType } = props.form;
+
   const [state, setState] = useState(false);
   const [reqSelect, setReqSelect] = useState(false);
   const [ofSelect, setOfSelect] = useState(false);
@@ -24,13 +25,18 @@ const CarpoolSelect = (props) => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+    console.log(name, value)
 
     props.bringForm(name, value);
   };
 
+  // 날짜 선택
+  const selectDate = (date) => {
+    props.bringDate(date);
+  };
+
   const hiddenChange = (e) => {
     const { name, value } = e.target;
-
 
     if (noneSelect) {
       e.target.value = setNoneSelect(false);
@@ -41,8 +47,13 @@ const CarpoolSelect = (props) => {
     props.bringForm(name, value);
   };
 
+  // 지역 보내기
+  const selectLocation = (name, value) => {
+    props.bringLocation(name, value);
+  };
+
   // 출발 도착 지역 바꾸기
-  const locationChange = (e) => {
+  const locationChange = () => {
     const _startLoca = startLoca.current.value;
     const _subLoca = subLoca.current.value;
     const _endLoca = endLoca.current.value;
@@ -59,49 +70,51 @@ const CarpoolSelect = (props) => {
     }
   };
 
-  // 날짜 선택
-  const selectDate = (date) => {
-    props.bringDate(date);
-  };
-
   return (
     <React.Fragment>
       <Grid phoneSize>
         {/* 지역 선택 */}
-        <Grid is_flex justify="space-between" padding="38px 0 17px 0">
-          <Text margin="0 0 0 37px" size="16px">
+        <Grid is_flex justify="space-around" padding="38px 0 17px 0">
+          <Text size="16px" padding='0 20px'>
             출발지역
           </Text>
           <ChangeButton onClick={locationChange}>
             <Image src={Change} width="100%" height="15px" />
           </ChangeButton>
-          <Text margin="0 37px 0 0" size="16px">
+          <Text size="16px" padding='0 20px'>
             도착지역
           </Text>
         </Grid>
 
-        <Grid
+        {is_edit
+        ? <Location>
+            <Text bold width='122px' sort='center'>{startLocation}</Text>
+            <Image src={arrow} width="50px" height="10px" size='40px 10px'/>
+            <Text bold width='122px' sort='center'>{endLocation}</Text>
+          </Location>
+        : <Grid
           is_flex
           justify="space-between"
           margin="0 0 32px 0"
           direction={state ? "row-reverse" : ""}
-        >
-          <RegionSelector ref={startLoca} startLocation={startLocation} subLoca={subLoca} _onClick={handleChange}/>
-          {/* <RegionSelector /> */}
-          <Image src={Arrow} width="50px" height="10px" />
-          {/* value속성이 고정값이 아니라 나는 에러임 */}
-          <Label htmlFor="endLocation" width="144px">
-            {skiResort}
-          </Label>
-          <input
-            type="text"
-            id="endLocation"
-            name="endLocation"
-            value={endLocation}
-            style={{ display: "none" }}
-            ref={endLoca}
-          />
-        </Grid>
+          >
+            <RegionSelector ref={startLoca} subLoca={subLoca} changeLoca={selectLocation} state={state}/>
+            {/* <RegionSelector /> */}
+            <Image src={arrow} width="50px" height="10px" />
+            {/* value속성이 고정값이 아니라 나는 에러임 */}
+            <Label htmlFor="endLocation" width="144px">
+              {skiResort}
+            </Label>
+            <input
+              type="text"
+              id="endLocation"
+              name="endLocation"
+              value={endLocation}
+              style={{ display: "none" }}
+              ref={endLoca}
+            />
+          </Grid>
+        }
 
         {/* 날짜 or 수용인원 */}
         {props.is_filter ? (
@@ -256,6 +269,19 @@ const Label = styled.label`
   text-align: center;
   display: block;
   cursor: pointer;
+`;
+
+const Location = styled.div`
+  width: 100%;
+  height: 55px;
+  margin: 0 0 12px;
+  background: #FFF;
+  border: 1px solid #6195cf;
+  box-sizing: border-box;
+  border-radius: 5px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 `;
 
 const CheckLabel = styled.label`

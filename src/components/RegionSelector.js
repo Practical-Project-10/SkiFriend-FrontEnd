@@ -3,6 +3,9 @@ import { Grid } from "../elements/index";
 //지역선택 셀렉박스 css 는 import 경로에 쓰여져 있습니다!
 const RegionSelector = forwardRef((props, loca) => {
   console.log(props);
+  const {subLoca, changeLoca, state} = props;
+
+  // const 
   const city_name = [
     "서울",
     "부산",
@@ -323,42 +326,50 @@ const RegionSelector = forwardRef((props, loca) => {
       opt.value = add[i];
       opt.innerHTML = add[i];
       state.appendChild(opt);
-    }
+    };
+  };
 
-    // props._onClick()
+  const changeLocation = (e) => {
+    const _startLoca = loca.current.value;
+    const _subLoca = subLoca.current.value;
+    console.log(e.target.name)
+    const location = `${_startLoca} ${_subLoca}`;
 
-    console.log(loca.current.value)
-    console.log(props.subLoca.current.value)
+    if (_startLoca !== '시/도 선택' && _subLoca !== '군/구 선택') {
+      console.log('실행');
+      changeLoca(e.target.name, location)
+    };
   };
 
   return (
-    <Grid is_flex width="144px" height="55px">
-      <select
-        name="startLoca"
-        style={{ width: "60px" }}
-        value={props.startLocation? props.startLocation: ''}
-        onChange={regionSelect}
-        ref={loca}
-      >
-        <option value=''>시/도 선택</option>
-        {city_name.map((c, idx) => {
-          return (
-            <option value={c} key={"cityName" + idx}>
-              {c}
-            </option>
-          );
-        })}
-      </select>
-
-      <div>
+    <Grid is_flex width="144px" height="55px" onChange={changeLocation}>
+      <form onChange={changeLocation}>
         <select
-          id="state" 
-          ref={props.subLoca}
-          // onClick={props._onClick()}
+          name={state ? "endLocation" : "startLocation"}
+          style={{ width: "60px" }}
+          onChange={regionSelect}
+          ref={loca}
         >
-          <option>군/구 선택</option>
+          <option value=''>시/도 선택</option>
+          {city_name.map((c, idx) => {
+            return (
+              <option value={c} key={"cityName" + idx}>
+                {c}
+              </option>
+            );
+          })}
         </select>
-      </div>
+
+        <div>
+          <select
+            name={state ? "endLocation" : "startLocation"}
+            id="state" 
+            ref={subLoca}
+          >
+            <option>군/구 선택</option>
+          </select>
+        </div>
+      </form>
     </Grid>
   );
 });

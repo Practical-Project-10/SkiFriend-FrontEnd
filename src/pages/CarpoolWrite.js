@@ -53,12 +53,18 @@ const CarpoolWrite = (props) => {
   };
 
   const bringForm = (name, value) => {
-
     setForm({
       ...form,
       [name]: value,
     });
   };
+
+  const bringLocation = (name, value) => {
+    setForm({
+      ...form,
+      [name]: value,
+    })
+  }
 
   // 출발 도착 지역 바꾸기
   const location = (startLoca) => {
@@ -97,7 +103,7 @@ const CarpoolWrite = (props) => {
     <React.Fragment>
       <Header goBack>카풀 {is_edit ? "수정" : "작성"} 페이지</Header>
       <Grid bg="#FFF" minHeight="calc( 100vh - 124px )">
-        <CarpoolSelect form={form} bringForm={bringForm} bringDate={bringDate} location={location}/>
+        <CarpoolSelect is_edit={is_edit} form={form} bringForm={bringForm} bringDate={bringDate} bringLocation={bringLocation} location={location}/>
 
         <div style={{ border: "5px solid #edeeef" }}></div>
 

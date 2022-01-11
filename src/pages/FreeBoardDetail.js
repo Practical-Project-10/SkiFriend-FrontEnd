@@ -50,9 +50,9 @@ const FreeBoardDetail = ({ history }, props) => {
         }
       }
     }
-    if (likeData.length === 0) {
-      setHeart(false);
-    }
+    // if (likeData.length === 0) {
+    //   setHeart(false);
+    // }
   }, [postData]);
 
   //-------Modal-------
