@@ -20,6 +20,7 @@ const Text = (props) => {
     line,
     block,
     width,
+    sort,
   } = props;
 
   const styles = {
@@ -37,6 +38,7 @@ const Text = (props) => {
     line,
     block,
     width,
+    sort,
   };
 
   if (boardlink) {
@@ -68,6 +70,7 @@ const P = styled.p`
   font-size: ${(props) => props.size};
   line-height: ${(props) => props.line};
   font-weight: ${(props) => props.bold? 700: 400};
+  text-align: ${(props) => props.sort? props.sort: ''};
   margin: ${(props) => props.margin};
   padding: ${(props) => props.padding};
   background-color: ${(props) => props.bg};

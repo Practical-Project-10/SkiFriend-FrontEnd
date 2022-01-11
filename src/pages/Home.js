@@ -83,7 +83,7 @@ const Home = (props) => {
     <React.Fragment>
       <Header>홈</Header>
       <Grid width='100%' margin="0 0 70px">
-        <Grid height="210px">
+        <Grid width="100%" height="210px">
           <Image src={Banner} size="cover" width="100%" height="100%" />
         </Grid>
         <Grid align="center" padding="4px 0" bg="#474D56">

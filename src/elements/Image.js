@@ -74,7 +74,7 @@ const ElImage = styled.div`
   cursor: ${(props) => props.cursor};
   border: ${(props) => props.border};
   border-radius: ${(props) => props.radius};
-  background: ${(props) => `url(${props.src}) no-repeat center`};
+  background: ${(props) => props.src? `url(${props.src}) no-repeat center`: ''};
   background: ${(props) => props.bg};
   background-size: ${(props) => props.size};
 `;
