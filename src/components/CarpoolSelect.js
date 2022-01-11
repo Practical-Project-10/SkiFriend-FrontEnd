@@ -10,6 +10,7 @@ import Arrow from "../assets/carpoolWrite/arrow.svg";
 import RegionSelector from "./RegionSelector";
 
 const CarpoolSelect = (props) => {
+  console.log(props);
   const { memberNum, startLocation, endLocation, date, time, carpoolType } = props.form;
   const [state, setState] = useState(false);
   const [reqSelect, setReqSelect] = useState(false);
@@ -20,11 +21,9 @@ const CarpoolSelect = (props) => {
   const startLoca = useRef();
   const subLoca = useRef();
   const endLoca = useRef();
-  console.log(subLoca.current);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-
 
     props.bringForm(name, value);
   };
@@ -87,7 +86,7 @@ const CarpoolSelect = (props) => {
           margin="0 0 32px 0"
           direction={state ? "row-reverse" : ""}
         >
-          <RegionSelector ref={startLoca} subLoca={subLoca} _onClick={handleChange}/>
+          <RegionSelector ref={startLoca} startLocation={startLocation} subLoca={subLoca} _onClick={handleChange}/>
           {/* <RegionSelector /> */}
           <Image src={Arrow} width="50px" height="10px" />
           {/* value속성이 고정값이 아니라 나는 에러임 */}

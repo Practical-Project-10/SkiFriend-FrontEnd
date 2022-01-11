@@ -2,7 +2,7 @@ import React, { forwardRef, useState } from "react";
 import { Grid } from "../elements/index";
 //지역선택 셀렉박스 css 는 import 경로에 쓰여져 있습니다!
 const RegionSelector = forwardRef((props, loca) => {
-  const [city, setCity] = React.useState();
+  console.log(props);
   const city_name = [
     "서울",
     "부산",
@@ -336,7 +336,7 @@ const RegionSelector = forwardRef((props, loca) => {
       <select
         name="startLoca"
         style={{ width: "60px" }}
-        value={city}
+        value={props.startLocation? props.startLocation: ''}
         onChange={regionSelect}
         ref={loca}
       >

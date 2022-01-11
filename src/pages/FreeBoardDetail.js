@@ -69,15 +69,15 @@ const FreeBoardDetail = ({ history }, props) => {
 
   React.useEffect(() => {
     dispatch(boardActions.getOneBoardDB(postId));
-    if (is_login) {
-      for (let i = 0; i < likeData.length; i++) {
-        if (likeData[i].userId === parseInt(login_userId)) {
-          return setHeart(true);
-        } else {
-          return setHeart(false);
-        }
-      }
-    }
+    // if (is_login) {
+    //   for (let i = 0; i < likeData.length; i++) {
+    //     if (likeData[i].userId === parseInt(login_userId)) {
+    //       return setHeart(true);
+    //     } else {
+    //       return setHeart(false);
+    //     }
+    //   }
+    // }
   }, []);
 
   console.log(heart);

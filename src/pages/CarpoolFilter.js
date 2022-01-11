@@ -41,6 +41,7 @@ const CarpoolFilter = (props) => {
     }
     dispatch(carpoolActions.filterCarpoolDB(skiresort, form));
   };
+  console.log(form)
 
   return (
     <React.Fragment>
@@ -53,7 +54,7 @@ const CarpoolFilter = (props) => {
         minHeight="calc( 100vh - 124px )"
         margin="0 0 70px 0"
       >
-        <CarpoolSelect is_filter bringForm={bringForm} bringDate={bringDate} />
+        <CarpoolSelect is_filter form={form} bringForm={bringForm} bringDate={bringDate} />
 
         <Grid padding="0 16px 16px">
           <Button size="20px" _onClick={filterSubmit}>
