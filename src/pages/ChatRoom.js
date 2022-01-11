@@ -169,8 +169,7 @@ const ChatRoom = () => {
           {roomName}
         </Header>
         <Grid
-          margin="1em 0 0 0"
-
+          margin="54px 0 0 0"
           minHeight="calc( 100vh - 124px )"
           display="flex"
           direction="column"

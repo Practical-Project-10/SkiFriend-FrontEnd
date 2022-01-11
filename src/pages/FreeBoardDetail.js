@@ -47,10 +47,10 @@ const FreeBoardDetail = ({ history }, props) => {
       for (let i = 0; i < likeData.length; i++) {
         if (likeData[i].userId === parseInt(login_userId)) {
           return setHeart(true);
+        } else {
+          continue;
         }
       }
-    }
-    if (likeData.length === 0) {
       setHeart(false);
     }
   }, [postData]);
@@ -93,7 +93,6 @@ const FreeBoardDetail = ({ history }, props) => {
 
   React.useEffect(() => {
     dispatch(boardActions.getOneBoardDB(postId));
-
   }, []);
 
   return (
