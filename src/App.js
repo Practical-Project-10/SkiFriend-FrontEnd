@@ -109,11 +109,12 @@ function App() {
 }
 
 const Container = styled.div`
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  height: 100%;
   background: #d9e3ee;
   /* background-size: contain; */
   overflow: hidden;
@@ -140,8 +141,9 @@ const Container = styled.div`
   }
 
   @media screen and (min-width: 1200px) {
-      background: url(${background}) no-repeat;
-    }
+    background: url(${background}) no-repeat;
+    background-size: 100%;
+  }
 `;
 
 const CardList = styled.div`
