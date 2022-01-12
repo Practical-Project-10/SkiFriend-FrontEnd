@@ -164,10 +164,12 @@ const MyPage = (props) => {
           radius="22px 22px 0 0"
           padding="16px 16px 0"
         >
-          <Grid cursor width="100%" height="143px">
-            <Image src={banner} width="100%" height="100%" size="cover" />
-            {/* 구글 폼으로 이동 */}
-          </Grid>
+          {/* 구글 폼으로 이동 */}
+          <a href='https://docs.google.com/forms/d/1kRaC8Zy-8gpKSI2O4kDErjCYiE0l6jP_2dbR8tQGggc/viewform?edit_requested=true' target='_blank' rel='noopener noreferrer'>
+            <Grid cursor width="100%" height="143px">
+              <Image src={banner} width="100%" height="100%" size="cover" />
+            </Grid>
+          </a>
 
           <Grid margin="25px 0 0">
             {is_login ? (
@@ -177,7 +179,7 @@ const MyPage = (props) => {
                 </Text>
                 <Swiper
                   className="scroll-container"
-                  slidesPerView={2}
+                  slidesPerView={1.5}
                   spaceBetween={10}
                   initialSlide={1}
                 >

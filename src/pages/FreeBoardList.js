@@ -58,7 +58,7 @@ const FreeBoardList = () => {
         {skiresort}
       </Header>
       <Grid bg="#FFF" margin="0 0 70px 0" minHeight="calc( 100vh - 124px )">
-        <Grid height="291px">
+        <Grid height="210px">
           <Image src={resortImg} size="cover" width="100%" height="100%" />
         </Grid>
 

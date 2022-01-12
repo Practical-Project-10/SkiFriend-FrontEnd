@@ -1,4 +1,6 @@
 import React, { forwardRef, useState } from "react";
+
+import styled from "styled-components";
 import { Grid } from "../elements/index";
 //지역선택 셀렉박스 css 는 import 경로에 쓰여져 있습니다!
 const RegionSelector = forwardRef((props, loca) => {
@@ -332,25 +334,23 @@ const RegionSelector = forwardRef((props, loca) => {
   const changeLocation = (e) => {
     const _startLoca = loca.current.value;
     const _subLoca = subLoca.current.value;
-    console.log(e.target.name)
     const location = `${_startLoca} ${_subLoca}`;
 
     if (_startLoca !== '시/도 선택' && _subLoca !== '군/구 선택') {
-      console.log('실행');
       changeLoca(e.target.name, location)
     };
   };
 
   return (
-    <Grid is_flex width="144px" height="55px" onChange={changeLocation}>
-      <form onChange={changeLocation}>
-        <select
+    // <Grid is_flex width="144px" height="55px" onChange={changeLocation}>
+      <Form is_flex width="144px" height="55px" onChange={changeLocation}>
+        <Select
+          margin='0 3px 0 0'
           name={state ? "endLocation" : "startLocation"}
-          style={{ width: "60px" }}
           onChange={regionSelect}
           ref={loca}
         >
-          <option value=''>시/도 선택</option>
+          <option value=''>시/도</option>
           {city_name.map((c, idx) => {
             return (
               <option value={c} key={"cityName" + idx}>
@@ -358,21 +358,34 @@ const RegionSelector = forwardRef((props, loca) => {
               </option>
             );
           })}
-        </select>
+        </Select>
 
-        <div>
-          <select
-            name={state ? "endLocation" : "startLocation"}
-            id="state" 
-            ref={subLoca}
-          >
-            <option>군/구 선택</option>
-          </select>
-        </div>
-      </form>
-    </Grid>
+        <Select
+          width='107px'
+          name={state ? "endLocation" : "startLocation"}
+          id="state" 
+          ref={subLoca}
+        >
+          <option>군/구</option>
+        </Select>
+      </Form>
+    // </Grid>
   );
 });
+
+const Form = styled.form`
+  width: 144px;
+  display: flex;
+  height: 55px;
+`
+
+const Select = styled.select`
+  width: ${props => props.width? props.width: '53px'};
+  height: 55px;
+  margin: ${props => props.margin && props.margin};
+  border: 1px solid #474d56;
+  border-radius: 6px;
+`
 
 export default RegionSelector
 

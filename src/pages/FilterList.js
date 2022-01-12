@@ -33,7 +33,7 @@ const FilterList = (props) => {
     <Grid>
       <Header goBack>{skiResort}</Header>
       <Grid bg="#FFF" minHeight="calc( 100vh - 124px )" margin="0 0 70px">
-        <Grid width="100%" height="291px">
+        <Grid width="100%" height="210px">
           <Image src={resortImg} size="cover" width="100%" height="100%" />
         </Grid>
 

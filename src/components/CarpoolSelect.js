@@ -16,7 +16,7 @@ const CarpoolSelect = (props) => {
   const [state, setState] = useState(false);
   const [reqSelect, setReqSelect] = useState(false);
   const [ofSelect, setOfSelect] = useState(false);
-  const [noneSelect, setNoneSelect] = useState(true);
+  const [noneSelect, setNoneSelect] = useState(false);
   const params = useParams();
   const skiResort = params.skiresort;
   const startLoca = useRef();
@@ -88,9 +88,9 @@ const CarpoolSelect = (props) => {
 
         {is_edit
         ? <Location>
-            <Text bold width='122px' sort='center'>{startLocation}</Text>
+            <Text bold width='130px' sort='center' size='14px'>{startLocation}</Text>
             <Image src={arrow} width="50px" height="10px" size='40px 10px'/>
-            <Text bold width='122px' sort='center'>{endLocation}</Text>
+            <Text bold width='122px' sort='center' size='20px' color='#6195cf'>{endLocation}</Text>
           </Location>
         : <Grid
           is_flex
@@ -174,9 +174,9 @@ const CarpoolSelect = (props) => {
           <Grid display="flex" gap="20px" margin="0 0 50px 0">
             <Grid width="50%">
               <Label
+                width="100%" cursor="pointer"
                 htmlFor="request"
                 select={carpoolType === '카풀 요청'? true: reqSelect}
-                width="100%"
                 onClick={() => {
                   setReqSelect(true);
                   setOfSelect(false);
@@ -194,9 +194,9 @@ const CarpoolSelect = (props) => {
             </Grid>
             <Grid width="50%">
               <Label
-                htmlFor="offer"
+                width="100%" cursor="pointer"
+                htmlFor="offer" 
                 select={carpoolType === '카풀 제공'? true: ofSelect}
-                width="100%"
                 onClick={() => {
                   setOfSelect(true);
                   setReqSelect(false);
@@ -217,9 +217,9 @@ const CarpoolSelect = (props) => {
         <from onChange={hiddenChange}>
           {props.is_filter && (
             <Grid width="100%">
-              <CheckLabel htmlFor="none" select={noneSelect} width="100%">
+              <Label htmlFor="none" select={noneSelect} width="100%">
                 카풀완료 보지않기
-              </CheckLabel>
+              </Label>
               <input
                 id="none"
                 type="checkbox"
@@ -268,7 +268,7 @@ const Label = styled.label`
   line-height: 49px;
   text-align: center;
   display: block;
-  cursor: pointer;
+  cursor: default;
 `;
 
 const Location = styled.div`
@@ -282,22 +282,6 @@ const Location = styled.div`
   display: flex;
   justify-content: space-around;
   align-items: center;
-`;
-
-const CheckLabel = styled.label`
-  width: ${(props) => props.width};
-  height: 55px;
-  background: ${(props) => (props.select ? "#FFF" : "#6195CF")};
-  border: 2px solid #6195cf;
-  box-sizing: border-box;
-  border-radius: 6px;
-  color: ${(props) => (props.select ? "#6195CF" : "#FFF")};
-  font-weight: bold;
-  font-size: 20px;
-  line-height: 49px;
-  text-align: center;
-  display: block;
-  cursor: pointer;
 `;
 
 export default CarpoolSelect;

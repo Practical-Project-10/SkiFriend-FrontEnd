@@ -87,9 +87,10 @@ const Home = (props) => {
           <Image src={Banner} size="cover" width="100%" height="100%" />
         </Grid>
         <Grid align="center" padding="4px 0" bg="#474D56">
-          <Text bold color="#fff">
+          {/* 가이드 링크 */}
+          <a href='https://www.notion.so/7991aee19c5f4a419bb71207823d01fe' target='_blank' rel='noopener noreferrer' style={{fontWeight:'700', color:'#FFF'}}>
             카풀과 스키장이 처음이라면? 가이드 읽어보기
-          </Text>
+          </a>
         </Grid>
         <IconWrap>
           {/* padding='26px' 적용이 안 됨*/}
