@@ -141,9 +141,9 @@ const Container = styled.div`
   }
 
   @media screen and (min-width: 1200px) {
-    background: url(${background}) no-repeat;
-    background-size: 100%;
-  }
+      background: url(${background}) no-repeat;
+      background-size: 100%;
+    }
 `;
 
 const CardList = styled.div`
