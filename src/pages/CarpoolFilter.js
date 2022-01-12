@@ -20,7 +20,6 @@ const CarpoolFilter = (props) => {
     date: "",
     status: false,
   });
-  console.log(form);
   const bringDate = (date) => {
     setForm({
       ...form,
@@ -44,7 +43,6 @@ const CarpoolFilter = (props) => {
 
   // 출발 도착 지역 바꾸기
   const location = (startLoca) => {
-    console.log(startLoca)
 
     if (!state) {
       setState(true);
@@ -70,7 +68,6 @@ const CarpoolFilter = (props) => {
     }
     dispatch(carpoolActions.filterCarpoolDB(skiResort, form));
   };
-  console.log(form)
 
   return (
     <React.Fragment>

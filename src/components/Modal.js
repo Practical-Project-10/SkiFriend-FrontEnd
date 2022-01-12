@@ -8,7 +8,6 @@ import defaultIMG from "../assets/myPage/profilePicture.png";
 
 const Modal = (props) => {
   const { profile, _onClick, complete } = props;
-  console.log(complete)
   if (profile) {
     return (
       <ModalBackground onClick={props.closeModal}>

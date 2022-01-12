@@ -44,9 +44,12 @@ const CommentList = () => {
 
   //-------댓글 작성-------
   const addCommentBtn = () => {
-    if (is_login && commentValue.replace(/\s|/gi, "").length !== 0) {
-      dispatch(commentActions.addCommentDB(postId, commentValue));
-      return setCommentValue("");
+    if (is_login) {
+      if (commentValue.replace(/\s|/gi, "").length !== 0) {
+        dispatch(commentActions.addCommentDB(postId, commentValue));
+        return setCommentValue("");
+      }
+      return;
     } else {
       const ask = window.confirm(
         "로그인한 회원만 이용가능합니다. 로그인 페이지로 이동하시겠습니까?"

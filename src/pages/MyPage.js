@@ -14,7 +14,6 @@ import Header from "../components/Header";
 
 import styled from "styled-components";
 import { Grid, Image, Text } from "../elements/index";
-import basicProfile from "../assets/myPage/profilePicture.png";
 import notLoginProfile from "../assets/myPage/profile_default_img.png";
 import banner from "../assets/myPage/mypage_banner.png";
 
@@ -25,7 +24,6 @@ const MyPage = (props) => {
   const is_profile = localStorage.getItem("is_profile");
   const user_profile = useSelector((state) => state.profile.user_profile);
   const myCarpool = useSelector((state) => state.carpool.list);
-  console.log(myCarpool);
 
   React.useEffect(() => {
     if (!is_login) {

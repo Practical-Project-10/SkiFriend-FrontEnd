@@ -22,7 +22,7 @@ export const apis = {
       password: pwd,
     }),
 
-  signup: (userInfo) => 
+  signup: (userInfo) =>
     api.post("/user/signup", {
       username: userInfo.username,
       password: userInfo.password,
@@ -76,7 +76,7 @@ export const apis = {
 
   getCarpool: (skiResort, page) =>
     api.get(`/board/carpool/${skiResort}`, {
-      // params: { page: page, size: 3 },
+      params: { page: 1, size: 10 },
     }),
 
   addCarpool: (skiResort, carpool) =>

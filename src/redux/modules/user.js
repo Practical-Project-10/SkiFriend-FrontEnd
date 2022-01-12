@@ -73,9 +73,7 @@ const isNicknameDB = (nickname) => {
 const isPhoneNumDB = (_phoneNum) => {
   return async (dispatch, getState, { history }) => {
     try {
-      const response = await apis.phoneNumCheck(_phoneNum);
-      console.log(response);
-
+      await apis.phoneNumCheck(_phoneNum);
       window.alert("인증번호가 전송되었습니다.");
       dispatch(phoneNum(_phoneNum));
     } catch (err) {

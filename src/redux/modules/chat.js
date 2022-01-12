@@ -125,7 +125,6 @@ export const getPhoneNumDB =
     await apis
       .chatPhoneNum()
       .then((res) => {
-        console.log(res.data);
         dispatch(getPhoneInfo(res.data));
       })
       .catch((error) => {
@@ -140,7 +139,6 @@ export const getRoomInfoDB =
     await apis
       .chatRoomInfo(roomId)
       .then((res) => {
-        console.log("불러오기 성공");
         dispatch(getRoomInfo(res.data));
       })
       .catch((error) => {

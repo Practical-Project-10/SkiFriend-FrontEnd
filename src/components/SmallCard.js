@@ -7,7 +7,6 @@ import calendar from "../assets/carpoolList/calendar_icon.svg";
 import clock from "../assets/carpoolList/clock_icon.svg";
 
 const SmallCard = (props) => {
-  console.log(props)
   const repuest = props.carpoolType === '카풀 요청'
 
   if(props.notLogin) {

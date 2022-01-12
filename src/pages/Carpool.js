@@ -16,7 +16,6 @@ const Carpool = (props) => {
   const history = props.history;
   const dispatch = useDispatch();
   const carpool_list = useSelector((state) => state.carpool.list);
-  console.log(carpool_list)
   // const page = useSelector((state) => state.carpool.page);
   // const is_loading = useSelector((state) => state.carpool.is_loading);
   const resortImg = useSelector((state) => state.carpool.resortImg);

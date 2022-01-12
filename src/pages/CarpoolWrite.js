@@ -68,7 +68,6 @@ const CarpoolWrite = (props) => {
 
   // 출발 도착 지역 바꾸기
   const location = (startLoca) => {
-    console.log(startLoca)
 
     if (!state) {
       setState(true);
