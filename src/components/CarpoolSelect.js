@@ -59,7 +59,6 @@ const CarpoolSelect = (props) => {
 
     const _startLocation = `${_startLoca} ${_subLoca}`;
 
-    console.log('select', state)
     if (!state) {
       setState(true);
       props.location(_startLocation);

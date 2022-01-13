@@ -71,7 +71,7 @@ const Home = (props) => {
   ];
   React.useEffect(() => {
     const mainHotPosts = async () => {
-      const response = await (await fetch("http://3.34.52.2:8080/main")).json();
+      const response = await (await fetch("https://seongeunyang.shop/user/profile")).json();
       dispatch(mainActions.loadPosts(response));
     };
     mainHotPosts();

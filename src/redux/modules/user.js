@@ -158,7 +158,6 @@ export default handleActions(
     [SET_USER]: (state, action) =>
       produce(state, (draft) => {
         draft.is_login = true;
-        console.log(action.payload.user);
         draft.user = action.payload.user;
       }),
     [LOGOUT]: (state, action) =>
