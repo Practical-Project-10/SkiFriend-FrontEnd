@@ -198,13 +198,11 @@ export default handleActions(
         const page = action.payload.page;
         const skiResort = action.payload.skiResort;
 
-        console.log(page);
-        if(page === 'carpool') {
-          let deleted_list = draft.list[skiResort].filter(
-            (l) => l.postId !== action.payload.postId
-          );
-          draft.list[skiResort] = deleted_list;
-        };
+        let deleted_list = draft.list[skiResort].filter(
+          (l) => l.postId !== action.payload.postId
+        );
+        draft.list[skiResort] = deleted_list;
+
         if(page === 'myPage') {
           let deleted_myList = draft.myList.filter(
             (l) => l.postId !== action.payload.postId
@@ -228,12 +226,11 @@ export default handleActions(
         const page = action.payload.page;
         const skiResort = action.payload.skiResort;
 
-        if(page === 'carpool') {
-          const idx = draft.list[skiResort].findIndex((l) => 
-            l.postId === Number(action.payload.postId)
-          );
-          draft.list[skiResort][idx] = { ...draft.list[skiResort][idx], ...action.payload.carpool}
-        };
+        const idx = draft.list[skiResort].findIndex((l) => 
+          l.postId === Number(action.payload.postId)
+        );
+        draft.list[skiResort][idx] = { ...draft.list[skiResort][idx], ...action.payload.carpool}
+        
         if(page === 'myPage') {
           const idx = draft.myList.findIndex((l) => 
           l.postId === Number(action.payload.postId)
