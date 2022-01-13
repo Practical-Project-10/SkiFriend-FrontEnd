@@ -10,7 +10,7 @@ import price from "../assets/carpoolList/price_icon.svg";
 
 const ChatRoomCard = (props) => {
   const { roomInfo } = props;
-  
+
   return (
     <React.Fragment>
       <Grid

@@ -56,7 +56,7 @@ const filterCarpool = createAction(FILTER_CARPOOL, (carpool) => ({ carpool }));
 const imageResort = createAction(IMAGE_RESORT, (url) => ({ url }));
 const isLoading = createAction(IS_LOADING, (state) => ({ state }));
 const isNext = createAction(IS_NEXT, (state) => ({ state }));
-const reset = createAction(RESET, (skiResort) => ({skiResort}));
+const reset = createAction(RESET, (skiResort) => ({ skiResort }));
 
 // middlewares
 const imageResortDB = (skiResort) => {
@@ -280,7 +280,6 @@ export default handleActions(
 
     [RESET]: (state, action) =>
       produce(state, (draft) => {
-        console.log('실행')
         const skiResort = action.payload.skiResort;
         draft.resortImg = "";
         draft.list[skiResort] = [];

@@ -8,7 +8,7 @@ import { history } from "../redux/ConfigStore";
 import { carpoolActions } from "../redux/modules/carpool";
 import { chatCreators as chatActions } from "../redux/modules/chat";
 
-import Modal from "../components/Modal"
+import Modal from "../components/Modal";
 
 import arrow from "../assets/carpoolList/arrow_icon.svg";
 import calendar from "../assets/carpoolList/calendar_icon.svg";
@@ -18,7 +18,7 @@ import price from "../assets/carpoolList/price_icon.svg";
 import etc from "../assets/carpoolList/etc_icon.svg";
 
 const Card = (props) => {
-  const {notLogin, page} = props;
+  const { notLogin, page } = props;
 
   const dispatch = useDispatch();
   const is_login = localStorage.getItem("is_login");
@@ -40,11 +40,15 @@ const Card = (props) => {
   };
 
   const deleteCard = () => {
-    dispatch(carpoolActions.deleteCarpoolDB(props.skiResort, page, props.postId));
+    dispatch(
+      carpoolActions.deleteCarpoolDB(props.skiResort, page, props.postId)
+    );
   };
 
   const completeCard = () => {
-    dispatch(carpoolActions.completeCarpoolDB(props.skiResort, page, props.postId));
+    dispatch(
+      carpoolActions.completeCarpoolDB(props.skiResort, page, props.postId)
+    );
   };
 
   //연락하기 기능
@@ -72,45 +76,70 @@ const Card = (props) => {
     return dispatch(chatActions.makeRoomChatDB(postId));
   };
 
-  if(notLogin) {
+  if (notLogin) {
     return (
       <Grid>
         <Text>내가 쓴 카풀</Text>
-        <NotLogin>
-          최근 카풀 내역이 없어요!
-        </NotLogin>
+        <NotLogin>최근 카풀 내역이 없어요!</NotLogin>
       </Grid>
-    )
+    );
   }
 
-  if (page === 'myPage') {
+  if (page === "myPage") {
     return (
       <React.Fragment>
-        <CarpoolCard width='185px' height='152px' padding='12px' repuest={repuest} status={!props.status} >
+        <CarpoolCard
+          width="185px"
+          height="152px"
+          padding="12px"
+          repuest={repuest}
+          status={!props.status}
+        >
           <Grid>
-            <Text bold size='12px' color={repuest? '#7281D1': '#6195CF'}>{props.carpoolType}</Text>
+            <Text bold size="12px" color={repuest ? "#7281D1" : "#6195CF"}>
+              {props.carpoolType}
+            </Text>
           </Grid>
-          <Text block bold width='239px' size='16px'>{props.title}</Text>
-          <Posts width='240px' height='30px' margin='7px 0'>
-            <Text bold size='12px'>{props.startLocation}</Text>
-            <Image src={arrow} width='50px' height='10px'/>
-            <Text bold size='12px' color={repuest? '#7281D1': '#6195CF'}>{props.endLocation}</Text>
+          <Text block bold width="239px" size="16px">
+            {props.title}
+          </Text>
+          <Posts width="240px" height="30px" margin="7px 0">
+            <Text bold size="12px">
+              {props.startLocation}
+            </Text>
+            <Image src={arrow} width="50px" height="10px" />
+            <Text bold size="12px" color={repuest ? "#7281D1" : "#6195CF"}>
+              {props.endLocation}
+            </Text>
           </Posts>
           <Grid>
-            <SmallItems repuest={repuest} >
-              <Image src={calendar} width='12px' height='15px'/>
-              <Text size='12px'>{props.date}</Text>
+            <SmallItems repuest={repuest}>
+              <Image src={calendar} width="12px" height="15px" />
+              <Text size="12px">{props.date}</Text>
             </SmallItems>
             <SmallItems repuest={repuest} width="61px">
-              <Image src={clock} width='12px' height='15px'/>
-              <Text size='12px'>{props.time}</Text>
+              <Image src={clock} width="12px" height="15px" />
+              <Text size="12px">{props.time}</Text>
             </SmallItems>
           </Grid>
-          {props.status 
-          ? <Grid is_flex>
+          {props.status ? (
+            <Grid is_flex>
               {/* 게시글 수정 삭제 modal 시작 */}
               {/* 게시글을 조회한사람이 작성한 사람과 일치할 경우 모달 선택창이 보이게 하기 */}
               <SubMenu width="27px" height="27px" line="41px">
+                <Grid
+                  _onClick={() => {
+                    setShowModal(true);
+                  }}
+                >
+                  <Image src={etc} width="27px" height="27px" />
+                </Grid>
+              </SubMenu>
+            </Grid>
+          ) : (
+            <Grid>
+              {is_mine ? (
+                <SubMenu width="27px" height="27px" line="41px">
                   <Grid
                     _onClick={() => {
                       setShowModal(true);
@@ -119,43 +148,28 @@ const Card = (props) => {
                     <Image src={etc} width="27px" height="27px" />
                   </Grid>
                 </SubMenu>
+              ) : null}
             </Grid>
-          : <Grid>
-              {is_mine
-              ? <SubMenu width="27px" height="27px" line="41px">
-                  <Grid
-                    _onClick={() => {
-                      setShowModal(true);
-                    }}
-                  >
-                    <Image src={etc} width="27px" height="27px" />
-                  </Grid>
-                </SubMenu>
-              : null
-              }
-            </Grid>
-          }
+          )}
         </CarpoolCard>
-        {showmodal 
-        ? <Modal
-            complete={!props.status? true: false}
-            width='179px'
-            height='146px'
-            radius='15px'
-            padding='5px'
-            fontS='14px'
+        {showmodal ? (
+          <Modal
+            complete={!props.status ? true : false}
+            width="179px"
+            height="146px"
+            radius="15px"
+            padding="5px"
+            fontS="14px"
             closeModal={closemodal}
             edit={editCard}
             delete={deleteCard}
             _onClick={completeCard}
           />
-        : null
-        }
+        ) : null}
       </React.Fragment>
-    )
+    );
   }
 
-  console.log(props.border)
   return (
     <React.Fragment>
       <CarpoolCard repuest={repuest} status={!props.status} border={props.border}>
@@ -168,7 +182,7 @@ const Card = (props) => {
           <Text bold size="20px">
             {props.title}
           </Text>
-          
+
           <Posts>
             <Text bold>{props.startLocation}</Text>
             <Image src={arrow} width="50px" height="10px" />
@@ -201,12 +215,12 @@ const Card = (props) => {
           </Text>
         </Grid>
 
-        {props.status 
-        ? <Grid is_flex>
+        {props.status ? (
+          <Grid is_flex>
             {/* 게시글 수정 삭제 modal 시작 */}
             {/* 게시글을 조회한사람이 작성한 사람과 일치할 경우 모달 선택창이 보이게 하기 */}
-            {is_mine 
-            ? <SubMenu width="27px" height="27px" line="41px">
+            {is_mine ? (
+              <SubMenu width="27px" height="27px" line="41px">
                 <Grid
                   _onClick={() => {
                     setShowModal(true);
@@ -215,7 +229,8 @@ const Card = (props) => {
                   <Image src={etc} width="27px" height="27px" />
                 </Grid>
               </SubMenu>
-            : <SubMenu width="78px" height="27px" line="29px">
+            ) : (
+              <SubMenu width="78px" height="27px" line="29px">
                 <Text
                   bold
                   color={repuest ? "#7281D1" : "#6195CF"}
@@ -226,12 +241,13 @@ const Card = (props) => {
                   연락하기&gt;
                 </Text>
               </SubMenu>
-            }
+            )}
             {/* <div showmodal={showmodal} /> */}
           </Grid>
-        : <Grid>
-            {is_mine
-            ? <SubMenu width="27px" height="27px" line="41px">
+        ) : (
+          <Grid>
+            {is_mine ? (
+              <SubMenu width="27px" height="27px" line="41px">
                 <Grid
                   _onClick={() => {
                     setShowModal(true);
@@ -240,33 +256,29 @@ const Card = (props) => {
                   <Image src={etc} width="27px" height="27px" />
                 </Grid>
               </SubMenu>
-            : null
-            }
+            ) : null}
           </Grid>
-        }
+        )}
       </CarpoolCard>
-      {showmodal 
-      ? <Modal
-          complete={!props.status? true: false}
-          height={!props.status? '198px': '256px'}
+      {showmodal ? (
+        <Modal
+          complete={!props.status ? true : false}
+          height={!props.status ? "198px" : "256px"}
           closeModal={closemodal}
           edit={editCard}
           delete={deleteCard}
           _onClick={completeCard}
         />
-      : null
-      }
+      ) : null}
     </React.Fragment>
   );
 };
 
-
-
 const CarpoolCard = styled.div`
-  height: ${props => props.height? props.height: '173px'};
+  height: ${(props) => (props.height ? props.height : "173px")};
   background: ${(props) => (props.repuest ? "#D3DBEE" : "#D9E4EE")};
   border-radius: 15px;
-  padding: ${props => props.padding? props.padding: '16px'};
+  padding: ${(props) => (props.padding ? props.padding : "16px")};
   position: relative;
 
   &::before {
@@ -282,10 +294,10 @@ const CarpoolCard = styled.div`
 `;
 
 const Posts = styled.div`
-  width: ${props => props.width? props.width: '275px'};
+  width: ${(props) => (props.width ? props.width : "275px")};
   height: 30px;
-  margin: ${props => props.margin? props.margin: '10px 0 12px'};
-  background: #FFF;
+  margin: ${(props) => (props.margin ? props.margin : "10px 0 12px")};
+  background: #fff;
   border: 1px solid #6195cf;
   box-sizing: border-box;
   border-radius: 5px;
@@ -308,14 +320,14 @@ const Items = styled.div`
 `;
 
 const SmallItems = styled.div`
-  width: ${props => props.width};
+  width: ${(props) => props.width};
   height: 22px;
   border-radius: 5px;
   display: flex;
   align-items: center;
   gap: 5px;
-  color: #FFF;
-`
+  color: #fff;
+`;
 
 const SubMenu = styled.div`
   width: ${(props) => props.width};
@@ -339,14 +351,14 @@ const NotLogin = styled.div`
   height: 120px;
   margin: 12px 0;
   padding: 12px;
-  background: #EDEDEE;
+  background: #ededee;
   border-radius: 10px;
-  color: #474D56;
+  color: #474d56;
   font-weight: 700;
   font-size: 14px;
   opacity: 0.5;
   text-align: center;
   line-height: 90px;
-`
+`;
 
 export default Card;
