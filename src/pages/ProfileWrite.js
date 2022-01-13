@@ -67,8 +67,7 @@ const ProfileWrite = (props) => {
 
     if (name === "nickname") {
       if (nickname !== "") {
-        console.log("성공");
-        console.log(nickname);
+       
         dispatch(userActions.isNicknameDB(nickname));
       } else {
         window.alert("닉네임을 입력해주세요.");

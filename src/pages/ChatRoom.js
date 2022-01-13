@@ -156,13 +156,11 @@ const ChatRoom = () => {
         headers: token,
       })
       .then((res) => {
-        console.log("불러오기 성공");
         setRoomInfo(res.data);
         // dispatch(chatActions.getRoomInfo(res.data));
       });
     // dispatch(chatActions.getRoomInfoDB(roomId));
   }, []);
-  console.log(roomInfo);
   return (
     <React.Fragment>
       {/* 상단부  */}

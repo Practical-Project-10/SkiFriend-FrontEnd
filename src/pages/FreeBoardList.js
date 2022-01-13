@@ -20,7 +20,7 @@ const FreeBoardList = () => {
   const skiresort = params.skiresort;
   const dispatch = useDispatch();
   const boardList = useSelector((state) => state.freeboard.list);
-  const is_loading = useSelector((state) => state.freeboard.is_loading);
+  // const is_loading = useSelector((state) => state.freeboard.is_loading);
   const resortImg = useSelector((state) => state.carpool.resortImg);
   const is_login = localStorage.getItem("nickname");
 
