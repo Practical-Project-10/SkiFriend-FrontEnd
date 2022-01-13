@@ -335,7 +335,7 @@ const RegionSelector = forwardRef((props, loca) => {
     const _subLoca = subLoca.current.value;
     const location = `${_startLoca} ${_subLoca}`;
 
-    if (_startLoca !== '시/도 선택' && _subLoca !== '군/구 선택') {
+    if (_startLoca !== '' && _subLoca !== '') {
       changeLoca(e.target.name, location)
     };
   };
@@ -365,7 +365,7 @@ const RegionSelector = forwardRef((props, loca) => {
           id="state" 
           ref={subLoca}
         >
-          <option>군/구</option>
+          <option value=''>군/구</option>
         </Select>
       </Form>
     // </Grid>

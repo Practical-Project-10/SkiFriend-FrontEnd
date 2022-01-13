@@ -11,30 +11,29 @@ const FILTER_CARPOOL = "FILTER_CARPOOL";
 const GET_MYCARPOOL = "GET_MYCARPOOL";
 const COMPLETE_CARPOOL = "COMPLETE_CARPOOL";
 const IMAGE_RESORT = "IMAGE_RESORT";
-const RESET_LIST = 'RESET_LIST';
-// const IS_LOADING = "IS_LOADING";
-// const IS_NEXT = "IS_NEXT";
+const IS_LOADING = "IS_LOADING";
+const IS_NEXT = "IS_NEXT";
 
 // acrtion creators
-const getCarpool = createAction(GET_CARPOOL, (skiResort, list) => ({
-  skiResort,
-  list,
+const getCarpool = createAction(GET_CARPOOL, (skiResort, list) => ({ 
+  skiResort, 
+  list 
 }));
-const addCarpool = createAction(ADD_CARPOOL, (carpool) => ({ carpool }));
+const addCarpool = createAction(ADD_CARPOOL, (skiResort, carpool) => ({ 
+  skiResort, 
+  carpool 
+}));
 const editCarpool = createAction(EDIT_CARPOOL, (postId, carpool) => ({
   postId,
   carpool,
 }));
 const deleteCarpool = createAction(DELETE_CARPOOL, (postId) => ({ postId }));
-const getMyCarpool = createAction(GET_MYCARPOOL, (myCarpools) => ({
-  myCarpools,
-}));
+const getMyCarpool = createAction(GET_MYCARPOOL, (myCarpools) => ({ myCarpools }));
 const completeMycarpool = createAction(COMPLETE_CARPOOL, (postId, carpool) => ({postId, carpool}));
 const filterCarpool = createAction(FILTER_CARPOOL, (carpool) => ({ carpool }));
 const imageResort = createAction(IMAGE_RESORT, (url) => ({ url }));
-const resetList = createAction(RESET_LIST, () => ({}));
-// const isLoading = createAction(IS_LOADING, (state) => ({ state }));
-// const isNext = createAction(IS_NEXT, (state) => ({ state }));
+const isLoading = createAction(IS_LOADING, (state) => ({ state }));
+const isNext = createAction(IS_NEXT, (state) => ({ state }));
 
 // middlewares
 const imageResortDB = (skiResort) => {
@@ -48,18 +47,20 @@ const imageResortDB = (skiResort) => {
 
 const getCarpoolDB = (skiResort, page) => {
   return async function (dispatch) {
-    // dispatch(isLoading(true));
+    dispatch(isLoading(true));
     try {
       const response = await apis.getCarpool(skiResort, page);
-      response && dispatch(getCarpool(skiResort, response.data));
-      // if (response.data.length === 3) {
-      //   dispatch(getCarpool(skiResort, response.data));
-      //   dispatch(isNext(true));
-      // } else {
-      //   dispatch(getCarpool(skiResort, response.data));
-      //   dispatch(isNext(false));
-      // }
-    } catch (err) {}
+      // response && dispatch(getCarpool(skiResort, response.data));
+      if (response.data.length === 4) {
+        dispatch(getCarpool(skiResort, response.data));
+        dispatch(isNext(true));
+      } else {
+        dispatch(getCarpool(skiResort, response.data));
+        dispatch(isNext(false));
+      }
+    } catch (err) {
+      console.log(err);
+    }
   };
 };
 
@@ -68,19 +69,19 @@ const addCarpoolDB = (skiResort, carpool) => {
     try {
       const response = await apis.addCarpool(skiResort, carpool);
       response && history.push(`/carpool/${skiResort}`);
-      dispatch(addCarpool(response.data));
+      dispatch(addCarpool(skiResort, response.data));
     } catch (err) {
       window.alert("모든 사항을 기재해 주세요.");
     }
   };
 };
 
-const editCarpoolDB = (postId, carpool) => {
+const editCarpoolDB = (skiResort, postId, carpool) => {
   return async function (dispatch, getState, { history }) {
     try {
       const response = await apis.editCarpool(postId, carpool);
       response && history.goBack();
-      dispatch(editCarpool(postId, response.data));
+      dispatch(editCarpool(skiResort, postId, response.data));
     } catch (err) {}
   };
 };
@@ -140,23 +141,15 @@ const getMyCarpoolDB = () => {
 // initialState
 const initialState = {
   resortImg: "",
-  list: [
-    // {하이원: [
-    //     {},
-    //     {},
-    //   ]
-    // },
-    // {비발디: [
-    //     {},
-    //     {},
-    //   ]
-    // },
-    // {곤지암: [
-    //     {},
-    //     {},
-    //   ]
-    // },
-  ],
+  list: {
+    HighOne: [],
+    YongPyong: [],
+    VivaldiPark: [],
+    Phoenix: [],
+    WellihilliPark: [],
+    Konjiam: [],
+  },
+  myList: [],
   filterList: [],
   page: 1,
   is_loading: false,
@@ -168,24 +161,25 @@ export default handleActions(
   {
     [GET_CARPOOL]: (state, action) =>
     produce(state, (draft) => {
-      draft.list = action.payload.list;
-      // draft.loading = false;
-      // draft.page += 1;
-      // const skiResort = action.payload.skiResort;
-      // draft.list.push(...draft.list, {[skiResort]: action.payload.list});
+      const skiResort = action.payload.skiResort;
+      draft.is_loading = false;
+      draft.page += 1;
+      draft.list[skiResort].push(...action.payload.list);
       }),
 
     [ADD_CARPOOL]: (state, action) =>
       produce(state, (draft) => {
-        draft.list.unshift(action.payload.carpool);
+        const skiResort = action.payload.skiResort;
+        draft.list[skiResort].unshift(action.payload.carpool);
       }),
 
     [EDIT_CARPOOL]: (state, action) =>
       produce(state, (draft) => {
+        const skiResort = action.payload.skiResort;
         const idx = draft.list.findIndex((l) => 
           l.postId === Number(action.payload.postId)
         );
-        draft.list[idx] = { ...draft.list[idx], ...action.payload.carpool };
+        draft.list[skiResort][idx] = { ...draft.list[skiResort][idx], ...action.payload.carpool };
       }),
 
     [DELETE_CARPOOL]: (state, action) =>
@@ -203,7 +197,7 @@ export default handleActions(
 
     [GET_MYCARPOOL]: (state, action) =>
       produce(state, (draft) => {
-        draft.list = action.payload.myCarpools;
+        draft.myList = action.payload.myCarpools;
       }),
     
     [COMPLETE_CARPOOL]: (state, action) =>
@@ -219,20 +213,15 @@ export default handleActions(
         draft.resortImg = action.payload.url;
       }),
     
-    [RESET_LIST]: (state, action) =>
+    [IS_LOADING]: (state, action) =>
       produce(state, (draft) => {
-        console.log('성공')
-        draft.list = [];
+        draft.is_loading = action.payload.state;
       }),
-    // [IS_LOADING]: (state, action) =>
-    //   produce(state, (draft) => {
-    //     draft.is_loading = action.payload.state;
-    //   }),
 
-    // [IS_NEXT]: (state, action) =>
-    //   produce(state, (draft) => {
-    //     draft.is_next = action.payload.state;
-    //   }),
+    [IS_NEXT]: (state, action) =>
+      produce(state, (draft) => {
+        draft.is_next = action.payload.state;
+      }),
   },
   initialState
 );
@@ -242,7 +231,6 @@ const carpoolActions = {
   addCarpool,
   editCarpool,
   deleteCarpool,
-  resetList,
   getCarpoolDB,
   addCarpoolDB,
   editCarpoolDB,

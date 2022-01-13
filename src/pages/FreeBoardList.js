@@ -9,7 +9,7 @@ import { Grid, Image } from "../elements/index";
 import CarpoolMenuBar from "../components/CarpoolMenuBar";
 import FloatButton from "../components/FloatButton";
 import Board from "../components/Board";
-import InfinityScroll from "../components/InfinityScroll";
+// import InfinityScroll from "../components/InfinityScroll";
 import Header from "../components/Header";
 
 // import Pagination from "@mui/material/Pagination";
@@ -20,7 +20,6 @@ const FreeBoardList = () => {
   const skiresort = params.skiresort;
   const dispatch = useDispatch();
   const boardList = useSelector((state) => state.freeboard.list);
-  const page = useSelector((state) => state.carpool.page);
   const is_loading = useSelector((state) => state.freeboard.is_loading);
   const resortImg = useSelector((state) => state.carpool.resortImg);
   const is_login = localStorage.getItem("nickname");
@@ -65,12 +64,12 @@ const FreeBoardList = () => {
         <CarpoolMenuBar />
 
         <Grid margin="16px" height="300px">
-          <InfinityScroll
+          {/* <InfinityScroll
             callNext={() => {
               dispatch(boardActions.loadBoardDB(skiresort, page));
             }}
             is_loading={is_loading}
-          >
+          > */}
             {boardList.map((l) => {
               return (
                 <Grid key={l.postId}>
@@ -78,7 +77,7 @@ const FreeBoardList = () => {
                 </Grid>
               );
             })}
-          </InfinityScroll>
+          {/* </InfinityScroll> */}
         </Grid>
         <FloatButton _onClick={moveWritePage} />
       </Grid>

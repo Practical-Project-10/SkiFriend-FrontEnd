@@ -28,34 +28,42 @@ const Navbar = ({ location }) => {
     <React.Fragment>
       <FixedNav>
         <Menu>
-          <NavLink to="/" className="navLink">
-            {location.pathname === "/" ? (
-              <AiTwotoneHome size="30" />
-            ) : (
-              <AiOutlineHome size="30" />
-            )}
-          </NavLink>
-          <NavLink to="/placeinfo" className="navLink">
-            {location.pathname === "/placeinfo" ? (
-              <AiFillInfoCircle size="30" />
-            ) : (
-              <AiOutlineInfoCircle size="30" />
-            )}
-          </NavLink>
-          <NavLink to="/chatlist" className="navLink">
-            {location.pathname === "/chatlist" ? (
-              <BsChatFill size="30" />
-            ) : (
-              <BsChat size="30" />
-            )}
-          </NavLink>
-          <NavLink to="/mypage" className="navLink">
-            {location.pathname === "/mypage" ? (
-              <AiFillAppstore size="30" />
-            ) : (
-              <AiOutlineAppstore size="30" />
-            )}
-          </NavLink>
+          <Icon>
+            <NavLink to="/" className="navLink">
+              {location.pathname === "/" ? (
+                <AiTwotoneHome size="30" />
+              ) : (
+                <AiOutlineHome size="30" />
+              )}
+            </NavLink>
+          </Icon>
+          <Icon>
+            <NavLink to="/placeinfo" className="navLink">
+              {location.pathname === "/placeinfo" ? (
+                <AiFillInfoCircle size="30" />
+              ) : (
+                <AiOutlineInfoCircle size="30" />
+              )}
+            </NavLink>
+          </Icon>
+          <Icon>
+            <NavLink to="/chatlist" className="navLink">
+              {location.pathname === "/chatlist" ? (
+                <BsChatFill size="30" />
+              ) : (
+                <BsChat size="30" />
+              )}
+            </NavLink>
+          </Icon>
+          <Icon>
+            <NavLink to="/mypage" className="navLink">
+              {location.pathname === "/mypage" ? (
+                <AiFillAppstore size="30" />
+              ) : (
+                <AiOutlineAppstore size="30" />
+              )}
+            </NavLink>
+          </Icon>
         </Menu>
       </FixedNav>
     </React.Fragment>
@@ -77,7 +85,10 @@ const Menu = styled.div`
   display: flex;
   align-items: center;
   gap: 79px;
+`
 
+const Icon = styled.div`
+  width: calc((100% - 237px) / 4);
 `
 
 export default withRouter(Navbar);

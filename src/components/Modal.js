@@ -81,10 +81,13 @@ const Modal = (props) => {
             <Menu>
               <Image src={modal} width="25px" height="25px" margin="0 auto" />
             </Menu>
-            <Menu fontS={props.fontS} onClick={props.delete}>
+            <Menu fontS={props.fontS} padding={props.padding} onClick={props._onClick}>
+              모집 해제
+            </Menu>
+            <Menu fontS={props.fontS} padding={props.padding} onClick={props.delete}>
               삭제하기
             </Menu>
-            <Menu fontS={props.fontS} opacity onClick={props.closemodal}>
+            <Menu fontS={props.fontS} padding={props.padding} opacity onClick={props.closemodal}>
               취소
             </Menu>
           </ModalContainer>
@@ -124,7 +127,7 @@ const ModalBackground = styled.div`
   top: 0;
   left: 0;
   background-color: rgba(0, 0, 0, 0.5);
-  z-index: 3;
+  z-index: 9;
 `;
 
 const ModalContainer = styled.div`

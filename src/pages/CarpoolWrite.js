@@ -9,8 +9,10 @@ import CarpoolSelect from "../components/CarpoolSelect";
 import Header from "../components/Header";
 
 const CarpoolWrite = (props) => {
-  const dispatch = useDispatch();
   const carpool_list = useSelector((state) => state.carpool.list);
+  console.log(carpool_list)
+
+  const dispatch = useDispatch();
   const skiResort = props.match.params.skiresort;
   const [state, setState] = React.useState(false);
 
@@ -20,7 +22,7 @@ const CarpoolWrite = (props) => {
   const nickname = localStorage.getItem("nickname");
   const is_login = nickname ? true : false;
   const carpool = is_edit
-    ? carpool_list.find((l) => l.postId === Number(postId))
+    ? carpool_list[skiResort].find((l) => l.postId === Number(postId))
     : null;
 
   const [form, setForm] = React.useState({
@@ -95,7 +97,7 @@ const CarpoolWrite = (props) => {
     }
   };
   const editCarpool = () => {
-    dispatch(carpoolActions.editCarpoolDB(postId, form));
+    dispatch(carpoolActions.editCarpoolDB(skiResort, postId, form));
   };
 
   return (
@@ -159,7 +161,7 @@ const CarpoolWrite = (props) => {
           <Input
             blue
             label="주의사항"
-            _maxLength="45"
+            _maxLength="40"
             _name="notice"
             _value={notice}
             _onChange={handleChange}
