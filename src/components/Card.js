@@ -18,6 +18,8 @@ import price from "../assets/carpoolList/price_icon.svg";
 import etc from "../assets/carpoolList/etc_icon.svg";
 
 const Card = (props) => {
+  const {notLogin, page} = props;
+
   const dispatch = useDispatch();
   const is_login = localStorage.getItem("is_login");
   const is_profile = localStorage.getItem("is_profile");
@@ -38,11 +40,11 @@ const Card = (props) => {
   };
 
   const deleteCard = () => {
-    dispatch(carpoolActions.deleteCarpoolDB(props.skiResort, props.postId));
+    dispatch(carpoolActions.deleteCarpoolDB(props.skiResort, page, props.postId));
   };
 
   const completeCard = () => {
-    dispatch(carpoolActions.completeCarpoolDB(props.skiResort, props.postId));
+    dispatch(carpoolActions.completeCarpoolDB(props.skiResort, page, props.postId));
   };
 
   //연락하기 기능
@@ -70,7 +72,7 @@ const Card = (props) => {
     return dispatch(chatActions.makeRoomChatDB(postId));
   };
 
-  if(props.notLogin) {
+  if(notLogin) {
     return (
       <Grid>
         <Text>내가 쓴 카풀</Text>
@@ -81,7 +83,7 @@ const Card = (props) => {
     )
   }
 
-  if (props.myPage) {
+  if (page === 'myPage') {
     return (
       <React.Fragment>
         <CarpoolCard width='185px' height='152px' padding='12px' repuest={repuest} status={!props.status} >
@@ -246,7 +248,7 @@ const Card = (props) => {
       {showmodal 
       ? <Modal
           complete={!props.status? true: false}
-          height={!props.status? '151px': '256px'}
+          height={!props.status? '198px': '256px'}
           closeModal={closemodal}
           edit={editCard}
           delete={deleteCard}

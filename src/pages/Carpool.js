@@ -120,7 +120,7 @@ const Carpool = (props) => {
           {carpool_list[skiResort].map((l) => {
             return (
               <Grid key={l.postId} padding="0 0 16px 0">
-                <Card {...l} skiResort={skiResort} />
+                <Card page='carpool' {...l} skiResort={skiResort} />
               </Grid>
             );
           })}
