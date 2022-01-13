@@ -27,7 +27,6 @@ import Snowflakes from "./components/Snowflakes";
 import background from "./assets/background.png.jpg";
 
 function App() {
-  
   return (
     <React.Fragment>
       <Container>
@@ -139,9 +138,9 @@ const Container = styled.div`
   }
 
   @media screen and (min-width: 1200px) {
-      background: url(${background}) no-repeat;
-      background-size: 100%;
-    }
+    background: url(${background}) no-repeat;
+    background-size: 100%;
+  }
 `;
 
 const CardList = styled.div`

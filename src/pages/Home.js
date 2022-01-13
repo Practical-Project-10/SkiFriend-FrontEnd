@@ -19,6 +19,7 @@ import WellihilliPark_ from "../assets/skiImage/Wellihilli/Wellihilli1.png";
 import Konjiam from "../assets/skiInfo/kongiam_logo.png";
 import Konjiam_ from "../assets/skiImage/Konjiam/Konjiam1.png";
 import Banner from "../assets/mainPage/Home_banner.png";
+import PWAButton from "../components/PwaButton";
 
 const Home = (props) => {
   const dispatch = useDispatch();
@@ -79,6 +80,16 @@ const Home = (props) => {
     mainHotPosts();
     // dispatch(mainActions.hotPostsDB());
   }, []);
+
+  // window.onload = () => {
+  //   'use strict';
+
+  //   if ('serviceWorker' in navigator) {
+  //     navigator.serviceWorker
+  //              .register('./sw.js');
+  //   }
+  // }
+
   return (
     <React.Fragment>
       <Header>홈</Header>
@@ -127,6 +138,7 @@ const Home = (props) => {
               인기게시글
             </Text>
           </Grid>
+          <PWAButton />
           <Grid phoneSize>
             {hotPosts.map((p) => {
               return (
