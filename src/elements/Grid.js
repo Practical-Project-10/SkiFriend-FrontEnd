@@ -40,6 +40,7 @@ const Grid = (props) => {
     gap,
     phoneSize,
     header2,
+    _onScroll,
   } = props;
 
   const styles = {
@@ -115,7 +116,7 @@ const Grid = (props) => {
 
   return (
     <React.Fragment>
-      <GridBox {...styles} onClick={_onClick} id={id}>
+      <GridBox {...styles} onClick={_onClick} onScroll={_onScroll} id={id}>
         {children}
       </GridBox>
     </React.Fragment>

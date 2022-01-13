@@ -20,7 +20,7 @@ const GlobalStyles = createGlobalStyle`
         color: #000;
     }
 
-    &::-webkit-scrollbar { display: none; /* Chrome, Safari, Opera*/ };
+    &::-webkit-scrollbar { display: none; Chrome, Safari, Opera };
 
     input[type="number"]::-webkit-inner-spin-button {
         -webkit-appearance: none;

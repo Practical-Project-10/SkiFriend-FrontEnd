@@ -27,13 +27,12 @@ import Snowflakes from "./components/Snowflakes";
 import background from "./assets/background.png.jpg";
 
 function App() {
+  
   return (
     <React.Fragment>
-      {/* <Grid mainFrame> */}
       <Container>
         <Snowflakes />
-        <div className="wrap">
-          {/* <Header /> */}
+        <div id="wrap">
           <GlobalStyleds />
           <CardList>
             <Route exact path="/" component={Home} />
@@ -103,7 +102,6 @@ function App() {
           </CardList>
         </div>
       </Container>
-      {/* </Grid> */}
     </React.Fragment>
   );
 }
@@ -120,7 +118,7 @@ const Container = styled.div`
   overflow: hidden;
   position: relative;
 
-  .wrap {
+  #wrap {
     width: 100%;
     max-width: 412px;
     height: 100%;

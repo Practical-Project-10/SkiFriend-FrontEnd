@@ -85,7 +85,6 @@ const ProfileWrite = (props) => {
       reader.readAsDataURL(profileImgFile);
 
       reader.onloadend = () => {
-        console.log('url', reader.result)
         dispatch(imageActions.setPreview(reader.result));
       };
 
