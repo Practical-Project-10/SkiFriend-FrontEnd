@@ -22,7 +22,7 @@ export const apis = {
       password: pwd,
     }),
 
-  signup: (userInfo) => 
+  signup: (userInfo) =>
     api.post("/user/signup", {
       username: userInfo.username,
       password: userInfo.password,

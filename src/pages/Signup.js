@@ -6,7 +6,7 @@ import Header from "../components/Header";
 
 import { idRegExp, pwdRegExp } from "../shared/validation";
 
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { userActions } from "../redux/modules/user";
 
 const SignupOne = (props) => {

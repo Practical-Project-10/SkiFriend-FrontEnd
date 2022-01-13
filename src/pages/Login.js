@@ -1,8 +1,6 @@
 import React from "react";
 
-import styled from "styled-components";
 import { Grid, Input, Button, Image } from "../elements/index";
-import background from "../assets/login/login.png";
 import logo from "../assets/login/logo.svg"
 
 import Header from "../components/Header";

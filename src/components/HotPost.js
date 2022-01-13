@@ -10,8 +10,6 @@ import Comment from "../assets/freeBoard/comment.svg";
 
 const HotPost = (props) => {
 
-  console.log(props);
-
   if(props.l === '') {
     
   }

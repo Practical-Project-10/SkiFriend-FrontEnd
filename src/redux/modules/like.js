@@ -21,7 +21,6 @@ export const addLikeDB =
     await apis
       .changeLike(postId)
       .then((res) => {
-        console.log(res.data);
         dispatch(getLike(res.data));
         dispatch(boardActions.getOneBoardDB(postId));
       })
