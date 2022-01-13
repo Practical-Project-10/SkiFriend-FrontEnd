@@ -29,20 +29,13 @@ export const updateBoard = createAction(UPDATE, (postData) => ({ postData }));
 export const loadBoardDB =
   (skiResort, page) =>
   async (dispatch, getState, { history }) => {
-    await apis
-      .getFreePost(skiResort, page)
-      .then((res) => {
-        // if(res.data.length === 17) {
-        dispatch(loadBoard(res.data));
-        // dispatch(nextBoard(true));
-        // } else {
-        //   dispatch(loadBoard(res.data));
-        //   dispatch(nextBoard(false));
-        // }
-      })
-      .catch((error) => {
-        console.log(`불러오기 실패${error}`);
-      });
+    try {
+      const response = await apis.getFreePost(skiResort, page);
+
+      response && dispatch(loadBoard(response.data));
+    } catch(err) {
+      console.log(`불러오기 실패${err}`);
+    }
   };
 
 // 게시글 등록하기
@@ -59,28 +52,27 @@ export const addBoardDB =
     // for (let pair of formData.entries()) {
     //   console.log(pair[0] + ", " + pair[1]);
     // }
-    await apis
-      .writeFreePost(skiResort, formData)
-      .then((res) => {
-        history.push(`/freeboardlist/${skiResort}`);
-        dispatch(addBoard(res.data));
-      })
-      .catch((error) => {
-        console.log(`오류 발생!${error}`);
-      });
+
+    try {
+      const response = await apis.writeFreePost(skiResort, formData);
+
+      response && history.push(`/freeboardlist/${skiResort}`);
+      dispatch(addBoard(response.data));
+    } catch(err) {
+      console.log(`오류 발생!${err}`);
+    }
   };
 
 export const getOneBoardDB =
   (postId) =>
   async (dispatch, getState, { history }) => {
-    await apis
-      .getOneFreePost(postId)
-      .then((res) => {
-        dispatch(getOneBoard(res.data));
-      })
-      .catch((error) => {
-        console.log(`오류 발생!${error}`);
-      });
+    try {
+      const response = await apis.getOneFreePost(postId);
+
+      response && dispatch(getOneBoard(response.data));
+    } catch(err) {
+      console.log(`오류 발생!${err}`);
+    }
   };
 
 export const updateBoardDB =
@@ -97,30 +89,28 @@ export const updateBoardDB =
       "requestDto",
       new Blob([JSON.stringify(datas)], { type: "application/json" })
     );
-    await apis
-      .updateFreePost(postId, formdata)
-      .then((res) => {
-        dispatch(updateBoard(res.config.data));
-        history.push(`/freeboarddetail/${skiResort}/${postId}`);
-      })
-      .catch((error) => {
-        console.log(`오류 발생!${error}`);
-      });
+
+    try {
+      const response = await apis.updateFreePost(postId, formdata);
+
+      response && history.push(`/freeboarddetail/${skiResort}/${postId}`);
+      dispatch(updateBoard(response.config.data));
+    } catch(err) {
+      console.log(`오류 발생!${err}`);
+    }
   };
 
 export const deleteBoardDB =
   (postId, skiresort) =>
   async (dispatch, getState, { history }) => {
-    await apis
-      .deleteFreePost(postId)
-      .then((res) => {
-        window.alert("게시물이 정상적으로 삭제되었습니다.");
-        dispatch(loadBoardDB());
-        history.push(`/freeboardlist/${skiresort}`);
-      })
-      .catch((error) => {
-        console.log(`삭제요청 실패${error}`);
-      });
+    try {
+      const response = await apis.deleteFreePost(postId);
+
+      response && history.push(`/freeboardlist/${skiresort}`);
+      dispatch(loadBoardDB());
+    } catch(err) {
+      console.log(`삭제요청 실패${err}`);
+    }
   };
 
 // reducer
