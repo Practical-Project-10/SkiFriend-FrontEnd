@@ -68,6 +68,7 @@ const imageResortDB = (skiResort) => {
 
 const getCarpoolDB = (skiResort, page) => {
   return async function (dispatch) {
+    console.log(skiResort);
     dispatch(isLoading(true));
     try {
       const response = await apis.getCarpool(skiResort, page);

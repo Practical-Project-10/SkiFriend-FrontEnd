@@ -10,12 +10,12 @@ import High1 from "../assets/skiInfo/high1_logo.png";
 import High1_ from "../assets/skiImage/HighOne/HighOne3.png";
 import YongPyong from "../assets/skiInfo/yongpyong_logo.png";
 import YongPyong_ from "../assets/skiImage/YongPyong/YongPyong2.png";
-import VivaldiPark from "../assets/skiInfo/vivaldi_logo.png";
-import VivaldiPark_ from "../assets/skiImage/Vivaldi/Vivaldi1.png";
+import Vivaldi from "../assets/skiInfo/vivaldi_logo.png";
+import Vivaldi_ from "../assets/skiImage/Vivaldi/Vivaldi1.png";
 import Phoenix from "../assets/skiInfo/phoenix_logo.png";
 import Phoenix_ from "../assets/skiImage/Phoenix/Phoenix2.png";
-import WellihilliPark from "../assets/skiInfo/welli_logo.png";
-import WellihilliPark_ from "../assets/skiImage/Wellihilli/Wellihilli1.png";
+import Wellihilli from "../assets/skiInfo/welli_logo.png";
+import Wellihilli_ from "../assets/skiImage/Wellihilli/Wellihilli1.png";
 import Konjiam from "../assets/skiInfo/kongiam_logo.png";
 import Konjiam_ from "../assets/skiImage/Konjiam/Konjiam1.png";
 import Banner from "../assets/mainPage/Home_banner.png";
@@ -23,7 +23,6 @@ import Banner from "../assets/mainPage/Home_banner.png";
 const Home = (props) => {
   const dispatch = useDispatch();
   const hotPosts = useSelector((state) => state.main.list);
-  // const carpool_list = useSelector((state) => state.carpool.list);
   const history = props.history;
   const skiResort = [
     {
@@ -44,8 +43,8 @@ const Home = (props) => {
       resortNum: 3,
       resort: "비발디",
       name: "VivaldiPark",
-      logo: VivaldiPark,
-      img: VivaldiPark_,
+      logo: Vivaldi,
+      img: Vivaldi_,
     },
     {
       resortNum: 4,
@@ -58,8 +57,8 @@ const Home = (props) => {
       resortNum: 5,
       resort: "웰리힐리",
       name: "WellihilliPark",
-      logo: WellihilliPark,
-      img: WellihilliPark_,
+      logo: Wellihilli,
+      img: Wellihilli_,
     },
     {
       resortNum: 6,
@@ -69,6 +68,7 @@ const Home = (props) => {
       img: Konjiam_,
     },
   ];
+
   React.useEffect(() => {
     const mainHotPosts = async () => {
       const response = await (
@@ -79,6 +79,7 @@ const Home = (props) => {
     mainHotPosts();
     // dispatch(mainActions.hotPostsDB());
   }, []);
+
   return (
     <React.Fragment>
       <Header>홈</Header>
@@ -109,7 +110,7 @@ const Home = (props) => {
                 _onClick={() => history.push(`/carpool/${r.name}`)}
                 align="center"
               >
-                <SkiIcon src={r.logo} />
+                <SkiIcon src={r.logo}/>
                 <Text>{r.resort}</Text>
               </Grid>
             );

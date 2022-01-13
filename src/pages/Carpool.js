@@ -28,7 +28,7 @@ const Carpool = (props) => {
 
   React.useEffect(() => {
     dispatch(carpoolActions.imageResortDB(skiResort));
-    dispatch(carpoolActions.getCarpoolDB(skiResort, page)); //
+    dispatch(carpoolActions.getCarpoolDB(skiResort, page));
   }, []);
 
   const induceProfile = () => {

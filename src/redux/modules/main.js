@@ -16,18 +16,15 @@ export const loadPosts = createAction(LOAD, (postList) => ({
 }));
 
 // thunk
-export const hotPostsDB =
-  () =>
+export const hotPostsDB = () =>
   async (dispatch, getState, { history }) => {
-    await axios
-      .get("http://3.34.52.2:8080/main")
-      // .hotPost
-      .then((res) => {
-        dispatch(loadPosts(res));
-      })
-      .catch((error) => {
-        console.log(`게시물 가져오기 실패${error}`);
-      });
+    try {
+      const response = await axios.get("http://3.34.52.2:8080/main");
+
+      response && dispatch(loadPosts(response));
+    } catch(err) {
+      console.log(`게시물 가져오기 실패${err}`);
+    }
   };
 
 export default handleActions(
