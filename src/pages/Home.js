@@ -19,6 +19,7 @@ import Wellihilli_ from "../assets/skiImage/Wellihilli/Wellihilli1.png";
 import Konjiam from "../assets/skiInfo/kongiam_logo.png";
 import Konjiam_ from "../assets/skiImage/Konjiam/Konjiam1.png";
 import Banner from "../assets/mainPage/Home_banner.png";
+import PWAButton from "../components/PwaButton";
 
 const Home = (props) => {
   const dispatch = useDispatch();
@@ -128,6 +129,7 @@ const Home = (props) => {
               인기게시글
             </Text>
           </Grid>
+          <PWAButton />
           <Grid phoneSize>
             {hotPosts.map((p) => {
               return (
