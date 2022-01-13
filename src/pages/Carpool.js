@@ -32,7 +32,7 @@ const Carpool = (props) => {
     dispatch(carpoolActions.getCarpoolDB(skiResort, page));
 
     return(() =>
-      dispatch((carpoolActions.reset()))
+      dispatch((carpoolActions.reset(skiResort)))
     )
   }, []);
 
@@ -62,7 +62,7 @@ const Carpool = (props) => {
   const list = document.getElementById("list");
   const cardList = document.getElementById("cardList");
 
-  const infinifyScroll = _.throttle(() => {
+  const infinifyScroll = () => {
     const recentScroll = list ? list.scrollTop : null;
     const cardListHeight = cardList ? cardList.offsetHeight : null;
     const listHeight = list ? list.scrollHeight : null;
@@ -76,7 +76,7 @@ const Carpool = (props) => {
         dispatch(carpoolActions.getCarpoolDB(skiResort, page));
       }
     }
-  }, 1000);
+  };
 
   return (
     <CardList id="list" onScroll={infinifyScroll}>
