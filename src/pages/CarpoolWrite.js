@@ -10,7 +10,6 @@ import Header from "../components/Header";
 
 const CarpoolWrite = (props) => {
   const carpool_list = useSelector((state) => state.carpool.list);
-  console.log(carpool_list)
 
   const dispatch = useDispatch();
   const skiResort = props.match.params.skiresort;

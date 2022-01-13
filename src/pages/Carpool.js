@@ -1,6 +1,6 @@
 import React from "react";
 
-import _ from 'lodash';
+import _ from "lodash";
 
 import { useDispatch, useSelector } from "react-redux";
 import { carpoolActions } from "../redux/modules/carpool";
@@ -10,7 +10,7 @@ import Card from "../components/Card";
 import FloatButton from "../components/FloatButton";
 import Header from "../components/Header";
 
-import styled from 'styled-components';
+import styled from "styled-components";
 import { Grid, Image, Text } from "../elements/index";
 import filter from "../assets/carpoolList/filter.svg";
 
@@ -25,7 +25,6 @@ const Carpool = (props) => {
   const is_login = localStorage.getItem("is_login");
   const is_profile = localStorage.getItem("is_profile");
   const skiResort = props.match.params.skiresort;
-
 
   React.useEffect(() => {
     dispatch(carpoolActions.imageResortDB(skiResort));
@@ -55,30 +54,27 @@ const Carpool = (props) => {
     history.push(`/carpoolwrite/${skiResort}`);
   };
 
-  const list = document.getElementById('list');
-  const cardList = document.getElementById('cardList');
+  const list = document.getElementById("list");
+  const cardList = document.getElementById("cardList");
 
-  const infinifyScroll = _.throttle(() => {    
-    const recentScroll = list? list.scrollTop: null;
-    const cardListHeight = cardList? cardList.offsetHeight: null;
-    const listHeight = list? list.scrollHeight: null
-    console.log(listHeight , cardListHeight , recentScroll)
-    console.log(listHeight - cardListHeight - recentScroll)
+  const infinifyScroll = _.throttle(() => {
+    const recentScroll = list ? list.scrollTop : null;
+    const cardListHeight = cardList ? cardList.offsetHeight : null;
+    const listHeight = list ? list.scrollHeight : null;
 
-    if(is_loading) {
+    if (is_loading) {
       return;
     }
 
-    if(listHeight - cardListHeight - recentScroll < 20) {
-      if(is_next){
+    if (listHeight - cardListHeight - recentScroll < 20) {
+      if (is_next) {
         dispatch(carpoolActions.getCarpoolDB(skiResort, page));
       }
     }
-  }, 1000)
-
+  }, 1000);
 
   return (
-    <CardList id='list' onScroll={infinifyScroll}>
+    <CardList id="list" onScroll={infinifyScroll}>
       <Header
         goBack
         push
@@ -88,7 +84,12 @@ const Carpool = (props) => {
       >
         {skiResort}
       </Header>
-      <Grid id="cardList" bg="#FFF" minHeight="calc( 100vh - 124px )" margin="0 0 70px">
+      <Grid
+        id="cardList"
+        bg="#FFF"
+        minHeight="calc( 100vh - 124px )"
+        margin="0 0 70px"
+      >
         <Grid width="100%" height="210px">
           <Image src={resortImg} size="cover" width="100%" height="100%" />
         </Grid>

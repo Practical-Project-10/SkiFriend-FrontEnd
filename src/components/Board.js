@@ -5,7 +5,7 @@ import { Grid, Text, Image } from "../elements";
 import Comment from "../assets/freeBoard/comment.svg";
 
 // react icons
-import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
+import { AiOutlineHeart } from "react-icons/ai";
 
 const Board = (props) => {
   return (
