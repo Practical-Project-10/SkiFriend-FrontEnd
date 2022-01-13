@@ -71,7 +71,9 @@ const Home = (props) => {
   ];
   React.useEffect(() => {
     const mainHotPosts = async () => {
-      const response = await (await fetch("https://seongeunyang.shop/user/profile")).json();
+      const response = await (
+        await fetch("https://seongeunyang.shop/main")
+      ).json();
       dispatch(mainActions.loadPosts(response));
     };
     mainHotPosts();
@@ -80,13 +82,18 @@ const Home = (props) => {
   return (
     <React.Fragment>
       <Header>홈</Header>
-      <Grid width='100%' margin="0 0 70px">
+      <Grid width="100%" margin="0 0 70px">
         <Grid width="100%" height="210px">
           <Image src={Banner} size="cover" width="100%" height="100%" />
         </Grid>
         <Grid align="center" padding="4px 0" bg="#474D56">
           {/* 가이드 링크 */}
-          <a href='https://www.notion.so/7991aee19c5f4a419bb71207823d01fe' target='_blank' rel='noopener noreferrer' style={{fontWeight:'700', color:'#FFF'}}>
+          <a
+            href="https://www.notion.so/7991aee19c5f4a419bb71207823d01fe"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{ fontWeight: "700", color: "#FFF" }}
+          >
             카풀과 스키장이 처음이라면? 가이드 읽어보기
           </a>
         </Grid>
@@ -95,7 +102,7 @@ const Home = (props) => {
           {skiResort.map((r) => {
             return (
               <Grid
-                width='calc((100% - 100px) / 3)'
+                width="calc((100% - 100px) / 3)"
                 cursor
                 hoverOpacity="0.8"
                 key={r.resortNum}
@@ -108,7 +115,13 @@ const Home = (props) => {
             );
           })}
         </IconWrap>
-        <Grid bg="#FFF" height="415px" radius="22px" padding="26px 0" margin='0 0 20px'>
+        <Grid
+          bg="#FFF"
+          height="415px"
+          radius="22px"
+          padding="26px 0"
+          margin="0 0 20px"
+        >
           <Grid phoneSize>
             <Text bold size="18px">
               인기게시글
@@ -133,6 +146,6 @@ const IconWrap = styled.div`
   flex-wrap: wrap;
   padding: 26px 42px;
   gap: 30px 50px;
-`
+`;
 
 export default Home;

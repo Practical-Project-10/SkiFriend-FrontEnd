@@ -24,7 +24,6 @@ const MyPage = (props) => {
   const is_profile = localStorage.getItem("is_profile");
   const user_profile = useSelector((state) => state.profile.user_profile);
   const myCarpool = useSelector((state) => state.carpool.myList);
-  console.log(user_profile);
   React.useEffect(() => {
     if (!is_login) {
       return null;

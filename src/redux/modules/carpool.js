@@ -15,31 +15,42 @@ const IS_LOADING = "IS_LOADING";
 const IS_NEXT = "IS_NEXT";
 
 // acrtion creators
-const getCarpool = createAction(GET_CARPOOL, (skiResort, list) => ({ 
-  skiResort, 
+const getCarpool = createAction(GET_CARPOOL, (skiResort, list) => ({
+  skiResort,
   list,
 }));
-const addCarpool = createAction(ADD_CARPOOL, (skiResort, carpool) => ({ 
-  skiResort, 
-  carpool, 
-}));
-const editCarpool = createAction(EDIT_CARPOOL, (skiResort, postId, carpool) => ({
+const addCarpool = createAction(ADD_CARPOOL, (skiResort, carpool) => ({
   skiResort,
-  postId,
   carpool,
 }));
-const deleteCarpool = createAction(DELETE_CARPOOL, (skiResort, page, postId) => ({ 
-  skiResort, 
-  page, 
-  postId,
+const editCarpool = createAction(
+  EDIT_CARPOOL,
+  (skiResort, postId, carpool) => ({
+    skiResort,
+    postId,
+    carpool,
+  })
+);
+const deleteCarpool = createAction(
+  DELETE_CARPOOL,
+  (skiResort, page, postId) => ({
+    skiResort,
+    page,
+    postId,
+  })
+);
+const getMyCarpool = createAction(GET_MYCARPOOL, (myCarpools) => ({
+  myCarpools,
 }));
-const getMyCarpool = createAction(GET_MYCARPOOL, (myCarpools) => ({ myCarpools }));
-const completeMycarpool = createAction(COMPLETE_CARPOOL, (skiResort, page, postId, carpool) => ({
-  skiResort, 
-  page, 
-  postId, 
-  carpool,
-}));
+const completeMycarpool = createAction(
+  COMPLETE_CARPOOL,
+  (skiResort, page, postId, carpool) => ({
+    skiResort,
+    page,
+    postId,
+    carpool,
+  })
+);
 const filterCarpool = createAction(FILTER_CARPOOL, (carpool) => ({ carpool }));
 const imageResort = createAction(IMAGE_RESORT, (url) => ({ url }));
 const isLoading = createAction(IS_LOADING, (state) => ({ state }));
@@ -113,7 +124,8 @@ const completeCarpoolDB = (skiResort, page, postId) => {
     try {
       const response = await apis.completeCarpool(postId);
 
-      response && dispatch(completeMycarpool(skiResort, page, postId, response.data));
+      response &&
+        dispatch(completeMycarpool(skiResort, page, postId, response.data));
     } catch (err) {
       console.log(err);
     }
@@ -170,11 +182,11 @@ const initialState = {
 export default handleActions(
   {
     [GET_CARPOOL]: (state, action) =>
-    produce(state, (draft) => {
-      const skiResort = action.payload.skiResort;
-      draft.is_loading = false;
-      draft.page += 1;
-      draft.list[skiResort].push(...action.payload.list);
+      produce(state, (draft) => {
+        const skiResort = action.payload.skiResort;
+        draft.is_loading = false;
+        draft.page += 1;
+        draft.list[skiResort].push(...action.payload.list);
       }),
 
     [ADD_CARPOOL]: (state, action) =>
@@ -186,8 +198,8 @@ export default handleActions(
     [EDIT_CARPOOL]: (state, action) =>
       produce(state, (draft) => {
         const skiResort = action.payload.skiResort;
-        const idx = draft.list[skiResort].findIndex((l) => 
-          l.postId === Number(action.payload.postId)
+        const idx = draft.list[skiResort].findIndex(
+          (l) => l.postId === Number(action.payload.postId)
         );
         draft.list[skiResort][idx] = { ...draft.list[skiResort][idx], ...action.payload.carpool };
       }),
@@ -202,12 +214,12 @@ export default handleActions(
         );
         draft.list[skiResort] = deleted_list;
 
-        if(page === 'myPage') {
+        if (page === "myPage") {
           let deleted_myList = draft.myList.filter(
             (l) => l.postId !== action.payload.postId
           );
           draft.myList = deleted_myList;
-        };
+        }
       }),
 
     [FILTER_CARPOOL]: (state, action) =>
@@ -219,22 +231,28 @@ export default handleActions(
       produce(state, (draft) => {
         draft.myList = action.payload.myCarpools;
       }),
-    
+
     [COMPLETE_CARPOOL]: (state, action) =>
       produce(state, (draft) => {
         const page = action.payload.page;
         const skiResort = action.payload.skiResort;
 
-        const idx = draft.list[skiResort].findIndex((l) => 
-          l.postId === Number(action.payload.postId)
+        const idx = draft.list[skiResort].findIndex(
+          (l) => l.postId === Number(action.payload.postId)
         );
-        draft.list[skiResort][idx] = { ...draft.list[skiResort][idx], ...action.payload.carpool}
-        
-        if(page === 'myPage') {
-          const idx = draft.myList.findIndex((l) => 
-          l.postId === Number(action.payload.postId)
+        draft.list[skiResort][idx] = {
+          ...draft.list[skiResort][idx],
+          ...action.payload.carpool,
+        };
+
+        if (page === "myPage") {
+          const idx = draft.myList.findIndex(
+            (l) => l.postId === Number(action.payload.postId)
           );
-          draft.myList[idx] = { ...draft.myList[idx], ...action.payload.carpool}
+          draft.myList[idx] = {
+            ...draft.myList[idx],
+            ...action.payload.carpool,
+          };
         }
       }),
 
@@ -242,7 +260,7 @@ export default handleActions(
       produce(state, (draft) => {
         draft.resortImg = action.payload.url;
       }),
-    
+
     [IS_LOADING]: (state, action) =>
       produce(state, (draft) => {
         draft.is_loading = action.payload.state;
