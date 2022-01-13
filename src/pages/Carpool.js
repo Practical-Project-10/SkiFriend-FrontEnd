@@ -18,6 +18,8 @@ const Carpool = (props) => {
   const dispatch = useDispatch();
   const carpool_list = useSelector((state) => state.carpool.list);
   const page = useSelector((state) => state.carpool.page);
+  console.log(page);
+
   const is_loading = useSelector((state) => state.carpool.is_loading);
   const is_next = useSelector((state) => state.carpool.is_next);
   const resortImg = useSelector((state) => state.carpool.resortImg);
@@ -28,6 +30,10 @@ const Carpool = (props) => {
   React.useEffect(() => {
     dispatch(carpoolActions.imageResortDB(skiResort));
     dispatch(carpoolActions.getCarpoolDB(skiResort, page));
+
+    return(() =>
+      dispatch((carpoolActions.reset()))
+    )
   }, []);
 
   const induceProfile = () => {

@@ -119,7 +119,7 @@ const Home = (props) => {
         </IconWrap>
         <Grid
           bg="#FFF"
-          height="415px"
+          height="470px"
           radius="22px"
           padding="26px 0"
           margin="0 0 20px"
