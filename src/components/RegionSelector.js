@@ -3,7 +3,6 @@ import React, { forwardRef } from "react";
 import styled from "styled-components";
 //지역선택 셀렉박스 css 는 import 경로에 쓰여져 있습니다!
 const RegionSelector = forwardRef((props, loca) => {
-  console.log(props);
   const {subLoca, changeLoca, state} = props;
 
   // const 

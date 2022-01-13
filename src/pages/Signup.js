@@ -1,11 +1,8 @@
 import React, { useState } from "react";
-
 import { Grid, Text, Input, Button } from "../elements/index";
 
 import Header from "../components/Header";
-
 import { idRegExp, pwdRegExp } from "../shared/validation";
-
 import { useDispatch } from "react-redux";
 import { userActions } from "../redux/modules/user";
 
