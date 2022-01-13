@@ -41,7 +41,6 @@ const CommentList = () => {
       addCommentBtn();
     }
   };
-  //hi
   //-------댓글 작성-------
   const addCommentBtn = () => {
     if (is_login) {
