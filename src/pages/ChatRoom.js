@@ -35,6 +35,8 @@ const ChatRoom = () => {
   const [message, setMessage] = useState("");
   const [messageList, setMessageList] = useState([]);
   const [roomInfo, setRoomInfo] = useState([]);
+  console.log(roomInfo)
+
   const messageDatas = (recv) => {
     setMessageList((prev) => [...prev, recv]);
   };
@@ -169,6 +171,7 @@ const ChatRoom = () => {
           {roomName}
         </Header>
         <Grid
+          phoneSize
           margin="54px 0 0 0"
           minHeight="calc( 100vh - 124px )"
           display="flex"

@@ -172,7 +172,7 @@ const Card = (props) => {
 
   return (
     <React.Fragment>
-      <CarpoolCard repuest={repuest} status={!props.status}>
+      <CarpoolCard repuest={repuest} status={!props.status} border={props.border}>
         <Grid>
           <Grid margin="0 0 3px">
             <Text bold color={repuest ? "#7281D1" : "#6195CF"}>

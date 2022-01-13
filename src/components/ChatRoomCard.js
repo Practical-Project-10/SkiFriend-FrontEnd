@@ -13,24 +13,30 @@ const ChatRoomCard = (props) => {
 
   return (
     <React.Fragment>
-      <Grid margin="auto" width="95%" padding="10px" bg="#FFF" radius="10px">
-        <Grid is_flex justify="space-around" margin="12px 0">
-          <Grid>
-            <Text size="14px" bold>
-              {roomInfo.title}
-            </Text>
-          </Grid>
-          <Grid is_flex border="2px solid #6195CF" radius="5px" padding="5px">
-            <Text bold size="12px">
-              {roomInfo.startLocation}
-            </Text>
-            <Image src={arrow} width="20px" height="10px" margin="0 5px" />
-            <Text bold color="#6195CF" size="12px">
+      <Grid
+        width="100%"
+        height="163px"
+        padding="16px"
+        margin='0 0 10px'
+        bg="#FFF"
+        radius="10px"
+        display='flex'
+        direction='column'
+        justify='space-between'
+      >
+        {/* <Grid justify="space-around" margin="12px 0"> */}
+          <Text block size="20px" bold>
+            {roomInfo.title}
+          </Text>
+          <Grid is_flex border="2px solid #6195CF" radius="5px" padding="5px" justify='center'>
+            <Text bold>{roomInfo.startLocation}</Text>
+            <Image src={arrow} width="20px" height="10px" margin="0 10px" />
+            <Text bold color="#6195CF">
               {roomInfo.endLocation}
             </Text>
           </Grid>
-        </Grid>
-        <Grid is_flex justify="space-around">
+        {/* </Grid> */}
+        <Grid is_flex justify="space-between">
           <Grid is_flex bg="#6195CF" radius="5px" padding="4px 8px">
             <Image
               src={calendar}
@@ -61,7 +67,7 @@ const ChatRoomCard = (props) => {
             </Text>
           </Grid>
         </Grid>
-        <Grid margin="10px">
+        <Grid>
           <Text bold>주의사항: {roomInfo.notice}</Text>
         </Grid>
       </Grid>

@@ -193,8 +193,10 @@ export default handleActions(
 
     [ADD_CARPOOL]: (state, action) =>
       produce(state, (draft) => {
+        console.log(action.payload.carpool)
         const skiResort = action.payload.skiResort;
-        draft.list[skiResort].unshift(action.payload.carpool);
+        // draft.list[skiResort].unshift(action.payload.carpool);
+        console.log(state.list[skiResort]);
       }),
 
     [EDIT_CARPOOL]: (state, action) =>
