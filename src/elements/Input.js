@@ -47,14 +47,6 @@ const Input = forwardRef((props, ref) => {
     margin,
   };
 
-  // const maxLengthCheck = (e) => {
-  //   console.log(e.value);
-  //   if(!e.value.length <= e.maxLength) {
-  //     console.log('실행')
-  //     // e.value = e.value.slice(0, e.maxLength);
-  //   }
-  // }
-
   if (dupButton) {
     return (
       <Grid>

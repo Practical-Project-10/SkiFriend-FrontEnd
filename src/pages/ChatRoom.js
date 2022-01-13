@@ -35,7 +35,6 @@ const ChatRoom = () => {
   const [message, setMessage] = useState("");
   const [messageList, setMessageList] = useState([]);
   const [roomInfo, setRoomInfo] = useState([]);
-  console.log(roomInfo)
 
   const messageDatas = (recv) => {
     setMessageList((prev) => [...prev, recv]);
