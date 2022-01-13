@@ -191,9 +191,9 @@ const MyPage = (props) => {
                 </Text>
                 <Swiper
                   className="scroll-container"
-                  slidesPerView={1.5}
+                  slidesPerView={1.3}
                   spaceBetween={10}
-                  initialSlide={1}
+                  initialSlide={0}
                 >
                   {myCarpool.map((l) => {
                     return (

@@ -15,18 +15,16 @@ const GET_LIKE = "like/GET_LIKE";
 export const getLike = createAction(GET_LIKE, (likeList) => ({ likeList }));
 
 // thunk
-export const addLikeDB =
-  (postId) =>
+export const addLikeDB = (postId) =>
   async (dispatch, getState, { history }) => {
-    await apis
-      .changeLike(postId)
-      .then((res) => {
-        dispatch(getLike(res.data));
-        dispatch(boardActions.getOneBoardDB(postId));
-      })
-      .catch((error) => {
-        console.log(`좋아요 변경 실패${error}`);
-      });
+    try {
+      const response = await apis.changeLike(postId);
+
+      response && dispatch(getLike(response.data)) && 
+      dispatch(boardActions.getOneBoardDB(postId));
+    } catch(err) {
+      console.log(`좋아요 변경 실패${err}`);
+    }
   };
 
 // reducer
