@@ -139,7 +139,7 @@ const GridBox = styled.div`
   padding: ${(props) => props.padding};
   margin: ${(props) => props.margin};
   position: ${(props) => props.position};
-  background: ${(props) => `url(${props.src})`} no-repeat;
+  background: ${(props) => props.src? `url(${props.src}) no-repeat`: ''};
   background-size: cover;
   background-position: center;
   background-color: ${(props) => props.bg};
