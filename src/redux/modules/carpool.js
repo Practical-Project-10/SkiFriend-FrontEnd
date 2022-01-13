@@ -201,7 +201,10 @@ export default handleActions(
         const idx = draft.list[skiResort].findIndex(
           (l) => l.postId === Number(action.payload.postId)
         );
-        draft.list[skiResort][idx] = { ...draft.list[skiResort][idx], ...action.payload.carpool };
+        draft.list[skiResort][idx] = {
+          ...draft.list[skiResort][idx],
+          ...action.payload.carpool,
+        };
       }),
 
     [DELETE_CARPOOL]: (state, action) =>

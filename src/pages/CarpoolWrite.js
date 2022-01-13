@@ -10,7 +10,6 @@ import Header from "../components/Header";
 
 const CarpoolWrite = (props) => {
   const carpool_list = useSelector((state) => state.carpool.list);
-
   const dispatch = useDispatch();
   const skiResort = props.match.params.skiresort;
   const [state, setState] = React.useState(false);
@@ -63,12 +62,11 @@ const CarpoolWrite = (props) => {
     setForm({
       ...form,
       [name]: value,
-    })
-  }
+    });
+  };
 
   // 출발 도착 지역 바꾸기
   const location = (startLoca) => {
-
     if (!state) {
       setState(true);
       setForm({
@@ -102,7 +100,14 @@ const CarpoolWrite = (props) => {
     <React.Fragment>
       <Header goBack>카풀 {is_edit ? "수정" : "작성"} 페이지</Header>
       <Grid bg="#FFF" minHeight="calc( 100vh - 124px )">
-        <CarpoolSelect is_edit={is_edit} form={form} bringForm={bringForm} bringDate={bringDate} bringLocation={bringLocation} location={location}/>
+        <CarpoolSelect
+          is_edit={is_edit}
+          form={form}
+          bringForm={bringForm}
+          bringDate={bringDate}
+          bringLocation={bringLocation}
+          location={location}
+        />
 
         <div style={{ border: "5px solid #edeeef" }}></div>
 
