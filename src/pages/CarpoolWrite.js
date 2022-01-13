@@ -125,7 +125,7 @@ const CarpoolWrite = (props) => {
             _name="title"
             _value={title}
             _onChange={handleChange}
-            placeholder="제목을 입력해주세요."
+            placeholder="ex) 서울역에서 출발합니다."
             padding="19px 8px"
           />
 
@@ -138,7 +138,7 @@ const CarpoolWrite = (props) => {
             _value={price}
             _onChange={handleChange}
             autocomplete="off"
-            placeholder="숫자만 입력해주세요."
+            placeholder="숫자만 입력가능! 서울→경기 편도시세 10000(자유협의)"
             padding="19px 8px"
           />
 
@@ -169,7 +169,7 @@ const CarpoolWrite = (props) => {
             _value={notice}
             _onChange={handleChange}
             autocomplete="off"
-            placeholder="주의사항을 입력해주세요."
+            placeholder="ex) 장비 추가시, 5000원."
             padding="19px 8px"
           />
 
