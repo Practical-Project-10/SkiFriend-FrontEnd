@@ -4,7 +4,7 @@ import Stomp from "stompjs";
 const accessToken = document.cookie.split("=")[1];
 const token = { Authorization: `${accessToken}` };
 
-const sock = new SockJS("http://3.34.52.2:8080/ws-stomp");
+const sock = new SockJS("https://seongeunyang.shop/ws-stomp");
 const stomp = Stomp.over(sock);
 
 export const socket = {

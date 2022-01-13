@@ -149,7 +149,7 @@ const ProfileWrite = (props) => {
     );
 
     return axios
-      .post(`http://3.34.52.2:8080/user/profile`, formData, token)
+      .post(`https://seongeunyang.shop/user/profile`, formData, token)
       .then((response) => {
         alert("정상적으로 프로필이 등록되었습니다.");
 
