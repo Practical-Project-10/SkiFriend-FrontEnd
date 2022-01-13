@@ -44,7 +44,6 @@ const CarpoolWrite = (props) => {
       [name]: value,
     });
   };
-  console.log(form);
 
   const bringDate = (date) => {
     setForm({
