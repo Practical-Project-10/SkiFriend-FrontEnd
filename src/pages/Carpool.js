@@ -1,5 +1,5 @@
 import React from "react";
-import _ from "lodash";
+// import _ from "lodash";
 
 import { useDispatch, useSelector } from "react-redux";
 import { carpoolActions } from "../redux/modules/carpool";
@@ -17,9 +17,9 @@ const Carpool = (props) => {
   const history = props.history;
   const dispatch = useDispatch();
   const carpool_list = useSelector((state) => state.carpool.list);
-  const page = useSelector((state) => state.carpool.page);
-  console.log(page);
+  console.log(carpool_list)
 
+  const page = useSelector((state) => state.carpool.page);
   const is_loading = useSelector((state) => state.carpool.is_loading);
   const is_next = useSelector((state) => state.carpool.is_next);
   const resortImg = useSelector((state) => state.carpool.resortImg);

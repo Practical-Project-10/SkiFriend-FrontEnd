@@ -26,7 +26,6 @@ const Card = (props) => {
   const repuest = props.carpoolType === "카풀 요청";
   const nickname = localStorage.getItem("nickname");
   const is_mine = props.nickname === nickname;
-  console.log(props.nickname, nickname)
 
   //------useState관리-------
   const [showmodal, setShowModal] = React.useState(false);
@@ -156,10 +155,10 @@ const Card = (props) => {
     )
   }
 
-
+  console.log(props.border)
   return (
     <React.Fragment>
-      <CarpoolCard repuest={repuest} status={!props.status}>
+      <CarpoolCard repuest={repuest} status={!props.status} border={props.border}>
         <Grid>
           <Grid margin="0 0 3px">
             <Text bold color={repuest ? "#7281D1" : "#6195CF"}>

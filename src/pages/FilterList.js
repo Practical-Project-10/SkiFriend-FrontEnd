@@ -1,5 +1,7 @@
 import React from "react";
-import { useSelector } from "react-redux";
+
+import { useDispatch, useSelector } from "react-redux";
+import { carpoolActions } from "../redux/modules/carpool";
 
 import CarpoolMenuBar from "../components/CarpoolMenuBar";
 import Card from "../components/Card";
@@ -11,11 +13,13 @@ import filter from "../assets/carpoolList/filter.svg";
 
 const FilterList = (props) => {
   const history = props.history;
+  const dispatch = useDispatch();
   const is_profile = localStorage.getItem("is_profile");
   const carpool_list = useSelector((state) => state.carpool.filterList);
   const resortImg = useSelector((state) => state.carpool.resortImg);
   const skiResort = props.match.params.skiresort;
   React.useEffect(() => {
+    dispatch(carpoolActions.imageResortDB(skiResort));
     if (carpool_list.length === 0) {
       history.push(`/carpool/${skiResort}`);
     }
