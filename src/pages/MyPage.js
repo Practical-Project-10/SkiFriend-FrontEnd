@@ -181,7 +181,7 @@ const MyPage = (props) => {
                     return (
                       <SwiperSlide>
                         <Grid key={l.createdAt} width="100%">
-                          <Card myPage {...l} />
+                          <Card page='myPage' {...l} />
                         </Grid>
                       </SwiperSlide>
                     );
