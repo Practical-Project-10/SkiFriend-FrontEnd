@@ -110,7 +110,7 @@ const Home = (props) => {
                 _onClick={() => history.push(`/carpool/${r.name}`)}
                 align="center"
               >
-                <SkiIcon src={r.logo}/>
+                <SkiIcon src={r.logo} />
                 <Text>{r.resort}</Text>
               </Grid>
             );
