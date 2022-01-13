@@ -2,6 +2,7 @@ import React from "react";
 
 import { Grid, Input, Button, Image } from "../elements/index";
 import logo from "../assets/login/logo.svg"
+import bg from "../assets/login/login.png"
 
 import Header from "../components/Header";
 
@@ -32,7 +33,7 @@ const Login = (props) => {
   return (
     <React.Fragment>
       <Header>로그인</Header>
-      <Grid minHeight="calc( 100vh - 55px )" display='flex' direction='column' justify='space-between' padding='46px 16px 16px'>
+      <Grid src={bg} minHeight="calc( 100vh - 55px )" display='flex' direction='column' justify='space-between' padding='46px 16px 16px'>
         <Grid width='100%' height="73px">
           <Image src={logo} width='100%' height='73px'/>
         </Grid>
@@ -55,5 +56,7 @@ const Login = (props) => {
     </React.Fragment>
   );
 };
+
+
 
 export default Login;
