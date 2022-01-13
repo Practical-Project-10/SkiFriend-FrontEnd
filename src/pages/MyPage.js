@@ -24,11 +24,11 @@ const MyPage = (props) => {
   const is_profile = localStorage.getItem("is_profile");
   const user_profile = useSelector((state) => state.profile.user_profile);
   const myCarpool = useSelector((state) => state.carpool.myList);
-
+  console.log(user_profile);
   React.useEffect(() => {
     if (!is_login) {
       return null;
-    };
+    }
     dispatch(profileActions.getProfileDB());
     dispatch(carpoolActions.getMyCarpoolDB());
   }, []);
@@ -65,7 +65,11 @@ const MyPage = (props) => {
                 </Grid>
 
                 <Grid padding="6px 0 0">
-                  <SubButton onClick={() => {history.push("/login");}}>
+                  <SubButton
+                    onClick={() => {
+                      history.push("/login");
+                    }}
+                  >
                     <Text size="12px" color="#474D56">
                       로그인
                     </Text>
@@ -96,8 +100,12 @@ const MyPage = (props) => {
                     환영해요! {user_profile.nickname}님
                   </Text>
 
-                  {is_profile === "true"
-                  ? <Grid margin="10px 0 0" display='flex' justify='space-between'>
+                  {is_profile === "true" ? (
+                    <Grid
+                      margin="10px 0 0"
+                      display="flex"
+                      justify="space-between"
+                    >
                       <Small>
                         <Text bold size="12px" color="#FFF">
                           {user_profile.gender}
@@ -114,19 +122,26 @@ const MyPage = (props) => {
                         </Text>
                       </Small>
                     </Grid>
-                  : null
-                  }
+                  ) : null}
                 </Grid>
 
                 <Grid padding="6px 0 0">
                   {is_profile === "true" ? (
-                    <SubButton onClick={() => {history.push(`/profilewrite/${user_profile.username}`);}}>
+                    <SubButton
+                      onClick={() => {
+                        history.push(`/profilewrite/${user_profile.username}`);
+                      }}
+                    >
                       <Text size="12px" color="#474D56">
                         수정하기
                       </Text>
                     </SubButton>
                   ) : (
-                    <SubButton onClick={() => {history.push("/profilewrite");}}>
+                    <SubButton
+                      onClick={() => {
+                        history.push("/profilewrite");
+                      }}
+                    >
                       <Text size="12px" color="#474D56">
                         등록하기
                       </Text>
@@ -143,7 +158,7 @@ const MyPage = (props) => {
               <div style={{ border: "1px solid #adb6c1" }}></div>
 
               <Grid margin="22px 0 31px">
-                <Text block margin='0 0 6px 0' bold="800" size="12px">
+                <Text block margin="0 0 6px 0" bold="800" size="12px">
                   자기소개
                 </Text>
                 <Text>{user_profile.selfIntro}</Text>
@@ -159,7 +174,11 @@ const MyPage = (props) => {
           padding="16px 16px 0"
         >
           {/* 구글 폼으로 이동 */}
-          <a href='https://docs.google.com/forms/d/1kRaC8Zy-8gpKSI2O4kDErjCYiE0l6jP_2dbR8tQGggc/viewform?edit_requested=true' target='_blank' rel='noopener noreferrer'>
+          <a
+            href="https://docs.google.com/forms/d/1kRaC8Zy-8gpKSI2O4kDErjCYiE0l6jP_2dbR8tQGggc/viewform?edit_requested=true"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <Grid cursor width="100%" height="143px">
               <Image src={banner} width="100%" height="100%" size="cover" />
             </Grid>
@@ -181,7 +200,7 @@ const MyPage = (props) => {
                     return (
                       <SwiperSlide>
                         <Grid key={l.createdAt} width="100%">
-                          <Card page='myPage' {...l} />
+                          <Card page="myPage" {...l} />
                         </Grid>
                       </SwiperSlide>
                     );
@@ -225,10 +244,10 @@ const SubButton = styled.div`
   width: 66px;
   padding: 6px;
   margin-bottom: 5px;
-  background-color: #FFF;
+  background-color: #fff;
   border-radius: 4px;
   text-align: center;
   cursor: pointer;
-`
+`;
 
 export default MyPage;
