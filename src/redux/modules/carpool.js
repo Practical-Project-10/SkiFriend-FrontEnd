@@ -77,11 +77,9 @@ const getCarpoolDB = (skiResort, page) => {
       // response && dispatch(getCarpool(skiResort, response.data));
       if (response.data.length === 4) {
         dispatch(getCarpool(skiResort, response.data));
-        console.log('트루')
         dispatch(isNext(true));
       } else {
         dispatch(getCarpool(skiResort, response.data));
-        console.log('펄스')
         dispatch(isNext(false));
       }
     } catch (err) {

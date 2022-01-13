@@ -74,9 +74,11 @@ const editProfileDB = (profile) => {
 
     try {
       const response = await apis.editProfile(formData);
+      
       response && history.push("/mypage");
       dispatch(editProfile(response.data));
       dispatch(imageActions.setPreview(null));
+      localStorage.setItem('nickname', response.data.nickname);
     } catch (err) {
       console.log("addProfileDB", err);
       // const error = {...err};
