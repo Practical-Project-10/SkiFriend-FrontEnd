@@ -13,6 +13,7 @@ const COMPLETE_CARPOOL = "COMPLETE_CARPOOL";
 const IMAGE_RESORT = "IMAGE_RESORT";
 const IS_LOADING = "IS_LOADING";
 const IS_NEXT = "IS_NEXT";
+const RESET = "RESET";
 
 // acrtion creators
 const getCarpool = createAction(GET_CARPOOL, (skiResort, list) => ({
@@ -55,6 +56,7 @@ const filterCarpool = createAction(FILTER_CARPOOL, (carpool) => ({ carpool }));
 const imageResort = createAction(IMAGE_RESORT, (url) => ({ url }));
 const isLoading = createAction(IS_LOADING, (state) => ({ state }));
 const isNext = createAction(IS_NEXT, (state) => ({ state }));
+const reset = createAction(RESET, () => ({}));
 
 // middlewares
 const imageResortDB = (skiResort) => {
@@ -68,7 +70,6 @@ const imageResortDB = (skiResort) => {
 
 const getCarpoolDB = (skiResort, page) => {
   return async function (dispatch) {
-    console.log(skiResort);
     dispatch(isLoading(true));
     try {
       const response = await apis.getCarpool(skiResort, page);
@@ -274,6 +275,13 @@ export default handleActions(
       produce(state, (draft) => {
         draft.is_next = action.payload.state;
       }),
+
+    [RESET]: (state, action) =>
+      produce(state, (draft) => {
+        console.log('실행')
+        draft.resortImg = "";
+        draft.page = 1;
+      }),
   },
   initialState
 );
@@ -283,6 +291,7 @@ const carpoolActions = {
   addCarpool,
   editCarpool,
   deleteCarpool,
+  reset,
   getCarpoolDB,
   addCarpoolDB,
   editCarpoolDB,
