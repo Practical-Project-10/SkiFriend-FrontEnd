@@ -10,27 +10,22 @@ import price from "../assets/carpoolList/price_icon.svg";
 
 const ChatRoomCard = (props) => {
   const { roomInfo } = props;
-  
+
   return (
     <React.Fragment>
-      <Grid
-        margin="auto"
-        width="90%"
-        height="130px"
-        padding="10px"
-        bg="#FFF"
-        radius="10px"
-      >
+      <Grid margin="auto" width="95%" padding="10px" bg="#FFF" radius="10px">
         <Grid is_flex justify="space-around" margin="12px 0">
           <Grid>
-            <Text size="20px" bold>
+            <Text size="14px" bold>
               {roomInfo.title}
             </Text>
           </Grid>
           <Grid is_flex border="2px solid #6195CF" radius="5px" padding="5px">
-            <Text bold>{roomInfo.startLocation}</Text>
-            <Image src={arrow} width="20px" height="10px" margin="0 10px" />
-            <Text bold color="#6195CF">
+            <Text bold size="12px">
+              {roomInfo.startLocation}
+            </Text>
+            <Image src={arrow} width="20px" height="10px" margin="0 5px" />
+            <Text bold color="#6195CF" size="12px">
               {roomInfo.endLocation}
             </Text>
           </Grid>

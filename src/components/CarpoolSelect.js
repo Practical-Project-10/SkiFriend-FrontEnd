@@ -10,8 +10,9 @@ import arrow from "../assets/carpoolWrite/arrow.svg";
 import RegionSelector from "./RegionSelector";
 
 const CarpoolSelect = (props) => {
-  const {is_edit} = props;
-  const { memberNum, startLocation, endLocation, date, time, carpoolType } = props.form;
+  const { is_edit } = props;
+  const { memberNum, startLocation, endLocation, date, time, carpoolType } =
+    props.form;
 
   const [state, setState] = useState(false);
   const [reqSelect, setReqSelect] = useState(false);
@@ -73,30 +74,40 @@ const CarpoolSelect = (props) => {
       <Grid phoneSize>
         {/* 지역 선택 */}
         <Grid is_flex justify="space-around" padding="38px 0 17px 0">
-          <Text size="16px" padding='0 20px'>
+          <Text size="16px" padding="0 20px">
             출발지역
           </Text>
           <ChangeButton onClick={locationChange}>
             <Image src={Change} width="100%" height="15px" />
           </ChangeButton>
-          <Text size="16px" padding='0 20px'>
+          <Text size="16px" padding="0 20px">
             도착지역
           </Text>
         </Grid>
 
-        {is_edit
-        ? <Location>
-            <Text bold width='130px' sort='center' size='14px'>{startLocation}</Text>
-            <Image src={arrow} width="50px" height="10px" size='40px 10px'/>
-            <Text bold width='122px' sort='center' size='20px' color='#6195cf'>{endLocation}</Text>
+        {is_edit ? (
+          <Location>
+            <Text bold width="130px" sort="center" size="14px">
+              {startLocation}
+            </Text>
+            <Image src={arrow} width="50px" height="10px" size="40px 10px" />
+            <Text bold width="122px" sort="center" size="20px" color="#6195cf">
+              {endLocation}
+            </Text>
           </Location>
-        : <Grid
-          is_flex
-          justify="space-between"
-          margin="0 0 32px 0"
-          direction={state ? "row-reverse" : ""}
+        ) : (
+          <Grid
+            is_flex
+            justify="space-between"
+            margin="0 0 32px 0"
+            direction={state ? "row-reverse" : ""}
           >
-            <RegionSelector ref={startLoca} subLoca={subLoca} changeLoca={selectLocation} state={state}/>
+            <RegionSelector
+              ref={startLoca}
+              subLoca={subLoca}
+              changeLoca={selectLocation}
+              state={state}
+            />
             {/* <RegionSelector /> */}
             <Image src={arrow} width="50px" height="10px" />
             {/* value속성이 고정값이 아니라 나는 에러임 */}
@@ -112,7 +123,7 @@ const CarpoolSelect = (props) => {
               ref={endLoca}
             />
           </Grid>
-        }
+        )}
 
         {/* 날짜 or 수용인원 */}
         {props.is_filter ? (
@@ -172,9 +183,10 @@ const CarpoolSelect = (props) => {
           <Grid display="flex" gap="20px" margin="0 0 50px 0">
             <Grid width="50%">
               <Label
-                width="100%" cursor="pointer"
+                width="100%"
+                cursor="pointer"
                 htmlFor="request"
-                select={carpoolType === '카풀 요청'? true: reqSelect}
+                select={carpoolType === "카풀 요청" ? true : reqSelect}
                 onClick={() => {
                   setReqSelect(true);
                   setOfSelect(false);
@@ -192,9 +204,10 @@ const CarpoolSelect = (props) => {
             </Grid>
             <Grid width="50%">
               <Label
-                width="100%" cursor="pointer"
-                htmlFor="offer" 
-                select={carpoolType === '카풀 제공'? true: ofSelect}
+                width="100%"
+                cursor="pointer"
+                htmlFor="offer"
+                select={carpoolType === "카풀 제공" ? true : ofSelect}
                 onClick={() => {
                   setOfSelect(true);
                   setReqSelect(false);
@@ -212,6 +225,7 @@ const CarpoolSelect = (props) => {
             </Grid>
           </Grid>
         </form>
+
         <from onChange={hiddenChange}>
           {props.is_filter && (
             <Grid width="100%">
@@ -222,7 +236,7 @@ const CarpoolSelect = (props) => {
                 id="none"
                 type="checkbox"
                 name="status"
-                value={noneSelect}
+                value={!noneSelect}
                 style={{ display: "none" }}
               />
             </Grid>
@@ -273,7 +287,7 @@ const Location = styled.div`
   width: 100%;
   height: 55px;
   margin: 0 0 12px;
-  background: #FFF;
+  background: #fff;
   border: 1px solid #6195cf;
   box-sizing: border-box;
   border-radius: 5px;
