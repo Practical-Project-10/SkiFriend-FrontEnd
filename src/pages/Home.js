@@ -94,7 +94,7 @@ const Home = (props) => {
             return (
               <Grid
                 width="calc((100% - 100px) / 3)"
-                cursor
+                cursor='pointer'
                 hoverOpacity="0.8"
                 key={r.resortNum}
                 _onClick={() => history.push(`/carpool/${r.name}`)}

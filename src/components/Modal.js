@@ -88,7 +88,7 @@ const Modal = (props) => {
             <Menu fontS={props.fontS} padding={props.padding} onClick={props.delete}>
               삭제하기
             </Menu>
-            <Menu fontS={props.fontS} padding={props.padding} opacity onClick={props.closemodal}>
+            <Menu fontS={props.fontS} padding={props.padding} opacity='0.5' onClick={props.closemodal}>
               취소
             </Menu>
           </ModalContainer>
@@ -109,7 +109,7 @@ const Modal = (props) => {
                 모집 완료
               </Menu>
             ) : null}
-            <Menu fontS={props.fontS} padding={props.padding} opacity onClick={props.closemodal}>
+            <Menu fontS={props.fontS} padding={props.padding} opacity='0.5' onClick={props.closemodal}>
               취소
             </Menu>
           </ModalContainer>
@@ -155,7 +155,7 @@ const Menu = styled.div`
   font-size: ${props => props.fontS? props.fontS: '16px'};
   font-weight: 700;
   cursor: pointer;
-  ${props => props.opacity? 'opacity: 0.5;': ''}
+  opacity: ${props => props.opacity};
 
   &:first-child {
     border-bottom: none;

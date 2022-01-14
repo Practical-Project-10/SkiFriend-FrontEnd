@@ -148,7 +148,6 @@ const CarpoolWrite = (props) => {
             </Text>
             <Select
               name="memberNum"
-              defaultValue="default"
               onChange={handleChange}
               value={memberNum}
             >

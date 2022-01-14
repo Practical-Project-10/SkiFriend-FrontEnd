@@ -141,7 +141,6 @@ const MessageBox = (props) => {
           </Grid>
         )}
         {/* 모달 프로필공개 */}
-        <div showmodal={showmodal} />
         {showmodal ? (
           <Modal
             height="256px"

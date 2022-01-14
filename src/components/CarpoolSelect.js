@@ -108,9 +108,7 @@ const CarpoolSelect = (props) => {
               changeLoca={selectLocation}
               state={state}
             />
-            {/* <RegionSelector /> */}
             <Image src={arrow} width="50px" height="10px" />
-            {/* value속성이 고정값이 아니라 나는 에러임 */}
             <Label htmlFor="endLocation" width="144px">
               {skiResort}
             </Label>
@@ -121,6 +119,7 @@ const CarpoolSelect = (props) => {
               value={endLocation}
               style={{ display: "none" }}
               ref={endLoca}
+              readOnly
             />
           </Grid>
         )}
@@ -140,7 +139,6 @@ const CarpoolSelect = (props) => {
               </Text>
               <Select
                 name="memberNum"
-                defaultValue="default"
                 value={memberNum}
                 onChange={handleChange}
               >
@@ -226,7 +224,7 @@ const CarpoolSelect = (props) => {
           </Grid>
         </form>
 
-        <from onChange={hiddenChange}>
+        <form onChange={hiddenChange}>
           {props.is_filter && (
             <Grid width="100%">
               <Label htmlFor="none" select={noneSelect} width="100%">
@@ -241,7 +239,7 @@ const CarpoolSelect = (props) => {
               />
             </Grid>
           )}
-        </from>
+        </form>
 
         {/* <Grid>
           <Input type="checkBox"/>
