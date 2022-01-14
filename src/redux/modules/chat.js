@@ -45,7 +45,6 @@ export const makeRoomChatDB =
   async (dispatch, getState, { history }) => {
     try{
       const response = await apis.chatRoom(postId);
-
       response && 
       history.push(
         `/chatroom/${response.data.roomId}/${response.data.roomName}/${response.data.longRoomId}`

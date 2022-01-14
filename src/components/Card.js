@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 
 import styled from "styled-components";
 import { Grid, Text, Image } from "../elements/index";
@@ -21,14 +21,14 @@ const Card = (props) => {
   const { notLogin, page } = props;
 
   const dispatch = useDispatch();
-  const is_login = localStorage.getItem("is_login");
+  const is_login = localStorage.getItem("is_login") === "true" ? true : false;
   const is_profile = localStorage.getItem("is_profile");
   const repuest = props.carpoolType === "카풀 요청";
   const nickname = localStorage.getItem("nickname");
   const is_mine = props.nickname === nickname;
 
   //------useState관리-------
-  const [showmodal, setShowModal] = React.useState(false);
+  const [showmodal, setShowModal] = useState(false);
 
   //-------Modal-------
   const closemodal = () => {
@@ -172,7 +172,11 @@ const Card = (props) => {
 
   return (
     <React.Fragment>
-      <CarpoolCard repuest={repuest} status={!props.status} border={props.border}>
+      <CarpoolCard
+        repuest={repuest}
+        status={!props.status}
+        border={props.border}
+      >
         <Grid>
           <Grid margin="0 0 3px">
             <Text bold color={repuest ? "#7281D1" : "#6195CF"}>

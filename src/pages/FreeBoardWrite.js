@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-
 import { useParams } from "react-router-dom";
+
 import { useDispatch, useSelector } from "react-redux";
 import { boardCreators as boardActions } from "../redux/modules/freeboard";
 import { imageActions } from "../redux/modules/image";
@@ -16,38 +16,31 @@ import { AiOutlineCamera } from "react-icons/ai";
 
 const FreeBoardWrite = () => {
   const dispatch = useDispatch();
-  // const emptyFile = new File([""], "empty");
 
   // 주소 경로값
   const params = useParams();
   const skiresort = params.skiresort;
   const postId = params.postId;
-
   // 작성 수정 판단 여부
   const is_edit = postId ? true : false;
-
   // redux데이터
   const postData = useSelector((state) => state.freeboard.detail);
   const preview = useSelector((state) => state.image.preview);
-
   // useState관리
   const [title, setTitle] = useState(postData ? postData.title : "");
   const [content, setContet] = useState(postData ? postData.content : "");
   const [uploadURL, setUploadURL] = useState([]);
   const [uploadFiles, setUploadFiles] = useState(null);
-  
   // 제목
   const postTitle = (e) => {
     const currentTitle = e.target.value;
     setTitle(currentTitle);
   };
-
   // 글 내용
   const postContent = (e) => {
     const currentContent = e.target.value;
     setContet(currentContent);
   };
-
   // 이미지 업로드
   const uploadImg = (e) => {
     e.preventDefault();
@@ -57,11 +50,9 @@ const FreeBoardWrite = () => {
       const ImgUrl = URL.createObjectURL(e.target.files[i]);
       ImgUrlList.push(ImgUrl);
     }
-
     dispatch(imageActions.setPreview(ImgUrlList));
     setUploadURL(ImgUrlList);
   };
-
   // 데이터 전송 (완료 버튼)
   const addPostBtn = () => {
     const requestDto = { title: title, content: content };
@@ -74,7 +65,6 @@ const FreeBoardWrite = () => {
       return;
     }
   };
-
   // 데이터 수정 (완료 버튼)
   const editPostBtn = () => {
     const requestDto = { title: title, content: content };
@@ -107,35 +97,19 @@ const FreeBoardWrite = () => {
 
         <Grid phoneSize height="330px">
           {/* 제목작성 */}
-          {is_edit ? (
-            <Input
-              title
-              _value={title}
-              placeholder="제목을 작성해주세요."
-              _onChange={postTitle}
-            />
-          ) : (
-            <Input
-              title
-              placeholder="제목을 작성해주세요."
-              _onChange={postTitle}
-            />
-          )}
+          <Input
+            title
+            _value={is_edit ? title : null}
+            placeholder="제목을 작성해주세요."
+            _onChange={postTitle}
+          />
           {/* 내용작성 */}
-          {is_edit ? (
-            <Content
-              placeholder="내용을 입력하세요"
-              value={content}
-              onChange={postContent}
-            ></Content>
-          ) : (
-            <Content
-              placeholder="내용을 입력하세요"
-              onChange={postContent}
-            ></Content>
-          )}
+          <Content
+            placeholder="내용을 입력하세요"
+            value={is_edit ? content : null}
+            onChange={postContent}
+          ></Content>
         </Grid>
-
         {/* 사진미리보기 */}
         <Grid is_flex width="100%" height="280px" padding="0 16px 5px">
           <Image
@@ -145,7 +119,7 @@ const FreeBoardWrite = () => {
             size="contain"
           />
         </Grid>
-
+        {/* 좋아요 */}
         <Grid
           padding="20px 0"
           align="center"

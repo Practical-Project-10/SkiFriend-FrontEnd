@@ -31,9 +31,8 @@ export const loadBoardDB =
   async (dispatch, getState, { history }) => {
     try {
       const response = await apis.getFreePost(skiResort, page);
-
       response && dispatch(loadBoard(response.data));
-    } catch(err) {
+    } catch (err) {
       console.log(`불러오기 실패${err}`);
     }
   };
@@ -48,17 +47,11 @@ export const addBoardDB =
       "requestDto",
       new Blob([JSON.stringify(datas)], { type: "application/json" })
     );
-    //formdata 객체 내용 확인
-    // for (let pair of formData.entries()) {
-    //   console.log(pair[0] + ", " + pair[1]);
-    // }
-
     try {
       const response = await apis.writeFreePost(skiResort, formData);
-
       response && history.push(`/freeboardlist/${skiResort}`);
       dispatch(addBoard(response.data));
-    } catch(err) {
+    } catch (err) {
       console.log(`오류 발생!${err}`);
     }
   };
@@ -70,7 +63,7 @@ export const getOneBoardDB =
       const response = await apis.getOneFreePost(postId);
 
       response && dispatch(getOneBoard(response.data));
-    } catch(err) {
+    } catch (err) {
       console.log(`오류 발생!${err}`);
     }
   };
@@ -79,23 +72,20 @@ export const updateBoardDB =
   (skiResort, postId, image, datas) =>
   async (dispatch, getState, { history }) => {
     if (!postId) {
-      console.log("게시물 정보가 없어요!");
+      window.alert("게시물 정보가 없어요!");
       return;
     }
-
     let formdata = new FormData();
     formdata.append("image", image);
     formdata.append(
       "requestDto",
       new Blob([JSON.stringify(datas)], { type: "application/json" })
     );
-
     try {
       const response = await apis.updateFreePost(postId, formdata);
-
       response && history.push(`/freeboarddetail/${skiResort}/${postId}`);
       dispatch(updateBoard(response.config.data));
-    } catch(err) {
+    } catch (err) {
       console.log(`오류 발생!${err}`);
     }
   };
@@ -105,10 +95,9 @@ export const deleteBoardDB =
   async (dispatch, getState, { history }) => {
     try {
       const response = await apis.deleteFreePost(postId);
-
       response && history.push(`/freeboardlist/${skiresort}`);
       dispatch(loadBoardDB());
-    } catch(err) {
+    } catch (err) {
       console.log(`삭제요청 실패${err}`);
     }
   };
