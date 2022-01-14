@@ -39,6 +39,7 @@ const signupDB = (userInfo) => {
       history.push("/login");
     } catch (err) {
       console.log(err);
+      // window.alert(err)
     }
   };
 };

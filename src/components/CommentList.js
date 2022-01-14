@@ -6,7 +6,7 @@ import { history } from "../redux/ConfigStore";
 
 import styled from "styled-components";
 import { Grid, Input, Text, Image } from "../elements/index";
-import sendBtn from "../assets/chat/send.png";
+import sendBtn from "../assets/send.svg";
 
 const CommentList = () => {
   const dispatch = useDispatch();

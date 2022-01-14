@@ -1,23 +1,19 @@
 import React from "react";
+
 import { useDispatch, useSelector } from "react-redux";
 import { mainCreators as mainActions } from "../redux/modules/main";
+
 import styled from "styled-components";
 import { Grid, Image, Text } from "../elements/index";
 import SkiIcon from "../components/SkiIcon";
 import HotPost from "../components/HotPost";
 import Header from "../components/Header";
-import High1 from "../assets/skiInfo/high1_logo.png";
-import High1_ from "../assets/skiImage/HighOne/HighOne3.png";
-import YongPyong from "../assets/skiInfo/yongpyong_logo.png";
-import YongPyong_ from "../assets/skiImage/YongPyong/YongPyong2.png";
-import Vivaldi from "../assets/skiInfo/vivaldi_logo.png";
-import Vivaldi_ from "../assets/skiImage/Vivaldi/Vivaldi1.png";
-import Phoenix from "../assets/skiInfo/phoenix_logo.png";
-import Phoenix_ from "../assets/skiImage/Phoenix/Phoenix2.png";
-import Wellihilli from "../assets/skiInfo/welli_logo.png";
-import Wellihilli_ from "../assets/skiImage/Wellihilli/Wellihilli1.png";
-import Konjiam from "../assets/skiInfo/kongiam_logo.png";
-import Konjiam_ from "../assets/skiImage/Konjiam/Konjiam1.png";
+import High1 from "../assets/high1_logo.png";
+import YongPyong from "../assets/yongpyong_logo.png";
+import Vivaldi from "../assets/vivaldi_logo.png";
+import Phoenix from "../assets/phoenix_logo.png";
+import Wellihilli from "../assets/welli_logo.png";
+import Konjiam from "../assets/kongiam_logo.png";
 import Banner from "../assets/mainPage/Home_banner.png";
 
 const Home = (props) => {
@@ -30,42 +26,36 @@ const Home = (props) => {
       resort: "하이원",
       name: "HighOne",
       logo: High1,
-      img: High1_,
     },
     {
       resortNum: 2,
       resort: "용평",
       name: "YongPyong",
       logo: YongPyong,
-      img: YongPyong_,
     },
     {
       resortNum: 3,
       resort: "비발디",
       name: "VivaldiPark",
       logo: Vivaldi,
-      img: Vivaldi_,
     },
     {
       resortNum: 4,
       resort: "휘닉스",
       name: "Phoenix",
       logo: Phoenix,
-      img: Phoenix_,
     },
     {
       resortNum: 5,
       resort: "웰리힐리",
       name: "WellihilliPark",
       logo: Wellihilli,
-      img: Wellihilli_,
     },
     {
       resortNum: 6,
       resort: "곤지암",
       name: "Konjiam",
       logo: Konjiam,
-      img: Konjiam_,
     },
   ];
 

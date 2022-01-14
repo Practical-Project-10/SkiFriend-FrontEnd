@@ -10,9 +10,9 @@ import Comment from "../assets/freeBoard/comment.svg";
 
 const HotPost = (props) => {
 
-  if(props.l === '') {
+  // if(props.l === '') {
     
-  }
+  // }
 
   return (
     <React.Fragment>
@@ -42,6 +42,7 @@ const HotPost = (props) => {
 };
 
 const ResortName = styled.div`
+  width: 100px;
   padding: 0 7px;
   margin-right: 11px;
   background: #6195cf;

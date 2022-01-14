@@ -11,7 +11,7 @@ import Header from "../components/Header";
 import ChatRoomCard from "../components/ChatRoomCard";
 //icons
 import { Grid, Input } from "../elements/index";
-import sendBtn from "../assets/chat/send.png";
+import sendBtn from "../assets/send.svg";
 
 const ChatRoom = () => {
   // const dispatch = useDispatch;

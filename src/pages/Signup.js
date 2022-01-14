@@ -158,7 +158,7 @@ const SignupOne = (props) => {
             _onChange={handleChange}
             label="비밀번호"
             type="password"
-            placeholder="영대소문자와 특수문자를 포함한 8자리 이상"
+            placeholder="영문자와 특수문자를 포함한 8자리 이상"
           />
           {!checkPwd &&
             <Text color="red" margin="-20px 5px">

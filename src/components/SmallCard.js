@@ -7,7 +7,7 @@ import calendar from "../assets/carpoolList/calendar_icon.svg";
 import clock from "../assets/carpoolList/clock_icon.svg";
 
 const SmallCard = (props) => {
-  const repuest = props.carpoolType === '카풀 요청'
+  const request = props.carpoolType === '카풀 요청'
 
   if(props.notLogin) {
     return (
@@ -21,22 +21,22 @@ const SmallCard = (props) => {
   }
 
   return(
-    <CarpoolCard repuest={repuest} status={!props.status} >
+    <CarpoolCard request={request} status={!props.status} >
         <Grid>
-          <Text bold size='12px' color={repuest? '#7281D1': '#6195CF'}>{props.carpoolType}</Text>
+          <Text bold size='12px' color={request? '#7281D1': '#6195CF'}>{props.carpoolType}</Text>
         </Grid>
         <Text bold size='16px'>{props.title}</Text>
         <Location>
           <Text bold size='12px'>{props.startLocation}</Text>
           <Image src={arrow} width='50px' height='10px'/>
-          <Text bold size='12px' color={repuest? '#7281D1': '#6195CF'}>{props.endLocation}</Text>
+          <Text bold size='12px' color={request? '#7281D1': '#6195CF'}>{props.endLocation}</Text>
         </Location>
         <Grid>
-          <Small repuest={repuest} >
+          <Small request={request} >
             <Image src={calendar} width='12px' height='15px'/>
             <Text size='12px'>{props.date}</Text>
           </Small>
-          <Small repuest={repuest} width="61px">
+          <Small request={request} width="61px">
             <Image src={clock} width='12px' height='15px'/>
             <Text size='12px'>{props.time}</Text>
           </Small>
@@ -49,7 +49,7 @@ const CarpoolCard = styled.div`
   width: 185px;
   height: 152px;
   padding: 12px;
-  background: ${(props) => (props.repuest ? "#D3DBEE" : "#D9E4EE")};
+  background: ${(props) => (props.request ? "#D3DBEE" : "#D9E4EE")};
   border-radius: 15px;
 
   &::after {
