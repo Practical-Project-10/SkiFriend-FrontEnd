@@ -102,7 +102,7 @@ const Carpool = (props) => {
 
         <Grid phoneSize>
           <Grid
-            cursor
+            cursor='pointer'
             is_flex
             justify="center"
             width="66px"

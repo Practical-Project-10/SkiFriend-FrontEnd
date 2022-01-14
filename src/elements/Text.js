@@ -77,7 +77,7 @@ const P = styled.p`
   border-radius: ${(props) => props.radius};
   opacity: ${(props) => props.opacity};
   display: ${(props) => props.block? 'block': ''};
-  cursor: ${(props) => props.cursor? 'pointer': ''};
+  cursor: ${(props) => props.cursor};
   ${(props) => (props.className ? `className: ${props.className};` : "")};
 `;
 

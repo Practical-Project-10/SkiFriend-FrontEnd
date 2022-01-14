@@ -154,7 +154,7 @@ const GridBox = styled.div`
   align-items: ${(props) => props.alignItems};
   flex-wrap: ${(props) => props.wrap};
   flex-direction: ${(props) => props.direction};
-  cursor: ${(props) => (props.cursor ? "pointer" : "")};
+  cursor: ${(props) => (props.cursor)};
   &:hover {
     opacity: ${(props) => props.hoverOpacity};
     background: ${(props) => props.hoverBg};

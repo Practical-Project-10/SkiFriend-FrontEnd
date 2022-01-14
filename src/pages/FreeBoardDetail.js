@@ -30,7 +30,7 @@ const FreeBoardDetail = ({ history }, props) => {
   const is_login = nickname ? true : false;
 
   //------useState관리-------
-  const [showmodal, setShowModal] = useState();
+  const [showmodal, setShowModal] = useState(false);
   const [heart, setHeart] = useState(false);
 
   //-------heart-------
@@ -144,7 +144,6 @@ const FreeBoardDetail = ({ history }, props) => {
                 </Grid>
               ) : null}
               {/* 게시글 수정 삭제 modal 시작 */}
-              <div showmodal={showmodal} />
               {showmodal ? (
                 <Modal
                   height="222px"

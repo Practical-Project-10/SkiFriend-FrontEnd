@@ -14,7 +14,7 @@ const Board = (props) => {
         <Grid padding="9px" display="flex" direction="column" gap="3px">
           <Text
             bold
-            cursor
+            cursor='pointer'
             size="16px"
             _onClick={() => {
               history.push(

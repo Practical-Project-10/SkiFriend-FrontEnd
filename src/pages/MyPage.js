@@ -178,7 +178,7 @@ const MyPage = (props) => {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <Grid cursor width="100%" height="143px">
+            <Grid cursor="pointer" width="100%" height="143px">
               <Image src={banner} width="100%" height="100%" size="cover" />
             </Grid>
           </a>
@@ -197,8 +197,8 @@ const MyPage = (props) => {
                 >
                   {myCarpool.map((l) => {
                     return (
-                      <SwiperSlide>
-                        <Grid key={l.createdAt} width="100%">
+                      <SwiperSlide key={l.createdAt}>
+                        <Grid   width="100%">
                           <Card page="myPage" {...l} />
                         </Grid>
                       </SwiperSlide>
