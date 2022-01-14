@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { chatCreators as chatActions } from "../redux/modules/chat";
 
@@ -12,26 +12,25 @@ import { BsTelephoneOutbound } from "react-icons/bs";
 const MessageBox = (props) => {
   const { chatInfo } = props;
   const dispatch = useDispatch();
+  //경로
   const params = useParams();
   const longRoomId = params.longRoomId;
-  const nickname = localStorage.getItem("nickname");
+  //redux 데이터
   const profileList = useSelector((state) => state.chat.profileList);
-
+  //localstorage
+  const nickname = localStorage.getItem("nickname");
   //------useState관리-------
   const [showmodal, setShowModal] = useState();
-
   //-------Modal-------
   const closeModal = () => {
     setShowModal(false);
   };
-
   //프로필 정보 보기
   const showProfile = () => {
     setShowModal(true);
   };
-
   //프로필 정보 가져오기
-  React.useEffect(() => {
+  useEffect(() => {
     dispatch(chatActions.getProfileInfoDB(longRoomId));
   }, []);
 

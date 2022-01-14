@@ -12,21 +12,23 @@ import Board from "../components/Board";
 import Header from "../components/Header";
 
 const FreeBoardList = () => {
+  const dispatch = useDispatch();
+  //경로
   const params = useParams();
   const skiresort = params.skiresort;
-  const dispatch = useDispatch();
+  //redux
   const boardList = useSelector((state) => state.freeboard.list);
-  // const is_loading = useSelector((state) => state.freeboard.is_loading);
   const resortImg = useSelector((state) => state.carpool.resortImg);
-  const is_login = localStorage.getItem("nickname");
-
+  //로그인 판단
+  const is_login = localStorage.getItem("is_login");
+  const loginCheck = is_login === "true" ? true : false;
   // 게시글 작성 페이지 이동 판단
   const moveWritePage = () => {
-    if (is_login) {
+    if (loginCheck) {
       return history.push(`/freeboardwrite/${skiresort}`);
     } else {
       const ask = window.confirm(
-        `게시물 등록은 로그인한 회원만 가능합니다. \n 로그인 페이지로 이동하시겠습니까?`
+        `게시물 등록은 로그인한 회원만 가능합니다. 로그인 페이지로 이동하시겠습니까?`
       );
       if (ask) {
         return history.push("/login");
@@ -56,18 +58,19 @@ const FreeBoardList = () => {
         <Grid height="210px">
           <Image src={resortImg} size="cover" width="100%" height="100%" />
         </Grid>
-
+        {/* 메뉴 탭바 */}
         <CarpoolMenuBar />
-
+        {/* body */}
         <Grid margin="16px" height="300px">
-            {boardList.map((l) => {
-              return (
-                <Grid key={l.postId}>
-                  <Board skiresort={skiresort} {...l} />
-                </Grid>
-              );
-            })}
+          {boardList.map((l) => {
+            return (
+              <Grid key={l.postId}>
+                <Board skiresort={skiresort} {...l} />
+              </Grid>
+            );
+          })}
         </Grid>
+        {/* 작성버튼 */}
         <FloatButton _onClick={moveWritePage} />
       </Grid>
     </React.Fragment>

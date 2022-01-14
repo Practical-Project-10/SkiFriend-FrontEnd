@@ -10,31 +10,31 @@ import sendBtn from "../assets/send.svg";
 
 const CommentList = () => {
   const dispatch = useDispatch();
+  //경로
   const params = useParams();
   const postId = params.postId;
+  //redux데이터
   const commentArray = useSelector(
     (state) => state.freeboard.detail.commentDtoList
   );
   const postData = useSelector((state) => state.freeboard.detail);
+  //localstorage
   const nickname = localStorage.getItem("nickname");
-  const is_login = nickname ? true : false;
-  //------useState관리-------
-  const [commentValue, setCommentValue] = useState();
+  const is_login = localStorage.getItem("is_login");
+  const loginCheck = is_login === "true" ? true : false; //------useState관리-------
+  const [commentValue, setCommentValue] = useState("");
   const [commentEditValue, setCommentEditValue] = useState();
   const [editCommentNo, setEditCommentNo] = useState();
-
   //------댓글 입력한 내용 가져오기------
   const postComment = (e) => {
     const currentComment = e.target.value;
     setCommentValue(currentComment);
   };
-
   //-----댓글 수정 내용 가져오기----------
   const postEditComment = (e) => {
     const currentComment = e.target.value;
     setCommentEditValue(currentComment);
   };
-
   //엔터치면 메세지 보내지게 하기
   const onKeyPress = (e) => {
     if (e.key === "Enter" && commentValue.replace(/\s|/gi, "").length !== 0) {
@@ -43,7 +43,7 @@ const CommentList = () => {
   };
   //-------댓글 작성-------
   const addCommentBtn = () => {
-    if (is_login) {
+    if (loginCheck) {
       if (commentValue.replace(/\s|/gi, "").length !== 0) {
         dispatch(commentActions.addCommentDB(postId, commentValue));
         return setCommentValue("");
@@ -58,12 +58,10 @@ const CommentList = () => {
       }
     }
   };
-
   //-------댓글수정-------
   const updateCommentBtn = (commentId) => {
     setEditCommentNo(commentId);
   };
-
   //-------댓글수정 전송-------
   const updateSubmitCommentBtn = () => {
     setEditCommentNo(0);

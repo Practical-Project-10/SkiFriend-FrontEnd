@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { useParams } from "react-router-dom";
 // import { useDispatch, useSelector } from "react-redux";
 // import { chatCreators as chatActions } from "../redux/modules/chat";
@@ -15,27 +15,27 @@ import sendBtn from "../assets/send.svg";
 
 const ChatRoom = () => {
   // const dispatch = useDispatch;
-  // const datas = useSelector((state) => state.chat.chatList);
-  // const phoneInfo = useSelector((state) => state.chat.phoneInfo);
-  // const roomInfo = useSelector((state) => state.chat.roomInfo);
+  //경로
   const params = useParams();
   const roomId = params.roomId;
   const roomName = params.roomName;
   const scrollRef = useRef();
-
+  //redux 데이터
+  // const datas = useSelector((state) => state.chat.chatList);
+  // const phoneInfo = useSelector((state) => state.chat.phoneInfoList);
+  // const roomInfoList = useSelector((state) => state.chat.roomInfoList);
+  // console.log(datas);
   //토큰
   const accessToken = document.cookie.split("=")[1];
   const token = { Authorization: `${accessToken}` };
-
   //소켓
   const sock = new SockJS("https://seongeunyang.shop/ws-stomp");
   const stomp = Stomp.over(sock);
-
   // useState관리
   const [message, setMessage] = useState("");
   const [messageList, setMessageList] = useState([]);
   const [roomInfo, setRoomInfo] = useState([]);
-
+  // 쌓인 대화
   const messageDatas = (recv) => {
     setMessageList((prev) => [...prev, recv]);
   };
@@ -46,7 +46,7 @@ const ChatRoom = () => {
   };
 
   //채팅룸 연결
-  React.useEffect(() => {
+  useEffect(() => {
     chatConnect();
     // dispatch(chatActions.connectChatDB(roomId));
     return () => {
@@ -83,14 +83,14 @@ const ChatRoom = () => {
   };
 
   // 대화내용 가져오기
-  React.useEffect(() => {
+  useEffect(() => {
     axios
       .get(`https://seongeunyang.shop/chat/message/${roomId}`, {
         headers: token,
       })
       .then((res) => {
         const prevChatData = res.data;
-        // console.log("response : ", prevChatData);
+        console.log("response : ", prevChatData);
         setMessageList(prevChatData);
       });
     // dispatch(chatActions.getContentChatDB(roomId));
@@ -151,7 +151,7 @@ const ChatRoom = () => {
   };
 
   //방정보 가져오기
-  React.useEffect(() => {
+  useEffect(() => {
     axios
       .get(`https://seongeunyang.shop/chat/room/${roomId}/carpool`, {
         headers: token,

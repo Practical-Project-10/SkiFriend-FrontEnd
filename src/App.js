@@ -95,7 +95,7 @@ function App() {
             <Route
               exact
               path="/chatroom/:roomId/:roomName/:longRoomId"
-              component={ChatRoom}//
+              component={ChatRoom}
             />
 
             <Navbar />

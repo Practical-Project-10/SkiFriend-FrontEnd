@@ -19,20 +19,22 @@ import { BiDotsHorizontalRounded } from "react-icons/bi";
 
 const FreeBoardDetail = ({ history }, props) => {
   const dispatch = useDispatch();
+  // 경로
   const params = useParams();
   const postId = params.postId;
   const skiresort = params.skiresort;
+  // redux데이터
   const postData = useSelector((state) => state.freeboard.detail);
   const likeList = useSelector((state) => state.like.list);
   const likeData = postData.likesDtoList;
+  //localstorage 로그인정보
   const nickname = localStorage.getItem("nickname");
   const login_userId = localStorage.getItem("userId");
-  const is_login = nickname ? true : false;
-
+  const is_login = localStorage.getItem("is_login");
+  const loginCheck = is_login === "true" ? true : false;
   //------useState관리-------
   const [showmodal, setShowModal] = useState(false);
   const [heart, setHeart] = useState(false);
-
   //-------heart-------
   const changeHeart = () => {
     if (likeList === false) {
@@ -41,7 +43,6 @@ const FreeBoardDetail = ({ history }, props) => {
       return setHeart(false);
     }
   };
-
   React.useEffect(() => {
     if (likeData !== undefined) {
       for (let i = 0; i < likeData.length; i++) {
@@ -54,17 +55,17 @@ const FreeBoardDetail = ({ history }, props) => {
       setHeart(false);
     }
   }, [postData]);
-
+  React.useEffect(() => {
+    dispatch(boardActions.getOneBoardDB(postId));
+  }, []);
   //-------Modal-------
   const closemodal = () => {
     setShowModal(false);
   };
-
   //-------게시글 수정-------
   const editPost = () => {
     history.push(`/freeboardedit/${skiresort}/${postId}`);
   };
-
   //-------게시글 삭제--------
   const deletePost = () => {
     const ask = window.confirm("정말 삭제하시겠습니까?");
@@ -75,10 +76,9 @@ const FreeBoardDetail = ({ history }, props) => {
       return;
     }
   };
-
   //-------좋아요 변경---------
   const likeChange = () => {
-    if (is_login) {
+    if (loginCheck) {
       changeHeart();
       return dispatch(likeActions.addLikeDB(postId));
     } else {
@@ -90,10 +90,6 @@ const FreeBoardDetail = ({ history }, props) => {
       }
     }
   };
-
-  React.useEffect(() => {
-    dispatch(boardActions.getOneBoardDB(postId));
-  }, []);
 
   return (
     <React.Fragment>
@@ -107,6 +103,7 @@ const FreeBoardDetail = ({ history }, props) => {
       >
         자유게시글
       </Header>
+      {/* body */}
       <Grid bg="#FFF" minHeight="calc( 100vh - 55px )">
         <Grid phoneSize>
           <Grid
@@ -126,13 +123,12 @@ const FreeBoardDetail = ({ history }, props) => {
                   border: "1px solid #6195CF",
                 }}
               ></div>
-              <Text size="16px" bold margin="">
+              <Text size="16px" bold>
                 {postData.title}
               </Text>
             </Grid>
-
+            {/* 게시글을 조회한사람이 작성한 사람과 일치할 경우 모달 선택창이 보이게 하기 */}
             <Grid>
-              {/* 게시글을 조회한사람이 작성한 사람과 일치할 경우 모달 선택창이 보이게 하기 */}
               {nickname === postData.nickname ? (
                 <Grid
                   cursor="pointer"
@@ -147,15 +143,14 @@ const FreeBoardDetail = ({ history }, props) => {
               {showmodal ? (
                 <Modal
                   height="222px"
-                  closeModal={closemodal}
-                  edit={editPost}
-                  delete={deletePost}
+                  closeModal={closemodal} //닫기
+                  edit={editPost} //수정
+                  delete={deletePost} //삭제
                 />
               ) : null}
               {/* modal 끝 */}
             </Grid>
           </Grid>
-
           {/* 좋아요 댓글 시간 */}
           <Grid padding="16px 0" is_flex justify="space-between">
             <Grid>
@@ -163,7 +158,7 @@ const FreeBoardDetail = ({ history }, props) => {
             </Grid>
             <Grid is_flex>
               <Grid is_flex margin="0 11px 0 0">
-                {heart === false ? (
+                {!heart ? (
                   <AiOutlineHeart size="16" color="#6195CF" />
                 ) : (
                   <AiFillHeart size="16" color="red" />
@@ -176,7 +171,6 @@ const FreeBoardDetail = ({ history }, props) => {
               </Grid>
             </Grid>
           </Grid>
-
           {/* 사진 및 게시글 */}
           <Grid>
             <Grid padding="16px 0">
@@ -191,7 +185,7 @@ const FreeBoardDetail = ({ history }, props) => {
               />
             </Grid>
             <Small onClick={likeChange}>
-              {heart === false ? (
+              {!heart ? (
                 <AiOutlineHeart size="16" color="#FFF" />
               ) : (
                 <AiFillHeart size="16" color="red" />

@@ -24,7 +24,6 @@ const ChatRoomCard = (props) => {
         direction='column'
         justify='space-between'
       >
-        {/* <Grid justify="space-around" margin="12px 0"> */}
           <Text block size="20px" bold>
             {roomInfo.title}
           </Text>
@@ -35,7 +34,6 @@ const ChatRoomCard = (props) => {
               {roomInfo.endLocation}
             </Text>
           </Grid>
-        {/* </Grid> */}
         <Grid is_flex justify="space-between">
           <Grid is_flex bg="#6195CF" radius="5px" padding="4px 8px">
             <Image
