@@ -26,8 +26,9 @@ const addCarpool = createAction(ADD_CARPOOL, (skiResort, carpool) => ({
 }));
 const editCarpool = createAction(
   EDIT_CARPOOL,
-  (skiResort, postId, carpool) => ({
+  (skiResort, page, postId, carpool) => ({
     skiResort,
+    page,
     postId,
     carpool,
   })
@@ -193,13 +194,14 @@ export default handleActions(
 
     [ADD_CARPOOL]: (state, action) =>
       produce(state, (draft) => {
-        const skiResort = action.payload.skiResort;
+        // const skiResort = action.payload.skiResort;
         // draft.list[skiResort].unshift(action.payload.carpool);
       }),
 
     [EDIT_CARPOOL]: (state, action) =>
       produce(state, (draft) => {
         const skiResort = action.payload.skiResort;
+        const page = action.payload.page;
         const idx = draft.list[skiResort].findIndex(
           (l) => l.postId === Number(action.payload.postId)
         );
@@ -207,6 +209,16 @@ export default handleActions(
           ...draft.list[skiResort][idx],
           ...action.payload.carpool,
         };
+
+        if(page === "myPage") {
+          const idx = draft.myList.findIndex(
+            (l) => l.postId === Number(action.payload.postId)
+          );
+          draft.myList[idx] = {
+            ...draft.myList[idx],
+            ...action.payload.carpool,
+          };
+        }
       }),
 
     [DELETE_CARPOOL]: (state, action) =>

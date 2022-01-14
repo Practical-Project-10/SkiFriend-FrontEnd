@@ -9,10 +9,10 @@ import { phoneNumExp } from "../shared/validation";
 const PhoneAuth = (props) => {
   const dispatch = useDispatch();
   const userInfo = useSelector((state) => state.user.user);
-  // const isSms = useSelector(state => state.user.is_sms);
   const phoneNumInput = React.useRef("");
   const smsNumInput = React.useRef("");
 
+  //사용자 휴대폰번호 전송
   const numSend = () => {
     const phoneNum = phoneNumInput.current.value;
     if (!phoneNumExp.test(phoneNum)) {
@@ -23,6 +23,7 @@ const PhoneAuth = (props) => {
     }
   };
 
+  //회원가입 페이지로 넘어가기 위해 인증번호 확인
   const nextStep = () => {
     const smsNum = smsNumInput.current.value;
 

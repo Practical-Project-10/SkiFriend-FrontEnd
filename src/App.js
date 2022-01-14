@@ -54,6 +54,11 @@ function App() {
             />
             <Route
               exact
+              path="/carpoolwrite/:page/:skiresort/:postId"
+              component={CarpoolWrite}
+            />
+            <Route
+              exact
               path="/carpoolfilter/:skiresort"
               component={CarpoolFilter}
             />

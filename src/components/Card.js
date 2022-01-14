@@ -36,6 +36,10 @@ const Card = (props) => {
   };
 
   const editCard = () => {
+    if(page === "myPage") {
+      history.push(`/carpoolwrite/${page}/${props.skiResort}/${props.postId}`);
+      return null;
+    }
     history.push(`/carpoolwrite/${props.skiResort}/${props.postId}`);
   };
 

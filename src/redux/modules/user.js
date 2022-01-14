@@ -90,7 +90,6 @@ const isSmsCheckDB = (phoneNum, randomNum) => {
       await apis.smsNumCheck(phoneNum, randomNum);
       window.alert("인증이 완료되었습니다.");
       history.push("/signup");
-      // dispatch(smsCheck(true));
     } catch (err) {
       window.alert("인증번호가 일치하지 않습니다.");
       console.log(err);
