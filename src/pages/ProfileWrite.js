@@ -10,7 +10,6 @@ import Header from "../components/Header";
 import styled from "styled-components";
 import { Grid, Image, Text, Input, Button } from "../elements/index";
 import defaultIMG from "../assets/myPage/profilePicture.png";
-import axios from "axios";
 
 const ProfileWrite = (props) => {
   const history = props.history;
@@ -19,15 +18,11 @@ const ProfileWrite = (props) => {
   const user_profile = useSelector((state) => state.profile.user_profile);
 
   const pfImgFile = useRef();
-  // const vImgFile = useRef();
-
-  // const emptyFile = new File([""], "empty");
   const deleteFile = new File(["delete"], "delete");
 
   const username = props.match.params.username;
   const is_edit = username ? true : false;
 
-  // const [vacSelect, setVacSelect] = useState(false);
   const [profile, setProfile] = useState({
     nickname: user_profile.nickname,
     profileImg: null,
@@ -78,7 +73,6 @@ const ProfileWrite = (props) => {
   const selectFile = () => {
     const reader = new FileReader();
     const profileImgFile = pfImgFile.current.files[0];
-    // const vacImgFile = vImgFile.current.files[0];
 
     if (profileImgFile) {
       reader.readAsDataURL(profileImgFile);
@@ -92,17 +86,6 @@ const ProfileWrite = (props) => {
         profileImg: profileImgFile,
       });
     }
-
-    // if (vacImgFile) {
-    //   setProfile({
-    //     ...profile,
-    //     vacImg: vacImgFile,
-    //   });
-    //   if(selectedFild) {
-    //     console.log('vasine')
-    //     setVacSelect(true);
-    //   }
-    // }
   };
 
   const deleteImg = (e) => {
@@ -125,41 +108,7 @@ const ProfileWrite = (props) => {
   };
 
   const addProfile = async () => {
-    // dispatch(profileActions.addProfileDB(profile));
-    const accessToken = document.cookie.split("=")[1];
-    const token = {
-      headers: {
-        "Content-Type": "multipart/form-data",
-        Authorization: `${accessToken}`,
-      },
-    };
-    const new_profile = {
-      gender: profile.gender,
-      ageRange: profile.ageRange,
-      career: profile.career,
-      selfIntro: profile.selfIntro,
-    };
-    const formData = new FormData();
-    formData.append("profileImg", profile.profileImg);
-    formData.append("vacImg", profile.vacImg);
-    formData.append(
-      "requestDto",
-      new Blob([JSON.stringify(new_profile)], { type: "application/json" })
-    );
-
-    return axios
-      .post(`https://seongeunyang.shop/user/profile`, formData, token)
-      .then((response) => {
-        alert("정상적으로 프로필이 등록되었습니다.");
-
-        history.push("/mypage");
-
-        dispatch(imageActions.setPreview(null));
-        dispatch(profileActions.addProfile(response.data));
-      })
-      .catch((e) => {
-        window.alert("프로필을 다시 확인해 주세요!");
-      });
+    dispatch(profileActions.addProfileDB(profile));
   };
 
   const editProfile = () => {

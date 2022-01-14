@@ -27,38 +27,38 @@ const getProfileDB = () => {
 };
 
 const addProfileDB = (profile) => {
-  // return async (dispatch, getState, { history }) => {
-  //   const new_profile = {
-  //     gender: profile.gender,
-  //     ageRange: profile.ageRange,
-  //     career: profile.career,
-  //     selfIntro: profile.selfIntro,
-  //   };
-  //   console.log(new_profile);
-  //   console.log(profile);
-  //   const formData = new FormData();
-  //   formData.append("profileImg", profile.profileImg);
-  //   formData.append("vacImg", profile.vacImg);
-  //   formData.append(
-  //     "requestDto",
-  //     new Blob([JSON.stringify(new_profile)], { type: "application/json" })
-  //   );
-  //   try {
-  //     const response = await apis.addProfile(formData);
-  //     console.log(response);
-  //     const _profile = response.data;
-  //     response && history.push("/mypage");
-  //     dispatch(addProfile(_profile));
-  //     dispatch(imageActions.setPreview(null));
-  //   } catch (err) {
-  //     console.log("addProfileDB", err);
-  //   }
-  // };
+  return async (dispatch, getState, { history }) => {
+    const new_profile = {
+      gender: profile.gender,
+      ageRange: profile.ageRange,
+      career: profile.career,
+      selfIntro: profile.selfIntro,
+    };
+
+    const formData = new FormData();
+    formData.append("profileImg", profile.profileImg);
+    formData.append("vacImg", profile.vacImg);
+    formData.append(
+      "requestDto",
+      new Blob([JSON.stringify(new_profile)], { type: "application/json" })
+    );
+    try {
+      const response = await apis.addProfile(formData);
+
+      const _profile = response.data;
+      response && history.push("/mypage");
+      window.alert("정상적으로 프로필이 등록되었습니다.");
+      dispatch(addProfile(_profile));
+      dispatch(imageActions.setPreview(null));
+    } catch (err) {
+      window.alert("프로필을 다시 확인해 주세요!");
+      console.log("addProfileDB", err);
+    }
+  };
 };
 
 const editProfileDB = (profile) => {
   return async (dispatch, getState, { history }) => {
-    const _profile = getState().profile.user_profile;
     const new_profile = {
       nickname: profile.nickname,
       career: profile.career,
@@ -76,10 +76,12 @@ const editProfileDB = (profile) => {
       const response = await apis.editProfile(formData);
       
       response && history.push("/mypage");
+      window.alert("정상적으로 프로필이 수정되었습니다.");
       dispatch(editProfile(response.data));
       dispatch(imageActions.setPreview(null));
       localStorage.setItem('nickname', response.data.nickname);
     } catch (err) {
+      window.alert("프로필을 다시 확인해 주세요!");
       console.log("addProfileDB", err);
       // const error = {...err};
       // console.log(error.response.data.error);

@@ -12,13 +12,12 @@ const CarpoolWrite = (props) => {
   const carpool_list = useSelector((state) => state.carpool.list);
   const dispatch = useDispatch();
   const skiResort = props.match.params.skiresort;
+  const page = props.match.params.page;
   const [state, setState] = React.useState(false);
 
-  //수정페이지
+  //수정 유무
   const postId = props.match.params.postId;
   const is_edit = postId ? true : false;
-  const nickname = localStorage.getItem("nickname");
-  const is_login = nickname ? true : false;
   const carpool = is_edit
     ? carpool_list[skiResort].find((l) => l.postId === Number(postId))
     : null;
@@ -36,6 +35,7 @@ const CarpoolWrite = (props) => {
   });
   const { title, price, memberNum, notice } = form;
 
+  // 제목, 가격, 모집인원, 주의사항 변경
   const handleChange = (e) => {
     const { name, value } = e.target;
     setForm({
@@ -44,6 +44,7 @@ const CarpoolWrite = (props) => {
     });
   };
 
+  // 날짜 변경
   const bringDate = (date) => {
     setForm({
       ...form,
@@ -51,6 +52,7 @@ const CarpoolWrite = (props) => {
     });
   };
 
+  // CarpoolSelect 컴포넌트에서 가져온 정보로 state 변경
   const bringForm = (name, value) => {
     setForm({
       ...form,
@@ -58,6 +60,7 @@ const CarpoolWrite = (props) => {
     });
   };
 
+  // 지역 교차시 실행
   const bringLocation = (name, value) => {
     setForm({
       ...form,
@@ -66,7 +69,7 @@ const CarpoolWrite = (props) => {
   };
 
   // 출발 도착 지역 바꾸기
-  const location = (startLoca) => {
+  const ChageLocation = (startLoca) => {
     if (!state) {
       setState(true);
       setForm({
@@ -84,15 +87,17 @@ const CarpoolWrite = (props) => {
     }
   };
 
+  // 카풀게시물 추가
   const addCarpool = () => {
-    if (is_login) {
-      return dispatch(carpoolActions.addCarpoolDB(skiResort, form));
-    } else {
-      window.alert("로그인 및 프로필작성한 회원만 작성가능합니다.");
-      return;
-    }
+    dispatch(carpoolActions.addCarpoolDB(skiResort, form));
   };
+  // 카풀게시물 수정
   const editCarpool = () => {
+    if(page === 'myPage') {
+      dispatch(carpoolActions.editCarpoolDB(skiResort, page, postId, form));
+      return null;
+    }
+
     dispatch(carpoolActions.editCarpoolDB(skiResort, postId, form));
   };
 
@@ -106,7 +111,7 @@ const CarpoolWrite = (props) => {
           bringForm={bringForm}
           bringDate={bringDate}
           bringLocation={bringLocation}
-          location={location}
+          location={ChageLocation}
         />
 
         <div style={{ border: "5px solid #edeeef" }}></div>
