@@ -3,7 +3,7 @@ import { history } from "../redux/ConfigStore";
 import styled from "styled-components";
 
 import { Image, Text } from "../elements";
-import back from "../assets/carpoolWrite/back.svg";
+import back from "../assets/back.svg";
 
 const Header = (props) => {
   const { complete, goBack, children, _onClick, phone, fixed, push } = props;

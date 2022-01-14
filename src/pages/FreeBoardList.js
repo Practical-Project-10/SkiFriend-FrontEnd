@@ -9,11 +9,7 @@ import { Grid, Image } from "../elements/index";
 import CarpoolMenuBar from "../components/CarpoolMenuBar";
 import FloatButton from "../components/FloatButton";
 import Board from "../components/Board";
-// import InfinityScroll from "../components/InfinityScroll";
 import Header from "../components/Header";
-
-// import Pagination from "@mui/material/Pagination";
-// import Stack from "@mui/material/Stack";
 
 const FreeBoardList = () => {
   const params = useParams();
@@ -64,12 +60,6 @@ const FreeBoardList = () => {
         <CarpoolMenuBar />
 
         <Grid margin="16px" height="300px">
-          {/* <InfinityScroll
-            callNext={() => {
-              dispatch(boardActions.loadBoardDB(skiresort, page));
-            }}
-            is_loading={is_loading}
-          > */}
             {boardList.map((l) => {
               return (
                 <Grid key={l.postId}>
@@ -77,7 +67,6 @@ const FreeBoardList = () => {
                 </Grid>
               );
             })}
-          {/* </InfinityScroll> */}
         </Grid>
         <FloatButton _onClick={moveWritePage} />
       </Grid>

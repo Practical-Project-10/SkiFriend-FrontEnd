@@ -65,6 +65,7 @@ const Input = forwardRef((props, ref) => {
             onBlur={_onBlur}
             placeholder={placeholder}
             onChange={_onChange}
+            autocapitalize="off"
           />
           <Button
             _name={_name}
@@ -177,6 +178,7 @@ const Input = forwardRef((props, ref) => {
         onChange={_onChange}
         autocomplete={autocomplete}
         maxLength={_maxLength}
+        autocapitalize="off"
         // onInput={maxLengthCheck(this)}
       />
     </Grid>

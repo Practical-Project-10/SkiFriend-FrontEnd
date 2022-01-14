@@ -15,7 +15,7 @@ import calendar from "../assets/carpoolList/calendar_icon.svg";
 import clock from "../assets/carpoolList/clock_icon.svg";
 import person from "../assets/carpoolList/person_icon.svg";
 import price from "../assets/carpoolList/price_icon.svg";
-import etc from "../assets/carpoolList/etc_icon.svg";
+import etc from "../assets/etc_icon.svg";
 
 const Card = (props) => {
   const { notLogin, page } = props;

@@ -6,13 +6,13 @@ import { Grid, Image, Text } from "../elements/index";
 import SkiIcon from "../components/SkiIcon"
 import Header from "../components/Header";
 
-import High1 from "../assets/skiInfo/high1_logo.png";
-import YongPyong from "../assets/skiInfo/yongpyong_logo.png";
-import VivaldiPark from "../assets/skiInfo/vivaldi_logo.png";
-import Phoenix from "../assets/skiInfo/phoenix_logo.png";
-import WellihilliPark from "../assets/skiInfo/welli_logo.png";
-import Konjiam from "../assets/skiInfo/kongiam_logo.png";
-import drop from "../assets/skiInfo/drop.svg"
+import High1 from "../assets/high1_logo.png";
+import YongPyong from "../assets/yongpyong_logo.png";
+import Vivaldi from "../assets/vivaldi_logo.png";
+import Phoenix from "../assets/phoenix_logo.png";
+import Wellihilli from "../assets/welli_logo.png";
+import Konjiam from "../assets/kongiam_logo.png";
+import drop from "../assets/drop.svg"
 
 const PlaceInfo = () => {
   const [toggleState, setToggleState] = useState({
@@ -80,7 +80,7 @@ const PlaceInfo = () => {
     {// 비발디
       resort: '비발디',
       id: 'tabVivaldiPark',
-      logo: VivaldiPark,
+      logo: Vivaldi,
       intro: "https://www.sonohotelsresorts.com/daemyung.vp.skiworld.index.ds/dmparse.dm",
       slope: "https://www.sonohotelsresorts.com/daemyung.vp.skiworld.04_02_01.ds/dmparse.dm",
       fare: "https://www.sonohotelsresorts.com/daemyung.vp.skiworld.04_04_01.ds/dmparse.dm",
@@ -98,7 +98,7 @@ const PlaceInfo = () => {
     {// 웰리힐리
       resort: '웰리힐리',
       id: 'tabWellihilliPark',
-      logo: WellihilliPark,
+      logo: Wellihilli,
       intro: "https://www.wellihillipark.com/snowpark/snowpark/intro",
       slope: "https://www.wellihillipark.com/snowpark/snowpark/slope-guide",
       fare: "https://www.wellihillipark.com/home/guide/pay/snowpark)",
@@ -124,7 +124,7 @@ const PlaceInfo = () => {
           {resortInfo.map((r, i) => {
             
             return(
-              <Grid id={r.id} _onClick={toggleMenu}>
+              <Grid id={r.id} key={r.id} _onClick={toggleMenu}>
                 <Grid is_flex>
                   <Grid padding='16px 0' margin='0 13px 0 0'>
                     <SkiIcon border='2px solid #6195CF' src={r.logo}/>

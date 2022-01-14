@@ -4,8 +4,8 @@ import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import { Grid, Text, Input, Image } from "../elements/index";
 import DateSelector from "../components/DateSelector";
-import Change from "../assets/carpoolWrite/change.svg";
-import arrow from "../assets/carpoolWrite/arrow.svg";
+import Change from "../assets/carpoolList/change.svg";
+import arrow from "../assets/carpoolList/arrow.svg";
 
 import RegionSelector from "./RegionSelector";
 
