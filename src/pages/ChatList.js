@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
 import { chatCreators as chatActions } from "../redux/modules/chat";
@@ -13,7 +13,7 @@ const ChatList = (props) => {
   const chatRoomList = useSelector((state) => state.chat.roomList);
   const is_login = localStorage.getItem("is_login");
   //채팅방 목록으로 나타내기
-  React.useEffect(() => {
+  useEffect(() => {
     if (!is_login) {
       window.alert("로그인한 회원만 이용가능 합니다.");
       return history.push(`/`);

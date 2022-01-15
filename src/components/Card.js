@@ -57,7 +57,7 @@ const Card = (props) => {
 
   //연락하기 기능
   const connectRoom = (postId) => {
-    if (is_login !== "true") {
+    if (!is_login) {
       const login_ask = window.confirm(
         "로그인한 회원만 사용 가능합니다. 로그인 페이지로 이동하시겠습니까?"
       );

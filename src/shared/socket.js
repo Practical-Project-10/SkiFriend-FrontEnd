@@ -11,7 +11,14 @@ export const socket = {
   chatConnect: (token) => stomp.connect(token),
   chatDisconnect: () => stomp.disconnect(),
   chatRoomSubscribe: (roomId) =>
-    stomp.subscribe(`/sub/chat/room/${roomId}`, token),
+    stomp.subscribe(
+      `/sub/chat/room/${roomId}`,
+      (message) => {
+        const responseData = JSON.parse(message.body);
+        console.log(responseData);
+      },
+      token
+    ),
 
   chatSendMSG: (content) => stomp.send("/pub/chat/message", token, content),
 };
