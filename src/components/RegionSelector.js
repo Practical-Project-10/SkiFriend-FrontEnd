@@ -387,3 +387,75 @@ const Select = styled.select`
 `;
 
 export default RegionSelector;
+
+{/* <React.Fragment>
+      {is_edit ? (
+          <Location>
+            <Text bold width="130px" sort="center" size="14px">
+              {startLocation}
+            </Text>
+            <Image src={arrow} width="50px" height="10px" size="40px 10px" />
+            <Text bold width="122px" sort="center" size="20px" color="#6195cf">
+              {endLocation}
+            </Text>
+          </Location>
+        ) : (
+          <Grid
+            is_flex
+            justify="space-between"
+            margin="0 0 32px 0"
+            direction={state ? "row-reverse" : ""}
+          >
+            <Form is_flex width="144px" height="55px" onChange={changeLocation}>
+              <Select
+                margin="0 3px 0 0"
+                name={state ? "endLocation" : "startLocation"}
+                onChange={regionSelect}
+                ref={loca}
+              >
+                <option value="">시/도</option>
+                {city_name.map((c, idx) => {
+                  return (
+                    <option value={c} key={"cityName" + idx}>
+                      {c}
+                    </option>
+                  );
+                })}
+              </Select>
+
+              <Select
+                width="107px"
+                name={state ? "endLocation" : "startLocation"}
+                id="state"
+                ref={subLoca}
+              >
+                <option value="">군/구</option>
+              </Select>
+            </Form>
+
+            <Image src={arrow} width="50px" height="10px" />
+
+            <Select
+              width='114px'
+            >
+              <option value="">스키장</option>
+              <option value={props.skiResort}>{props.skiResort}</option>
+            </Select>
+
+
+
+            <Label htmlFor="endLocation" width="144px">
+              {skiResort}
+            </Label>
+            <input
+              type="text"
+              id="endLocation"
+              name="endLocation"
+              value={endLocation}
+              style={{ display: "none" }}
+              ref={endLoca}
+              readOnly
+            />
+          </Grid>
+        )}
+    </React.Fragment> */}

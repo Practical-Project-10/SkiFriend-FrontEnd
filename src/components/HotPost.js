@@ -10,10 +10,6 @@ import Comment from "../assets/freeBoard/comment.svg";
 
 const HotPost = (props) => {
 
-  // if(props.l === '') {
-    
-  // }
-
   return (
     <React.Fragment>
       <Posts>
@@ -21,7 +17,7 @@ const HotPost = (props) => {
           <ResortName>{props.skiResort}</ResortName>
           <Grid is_flex justify='space-between' width='100%' gap='30px'>
             <Grid width='80%'>
-              <Underline onClick={() => history.push(`/freeboarddetail/${props.skiResort}/${props.postId}`)}>{props.title}</Underline>
+              <Underline onClick={() => history.push(`/freeboarddetail/${props.skiResort}/${props.postId}/hotpost`)}>{props.title}</Underline>
             </Grid>
             <Grid is_flex width="25%">
               <Grid is_flex margin="0 11px 0 0">

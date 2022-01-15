@@ -21,7 +21,7 @@ const Carpool = (props) => {
   const is_loading = useSelector((state) => state.carpool.is_loading);
   const is_next = useSelector((state) => state.carpool.is_next);
   const resortImg = useSelector((state) => state.carpool.resortImg);
-  const is_login = localStorage.getItem("is_login");
+  const is_login = localStorage.getItem("is_login") === "true"? true: false;
   const is_profile = localStorage.getItem("is_profile");
   const skiResort = props.match.params.skiresort;
 
@@ -34,7 +34,7 @@ const Carpool = (props) => {
   }, []);
 
   const induceProfile = () => {
-    if (is_login !== "true") {
+    if (!is_login) {
       const ask = window.confirm(
         "로그인 후 이용할 수 있는 서비스 입니다. 로그인 페이지로 이동하시겠습니까?"
       );
