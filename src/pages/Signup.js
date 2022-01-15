@@ -1,12 +1,16 @@
 import React, { useState } from "react";
-import { Grid, Text, Input, Button } from "../elements/index";
 
-import Header from "../components/Header";
-import { idRegExp, pwdRegExp } from "../shared/validation";
 import { useDispatch } from "react-redux";
 import { userActions } from "../redux/modules/user";
 
+import { Grid, Text, Input, Button, Image } from "../elements/index";
+import logo from "../assets/login/logo.svg"
+
+import { idRegExp, pwdRegExp } from "../shared/validation";
+import Header from "../components/Header";
+
 const SignupOne = (props) => {
+  const history = props.history;
   const dispatch = useDispatch();
 
   // 유효성검사 상태
@@ -103,14 +107,18 @@ const SignupOne = (props) => {
     <Grid>
       <Header goBack>회원가입</Header>
       <Grid
-        phoneSize
+        padding='89px 16px 16px'
         minHeight="calc( 100vh - 55px )"
         display="flex"
         direction="column"
         justify="space-between"
       >
+        <Grid width='100%' height="73px" _onClick={() => history.push('/')} cursor='pointer'>
+          <Image src={logo} width='100%' height='73px'/>
+        </Grid>
+
         <Grid
-          margin="132px 0 195px"
+          margin="0 0 120px"
           display="flex"
           direction="column"
           gap="33px"
@@ -123,6 +131,7 @@ const SignupOne = (props) => {
             label="아이디"
             type="id"
             placeholder="영소문자, 숫자를 포함한 5자리 이상"
+            autocapitalize='off'
             _onBlur={handleBlur}
             _onChange={handleChange}
             _onClick={handleClick}

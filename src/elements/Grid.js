@@ -9,6 +9,7 @@ const Grid = (props) => {
     padding,
     margin,
     bg,
+    bgSize,
     color,
     children,
     _onClick,
@@ -55,6 +56,7 @@ const Grid = (props) => {
     alignItems,
     borderT,
     bg,
+    bgSize,
     color,
     direction,
     position,
@@ -140,7 +142,7 @@ const GridBox = styled.div`
   margin: ${(props) => props.margin};
   position: ${(props) => props.position};
   background: ${(props) => props.src? `url(${props.src}) no-repeat`: ''};
-  background-size: cover;
+  background-size: ${(props) => props.bgSize? props.bgSize: 'cover'};
   background-position: center;
   background-color: ${(props) => props.bg};
   /* background-position: ${(props) => props.position}; */

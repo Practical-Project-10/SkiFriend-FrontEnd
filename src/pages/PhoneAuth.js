@@ -1,12 +1,15 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { userActions } from "../redux/modules/user";
-import { Grid, Button, Input } from "../elements";
 
 import Header from "../components/Header";
 import { phoneNumExp } from "../shared/validation";
 
+import { Grid, Button, Input, Image } from "../elements";
+import logo from "../assets/login/logo.svg"
+
 const PhoneAuth = (props) => {
+  const history = props.history;
   const dispatch = useDispatch();
   const userInfo = useSelector((state) => state.user.user);
   const phoneNumInput = React.useRef("");
@@ -39,13 +42,17 @@ const PhoneAuth = (props) => {
     <Grid>
       <Header>회원가입</Header>
       <Grid
-        phoneSize
         minHeight="calc( 100vh - 55px )"
         display="flex"
         direction="column"
         justify="space-between"
+        padding='85px 16px 16px'
       >
-        <Grid margin="159px 0 0">
+        <Grid width='100%' height="73px" _onClick={() => history.push('/')} cursor='pointer'>
+          <Image src={logo} width='100%' height='73px'/>
+        </Grid>
+
+        <Grid display='flex' direction='column' gap='41px' margin='0 0 260px 0'>
           <Grid margin="0 0 41px">
             <Input
               dupButton
@@ -60,7 +67,7 @@ const PhoneAuth = (props) => {
           <Grid>
             <Input
               type="text"
-              pattern="[0-9]"
+              pattern="[0-9]*"
               inputMode="numeric"
               autocomplete="one-time-code" //autocomplete one-time-code 문자가 오면 클릭했을 시 바로 입력이 된다. (모바일에 편리하다) html5기능
               ref={smsNumInput}
@@ -68,7 +75,7 @@ const PhoneAuth = (props) => {
             />
           </Grid>
         </Grid>
-        <Grid padding="0 0 16px">
+        <Grid>
           <Button _onClick={nextStep}>다음</Button>
         </Grid>
       </Grid>

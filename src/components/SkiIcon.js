@@ -20,7 +20,7 @@ const Circle = styled.div`
   border: ${props => props.border};
   border-radius: 999px;
   background: ${props => props.src? `url(${props.src}) no-repeat center`: ''};
-  background-size: 60px 35px;
+  /* background-size: 60px 35px; */
   background-color: #fff;
 `
 

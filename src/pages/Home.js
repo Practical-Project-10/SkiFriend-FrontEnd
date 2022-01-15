@@ -97,7 +97,7 @@ const Home = (props) => {
       )}
       <Grid width="100%" margin="0 0 70px">
         <Grid width="100%" height="210px">
-          <Image src={Banner} size="cover" width="100%" height="100%" />
+          <Image src={Banner} size="100% 207px" width="100%" height="100%" />
         </Grid>
         <Grid align="center" padding="4px 0" bg="#474D56">
           {/* 가이드 링크 */}
@@ -130,7 +130,7 @@ const Home = (props) => {
         </IconWrap>
         <Grid
           bg="#FFF"
-          height="470px"
+          height="413px"
           radius="22px"
           padding="26px 0"
           margin="0 0 20px"

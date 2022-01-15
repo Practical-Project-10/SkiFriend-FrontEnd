@@ -19,7 +19,7 @@ const HotPost = (props) => {
       <Posts>
         <Grid is_flex padding="20px 0">
           <ResortName>{props.skiResort}</ResortName>
-          <Grid is_flex justify='space-between' width='100%' gap='66px'>
+          <Grid is_flex justify='space-between' width='100%' gap='30px'>
             <Grid width='80%'>
               <Underline onClick={() => history.push(`/freeboarddetail/${props.skiResort}/${props.postId}`)}>{props.title}</Underline>
             </Grid>
@@ -42,7 +42,7 @@ const HotPost = (props) => {
 };
 
 const ResortName = styled.div`
-  width: 100px;
+  width: 114px;
   padding: 0 7px;
   margin-right: 11px;
   background: #6195cf;
@@ -62,6 +62,11 @@ const Posts = styled.div`
 `;
 
 const Underline = styled.div`
+  width: 190px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
   &:hover {
     cursor: pointer;
     text-decoration: underline;

@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useParams } from "react-router-dom";
-// import { useDispatch, useSelector } from "react-redux";
-// import { chatCreators as chatActions } from "../redux/modules/chat";
+import { useDispatch, useSelector } from "react-redux";
+import { chatCreators as chatActions } from "../redux/modules/chat";
 
 import axios from "axios";
 import SockJS from "sockjs-client";
@@ -14,16 +14,16 @@ import { Grid, Input } from "../elements/index";
 import sendBtn from "../assets/send.svg";
 
 const ChatRoom = () => {
-  // const dispatch = useDispatch;
+  const dispatch = useDispatch;
   //경로
   const params = useParams();
   const roomId = params.roomId;
   const roomName = params.roomName;
   const scrollRef = useRef();
   //redux 데이터
-  // const datas = useSelector((state) => state.chat.chatList);
-  // const phoneInfo = useSelector((state) => state.chat.phoneInfoList);
-  // const roomInfoList = useSelector((state) => state.chat.roomInfoList);
+  const datas = useSelector((state) => state.chat.chatList);
+  const phoneInfo = useSelector((state) => state.chat.phoneInfoList);
+  const roomInfoList = useSelector((state) => state.chat.roomInfoList);
   // console.log(datas);
   //토큰
   const accessToken = document.cookie.split("=")[1];
@@ -35,15 +35,33 @@ const ChatRoom = () => {
   const [message, setMessage] = useState("");
   const [messageList, setMessageList] = useState([]);
   const [roomInfo, setRoomInfo] = useState([]);
-  // 쌓인 대화
-  const messageDatas = (recv) => {
-    setMessageList((prev) => [...prev, recv]);
-  };
-  //메세지 내용
-  const messageChat = (e) => {
-    const content = e.target.value;
-    setMessage(content);
-  };
+
+  //방정보 가져오기
+  useEffect(() => {
+    // axios
+    //   .get(`https://seongeunyang.shop/chat/room/${roomId}/carpool`, {
+    //     headers: token,
+    //   })
+    //   .then((res) => {
+    //     setRoomInfo(res.data);
+    //     // dispatch(chatActions.getRoomInfo(res.data));
+    //   });
+    dispatch(chatActions.getRoomInfoDB(roomId));
+  }, []);
+
+  // 대화내용 가져오기
+  useEffect(() => {
+    // axios
+    //   .get(`https://seongeunyang.shop/chat/message/${roomId}`, {
+    //     headers: token,
+    //   })
+    //   .then((res) => {
+    //     const prevChatData = res.data;
+    //     console.log("response : ", prevChatData);
+    //     setMessageList(prevChatData);
+    //   });
+    dispatch(chatActions.getContentChatDB(roomId));
+  }, []);
 
   //채팅룸 연결
   useEffect(() => {
@@ -53,6 +71,16 @@ const ChatRoom = () => {
       chatDisconnect();
     };
   }, []);
+
+  // 쌓인 대화
+  const messageDatas = (recv) => {
+    setMessageList((prev) => [...prev, recv]);
+  };
+  //메세지 내용
+  const messageChat = (e) => {
+    const content = e.target.value;
+    setMessage(content);
+  };  
 
   // stomp연결
   const chatConnect = () => {
@@ -150,18 +178,6 @@ const ChatRoom = () => {
     // dispatch(chatActions.sendChatDB(roomId, message));
   };
 
-  //방정보 가져오기
-  useEffect(() => {
-    axios
-      .get(`https://seongeunyang.shop/chat/room/${roomId}/carpool`, {
-        headers: token,
-      })
-      .then((res) => {
-        setRoomInfo(res.data);
-        // dispatch(chatActions.getRoomInfo(res.data));
-      });
-    // dispatch(chatActions.getRoomInfoDB(roomId));
-  }, []);
   return (
     <React.Fragment>
       {/* 상단부  */}
