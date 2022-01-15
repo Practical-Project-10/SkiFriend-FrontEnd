@@ -95,7 +95,7 @@ const addCarpoolDB = (skiResort, carpool) => {
       response && history.push(`/carpool/${skiResort}`);
       dispatch(addCarpool(skiResort, response.data));
     } catch (err) {
-      window.alert("모든 사항을 기재해 주세요.");
+      console.log(err);
     }
   };
 };
@@ -210,7 +210,7 @@ export default handleActions(
           ...action.payload.carpool,
         };
 
-        if(page === "myPage") {
+        if (page === "myPage") {
           const idx = draft.myList.findIndex(
             (l) => l.postId === Number(action.payload.postId)
           );

@@ -90,7 +90,7 @@ const ChatRoom = () => {
       })
       .then((res) => {
         const prevChatData = res.data;
-        console.log("response : ", prevChatData);
+        // console.log("response : ", prevChatData);
         setMessageList(prevChatData);
       });
     // dispatch(chatActions.getContentChatDB(roomId));

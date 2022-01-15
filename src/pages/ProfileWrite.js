@@ -62,7 +62,6 @@ const ProfileWrite = (props) => {
 
     if (name === "nickname") {
       if (nickname !== "") {
-       
         dispatch(userActions.isNicknameDB(nickname));
       } else {
         window.alert("닉네임을 입력해주세요.");
@@ -124,12 +123,7 @@ const ProfileWrite = (props) => {
 
   return (
     <React.Fragment>
-      <Header
-        goBack
-        complete
-        fixed
-        _onClick={is_edit ? editProfile : addProfile}
-      >
+      <Header goBack fixed>
         내 프로필
       </Header>
       <Grid phoneSize position="relative" margin="70px 0 0">
@@ -270,6 +264,14 @@ const ProfileWrite = (props) => {
         </Grid>
 
         <Grid display="flex" direction="column" gap="16px" padding="0 0 16px">
+          <Button
+            height="61px"
+            color="#FFF"
+            bg="#474D56"
+            _onClick={is_edit ? editProfile : addProfile}
+          >
+            작성완료
+          </Button>
           <Button
             height="61px"
             color="#474D56"

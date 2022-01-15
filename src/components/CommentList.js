@@ -21,7 +21,8 @@ const CommentList = () => {
   //localstorage
   const nickname = localStorage.getItem("nickname");
   const is_login = localStorage.getItem("is_login");
-  const loginCheck = is_login === "true" ? true : false; //------useState관리-------
+  const loginCheck = is_login === "true" ? true : false;
+  //------useState관리-------
   const [commentValue, setCommentValue] = useState("");
   const [commentEditValue, setCommentEditValue] = useState();
   const [editCommentNo, setEditCommentNo] = useState();
@@ -187,11 +188,14 @@ const CommentList = () => {
         {/* 댓글작성창 */}
         <CommentWrite>
           <CommentInput
-            placeholder="댓글작성"
+            placeholder={
+              loginCheck ? "댓글작성" : "로그인한 회원만 작성가능 합니다."
+            }
             value={commentValue}
             autoComplete="off"
             onKeyPress={onKeyPress}
             onChange={postComment}
+            readOnly={!loginCheck}
           />
           <Send onClick={addCommentBtn}>
             <Image
