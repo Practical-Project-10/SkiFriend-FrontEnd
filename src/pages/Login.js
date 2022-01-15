@@ -16,8 +16,18 @@ const Login = (props) => {
   const pwdInput = React.useRef();
 
   const join = () => {
+    // const {name} = e.target;
+
     const id = ldInput.current.value;
     const pwd = pwdInput.current.value;
+
+    // if (name === 'id' || name === 'password') {
+    //   if (e.key === "Enter") {
+    //     dispatch(userActions.loginDB(id, pwd));
+    //   }
+    // } else {
+    //   return null;
+    // }
 
     if (id === "") {
       window.alert("아이디를 입력해주세요.");
@@ -26,25 +36,37 @@ const Login = (props) => {
       window.alert("비밀번호를 입력해주세요.");
       return null;
     }
-
+    
     dispatch(userActions.loginDB(id, pwd));
+  };
+
+  //엔터키로 로그인
+  const onKeyPress = (e) => {
+    const id = ldInput.current.value;
+    const pwd = pwdInput.current.value;
+
+    if (e.key === "Enter") {
+      dispatch(userActions.loginDB(id, pwd));
+    }
   };
 
   return (
     <React.Fragment>
       <Header>로그인</Header>
-      <Grid src={bg} minHeight="calc( 100vh - 55px )" display='flex' direction='column' justify='space-between' padding='46px 16px 16px'>
-        <Grid width='100%' height="73px">
+      <Grid src={bg} minHeight="calc( 100vh - 55px )" display='flex' direction='column' justify='space-between' padding='85px 16px 16px'>
+        <Grid width='100%' height="73px" _onClick={() => history.push('/')} cursor='pointer'>
           <Image src={logo} width='100%' height='73px'/>
         </Grid>
 
-        <Grid display='flex' direction='column' gap='41px' margin='0 0 200px 0'>
-          <Input type="id" placeholder="아이디" ref={ldInput} label="아이디" />
+        <Grid display='flex' direction='column' gap='41px' margin='0 0 260px 0'>
+          <Input _name='id' type="id" placeholder="아이디" ref={ldInput} label="아이디" autocapitalize='off' _onKeyPress={onKeyPress}/>
           <Input
+            _name='password'
             type="password"
             placeholder="비밀번호"
             ref={pwdInput}
             label="비밀번호"
+            _onKeyPress={onKeyPress}
           />
         </Grid>
 

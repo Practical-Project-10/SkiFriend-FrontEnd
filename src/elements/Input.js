@@ -35,6 +35,7 @@ const Input = forwardRef((props, ref) => {
     _defaultValue,
     size,
     step,
+    autocapitalize,
   } = props;
 
   const style = {
@@ -65,7 +66,7 @@ const Input = forwardRef((props, ref) => {
             onBlur={_onBlur}
             placeholder={placeholder}
             onChange={_onChange}
-            autocapitalize="off"
+            autocapitalize={autocapitalize}
           />
           <Button
             _name={_name}
@@ -167,6 +168,7 @@ const Input = forwardRef((props, ref) => {
         name={_name}
         textContentType={contentType}
         autoComplete={autocomplete}
+        autocapitalize={autocapitalize}
         pattern={pattern}
         inputMode={inputMode}
         defaultValue={_defaultValue}
@@ -178,7 +180,7 @@ const Input = forwardRef((props, ref) => {
         onChange={_onChange}
         autocomplete={autocomplete}
         maxLength={_maxLength}
-        autocapitalize="off"
+        onKeyPress={_onKeyPress}
         // onInput={maxLengthCheck(this)}
       />
     </Grid>

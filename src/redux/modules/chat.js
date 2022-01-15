@@ -71,8 +71,8 @@ export const getContentChatDB = (roomId) =>
   async (dispatch, getState, { history }) => {
     try {
       const response = await apis.chatMSG(roomId);
-
-      response && dispatch(getChatList(...response.data));
+      console.log(response);
+      // response && dispatch(getChatList(...response.data));
     } catch(err) {
       console.log(`불러오기 실패${err}`);
     }

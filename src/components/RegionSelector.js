@@ -272,6 +272,7 @@ const RegionSelector = forwardRef((props, loca) => {
       "청주시 상당구",
       "청주시 흥덕구",
       "충주시",
+      "청원구",
       "괴산군",
       "단양군",
       "보은군",
@@ -279,7 +280,6 @@ const RegionSelector = forwardRef((props, loca) => {
       "옥천군",
       "음성군",
       "진천군",
-      "청원군",
     ];
     const state = document.getElementById("state");
 
