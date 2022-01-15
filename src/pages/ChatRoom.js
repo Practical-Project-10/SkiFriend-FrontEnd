@@ -3,7 +3,6 @@ import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { chatCreators as chatActions } from "../redux/modules/chat";
 
-import axios from "axios";
 import SockJS from "sockjs-client";
 import Stomp from "stompjs";
 import MessageBox from "../components/MessageBox";
@@ -24,7 +23,6 @@ const ChatRoom = () => {
   const datas = useSelector((state) => state.chat.chatList);
   const phoneInfo = useSelector((state) => state.chat.phoneInfoList);
   const roomInfoList = useSelector((state) => state.chat.roomInfoList);
-  // console.log(datas);
   //토큰
   const accessToken = document.cookie.split("=")[1];
   const token = { Authorization: `${accessToken}` };
@@ -34,36 +32,28 @@ const ChatRoom = () => {
   // useState관리
   const [message, setMessage] = useState("");
   const [messageList, setMessageList] = useState([]);
-  const [roomInfo, setRoomInfo] = useState([]);
+  
+  // 쌓인 대화
+  const messageDatas = (recv) => {
+    setMessageList((prev) => [...prev, recv]);
+  };
 
-  //방정보 가져오기
-  useEffect(() => {
-    dispatch(chatActions.getRoomInfoDB(roomId));
-  }, []);
+  //메세지 내용
+  const messageChat = (e) => {
+    const content = e.target.value;
+    setMessage(content);
+  };
 
-  // 대화내용 가져오기
   useEffect(() => {
-    dispatch(chatActions.getContentChatDB(roomId));
-  }, []);
-
-  //채팅룸 연결
-  useEffect(() => {
-    chatConnect();
+    dispatch(chatActions.getRoomInfoDB(roomId)); //방정보 가져오기
+    dispatch(chatActions.getContentChatDB(roomId)); //대화내용 가져오기
+    setMessageList(datas);
+    chatConnect(); //채팅룸 연결
     // dispatch(chatActions.connectChatDB(roomId));
     return () => {
       chatDisconnect();
     };
   }, []);
-
-  // 쌓인 대화
-  const messageDatas = (recv) => {
-    setMessageList((prev) => [...prev, recv]);
-  };
-  //메세지 내용
-  const messageChat = (e) => {
-    const content = e.target.value;
-    setMessage(content);
-  };  
 
   // stomp연결
   const chatConnect = () => {
@@ -82,6 +72,7 @@ const ChatRoom = () => {
       console.log(err);
     }
   };
+
   // stomp 연결해제
   const chatDisconnect = () => {
     try {
@@ -93,27 +84,12 @@ const ChatRoom = () => {
     }
   };
 
-  // 대화내용 가져오기
-  useEffect(() => {
-    axios
-      .get(`https://seongeunyang.shop/chat/message/${roomId}`, {
-        headers: token,
-      })
-      .then((res) => {
-        const prevChatData = res.data;
-        // console.log("response : ", prevChatData);
-        setMessageList(prevChatData);
-      });
-    // dispatch(chatActions.getContentChatDB(roomId));
-  }, []);
-
-  //엔터치면 메세지 보내지게 하기
+  //엔터치면 메세지 보내지게하기
   const onKeyPress = (e) => {
     if (e.key === "Enter" && message.replace(/\s|/gi, "").length !== 0) {
       sendMessage();
     }
   };
-
   //메세지 보내기
   const sendMessage = async () => {
     if (message.replace(/\s|/gi, "").length !== 0) {
@@ -136,16 +112,11 @@ const ChatRoom = () => {
 
   //전화번호 정보받기
   const getPhoneNum = () => {
-    axios
-      .get(`https://seongeunyang.shop/user/info/phoneNum`, { headers: token })
-      .then((res) => {
-        // dispatch(chatActions.getPhoneNumDB());
-        // setPhoneInfo(res.data.phoneNumber);
-        showPhoneNum(res.data.phoneNumber);
-      });
+    dispatch(chatActions.getPhoneNumDB());
+    showPhoneNum();
   };
   //전화번호 보여주기
-  const showPhoneNum = async (phoneInfo) => {
+  const showPhoneNum = async () => {
     const datas = {
       type: "PHONE_NUM",
       roomId: roomId,

@@ -69,6 +69,7 @@ const Head = styled.div`
   height: 54px;
   padding: 0 16px;
   box-sizing: border-box;
+  position: relative;
   background-color: #d9e3ee;
   position: relative;
 `;

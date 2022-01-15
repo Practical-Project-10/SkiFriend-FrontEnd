@@ -43,42 +43,45 @@ export const addChat = createAction(ADD, (chatData) => ({ chatData }));
 export const makeRoomChatDB =
   (postId) =>
   async (dispatch, getState, { history }) => {
-    try{
+    try {
       const response = await apis.chatRoom(postId);
-      response && 
-      history.push(
-        `/chatroom/${response.data.roomId}/${response.data.roomName}/${response.data.longRoomId}`
-      );
-    } catch(err) {
+      response &&
+        history.push(
+          `/chatroom/${response.data.roomId}/${response.data.roomName}/${response.data.longRoomId}`
+        );
+    } catch (err) {
       console.log(`불러오기 실패${err}`);
     }
   };
 
 //채팅목록 정보 가져오기
-export const getListChatDB = () =>
+export const getListChatDB =
+  () =>
   async (dispatch, getState, { history }) => {
     try {
       const response = await apis.chatRoomList();
 
       response && dispatch(getChatRoomList(response.data));
-    } catch(err) {
+    } catch (err) {
       console.log(`불러오기 실패${err}`);
     }
   };
 
 //채팅방 내용 가져오기
-export const getContentChatDB = (roomId) =>
+export const getContentChatDB =
+  (roomId) =>
   async (dispatch, getState, { history }) => {
     try {
       const response = await apis.chatMSG(roomId);
-      response && dispatch(getChatList(...response.data));
-    } catch(err) {
+      response && dispatch(getChatList(response.data));
+    } catch (err) {
       console.log(`불러오기 실패${err}`);
     }
   };
 
 //대화연결
-export const connectChatDB = (roomId) =>
+export const connectChatDB =
+  (roomId) =>
   async (dispatch, getState, { history }) => {
     await socket.chatConnect(() => {
       socket.chatRoomSubscribe(roomId);
@@ -86,7 +89,8 @@ export const connectChatDB = (roomId) =>
   };
 
 //메세지 보내기
-export const sendChatDB = (roomId, message) =>
+export const sendChatDB =
+  (roomId, message) =>
   async (dispatch, getState, { history }) => {
     const content = JSON.stringify({
       type: "TALK",
@@ -97,38 +101,41 @@ export const sendChatDB = (roomId, message) =>
   };
 
 //프로필 정보
-export const getProfileInfoDB = (longRoomId) =>
+export const getProfileInfoDB =
+  (longRoomId) =>
   async (dispatch, getState, { history }) => {
     try {
-      const response = await apis.chatShowProfile(longRoomId)
+      const response = await apis.chatShowProfile(longRoomId);
 
       response && dispatch(getProfileList(response.data));
-    } catch(err) {
+    } catch (err) {
       console.log(`불러오기 실패${err}`);
     }
   };
 
 //전화번호 가져오기
-export const getPhoneNumDB = () =>
+export const getPhoneNumDB =
+  () =>
   async (dispatch, getState, { history }) => {
     try {
-      const response = await apis.chatPhoneNum()
+      const response = await apis.chatPhoneNum();
 
       response && dispatch(getPhoneInfo(response.data));
-    } catch(err) {
+    } catch (err) {
       console.log(`불러오기 실패${err}`);
     }
   };
 
 //카풀정보 가져오기
-export const getRoomInfoDB = (roomId) =>
+export const getRoomInfoDB =
+  (roomId) =>
   async (dispatch, getState, { history }) => {
     console.log('실행')
     try {
-      const response = await apis.chatRoomInfo(roomId)
+      const response = await apis.chatRoomInfo(roomId);
 
       response && dispatch(getRoomInfo(response.data));
-    } catch(err) {
+    } catch (err) {
       console.log(`불러오기 실패${err}`);
     }
   };
