@@ -23,6 +23,7 @@ const FreeBoardDetail = ({ history }, props) => {
   const params = useParams();
   const postId = params.postId;
   const skiresort = params.skiresort;
+  const page = params.page;
   // redux데이터
   const postData = useSelector((state) => state.freeboard.detail);
   const likeList = useSelector((state) => state.like.list);
@@ -96,6 +97,7 @@ const FreeBoardDetail = ({ history }, props) => {
       <Header
         goBack
         push
+        page={page}
         _onClick={() => {
           history.push(`/freeboardlist/${skiresort}`);
         }}

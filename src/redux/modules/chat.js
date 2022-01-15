@@ -71,8 +71,7 @@ export const getContentChatDB = (roomId) =>
   async (dispatch, getState, { history }) => {
     try {
       const response = await apis.chatMSG(roomId);
-      console.log(response);
-      // response && dispatch(getChatList(...response.data));
+      response && dispatch(getChatList(...response.data));
     } catch(err) {
       console.log(`불러오기 실패${err}`);
     }
@@ -124,6 +123,7 @@ export const getPhoneNumDB = () =>
 //카풀정보 가져오기
 export const getRoomInfoDB = (roomId) =>
   async (dispatch, getState, { history }) => {
+    console.log('실행')
     try {
       const response = await apis.chatRoomInfo(roomId)
 

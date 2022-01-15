@@ -14,7 +14,7 @@ import { Grid, Input } from "../elements/index";
 import sendBtn from "../assets/send.svg";
 
 const ChatRoom = () => {
-  const dispatch = useDispatch;
+  const dispatch = useDispatch();
   //경로
   const params = useParams();
   const roomId = params.roomId;
@@ -38,28 +38,11 @@ const ChatRoom = () => {
 
   //방정보 가져오기
   useEffect(() => {
-    // axios
-    //   .get(`https://seongeunyang.shop/chat/room/${roomId}/carpool`, {
-    //     headers: token,
-    //   })
-    //   .then((res) => {
-    //     setRoomInfo(res.data);
-    //     // dispatch(chatActions.getRoomInfo(res.data));
-    //   });
     dispatch(chatActions.getRoomInfoDB(roomId));
   }, []);
 
   // 대화내용 가져오기
   useEffect(() => {
-    // axios
-    //   .get(`https://seongeunyang.shop/chat/message/${roomId}`, {
-    //     headers: token,
-    //   })
-    //   .then((res) => {
-    //     const prevChatData = res.data;
-    //     console.log("response : ", prevChatData);
-    //     setMessageList(prevChatData);
-    //   });
     dispatch(chatActions.getContentChatDB(roomId));
   }, []);
 
@@ -192,7 +175,7 @@ const ChatRoom = () => {
           display="flex"
           direction="column"
         >
-          <ChatRoomCard roomInfo={roomInfo} />
+          <ChatRoomCard roomInfo={roomInfoList} />
           <Grid phoneSize height="532px" overflow="scroll">
             <div style={{ padding: "0 0 70px 0" }} ref={scrollRef}>
               {/* 채팅말풍선 */}
@@ -204,19 +187,6 @@ const ChatRoom = () => {
           {/* 하단부 버튼들 */}
 
           <Grid height="100%" bg="#474D56">
-            {/* <Grid justify="flex-end" borderB="1px solid #fff" padding="5px">
-              <Grid
-                align="center"
-                width="45px"
-                height=" 24px"
-                radius="33px"
-                bg="#ffffff"
-                cursor="pointer"
-                // _onClick={uploadPhoto}
-              >
-                <AiOutlineCamera size="20" />
-              </Grid>
-            </Grid> */}
             <Grid is_flex padding="20px 16px">
               <Input
                 free
