@@ -6,7 +6,17 @@ import { Image, Text } from "../elements";
 import back from "../assets/back.svg";
 
 const Header = (props) => {
-  const { complete, goBack, children, _onClick, phone, fixed, push } = props;
+  const {
+    complete,
+    goBack,
+    children,
+    _onClick,
+    phone,
+    fixed,
+    push,
+    login,
+    logout,
+  } = props;
 
   if (goBack) {
     return (
@@ -39,6 +49,8 @@ const Header = (props) => {
 
   return (
     <Head>
+      {login ? <Button onClick={_onClick}>로그인</Button> : null}
+      {logout ? <Button onClick={_onClick}>로그아웃</Button> : null}
       <Text bold size="22px" line="50px">
         {children}
       </Text>

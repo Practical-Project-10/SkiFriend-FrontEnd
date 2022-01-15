@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 
 import styled from "styled-components";
 import { Grid, Text, Image } from "../elements/index";
@@ -36,7 +36,7 @@ const Card = (props) => {
   };
 
   const editCard = () => {
-    if(page === "myPage") {
+    if (page === "myPage") {
       history.push(`/carpoolwrite/${page}/${props.skiResort}/${props.postId}`);
       return null;
     }
@@ -202,19 +202,27 @@ const Card = (props) => {
           <Grid is_flex justify="space-between" margin="0 0 7px">
             <Items repuest={repuest} width="101px">
               <Image src={calendar} width="11px" height="15px" />
-              <Text size="12px">{props.date}</Text>
+              <Text size="12px" color="#FFF">
+                {props.date}
+              </Text>
             </Items>
             <Items repuest={repuest} width="61px">
               <Image src={clock} width="11px" height="15px" />
-              <Text size="12px">{props.time}</Text>
+              <Text size="12px" color="#FFF">
+                {props.time}
+              </Text>
             </Items>
             <Items repuest={repuest} width="49px">
               <Image src={person} width="11px" height="15px" />
-              <Text size="12px">{props.memberNum}명</Text>
+              <Text size="12px" color="#FFF">
+                {props.memberNum}명
+              </Text>
             </Items>
             <Items repuest={repuest} width="80px">
               <Image src={price} width="11px" height="15px" />
-              <Text size="12px">{props.price}원</Text>
+              <Text size="12px" color="#FFF">
+                {props.price}원
+              </Text>
             </Items>
           </Grid>
 
