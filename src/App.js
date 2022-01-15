@@ -82,6 +82,11 @@ function App() {
               path="/freeboarddetail/:skiresort/:postId"
               component={FreeBoardDetail}
             />
+            <Route
+              exact
+              path="/freeboarddetail/:skiresort/:postId/:page"
+              component={FreeBoardDetail}
+            />
             <Route exact path="/placeinfo" component={PlaceInfo} />
             <Route exact path="/mypage" component={MyPage} />
             <Route exact path="/profilewrite" component={ProfileWrite} />

@@ -129,6 +129,8 @@ Grid.defaultProps = {
   _onClick: () => {},
 };
 
+// 먼저 css 결을 정하기
+
 const GridBox = styled.div`
   width: ${(props) => props.width};
   height: ${(props) => props.height};

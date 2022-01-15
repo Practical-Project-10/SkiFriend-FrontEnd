@@ -130,6 +130,7 @@ export const getPhoneNumDB =
 export const getRoomInfoDB =
   (roomId) =>
   async (dispatch, getState, { history }) => {
+    console.log('실행')
     try {
       const response = await apis.chatRoomInfo(roomId);
 

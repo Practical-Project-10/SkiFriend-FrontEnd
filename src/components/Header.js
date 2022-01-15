@@ -1,7 +1,8 @@
 import React from "react";
-import { history } from "../redux/ConfigStore";
-import styled from "styled-components";
 
+import { history } from "../redux/ConfigStore";
+
+import styled from "styled-components";
 import { Image, Text } from "../elements";
 import back from "../assets/back.svg";
 
@@ -16,7 +17,12 @@ const Header = (props) => {
     push,
     login,
     logout,
+    page
   } = props;
+  
+  const goMain = () => {
+    history.goBack();
+  }
 
   if (goBack) {
     return (
@@ -24,7 +30,7 @@ const Header = (props) => {
         {push ? (
           <Image
             src={back}
-            _onClick={_onClick}
+            _onClick={page === 'hotpost'? goMain: _onClick}
             width="20px"
             height="17px"
             cursor="pointer"
@@ -65,6 +71,7 @@ const Head = styled.div`
   box-sizing: border-box;
   position: relative;
   background-color: #d9e3ee;
+  position: relative;
 `;
 
 const GoBack = styled.div`

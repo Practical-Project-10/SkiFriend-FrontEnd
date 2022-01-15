@@ -32,7 +32,7 @@ const ChatRoom = () => {
   // useState관리
   const [message, setMessage] = useState("");
   const [messageList, setMessageList] = useState([]);
-
+  
   // 쌓인 대화
   const messageDatas = (recv) => {
     setMessageList((prev) => [...prev, recv]);

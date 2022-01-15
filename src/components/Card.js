@@ -22,7 +22,7 @@ const Card = (props) => {
 
   const dispatch = useDispatch();
   const is_login = localStorage.getItem("is_login") === "true" ? true : false;
-  const is_profile = localStorage.getItem("is_profile");
+  const is_profile = localStorage.getItem("is_profile") === "true" ? true : false;
   const repuest = props.carpoolType === "카풀 요청";
   const nickname = localStorage.getItem("nickname");
   const is_mine = props.nickname === nickname;
@@ -67,7 +67,7 @@ const Card = (props) => {
         return;
       }
     }
-    if (is_profile !== "true") {
+    if (!is_profile) {
       const profile_ask = window.confirm(
         "프로필 작성한 회원만 사용 가능합니다. 마이페이지로 이동하시겠습니까?"
       );
