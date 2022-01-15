@@ -86,14 +86,28 @@ const CarpoolWrite = (props) => {
       });
     }
   };
-
   // 카풀게시물 추가
   const addCarpool = () => {
+    if (form.startLocation === "" || form.startLocation === " ") {
+      return window.alert("출발지역을 선택해주세요");
+    }
+    if (form.startLocation === "" || form.endLocation === " ") {
+      return window.alert("도착지역을 선택해주세요");
+    }
+    if (form.date === "") {
+      return window.alert("날짜를 선택해주세요");
+    }
+    if (form.time === "") {
+      return window.alert("시간을 선택해주세요");
+    }
+    if (form.carpoolType === "") {
+      return window.alert("카풀 요청, 혹은 카풀 제공을 선택해주세요");
+    }
     dispatch(carpoolActions.addCarpoolDB(skiResort, form));
   };
   // 카풀게시물 수정
   const editCarpool = () => {
-    if(page === 'myPage') {
+    if (page === "myPage") {
       dispatch(carpoolActions.editCarpoolDB(skiResort, page, postId, form));
       return null;
     }
@@ -105,6 +119,9 @@ const CarpoolWrite = (props) => {
     <React.Fragment>
       <Header goBack>카풀 {is_edit ? "수정" : "작성"} 페이지</Header>
       <Grid bg="#FFF" minHeight="calc( 100vh - 124px )">
+        <Text color="red" padding="10px">
+          필수 입력사항
+        </Text>
         <CarpoolSelect
           is_edit={is_edit}
           form={form}
@@ -118,11 +135,12 @@ const CarpoolWrite = (props) => {
 
         <Grid
           phoneSize
-          margin="50px 0 0"
+          margin="10px 0 0"
           display="flex"
           direction="column"
-          gap="33px"
+          gap="20px"
         >
+          <Text color="red">선택 입력사항</Text>
           <Input
             blue
             label="제목"
@@ -151,11 +169,7 @@ const CarpoolWrite = (props) => {
             <Text size="12px" color="#6195CF">
               모집인원
             </Text>
-            <Select
-              name="memberNum"
-              onChange={handleChange}
-              value={memberNum}
-            >
+            <Select name="memberNum" onChange={handleChange} value={memberNum}>
               <option value="0">선택</option>
               <option value="1">1명</option>
               <option value="2">2명</option>

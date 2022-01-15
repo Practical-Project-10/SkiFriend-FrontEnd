@@ -110,6 +110,20 @@ const ChatRoom = () => {
     }
   };
 
+  // 대화내용 가져오기
+  useEffect(() => {
+    axios
+      .get(`https://seongeunyang.shop/chat/message/${roomId}`, {
+        headers: token,
+      })
+      .then((res) => {
+        const prevChatData = res.data;
+        // console.log("response : ", prevChatData);
+        setMessageList(prevChatData);
+      });
+    // dispatch(chatActions.getContentChatDB(roomId));
+  }, []);
+
   //엔터치면 메세지 보내지게 하기
   const onKeyPress = (e) => {
     if (e.key === "Enter" && message.replace(/\s|/gi, "").length !== 0) {

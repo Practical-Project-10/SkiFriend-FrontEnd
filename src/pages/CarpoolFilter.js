@@ -38,12 +38,11 @@ const CarpoolFilter = (props) => {
     setForm({
       ...form,
       [name]: value,
-    })
-  }
+    });
+  };
 
   // 출발 도착 지역 바꾸기
   const location = (startLoca) => {
-
     if (!state) {
       setState(true);
       setForm({
@@ -77,7 +76,14 @@ const CarpoolFilter = (props) => {
         minHeight="calc( 100vh - 124px )"
         margin="0 0 70px 0"
       >
-        <CarpoolSelect is_filter form={form} bringForm={bringForm} bringDate={bringDate} bringLocation={bringLocation} location={location}/>
+        <CarpoolSelect
+          is_filter
+          form={form}
+          bringForm={bringForm}
+          bringDate={bringDate}
+          bringLocation={bringLocation}
+          location={location}
+        />
 
         <Grid padding="0 16px 16px">
           <Button size="20px" _onClick={filterSubmit}>

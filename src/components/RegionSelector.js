@@ -3,9 +3,9 @@ import React, { forwardRef } from "react";
 import styled from "styled-components";
 //지역선택 셀렉박스 css 는 import 경로에 쓰여져 있습니다!
 const RegionSelector = forwardRef((props, loca) => {
-  const {subLoca, changeLoca, state} = props;
+  const { subLoca, changeLoca, state } = props;
 
-  // const 
+  // const
   const city_name = [
     "서울",
     "부산",
@@ -25,7 +25,7 @@ const RegionSelector = forwardRef((props, loca) => {
   ];
 
   const regionSelect = (e) => {
-    const {value} = e.target;
+    const { value } = e.target;
 
     let region_name = [];
 
@@ -138,6 +138,7 @@ const RegionSelector = forwardRef((props, loca) => {
       "성남시 중원구",
       "수원시 권선구",
       "수원시 장안구",
+      "수원시 영통구",
       "수원시 팔달구",
       "시흥시",
       "안산시 단원구",
@@ -315,18 +316,18 @@ const RegionSelector = forwardRef((props, loca) => {
       add = region_name[13];
     } else if (value === "충북") {
       add = region_name[14];
-    };
+    }
 
     // 지역 선택시 option 초기화
     state.options.length = 1;
-  
+
     // 지역 별 시군구 option 추가
     for (let i in add) {
       let opt = document.createElement("option");
       opt.value = add[i];
       opt.innerHTML = add[i];
       state.appendChild(opt);
-    };
+    }
   };
 
   const changeLocation = (e) => {
@@ -334,39 +335,39 @@ const RegionSelector = forwardRef((props, loca) => {
     const _subLoca = subLoca.current.value;
     const location = `${_startLoca} ${_subLoca}`;
 
-    if (_startLoca !== '' && _subLoca !== '') {
-      changeLoca(e.target.name, location)
-    };
+    if (_startLoca !== "" && _subLoca !== "") {
+      changeLoca(e.target.name, location);
+    }
   };
 
   return (
     // <Grid is_flex width="144px" height="55px" onChange={changeLocation}>
-      <Form is_flex width="144px" height="55px" onChange={changeLocation}>
-        <Select
-          margin='0 3px 0 0'
-          name={state ? "endLocation" : "startLocation"}
-          onChange={regionSelect}
-          ref={loca}
-        >
-          <option value=''>시/도</option>
-          {city_name.map((c, idx) => {
-            return (
-              <option value={c} key={"cityName" + idx}>
-                {c}
-              </option>
-            );
-          })}
-        </Select>
+    <Form is_flex width="144px" height="55px" onChange={changeLocation}>
+      <Select
+        margin="0 3px 0 0"
+        name={state ? "endLocation" : "startLocation"}
+        onChange={regionSelect}
+        ref={loca}
+      >
+        <option value="">시/도</option>
+        {city_name.map((c, idx) => {
+          return (
+            <option value={c} key={"cityName" + idx}>
+              {c}
+            </option>
+          );
+        })}
+      </Select>
 
-        <Select
-          width='107px'
-          name={state ? "endLocation" : "startLocation"}
-          id="state" 
-          ref={subLoca}
-        >
-          <option value=''>군/구</option>
-        </Select>
-      </Form>
+      <Select
+        width="107px"
+        name={state ? "endLocation" : "startLocation"}
+        id="state"
+        ref={subLoca}
+      >
+        <option value="">군/구</option>
+      </Select>
+    </Form>
     // </Grid>
   );
 });
@@ -375,15 +376,14 @@ const Form = styled.form`
   width: 144px;
   display: flex;
   height: 55px;
-`
+`;
 
 const Select = styled.select`
-  width: ${props => props.width? props.width: '53px'};
+  width: ${(props) => (props.width ? props.width : "53px")};
   height: 55px;
-  margin: ${props => props.margin && props.margin};
+  margin: ${(props) => props.margin && props.margin};
   border: 1px solid #474d56;
   border-radius: 6px;
-`
+`;
 
-export default RegionSelector
-
+export default RegionSelector;

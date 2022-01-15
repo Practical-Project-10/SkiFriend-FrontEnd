@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
 import { mainCreators as mainActions } from "../redux/modules/main";
+import { userActions } from "../redux/modules/user";
 
 import styled from "styled-components";
 import { Grid, Image, Text } from "../elements/index";
@@ -18,8 +19,12 @@ import Banner from "../assets/mainPage/Home_banner.png";
 
 const Home = (props) => {
   const dispatch = useDispatch();
-  const hotPosts = useSelector((state) => state.main.list);
+  //경로
   const history = props.history;
+  //redux 데이터
+  const hotPosts = useSelector((state) => state.main.list);
+  //login판단
+  const is_login = localStorage.getItem("is_login") === "true" ? true : false;
   const skiResort = [
     {
       resortNum: 1,
@@ -59,7 +64,7 @@ const Home = (props) => {
     },
   ];
 
-  React.useEffect(() => {
+  useEffect(() => {
     const mainHotPosts = async () => {
       const response = await (
         await fetch("https://seongeunyang.shop/main")
@@ -69,10 +74,27 @@ const Home = (props) => {
     mainHotPosts();
     // dispatch(mainActions.hotPostsDB());
   }, []);
-
+  //로그아웃
+  const logout = () => {
+    dispatch(userActions.logout());
+    history.replace("/");
+  };
   return (
     <React.Fragment>
-      <Header>홈</Header>
+      {is_login ? (
+        <Header logout _onClick={logout}>
+          홈
+        </Header>
+      ) : (
+        <Header
+          login
+          _onClick={() => {
+            history.push(`/login`);
+          }}
+        >
+          홈
+        </Header>
+      )}
       <Grid width="100%" margin="0 0 70px">
         <Grid width="100%" height="210px">
           <Image src={Banner} size="100% 207px" width="100%" height="100%" />
@@ -94,7 +116,7 @@ const Home = (props) => {
             return (
               <Grid
                 width="calc((100% - 100px) / 3)"
-                cursor='pointer'
+                cursor="pointer"
                 hoverOpacity="0.8"
                 key={r.resortNum}
                 _onClick={() => history.push(`/carpool/${r.name}`)}
