@@ -5,11 +5,9 @@ import { userActions } from "../redux/modules/user";
 import Header from "../components/Header";
 import { phoneNumExp } from "../shared/validation";
 
-import { Grid, Button, Input, Image } from "../elements";
-import logo from "../assets/login/logo.svg"
+import { Grid, Button, Input } from "../elements";
 
 const PhoneAuth = (props) => {
-  const history = props.history;
   const dispatch = useDispatch();
   const userInfo = useSelector((state) => state.user.user);
   const phoneNumInput = React.useRef("");
@@ -46,9 +44,9 @@ const PhoneAuth = (props) => {
         display="flex"
         direction="column"
         justify="space-between"
-        padding='160px 16px 16px'
+        padding="160px 16px 16px"
       >
-        <Grid display='flex' direction='column' gap='41px'>
+        <Grid display="flex" direction="column" gap="41px">
           <Grid>
             <Input
               dupButton

@@ -3,6 +3,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { mainCreators as mainActions } from "../redux/modules/main";
 import { userActions } from "../redux/modules/user";
+import { chatCreators as chatActions } from "../redux/modules/chat";
 
 import SockJS from "sockjs-client";
 import Stomp from "stompjs";
@@ -27,6 +28,7 @@ const Home = (props) => {
   //redux 데이터
   const hotPosts = useSelector((state) => state.main.list);
   const alarm = useSelector((state) => state.chat.alarm);
+  console.log(alarm);
   //토큰
   const accessToken = document.cookie.split("=")[1];
   const token = { Authorization: `${accessToken}` };
@@ -84,8 +86,7 @@ const Home = (props) => {
           `/sub/alarm/${userId}`,
           (data) => {
             const newData = JSON.parse(data.body);
-            console.log(newData);
-            // dispatch(chatActions.getAlarm(newData));
+            dispatch(chatActions.getAlarm(newData));
           },
           token
         );
@@ -93,12 +94,12 @@ const Home = (props) => {
     } catch (error) {
       console.log(error);
     }
-  });
+  }, []);
 
   useEffect(() => {
     const mainHotPosts = async () => {
       const response = await (
-        await fetch("https://seongeunyang.shop/main")
+        await fetch("http://3.34.19.50:8080/main")
       ).json();
       dispatch(mainActions.loadPosts(response));
     };

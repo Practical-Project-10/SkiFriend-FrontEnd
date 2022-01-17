@@ -26,22 +26,26 @@ const CommentList = () => {
   const [commentValue, setCommentValue] = useState("");
   const [commentEditValue, setCommentEditValue] = useState();
   const [editCommentNo, setEditCommentNo] = useState();
+
   //------댓글 입력한 내용 가져오기------
   const postComment = (e) => {
     const currentComment = e.target.value;
     setCommentValue(currentComment);
   };
+
   //-----댓글 수정 내용 가져오기----------
   const postEditComment = (e) => {
     const currentComment = e.target.value;
     setCommentEditValue(currentComment);
   };
+
   //엔터치면 메세지 보내지게 하기
   const onKeyPress = (e) => {
     if (e.key === "Enter" && commentValue.replace(/\s|/gi, "").length !== 0) {
       addCommentBtn();
     }
   };
+
   //-------댓글 작성-------
   const addCommentBtn = () => {
     if (loginCheck) {
@@ -59,10 +63,12 @@ const CommentList = () => {
       }
     }
   };
+
   //-------댓글수정-------
   const updateCommentBtn = (commentId) => {
     setEditCommentNo(commentId);
   };
+
   //-------댓글수정 전송-------
   const updateSubmitCommentBtn = () => {
     setEditCommentNo(0);
@@ -70,6 +76,7 @@ const CommentList = () => {
       commentActions.updateCommentDB(postId, editCommentNo, commentEditValue)
     );
   };
+  
   //-------댓글 삭제--------
   const deleteCommentBtn = (commentId) => {
     const ask = window.confirm("정말 삭제하시겠습니까?");
