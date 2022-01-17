@@ -60,6 +60,7 @@ const ChatRoom = () => {
   // stomp연결
   const chatConnect = () => {
     try {
+      stomp.debug = null;
       stomp.connect(token, () => {
         stomp.subscribe(
           `/sub/chat/room/${roomId}`,
@@ -78,6 +79,7 @@ const ChatRoom = () => {
   // stomp 연결해제
   const chatDisconnect = () => {
     try {
+      stomp.debug = null;
       stomp.disconnect(() => {
         stomp.unsubscribe("sub-0");
       }, token);
@@ -113,6 +115,7 @@ const ChatRoom = () => {
         roomId: roomId,
         message: message,
       };
+      stomp.debug = null;
       await stomp.send("/pub/chat/message", token, JSON.stringify(datas));
       //메세지 보내면 스크롤 자동내림
       scrollRef.current.scrollIntoView({

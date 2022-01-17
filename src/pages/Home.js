@@ -84,7 +84,7 @@ const Home = (props) => {
           `/sub/alarm/${userId}`,
           (data) => {
             const newData = JSON.parse(data.body);
-            dispatch(chatCreators.getAlarm(newData.message));
+            dispatch(chatCreators.getAlarm(newData));
           },
           token
         );
@@ -97,7 +97,7 @@ const Home = (props) => {
   useEffect(() => {
     const mainHotPosts = async () => {
       const response = await (
-        await fetch("https://seongeunyang.shop/main")
+        await fetch("http://3.34.19.50:8080/main")
       ).json();
       dispatch(mainActions.loadPosts(response));
     };

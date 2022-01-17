@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { history } from "../redux/ConfigStore"
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { userActions } from "../redux/modules/user";
 
 import styled from "styled-components";
