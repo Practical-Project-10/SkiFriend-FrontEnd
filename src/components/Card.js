@@ -19,10 +19,10 @@ import etc from "../assets/etc_icon.svg";
 
 const Card = (props) => {
   const { notLogin, page } = props;
-
   const dispatch = useDispatch();
   const is_login = localStorage.getItem("is_login") === "true" ? true : false;
-  const certification = localStorage.getItem("certification") === "true" ? true : false;
+  const certification =
+    localStorage.getItem("certification") === "true" ? true : false;
   const repuest = props.carpoolType === "카풀 요청";
   const nickname = localStorage.getItem("nickname");
   const is_mine = props.nickname === nickname;

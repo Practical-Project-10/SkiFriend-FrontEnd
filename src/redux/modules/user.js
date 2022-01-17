@@ -6,21 +6,18 @@ import { deleteCookie } from "../../shared/cookie";
 //action
 const SET_USER = "SET_USER";
 const LOGOUT = "LOGOUT";
-const EDIT_USER = "EDIT_USER";
 const PHONENUM_CHECK = "PHONENUM_CHECK";
 const SMS_CHECK = "SMS_CHECK";
 
 //action creators
 const setUser = createAction(SET_USER, (user) => ({ user }));
 const logout = createAction(LOGOUT, () => ({}));
-const editUserInfo = createAction(EDIT_USER, (userInfo) => ({ userInfo }));
 const phoneNum = createAction(PHONENUM_CHECK, (num) => ({ num }));
 const smsCheck = createAction(SMS_CHECK, (state) => ({ state }));
 
 //[회원가입, 회원탈퇴, 비밀번호수정, 문자인증]은 서버에서 처리 리덕스에서 할거 없음
 
 //middlewares
-
 const isPhoneNumDB = (_phoneNum) => {
   return async (dispatch, getState, { history }) => {
     try {
@@ -50,21 +47,6 @@ const isSmsCheckDB = (phoneNum, randomNum) => {
     }
   };
 };
-
-// const editUserInfoDB = (userInfo) => {
-//   return async (dispatch, getState, { history }) => {
-//     try {
-//       const oldUserInfo = getState().user.user;
-//       const newUserInfo = { ...oldUserInfo, userInfo };
-//       const response = await apis.editUserInfo(newUserInfo);
-//       const _userInfo = response.data;
-//       response && history.push("/freeboarddetail");
-//       dispatch(editUserInfo(_userInfo));
-//     } catch (err) {
-//       console.log(err);
-//     }
-//   };
-// };
 
 const deleteUserInfoDB = () => {
   return async (dispatch, getState, { history }) => {
@@ -101,11 +83,6 @@ export default handleActions(
         draft.user = {};
       }),
 
-    [EDIT_USER]: (state, action) =>
-      produce(state, (draft) => {
-        draft.user = action.payload.userInfo;
-      }),
-
     [PHONENUM_CHECK]: (state, action) =>
       produce(state, (draft) => {
         draft.user.phoneNum = action.payload.num;
@@ -122,12 +99,10 @@ export default handleActions(
 const userActions = {
   setUser,
   logout,
-  editUserInfo,
   phoneNum,
   isPhoneNumDB,
   isSmsCheckDB,
   deleteUserInfoDB,
-  // editUserInfoDB,
 };
 
 export { userActions };

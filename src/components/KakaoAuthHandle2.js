@@ -11,10 +11,10 @@ const KakaoAuthHandle2 = (props) => {
     let userId = localStorage.getItem('userId')
     const kakaoLogin = async () => {
       await axios
-        .get(`http://3.34.19.50:8080/user/kakao/callback/${userId}?code=${code}`)
+        .get(`https://seongeunyang.shop/user/kakao/callback/${userId}?code=${code}`)
         .then((res) => {
-          console.log("window.location.href = / 실행")
-          console.log(res)
+          // console.log("window.location.href = / 실행")
+          // console.log(res)
           localStorage.setItem("is_login", true);
           userStorage(res.data);
           // window.location.href = "/";

@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "http://3.34.19.50:8080/",//https://seongeunyang.shop/
+  baseURL: "https://seongeunyang.shop/",
   headers: {
     "content-type": "application/json;charset=UTF-8",
     accept: "application/json,",
@@ -15,26 +15,6 @@ api.interceptors.request.use(function (config) {
 });
 
 export const apis = {
-  //로그인 / 회원가입
-  // login: (id, pwd) =>
-  //   api.post("/user/login", {
-  //     username: id,
-  //     password: pwd,
-  //   }),
-
-  // signup: (userInfo) =>
-  //   api.post("/user/signup", {
-  //     username: userInfo.username,
-  //     password: userInfo.password,
-  //     phoneNum: userInfo.phoneNum,
-  //     nickname: userInfo.nickname,
-  //   }),
-
-  // idCheck: (id) => api.post("/user/signup/idcheck", { username: id }),
-
-  // nicknameCheck: (nickname) =>
-  //   api.post("/user/signup/nicknamecheck", { nickname }),
-
   phoneNumCheck: (phoneNumber) =>
     api.post("/user/sms", { phoneNumber: phoneNumber }),
 
@@ -46,13 +26,6 @@ export const apis = {
 
   //마이페이지
   getProfile: () => api.get("/user/info"),
-
-  // addProfile: (profile) =>
-  //   api.post("/user/profile", profile, {
-  //     headers: {
-  //       "Content-Type": "multipart/form-data",
-  //     },
-  //   }),
 
   addProfile: (profile) =>
     api.put("/user/info", profile, {

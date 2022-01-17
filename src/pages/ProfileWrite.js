@@ -16,8 +16,7 @@ const ProfileWrite = (props) => {
   const dispatch = useDispatch();
   const preview = useSelector((state) => state.image.preview);
   const user_profile = useSelector((state) => state.profile.user_profile);
-  console.log(user_profile)
-
+  console.log(user_profile);
   const pfImgFile = useRef();
   const deleteFile = new File(["delete"], "delete");
 
@@ -30,13 +29,20 @@ const ProfileWrite = (props) => {
     selfIntro: user_profile.selfIntro,
     phoneNum: user_profile.phoneNum,
   });
-  const { nickname, profileImg, gender, ageRange, career, selfIntro, phoneNum } = profile;
+  const {
+    nickname,
+    profileImg,
+    // gender,
+    // ageRange,
+    career,
+    selfIntro,
+    phoneNum,
+  } = profile;
 
   useEffect(() => {
     dispatch(profileActions.getProfileDB());
     dispatch(imageActions.setPreview(profileImg));
   }, []);
-  console.log(profile)
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -133,6 +139,29 @@ const ProfileWrite = (props) => {
             margin="0 0 63px"
           >
             <Grid width="100%">
+              <Text size="12px">전화번호</Text>
+              <Input
+                type="text"
+                _disabled
+                _name="phoneNum"
+                _value={phoneNum !== "null" ? user_profile.phoneNum : null}
+                _onChange={handleChange}
+                placeholder="휴대폰 인증을 해주세요."
+              />
+              {!user_profile.phoneNum && (
+                <Button
+                  height="47px"
+                  padding="14px 0"
+                  margin="10px 0 0"
+                  color="#474D56"
+                  bg="#FFF"
+                  _onClick={() => history.push("/phoneauth")}
+                >
+                  휴대폰 인증하기
+                </Button>
+              )}
+            </Grid>
+            <Grid width="100%">
               <Input
                 label="닉네임"
                 type="text"
@@ -159,59 +188,38 @@ const ProfileWrite = (props) => {
               <Text size="12px">자기소개</Text>
               <Textarea
                 name="selfIntro"
-                value={selfIntro !== 'null'? selfIntro: null}
+                value={selfIntro !== "null" ? selfIntro : null}
                 placeholder="내용을 입력해주세요"
                 onChange={handleChange}
               />
             </Grid>
 
             <Grid width="100%">
-              <Text size="12px">전화번호</Text>
-              <Input
-                type="text"
-                _disabled
-                _name="phoneNum"
-                _value={phoneNum !== 'null'? phoneNum: null}
-                _onChange={handleChange}
-                placeholder="휴대폰 인증을 해주세요."
-              />
-              <Button
-                height="47px"
-                padding="14px 0"
-                margin='10px 0 0'
-                color="#474D56"
-                bg="#FFF"
-                _onClick={() =>
-                  history.push("/phoneauth")
-                }
-              >
-                휴대폰 인증하기
-              </Button>
-            </Grid>
-
-            <Grid width="100%">
               <Text size="12px">성별</Text>
-              <Input name="gender" _value={gender} _disabled></Input>
+              <Input
+                name="gender"
+                _value={user_profile.gender}
+                _disabled
+              ></Input>
             </Grid>
 
             <Grid width="100%">
               <Text size="12px">나이</Text>
-              <Input name="gender" _value={ageRange} _disabled></Input>
+              <Input
+                name="gender"
+                _value={user_profile.ageRange}
+                _disabled
+              ></Input>
             </Grid>
           </Grid>
         </Grid>
 
         <Grid display="flex" direction="column" gap="16px" padding="0 0 16px">
-          <Button
-            height="61px"
-            color="#FFF"
-            bg="#6195CF"
-            _onClick={addProfile}
-          >
+          <Button height="61px" color="#FFF" bg="#6195CF" _onClick={addProfile}>
             작성완료
           </Button>
 
-          <div style={{border: '1px solid #9098a2', margin: '31px 0'}}></div>
+          <div style={{ border: "1px solid #9098a2", margin: "31px 0" }}></div>
 
           <Button
             height="61px"

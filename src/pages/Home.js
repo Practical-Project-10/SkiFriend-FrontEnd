@@ -27,12 +27,12 @@ const Home = (props) => {
   const history = props.history;
   //redux 데이터
   const hotPosts = useSelector((state) => state.main.list);
-  const alarm = useSelector((state) => state.chat.alarm);
+  // const alarm = useSelector((state) => state.chat.alarm);
   //토큰
   const accessToken = document.cookie.split("=")[1];
   const token = { Authorization: `${accessToken}` };
   //소켓
-  const sock = new SockJS("http://3.34.19.50:8080/ws-alarm");
+  const sock = new SockJS("https://seongeunyang.shop/ws-alarm");
   const stomp = Stomp.over(sock);
   //localstorage
   const is_login = localStorage.getItem("is_login") === "true" ? true : false;
@@ -79,13 +79,13 @@ const Home = (props) => {
   ];
   useEffect(() => {
     try {
-      // stomp.debug = null;
+      stomp.debug = null;
       stomp.connect(token, () => {
         stomp.subscribe(
           `/sub/alarm/${userId}`,
           (data) => {
             const newData = JSON.parse(data.body);
-            dispatch(chatActions.getAlarm(newData));
+            dispatch(chatCreators.getAlarm(newData));
           },
           token
         );
@@ -98,13 +98,14 @@ const Home = (props) => {
   useEffect(() => {
     const mainHotPosts = async () => {
       const response = await (
-        await fetch("http://3.34.19.50:8080/main")
+        await fetch("https://seongeunyang.shop/main")
       ).json();
       dispatch(mainActions.loadPosts(response));
     };
     mainHotPosts();
     // dispatch(mainActions.hotPostsDB());
   }, []);
+
   //로그아웃
   const logout = () => {
     dispatch(userActions.logout());

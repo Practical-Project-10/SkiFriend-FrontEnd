@@ -17,19 +17,17 @@ import FreeBoardDetail from "./pages/FreeBoardDetail";
 import PlaceInfo from "./pages/PlaceInfo";
 import MyPage from "./pages/MyPage";
 import ProfileWrite from "./pages/ProfileWrite";
-import PwdChange from "./pages/PwdChange";
 import ChatList from "./pages/ChatList";
 import Navbar from "./components/Navbar";
 import ChatRoom from "./pages/ChatRoom";
 import Snowflakes from "./components/Snowflakes";
 import KakaoAuthHandle from "./components/KakaoAuthHandle";
 import KakaoAuthHandle2 from "./components/KakaoAuthHandle2";
-import NaverAuthHandle  from "./components/NaverAuthHandle";
+import NaverAuthHandle from "./components/NaverAuthHandle";
 
 import background from "./assets/background.png.jpg";
 
 function App() {
-
   return (
     <React.Fragment>
       <Container>
@@ -40,9 +38,21 @@ function App() {
             <Route exact path="/" component={Home} />
             <Route exact path="/phoneauth" component={PhoneAuth} />
             <Route exact path="/login" component={SocialLogin} />
-            <Route exact path="/user/kakao/callback" component={KakaoAuthHandle}/>
-            <Route exact path="/user/kakao/callback/properties" component={KakaoAuthHandle2}/>
-            <Route exact path="/user/naver/callback" component={NaverAuthHandle}/>
+            <Route
+              exact
+              path="/user/kakao/callback"
+              component={KakaoAuthHandle}
+            />
+            <Route
+              exact
+              path="/user/kakao/callback/properties"
+              component={KakaoAuthHandle2}
+            />
+            <Route
+              exact
+              path="/user/naver/callback"
+              component={NaverAuthHandle}
+            />
             <Route exact path="/carpool/:skiresort" component={Carpool} />
             <Route exact path="/filter/:skiresort" component={FilterList} />
             <Route exact path="/carpoolwrite" component={CarpoolWrite} />
@@ -94,12 +104,6 @@ function App() {
             <Route exact path="/placeinfo" component={PlaceInfo} />
             <Route exact path="/mypage" component={MyPage} />
             <Route exact path="/profilewrite" component={ProfileWrite} />
-
-            <Route
-              exact
-              path="/profilewrite/:username/pwdchange"
-              component={PwdChange}
-            />
             <Route exact path="/chatlist" component={ChatList} />
             <Route
               exact
@@ -148,9 +152,9 @@ const Container = styled.div`
   }
 
   @media screen and (min-width: 1200px) {
-      background: url(${background}) no-repeat;
-      background-size: 100% 100vh;
-    }
+    background: url(${background}) no-repeat;
+    background-size: 100% 100vh;
+  }
 `;
 
 const CardList = styled.div`
