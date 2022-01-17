@@ -11,13 +11,33 @@ import { history } from "../redux/ConfigStore";
 const ChatList = (props) => {
   const dispatch = useDispatch();
   const chatRoomList = useSelector((state) => state.chat.roomList);
-  const is_login = localStorage.getItem("is_login");
+  const is_login = localStorage.getItem("is_login") === "true"? true: false;
+  const certification = localStorage.getItem("certification") === "true"? true: false;
+
   //채팅방 목록으로 나타내기
   useEffect(() => {
     if (!is_login) {
-      window.alert("로그인한 회원만 이용가능 합니다.");
-      return history.push(`/`);
+      const ask = window.confirm(
+        "로그인 후 이용 가능한 서비스 입니다. 로그인 페이지로 이동하시겠습니까?"
+      );
+      if (ask) {
+        history.push("/login");
+      } else {
+        history.goBack();
+      }
     }
+
+    if (!certification) {
+      const ask = window.confirm(
+        "휴대폰 인증 후 이용 가능한 서비스 입니다. 인증하시겠습니까?"
+      );
+      if (ask) {
+        history.push("/profilewrite");
+      } else {
+        return history.goBack();
+      }
+    }
+
     dispatch(chatActions.getListChatDB());
   }, []);
 

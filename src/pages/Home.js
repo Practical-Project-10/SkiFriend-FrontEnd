@@ -9,12 +9,12 @@ import { Grid, Image, Text } from "../elements/index";
 import SkiIcon from "../components/SkiIcon";
 import HotPost from "../components/HotPost";
 import Header from "../components/Header";
-import High1 from "../assets/high1_logo.png";
-import YongPyong from "../assets/yongpyong_logo.png";
-import Vivaldi from "../assets/vivaldi_logo.png";
-import Phoenix from "../assets/phoenix_logo.png";
-import Wellihilli from "../assets/welli_logo.png";
-import Konjiam from "../assets/kongiam_logo.png";
+import High1 from "../assets/high1_logo.svg";
+import YongPyong from "../assets/yongpyong_logo.svg";
+import Vivaldi from "../assets/vivaldi_logo.svg";
+import Phoenix from "../assets/phoenix_logo.svg";
+import Wellihilli from "../assets/welli_logo.svg";
+import Konjiam from "../assets/konjiam_logo.svg";
 import Banner from "../assets/mainPage/Home_banner.png";
 
 const Home = (props) => {
@@ -25,6 +25,8 @@ const Home = (props) => {
   const hotPosts = useSelector((state) => state.main.list);
   //login판단
   const is_login = localStorage.getItem("is_login") === "true" ? true : false;
+  // const user = useSelector(state => state.user.user)
+  // console.log(user)
   const skiResort = [
     {
       resortNum: 1,
@@ -102,7 +104,7 @@ const Home = (props) => {
         <Grid align="center" padding="4px 0" bg="#474D56">
           {/* 가이드 링크 */}
           <a
-            href="https://www.notion.so/7991aee19c5f4a419bb71207823d01fe"
+            href="https://beomin-sd.tistory.com/365"
             target="_blank"
             rel="noopener noreferrer"
             style={{ fontWeight: "700", color: "#FFF" }}

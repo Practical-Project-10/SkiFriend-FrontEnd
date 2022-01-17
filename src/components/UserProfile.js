@@ -10,10 +10,10 @@ import { Grid, Image, Text } from "../elements/index";
 import notLoginProfile from "../assets/myPage/profile_default_img.png";
 
 const UserProfile = (props) => {
-  const {user_profile, is_login} = props;
+  const {gender, ageRange, career, profileImg, nickname, selfIntro} = props;
 
   const dispatch = useDispatch();
-  const is_profile = localStorage.getItem("is_profile");
+  const is_phoneNum = localStorage.getItem("is_phoneNum") !== 'null'? true: false;
 
   const logout = () => {
     dispatch(userActions.logout());
@@ -22,7 +22,7 @@ const UserProfile = (props) => {
 
   return(
     <React.Fragment>
-          {!is_login ? (
+          {!props.is_login ? (
             <Grid>
               <Grid display="flex" justify="space-between" margin="30px 0 22px">
                 <Grid width="75px" height="75px">
@@ -68,62 +68,53 @@ const UserProfile = (props) => {
                     height="75px"
                     size="cover"
                     radius="999px"
-                    src={user_profile.profileImg}
+                    src={profileImg}
                   />
                 </Grid>
 
                 <Grid width="179px" padding="12px 0" margin="0 18px 0 0">
                   <Text bold size="18px" line>
-                    환영해요! {user_profile.nickname}님
+                    환영해요! {nickname}님
                   </Text>
 
-                  {is_profile === "true" ? (
+                  {is_phoneNum ? (
                     <Grid
                       margin="10px 0 0"
                       display="flex"
-                      justify="space-between"
+                      justify="flex-start"
                     >
                       <Small>
                         <Text bold size="12px" color="#FFF">
-                          {user_profile.gender}
+                          {gender}
                         </Text>
                       </Small>
                       <Small>
                         <Text bold size="12px" color="#FFF">
-                          {user_profile.ageRange}
+                          {ageRange}
                         </Text>
                       </Small>
-                      <Small>
-                        <Text bold size="12px" color="#FFF">
-                          {user_profile.career}
-                        </Text>
-                      </Small>
+                      {career
+                      ? <Small>
+                          <Text bold size="12px" color="#FFF">
+                            {career}
+                          </Text>
+                        </Small> 
+                      : null
+                      }
                     </Grid>
                   ) : null}
                 </Grid>
 
                 <Grid padding="6px 0 0">
-                  {is_profile === "true" ? (
-                    <SubButton
-                      onClick={() => {
-                        history.push(`/profilewrite/${user_profile.username}`);
-                      }}
-                    >
-                      <Text size="12px" color="#474D56">
-                        수정하기
-                      </Text>
-                    </SubButton>
-                  ) : (
-                    <SubButton
-                      onClick={() => {
-                        history.push("/profilewrite");
-                      }}
-                    >
-                      <Text size="12px" color="#474D56">
-                        등록하기
-                      </Text>
-                    </SubButton>
-                  )}
+                  <SubButton
+                    onClick={() => {
+                      history.push("/profilewrite");
+                    }}
+                  >
+                    <Text size="12px" color="#474D56">
+                      수정하기
+                    </Text>
+                  </SubButton>
                   <SubButton onClick={logout}>
                     <Text size="12px" color="#474D56">
                       로그아웃
@@ -138,7 +129,11 @@ const UserProfile = (props) => {
                 <Text block margin="0 0 6px 0" bold="800" size="12px">
                   자기소개
                 </Text>
-                <Text>{user_profile.selfIntro}</Text>
+                {selfIntro !== 'null'
+                ? <Text>{selfIntro}</Text>
+                : null
+                }
+                
               </Grid>
             </Grid>
           )}
