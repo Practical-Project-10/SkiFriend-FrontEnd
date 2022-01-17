@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 import { NavLink, withRouter } from "react-router-dom";
 
@@ -10,6 +11,16 @@ import { BsChatFill, BsChat } from "react-icons/bs";
 import { AiFillAppstore, AiOutlineAppstore } from "react-icons/ai";
 
 const Navbar = ({ location }) => {
+  const dispatch = useDispatch();
+  const alarm = useSelector((state) => state.chat.alarm);
+  const [newRing, setNewRings] = useState(false);
+
+  useEffect(() => {
+    if (alarm.length !== 0) {
+      setNewRings(true);
+    }
+  }, []);
+
   if (
     location.pathname === "/login" ||
     location.pathname === "/phoneauth" ||
@@ -77,7 +88,7 @@ const FixedNav = styled.div`
   border-top: 2px solid #edeeef;
   width: 100%;
   height: 70px;
-  background: #FFF;
+  background: #fff;
 `;
 
 const Menu = styled.div`
@@ -85,10 +96,10 @@ const Menu = styled.div`
   display: flex;
   align-items: center;
   gap: 79px;
-`
+`;
 
 const Icon = styled.div`
   width: calc((100% - 237px) / 4);
-`
+`;
 
 export default withRouter(Navbar);

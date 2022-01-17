@@ -2,7 +2,6 @@ import { createAction, handleActions } from "redux-actions";
 import { produce } from "immer";
 import { imageActions } from "./image";
 import { apis } from "../../shared/apis";
-import { userActions } from "../modules/user";
 import { userStorage } from "../../shared/userStorage";
 
 //action
