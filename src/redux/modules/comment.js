@@ -2,6 +2,7 @@ import { apis } from "../../shared/apis";
 import { getOneBoardDB } from "./freeboard";
 
 // thunk middleWare
+//댓글 작성
 export const addCommentDB = (postId, content) =>
   async (dispatch, getState, { history }) => {
     try {
@@ -11,7 +12,7 @@ export const addCommentDB = (postId, content) =>
       console.log(err);
     }
   };
-
+//댓글 수정
 export const updateCommentDB = (postId, commentId, content) =>
   async (dispatch, getState, { history }) => {
     try {
@@ -21,7 +22,7 @@ export const updateCommentDB = (postId, commentId, content) =>
       console.log(err);
     }
   };
-
+//댓글 삭제
 export const deleteCommentDB = (postId, commentId) =>
   async (dispatch, getState, { history }) => {
     try {

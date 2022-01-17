@@ -258,7 +258,6 @@ const Card = (props) => {
                 </Text>
               </SubMenu>
             )}
-            {/* <div showmodal={showmodal} /> */}
           </Grid>
         ) : (
           <Grid>
