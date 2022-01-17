@@ -37,8 +37,7 @@ const Home = (props) => {
   //localstorage
   const is_login = localStorage.getItem("is_login") === "true" ? true : false;
   const userId = localStorage.getItem("userId");
-  // const user = useSelector(state => state.user.user)
-  // console.log(user)
+
   const skiResort = [
     {
       resortNum: 1,

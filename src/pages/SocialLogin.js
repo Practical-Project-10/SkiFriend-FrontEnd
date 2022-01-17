@@ -12,7 +12,6 @@ import { NAVER_AUTH_URL } from "../shared/naverAuth";
 
 const Login = (props) => {
   const history = props.history;
-
   const kakaoLogin = () => {
     window.location.href = KAKAO_AUTH_URL;
   };

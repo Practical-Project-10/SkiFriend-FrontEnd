@@ -7,8 +7,8 @@ import modal from "../assets/modal.svg";
 import defaultIMG from "../assets/myPage/profilePicture.png";
 
 const Modal = (props) => {
-  const { profile, _onClick, complete } = props;
-  
+  const { profile, _onClick, complete, page } = props;
+
   if (profile) {
     return (
       <ModalBackground onClick={props.closeModal}>
@@ -98,9 +98,13 @@ const Modal = (props) => {
             <Menu padding={props.padding}>
               <Image src={modal} width="25px" height="25px" margin="0 auto" />
             </Menu>
-            <Menu fontS={props.fontS} padding={props.padding} onClick={props.edit}>
-              수정하기
-            </Menu>
+            {page === 'filter' || page === 'myPage'
+            ? null
+            : <Menu fontS={props.fontS} padding={props.padding} onClick={props.edit}>
+                수정하기
+              </Menu>
+            }
+            
             <Menu fontS={props.fontS} padding={props.padding} onClick={props.delete}>
               삭제하기
             </Menu>

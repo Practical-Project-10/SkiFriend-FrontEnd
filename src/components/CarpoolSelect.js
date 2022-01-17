@@ -26,6 +26,7 @@ const CarpoolSelect = (props) => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+    console.log(name, value);
 
     props.bringForm(name, value);
   };
@@ -109,18 +110,35 @@ const CarpoolSelect = (props) => {
               state={state}
             />
             <Image src={arrow} width="50px" height="10px" />
-            <Label htmlFor="endLocation" width="144px">
-              {skiResort}
-            </Label>
-            <input
-              type="text"
-              id="endLocation"
-              name="endLocation"
-              value={endLocation}
-              style={{ display: "none" }}
-              ref={endLoca}
-              readOnly
-            />
+            {props.is_filter
+            ? <Select
+                width='144px'
+                name="endLocation"
+                ref={endLoca}
+                value={endLocation}
+                onChange={handleChange}
+              >
+                <option value="">스키장 선택</option>
+                <option value={skiResort}>{skiResort}</option>
+              </Select>
+            : <Grid>
+                <Label htmlFor="endLocation" width="144px">
+                  {skiResort}
+                </Label>
+                <input
+                  type="text"
+                  id="endLocation"
+                  name="endLocation"
+                  value={endLocation}
+                  style={{ display: "none" }}
+                  ref={endLoca}
+                  readOnly
+                />
+              </Grid>
+            }
+            
+
+            
           </Grid>
         )}
 
@@ -138,6 +156,7 @@ const CarpoolSelect = (props) => {
                 수용가능인원
               </Text>
               <Select
+                width="138px"
                 name="memberNum"
                 value={memberNum}
                 onChange={handleChange}
@@ -260,7 +279,8 @@ const ChangeButton = styled.button`
 `;
 
 const Select = styled.select`
-  padding: 18px 33px;
+  width: ${props => props.width};
+  padding: 18px;
   border-radius: 6px;
   border: 1px solid #474d56;
 `;
