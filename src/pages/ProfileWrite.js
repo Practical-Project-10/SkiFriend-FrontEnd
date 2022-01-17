@@ -131,6 +131,30 @@ const ProfileWrite = (props) => {
             margin="0 0 63px"
           >
             <Grid width="100%">
+              <Text size="12px">전화번호</Text>
+              <Input
+                type="text"
+                _disabled
+                _name="phoneNum"
+                _value={phoneNum !== 'null'? phoneNum: null}
+                _onChange={handleChange}
+                placeholder="휴대폰 인증을 해주세요."
+              />
+              <Button
+                height="47px"
+                padding="14px 0"
+                margin='10px 0 0'
+                color="#474D56"
+                bg="#FFF"
+                _onClick={() =>
+                  history.push("/phoneauth")
+                }
+              >
+                휴대폰 인증하기
+              </Button>
+            </Grid>
+
+            <Grid width="100%">
               <Input
                 label="닉네임"
                 type="text"
@@ -161,30 +185,6 @@ const ProfileWrite = (props) => {
                 placeholder="내용을 입력해주세요"
                 onChange={handleChange}
               />
-            </Grid>
-
-            <Grid width="100%">
-              <Text size="12px">전화번호</Text>
-              <Input
-                type="text"
-                _disabled
-                _name="phoneNum"
-                _value={phoneNum !== 'null'? phoneNum: null}
-                _onChange={handleChange}
-                placeholder="휴대폰 인증을 해주세요."
-              />
-              <Button
-                height="47px"
-                padding="14px 0"
-                margin='10px 0 0'
-                color="#474D56"
-                bg="#FFF"
-                _onClick={() =>
-                  history.push("/phoneauth")
-                }
-              >
-                휴대폰 인증하기
-              </Button>
             </Grid>
 
             <Grid width="100%">

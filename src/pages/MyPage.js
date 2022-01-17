@@ -20,14 +20,17 @@ const MyPage = (props) => {
   const dispatch = useDispatch();
   const is_login = localStorage.getItem("is_login") === 'true'? true: false;
   const user_profile = useSelector((state) => state.profile.user_profile);
-  const myCarpool = useSelector((state) => state.carpool.myList);
+  const myCarpool = useSelector((state) => state.carpool.list['myPage']);
 
   React.useEffect(() => {
-    if (!is_login) {
-      return null;
-    }
+    // if (is_login) {
+    //   return null;
+    // }
     dispatch(profileActions.getProfileDB());
-    dispatch(carpoolActions.getMyCarpoolDB());
+    // if(myCarpool.length === 0) {
+    //   console.log('hi')
+      dispatch(carpoolActions.getMyCarpoolDB('myPage'));
+    // }
   }, []);
 
   return (

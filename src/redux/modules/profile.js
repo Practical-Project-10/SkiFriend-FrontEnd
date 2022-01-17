@@ -156,7 +156,6 @@ export default handleActions(
     [GET_PROFILE]: (state, action) =>
       produce(state, (draft) => {
         draft.user_profile = action.payload.profile;
-        console.log(action.payload.profile)
       }),
     // [ADD_PROFILE]: (state, action) =>
     //   produce(state, (draft) => {
