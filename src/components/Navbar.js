@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 
 import { NavLink, withRouter } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import { chatCreators } from "../redux/modules/chat";
 
 import styled from "styled-components";

@@ -4,8 +4,8 @@
 // const accessToken = document.cookie.split("=")[1];
 // const token = { Authorization: `${accessToken}` };
 
-const sock = new SockJS("https://seongeunyang.shop/ws-stomp");
-const stomp = Stomp.over(sock);
+// const sock = new SockJS("https://seongeunyang.shop/ws-stomp");
+// const stomp = Stomp.over(sock);
 
 // export const socket = {
 //   chatConnect: (token) => stomp.connect(token),
