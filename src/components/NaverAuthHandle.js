@@ -2,8 +2,11 @@ import axios from 'axios'
 import { useEffect } from 'react'
 import styled from 'styled-components'
 import { setCookie } from "../shared/cookie";
+import { userStorage } from '../shared/userStorage';
 
 const NaverAuthHandle = (props) => {
+  const {history} = props;
+
   useEffect(() => {
     let code = new URL(window.location.href).searchParams.get('code')
     const kakaoLogin = async () => {
@@ -11,15 +14,15 @@ const NaverAuthHandle = (props) => {
         .get(`http://3.34.19.50:8080/user/naver/callback?code=${code}`)
         .then((res) => {
           setCookie('token', res.headers.authorization)
-          localStorage.setItem('userId', res.data.userId)
-          localStorage.setItem("nickname", res.data.nickname);
-          localStorage.setItem("is_profile", res.data.profile);
           localStorage.setItem("is_login", true);
-          window.location.href = "/";
+          localStorage.setItem('userId', res.data.userId)
+          userStorage(res.data)
+          // window.location.href = "/";
+          history.push('/');
         })
     }
     kakaoLogin()
-  }, [props.history])
+  }, [])
 
   return (
     <>

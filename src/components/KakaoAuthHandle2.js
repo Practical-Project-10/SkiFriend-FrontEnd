@@ -17,7 +17,7 @@ const KakaoAuthHandle2 = (props) => {
           console.log(res)
           localStorage.setItem("is_login", true);
           userStorage(res.data);
-          window.location.href = "/";
+          // window.location.href = "/";
           history.push('/');
         })
     }
