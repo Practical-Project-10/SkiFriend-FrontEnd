@@ -10,6 +10,7 @@ const initialState = {
   profileList: [],
   phoneInfoList: [],
   roomInfoList: [],
+  alarm: [],
 };
 
 // action
@@ -19,6 +20,8 @@ const GET_PROFILELIST = "chat/GET_PROFILELIST";
 const GET_PHONE_INFO = "chat/GET_PHONE_INFO";
 const GET_ROOM_INFO = "chat/GET_ROOM_INFO";
 const ADD = "chat/ADD";
+const GET_ALARM = "chat/GET_ALARM";
+const DELETE_ALARM = "chat/DELETE_ALARM";
 
 // action creater
 export const getChatList = createAction(GET_CHATLIST, (chatList) => ({
@@ -37,6 +40,8 @@ export const getRoomInfo = createAction(GET_ROOM_INFO, (roomInfo) => ({
   roomInfo,
 }));
 export const addChat = createAction(ADD, (chatData) => ({ chatData }));
+const getAlarm = createAction(GET_ALARM, (newChat) => ({newChat}));
+const deleteAlarm = createAction(DELETE_ALARM, () => ({}));
 
 // thunk
 // 채팅방 만들기(연락하기)
@@ -172,6 +177,16 @@ export default handleActions(
       produce(state, (draft) => {
         draft.chatList.unshift(action.payload.chatData);
       }),
+
+    [GET_ALARM]: (state, action) =>
+      produce(state, (draft) => {
+        draft.alarm.push(action.payload.newChat)
+      }),
+
+    [DELETE_ALARM]: (state, action) =>
+      produce(state, (draft) => {
+        draft.alarm = []
+      })
   },
   initialState
 );
@@ -180,6 +195,8 @@ const chatCreators = {
   addChat,
   getPhoneInfo,
   getRoomInfo,
+  getAlarm,
+  deleteAlarm,
   makeRoomChatDB,
   getListChatDB,
   getContentChatDB,

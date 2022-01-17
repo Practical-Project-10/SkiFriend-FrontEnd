@@ -3,6 +3,8 @@ import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { chatCreators as chatActions } from "../redux/modules/chat";
 
+import axios from "axios";
+
 import SockJS from "sockjs-client";
 import Stomp from "stompjs";
 import MessageBox from "../components/MessageBox";
@@ -23,6 +25,8 @@ const ChatRoom = () => {
   const datas = useSelector((state) => state.chat.chatList);
   const phoneInfo = useSelector((state) => state.chat.phoneInfoList);
   const roomInfoList = useSelector((state) => state.chat.roomInfoList);
+  // const test = useSelector((state) => state.chat);
+  // console.log(test);
   //토큰
   const accessToken = document.cookie.split("=")[1];
   const token = { Authorization: `${accessToken}` };
@@ -46,15 +50,15 @@ const ChatRoom = () => {
 
   useEffect(() => {
     dispatch(chatActions.getRoomInfoDB(roomId)); //방정보 가져오기
-    dispatch(chatActions.getContentChatDB(roomId)); //대화내용 가져오기
-    setMessageList(datas);
+    // dispatch(chatActions.getContentChatDB(roomId)); //대화내용 가져오기
+    // setMessageList(datas);
     chatConnect(); //채팅룸 연결
     // dispatch(chatActions.connectChatDB(roomId));
     return () => {
       chatDisconnect();
     };
   }, []);
-//sub/alarm/${userId}
+
   // stomp연결
   const chatConnect = () => {
     try {
@@ -83,6 +87,19 @@ const ChatRoom = () => {
       console.log(err);
     }
   };
+
+  // 대화내용 가져오기
+  useEffect(() => {
+    axios
+      .get(`http://3.34.19.50:8080/chat/message/${roomId}`, {
+        headers: token,
+      })
+      .then((res) => {
+        const prevChatData = res.data;
+        setMessageList(prevChatData);
+      });
+    // dispatch(chatActions.getContentChatDB(roomId));
+  }, []);
 
   //엔터치면 메세지 보내지게하기
   const onKeyPress = (e) => {
