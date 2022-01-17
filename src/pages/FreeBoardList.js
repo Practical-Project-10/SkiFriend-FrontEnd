@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { history } from "../redux/ConfigStore";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -38,7 +38,7 @@ const FreeBoardList = () => {
     }
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     dispatch(carpoolActions.imageResortDB(skiresort));
     dispatch(boardActions.loadBoardDB(skiresort));
   }, []);

@@ -1,5 +1,4 @@
-import React from "react";
-// import _ from "lodash";
+import React, {useEffect} from "react";
 
 import { useDispatch, useSelector } from "react-redux";
 import { carpoolActions } from "../redux/modules/carpool";
@@ -25,8 +24,7 @@ const Carpool = (props) => {
   const certification = localStorage.getItem("certification") === "true"? true: false;
   const skiResort = props.match.params.skiresort;
 
-
-  React.useEffect(() => {
+  useEffect(() => {
     dispatch(carpoolActions.imageResortDB(skiResort));
     dispatch(carpoolActions.getCarpoolDB(skiResort, page));
     return(() =>
