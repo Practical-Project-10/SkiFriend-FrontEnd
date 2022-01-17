@@ -4,6 +4,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { mainCreators as mainActions } from "../redux/modules/main";
 import { userActions } from "../redux/modules/user";
 
+import SockJS from "sockjs-client";
+import Stomp from "stompjs";
+
 import styled from "styled-components";
 import { Grid, Image, Text } from "../elements/index";
 import SkiIcon from "../components/SkiIcon";
@@ -23,8 +26,16 @@ const Home = (props) => {
   const history = props.history;
   //redux 데이터
   const hotPosts = useSelector((state) => state.main.list);
-  //login판단
+  const alarm = useSelector((state) => state.chat.alarm);
+  //토큰
+  const accessToken = document.cookie.split("=")[1];
+  const token = { Authorization: `${accessToken}` };
+  //소켓
+  const sock = new SockJS("http://3.34.19.50:8080/ws-alarm");
+  const stomp = Stomp.over(sock);
+  //localstorage
   const is_login = localStorage.getItem("is_login") === "true" ? true : false;
+  const userId = localStorage.getItem("userId");
   // const user = useSelector(state => state.user.user)
   // console.log(user)
   const skiResort = [
@@ -65,6 +76,24 @@ const Home = (props) => {
       logo: Konjiam,
     },
   ];
+  useEffect(() => {
+    try {
+      stomp.debug = null;
+      stomp.connect(token, () => {
+        stomp.subscribe(
+          `/sub/alarm/${userId}`,
+          (data) => {
+            const newData = JSON.parse(data.body);
+            console.log(newData);
+            // dispatch(chatActions.getAlarm(newData));
+          },
+          token
+        );
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  });
 
   useEffect(() => {
     const mainHotPosts = async () => {

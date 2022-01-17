@@ -27,12 +27,12 @@ const ChatRoom = () => {
   const accessToken = document.cookie.split("=")[1];
   const token = { Authorization: `${accessToken}` };
   //소켓
-  const sock = new SockJS("https://seongeunyang.shop/ws-stomp");
+  const sock = new SockJS("http://3.34.19.50:8080/ws-stomp"); //https://seongeunyang.shop/ws-stomp
   const stomp = Stomp.over(sock);
   // useState관리
   const [message, setMessage] = useState("");
   const [messageList, setMessageList] = useState([]);
-  
+
   // 쌓인 대화
   const messageDatas = (recv) => {
     setMessageList((prev) => [...prev, recv]);
@@ -54,7 +54,7 @@ const ChatRoom = () => {
       chatDisconnect();
     };
   }, []);
-
+//sub/alarm/${userId}
   // stomp연결
   const chatConnect = () => {
     try {
