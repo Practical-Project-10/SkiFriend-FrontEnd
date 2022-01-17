@@ -341,37 +341,4 @@ const Select = styled.select`
   border: 1px solid #474d56;
 `;
 
-const VacPic = styled.label`
-  display: block;
-  width: 100%;
-  height: 61px;
-  background: #ffffff;
-  border: 1px solid #6195cf;
-  box-sizing: border-box;
-  border-radius: 8px;
-  font-size: 16px;
-  color: #474d56;
-  line-height: 60px;
-  text-align: center;
-  position: relative;
-
-  & > .vac {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 6px;
-  }
-
-  &::before {
-    content: "";
-    width: ${(props) => (props.add ? "100%" : "")};
-    height: ${(props) => (props.add ? "100%" : "")};
-    border-radius: ${(props) => (props.add ? "8px" : "")};
-    background: ${(props) => (props.add ? "rgba(0,0,0,0.5)" : "")};
-    position: ${(props) => (props.add ? "absolute" : "")};
-    top: ${(props) => (props.add ? 0 : "")};
-    left: ${(props) => (props.add ? 0 : "")};
-  }
-`;
-
 export default ProfileWrite;
