@@ -39,10 +39,16 @@ export const loadBoardDB =
 
 // 게시글 등록하기
 export const addBoardDB =
-  (skiResort, image, datas) =>
+  (skiResort, images, datas) =>
   async (dispatch, getState, { history }) => {
     let formData = new FormData();
-    formData.append("image", image);
+    if (images === null) {
+      formData.append("image", images);
+    } else {
+      for (let i = 0; i < images.length; i++) {
+        formData.append("image", images[i]);
+      }
+    }
     formData.append(
       "requestDto",
       new Blob([JSON.stringify(datas)], { type: "application/json" })
@@ -50,12 +56,13 @@ export const addBoardDB =
     try {
       const response = await apis.writeFreePost(skiResort, formData);
       response && history.push(`/freeboardlist/${skiResort}`);
+      history.push(`/freeboardlist/${skiResort}`);
       dispatch(addBoard(response.data));
     } catch (err) {
       console.log(`오류 발생!${err}`);
     }
   };
-
+//상세페이지 게시글 정보 가져오기
 export const getOneBoardDB =
   (postId) =>
   async (dispatch, getState, { history }) => {
@@ -67,16 +74,22 @@ export const getOneBoardDB =
       console.log(`오류 발생!${err}`);
     }
   };
-
+//게시글 수ㅇ
 export const updateBoardDB =
-  (skiResort, postId, image, datas) =>
+  (skiResort, postId, images, datas) =>
   async (dispatch, getState, { history }) => {
     if (!postId) {
       window.alert("게시물 정보가 없어요!");
       return;
     }
     let formdata = new FormData();
-    formdata.append("image", image);
+    if (images === null) {
+      formdata.append("image", images);
+    } else {
+      for (let i = 0; i < images.length; i++) {
+        formdata.append("image", images[i]);
+      }
+    }
     formdata.append(
       "requestDto",
       new Blob([JSON.stringify(datas)], { type: "application/json" })
@@ -89,7 +102,7 @@ export const updateBoardDB =
       console.log(`오류 발생!${err}`);
     }
   };
-
+//게시글 삭제
 export const deleteBoardDB =
   (postId, skiresort) =>
   async (dispatch, getState, { history }) => {

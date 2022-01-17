@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "https://seongeunyang.shop/",
+  baseURL: "http://3.34.19.50:8080/",
   headers: {
     "content-type": "application/json;charset=UTF-8",
     accept: "application/json,",

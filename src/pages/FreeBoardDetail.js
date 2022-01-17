@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -10,8 +10,12 @@ import Header from "../components/Header";
 import Modal from "../components/Modal";
 
 import styled from "styled-components";
-import { Grid, Text, Image } from "../elements/index";
-
+import { Grid, Text } from "../elements/index";
+//swiper
+import { Swiper, SwiperSlide } from "swiper/react";
+import SwiperCore, { Navigation, Pagination } from "swiper";
+import "swiper/swiper.min.css";
+import "swiper/components/navigation/navigation.min.css";
 //react icons
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import { BsChat } from "react-icons/bs";
@@ -33,9 +37,13 @@ const FreeBoardDetail = ({ history }, props) => {
   const login_userId = localStorage.getItem("userId");
   const is_login = localStorage.getItem("is_login");
   const loginCheck = is_login === "true" ? true : false;
+  // swiper관리
+  SwiperCore.use([Navigation, Pagination]);
+
   //------useState관리-------
   const [showmodal, setShowModal] = useState(false);
   const [heart, setHeart] = useState(false);
+
   //-------heart-------
   const changeHeart = () => {
     if (likeList === false) {
@@ -44,7 +52,8 @@ const FreeBoardDetail = ({ history }, props) => {
       return setHeart(false);
     }
   };
-  React.useEffect(() => {
+
+  useEffect(() => {
     if (likeData !== undefined) {
       for (let i = 0; i < likeData.length; i++) {
         if (likeData[i].userId === parseInt(login_userId)) {
@@ -56,17 +65,21 @@ const FreeBoardDetail = ({ history }, props) => {
       setHeart(false);
     }
   }, [postData]);
-  React.useEffect(() => {
+
+  useEffect(() => {
     dispatch(boardActions.getOneBoardDB(postId));
   }, []);
+
   //-------Modal-------
   const closemodal = () => {
     setShowModal(false);
   };
+
   //-------게시글 수정-------
   const editPost = () => {
     history.push(`/freeboardedit/${skiresort}/${postId}`);
   };
+
   //-------게시글 삭제--------
   const deletePost = () => {
     const ask = window.confirm("정말 삭제하시겠습니까?");
@@ -77,6 +90,7 @@ const FreeBoardDetail = ({ history }, props) => {
       return;
     }
   };
+
   //-------좋아요 변경---------
   const likeChange = () => {
     if (loginCheck) {
@@ -178,13 +192,31 @@ const FreeBoardDetail = ({ history }, props) => {
             <Grid padding="16px 0">
               <Text>{postData.content}</Text>
             </Grid>
-            <Grid width="100%" height="380px">
-              <Image
-                width="100%"
-                height="100%"
-                size="contain"
-                src={postData.image}
-              />
+            <Grid is_flex width="100%" height="250px" padding="0 16px">
+              <Swiper
+                spaceBetween={10}
+                slidesPerView={1}
+                navigation
+                pagination={{ clickable: true }}
+                style={{ width: "100%" }}
+              >
+                {postData.photoList &&
+                  postData.photoList.map((file, index) => {
+                    return (
+                      <SwiperSlide key={file + index}>
+                        <img
+                          src={file.photoUrl}
+                          style={{
+                            width: "100%",
+                            height: "200px",
+                            objectFit: "cover",
+                          }}
+                          alt="userUploadImg"
+                        />
+                      </SwiperSlide>
+                    );
+                  })}
+              </Swiper>
             </Grid>
             <Small onClick={likeChange}>
               {!heart ? (
