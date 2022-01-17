@@ -19,16 +19,20 @@ const MessageBox = (props) => {
   const profileList = useSelector((state) => state.chat.profileList);
   //localstorage
   const nickname = localStorage.getItem("nickname");
+
   //------useState관리-------
   const [showmodal, setShowModal] = useState();
+
   //-------Modal-------
   const closeModal = () => {
     setShowModal(false);
   };
+
   //프로필 정보 보기
   const showProfile = () => {
     setShowModal(true);
   };
+
   //프로필 정보 가져오기
   useEffect(() => {
     dispatch(chatActions.getProfileInfoDB(longRoomId));

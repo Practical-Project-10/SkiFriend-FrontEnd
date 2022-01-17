@@ -27,9 +27,7 @@ const Home = (props) => {
   const history = props.history;
   //redux 데이터
   const hotPosts = useSelector((state) => state.main.list);
-  const alarm = useSelector((state) => state.chat);
-  console.log(alarm);
-  console.log(alarm.alarm);
+  const alarm = useSelector((state) => state.chat.alarm);
   //토큰
   const accessToken = document.cookie.split("=")[1];
   const token = { Authorization: `${accessToken}` };
@@ -87,8 +85,7 @@ const Home = (props) => {
           `/sub/alarm/${userId}`,
           (data) => {
             const newData = JSON.parse(data.body);
-            console.log(newData);
-            dispatch(chatCreators.getAlarm(newData.message));
+            dispatch(chatActions.getAlarm(newData));
           },
           token
         );
@@ -96,12 +93,12 @@ const Home = (props) => {
     } catch (error) {
       console.log(error);
     }
-  }, [dispatch, alarm]);
+  }, []);
 
   useEffect(() => {
     const mainHotPosts = async () => {
       const response = await (
-        await fetch("https://seongeunyang.shop/main")
+        await fetch("http://3.34.19.50:8080/main")
       ).json();
       dispatch(mainActions.loadPosts(response));
     };

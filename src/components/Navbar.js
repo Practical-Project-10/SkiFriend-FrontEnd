@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 import { NavLink, withRouter } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -104,7 +105,7 @@ const FixedNav = styled.div`
   border-top: 2px solid #edeeef;
   width: 100%;
   height: 70px;
-  background: #FFF;
+  background: #fff;
 `;
 
 const Menu = styled.div`
@@ -112,11 +113,11 @@ const Menu = styled.div`
   display: flex;
   align-items: center;
   gap: 79px;
-`
+`;
 
 const Icon = styled.div`
   width: calc((100% - 237px) / 4);
-`
+`;
 
 const Alarm = styled.div`
   height: 17px;
