@@ -2,8 +2,12 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { NavLink, withRouter } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { chatCreators } from "../redux/modules/chat";
 
 import styled from "styled-components";
+import { Grid } from "../elements";
+
 //react icons
 import { AiTwotoneHome, AiOutlineHome } from "react-icons/ai";
 import { AiFillInfoCircle, AiOutlineInfoCircle } from "react-icons/ai";
@@ -13,13 +17,16 @@ import { AiFillAppstore, AiOutlineAppstore } from "react-icons/ai";
 const Navbar = ({ location }) => {
   const dispatch = useDispatch();
   const alarm = useSelector((state) => state.chat.alarm);
-  const [newRing, setNewRings] = useState(false);
-
-  useEffect(() => {
+  const [newRing, setNewRings] = React.useState(false);
+  
+  React.useEffect(() => {
     if (alarm.length !== 0) {
       setNewRings(true);
-    }
-  }, []);
+    } 
+    // else {
+    //   setNewRings(false);
+    // }
+  }, [alarm]);
 
   if (
     location.pathname === "/login" ||
@@ -33,6 +40,11 @@ const Navbar = ({ location }) => {
     location.pathname.includes("/profilewrite")
   ) {
     return null;
+  };
+
+  const deleteAlarm = ()=> {
+    dispatch(chatCreators.deleteAlarm());
+    setNewRings(false)
   }
 
   return (
@@ -60,9 +72,14 @@ const Navbar = ({ location }) => {
           <Icon>
             <NavLink to="/chatlist" className="navLink">
               {location.pathname === "/chatlist" ? (
-                <BsChatFill size="30" />
+                <Grid position='relative' >
+                  <BsChatFill size="30" />
+                </Grid>
               ) : (
-                <BsChat size="30" />
+                <Grid position='relative' _onClick={deleteAlarm}>
+                  {newRing && <Alarm>New</Alarm>}
+                  <BsChat size="30" />
+                </Grid>
               )}
             </NavLink>
           </Icon>
@@ -101,5 +118,20 @@ const Menu = styled.div`
 const Icon = styled.div`
   width: calc((100% - 237px) / 4);
 `;
+
+const Alarm = styled.div`
+  height: 17px;
+  padding: 2px;
+  border-radius: 999px;
+  background: red;
+  color: #FFF;
+  font-size: 11px;
+  font-weight: 600;
+  text-align: center;
+  line-height: 13px;
+  position: absolute;
+  right: -17px;
+  top: -7px;
+`
 
 export default withRouter(Navbar);

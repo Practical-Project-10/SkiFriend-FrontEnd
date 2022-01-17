@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { mainCreators as mainActions } from "../redux/modules/main";
 import { userActions } from "../redux/modules/user";
-import { chatCreators as chatActions } from "../redux/modules/chat";
+import { chatCreators } from "../redux/modules/chat";
 
 import SockJS from "sockjs-client";
 import Stomp from "stompjs";
@@ -28,7 +28,6 @@ const Home = (props) => {
   //redux 데이터
   const hotPosts = useSelector((state) => state.main.list);
   const alarm = useSelector((state) => state.chat.alarm);
-  console.log(alarm);
   //토큰
   const accessToken = document.cookie.split("=")[1];
   const token = { Authorization: `${accessToken}` };
@@ -80,7 +79,7 @@ const Home = (props) => {
   ];
   useEffect(() => {
     try {
-      stomp.debug = null;
+      // stomp.debug = null;
       stomp.connect(token, () => {
         stomp.subscribe(
           `/sub/alarm/${userId}`,

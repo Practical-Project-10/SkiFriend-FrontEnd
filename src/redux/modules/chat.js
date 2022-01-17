@@ -40,7 +40,7 @@ export const getRoomInfo = createAction(GET_ROOM_INFO, (roomInfo) => ({
   roomInfo,
 }));
 export const addChat = createAction(ADD, (chatData) => ({ chatData }));
-const getAlarm = createAction(GET_ALARM, (alarm) => ({ alarm }));
+const getAlarm = createAction(GET_ALARM, (newChat) => ({newChat}));
 const deleteAlarm = createAction(DELETE_ALARM, () => ({}));
 
 // thunk
@@ -176,14 +176,16 @@ export default handleActions(
       produce(state, (draft) => {
         draft.chatList.unshift(action.payload.chatData);
       }),
+
     [GET_ALARM]: (state, action) =>
       produce(state, (draft) => {
-        draft.alarm.push(action.payload.alarm);
+        draft.alarm.push(action.payload.newChat)
       }),
+
     [DELETE_ALARM]: (state, action) =>
       produce(state, (draft) => {
-        draft.alarm = [];
-      }),
+        draft.alarm = []
+      })
   },
   initialState
 );

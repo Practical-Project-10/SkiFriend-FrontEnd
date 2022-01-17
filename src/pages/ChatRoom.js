@@ -2,7 +2,9 @@ import React, { useState, useRef, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { chatCreators as chatActions } from "../redux/modules/chat";
+
 import axios from "axios";
+
 import SockJS from "sockjs-client";
 import Stomp from "stompjs";
 import MessageBox from "../components/MessageBox";
@@ -23,6 +25,8 @@ const ChatRoom = () => {
   const datas = useSelector((state) => state.chat.chatList);
   const phoneInfo = useSelector((state) => state.chat.phoneInfoList);
   const roomInfoList = useSelector((state) => state.chat.roomInfoList);
+  // const test = useSelector((state) => state.chat);
+  // console.log(test);
   //토큰
   const accessToken = document.cookie.split("=")[1];
   const token = { Authorization: `${accessToken}` };
