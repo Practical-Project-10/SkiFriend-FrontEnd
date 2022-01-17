@@ -15,15 +15,18 @@ const FilterList = (props) => {
   const history = props.history;
   const dispatch = useDispatch();
   const certification = localStorage.getItem("certification") === "true"? true: false;
-  const carpool_list = useSelector((state) => state.carpool.filterList);
-  const resortImg = useSelector((state) => state.carpool.resortImg);
   const skiResort = props.match.params.skiresort;
+  const carpool_list = useSelector((state) => state.carpool.list[skiResort]);
+  const resortImg = useSelector((state) => state.carpool.resortImg);
 
   useEffect(() => {
     dispatch(carpoolActions.imageResortDB(skiResort));
     if (carpool_list.length === 0) {
       history.push(`/carpool/${skiResort}`);
     }
+    return(() =>
+      dispatch((carpoolActions.reset(skiResort)))
+    )
   }, []);
 
   const induceProfile = () => {
@@ -77,7 +80,7 @@ const FilterList = (props) => {
           {carpool_list.map((l) => {
             return (
               <Grid key={l.postId} width="100%" padding="0 0 16px">
-                <Card page='filter' {...l} skiResort={skiResort} />
+                <Card {...l} skiResort={skiResort} />
               </Grid>
             );
           })}

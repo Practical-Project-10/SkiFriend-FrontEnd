@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 
 import { NavLink, withRouter } from "react-router-dom";
 import { chatCreators } from "../redux/modules/chat";

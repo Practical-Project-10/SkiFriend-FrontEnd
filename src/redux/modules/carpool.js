@@ -26,34 +26,32 @@ const addCarpool = createAction(ADD_CARPOOL, (skiResort, carpool) => ({
 }));
 const editCarpool = createAction(
   EDIT_CARPOOL,
-  (skiResort, page, postId, carpool) => ({
+  (skiResort, postId, carpool) => ({
     skiResort,
-    page,
     postId,
     carpool,
   })
 );
 const deleteCarpool = createAction(
   DELETE_CARPOOL,
-  (skiResort, page, postId) => ({
+  (skiResort, postId) => ({
     skiResort,
-    page,
     postId,
   })
 );
-const getMyCarpool = createAction(GET_MYCARPOOL, (myCarpools) => ({
+const getMyCarpool = createAction(GET_MYCARPOOL, (page, myCarpools) => ({
+  page, 
   myCarpools,
 }));
 const completeMycarpool = createAction(
   COMPLETE_CARPOOL,
-  (skiResort, page, postId, carpool) => ({
+  (skiResort, postId, carpool) => ({
     skiResort,
-    page,
     postId,
     carpool,
   })
 );
-const filterCarpool = createAction(FILTER_CARPOOL, (carpool) => ({ carpool }));
+const filterCarpool = createAction(FILTER_CARPOOL, (skiResort, carpool) => ({ skiResort, carpool }));
 const imageResort = createAction(IMAGE_RESORT, (url) => ({ url }));
 const isLoading = createAction(IS_LOADING, (state) => ({ state }));
 const isNext = createAction(IS_NEXT, (state) => ({ state }));
@@ -112,11 +110,11 @@ const editCarpoolDB = (skiResort, postId, carpool) => {
   };
 };
 
-const deleteCarpoolDB = (skiResort, page, postId) => {
+const deleteCarpoolDB = (skiResort, postId) => {
   return async function (dispatch, getState, { history }) {
     try {
       await apis.deleteCarpool(postId);
-      dispatch(deleteCarpool(skiResort, page, postId));
+      dispatch(deleteCarpool(skiResort, postId));
       // history.push(`/carpool/${skiResort}`);
     } catch (err) {
       console.log(err);
@@ -124,14 +122,13 @@ const deleteCarpoolDB = (skiResort, page, postId) => {
   };
 };
 
-const completeCarpoolDB = (skiResort, page, postId) => {
+const completeCarpoolDB = (skiResort, postId) => {
   return async function (dispatch, getState, { history }) {
-    console.log(skiResort, page, postId)
     try {
       const response = await apis.completeCarpool(postId);
 
       response &&
-        dispatch(completeMycarpool(skiResort, page, postId, response.data));
+        dispatch(completeMycarpool(skiResort, postId, response.data));
     } catch (err) {
       console.log(err);
     }
@@ -147,7 +144,7 @@ const filterCarpoolDB = (skiResort, form) => {
         window.alert("필터에 맞는 정보가 없습니다");
         return null;
       } else {
-        dispatch(filterCarpool(response.data));
+        dispatch(filterCarpool(skiResort, response.data));
         history.push(`/filter/${skiResort}`);
       }
     } catch (err) {
@@ -156,11 +153,11 @@ const filterCarpoolDB = (skiResort, form) => {
   };
 };
 
-const getMyCarpoolDB = () => {
+const getMyCarpoolDB = (page) => {
   return async function (dispatch, getState, { history }) {
     try {
       const response = await apis.getMyCarpool();
-      response && dispatch(getMyCarpool(response.data));
+      response && dispatch(getMyCarpool(page, response.data));
     } catch (err) {
       console.log(err);
     }
@@ -177,6 +174,7 @@ const initialState = {
     Phoenix: [],
     WellihilliPark: [],
     Konjiam: [],
+    myPage: [],
   },
   myList: [],
   filterList: [],
@@ -205,7 +203,6 @@ export default handleActions(
     [EDIT_CARPOOL]: (state, action) =>
       produce(state, (draft) => {
         const skiResort = action.payload.skiResort;
-        const page = action.payload.page;
         const idx = draft.list[skiResort].findIndex(
           (l) => l.postId === Number(action.payload.postId)
         );
@@ -214,30 +211,29 @@ export default handleActions(
           ...action.payload.carpool,
         };
 
-        if (page === "filter") {
-          const idx = draft.filterList.findIndex(
-            (l) => l.postId === Number(action.payload.postId)
-          );
-          draft.filterList[idx] = {
-            ...draft.filterList[idx],
-            ...action.payload.carpool,
-          };
-        }
+      //   if (page === "filter") {
+      //     const idx = draft.filterList.findIndex(
+      //       (l) => l.postId === Number(action.payload.postId)
+      //     );
+      //     draft.filterList[idx] = {
+      //       ...draft.filterList[idx],
+      //       ...action.payload.carpool,
+      //     };
+      //   }
 
-        if (page === "myPage") {
-          const idx = draft.myList.findIndex(
-            (l) => l.postId === Number(action.payload.postId)
-          );
-          draft.myList[idx] = {
-            ...draft.myList[idx],
-            ...action.payload.carpool,
-          };
-        }
+      //   if (page === "myPage") {
+      //     const idx = draft.myList.findIndex(
+      //       (l) => l.postId === Number(action.payload.postId)
+      //     );
+      //     draft.myList[idx] = {
+      //       ...draft.myList[idx],
+      //       ...action.payload.carpool,
+      //     };
+      //   }
       }),
 
     [DELETE_CARPOOL]: (state, action) =>
       produce(state, (draft) => {
-        const page = action.payload.page;
         const skiResort = action.payload.skiResort;
 
         let deleted_list = draft.list[skiResort].filter(
@@ -245,34 +241,36 @@ export default handleActions(
         );
         draft.list[skiResort] = deleted_list;
 
-        if (page === "filter") {
-          let deleted_filterList = draft.myList.filter(
-            (l) => l.postId !== action.payload.postId
-          );
-          draft.filterList = deleted_filterList;
-        }
+      //   if (page === "filter") {
+      //     let deleted_filterList = draft.myList.filter(
+      //       (l) => l.postId !== action.payload.postId
+      //     );
+      //     draft.filterList = deleted_filterList;
+      //   }
 
-        if (page === "myPage") {
-          let deleted_myList = draft.myList.filter(
-            (l) => l.postId !== action.payload.postId
-          );
-          draft.myList = deleted_myList;
-        }
+      //   if (page === "myPage") {
+      //     let deleted_myList = draft.myList.filter(
+      //       (l) => l.postId !== action.payload.postId
+      //     );
+      //     draft.myList = deleted_myList;
+      //   }
       }),
 
     [FILTER_CARPOOL]: (state, action) =>
       produce(state, (draft) => {
-        draft.filterList = action.payload.carpool;
+        // draft.filterList = action.payload.carpool;
+        const skiResort = action.payload.skiResort;
+        draft.list[skiResort] = action.payload.carpool;
       }),
 
     [GET_MYCARPOOL]: (state, action) =>
       produce(state, (draft) => {
-        draft.myList = action.payload.myCarpools;
+        const page = action.payload.page;
+        draft.list[page] = action.payload.myCarpools;
       }),
 
     [COMPLETE_CARPOOL]: (state, action) =>
       produce(state, (draft) => {
-        const page = action.payload.page;
         const skiResort = action.payload.skiResort;
 
         const idx = draft.list[skiResort].findIndex(
@@ -284,25 +282,25 @@ export default handleActions(
           ...action.payload.carpool,
         };
 
-        if (page === "filter") {
-          const idx = draft.filterList.findIndex(
-            (l) => l.postId === Number(action.payload.postId)
-          );
-          draft.filterList[idx] = {
-            ...draft.filterList[idx],
-            ...action.payload.carpool,
-          };
-        }
+        // if (page === "filter") {
+        //   const idx = draft.filterList.findIndex(
+        //     (l) => l.postId === Number(action.payload.postId)
+        //   );
+        //   draft.filterList[idx] = {
+        //     ...draft.filterList[idx],
+        //     ...action.payload.carpool,
+        //   };
+        // }
 
-        if (page === "myPage") {
-          const idx = draft.myList.findIndex(
-            (l) => l.postId === Number(action.payload.postId)
-          );
-          draft.myList[idx] = {
-            ...draft.myList[idx],
-            ...action.payload.carpool,
-          };
-        }
+        // if (page === "myPage") {
+        //   const idx = draft.myList.findIndex(
+        //     (l) => l.postId === Number(action.payload.postId)
+        //   );
+        //   draft.myList[idx] = {
+        //     ...draft.myList[idx],
+        //     ...action.payload.carpool,
+        //   };
+        // }
       }),
 
     [IMAGE_RESORT]: (state, action) =>

@@ -37,21 +37,20 @@ const Card = (props) => {
 
   const editCard = () => {
     if (page === "myPage") {
-      history.push(`/carpoolwrite/${page}/${props.skiResort}/${props.postId}`);
-      return null;
+      return history.push(`/carpoolwrite/${page}/${props.postId}`);
     }
     history.push(`/carpoolwrite/${props.skiResort}/${props.postId}`);
   };
 
   const deleteCard = () => {
     dispatch(
-      carpoolActions.deleteCarpoolDB(props.skiResort, page, props.postId)
+      carpoolActions.deleteCarpoolDB(props.skiResort, props.postId)
     );
   };
 
   const completeCard = () => {
     dispatch(
-      carpoolActions.completeCarpoolDB(props.skiResort, page, props.postId)
+      carpoolActions.completeCarpoolDB(props.skiResort, props.postId)
     );
   };
 
@@ -278,7 +277,6 @@ const Card = (props) => {
       </CarpoolCard>
       {showmodal ? (
         <Modal
-        page={page}
           complete={!props.status ? true : false}
           height={!props.status ? "198px" : "256px"}
           closeModal={closemodal}

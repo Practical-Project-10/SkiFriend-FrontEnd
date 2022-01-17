@@ -98,21 +98,18 @@ const Modal = (props) => {
             <Menu padding={props.padding}>
               <Image src={modal} width="25px" height="25px" margin="0 auto" />
             </Menu>
-            {page === 'filter' || page === 'myPage'
-            ? null
-            : <Menu fontS={props.fontS} padding={props.padding} onClick={props.edit}>
-                수정하기
-              </Menu>
-            }
+            <Menu fontS={props.fontS} padding={props.padding} onClick={props.edit}>
+              수정하기
+            </Menu>
             
             <Menu fontS={props.fontS} padding={props.padding} onClick={props.delete}>
               삭제하기
             </Menu>
-            {_onClick ? (
-              <Menu fontS={props.fontS} padding={props.padding} onClick={props._onClick}>
-                모집 완료
-              </Menu>
-            ) : null}
+            {/* {_onClick ? ( */}
+            <Menu fontS={props.fontS} padding={props.padding} onClick={props._onClick}>
+              모집 완료
+            </Menu>
+            {/* ) : null} */}
             <Menu fontS={props.fontS} padding={props.padding} opacity='0.5' onClick={props.closemodal}>
               취소
             </Menu>
