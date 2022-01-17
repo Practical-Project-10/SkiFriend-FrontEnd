@@ -58,21 +58,21 @@ const Card = (props) => {
   //연락하기 기능
   const connectRoom = (postId) => {
     if (!is_login) {
-      const login_ask = window.confirm(
+      const ask = window.confirm(
         "로그인한 회원만 사용 가능합니다. 로그인 페이지로 이동하시겠습니까?"
       );
-      if (login_ask) {
+      if (ask) {
         return history.push(`/login`);
       } else {
         return;
       }
     }
     if (!certification) {
-      const profile_ask = window.confirm(
-        "프로필 작성한 회원만 사용 가능합니다. 마이페이지로 이동하시겠습니까?"
+      const ask = window.confirm(
+        "휴대폰 인증한 회원만 사용 가능합니다. 인증하시겠습니까?"
       );
-      if (profile_ask) {
-        return history.push(`/mypage`);
+      if (ask) {
+        return history.push(`/profilewrite`);
       } else {
         return;
       }
