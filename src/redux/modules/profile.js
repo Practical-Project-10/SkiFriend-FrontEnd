@@ -102,21 +102,50 @@ const addProfileDB = (profile) => {
   };
 };
 
-const changePwdDB = (password, newPassword) => {
-  return async (dispatch, getState, { history }) => {
-    try {
-      await apis.changePwd(password, newPassword);
-      window.alert(
-        "비밀번호가 정상적으로 변경되었습니다. 변경된 비밀번호로 다시 로그인 해주시기 바랍니다."
-      );
-      dispatch(userActions.logout());
-      history.push(`/login`);
-    } catch (err) {
-      window.alert("비밀번호를 잘못입력하셨습니다.");
-      console.log(err);
-    }
-  };
-};
+// const isPhoneNumDB = (_phoneNum) => {
+//   return async (dispatch, getState, { history }) => {
+//     try {
+//       await apis.phoneNumCheck(_phoneNum);
+//       window.alert("인증번호가 전송되었습니다.");
+//     } catch (err) {
+//       window.alert('이미 전화번호 인증을 완료하셨습니다.')
+//       console.log(err);
+//     }
+//   };
+// };
+
+// const isSmsCheckDB = (phoneNum, randomNum) => {
+//   return async (dispatch, getState, { history }) => {
+//     try {
+//       const response = await apis.smsNumCheck(phoneNum, randomNum);
+//       response && window.alert("인증이 완료되었습니다.");
+//       history.goBack();
+//       localStorage.setItem("phoneNum", phoneNum);
+//       localStorage.setItem('certification', response.data)
+//       // dispatch(smsCheck(response.data));
+//     } catch (err) {
+//       window.alert('인증번호가 일치하지 않습니다.')
+//       // window.alert(err.errorMessage);
+//       console.log(err);
+//     }
+//   };
+// };
+
+// const changePwdDB = (password, newPassword) => {
+//   return async (dispatch, getState, { history }) => {
+//     try {
+//       await apis.changePwd(password, newPassword);
+//       window.alert(
+//         "비밀번호가 정상적으로 변경되었습니다. 변경된 비밀번호로 다시 로그인 해주시기 바랍니다."
+//       );
+//       dispatch(userActions.logout());
+//       history.push(`/login`);
+//     } catch (err) {
+//       window.alert("비밀번호를 잘못입력하셨습니다.");
+//       console.log(err);
+//     }
+//   };
+// };
 
 //initialState
 const initialState = {
@@ -150,7 +179,9 @@ const profileActions = {
   getProfileDB,
   // addProfileDB,
   addProfileDB,
-  changePwdDB,
+  // isPhoneNumDB,
+  // isSmsCheckDB,
+  // changePwdDB,
 };
 
 export { profileActions };

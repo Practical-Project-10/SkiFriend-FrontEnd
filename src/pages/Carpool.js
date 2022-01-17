@@ -39,8 +39,9 @@ const Carpool = (props) => {
         "로그인 후 이용할 수 있는 서비스 입니다. 로그인 페이지로 이동하시겠습니까?"
       );
       if (ask) {
-        history.push("/login");
+        return history.push("/login");
       }
+      return null;
     }
 
     if (!certification) {
