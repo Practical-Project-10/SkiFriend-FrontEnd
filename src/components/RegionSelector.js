@@ -30,6 +30,7 @@ const RegionSelector = forwardRef((props, loca) => {
     let region_name = [];
 
     region_name[0] = [
+      "전체",
       "강남구",
       "강동구",
       "강북구",
@@ -57,6 +58,7 @@ const RegionSelector = forwardRef((props, loca) => {
       "중랑구",
     ];
     region_name[1] = [
+      "전체",
       "강서구",
       "금정구",
       "남구",
@@ -75,6 +77,7 @@ const RegionSelector = forwardRef((props, loca) => {
       "기장군",
     ];
     region_name[2] = [
+      "전체",
       "남구",
       "달서구",
       "동구",
@@ -85,6 +88,7 @@ const RegionSelector = forwardRef((props, loca) => {
       "달성군",
     ];
     region_name[3] = [
+      "전체",
       "계양구",
       "남구",
       "남동구",
@@ -96,10 +100,11 @@ const RegionSelector = forwardRef((props, loca) => {
       "강화군",
       "옹진군",
     ];
-    region_name[4] = ["광산구", "남구", "동구", "북구", "서구"];
-    region_name[6] = ["남구", "동구", "북구", "중구", "울주군"];
-    region_name[5] = ["대덕구", "동구", "서구", "유성구", "중구"];
+    region_name[4] = ["전체", "광산구", "남구", "동구", "북구", "서구"];
+    region_name[6] = ["전체", "남구", "동구", "북구", "중구", "울주군"];
+    region_name[5] = ["전체", "대덕구", "동구", "서구", "유성구", "중구"];
     region_name[7] = [
+      "전체",
       "강릉시",
       "동해시",
       "삼척시",
@@ -120,6 +125,7 @@ const RegionSelector = forwardRef((props, loca) => {
       "횡성군",
     ];
     region_name[8] = [
+      "전체",
       "고양시 덕양구",
       "고양시 일산구",
       "과천시",
@@ -163,6 +169,7 @@ const RegionSelector = forwardRef((props, loca) => {
       "포천군",
     ];
     region_name[9] = [
+      "전체",
       "거제시",
       "김해시",
       "마산시",
@@ -185,6 +192,7 @@ const RegionSelector = forwardRef((props, loca) => {
       "합천군",
     ];
     region_name[10] = [
+      "전체",
       "경산시",
       "경주시",
       "구미시",
@@ -211,6 +219,7 @@ const RegionSelector = forwardRef((props, loca) => {
       "칠곡군",
     ];
     region_name[11] = [
+      "전체",
       "광양시",
       "나주시",
       "목포시",
@@ -235,6 +244,7 @@ const RegionSelector = forwardRef((props, loca) => {
       "화순군",
     ];
     region_name[12] = [
+      "전체",
       "군산시",
       "김제시",
       "남원시",
@@ -252,6 +262,7 @@ const RegionSelector = forwardRef((props, loca) => {
       "진안군",
     ];
     region_name[13] = [
+      "전체",
       "공주시",
       "논산시",
       "보령시",
@@ -269,6 +280,7 @@ const RegionSelector = forwardRef((props, loca) => {
       "홍성군",
     ];
     region_name[14] = [
+      "전체",
       "제천시",
       "청주시 상당구",
       "청주시 흥덕구",

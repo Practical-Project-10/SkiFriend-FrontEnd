@@ -37,8 +37,7 @@ const Home = (props) => {
   //localstorage
   const is_login = localStorage.getItem("is_login") === "true" ? true : false;
   const userId = localStorage.getItem("userId");
-  // const user = useSelector(state => state.user.user)
-  // console.log(user)
+
   const skiResort = [
     {
       resortNum: 1,
@@ -79,13 +78,13 @@ const Home = (props) => {
   ];
   useEffect(() => {
     try {
-      // stomp.debug = null;
+      stomp.debug = null;
       stomp.connect(token, () => {
         stomp.subscribe(
           `/sub/alarm/${userId}`,
           (data) => {
             const newData = JSON.parse(data.body);
-            dispatch(chatActions.getAlarm(newData));
+            dispatch(chatCreators.getAlarm(newData));
           },
           token
         );

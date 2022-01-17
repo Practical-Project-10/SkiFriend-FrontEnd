@@ -44,36 +44,12 @@ const Login = (props) => {
     dispatch(userActions.loginDB(id, pwd));
   };
 
-  // const onClickLogin = () => {
-  //   axios.post(LOCAL + '/user/login', {
-  //       username: id,
-  //       password: pw,
-  //   }).then((res) => {
-  //       console.log(res.data);
-  //       console.log(res.headers.authorization);
-  //       localStorage.setItem('token', res.headers.authorization);
-  //       window.location.href = "/";
-  //   }).catch((err) => { alert(err, " 로그인 실패"); });
-  // }
-
-  // const signUp = () => {
-  //   axios.post(LOCAL + '/user/signup', {
-  //       username: "tjddm12",
-  //       password: "diddl123",
-  //       phoneNum: "01012343234",
-  //       nickname: "tjdkl11",
-  //   }).then((res) => {
-  //       alert("회원가입 완료");
-  //   })
-  //   .catch((err) => { alert("이미 회원임..!") });
-  // }
-
   const kakaoLogin = () => {
     window.location.href = KAKAO_AUTH_URL;
   }
 
   const naverLogin = () => {
-      window.location.href = NAVER_AUTH_URL;
+    window.location.href = NAVER_AUTH_URL;
   }
 
   return (
@@ -90,14 +66,14 @@ const Login = (props) => {
                 <WrapLogo>
                   <img src={kakao_logo} alt='카카오 로그인'/>
                 </WrapLogo>
-                <Button bg="#FFF" color='#474D56' _onClick={kakaoLogin}>카카오톡</Button>
+                <Button bg="#FFF" color='#474D56' _onClick={kakaoLogin}>카카오톡으로 로그인 하기</Button>
               </Grid>
-              <Grid position='relative' cursor='pointer'>
+              {/* <Grid position='relative' cursor='pointer'>
                 <WrapLogo>
                   <img src={naver_logo} alt='네이버 로그인'/>
                 </WrapLogo>
-                <Button bg="#FFF" color='#474D56' _onClick={naverLogin}>네이버</Button>
-              </Grid>
+                <Button bg="#FFF" color='#474D56' _onClick={naverLogin}>네이버로 로그인 하기</Button>
+              </Grid> */}
             </Grid>
           </Grid>
       </Grid>

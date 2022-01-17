@@ -9,10 +9,10 @@ import CarpoolSelect from "../components/CarpoolSelect";
 import Header from "../components/Header";
 
 const CarpoolWrite = (props) => {
-  const carpool_list = useSelector((state) => state.carpool.list);
   const dispatch = useDispatch();
   const skiResort = props.match.params.skiresort;
   const page = props.match.params.page;
+  const carpool_list = useSelector((state) => state.carpool.list);
   const [state, setState] = React.useState(false);
 
   //수정 유무

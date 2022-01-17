@@ -14,10 +14,11 @@ import filter from "../assets/carpoolList/filter.svg";
 const FilterList = (props) => {
   const history = props.history;
   const dispatch = useDispatch();
-  const is_profile = localStorage.getItem("is_profile");
+  const certification = localStorage.getItem("certification") === "true"? true: false;
   const carpool_list = useSelector((state) => state.carpool.filterList);
   const resortImg = useSelector((state) => state.carpool.resortImg);
   const skiResort = props.match.params.skiresort;
+
   React.useEffect(() => {
     dispatch(carpoolActions.imageResortDB(skiResort));
     if (carpool_list.length === 0) {
@@ -26,8 +27,8 @@ const FilterList = (props) => {
   }, []);
 
   const induceProfile = () => {
-    if (!is_profile) {
-      window.alert("프로필 작성 후 이용할 수 있는 서비스 입니다.");
+    if (!certification) {
+      window.alert("휴대폰 인증 후 이용할 수 있는 서비스 입니다. 인증하시겠습니까?");
       return null;
     }
     history.push(`/carpoolwrite/${skiResort}`);
@@ -76,7 +77,7 @@ const FilterList = (props) => {
           {carpool_list.map((l) => {
             return (
               <Grid key={l.postId} width="100%" padding="0 0 16px">
-                <Card {...l} skiResort={skiResort} />
+                <Card page='filter' {...l} skiResort={skiResort} />
               </Grid>
             );
           })}

@@ -106,7 +106,9 @@ const editCarpoolDB = (skiResort, postId, carpool) => {
       const response = await apis.editCarpool(postId, carpool);
       response && history.goBack();
       dispatch(editCarpool(skiResort, postId, response.data));
-    } catch (err) {}
+    } catch (err) {
+      console.log(err);
+    }
   };
 };
 
@@ -124,6 +126,7 @@ const deleteCarpoolDB = (skiResort, page, postId) => {
 
 const completeCarpoolDB = (skiResort, page, postId) => {
   return async function (dispatch, getState, { history }) {
+    console.log(skiResort, page, postId)
     try {
       const response = await apis.completeCarpool(postId);
 
@@ -137,6 +140,7 @@ const completeCarpoolDB = (skiResort, page, postId) => {
 
 const filterCarpoolDB = (skiResort, form) => {
   return async function (dispatch, getState, { history }) {
+    console.log(form);
     try {
       const response = await apis.filterCarpool(skiResort, form);
       if (response.data.length === 0) {
@@ -210,6 +214,16 @@ export default handleActions(
           ...action.payload.carpool,
         };
 
+        if (page === "filter") {
+          const idx = draft.filterList.findIndex(
+            (l) => l.postId === Number(action.payload.postId)
+          );
+          draft.filterList[idx] = {
+            ...draft.filterList[idx],
+            ...action.payload.carpool,
+          };
+        }
+
         if (page === "myPage") {
           const idx = draft.myList.findIndex(
             (l) => l.postId === Number(action.payload.postId)
@@ -230,6 +244,13 @@ export default handleActions(
           (l) => l.postId !== action.payload.postId
         );
         draft.list[skiResort] = deleted_list;
+
+        if (page === "filter") {
+          let deleted_filterList = draft.myList.filter(
+            (l) => l.postId !== action.payload.postId
+          );
+          draft.filterList = deleted_filterList;
+        }
 
         if (page === "myPage") {
           let deleted_myList = draft.myList.filter(
@@ -257,10 +278,21 @@ export default handleActions(
         const idx = draft.list[skiResort].findIndex(
           (l) => l.postId === Number(action.payload.postId)
         );
+
         draft.list[skiResort][idx] = {
           ...draft.list[skiResort][idx],
           ...action.payload.carpool,
         };
+
+        if (page === "filter") {
+          const idx = draft.filterList.findIndex(
+            (l) => l.postId === Number(action.payload.postId)
+          );
+          draft.filterList[idx] = {
+            ...draft.filterList[idx],
+            ...action.payload.carpool,
+          };
+        }
 
         if (page === "myPage") {
           const idx = draft.myList.findIndex(
