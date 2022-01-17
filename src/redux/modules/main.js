@@ -16,13 +16,13 @@ export const loadPosts = createAction(LOAD, (postList) => ({
 }));
 
 // thunk
-export const hotPostsDB = () =>
+export const hotPostsDB =
+  () =>
   async (dispatch, getState, { history }) => {
     try {
-      const response = await axios.get("http://3.34.52.2:8080/main");
-
+      const response = await axios.get("https://seongeunyang.shop/main");
       response && dispatch(loadPosts(response));
-    } catch(err) {
+    } catch (err) {
       console.log(`게시물 가져오기 실패${err}`);
     }
   };

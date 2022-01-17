@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 
 import { useDispatch, useSelector } from "react-redux";
 import { profileActions } from "../redux/modules/profile";
@@ -22,10 +22,11 @@ const MyPage = (props) => {
   const user_profile = useSelector((state) => state.profile.user_profile);
   const myCarpool = useSelector((state) => state.carpool.list['myPage']);
 
-  React.useEffect(() => {
-    // if (is_login) {
-    //   return null;
-    // }
+
+  useEffect(() => {
+    if (!is_login) {
+      return null;
+    }
     dispatch(profileActions.getProfileDB());
     // if(myCarpool.length === 0) {
     //   console.log('hi')

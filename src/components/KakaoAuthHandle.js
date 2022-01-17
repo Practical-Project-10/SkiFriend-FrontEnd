@@ -12,7 +12,7 @@ const KakaoAuthHandle = (props) => {
     let code = new URL(window.location.href).searchParams.get("code");
     const kakaoLogin = async () => {
       await axios
-        .get(`http://3.34.19.50:8080/user/kakao/callback?code=${code}`)
+        .get(`https://seongeunyang.shop/user/kakao/callback?code=${code}`)
         .then((res) => {
           setCookie("token", res.headers.authorization);
           localStorage.setItem("userId", res.data);

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 
 import { NavLink, withRouter } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
 import { chatCreators } from "../redux/modules/chat";
 
 import styled from "styled-components";
@@ -17,14 +16,11 @@ const Navbar = ({ location }) => {
   const dispatch = useDispatch();
   const alarm = useSelector((state) => state.chat.alarm);
   const [newRing, setNewRings] = useState(false);
-  
+
   useEffect(() => {
     if (alarm.length !== 0) {
       setNewRings(true);
-    } 
-    // else {
-    //   setNewRings(false);
-    // }
+    }
   }, [alarm]);
 
   if (
@@ -39,12 +35,12 @@ const Navbar = ({ location }) => {
     location.pathname.includes("/profilewrite")
   ) {
     return null;
-  };
-
-  const deleteAlarm = ()=> {
-    dispatch(chatCreators.deleteAlarm());
-    setNewRings(false)
   }
+
+  const deleteAlarm = () => {
+    dispatch(chatCreators.deleteAlarm());
+    setNewRings(false);
+  };
 
   return (
     <React.Fragment>
@@ -71,11 +67,11 @@ const Navbar = ({ location }) => {
           <Icon>
             <NavLink to="/chatlist" className="navLink">
               {location.pathname === "/chatlist" ? (
-                <Grid position='relative' >
+                <Grid position="relative">
                   <BsChatFill size="30" />
                 </Grid>
               ) : (
-                <Grid position='relative' _onClick={deleteAlarm}>
+                <Grid position="relative" _onClick={deleteAlarm}>
                   {newRing && <Alarm>New</Alarm>}
                   <BsChat size="30" />
                 </Grid>
@@ -123,7 +119,7 @@ const Alarm = styled.div`
   padding: 2px;
   border-radius: 999px;
   background: red;
-  color: #FFF;
+  color: #fff;
   font-size: 11px;
   font-weight: 600;
   text-align: center;
@@ -131,6 +127,6 @@ const Alarm = styled.div`
   position: absolute;
   right: -17px;
   top: -7px;
-`
+`;
 
 export default withRouter(Navbar);

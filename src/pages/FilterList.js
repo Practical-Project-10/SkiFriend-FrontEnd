@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, { useEffect } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
 import { carpoolActions } from "../redux/modules/carpool";
@@ -20,7 +20,7 @@ const FilterList = (props) => {
   const resortImg = useSelector((state) => state.carpool.resortImg);
 
   useEffect(() => {
-    dispatch(carpoolActions.imageResortDB(skiResort))
+    dispatch(carpoolActions.imageResortDB(skiResort));
     if (carpool_list.length === 0) {
       history.push(`/carpool/${skiResort}`);
     }

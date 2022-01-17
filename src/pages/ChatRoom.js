@@ -22,14 +22,14 @@ const ChatRoom = () => {
   const roomName = params.roomName;
   const scrollRef = useRef();
   //redux 데이터
-  const datas = useSelector((state) => state.chat.chatList);
+  // const datas = useSelector((state) => state.chat.chatList);
   const phoneInfo = useSelector((state) => state.chat.phoneInfoList);
   const roomInfoList = useSelector((state) => state.chat.roomInfoList);
   //토큰
   const accessToken = document.cookie.split("=")[1];
   const token = { Authorization: `${accessToken}` };
   //소켓
-  const sock = new SockJS("http://3.34.19.50:8080/ws-stomp"); //https://seongeunyang.shop/ws-stomp
+  const sock = new SockJS("https://seongeunyang.shop/ws-stomp"); 
   const stomp = Stomp.over(sock);
   // useState관리
   const [message, setMessage] = useState("");
@@ -91,7 +91,7 @@ const ChatRoom = () => {
   // 대화내용 가져오기
   useEffect(() => {
     axios
-      .get(`http://3.34.19.50:8080/chat/message/${roomId}`, {
+      .get(`https://seongeunyang.shop/chat/message/${roomId}`, {
         headers: token,
       })
       .then((res) => {
