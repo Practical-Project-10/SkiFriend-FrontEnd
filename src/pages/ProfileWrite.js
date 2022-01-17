@@ -16,37 +16,27 @@ const ProfileWrite = (props) => {
   const dispatch = useDispatch();
   const preview = useSelector((state) => state.image.preview);
   const user_profile = useSelector((state) => state.profile.user_profile);
+  console.log(user_profile)
 
   const pfImgFile = useRef();
   const deleteFile = new File(["delete"], "delete");
 
-  const username = props.match.params.username;
-  const is_edit = username ? true : false;
-
   const [profile, setProfile] = useState({
     nickname: user_profile.nickname,
-    profileImg: null,
-    gender: is_edit ? user_profile.gender : "",
-    ageRange: is_edit ? user_profile.ageRange : "",
-    career: is_edit ? user_profile.career : "",
-    selfIntro: is_edit ? user_profile.selfIntro : "",
+    profileImg: user_profile.profileImg,
+    gender: user_profile.gender,
+    ageRange: user_profile.ageRange,
+    career: user_profile.career,
+    selfIntro: user_profile.selfIntro,
     phoneNum: user_profile.phoneNum,
-    vacImg: null,
   });
-  const { nickname, gender, ageRange, career, selfIntro, phoneNum } = profile;
+  const { nickname, profileImg, gender, ageRange, career, selfIntro, phoneNum } = profile;
 
   useEffect(() => {
-    if (is_edit && user_profile.gender === null) {
-      window.alert("프로필 정보가 없어요! 우선 프로필 등록을 해주세요!");
-      history.goback();
-
-      return null;
-    }
-
-    if (is_edit) {
-      dispatch(imageActions.setPreview(user_profile.profileImg));
-    }
+    dispatch(profileActions.getProfileDB());
+    dispatch(imageActions.setPreview(profileImg));
   }, []);
+  console.log(profile)
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -55,18 +45,6 @@ const ProfileWrite = (props) => {
       ...profile,
       [name]: value,
     });
-  };
-
-  const handleClick = (e) => {
-    const { name } = e.target;
-
-    if (name === "nickname") {
-      if (nickname !== "") {
-        dispatch(userActions.isNicknameDB(nickname));
-      } else {
-        window.alert("닉네임을 입력해주세요.");
-      }
-    }
   };
 
   const selectFile = () => {
@@ -97,21 +75,14 @@ const ProfileWrite = (props) => {
 
       dispatch(imageActions.deletePreview());
     }
-
-    if (id === "deleteVac") {
-      setProfile({
-        ...profile,
-        vacImg: deleteFile,
-      });
-    }
   };
 
-  const addProfile = async () => {
+  // const addProfile = async () => {
+  //   dispatch(profileActions.addProfileDB(profile));
+  // };
+
+  const addProfile = () => {
     dispatch(profileActions.addProfileDB(profile));
-  };
-
-  const editProfile = () => {
-    dispatch(profileActions.editProfileDB(profile));
   };
 
   const deleteUser = () => {
@@ -141,7 +112,7 @@ const ProfileWrite = (props) => {
             padding="0 0 9px"
             src={preview ? preview : defaultIMG}
           />
-          <ProfileLabel htmlFor="profile">사진 추가하기</ProfileLabel>
+          <ProfileLabel htmlFor="profile">사진 변경하기</ProfileLabel>
           <input
             id="profile"
             type="file"
@@ -163,61 +134,20 @@ const ProfileWrite = (props) => {
           >
             <Grid width="100%">
               <Input
-                dupButton
                 label="닉네임"
-                buttonText="중복확인"
                 type="text"
                 size="12px"
                 _name="nickname"
                 placeholder="닉네임을 입력해주세요."
                 _value={nickname}
-                _onClick={handleClick}
                 _onChange={handleChange}
               />
             </Grid>
 
-            {is_edit ? (
-              <Grid width="100%">
-                <Text size="12px">성별</Text>
-                <Input name="gender" _value={gender} _disabled></Input>
-              </Grid>
-            ) : (
-              <Grid width="100%">
-                <Text size="12px">성별</Text>
-                <Select name="gender" value={gender} onChange={handleChange}>
-                  <option>선택</option>
-                  <option value="남">남자</option>
-                  <option value="여">여자</option>
-                </Select>
-              </Grid>
-            )}
-
-            {is_edit ? (
-              <Grid width="100%">
-                <Text size="12px">나이</Text>
-                <Input name="gender" _value={ageRange} _disabled></Input>
-              </Grid>
-            ) : (
-              <Grid width="100%">
-                <Text size="12px">나이</Text>
-                <Select
-                  name="ageRange"
-                  value={ageRange}
-                  onChange={handleChange}
-                >
-                  <option>선택</option>
-                  <option value="10대">10대</option>
-                  <option value="20대">20대</option>
-                  <option value="30대">30대</option>
-                  <option value="40대이상">40대 이상</option>
-                </Select>
-              </Grid>
-            )}
-
             <Grid width="100%">
               <Text size="12px">스키 / 스노우보드 경력</Text>
               <Select name="career" value={career} onChange={handleChange}>
-                <option>선택</option>
+                <option value="">선택</option>
                 <option value="초보">초보</option>
                 <option value="1~3년">1~3년</option>
                 <option value="3~5년">3~5년</option>
@@ -229,36 +159,44 @@ const ProfileWrite = (props) => {
               <Text size="12px">자기소개</Text>
               <Textarea
                 name="selfIntro"
-                value={selfIntro}
+                value={selfIntro !== 'null'? selfIntro: null}
                 placeholder="내용을 입력해주세요"
                 onChange={handleChange}
               />
             </Grid>
 
             <Grid width="100%">
+              <Text size="12px">전화번호</Text>
               <Input
-                label="전화번호"
                 type="text"
                 _disabled
                 _name="phoneNum"
-                _value={phoneNum}
+                _value={phoneNum !== 'null'? phoneNum: null}
                 _onChange={handleChange}
+                placeholder="휴대폰 인증을 해주세요."
               />
-            </Grid>
-
-            <Grid width="100%">
-              <Text size="12px">비밀번호</Text>
               <Button
                 height="47px"
                 padding="14px 0"
+                margin='10px 0 0'
                 color="#474D56"
-                bg="#B5CCE5"
+                bg="#FFF"
                 _onClick={() =>
-                  history.push(`/profilewrite/${username}/pwdchange`)
+                  history.push("/phoneauth")
                 }
               >
-                비밀번호 변경
+                휴대폰 인증하기
               </Button>
+            </Grid>
+
+            <Grid width="100%">
+              <Text size="12px">성별</Text>
+              <Input name="gender" _value={gender} _disabled></Input>
+            </Grid>
+
+            <Grid width="100%">
+              <Text size="12px">나이</Text>
+              <Input name="gender" _value={ageRange} _disabled></Input>
             </Grid>
           </Grid>
         </Grid>
@@ -267,11 +205,14 @@ const ProfileWrite = (props) => {
           <Button
             height="61px"
             color="#FFF"
-            bg="#474D56"
-            _onClick={is_edit ? editProfile : addProfile}
+            bg="#6195CF"
+            _onClick={addProfile}
           >
             작성완료
           </Button>
+
+          <div style={{border: '1px solid #9098a2', margin: '31px 0'}}></div>
+
           <Button
             height="61px"
             color="#474D56"
@@ -338,40 +279,7 @@ const Select = styled.select`
   width: 100%;
   padding: 14px 8px;
   border-radius: 6px;
-  border: 1px solid #474d56;
-`;
-
-const VacPic = styled.label`
-  display: block;
-  width: 100%;
-  height: 61px;
-  background: #ffffff;
   border: 1px solid #6195cf;
-  box-sizing: border-box;
-  border-radius: 8px;
-  font-size: 16px;
-  color: #474d56;
-  line-height: 60px;
-  text-align: center;
-  position: relative;
-
-  & > .vac {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 6px;
-  }
-
-  &::before {
-    content: "";
-    width: ${(props) => (props.add ? "100%" : "")};
-    height: ${(props) => (props.add ? "100%" : "")};
-    border-radius: ${(props) => (props.add ? "8px" : "")};
-    background: ${(props) => (props.add ? "rgba(0,0,0,0.5)" : "")};
-    position: ${(props) => (props.add ? "absolute" : "")};
-    top: ${(props) => (props.add ? 0 : "")};
-    left: ${(props) => (props.add ? 0 : "")};
-  }
 `;
 
 export default ProfileWrite;

@@ -27,7 +27,7 @@ const PhoneAuth = (props) => {
   };
 
   //회원가입 페이지로 넘어가기 위해 인증번호 확인
-  const nextStep = () => {
+  const certification = () => {
     const smsNum = smsNumInput.current.value;
 
     if (smsNum === "") {
@@ -40,20 +40,16 @@ const PhoneAuth = (props) => {
 
   return (
     <Grid>
-      <Header>회원가입</Header>
+      <Header goBack>휴대폰 인증</Header>
       <Grid
         minHeight="calc( 100vh - 55px )"
         display="flex"
         direction="column"
         justify="space-between"
-        padding='85px 16px 16px'
+        padding='160px 16px 16px'
       >
-        <Grid width='100%' height="73px" _onClick={() => history.push('/')} cursor='pointer'>
-          <Image src={logo} width='100%' height='73px'/>
-        </Grid>
-
-        <Grid display='flex' direction='column' gap='41px' margin='0 0 260px 0'>
-          <Grid margin="0 0 41px">
+        <Grid display='flex' direction='column' gap='41px'>
+          <Grid>
             <Input
               dupButton
               type="tel" //tel로 입력해야한다(모바일 사용위해) 숫자키보드가 나올수 있다.
@@ -76,7 +72,7 @@ const PhoneAuth = (props) => {
           </Grid>
         </Grid>
         <Grid>
-          <Button _onClick={nextStep}>다음</Button>
+          <Button _onClick={certification}>인증</Button>
         </Grid>
       </Grid>
     </Grid>

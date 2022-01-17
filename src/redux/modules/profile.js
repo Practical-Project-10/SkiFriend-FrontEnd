@@ -3,61 +3,74 @@ import { produce } from "immer";
 import { imageActions } from "./image";
 import { apis } from "../../shared/apis";
 import { userActions } from "../modules/user";
+import { userStorage } from "../../shared/userStorage";
 
 //action
 const GET_PROFILE = "GET_PROFILE";
+// const ADD_PROFILE = "ADD_PROFILE";
 const ADD_PROFILE = "ADD_PROFILE";
-const EDIT_PROFILE = "EDIT_PROFILE";
 
 //action creators
 const getProfile = createAction(GET_PROFILE, (profile) => ({ profile }));
+// const addProfile = createAction(ADD_PROFILE, (profile) => ({ profile }));
 const addProfile = createAction(ADD_PROFILE, (profile) => ({ profile }));
-const editProfile = createAction(EDIT_PROFILE, (profile) => ({ profile }));
 
 //middlewares
 const getProfileDB = () => {
   return async (dispatch, getState, { history }) => {
     try {
       const response = await apis.getProfile();
-      dispatch(getProfile(response.data));
+      response && dispatch(getProfile(response.data));
+      // const userInfo = {
+      //   nickname: localStorage.getItem('nickname'),
+      //   profileImg: localStorage.getItem('profileImg'),
+      //   gender: localStorage.getItem('gender'),
+      //   ageRange: localStorage.getItem('ageRange'),
+      //   career: localStorage.getItem('career') !== "null"? localStorage.getItem('career'): null,
+      //   selfIntro: localStorage.getItem('selfIntro') !== "null"? localStorage.getItem('selfIntro'): null,
+      //   phoneNum: localStorage.getItem('phoneNum') !== "null"? localStorage.getItem('phoneNum'): null,
+      // };
+
+      // dispatch(getProfile(userInfo));
     } catch (err) {
       console.log("getProfileDB", err);
     }
   };
-};
+}
+
+// const addProfileDB = (profile) => {
+//   return async (dispatch, getState, { history }) => {
+//     const new_profile = {
+//       gender: profile.gender,
+//       ageRange: profile.ageRange,
+//       career: profile.career,
+//       selfIntro: profile.selfIntro,
+//     };
+
+//     const formData = new FormData();
+//     formData.append("profileImg", profile.profileImg);
+//     formData.append("vacImg", profile.vacImg);
+//     formData.append(
+//       "requestDto",
+//       new Blob([JSON.stringify(new_profile)], { type: "application/json" })
+//     );
+//     try {
+//       const response = await apis.addProfile(formData);
+
+//       const _profile = response.data;
+//       response && userStorage(response.data);
+//       history.push("/mypage");
+//       window.alert("정상적으로 프로필이 등록되었습니다.");
+//       dispatch(addProfile(_profile));
+//       dispatch(imageActions.setPreview(null));
+//     } catch (err) {
+//       window.alert("프로필을 다시 확인해 주세요!");
+//       console.log("addProfileDB", err);
+//     }
+//   };
+// };
 
 const addProfileDB = (profile) => {
-  return async (dispatch, getState, { history }) => {
-    const new_profile = {
-      gender: profile.gender,
-      ageRange: profile.ageRange,
-      career: profile.career,
-      selfIntro: profile.selfIntro,
-    };
-
-    const formData = new FormData();
-    formData.append("profileImg", profile.profileImg);
-    formData.append("vacImg", profile.vacImg);
-    formData.append(
-      "requestDto",
-      new Blob([JSON.stringify(new_profile)], { type: "application/json" })
-    );
-    try {
-      const response = await apis.addProfile(formData);
-
-      const _profile = response.data;
-      response && history.push("/mypage");
-      window.alert("정상적으로 프로필이 등록되었습니다.");
-      dispatch(addProfile(_profile));
-      dispatch(imageActions.setPreview(null));
-    } catch (err) {
-      window.alert("프로필을 다시 확인해 주세요!");
-      console.log("addProfileDB", err);
-    }
-  };
-};
-
-const editProfileDB = (profile) => {
   return async (dispatch, getState, { history }) => {
     const new_profile = {
       nickname: profile.nickname,
@@ -66,20 +79,20 @@ const editProfileDB = (profile) => {
     };
     const formData = new FormData();
     formData.append("profileImg", profile.profileImg);
-    formData.append("vacImg", profile.vacImg);
     formData.append(
       "requestDto",
       new Blob([JSON.stringify(new_profile)], { type: "application/json" })
     );
 
     try {
-      const response = await apis.editProfile(formData);
+      const response = await apis.addProfile(formData);
       
-      response && history.push("/mypage");
+      response && userStorage(response.data);
+      history.push("/mypage");
       window.alert("정상적으로 프로필이 수정되었습니다.");
-      dispatch(editProfile(response.data));
+      dispatch(addProfile(response.data));
       dispatch(imageActions.setPreview(null));
-      localStorage.setItem('nickname', response.data.nickname);
+      console.log(response.data);
     } catch (err) {
       window.alert("프로필을 다시 확인해 주세요!");
       console.log("addProfileDB", err);
@@ -107,7 +120,7 @@ const changePwdDB = (password, newPassword) => {
 
 //initialState
 const initialState = {
-  user_profile: [],
+  user_profile: {},
 };
 
 //reducer
@@ -116,17 +129,13 @@ export default handleActions(
     [GET_PROFILE]: (state, action) =>
       produce(state, (draft) => {
         draft.user_profile = action.payload.profile;
-        const user_gender = action.payload.profile.gender;
-
-        if (user_gender !== null) {
-          localStorage.setItem("is_profile", true);
-        }
+        console.log(action.payload.profile)
       }),
+    // [ADD_PROFILE]: (state, action) =>
+    //   produce(state, (draft) => {
+    //     draft.user_profile = action.payload.profile;
+    //   }),
     [ADD_PROFILE]: (state, action) =>
-      produce(state, (draft) => {
-        draft.user_profile = action.payload.profile;
-      }),
-    [EDIT_PROFILE]: (state, action) =>
       produce(state, (draft) => {
         draft.user_profile = action.payload.profile;
       }),
@@ -136,11 +145,11 @@ export default handleActions(
 
 const profileActions = {
   getProfile,
+  // addProfile,
   addProfile,
-  editProfile,
   getProfileDB,
+  // addProfileDB,
   addProfileDB,
-  editProfileDB,
   changePwdDB,
 };
 

@@ -22,7 +22,7 @@ const Carpool = (props) => {
   const is_next = useSelector((state) => state.carpool.is_next);
   const resortImg = useSelector((state) => state.carpool.resortImg);
   const is_login = localStorage.getItem("is_login") === "true"? true: false;
-  const is_profile = localStorage.getItem("is_profile");
+  const certification = localStorage.getItem("certification") === "true"? true: false;
   const skiResort = props.match.params.skiresort;
 
   React.useEffect(() => {
@@ -39,14 +39,13 @@ const Carpool = (props) => {
         "로그인 후 이용할 수 있는 서비스 입니다. 로그인 페이지로 이동하시겠습니까?"
       );
       if (ask) {
-        return history.push(`/login`);
+        history.push("/login");
       }
-      return null;
     }
 
-    if (is_profile !== "true") {
+    if (!certification) {
       const ask = window.confirm(
-        "프로필 작성 후 이용할 수 있는 서비스 입니다. 마이페이지로 이동하시겠습니까?"
+        "휴대폰 인증 후 이용할 수 있는 서비스 입니다. 인증하시겠습니까?"
       );
       if (ask) {
         return history.push(`/mypage`);

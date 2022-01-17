@@ -6,12 +6,12 @@ import { Grid, Image, Text } from "../elements/index";
 import SkiIcon from "../components/SkiIcon"
 import Header from "../components/Header";
 
-import High1 from "../assets/high1_logo.png";
-import YongPyong from "../assets/yongpyong_logo.png";
-import Vivaldi from "../assets/vivaldi_logo.png";
-import Phoenix from "../assets/phoenix_logo.png";
-import Wellihilli from "../assets/welli_logo.png";
-import Konjiam from "../assets/kongiam_logo.png";
+import High1 from "../assets/high1_logo.svg";
+import YongPyong from "../assets/yongpyong_logo.svg";
+import Vivaldi from "../assets/vivaldi_logo.svg";
+import Phoenix from "../assets/phoenix_logo.svg";
+import Wellihilli from "../assets/welli_logo.svg";
+import Konjiam from "../assets/konjiam_logo.svg";
 import drop from "../assets/drop.svg"
 
 const PlaceInfo = () => {

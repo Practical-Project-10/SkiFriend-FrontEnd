@@ -37,7 +37,7 @@ const MyPage = (props) => {
 
       <Grid margin="0 0 70px 0" minHeight="calc( 100vh - 154px )">
         <Grid phoneSize>
-          <UserProfile user_profile={user_profile} is_login={is_login}/>
+          <UserProfile {...user_profile} is_login={is_login}/>
         </Grid>
 
         <Grid

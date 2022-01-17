@@ -6,8 +6,7 @@ import { Route } from "react-router-dom";
 //pages import
 import Home from "./pages/Home";
 import PhoneAuth from "./pages/PhoneAuth";
-import Signup from "./pages/Signup";
-import Login from "./pages/Login";
+import SocialLogin from "./pages/SocialLogin";
 import Carpool from "./pages/Carpool";
 import CarpoolWrite from "./pages/CarpoolWrite";
 import CarpoolFilter from "./pages/CarpoolFilter";
@@ -23,6 +22,9 @@ import ChatList from "./pages/ChatList";
 import Navbar from "./components/Navbar";
 import ChatRoom from "./pages/ChatRoom";
 import Snowflakes from "./components/Snowflakes";
+import KakaoAuthHandle from "./components/KakaoAuthHandle";
+import KakaoAuthHandle2 from "./components/KakaoAuthHandle2";
+import NaverAuthHandle  from "./components/NaverAuthHandle";
 
 import background from "./assets/background.png.jpg";
 
@@ -37,8 +39,10 @@ function App() {
           <CardList>
             <Route exact path="/" component={Home} />
             <Route exact path="/phoneauth" component={PhoneAuth} />
-            <Route exact path="/signup" component={Signup} />
-            <Route exact path="/login" component={Login} />
+            <Route exact path="/login" component={SocialLogin} />
+            <Route exact path="/user/kakao/callback" component={KakaoAuthHandle}/>
+            <Route exact path="/user/kakao/callback/properties" component={KakaoAuthHandle2}/>
+            <Route exact path="/user/naver/callback" component={NaverAuthHandle}/>
             <Route exact path="/carpool/:skiresort" component={Carpool} />
             <Route exact path="/filter/:skiresort" component={FilterList} />
             <Route exact path="/carpoolwrite" component={CarpoolWrite} />
@@ -90,11 +94,6 @@ function App() {
             <Route exact path="/placeinfo" component={PlaceInfo} />
             <Route exact path="/mypage" component={MyPage} />
             <Route exact path="/profilewrite" component={ProfileWrite} />
-            <Route
-              exact
-              path="/profilewrite/:username"
-              component={ProfileWrite}
-            />
 
             <Route
               exact
