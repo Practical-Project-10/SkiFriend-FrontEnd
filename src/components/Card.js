@@ -158,6 +158,7 @@ const Card = (props) => {
         </CarpoolCard>
         {showmodal ? (
           <Modal
+            page={page}
             complete={!props.status ? true : false}
             width="179px"
             height="146px"
@@ -277,6 +278,7 @@ const Card = (props) => {
       </CarpoolCard>
       {showmodal ? (
         <Modal
+        page={page}
           complete={!props.status ? true : false}
           height={!props.status ? "198px" : "256px"}
           closeModal={closemodal}

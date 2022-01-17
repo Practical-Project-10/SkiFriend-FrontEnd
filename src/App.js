@@ -17,7 +17,6 @@ import FreeBoardDetail from "./pages/FreeBoardDetail";
 import PlaceInfo from "./pages/PlaceInfo";
 import MyPage from "./pages/MyPage";
 import ProfileWrite from "./pages/ProfileWrite";
-import PwdChange from "./pages/PwdChange";
 import ChatList from "./pages/ChatList";
 import Navbar from "./components/Navbar";
 import ChatRoom from "./pages/ChatRoom";
@@ -95,11 +94,6 @@ function App() {
             <Route exact path="/mypage" component={MyPage} />
             <Route exact path="/profilewrite" component={ProfileWrite} />
 
-            <Route
-              exact
-              path="/profilewrite/:username/pwdchange"
-              component={PwdChange}
-            />
             <Route exact path="/chatlist" component={ChatList} />
             <Route
               exact

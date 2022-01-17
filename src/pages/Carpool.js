@@ -25,6 +25,7 @@ const Carpool = (props) => {
   const certification = localStorage.getItem("certification") === "true"? true: false;
   const skiResort = props.match.params.skiresort;
 
+
   React.useEffect(() => {
     dispatch(carpoolActions.imageResortDB(skiResort));
     dispatch(carpoolActions.getCarpoolDB(skiResort, page));

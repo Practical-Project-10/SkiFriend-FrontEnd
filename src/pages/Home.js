@@ -27,9 +27,7 @@ const Home = (props) => {
   const history = props.history;
   //redux 데이터
   const hotPosts = useSelector((state) => state.main.list);
-  const alarm = useSelector((state) => state.chat);
-  console.log(alarm);
-  console.log(alarm.alarm);
+  const alarm = useSelector((state) => state.chat.alarm);
   //토큰
   const accessToken = document.cookie.split("=")[1];
   const token = { Authorization: `${accessToken}` };
@@ -39,8 +37,7 @@ const Home = (props) => {
   //localstorage
   const is_login = localStorage.getItem("is_login") === "true" ? true : false;
   const userId = localStorage.getItem("userId");
-  // const user = useSelector(state => state.user.user)
-  // console.log(user)
+
   const skiResort = [
     {
       resortNum: 1,
@@ -81,13 +78,12 @@ const Home = (props) => {
   ];
   useEffect(() => {
     try {
-      // stomp.debug = null;
+      stomp.debug = null;
       stomp.connect(token, () => {
         stomp.subscribe(
           `/sub/alarm/${userId}`,
           (data) => {
             const newData = JSON.parse(data.body);
-            console.log(newData);
             dispatch(chatCreators.getAlarm(newData.message));
           },
           token
@@ -96,7 +92,7 @@ const Home = (props) => {
     } catch (error) {
       console.log(error);
     }
-  }, [dispatch, alarm]);
+  }, []);
 
   useEffect(() => {
     const mainHotPosts = async () => {

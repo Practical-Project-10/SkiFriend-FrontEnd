@@ -25,8 +25,6 @@ const ChatRoom = () => {
   const datas = useSelector((state) => state.chat.chatList);
   const phoneInfo = useSelector((state) => state.chat.phoneInfoList);
   const roomInfoList = useSelector((state) => state.chat.roomInfoList);
-  // const test = useSelector((state) => state.chat);
-  // console.log(test);
   //토큰
   const accessToken = document.cookie.split("=")[1];
   const token = { Authorization: `${accessToken}` };

@@ -92,7 +92,6 @@ const addProfileDB = (profile) => {
       window.alert("정상적으로 프로필이 수정되었습니다.");
       dispatch(addProfile(response.data));
       dispatch(imageActions.setPreview(null));
-      console.log(response.data);
     } catch (err) {
       window.alert("프로필을 다시 확인해 주세요!");
       console.log("addProfileDB", err);

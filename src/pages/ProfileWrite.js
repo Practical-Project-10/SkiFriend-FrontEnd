@@ -16,7 +16,6 @@ const ProfileWrite = (props) => {
   const dispatch = useDispatch();
   const preview = useSelector((state) => state.image.preview);
   const user_profile = useSelector((state) => state.profile.user_profile);
-  console.log(user_profile)
 
   const pfImgFile = useRef();
   const deleteFile = new File(["delete"], "delete");
@@ -36,7 +35,6 @@ const ProfileWrite = (props) => {
     dispatch(profileActions.getProfileDB());
     dispatch(imageActions.setPreview(profileImg));
   }, []);
-  console.log(profile)
 
   const handleChange = (e) => {
     const { name, value } = e.target;

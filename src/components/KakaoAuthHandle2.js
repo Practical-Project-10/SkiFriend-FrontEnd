@@ -13,8 +13,6 @@ const KakaoAuthHandle2 = (props) => {
       await axios
         .get(`http://3.34.19.50:8080/user/kakao/callback/${userId}?code=${code}`)
         .then((res) => {
-          console.log("window.location.href = / 실행")
-          console.log(res)
           localStorage.setItem("is_login", true);
           userStorage(res.data);
           // window.location.href = "/";
