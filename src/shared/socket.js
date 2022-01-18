@@ -15,7 +15,6 @@ export const socket = {
       `/sub/chat/room/${roomId}`,
       (message) => {
         const responseData = JSON.parse(message.body);
-        console.log(responseData);
       },
       token
     ),

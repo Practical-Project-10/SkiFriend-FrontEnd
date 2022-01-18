@@ -136,7 +136,7 @@ const FreeBoardDetail = ({ history }, props) => {
                 style={{
                   height: "13px",
                   margin: "0 12px",
-                  border: "1px solid #6195CF",////
+                  border: "1px solid #6195CF",
                 }}
               ></div>
               <Text size="14px" bold>

@@ -11,6 +11,8 @@ const Image = (props) => {
     width,
     margin,
     padding,
+    maxWidth,
+    maxHeight,
     bg,
     border,
     _onClick,
@@ -26,6 +28,8 @@ const Image = (props) => {
     width,
     height,
     margin,
+    maxWidth,
+    maxHeight,
     padding,
     cursor,
     _onClick,
@@ -68,7 +72,9 @@ const MyIcon = styled.div`
 
 const ElImage = styled.div`
   width: ${(props) => props.width};
+  max-width: ${(props) => props.maxWidth};
   height: ${(props) => props.height};
+  max-height: ${(props) => props.maxHeight};
   padding: ${(props) => props.padding};
   margin: ${(props) => props.margin};
   cursor: ${(props) => props.cursor};

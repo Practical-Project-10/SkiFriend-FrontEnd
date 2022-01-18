@@ -8,8 +8,12 @@ import { chatCreators } from "../redux/modules/chat";
 import SockJS from "sockjs-client";
 import Stomp from "stompjs";
 
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+
 import styled from "styled-components";
-import { Grid, Image, Text } from "../elements/index";
+import { Grid, Text } from "../elements/index";
 import SkiIcon from "../components/SkiIcon";
 import HotPost from "../components/HotPost";
 import Header from "../components/Header";
@@ -20,6 +24,8 @@ import Phoenix from "../assets/phoenix_logo.svg";
 import Wellihilli from "../assets/welli_logo.svg";
 import Konjiam from "../assets/konjiam_logo.svg";
 import Banner from "../assets/mainPage/Home_banner.png";
+import Banner2 from "../assets/mainPage/Home_banner2.png";
+import Banner3 from "../assets/mainPage/Home_banner3.png";
 
 const Home = (props) => {
   const dispatch = useDispatch();
@@ -32,11 +38,26 @@ const Home = (props) => {
   const accessToken = document.cookie.split("=")[1];
   const token = { Authorization: `${accessToken}` };
   //소켓
-  const sock = new SockJS("http://3.34.19.50:8080/ws-alarm");
+  const sock = new SockJS("https://seongeunyang.shop/ws-alarm");
   const stomp = Stomp.over(sock);
   //localstorage
   const is_login = localStorage.getItem("is_login") === "true" ? true : false;
   const userId = localStorage.getItem("userId");
+  //캐러셀 배너이미지
+  const Carousel = [
+    { id: 1, url: Banner },
+    { id: 2, url: Banner2 },
+    { id: 3, url: Banner3 },
+  ];
+  //캐러셀 속성
+  const settings = {
+    dots: false,
+    infinite: true,
+    speed: 300,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    autoplay: true,
+  };
 
   const skiResort = [
     {
@@ -76,6 +97,7 @@ const Home = (props) => {
       logo: Konjiam,
     },
   ];
+
   useEffect(() => {
     try {
       stomp.debug = null;
@@ -97,7 +119,7 @@ const Home = (props) => {
   useEffect(() => {
     const mainHotPosts = async () => {
       const response = await (
-        await fetch("http://3.34.19.50:8080//main")
+        await fetch("https://seongeunyang.shop/main")
       ).json();
       dispatch(mainActions.loadPosts(response));
     };
@@ -113,6 +135,20 @@ const Home = (props) => {
       return history.replace("/");
     }
   };
+
+  //설문지 조사 이동
+  const connectUrl = (id) => {
+    console.log(id);
+    if (id === 2) {
+      return (window.location.href =
+        "https://docs.google.com/forms/d/1kRaC8Zy-8gpKSI2O4kDErjCYiE0l6jP_2dbR8tQGggc/edit?usp=forms_home&ths=true");
+    }
+    if (id === 3) {
+      return (window.location.href =
+        "https://docs.google.com/forms/d/e/1FAIpQLSdndra7y-jIH_gL8pJ1cU-H4XMwOYLYv9wHJINxX8WDbJnpJA/viewform");
+    }
+  };
+
   return (
     <React.Fragment>
       {is_login ? (
@@ -130,9 +166,24 @@ const Home = (props) => {
         </Header>
       )}
       <Grid width="100%" margin="0 0 70px">
-        <Grid width="100%" height="210px">
-          <Image src={Banner} size="100% 207px" width="100%" height="100%" />
+        <Grid width="100%" height="208px">
+          {/* 캐러셀 배너 */}
+          <Slider {...settings}>
+            {Carousel.map((item) => {
+              return (
+                <div key={item.id}>
+                  <BannerImage
+                    src={item.url}
+                    style={{ cursor: item.id === 1 ? "" : "pointer" }}
+                    onClick={() => connectUrl(item.id)}
+                    target="_blank"
+                  />
+                </div>
+              );
+            })}
+          </Slider>
         </Grid>
+
         <Grid align="center" padding="4px 0" bg="#474D56">
           {/* 가이드 링크 */}
           <a
@@ -195,4 +246,8 @@ const IconWrap = styled.div`
   gap: 30px 50px;
 `;
 
+const BannerImage = styled.img`
+  max-width: 100%;
+  max-height: 100%;
+`;
 export default Home;
