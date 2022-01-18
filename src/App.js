@@ -12,7 +12,7 @@ import CarpoolWrite from "./pages/CarpoolWrite";
 import CarpoolFilter from "./pages/CarpoolFilter";
 import FilterList from "./pages/FilterList";
 import FreeBoardList from "../src/pages/FreeBoardList";
-import FreeBoardWrite from "./pages/FreeBoardWrite";
+import BoardWrite from "./pages/BoardWrite";
 import FreeBoardDetail from "./pages/FreeBoardDetail";
 import PlaceInfo from "./pages/PlaceInfo";
 import MyPage from "./pages/MyPage";
@@ -85,12 +85,12 @@ function App() {
             <Route
               exact
               path="/freeboardwrite/:skiresort"
-              component={FreeBoardWrite}
+              component={BoardWrite}
             />
             <Route
               exact
               path="/freeboardedit/:skiresort/:postId"
-              component={FreeBoardWrite}
+              component={BoardWrite}
             />
             <Route
               exact

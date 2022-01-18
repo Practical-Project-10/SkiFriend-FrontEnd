@@ -1,11 +1,11 @@
 import React from "react";
-import BoardBody from "../components/BoardBody";
+import BoardBody from "../BoardBody";
 
 const VideoUpload = (props) => {
   
   return (
     <React.Fragment>
-      {/* <BoardBody page='video'/> */}
+      <BoardBody page='video'/>
     </React.Fragment>
   );
 };
