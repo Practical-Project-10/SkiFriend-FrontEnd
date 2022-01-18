@@ -17,8 +17,8 @@ import "swiper/components/navigation/navigation.min.css";
 //react icons
 import { AiOutlineCamera } from "react-icons/ai";
 
-const VideoUpload = (props) => {
-  const {is_edit, skiresort, postId} = props;
+const BoardWrite = (props) => {
+  const { is_edit, skiresort, postId } = props;
   const dispatch = useDispatch();
 
   // redux데이터
@@ -151,7 +151,8 @@ const VideoUpload = (props) => {
             pagination={{ clickable: true }}
             style={{ width: "100%" }}
           >
-            {is_edit && leftList !== undefined &&
+            {is_edit &&
+              leftList !== undefined &&
               leftList.map((photo, index) => {
                 return (
                   <SwiperSlide key={photo + index}>
@@ -248,4 +249,4 @@ const EditImage = styled.div`
   }
 `;
 
-export default VideoUpload;
+export default BoardWrite;

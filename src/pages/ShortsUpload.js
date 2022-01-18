@@ -1,7 +1,6 @@
 import React from "react";
-import BoardBody from "../components/BoardBody";
 
-const VideoUpload = (props) => {
+const ShortsUpload = (props) => {
   
   return (
     <React.Fragment>
@@ -10,4 +9,4 @@ const VideoUpload = (props) => {
   );
 };
 
-export default VideoUpload;
+export default ShortsUpload;

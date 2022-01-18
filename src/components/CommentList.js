@@ -76,7 +76,7 @@ const CommentList = () => {
       commentActions.updateCommentDB(postId, editCommentNo, commentEditValue)
     );
   };
-  
+
   //-------댓글 삭제--------
   const deleteCommentBtn = (commentId) => {
     const ask = window.confirm("정말 삭제하시겠습니까?");
@@ -184,7 +184,13 @@ const CommentList = () => {
                         _onChange={postEditComment}
                       />
                     ) : (
-                      <Text>{comment.content}</Text>
+                      <Text
+                        width="100%"
+                        wordWrap="break-word"
+                        wordBreak="break-all"
+                      >
+                        {comment.content}
+                      </Text>
                     )}
                   </Grid>
                 </Grid>
