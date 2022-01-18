@@ -1,13 +1,13 @@
 import React from "react";
 import BoardBody from "../components/BoardBody";
 
-const FreeBoardWrite = (props) => {
+const VideoUpload = (props) => {
   
   return (
     <React.Fragment>
-      <BoardBody/>
+      <BoardBody page='video'/>
     </React.Fragment>
   );
 };
 
-export default FreeBoardWrite;
+export default VideoUpload;
