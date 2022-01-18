@@ -140,4 +140,6 @@ export const apis = {
   chatPhoneNum: () => api.get(`/user/info/phoneNum`),
 
   chatRoomInfo: (roomId) => api.get(`/chat/room/${roomId}/carpool`),
+
+  chatRoomDelete: (roomId) => api.delete(`/chat/room/${roomId}`),
 };

@@ -137,7 +137,6 @@ const completeCarpoolDB = (skiResort, postId) => {
 
 const filterCarpoolDB = (skiResort, form) => {
   return async function (dispatch, getState, { history }) {
-    console.log(form);
     try {
       const response = await apis.filterCarpool(skiResort, form);
       if (response.data.length === 0) {

@@ -40,7 +40,7 @@ export const getRoomInfo = createAction(GET_ROOM_INFO, (roomInfo) => ({
   roomInfo,
 }));
 export const addChat = createAction(ADD, (chatData) => ({ chatData }));
-const getAlarm = createAction(GET_ALARM, (newChat) => ({newChat}));
+const getAlarm = createAction(GET_ALARM, (newChat) => ({ newChat }));
 const deleteAlarm = createAction(DELETE_ALARM, () => ({}));
 
 // thunk
@@ -131,6 +131,18 @@ export const getPhoneNumDB =
     }
   };
 
+//대화방 삭제
+export const chatRoomDeleteDB =
+  (roomId) =>
+  async (dispatch, getState, { history }) => {
+    try {
+      const response = await apis.chatRoomDelete(roomId);
+      response && dispatch(getListChatDB());
+    } catch (err) {
+      console.log(`불러오기 실패${err}`);
+    }
+  };
+
 //카풀정보 가져오기
 export const getRoomInfoDB =
   (roomId) =>
@@ -179,13 +191,13 @@ export default handleActions(
 
     [GET_ALARM]: (state, action) =>
       produce(state, (draft) => {
-        draft.alarm.push(action.payload.newChat)
+        draft.alarm.push(action.payload.newChat);
       }),
 
     [DELETE_ALARM]: (state, action) =>
       produce(state, (draft) => {
-        draft.alarm = []
-      })
+        draft.alarm = [];
+      }),
   },
   initialState
 );
@@ -204,6 +216,7 @@ const chatCreators = {
   getProfileInfoDB,
   getPhoneNumDB,
   getRoomInfoDB,
+  chatRoomDeleteDB,
 };
 
 export { chatCreators };

@@ -19,6 +19,8 @@ const Text = (props) => {
     opacity,
     whiteSpace,
     textOverflow,
+    wordWrap,
+    wordBreak,
     overflow,
     line,
     block,
@@ -38,6 +40,8 @@ const Text = (props) => {
     padding,
     whiteSpace,
     textOverflow,
+    wordWrap,
+    wordBreak,
     overflow,
     cursor,
     opacity,
@@ -79,6 +83,8 @@ const P = styled.p`
   text-align: ${(props) => (props.sort ? props.sort : "")};
   margin: ${(props) => props.margin};
   padding: ${(props) => props.padding};
+  word-wrap: ${(props) => props.wordWrap};
+  word-break: ${(props) => props.wordBreak};
   white-space: ${(props) => props.whiteSpace};
   overflow: ${(props) => props.overflow};
   text-overflow: ${(props) => props.textOverflow};

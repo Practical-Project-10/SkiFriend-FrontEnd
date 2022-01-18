@@ -131,28 +131,27 @@ const BoardBody = (props) => {
           {/* 제목작성 */}
           <Input
             title
+            _maxLength="50"
             _value={is_edit ? title : null}
-            placeholder="제목을 작성해주세요."
+            placeholder="제목을 작성해주세요.(50자 이내)"
             _onChange={postTitle}
           />
-          {props.page === "video"
-          ? null
-          : //내용작성
+          {props.page === "video" ? null : (
+            //내용작성
             <Content
-              placeholder="내용을 입력하세요"
+              maxLength="200"
+              placeholder="내용을 입력하세요(200자 이내)"
               value={is_edit ? content : null}
               onChange={postContent}
             ></Content>
-          }
-          
+          )}
         </Grid>
-        
-        {props.page === "video"
-        ? //동영상미리보기
-          <Grid>
-            
-          </Grid>
-        : //사진미리보기
+
+        {props.page === "video" ? (
+          //동영상미리보기
+          <Grid></Grid>
+        ) : (
+          //사진미리보기
           <Grid is_flex width="100%" height="280px" padding="0 16px 5px">
             <Swiper
               spaceBetween={10}
@@ -161,7 +160,8 @@ const BoardBody = (props) => {
               pagination={{ clickable: true }}
               style={{ width: "100%" }}
             >
-              {leftList !== undefined &&
+              {is_edit &&
+                leftList !== undefined &&
                 leftList.map((photo, index) => {
                   return (
                     <SwiperSlide key={photo + index}>
@@ -202,7 +202,7 @@ const BoardBody = (props) => {
                 })}
             </Swiper>
           </Grid>
-        }
+        )}
         {/* 이미지 */}
         <Grid
           padding="20px 0"

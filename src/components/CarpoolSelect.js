@@ -26,7 +26,6 @@ const CarpoolSelect = (props) => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    console.log(name, value);
 
     props.bringForm(name, value);
   };
