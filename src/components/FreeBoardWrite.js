@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { boardCreators as boardActions } from "../../redux/modules/freeboard";
-import { imageActions } from "../../redux/modules/image";
+import { boardCreators as boardActions } from "../redux/modules/freeboard";
+import { imageActions } from "../redux/modules/image";
 
 import styled from "styled-components";
-import { Grid, Text, Input, Image } from "../../elements/index";
-import UnderArrow from "../../assets/freeBoard/underArrow.svg";
+import { Grid, Text, Input, Image } from "../elements/index";
+import UnderArrow from "../assets/freeBoard/underArrow.svg";
 
-import Header from "../Header";
+import Header from "./Header";
 
 //swiper
 import { Swiper, SwiperSlide } from "swiper/react";
