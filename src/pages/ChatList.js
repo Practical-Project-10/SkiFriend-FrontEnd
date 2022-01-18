@@ -5,7 +5,7 @@ import { chatCreators as chatActions } from "../redux/modules/chat";
 
 import Header from "../components/Header";
 
-import { Grid, Text } from "../elements/index";
+import { Grid, Text, Button } from "../elements/index";
 import { history } from "../redux/ConfigStore";
 
 const ChatList = (props) => {
@@ -46,6 +46,15 @@ const ChatList = (props) => {
   const EnterChatRoom = (roomId, roomName, longRoomId) => {
     history.push(`/chatroom/${roomId}/${roomName}/${longRoomId}`);
   };
+  //채팅방 나가기(삭제하기)
+  const chatRoomExit = (roomId) => {
+    const ask = window.confirm(
+      "해당 채팅방을 나가면 이전 대화 내용이 모두 사라집니다. 정말 나가시겠습니까?"
+    );
+    if (ask) {
+      return dispatch(chatActions.chatRoomDeleteDB(roomId));
+    }
+  };
 
   return (
     <React.Fragment>
@@ -69,11 +78,13 @@ const ChatList = (props) => {
                 hoverOpacity="0.8"
                 hoverBg="aliceblue"
                 key={list.roomId}
-                _onClick={() => {
-                  EnterChatRoom(list.roomId, list.roomName, list.longRoomId);
-                }}
               >
-                <Grid is_flex>
+                <Grid
+                  is_flex
+                  _onClick={() => {
+                    EnterChatRoom(list.roomId, list.roomName, list.longRoomId);
+                  }}
+                >
                   <Grid
                     src={list.userProfile}
                     width="50px"
@@ -107,23 +118,28 @@ const ChatList = (props) => {
                   </Grid>
                 </Grid>
                 {/* 안읽은 메세지 표시 */}
-                <Grid is_flex align="center">
-                  {list.notVerifiedMsgCnt > 0 && (
-                    <Text
-                      width="25px"
-                      height="25px"
-                      bold
-                      bg="red"
-                      color="white"
-                      size="13px"
-                      radius="50%"
-                    >
-                      {list.notVerifiedMsgCnt}
+                <Grid align="end">
+                  <Button smallBtn _onClick={() => chatRoomExit(list.roomId)}>
+                    채팅방 나가기
+                  </Button>
+                  <Grid is_flex align="center">
+                    {list.notVerifiedMsgCnt > 0 && (
+                      <Text
+                        width="25px"
+                        height="25px"
+                        bold
+                        bg="red"
+                        color="white"
+                        size="13px"
+                        radius="50%"
+                      >
+                        {list.notVerifiedMsgCnt}
+                      </Text>
+                    )}
+                    <Text size="11px" height="15px" margin="0 5px">
+                      {list.lastMsgTime}
                     </Text>
-                  )}
-                  <Text size="11px" height="15px" margin="0 5px">
-                    {list.lastMsgTime}
-                  </Text>
+                  </Grid>
                 </Grid>
               </Grid>
             );

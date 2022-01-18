@@ -29,7 +29,6 @@ const MyPage = (props) => {
     }
     dispatch(profileActions.getProfileDB());
     // if(myCarpool.length === 0) {
-    //   console.log('hi')
       dispatch(carpoolActions.getMyCarpoolDB('myPage'));
     // }
   }, []);

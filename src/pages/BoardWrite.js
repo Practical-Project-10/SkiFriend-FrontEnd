@@ -42,4 +42,5 @@ const BoardWrite = ({ location }) => {
   );
 };
 
+
 export default BoardWrite;

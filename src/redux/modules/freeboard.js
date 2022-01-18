@@ -76,7 +76,7 @@ export const getOneBoardDB =
       console.log(`오류 발생!${err}`);
     }
   };
-//게시글 수ㅇ
+//게시글 수정
 export const updateBoardDB =
   (skiResort, postId, images, datas) =>
   async (dispatch, getState, { history }) => {

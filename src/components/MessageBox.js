@@ -19,7 +19,6 @@ const MessageBox = (props) => {
   const profileList = useSelector((state) => state.chat.profileList);
   //localstorage
   const nickname = localStorage.getItem("nickname");
-  console.log(chatInfo.message.length);
   //------useState관리-------
   const [showmodal, setShowModal] = useState();
 
@@ -69,18 +68,20 @@ const MessageBox = (props) => {
             ) : (
               <Text
                 width={chatInfo.message.length > 20 ? "50%" : undefined}
+                wordWrap="break-word"
+                wordBreak="break-all"
                 height="100%"
                 bg="#6195CF"
                 color="white"
                 radius="10px"
-                padding="2px 10px"
+                padding="5px"
               >
                 {chatInfo.message}
               </Text>
             )}
           </Grid>
         ) : (
-          <Grid display="flex" justify="left" alignItems="end" margin="5px">
+          <Grid display="flex" justify="left" alignItems="start" margin="5px">
             {chatInfo.senderImg === "null" ? (
               <Grid
                 cursor="pointer"
@@ -109,7 +110,7 @@ const MessageBox = (props) => {
             )}
             <Grid>
               <Text size="10px">{chatInfo.sender}</Text>
-              <Grid is_flex justify="left">
+              <Grid display="flex" justify="left" alignItems="end">
                 {/* 전화번호 공개 할 때와 일반 말풍선일 경우 */}
                 {chatInfo.type === "PHONE_NUM" ? (
                   <Grid
@@ -135,10 +136,13 @@ const MessageBox = (props) => {
                   </Grid>
                 ) : (
                   <Text
+                    width={chatInfo.message.length > 20 ? "50%" : undefined}
+                    wordWrap="break-word"
+                    wordBreak="break-all"
                     bg="#6195CF"
                     color="white"
                     radius="10px"
-                    padding="2px 10px"
+                    padding="5px"
                   >
                     {chatInfo.message}
                   </Text>

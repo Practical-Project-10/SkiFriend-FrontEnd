@@ -111,7 +111,7 @@ function App() {
               path="/chatroom/:roomId/:roomName/:longRoomId"
               component={ChatRoom}
             />
-            <Route exact path="/videoupload" component={VideoUpload}/>
+            <Route exact path="/videoupload" component={VideoUpload} />
 
             <Navbar />
           </CardList>

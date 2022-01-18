@@ -129,17 +129,17 @@ const FreeBoardDetail = ({ history }, props) => {
             borderB="1px solid #474D56"
           >
             <Grid is_flex>
-              <Text block size="14px">
+              <Text block size="12px">
                 {postData.nickname}
               </Text>
               <div
                 style={{
                   height: "13px",
                   margin: "0 12px",
-                  border: "1px solid #6195CF",
+                  border: "1px solid #6195CF",////
                 }}
               ></div>
-              <Text size="16px" bold>
+              <Text size="14px" bold>
                 {postData.title}
               </Text>
             </Grid>

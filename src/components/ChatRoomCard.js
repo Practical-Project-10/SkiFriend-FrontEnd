@@ -17,23 +17,29 @@ const ChatRoomCard = (props) => {
         width="100%"
         height="163px"
         padding="16px"
-        margin='0 0 10px'
+        margin="0 0 10px"
         bg="#FFF"
         radius="10px"
-        display='flex'
-        direction='column'
-        justify='space-between'
+        display="flex"
+        direction="column"
+        justify="space-between"
       >
-          <Text block size="20px" bold>
-            {roomInfo.title}
+        <Text block size="20px" bold>
+          {roomInfo.title}
+        </Text>
+        <Grid
+          is_flex
+          border="2px solid #6195CF"
+          radius="5px"
+          padding="5px"
+          justify="center"
+        >
+          <Text bold>{roomInfo.startLocation}</Text>
+          <Image src={arrow} width="20px" height="10px" margin="0 10px" />
+          <Text bold color="#6195CF">
+            {roomInfo.endLocation}
           </Text>
-          <Grid is_flex border="2px solid #6195CF" radius="5px" padding="5px" justify='center'>
-            <Text bold>{roomInfo.startLocation}</Text>
-            <Image src={arrow} width="20px" height="10px" margin="0 10px" />
-            <Text bold color="#6195CF">
-              {roomInfo.endLocation}
-            </Text>
-          </Grid>
+        </Grid>
         <Grid is_flex justify="space-between">
           <Grid is_flex bg="#6195CF" radius="5px" padding="4px 8px">
             <Image
