@@ -27,7 +27,7 @@ const Navbar = ({ location }) => {
   if (
     location.pathname === "/login" ||
     location.pathname === "/phoneauth" ||
-    location.pathname === "/signup" ||
+    location.pathname === "/user/kakao/callback" ||
     location.pathname.includes("/chatroom") ||
     location.pathname.includes("/freeboardwrite") ||
     location.pathname.includes("/freeboarddetail") ||

@@ -24,6 +24,7 @@ import Snowflakes from "./components/Snowflakes";
 import KakaoAuthHandle from "./components/KakaoAuthHandle";
 import KakaoAuthHandle2 from "./components/KakaoAuthHandle2";
 import NaverAuthHandle from "./components/NaverAuthHandle";
+import VideoUpload from "./pages/VideoUpload";
 
 import background from "./assets/background.png.jpg";
 
@@ -110,6 +111,7 @@ function App() {
               path="/chatroom/:roomId/:roomName/:longRoomId"
               component={ChatRoom}
             />
+            <Route exact path="/videoupload" component={VideoUpload}/>
 
             <Navbar />
           </CardList>

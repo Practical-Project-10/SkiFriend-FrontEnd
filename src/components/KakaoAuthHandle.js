@@ -6,6 +6,7 @@ import { KAKAO_ADD_PROPERTIES } from "../shared/kakaoAuth";
 import { setCookie } from "../shared/cookie";
 
 import styled from "styled-components";
+import bg from "../assets/login/login.png";
 
 const KakaoAuthHandle = (props) => {
   useEffect(() => {
@@ -24,18 +25,15 @@ const KakaoAuthHandle = (props) => {
   }, []);
 
   return (
-    <>
-      <Container>로딩 중 입니다.</Container>
-    </>
+    <React.Fragment>
+      <Container src={bg} alt="로딩 이미지"/>
+    </React.Fragment>
   );
 };
 
 export default KakaoAuthHandle;
 
-const Container = styled.div`
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+const Container = styled.img`
+  width: 100%;
+  min-height: calc( 100vh - 55px );
 `;
