@@ -1,7 +1,7 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 
-import FreeBoardWrite from "../components/molecule/FreeBoardWrite";
+import FreeBoardWrite from "../components/FreeBoardWrite";
 
 const BoardWrite = ({ location }) => {
   // 주소 경로값
