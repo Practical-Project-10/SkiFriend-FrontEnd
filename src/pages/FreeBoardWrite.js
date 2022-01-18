@@ -130,13 +130,15 @@ const FreeBoardWrite = () => {
           {/* 제목작성 */}
           <Input
             title
+            _maxLength="50"
             _value={is_edit ? title : null}
-            placeholder="제목을 작성해주세요."
+            placeholder="제목을 작성해주세요.(50자 이내)"
             _onChange={postTitle}
           />
           {/* 내용작성 */}
           <Content
-            placeholder="내용을 입력하세요"
+            placeholder="내용을 입력하세요(200자 이내)"
+            maxLength="200"
             value={is_edit ? content : null}
             onChange={postContent}
           ></Content>

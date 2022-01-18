@@ -14,8 +14,8 @@ const Grid = (props) => {
     children,
     _onClick,
     position,
-    justify,
     display,
+    justify,
     alignItems,
     borderT,
     line,
@@ -143,8 +143,8 @@ const GridBox = styled.div`
   padding: ${(props) => props.padding};
   margin: ${(props) => props.margin};
   position: ${(props) => props.position};
-  background: ${(props) => props.src? `url(${props.src}) no-repeat`: ''};
-  background-size: ${(props) => props.bgSize? props.bgSize: 'cover'};
+  background: ${(props) => (props.src ? `url(${props.src}) no-repeat` : "")};
+  background-size: ${(props) => (props.bgSize ? props.bgSize : "cover")};
   background-position: center;
   background-color: ${(props) => props.bg};
   /* background-position: ${(props) => props.position}; */
@@ -158,7 +158,7 @@ const GridBox = styled.div`
   align-items: ${(props) => props.alignItems};
   flex-wrap: ${(props) => props.wrap};
   flex-direction: ${(props) => props.direction};
-  cursor: ${(props) => (props.cursor)};
+  cursor: ${(props) => props.cursor};
   &:hover {
     opacity: ${(props) => props.hoverOpacity};
     background: ${(props) => props.hoverBg};

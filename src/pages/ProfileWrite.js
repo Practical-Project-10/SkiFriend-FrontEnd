@@ -99,7 +99,14 @@ const ProfileWrite = (props) => {
 
   return (
     <React.Fragment>
-      <Header goBack fixed>
+      <Header
+        goBack
+        push
+        fixed
+        _onClick={() => {
+          history.push(`/mypage`);
+        }}
+      >
         내 프로필
       </Header>
       <Grid phoneSize position="relative" margin="70px 0 0">
@@ -188,7 +195,8 @@ const ProfileWrite = (props) => {
               <Textarea
                 name="selfIntro"
                 value={selfIntro !== "null" ? selfIntro : null}
-                placeholder="내용을 입력해주세요"
+                placeholder="내용을 입력해주세요(글자제한 60자)"
+                maxLength="60"
                 onChange={handleChange}
               />
             </Grid>

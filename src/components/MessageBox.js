@@ -19,7 +19,7 @@ const MessageBox = (props) => {
   const profileList = useSelector((state) => state.chat.profileList);
   //localstorage
   const nickname = localStorage.getItem("nickname");
-
+  console.log(chatInfo.message.length);
   //------useState관리-------
   const [showmodal, setShowModal] = useState();
 
@@ -43,7 +43,7 @@ const MessageBox = (props) => {
       {/* 내가 메세지 보낼때 보이는 위치와 상대방이 나에게 보낼때 위치 */}
       <Grid>
         {nickname === chatInfo.sender ? (
-          <Grid is_flex justify="flex-end" margin="5px">
+          <Grid display="flex" justify="flex-end" alignItems="end" margin="5px">
             <Text size="10px" margin="0 10px">
               {chatInfo.createdAt}
             </Text>
@@ -67,13 +67,20 @@ const MessageBox = (props) => {
                 </Grid>
               </Grid>
             ) : (
-              <Text bg="#6195CF" color="white" radius="10px" padding="2px 10px">
+              <Text
+                width={chatInfo.message.length > 20 ? "50%" : undefined}
+                height="100%"
+                bg="#6195CF"
+                color="white"
+                radius="10px"
+                padding="2px 10px"
+              >
                 {chatInfo.message}
               </Text>
             )}
           </Grid>
         ) : (
-          <Grid is_flex justify="left" margin="5px">
+          <Grid display="flex" justify="left" alignItems="end" margin="5px">
             {chatInfo.senderImg === "null" ? (
               <Grid
                 cursor="pointer"

@@ -11,8 +11,9 @@ import { history } from "../redux/ConfigStore";
 const ChatList = (props) => {
   const dispatch = useDispatch();
   const chatRoomList = useSelector((state) => state.chat.roomList);
-  const is_login = localStorage.getItem("is_login") === "true"? true: false;
-  const certification = localStorage.getItem("certification") === "true"? true: false;
+  const is_login = localStorage.getItem("is_login") === "true" ? true : false;
+  const certification =
+    localStorage.getItem("certification") === "true" ? true : false;
 
   //채팅방 목록으로 나타내기
   useEffect(() => {
@@ -21,9 +22,9 @@ const ChatList = (props) => {
         "로그인 후 이용 가능한 서비스 입니다. 로그인 페이지로 이동하시겠습니까?"
       );
       if (ask) {
-        history.push("/login");
+        return history.push("/login");
       } else {
-        history.goBack();
+        return history.goBack();
       }
     }
 
@@ -32,7 +33,7 @@ const ChatList = (props) => {
         "휴대폰 인증 후 이용 가능한 서비스 입니다. 인증하시겠습니까?"
       );
       if (ask) {
-        history.push("/profilewrite");
+        return history.push("/profilewrite");
       } else {
         return history.goBack();
       }
@@ -91,7 +92,16 @@ const ChatList = (props) => {
                     >
                       {list.roomName}
                     </Text>
-                    <Text size="16px" padding="2px 0" margin="0" color="#999">
+                    <Text
+                      width="200px"
+                      size="16px"
+                      padding="2px 0"
+                      margin="0"
+                      color="#999"
+                      whiteSpace="nowrap"
+                      overflow="hidden"
+                      textOverflow="ellipsis"
+                    >
                       {list.lastMsg}
                     </Text>
                   </Grid>

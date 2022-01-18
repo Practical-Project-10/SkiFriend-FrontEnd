@@ -14,7 +14,11 @@ const Board = (props) => {
         <Grid padding="9px" display="flex" direction="column" gap="3px">
           <Text
             bold
-            cursor='pointer'
+            width="100%"
+            whiteSpace="nowrap"
+            overflow="hidden"
+            textOverflow="ellipsis"
+            cursor="pointer"
             size="16px"
             _onClick={() => {
               history.push(

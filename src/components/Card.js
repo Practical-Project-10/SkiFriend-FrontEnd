@@ -43,15 +43,11 @@ const Card = (props) => {
   };
 
   const deleteCard = () => {
-    dispatch(
-      carpoolActions.deleteCarpoolDB(props.skiResort, props.postId)
-    );
+    dispatch(carpoolActions.deleteCarpoolDB(props.skiResort, props.postId));
   };
 
   const completeCard = () => {
-    dispatch(
-      carpoolActions.completeCarpoolDB(props.skiResort, props.postId)
-    );
+    dispatch(carpoolActions.completeCarpoolDB(props.skiResort, props.postId));
   };
 
   //연락하기 기능
@@ -123,6 +119,10 @@ const Card = (props) => {
             <SmallItems repuest={repuest} width="61px">
               <Image src={clock} width="12px" height="15px" />
               <Text size="12px">{props.time}</Text>
+            </SmallItems>
+            <SmallItems repuest={repuest} width="61px">
+              <Image src={price} width="12px" height="15px" />
+              <Text size="12px">{props.price}원</Text>
             </SmallItems>
           </Grid>
           {props.status ? (
