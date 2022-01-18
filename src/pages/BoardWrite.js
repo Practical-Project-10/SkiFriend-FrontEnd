@@ -1,19 +1,21 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { useParams } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { boardCreators as boardActions } from "../redux/modules/freeboard";
-import { imageActions } from "../redux/modules/image";
 
-import FreeBoardWrite from "./molecule/FreeBoardWrite";
-import VideoWrite from "./molecule/VideoWrite";
+import FreeBoardWrite from "../components/molecule/FreeBoardWrite";
 
-const BoardBody = (props) => {
-  const {page} = props;
-
+const BoardWrite = ({ location }) => {
   // 주소 경로값
   const params = useParams();
   const skiresort = params.skiresort;
   const postId = params.postId;
+
+  // //page
+  // let page = ''
+  // if(location.pathname.includes("/freeboardwrite")) {
+  //   page="freeboardwrite"
+
+  // }
+  // console.log(location)
 
   // 작성 수정 판단 여부
   const is_edit = postId ? true : false;
@@ -31,6 +33,7 @@ const BoardBody = (props) => {
   return (
     <React.Fragment>
       <FreeBoardWrite
+        // page={}
         is_edit={is_edit}
         skiresort={skiresort}
         postId={postId}
@@ -39,4 +42,4 @@ const BoardBody = (props) => {
   );
 };
 
-export default BoardBody;
+export default BoardWrite;

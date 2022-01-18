@@ -1,6 +1,7 @@
 import { handleActions, createAction } from "redux-actions";
 import { apis } from "../../shared/apis";
 import produce from "immer";
+import { imageActions } from "./image";
 
 // initialState
 const initialState = {
@@ -58,6 +59,7 @@ export const addBoardDB =
       response && history.push(`/freeboardlist/${skiResort}`);
       history.push(`/freeboardlist/${skiResort}`);
       dispatch(addBoard(response.data));
+      dispatch(imageActions.setPreview(null));
     } catch (err) {
       console.log(`오류 발생!${err}`);
     }
@@ -98,6 +100,7 @@ export const updateBoardDB =
       const response = await apis.updateFreePost(postId, formdata);
       response && history.push(`/freeboarddetail/${skiResort}/${postId}`);
       dispatch(updateBoard(response.config.data));
+      dispatch(imageActions.setPreview(null));
     } catch (err) {
       console.log(`오류 발생!${err}`);
     }
