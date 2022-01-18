@@ -89,7 +89,7 @@ const Card = (props) => {
       <React.Fragment>
         <CarpoolCard
           width="185px"
-          height="152px"
+          height="160px"
           padding="12px"
           repuest={repuest}
           status={!props.status}
