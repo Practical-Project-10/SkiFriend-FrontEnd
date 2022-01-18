@@ -71,7 +71,7 @@ const FreeBoardList = () => {
           })}
         </Grid>
         {/* 작성버튼 */}
-        <FloatButton _onClick={moveWritePage} />
+        <FloatButton bottom="90px" right="16px" _onClick={moveWritePage} />
       </Grid>
     </React.Fragment>
   );

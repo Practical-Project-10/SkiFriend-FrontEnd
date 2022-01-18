@@ -20,8 +20,8 @@ import info from "../assets/nav/info.svg";
 import info_active from "../assets/nav/info_active.svg";
 import chat from "../assets/nav/chat.svg";
 import chat_active from "../assets/nav/chat_active.svg";
-import mypage from "../assets/nav/mypage.svg";
-import mypage_active from "../assets/nav/mypage_active.svg";
+import myPage from "../assets/nav/mypage.svg";
+import myPage_active from "../assets/nav/mypage_active.svg";
 
 const Navbar = ({ location }) => {
   const dispatch = useDispatch();
@@ -55,62 +55,50 @@ const Navbar = ({ location }) => {
   };
 
   return (
-    <React.Fragment>
-      <FixedNav>
-        <Menu>
-          <Icon>
-            <NavLink to="/" className="navLink">
-              {location.pathname === "/" ? (
-                <AiTwotoneHome size="30" />
-              ) : (
-                <AiOutlineHome size="30" />
-              )}
-            </NavLink>
-          </Icon>
-          <Icon>
-            <NavLink to="/placeinfo" className="navLink">
-              {location.pathname === "/placeinfo" ? (
-                <AiFillInfoCircle size="30" />
-              ) : (
-                <AiOutlineInfoCircle size="30" />
-              )}
-            </NavLink>
-          </Icon>
-          {/* <Icon>
-            <NavLink to="/shortupload" className="navLink">
-              {location.pathname === "/shortupload" ? (
-                <img src={video} alt="숏츠"/>
-              ) : (
-                <img src={video} alt="숏츠"/>
-              )}
-            </NavLink>
-          </Icon> */}
-          <Icon>
-            <NavLink to="/chatlist" className="navLink">
-              {location.pathname === "/chatlist" ? (
-                <Grid position="relative">
-                  <BsChatFill size="30" />
-                </Grid>
-              ) : (
-                <Grid position="relative" _onClick={deleteAlarm}>
-                  {newRing && <Alarm>New</Alarm>}
-                  <BsChat size="30" />
-                </Grid>
-              )}
-            </NavLink>
-          </Icon>
-          <Icon>
-            <NavLink to="/mypage" className="navLink">
-              {location.pathname === "/mypage" ? (
-                <AiFillAppstore size="30" />
-              ) : (
-                <AiOutlineAppstore size="30" />
-              )}
-            </NavLink>
-          </Icon>
-        </Menu>
-      </FixedNav>
-    </React.Fragment>
+    <FixedNav>
+      <Menu>
+        <Icon>
+          <NavLink to="/" className="navLink">
+            <img 
+              src={location.pathname === "/"? home_active: home} 
+              alt='홈'
+            />
+          </NavLink>
+        </Icon>
+        <Icon>
+          <NavLink to="/placeinfo" className="navLink">
+            <img 
+              src={location.pathname === "/placeinfo"? info_active: info} 
+              alt='스키장 안내'
+            />
+          </NavLink>
+        </Icon>
+        {/* <Icon>
+          <NavLink to="/shorts" className="navLink">
+            <img 
+              src={location.pathname === "/shorts"? shorts_active: shorts} 
+              alt='동영상'
+            />
+          </NavLink>
+        </Icon> */}
+        <Icon>
+          <NavLink to="/chatlist" className="navLink">
+            <img 
+              src={location.pathname === "/chatlist"? chat_active: chat} 
+              alt='채팅'
+            />
+          </NavLink>
+        </Icon>
+        <Icon>
+          <NavLink to="/mypage" className="navLink">
+            <img
+              src={location.pathname === "/mypage"? myPage_active: myPage} 
+              alt='마이페이지'
+            />
+          </NavLink>
+        </Icon>
+      </Menu>
+    </FixedNav>
   );
 };
 
@@ -128,26 +116,13 @@ const Menu = styled.div`
   padding: 17px 28px;
   display: flex;
   align-items: center;
+  /* gap: 65px; */
   gap: 79px;
 `;
 
 const Icon = styled.div`
+  /* width: calc((100% - 268px) / 5); */
   width: calc((100% - 237px) / 4);
-`;
-
-const Alarm = styled.div`
-  height: 17px;
-  padding: 2px;
-  border-radius: 999px;
-  background: red;
-  color: #fff;
-  font-size: 11px;
-  font-weight: 600;
-  text-align: center;
-  line-height: 13px;
-  position: absolute;
-  right: -17px;
-  top: -7px;
 `;
 
 export default withRouter(Navbar);
