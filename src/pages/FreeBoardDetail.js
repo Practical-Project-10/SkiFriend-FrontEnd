@@ -158,7 +158,6 @@ const FreeBoardDetail = ({ history }, props) => {
               {/* 게시글 수정 삭제 modal 시작 */}
               {showmodal ? (
                 <Modal
-                  page='board'
                   height="222px"
                   closeModal={closemodal} //닫기
                   edit={editPost} //수정

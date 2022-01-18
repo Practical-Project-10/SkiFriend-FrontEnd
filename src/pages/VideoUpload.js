@@ -5,7 +5,7 @@ const VideoUpload = (props) => {
   
   return (
     <React.Fragment>
-      {/* <BoardBody page='video'/> */}
+      <BoardBody page='video'/>
     </React.Fragment>
   );
 };

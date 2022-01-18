@@ -154,7 +154,7 @@ const MessageBox = (props) => {
         {showmodal ? (
           <Modal
             height="256px"
-            page='profile'
+            profile
             closeModal={closeModal}
             profileImg={profileList.profileImg}
             nickname={profileList.nickname}
