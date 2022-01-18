@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "http://3.34.19.50:8080/",
+  baseURL: "https://seongeunyang.shop/",
   headers: {
     "content-type": "application/json;charset=UTF-8",
     accept: "application/json,",
@@ -145,9 +145,9 @@ export const apis = {
   chatRoomDelete: (roomId) => api.delete(`/chat/room/${roomId}`),
 
   //동영상
-  videoRandomList: () => api.get(`/shorts`),
+  shortsRandomList: () => api.get(`/shorts`),
 
-  videoUpload: (videoFile, title) =>
+  shortsUpload: (videoFile, title) =>
     api.post(
       `/shorts`,
       { videoFile, title },
@@ -158,25 +158,25 @@ export const apis = {
       }
     ),
 
-  videoUpdate: (videoId, title) => api.post(`/shorts/${videoId}`, { title }),
+  shortsUpdate: (videoId, title) => api.put(`/shorts/${videoId}`, { title }),
 
-  videoDelete: (videoId) => api.post(`/shorts/${videoId}`),
+  shortsDelete: (videoId) => api.delete(`/shorts/${videoId}`),
 
   //동영상 좋아요
-  videoLike: (videoId) => api.post(`/shorts/${videoId}/like`),
+  shortsLike: (videoId) => api.post(`/shorts/${videoId}/like`),
 
   //동영상 댓글
-  videoCommentList: (videoId) => api.get(`/shorts/${videoId}/comments`),
+  shortsListComment: (videoId) => api.get(`/shorts/${videoId}/comments`),
 
-  videoCommentWrite: (videoId, content) =>
+  shortsWriteComment: (videoId, content) =>
     api.post(`/shorts/${videoId}/comments`, content),
 
-  videoCommentUpdate: (videoCommentId, content) =>
-    api.post(`/shorts/comments/${videoCommentId}`, content),
+  shortsUpdateComment: (videoCommentId, content) =>
+    api.put(`/shorts/comments/${videoCommentId}`, content),
 
-  videoCommentDelete: (videoCommentId) =>
-    api.post(`/shorts/${videoCommentId}/like`),
+  shortsDeleteComment: (videoCommentId) =>
+    api.delete(`/shorts/comments/${videoCommentId}`),
 
   //내가 작성한 동영상 목록
-  myVideoList: (videoId) => api.post(`/shorts/${videoId}/like`),
+  myShortsList: () => api.get(`/user/info/shorts`),
 };

@@ -46,7 +46,7 @@ const ChatRoom = () => {
 
   useEffect(() => {
     //소켓
-    const sock = new SockJS("http://3.34.19.50:8080/ws-stomp");
+    const sock = new SockJS("https://seongeunyang.shop/ws-stomp");
     setStomp(Stomp.over(sock));
     dispatch(chatActions.getRoomInfoDB(roomId)); //방정보 가져오기
     // dispatch(chatActions.getContentChatDB(roomId)); //대화내용 가져오기
@@ -63,13 +63,22 @@ const ChatRoom = () => {
   // 대화내용 가져오기
   useEffect(() => {
     axios
-      .get(`http://3.34.19.50:8080/chat/message/${roomId}`, {
+      .get(`https://seongeunyang.shop/chat/message/${roomId}`, {
         headers: token,
       })
       .then((res) => {
         const prevChatData = res.data;
         setMessageList(prevChatData);
       });
+    setTimeout(() => {
+      //메세지 보내면 스크롤 자동내림
+      scrollRef.current.scrollIntoView({
+        behavior: "smooth",
+        block: "end",
+        inline: "start",
+      });
+    }, 100);
+
     // dispatch(chatActions.getContentChatDB(roomId));
   }, []);
 
@@ -173,7 +182,7 @@ const ChatRoom = () => {
           direction="column"
         >
           <ChatRoomCard roomInfo={roomInfoList} />
-          <Grid height="532px" overflow="scroll">
+          <Grid height="460px" overflow="scroll">
             <div style={{ padding: "0 0 70px 0" }} ref={scrollRef}>
               {/* 채팅말풍선 */}
               {messageList.map((msg, idx) => {
@@ -183,11 +192,12 @@ const ChatRoom = () => {
           </Grid>
           {/* 하단부 버튼들 */}
 
-          <Grid height="100%" bg="#474D56">
-            <Grid is_flex padding="20px 16px">
+          <Grid height="100px" position="relative" bg="#474D56">
+            <Grid is_flex padding="35px 16px">
               <Input
                 free
-                width="100%"
+                position="absolute"
+                width="92%"
                 height="40px"
                 radius="40px"
                 autocomplete="off"
@@ -219,6 +229,6 @@ const Send = styled.div`
   background: #6195cf;
   border-radius: 50%;
   position: absolute;
-  right: 40px;
+  right: 26px;
 `;
 export default ChatRoom;

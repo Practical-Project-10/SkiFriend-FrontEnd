@@ -57,7 +57,6 @@ const Card = (props) => {
     }
     dispatch(carpoolActions.completeCarpoolDB(props.skiResort, props.postId));
   };
-  console.log(page)
 
   //연락하기 기능
   const connectRoom = (postId) => {

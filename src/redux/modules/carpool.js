@@ -129,7 +129,6 @@ const deleteCarpoolDB = (skiResort, postId, page) => {
 
 const completeCarpoolDB = (skiResort, postId, page) => {
   return async function (dispatch, getState, { history }) {
-    console.log(page)
     try {
       const response = await apis.completeCarpool(postId);
 
@@ -227,7 +226,6 @@ export default handleActions(
         let deleted_list = draft.list[skiResort].filter(
           (l) => l.postId !== action.payload.postId
         );
-        console.log(skiResort)
         draft.list[skiResort] = deleted_list;
 
         if (page === "myPage") {
@@ -255,7 +253,6 @@ export default handleActions(
       produce(state, (draft) => {
         const skiResort = action.payload.skiResort;
         const page = action.payload.page;
-        console.log(page)
 
         const idx = draft.list[skiResort].findIndex(
           (l) => l.postId === Number(action.payload.postId)

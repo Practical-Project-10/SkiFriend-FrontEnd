@@ -13,6 +13,7 @@ const Input = forwardRef((props, ref) => {
     contentType,
     type,
     pattern,
+    position,
     inputMode,
     _value,
     more4,
@@ -43,6 +44,7 @@ const Input = forwardRef((props, ref) => {
     width,
     border,
     padding,
+    position,
     radius,
     height,
     margin,
@@ -225,6 +227,7 @@ const FreeInput = styled.input`
   padding: ${(props) => props.padding};
   box-sizing: border-box;
   margin: ${(props) => props.margin};
+  position: ${(props) => props.position};
   border-radius: ${(props) => props.radius};
 `;
 
