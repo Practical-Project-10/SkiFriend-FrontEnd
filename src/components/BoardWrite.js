@@ -18,7 +18,7 @@ import "swiper/components/navigation/navigation.min.css";
 import { AiOutlineCamera } from "react-icons/ai";
 
 const BoardWrite = (props) => {
-  const { is_edit, skiresort, postId } = props;
+  const {is_edit, skiresort, postId} = props;
   const dispatch = useDispatch();
 
   // redux데이터
@@ -151,8 +151,7 @@ const BoardWrite = (props) => {
             pagination={{ clickable: true }}
             style={{ width: "100%" }}
           >
-            {is_edit &&
-              leftList !== undefined &&
+            {is_edit && leftList !== undefined &&
               leftList.map((photo, index) => {
                 return (
                   <SwiperSlide key={photo + index}>

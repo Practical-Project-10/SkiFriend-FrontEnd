@@ -11,7 +11,6 @@ import Header from "../components/Header";
 const CarpoolWrite = (props) => {
   const dispatch = useDispatch();
   const skiResort = props.match.params.skiresort;
-  const page = props.match.params.page;
   const carpool_list = useSelector((state) => state.carpool.list);
   const [state, setState] = React.useState(false);
 
@@ -107,11 +106,6 @@ const CarpoolWrite = (props) => {
   };
   // 카풀게시물 수정
   const editCarpool = () => {
-    if (page === "myPage") {
-      dispatch(carpoolActions.editCarpoolDB(skiResort, page, postId, form));
-      return null;
-    }
-
     dispatch(carpoolActions.editCarpoolDB(skiResort, postId, form));
   };
 

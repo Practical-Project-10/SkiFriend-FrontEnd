@@ -25,6 +25,7 @@ import KakaoAuthHandle from "./components/KakaoAuthHandle";
 import KakaoAuthHandle2 from "./components/KakaoAuthHandle2";
 import NaverAuthHandle from "./components/NaverAuthHandle";
 import ShortsUpload from "./pages/ShortsUpload";
+import Shorts from "./pages/Shorts";
 
 import background from "./assets/background.png.jpg";
 
@@ -112,7 +113,7 @@ function App() {
               component={ChatRoom}
             />
             <Route exact path="/shortsupload" component={ShortsUpload} />
-
+            <Route exact path="/shorts" component={Shorts} />
             <Navbar />
           </CardList>
         </div>

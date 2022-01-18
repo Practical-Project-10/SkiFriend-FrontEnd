@@ -12,6 +12,16 @@ import { AiTwotoneHome, AiOutlineHome } from "react-icons/ai";
 import { AiFillInfoCircle, AiOutlineInfoCircle } from "react-icons/ai";
 import { BsChatFill, BsChat } from "react-icons/bs";
 import { AiFillAppstore, AiOutlineAppstore } from "react-icons/ai";
+import shorts from "../assets/nav/shorts.svg"
+import shorts_active from "../assets/nav/shorts_active.svg"
+import home from "../assets/nav/home.svg";
+import home_active from "../assets/nav/home_active.svg";
+import info from "../assets/nav/info.svg";
+import info_active from "../assets/nav/info_active.svg";
+import chat from "../assets/nav/chat.svg";
+import chat_active from "../assets/nav/chat_active.svg";
+import mypage from "../assets/nav/mypage.svg";
+import mypage_active from "../assets/nav/mypage_active.svg";
 
 const Navbar = ({ location }) => {
   const dispatch = useDispatch();
@@ -33,7 +43,8 @@ const Navbar = ({ location }) => {
     location.pathname.includes("/freeboarddetail") ||
     location.pathname.includes("/carpoolwrite") ||
     location.pathname.includes("/freeboardedit") ||
-    location.pathname.includes("/profilewrite")
+    location.pathname.includes("/profilewrite") ||
+    location.pathname.includes("/videoupload")
   ) {
     return null;
   }
@@ -65,6 +76,15 @@ const Navbar = ({ location }) => {
               )}
             </NavLink>
           </Icon>
+          {/* <Icon>
+            <NavLink to="/shortupload" className="navLink">
+              {location.pathname === "/shortupload" ? (
+                <img src={video} alt="숏츠"/>
+              ) : (
+                <img src={video} alt="숏츠"/>
+              )}
+            </NavLink>
+          </Icon> */}
           <Icon>
             <NavLink to="/chatlist" className="navLink">
               {location.pathname === "/chatlist" ? (

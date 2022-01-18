@@ -34,9 +34,10 @@ const editCarpool = createAction(
 );
 const deleteCarpool = createAction(
   DELETE_CARPOOL,
-  (skiResort, postId) => ({
+  (skiResort, postId, page) => ({
     skiResort,
     postId,
+    page,
   })
 );
 const getMyCarpool = createAction(GET_MYCARPOOL, (page, myCarpools) => ({
@@ -45,10 +46,11 @@ const getMyCarpool = createAction(GET_MYCARPOOL, (page, myCarpools) => ({
 }));
 const completeMycarpool = createAction(
   COMPLETE_CARPOOL,
-  (skiResort, postId, carpool) => ({
+  (skiResort, postId, carpool, page) => ({
     skiResort,
     postId,
     carpool,
+    page,
   })
 );
 const filterCarpool = createAction(FILTER_CARPOOL, (skiResort, carpool) => ({ skiResort, carpool }));
@@ -110,11 +112,14 @@ const editCarpoolDB = (skiResort, postId, carpool) => {
   };
 };
 
-const deleteCarpoolDB = (skiResort, postId) => {
+const deleteCarpoolDB = (skiResort, postId, page) => {
   return async function (dispatch, getState, { history }) {
     try {
       await apis.deleteCarpool(postId);
       dispatch(deleteCarpool(skiResort, postId));
+      if(page === 'myPage') {
+        dispatch(deleteCarpool(skiResort, postId, page));
+      }
       // history.push(`/carpool/${skiResort}`);
     } catch (err) {
       console.log(err);
@@ -122,13 +127,16 @@ const deleteCarpoolDB = (skiResort, postId) => {
   };
 };
 
-const completeCarpoolDB = (skiResort, postId) => {
+const completeCarpoolDB = (skiResort, postId, page) => {
   return async function (dispatch, getState, { history }) {
+    console.log(page)
     try {
       const response = await apis.completeCarpool(postId);
 
-      response &&
-        dispatch(completeMycarpool(skiResort, postId, response.data));
+      response && dispatch(completeMycarpool(skiResort, postId, response.data));
+      if(page === 'myPage') {
+        dispatch(completeMycarpool(skiResort, postId, response.data, page));
+      }
     } catch (err) {
       console.log(err);
     }
@@ -209,50 +217,25 @@ export default handleActions(
           ...draft.list[skiResort][idx],
           ...action.payload.carpool,
         };
-
-      //   if (page === "filter") {
-      //     const idx = draft.filterList.findIndex(
-      //       (l) => l.postId === Number(action.payload.postId)
-      //     );
-      //     draft.filterList[idx] = {
-      //       ...draft.filterList[idx],
-      //       ...action.payload.carpool,
-      //     };
-      //   }
-
-      //   if (page === "myPage") {
-      //     const idx = draft.myList.findIndex(
-      //       (l) => l.postId === Number(action.payload.postId)
-      //     );
-      //     draft.myList[idx] = {
-      //       ...draft.myList[idx],
-      //       ...action.payload.carpool,
-      //     };
-      //   }
       }),
 
     [DELETE_CARPOOL]: (state, action) =>
       produce(state, (draft) => {
         const skiResort = action.payload.skiResort;
+        const page = action.payload.page;
 
         let deleted_list = draft.list[skiResort].filter(
           (l) => l.postId !== action.payload.postId
         );
+        console.log(skiResort)
         draft.list[skiResort] = deleted_list;
 
-      //   if (page === "filter") {
-      //     let deleted_filterList = draft.myList.filter(
-      //       (l) => l.postId !== action.payload.postId
-      //     );
-      //     draft.filterList = deleted_filterList;
-      //   }
-
-      //   if (page === "myPage") {
-      //     let deleted_myList = draft.myList.filter(
-      //       (l) => l.postId !== action.payload.postId
-      //     );
-      //     draft.myList = deleted_myList;
-      //   }
+        if (page === "myPage") {
+          let deleted_list = draft.list[page].filter(
+            (l) => l.postId !== action.payload.postId
+          );
+          draft.list[page] = deleted_list;
+        }
       }),
 
     [FILTER_CARPOOL]: (state, action) =>
@@ -271,6 +254,8 @@ export default handleActions(
     [COMPLETE_CARPOOL]: (state, action) =>
       produce(state, (draft) => {
         const skiResort = action.payload.skiResort;
+        const page = action.payload.page;
+        console.log(page)
 
         const idx = draft.list[skiResort].findIndex(
           (l) => l.postId === Number(action.payload.postId)
@@ -281,25 +266,15 @@ export default handleActions(
           ...action.payload.carpool,
         };
 
-        // if (page === "filter") {
-        //   const idx = draft.filterList.findIndex(
-        //     (l) => l.postId === Number(action.payload.postId)
-        //   );
-        //   draft.filterList[idx] = {
-        //     ...draft.filterList[idx],
-        //     ...action.payload.carpool,
-        //   };
-        // }
-
-        // if (page === "myPage") {
-        //   const idx = draft.myList.findIndex(
-        //     (l) => l.postId === Number(action.payload.postId)
-        //   );
-        //   draft.myList[idx] = {
-        //     ...draft.myList[idx],
-        //     ...action.payload.carpool,
-        //   };
-        // }
+        if (page === "myPage") {
+          const idx = draft.list[page].findIndex(
+            (l) => l.postId === Number(action.payload.postId)
+          );
+          draft.list[page][idx] = {
+            ...draft.list[page][idx],
+            ...action.payload.carpool,
+          };
+        }
       }),
 
     [IMAGE_RESORT]: (state, action) =>

@@ -1,6 +1,8 @@
+import React from 'react';
 import axios from 'axios'
 import { useEffect } from 'react'
 import styled from 'styled-components'
+import bg from "../assets/login/login.png";
 import { setCookie } from "../shared/cookie";
 import { userStorage } from '../shared/userStorage';
 
@@ -25,9 +27,9 @@ const NaverAuthHandle = (props) => {
   }, [])
 
   return (
-    <>
-      <Container></Container>
-    </>
+    <React.Fragment>
+      <Container src={bg} alt="로딩 이미지"/>
+    </React.Fragment>
   )
 }
 
