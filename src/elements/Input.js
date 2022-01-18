@@ -139,6 +139,7 @@ const Input = forwardRef((props, ref) => {
       <Title
         autoComplete={autocomplete}
         placeholder={placeholder}
+        maxLength={_maxLength}
         onChange={_onChange}
         value={_value}
       ></Title>

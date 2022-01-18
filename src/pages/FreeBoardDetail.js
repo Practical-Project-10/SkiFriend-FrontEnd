@@ -190,7 +190,18 @@ const FreeBoardDetail = ({ history }, props) => {
           {/* 사진 및 게시글 */}
           <Grid>
             <Grid padding="16px 0">
-              <Text>{postData.content}</Text>
+              <Text>
+                {/* 줄개행처리 */}
+                {postData.content &&
+                  postData.content.split("\n").map((line) => {
+                    return (
+                      <span>
+                        {line}
+                        <br />
+                      </span>
+                    );
+                  })}
+              </Text>
             </Grid>
             <Grid is_flex width="100%" height="250px" padding="0 16px">
               <Swiper
