@@ -1,9 +1,9 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 
-import FreeBoardWrite from "../components/FreeBoardWrite";
+import BoardWrite from "../components/BoardWrite";
 
-const BoardWrite = ({ location }) => {
+const FreeBoardWrite = ({ location }) => {
   // 주소 경로값
   const params = useParams();
   const skiresort = params.skiresort;
@@ -22,17 +22,17 @@ const BoardWrite = ({ location }) => {
 
   // if(page === "video") {
   //   return(
-    // <VideoWrite
-    //   is_edit={is_edit}
-    //   skiresort={skiresort}
-    //   postId={postId}
-    // />
+  // <VideoWrite
+  //   is_edit={is_edit}
+  //   skiresort={skiresort}
+  //   postId={postId}
+  // />
   //   )
   // }
 
   return (
     <React.Fragment>
-      <FreeBoardWrite
+      <BoardWrite
         // page={}
         is_edit={is_edit}
         skiresort={skiresort}
@@ -42,5 +42,4 @@ const BoardWrite = ({ location }) => {
   );
 };
 
-
-export default BoardWrite;
+export default FreeBoardWrite;

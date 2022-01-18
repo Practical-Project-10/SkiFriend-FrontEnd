@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { chatCreators as chatActions } from "../redux/modules/chat";
-
+import styled from "styled-components";
 import axios from "axios";
 
 import SockJS from "sockjs-client";
@@ -11,7 +11,7 @@ import MessageBox from "../components/MessageBox";
 import Header from "../components/Header";
 import ChatRoomCard from "../components/ChatRoomCard";
 //icons
-import { Grid, Input } from "../elements/index";
+import { Grid, Input, Image } from "../elements/index";
 import sendBtn from "../assets/send.svg";
 
 const ChatRoom = () => {
@@ -28,12 +28,10 @@ const ChatRoom = () => {
   //토큰
   const accessToken = document.cookie.split("=")[1];
   const token = { Authorization: `${accessToken}` };
-  //소켓
-  const sock = new SockJS("http://3.34.19.50:8080/ws-stomp");
-  const stomp = Stomp.over(sock);
   // useState관리
   const [message, setMessage] = useState("");
   const [messageList, setMessageList] = useState([]);
+  const [stomp, setStomp] = useState();
 
   // 쌓인 대화
   const messageDatas = (recv) => {
@@ -47,14 +45,32 @@ const ChatRoom = () => {
   };
 
   useEffect(() => {
+    //소켓
+    const sock = new SockJS("http://3.34.19.50:8080/ws-stomp");
+    setStomp(Stomp.over(sock));
     dispatch(chatActions.getRoomInfoDB(roomId)); //방정보 가져오기
     // dispatch(chatActions.getContentChatDB(roomId)); //대화내용 가져오기
-    // setMessageList(datas);
-    chatConnect(); //채팅룸 연결
     // dispatch(chatActions.connectChatDB(roomId));
+  }, []);
+
+  useEffect(() => {
+    chatConnect(); //채팅룸 연결
     return () => {
       chatDisconnect();
     };
+  }, [stomp]);
+
+  // 대화내용 가져오기
+  useEffect(() => {
+    axios
+      .get(`http://3.34.19.50:8080/chat/message/${roomId}`, {
+        headers: token,
+      })
+      .then((res) => {
+        const prevChatData = res.data;
+        setMessageList(prevChatData);
+      });
+    // dispatch(chatActions.getContentChatDB(roomId));
   }, []);
 
   // stomp연결
@@ -87,19 +103,6 @@ const ChatRoom = () => {
       console.log(err);
     }
   };
-
-  // 대화내용 가져오기
-  useEffect(() => {
-    axios
-      .get(`http://3.34.19.50:8080/chat/message/${roomId}`, {
-        headers: token,
-      })
-      .then((res) => {
-        const prevChatData = res.data;
-        setMessageList(prevChatData);
-      });
-    // dispatch(chatActions.getContentChatDB(roomId));
-  }, []);
 
   //엔터치면 메세지 보내지게하기
   const onKeyPress = (e) => {
@@ -192,16 +195,16 @@ const ChatRoom = () => {
                 _onKeyPress={onKeyPress}
                 _onChange={messageChat}
               />
-              <Grid
-                src={sendBtn}
-                width="30px"
-                height="30px"
-                bg="#6195CF"
-                radius="50%"
-                margin="0 -40px 0"
-                cursor="pointer"
-                _onClick={sendMessage}
-              />
+              <Send onClick={sendMessage}>
+                <Image
+                  src={sendBtn}
+                  width="30px"
+                  height="30px"
+                  position="center"
+                  size="19px 20px"
+                  cursor="pointer"
+                />
+              </Send>
             </Grid>
           </Grid>
         </Grid>
@@ -210,4 +213,12 @@ const ChatRoom = () => {
   );
 };
 
+const Send = styled.div`
+  width: 30px;
+  height: 30px;
+  background: #6195cf;
+  border-radius: 50%;
+  position: absolute;
+  right: 40px;
+`;
 export default ChatRoom;
