@@ -51,19 +51,21 @@ const Image = (props) => {
 };
 
 Image.defaultProps = {
-  shape: "myIcon",
+  // shape: "myIcon",
   _onClick: () => {},
   src: defaultIMG,
+  width: '3.5em',
+  height: '3.5em',
 };
 
 const MyIcon = styled.div`
-  width: 3.5em;
-  height: 3.5em;
+  width: ${props => props.width};
+  height: ${props => props.height};
   border-radius: 50%;
   margin-right: 10px;
   background-size: cover;
   background-position: center;
-  background: ${(props) => `url(${props.src}) no-repeat center`};
+  background: ${(props) => props.src? `url(${props.src}) no-repeat center`: ''};
 `;
 
 const ElImage = styled.div`

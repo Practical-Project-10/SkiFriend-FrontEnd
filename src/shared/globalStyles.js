@@ -13,6 +13,7 @@ const GlobalStyles = createGlobalStyle`
         box-sizing: border-box;
     }
     body {
+        color: #474D56;
         font-family: Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', sans-serif;
         font-size: 14px;
         line-height: 17px;

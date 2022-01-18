@@ -128,7 +128,7 @@ const Carpool = (props) => {
           })}
         </Grid>
 
-        <FloatButton _onClick={induceProfile} />
+        <FloatButton bottom="90px" right="16px" _onClick={induceProfile} />
       </Grid>
     </CardList>
   );
