@@ -97,7 +97,7 @@ const Home = (props) => {
   useEffect(() => {
     const mainHotPosts = async () => {
       const response = await (
-        await fetch("https://seongeunyang.shop/main")
+        await fetch("http://3.34.19.50:8080/main")
       ).json();
       dispatch(mainActions.loadPosts(response));
     };
@@ -107,8 +107,11 @@ const Home = (props) => {
 
   //로그아웃
   const logout = () => {
-    dispatch(userActions.logout());
-    history.replace("/");
+    const ask = window.confirm("로그아웃 하시겠습니까?");
+    if (ask) {
+      dispatch(userActions.logout());
+      return history.replace("/");
+    }
   };
   return (
     <React.Fragment>

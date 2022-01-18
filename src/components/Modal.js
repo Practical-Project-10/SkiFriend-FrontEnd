@@ -7,7 +7,7 @@ import modal from "../assets/modal.svg";
 import defaultIMG from "../assets/myPage/profilePicture.png";
 
 const Modal = (props) => {
-  const { profile, _onClick, complete, page } = props;
+  const { profile, complete } = props;
 
   if (profile) {
     return (
@@ -77,44 +77,74 @@ const Modal = (props) => {
     <React.Fragment>
       <ModalBackground onClick={props.closeModal} radius={props.radius}>
         {/* 모집완료 후 뜨는 모달 */}
-        {complete
-        ? <ModalContainer width={props.width} height={props.height}>
+        {complete ? (
+          <ModalContainer width={props.width} height={props.height}>
             <Menu>
               <Image src={modal} width="25px" height="25px" margin="0 auto" />
             </Menu>
-            <Menu fontS={props.fontS} padding={props.padding} onClick={props._onClick}>
+            <Menu
+              fontS={props.fontS}
+              padding={props.padding}
+              onClick={props._onClick}
+            >
               모집 해제
             </Menu>
-            <Menu fontS={props.fontS} padding={props.padding} onClick={props.delete}>
+            <Menu
+              fontS={props.fontS}
+              padding={props.padding}
+              onClick={props.delete}
+            >
               삭제하기
             </Menu>
-            <Menu fontS={props.fontS} padding={props.padding} opacity='0.5' onClick={props.closemodal}>
+            <Menu
+              fontS={props.fontS}
+              padding={props.padding}
+              opacity="0.5"
+              onClick={props.closemodal}
+            >
               취소
             </Menu>
           </ModalContainer>
-
+        ) : (
           // 모집완료 전 뜨는 모달
-        : <ModalContainer width={props.width} height={props.height}>
+          <ModalContainer width={props.width} height={props.height}>
             <Menu padding={props.padding}>
               <Image src={modal} width="25px" height="25px" margin="0 auto" />
             </Menu>
-            <Menu fontS={props.fontS} padding={props.padding} onClick={props.edit}>
+            <Menu
+              fontS={props.fontS}
+              padding={props.padding}
+              onClick={props.edit}
+            >
               수정하기
             </Menu>
-            
-            <Menu fontS={props.fontS} padding={props.padding} onClick={props.delete}>
+
+            <Menu
+              fontS={props.fontS}
+              padding={props.padding}
+              onClick={props.delete}
+            >
               삭제하기
             </Menu>
             {/* {_onClick ? ( */}
-            <Menu fontS={props.fontS} padding={props.padding} onClick={props._onClick}>
+            <Menu
+              fontS={props.fontS}
+              padding={props.padding}
+              onClick={props._onClick}
+            >
               모집 완료
             </Menu>
             {/* ) : null} */}
-            <Menu fontS={props.fontS} padding={props.padding} opacity='0.5' onClick={props.closemodal}>
+            <Menu
+              fontS={props.fontS}
+              padding={props.padding}
+              opacity="0.5"
+              onClick={props.closemodal}
+            >
               취소
             </Menu>
           </ModalContainer>
-        }
+        )}
       </ModalBackground>
     </React.Fragment>
   );
@@ -124,7 +154,7 @@ const ModalBackground = styled.div`
   width: 100%;
   height: 100%;
   padding: 0 20px;
-  border-radius: ${props => props.radius? props.radius: ''};
+  border-radius: ${(props) => (props.radius ? props.radius : "")};
   position: absolute;
   top: 0;
   left: 0;
@@ -133,8 +163,8 @@ const ModalBackground = styled.div`
 `;
 
 const ModalContainer = styled.div`
-  width: ${(props) => props.width? props.width: '372px'};
-  height: ${(props) => props.height? props.height: '256px'};
+  width: ${(props) => (props.width ? props.width : "372px")};
+  height: ${(props) => (props.height ? props.height : "256px")};
   padding: 0 17px;
   background: #fff;
   border-radius: 15px;
@@ -151,12 +181,12 @@ const ModalContainer = styled.div`
 `;
 
 const Menu = styled.div`
-  padding: ${props => props.padding? props.padding: '15px'};
+  padding: ${(props) => (props.padding ? props.padding : "15px")};
   border-bottom: 1px solid #edeeef;
-  font-size: ${props => props.fontS? props.fontS: '16px'};
+  font-size: ${(props) => (props.fontS ? props.fontS : "16px")};
   font-weight: 700;
   cursor: pointer;
-  opacity: ${props => props.opacity};
+  opacity: ${(props) => props.opacity};
 
   &:first-child {
     border-bottom: none;

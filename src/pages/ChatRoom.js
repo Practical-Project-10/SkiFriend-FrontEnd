@@ -29,7 +29,7 @@ const ChatRoom = () => {
   const accessToken = document.cookie.split("=")[1];
   const token = { Authorization: `${accessToken}` };
   //소켓
-  const sock = new SockJS("https://seongeunyang.shop/ws-stomp"); 
+  const sock = new SockJS("http://3.34.19.50:8080/ws-stomp");
   const stomp = Stomp.over(sock);
   // useState관리
   const [message, setMessage] = useState("");
@@ -91,7 +91,7 @@ const ChatRoom = () => {
   // 대화내용 가져오기
   useEffect(() => {
     axios
-      .get(`https://seongeunyang.shop/chat/message/${roomId}`, {
+      .get(`http://3.34.19.50:8080/chat/message/${roomId}`, {
         headers: token,
       })
       .then((res) => {
@@ -131,7 +131,12 @@ const ChatRoom = () => {
   //전화번호 정보받기
   const getPhoneNum = () => {
     dispatch(chatActions.getPhoneNumDB());
-    showPhoneNum();
+    const ask = window.confirm("전화번호를 공개하시겠습니까?");
+    if (ask) {
+      return showPhoneNum();
+    } else {
+      return;
+    }
   };
   //전화번호 보여주기
   const showPhoneNum = async () => {
