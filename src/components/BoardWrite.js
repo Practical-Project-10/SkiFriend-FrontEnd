@@ -17,7 +17,7 @@ import "swiper/components/navigation/navigation.min.css";
 //react icons
 import { AiOutlineCamera } from "react-icons/ai";
 
-const VideoUpload = (props) => {
+const BoardWrite = (props) => {
   const {is_edit, skiresort, postId} = props;
   const dispatch = useDispatch();
 
@@ -248,4 +248,4 @@ const EditImage = styled.div`
   }
 `;
 
-export default VideoUpload;
+export default BoardWrite;

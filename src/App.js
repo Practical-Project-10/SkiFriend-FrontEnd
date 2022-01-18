@@ -12,7 +12,7 @@ import CarpoolWrite from "./pages/CarpoolWrite";
 import CarpoolFilter from "./pages/CarpoolFilter";
 import FilterList from "./pages/FilterList";
 import FreeBoardList from "../src/pages/FreeBoardList";
-import BoardWrite from "./pages/BoardWrite";
+import FreeBoardWrite from "./pages/FreeBoardWrite";
 import FreeBoardDetail from "./pages/FreeBoardDetail";
 import PlaceInfo from "./pages/PlaceInfo";
 import MyPage from "./pages/MyPage";
@@ -24,7 +24,8 @@ import Snowflakes from "./components/Snowflakes";
 import KakaoAuthHandle from "./components/KakaoAuthHandle";
 import KakaoAuthHandle2 from "./components/KakaoAuthHandle2";
 import NaverAuthHandle from "./components/NaverAuthHandle";
-import VideoUpload from "./pages/VideoUpload";
+import ShortsUpload from "./pages/ShortsUpload";
+import Shorts from "./pages/Shorts";
 
 import background from "./assets/background.png.jpg";
 
@@ -85,12 +86,12 @@ function App() {
             <Route
               exact
               path="/freeboardwrite/:skiresort"
-              component={BoardWrite}
+              component={FreeBoardWrite}
             />
             <Route
               exact
               path="/freeboardedit/:skiresort/:postId"
-              component={BoardWrite}
+              component={FreeBoardWrite}
             />
             <Route
               exact
@@ -111,8 +112,8 @@ function App() {
               path="/chatroom/:roomId/:roomName/:longRoomId"
               component={ChatRoom}
             />
-            <Route exact path="/videoupload" component={VideoUpload} />
-
+            <Route exact path="/shortsupload" component={ShortsUpload} />
+            <Route exact path="/shorts" component={Shorts} />
             <Navbar />
           </CardList>
         </div>

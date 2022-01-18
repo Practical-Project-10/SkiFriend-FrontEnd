@@ -43,12 +43,21 @@ const Card = (props) => {
   };
 
   const deleteCard = () => {
+    if (page === "myPage") {
+      dispatch(carpoolActions.deleteCarpoolDB(props.skiResort, props.postId, page));
+      return null;
+    }
     dispatch(carpoolActions.deleteCarpoolDB(props.skiResort, props.postId));
   };
 
   const completeCard = () => {
+    if (page === "myPage") {
+      dispatch(carpoolActions.completeCarpoolDB(props.skiResort, props.postId, page));
+      return null;
+    }
     dispatch(carpoolActions.completeCarpoolDB(props.skiResort, props.postId));
   };
+  console.log(page)
 
   //연락하기 기능
   const connectRoom = (postId) => {
@@ -102,7 +111,7 @@ const Card = (props) => {
           <Text block bold width="239px" size="16px">
             {props.title}
           </Text>
-          <Posts width="240px" height="30px" margin="7px 0">
+          <Posts width="255px" height="30px" margin="7px 0">
             <Text bold size="12px">
               {props.startLocation}
             </Text>
@@ -129,14 +138,8 @@ const Card = (props) => {
             <Grid is_flex>
               {/* 게시글 수정 삭제 modal 시작 */}
               {/* 게시글을 조회한사람이 작성한 사람과 일치할 경우 모달 선택창이 보이게 하기 */}
-              <SubMenu width="27px" height="27px" line="41px">
-                <Grid
-                  _onClick={() => {
-                    setShowModal(true);
-                  }}
-                >
-                  <Image src={etc} width="27px" height="27px" />
-                </Grid>
+              <SubMenu width="27px" height="27px" line="41px" onClick={() => {setShowModal(true)}}>
+                <Image src={etc} width="27px" height="27px" />
               </SubMenu>
             </Grid>
           ) : (
@@ -191,7 +194,7 @@ const Card = (props) => {
             {props.title}
           </Text>
 
-          <Posts>
+          <Posts width='342px'>
             <Text bold>{props.startLocation}</Text>
             <Image src={arrow} width="50px" height="10px" />
             <Text bold color={repuest ? "#7281D1" : "#6195CF"}>
@@ -199,7 +202,7 @@ const Card = (props) => {
             </Text>
           </Posts>
 
-          <Grid is_flex justify="space-between" margin="0 0 7px">
+          <Grid is_flex width='342px' justify="space-between" margin="0 0 7px">
             <Items repuest={repuest} width="101px">
               <Image src={calendar} width="11px" height="15px" />
               <Text size="12px" color="#FFF">
@@ -335,7 +338,6 @@ const Items = styled.div`
 `;
 
 const SmallItems = styled.div`
-  width: ${(props) => props.width};
   height: 22px;
   border-radius: 5px;
   display: flex;
