@@ -15,6 +15,7 @@ api.interceptors.request.use(function (config) {
 });
 
 export const apis = {
+  //전화번호
   phoneNumCheck: (phoneNumber) =>
     api.post("/user/sms", { phoneNumber: phoneNumber }),
 
@@ -115,7 +116,7 @@ export const apis = {
 
   deleteFreePost: (postId) => api.delete(`/board/freeBoard/${postId}`, {}),
 
-  // //댓글
+  //댓글
   addPostComment: (postId, content) =>
     api.post(`/board/freeBoard/${postId}/comments`, { content }),
 
@@ -142,4 +143,40 @@ export const apis = {
   chatRoomInfo: (roomId) => api.get(`/chat/room/${roomId}/carpool`),
 
   chatRoomDelete: (roomId) => api.delete(`/chat/room/${roomId}`),
+
+  //동영상
+  videoRandomList: () => api.get(`/shorts`),
+
+  videoUpload: (videoFile, title) =>
+    api.post(
+      `/shorts`,
+      { videoFile, title },
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      }
+    ),
+
+  videoUpdate: (videoId, title) => api.post(`/shorts/${videoId}`, { title }),
+
+  videoDelete: (videoId) => api.post(`/shorts/${videoId}`),
+
+  //동영상 좋아요
+  videoLike: (videoId) => api.post(`/shorts/${videoId}/like`),
+
+  //동영상 댓글
+  videoCommentList: (videoId) => api.get(`/shorts/${videoId}/comments`),
+
+  videoCommentWrite: (videoId, content) =>
+    api.post(`/shorts/${videoId}/comments`, content),
+
+  videoCommentUpdate: (videoCommentId, content) =>
+    api.post(`/shorts/comments/${videoCommentId}`, content),
+
+  videoCommentDelete: (videoCommentId) =>
+    api.post(`/shorts/${videoCommentId}/like`),
+
+  //내가 작성한 동영상 목록
+  myVideoList: (videoId) => api.post(`/shorts/${videoId}/like`),
 };

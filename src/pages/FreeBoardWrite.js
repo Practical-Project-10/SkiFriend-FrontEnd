@@ -23,5 +23,4 @@ const FreeBoardWrite = (props) => {
   );
 };
 
-
 export default FreeBoardWrite;
