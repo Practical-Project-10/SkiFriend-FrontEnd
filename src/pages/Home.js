@@ -226,14 +226,13 @@ const Home = (props) => {
             </Text>
           </Grid>
           <Grid phoneSize>
-          <HotPost/>
-            {/* {hotPosts.map((p) => {
+            {hotPosts.map((p) => {
               return (
                 <Grid key={p.postId}>
                   <HotPost {...p} />
                 </Grid>
               );
-            })} */}
+            })}
           </Grid>
         </Grid>
       </Grid>

@@ -13,8 +13,8 @@ const HotPost = (props) => {
     <React.Fragment>
       <Posts>
         <Grid is_flex padding="20px 0">
-          <Grid width='28%'>
-            <ResortName>{props.skiResort}WellihilliPark</ResortName>
+          <Grid width="28%">
+            <ResortName>{props.skiResort}</ResortName>
           </Grid>
           <Grid is_flex justify="space-between" width="72%">
             <Underline
@@ -24,16 +24,16 @@ const HotPost = (props) => {
                 )
               }
             >
-              {props.title}일이삼사오육칠팔구십
+              {props.title}
             </Underline>
             <Grid is_flex width="30%">
               <Grid is_flex margin="0 11px 0 0">
                 <Image src={Heart} width="15px" height="13px" />
-                <Text>{props.likeCnt}7</Text>
+                <Text>{props.likeCnt}</Text>
               </Grid>
               <Grid is_flex>
                 <Image src={Comment} width="15px" height="13px" />
-                <Text>{props.commentCnt}7</Text>
+                <Text>{props.commentCnt}</Text>
               </Grid>
             </Grid>
           </Grid>

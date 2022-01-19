@@ -61,7 +61,7 @@ export const getShortsCommentDB =
   async (dispatch, getState, { history }) => {
     try {
       const response = await apis.shortsListComment(videoId);
-      // response && dispatch(getComment(response.data));
+      response && dispatch(getShortsComment(response.data));
     } catch (err) {
       console.log(err);
     }
@@ -73,7 +73,7 @@ export const addShortsCommentDB =
   async (dispatch, getState, { history }) => {
     try {
       const response = await apis.shortsWriteComment(videoId, content);
-      response && dispatch(getOneBoardDB(response.data));
+      response && dispatch(addShortsComment(response.data));
     } catch (err) {
       console.log(err);
     }
@@ -85,7 +85,7 @@ export const updateShortsCommentDB =
   async (dispatch, getState, { history }) => {
     try {
       const response = await apis.shortsUpdateComment(videoCommentId, content);
-      response && dispatch(getOneBoardDB(response.data));
+      response && dispatch(updateShortsComment(response.data));
     } catch (err) {
       console.log(err);
     }
@@ -97,7 +97,7 @@ export const deleteShortsCommentDB =
   async (dispatch, getState, { history }) => {
     try {
       const response = await apis.shortsDeleteComment(videoCommentId);
-      response && dispatch(getOneBoardDB(response.data));
+      response && dispatch(deleteShortsComment(response.data));
     } catch (err) {
       console.log(`댓글삭제 실패${err}`);
     }
@@ -110,10 +110,10 @@ export default handleActions(
       produce(state, (draft) => {
         draft.list = action.payload.commentList;
         draft.list = draft.list.reduce((prev, now) => {
-          if (prev.findIndex((a) => a.postId === now.postId) === -1) {
+          if (prev.findIndex((a) => a.shortsCommentId === now.shortsCommentId) === -1) {
             return [...prev, now];
           } else {
-            prev[prev.findIndex((a) => a.postId === now.postId)] = now;
+            prev[prev.findIndex((a) => a.shortsCommentId === now.shortsCommentId)] = now;
             return prev;
           }
         }, []);
