@@ -56,48 +56,46 @@ const Navbar = ({ location }) => {
 
   return (
     <FixedNav>
-      <Menu>
-        <Icon>
-          <NavLink to="/" className="navLink">
-            <img 
-              src={location.pathname === "/"? home_active: home} 
-              alt='홈'
-            />
-          </NavLink>
-        </Icon>
-        <Icon>
-          <NavLink to="/placeinfo" className="navLink">
-            <img 
-              src={location.pathname === "/placeinfo"? info_active: info} 
-              alt='스키장 안내'
-            />
-          </NavLink>
-        </Icon>
-        {/* <Icon>
-          <NavLink to="/shorts" className="navLink">
-            <img 
-              src={location.pathname === "/shorts"? shorts_active: shorts} 
-              alt='동영상'
-            />
-          </NavLink>
-        </Icon> */}
-        <Icon>
-          <NavLink to="/chatlist" className="navLink">
-            <img 
-              src={location.pathname === "/chatlist"? chat_active: chat} 
-              alt='채팅'
-            />
-          </NavLink>
-        </Icon>
-        <Icon>
-          <NavLink to="/mypage" className="navLink">
-            <img
-              src={location.pathname === "/mypage"? myPage_active: myPage} 
-              alt='마이페이지'
-            />
-          </NavLink>
-        </Icon>
-      </Menu>
+      <Icon>
+        <NavLink to="/" className="navLink">
+          <img 
+            src={location.pathname === "/"? home_active: home} 
+            alt='홈'
+          />
+        </NavLink>
+      </Icon>
+      <Icon>
+        <NavLink to="/placeinfo" className="navLink">
+          <img 
+            src={location.pathname === "/placeinfo"? info_active: info} 
+            alt='스키장 안내'
+          />
+        </NavLink>
+      </Icon>
+      {/* <Icon>
+        <NavLink to="/shorts" className="navLink">
+          <img 
+            src={location.pathname === "/shorts"? shorts_active: shorts} 
+            alt='동영상'
+          />
+        </NavLink>
+      </Icon> */}
+      <Icon>
+        <NavLink to="/chatlist" className="navLink">
+          <img 
+            src={location.pathname === "/chatlist"? chat_active: chat} 
+            alt='채팅'
+          />
+        </NavLink>
+      </Icon>
+      <Icon>
+        <NavLink to="/mypage" className="navLink">
+          <img
+            src={location.pathname === "/mypage"? myPage_active: myPage} 
+            alt='마이페이지'
+          />
+        </NavLink>
+      </Icon>
     </FixedNav>
   );
 };
@@ -106,18 +104,14 @@ const FixedNav = styled.div`
   position: absolute;
   bottom: 0;
   left: 0;
-  border-top: 2px solid #edeeef;
   width: 100%;
   height: 70px;
+  padding: 25px 28px;
+  border-top: 2px solid #edeeef;
   background: #fff;
-`;
-
-const Menu = styled.div`
-  padding: 17px 28px;
   display: flex;
   align-items: center;
-  /* gap: 65px; */
-  gap: 79px;
+  /* gap: 65px; */gap: 79px;
 `;
 
 const Icon = styled.div`

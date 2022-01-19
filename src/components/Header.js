@@ -49,8 +49,8 @@ const Header = (props) => {
         <Text bold size="18px" line='54px'>
           {children}
         </Text>
-        {/* {complete ? <Button onClick={_onClick}>완료</Button> : null}
-        {phone ? <Button onClick={_onClick}>전화번호 공개</Button> : null} */}
+        {complete ? <Button onClick={_onClick}>완료</Button> : null}
+        {phone ? <Button onClick={_onClick}>전화번호 공개</Button> : null}
       </GoBack>
     );
   }
