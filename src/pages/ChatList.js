@@ -11,6 +11,9 @@ import { history } from "../redux/ConfigStore";
 const ChatList = (props) => {
   const dispatch = useDispatch();
   const chatRoomList = useSelector((state) => state.chat.roomList);
+  console.log(chatRoomList);
+  const time = chatRoomList;
+  // const realTime = time[0] + " " + time[1] + " " + time[2];
   const is_login = localStorage.getItem("is_login") === "true" ? true : false;
   const certification =
     localStorage.getItem("certification") === "true" ? true : false;
@@ -67,7 +70,9 @@ const ChatList = (props) => {
           overflow="scroll"
           minHeight="calc( 100vh - 124px )"
         >
-          {chatRoomList.map((list) => {
+          {chatRoomList.map((list, index) => {
+            const time = chatRoomList[index].lastMsgTime.split(" ");
+            const realTime = time[0] + " " + time[1] + " " + time[2];
             return (
               <Grid
                 is_flex
@@ -103,7 +108,7 @@ const ChatList = (props) => {
                       {list.roomName}
                     </Text>
                     <Text
-                      width="200px"
+                      width="180px"
                       size="16px"
                       padding="2px 0"
                       margin="0"
@@ -136,7 +141,7 @@ const ChatList = (props) => {
                       </Text>
                     )}
                     <Text size="11px" height="15px" margin="0 5px">
-                      {list.lastMsgTime}
+                      {realTime}
                     </Text>
                   </Grid>
                 </Grid>
