@@ -59,7 +59,7 @@ const PlaceInfo = () => {
   };
 
   const resortInfo = [
-    {// 하이원
+    {
       resort: '하이원',
       id: 'tabHighOne',
       logo: High1,
@@ -68,7 +68,7 @@ const PlaceInfo = () => {
       fare: "https://www.high1.com/ski/contents.do?key=750",
       weather: "http://www.high1.com/www/contents.do?key=622",
     },
-    {// 용평
+    {
       resort: '용평',
       id: 'tabYongPyong',
       logo: YongPyong,
@@ -77,7 +77,7 @@ const PlaceInfo = () => {
       fare: "https://www.yongpyong.co.kr/kor/skiNboard/utilizationFee/rentCharge.do",
       weather: "https://www.yongpyong.co.kr/kor/skiNboard/live.do",
     },
-    {// 비발디
+    {
       resort: '비발디',
       id: 'tabVivaldiPark',
       logo: Vivaldi,
@@ -86,7 +86,7 @@ const PlaceInfo = () => {
       fare: "https://www.sonohotelsresorts.com/daemyung.vp.skiworld.04_04_01.ds/dmparse.dm",
       weather: "https://www.kweather.co.kr/forecast/forecast_sports.html?index=6&area=42720370%7C212&rname=Xff3UAv5Ux72VicBTAj8Uv73ZOYN&idx=ski",
     },
-    {// 휘닉스
+    {
       resort: '휘닉스',
       id: 'tabPhoenix',
       logo: Phoenix,
@@ -95,7 +95,7 @@ const PlaceInfo = () => {
       fare: "https://phoenixhnr.co.kr/static/pyeongchang/guide/price/snowpark",
       weather: "https://phoenixhnr.co.kr/static/pyeongchang/guide/weather/weather1",
     },
-    {// 웰리힐리
+    {
       resort: '웰리힐리',
       id: 'tabWellihilliPark',
       logo: Wellihilli,
@@ -104,7 +104,7 @@ const PlaceInfo = () => {
       fare: "https://www.wellihillipark.com/home/guide/pay/snowpark)",
       weather: "https://www.wellihillipark.com/home/guide/weather",
     },
-    {// 곤지암
+    {
       resort: '곤지암',
       id: 'tabKonjiam',
       logo: Konjiam,
