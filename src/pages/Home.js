@@ -38,7 +38,9 @@ const Home = (props) => {
   const accessToken = document.cookie.split("=")[1];
   const token = { Authorization: `${accessToken}` };
   //소켓
-  const sock = new SockJS("http://3.34.19.50:8080/ws-alarm");
+  const sock = 
+              // new SockJS("https://seongeunyang.shop/ws-alarm");
+              new SockJS("http://3.34.19.50:8080/ws-alarm");
   const stomp = Stomp.over(sock);
   //localstorage
   const is_login = localStorage.getItem("is_login") === "true" ? true : false;
@@ -119,6 +121,7 @@ const Home = (props) => {
   useEffect(() => {
     const mainHotPosts = async () => {
       const response = await (
+        // await fetch("https://seongeunyang.shop/main")
         await fetch("http://3.34.19.50:8080/main")
       ).json();
       dispatch(mainActions.loadPosts(response));
@@ -138,7 +141,6 @@ const Home = (props) => {
 
   //설문지 조사 이동
   const connectUrl = (id) => {
-    console.log(id);
     if (id === 2) {
       return (window.location.href =
         "https://docs.google.com/forms/d/1kRaC8Zy-8gpKSI2O4kDErjCYiE0l6jP_2dbR8tQGggc/edit?usp=forms_home&ths=true");

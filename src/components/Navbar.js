@@ -8,12 +8,6 @@ import styled from "styled-components";
 import { Grid } from "../elements";
 
 //react icons
-import { AiTwotoneHome, AiOutlineHome } from "react-icons/ai";
-import { AiFillInfoCircle, AiOutlineInfoCircle } from "react-icons/ai";
-import { BsChatFill, BsChat } from "react-icons/bs";
-import { AiFillAppstore, AiOutlineAppstore } from "react-icons/ai";
-import shorts from "../assets/nav/shorts.svg"
-import shorts_active from "../assets/nav/shorts_active.svg"
 import home from "../assets/nav/home.svg";
 import home_active from "../assets/nav/home_active.svg";
 import info from "../assets/nav/info.svg";
@@ -82,10 +76,13 @@ const Navbar = ({ location }) => {
       </Icon> */}
       <Icon>
         <NavLink to="/chatlist" className="navLink">
-          <img 
-            src={location.pathname === "/chatlist"? chat_active: chat} 
-            alt='채팅'
-          />
+          <Grid _onClick={deleteAlarm}>
+            {newRing && <New>New</New>}
+            <img 
+              src={location.pathname === "/chatlist"? chat_active: chat} 
+              alt='채팅'
+            />
+          </Grid>
         </NavLink>
       </Icon>
       <Icon>
@@ -115,8 +112,24 @@ const FixedNav = styled.div`
 `;
 
 const Icon = styled.div`
+  position: relative;
   /* width: calc((100% - 268px) / 5); */
   width: calc((100% - 237px) / 4);
+`;
+
+const New = styled.div`
+  height: 17px;
+  padding: 2px;
+  border-radius: 999px;
+  background: red;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 600;
+  text-align: center;
+  line-height: 13px;
+  position: absolute;
+  right: -13px;
+  top: -8px;
 `;
 
 export default withRouter(Navbar);

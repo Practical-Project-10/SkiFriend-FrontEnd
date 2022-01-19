@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect } from "react";
 import styled from "styled-components";
 import { userStorage } from "../shared/userStorage";
+import bg from "../assets/login/login.png";
 
 const KakaoAuthHandle2 = (props) => {
   const { history } = props;
@@ -15,11 +16,8 @@ const KakaoAuthHandle2 = (props) => {
           `https://seongeunyang.shop/user/kakao/callback/${userId}?code=${code}`
         )
         .then((res) => {
-          // console.log("window.location.href = / 실행")
-          // console.log(res)
           localStorage.setItem("is_login", true);
           userStorage(res.data);
-          // window.location.href = "/";
           history.push("/");
         });
     };
@@ -27,9 +25,7 @@ const KakaoAuthHandle2 = (props) => {
   }, []);
 
   return (
-    <>
-      <Container></Container>
-    </>
+    <Container src={bg} alt="로딩 이미지"/>
   );
 };
 
