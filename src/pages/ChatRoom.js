@@ -32,7 +32,6 @@ const ChatRoom = () => {
   const [message, setMessage] = useState("");
   const [messageList, setMessageList] = useState([]);
   const [stomp, setStomp] = useState();
-
   // 쌓인 대화
   const messageDatas = (recv) => {
     setMessageList((prev) => [...prev, recv]);
@@ -63,7 +62,7 @@ const ChatRoom = () => {
   // 대화내용 가져오기
   useEffect(() => {
     axios
-      .get(`https://seongeunyang.shop/chat/message/${roomId}`, {
+      .get(`http://3.34.19.50:8080/chat/message/${roomId}`, {
         headers: token,
       })
       .then((res) => {
@@ -175,14 +174,13 @@ const ChatRoom = () => {
           {roomName}
         </Header>
         <Grid
-          phoneSize
           margin="54px 0 0 0"
           minHeight="calc( 100vh - 124px )"
           display="flex"
           direction="column"
         >
-          <ChatRoomCard roomInfo={roomInfoList} />
-          <Grid height="460px" overflow="scroll">
+          <Grid padding="0 16px" height="642px" overflow="scroll">
+            <ChatRoomCard roomInfo={roomInfoList} />
             <div style={{ padding: "0 0 70px 0" }} ref={scrollRef}>
               {/* 채팅말풍선 */}
               {messageList.map((msg, idx) => {

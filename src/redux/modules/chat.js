@@ -52,7 +52,7 @@ export const makeRoomChatDB =
       const response = await apis.chatRoom(postId);
       response &&
         history.push(
-          `/chatroom/${response.data.roomId}/${response.data.roomName}/${response.data.longRoomId}`
+          `/chatroom/${response.data.roomId}/${response.data.roomName}`
         );
     } catch (err) {
       console.log(`불러오기 실패${err}`);
@@ -107,10 +107,10 @@ export const sendChatDB =
 
 //프로필 정보
 export const getProfileInfoDB =
-  (longRoomId) =>
+  (roomId) =>
   async (dispatch, getState, { history }) => {
     try {
-      const response = await apis.chatShowProfile(longRoomId);
+      const response = await apis.chatShowProfile(roomId);
 
       response && dispatch(getProfileList(response.data));
     } catch (err) {

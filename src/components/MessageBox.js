@@ -14,7 +14,7 @@ const MessageBox = (props) => {
   const dispatch = useDispatch();
   //경로
   const params = useParams();
-  const longRoomId = params.longRoomId;
+  const roomId = params.roomId;
   //redux 데이터
   const profileList = useSelector((state) => state.chat.profileList);
   //localstorage
@@ -34,7 +34,7 @@ const MessageBox = (props) => {
 
   //프로필 정보 가져오기
   useEffect(() => {
-    dispatch(chatActions.getProfileInfoDB(longRoomId));
+    dispatch(chatActions.getProfileInfoDB(roomId));
   }, []);
 
   return (
