@@ -37,6 +37,7 @@ const Input = forwardRef((props, ref) => {
     size,
     step,
     autocapitalize,
+    send,
   } = props;
 
   const style = {
@@ -157,6 +158,11 @@ const Input = forwardRef((props, ref) => {
   //     ></Textarea>
   //   );
   // }
+  if(send) {
+    return(
+      <Send/>
+    )
+  }
 
   return (
     <Grid>
@@ -210,6 +216,14 @@ const ElInput = styled.input`
   border-radius: 6px;
   box-sizing: border-box;
 `;
+
+const Send = styled.input`
+  width: 100%;
+  height: 38px;
+  padding: 14px 8px;
+  border: 1px solid #a3a6ab;
+  border-radius: 40px;
+`
 
 const DupButton = styled.input`
   border: 1px solid #212121;
