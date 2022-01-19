@@ -55,7 +55,7 @@ export const makeRoomChatDB =
           `/chatroom/${response.data.roomId}/${response.data.roomName}`
         );
     } catch (err) {
-      console.log(`불러오기 실패${err}`);
+      window.alert(err);
     }
   };
 

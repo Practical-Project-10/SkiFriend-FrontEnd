@@ -37,7 +37,6 @@ const ProfileWrite = (props) => {
     selfIntro,
     phoneNum,
   } = profile;
-
   useEffect(() => {
     dispatch(profileActions.getProfileDB());
     dispatch(imageActions.setPreview(profileImg));
