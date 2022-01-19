@@ -119,7 +119,7 @@ const Home = (props) => {
   useEffect(() => {
     const mainHotPosts = async () => {
       const response = await (
-        await fetch("https://seongeunyang.shop/main")
+        await fetch("http://3.34.19.50:8080/main")
       ).json();
       dispatch(mainActions.loadPosts(response));
     };
@@ -166,19 +166,19 @@ const Home = (props) => {
         </Header>
       )}
       <Grid width="100%" margin="0 0 70px">
-        <Grid width="100%" height="208px">
+        <Grid width="100%" height="189px">
           {/* 캐러셀 배너 */}
           <Slider {...settings}>
             {Carousel.map((item) => {
               return (
-                <div key={item.id}>
-                  <BannerImage
-                    src={item.url}
-                    style={{ cursor: item.id === 1 ? "" : "pointer" }}
-                    onClick={() => connectUrl(item.id)}
-                    target="_blank"
-                  />
-                </div>
+                <BannerImage
+                  key={item.id}
+                  src={item.url}
+                  style={{ cursor: item.id === 1 ? "" : "pointer" }}
+                  onClick={() => connectUrl(item.id)}
+                  target="_blank"
+                  alt="배너"
+                />
               );
             })}
           </Slider>
@@ -226,13 +226,14 @@ const Home = (props) => {
             </Text>
           </Grid>
           <Grid phoneSize>
-            {hotPosts.map((p) => {
+          <HotPost/>
+            {/* {hotPosts.map((p) => {
               return (
                 <Grid key={p.postId}>
                   <HotPost {...p} />
                 </Grid>
               );
-            })}
+            })} */}
           </Grid>
         </Grid>
       </Grid>
@@ -248,6 +249,6 @@ const IconWrap = styled.div`
 
 const BannerImage = styled.img`
   max-width: 100%;
-  max-height: 100%;
+  max-height: 189px;
 `;
 export default Home;

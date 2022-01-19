@@ -13,27 +13,27 @@ const HotPost = (props) => {
     <React.Fragment>
       <Posts>
         <Grid is_flex padding="20px 0">
-          <ResortName>{props.skiResort}</ResortName>
-          <Grid is_flex justify="space-between" width="100%" gap="30px">
-            <Grid width="80%">
-              <Underline
-                onClick={() =>
-                  history.push(
-                    `/freeboarddetail/${props.skiResort}/${props.postId}/hotpost`
-                  )
-                }
-              >
-                {props.title}
-              </Underline>
-            </Grid>
-            <Grid is_flex width="25%">
+          <Grid width='28%'>
+            <ResortName>{props.skiResort}WellihilliPark</ResortName>
+          </Grid>
+          <Grid is_flex justify="space-between" width="72%">
+            <Underline
+              onClick={() =>
+                history.push(
+                  `/freeboarddetail/${props.skiResort}/${props.postId}/hotpost`
+                )
+              }
+            >
+              {props.title}일이삼사오육칠팔구십
+            </Underline>
+            <Grid is_flex width="30%">
               <Grid is_flex margin="0 11px 0 0">
                 <Image src={Heart} width="15px" height="13px" />
-                <Text>{props.likeCnt}</Text>
+                <Text>{props.likeCnt}7</Text>
               </Grid>
               <Grid is_flex>
                 <Image src={Comment} width="15px" height="13px" />
-                <Text>{props.commentCnt}</Text>
+                <Text>{props.commentCnt}7</Text>
               </Grid>
             </Grid>
           </Grid>
@@ -45,9 +45,8 @@ const HotPost = (props) => {
 };
 
 const ResortName = styled.div`
-  width: 114px;
+  width: 90%;
   padding: 0 7px;
-  margin-right: 11px;
   background: #6195cf;
   border-radius: 140px;
   font-weight: bold;
@@ -65,7 +64,8 @@ const Posts = styled.div`
 `;
 
 const Underline = styled.div`
-  width: 190px;
+  width: 70%;
+  margin-right: 60px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;

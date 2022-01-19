@@ -46,7 +46,7 @@ const ChatRoom = () => {
 
   useEffect(() => {
     //소켓
-    const sock = new SockJS("https://seongeunyang.shop/ws-stomp");
+    const sock = new SockJS("http://3.34.19.50:8080/ws-stomp");
     setStomp(Stomp.over(sock));
     dispatch(chatActions.getRoomInfoDB(roomId)); //방정보 가져오기
     // dispatch(chatActions.getContentChatDB(roomId)); //대화내용 가져오기
