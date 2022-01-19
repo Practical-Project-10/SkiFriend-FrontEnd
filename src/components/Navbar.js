@@ -25,7 +25,7 @@ const Navbar = ({ location }) => {
   useEffect(() => {
     if (alarm.length !== 0) {
       setNewRings(true);
-    }
+    } 
   }, [alarm]);
 
   if (
