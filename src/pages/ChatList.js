@@ -11,9 +11,6 @@ import { history } from "../redux/ConfigStore";
 const ChatList = (props) => {
   const dispatch = useDispatch();
   const chatRoomList = useSelector((state) => state.chat.roomList);
-  console.log(chatRoomList);
-  const time = chatRoomList;
-  // const realTime = time[0] + " " + time[1] + " " + time[2];
   const is_login = localStorage.getItem("is_login") === "true" ? true : false;
   const certification =
     localStorage.getItem("certification") === "true" ? true : false;

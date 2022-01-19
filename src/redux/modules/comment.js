@@ -5,20 +5,31 @@ import { getOneBoardDB } from "./freeboard";
 
 // initialState
 const initialState = {
-  list: [],
+  shortsList: [],
 };
 
 // action
-const GET_Shorts_Comment = "comment/GET";
-const ADD_Shorts_Comment = "comment/ADD";
-const UPDATE_Shorts_Comment = "comment/UPDATE";
-const DELETE_Shorts_Comment = "comment/DELETE";
+const GET_SHORTS_COMMENT = "comment/GET";
+const ADD_SHORTS_COMMENT = "comment/ADD";
+const UPDATE_SHORTS_COMMENT = "comment/UPDATE";
+const DELETE_SHORTS_COMMENT = "comment/DELETE";
 
 // action creater
-export const getShortsComment = createAction(GET_Shorts_Comment, (commentList) => ({ commentList }));
-export const addShortsComment = createAction(ADD_Shorts_Comment, (comment) => ({ comment }));
-export const updateShortsComment = createAction(UPDATE_Shorts_Comment, (comment) => ({ comment }));
-export const deleteShortsComment = createAction(DELETE_Shorts_Comment, (videoCommentId) => ({ videoCommentId }));
+export const getShortsComment = createAction(
+  GET_SHORTS_COMMENT,
+  (commentList) => ({ commentList })
+);
+export const addShortsComment = createAction(ADD_SHORTS_COMMENT, (comment) => ({
+  comment,
+}));
+export const updateShortsComment = createAction(
+  UPDATE_SHORTS_COMMENT,
+  (comment) => ({ comment })
+);
+export const deleteShortsComment = createAction(
+  DELETE_SHORTS_COMMENT,
+  (videoCommentId) => ({ videoCommentId })
+);
 
 // thunk middleWare
 //게시판 댓글 작성
@@ -103,38 +114,45 @@ export const deleteShortsCommentDB =
     }
   };
 
-  // reducer
+// reducer
 export default handleActions(
   {
-    [GET_Shorts_Comment]: (state, action) =>
+    [GET_SHORTS_COMMENT]: (state, action) =>
       produce(state, (draft) => {
-        draft.list = action.payload.commentList;
-        draft.list = draft.list.reduce((prev, now) => {
-          if (prev.findIndex((a) => a.shortsCommentId === now.shortsCommentId) === -1) {
+        draft.shortsList = action.payload.commentList;
+        draft.shortsList = draft.shortsList.reduce((prev, now) => {
+          if (
+            prev.findIndex((a) => a.shortsCommentId === now.shortsCommentId) ===
+            -1
+          ) {
             return [...prev, now];
           } else {
-            prev[prev.findIndex((a) => a.shortsCommentId === now.shortsCommentId)] = now;
+            prev[
+              prev.findIndex((a) => a.shortsCommentId === now.shortsCommentId)
+            ] = now;
             return prev;
           }
         }, []);
       }),
 
-    [ADD_Shorts_Comment]: (state, action) =>
+    [ADD_SHORTS_COMMENT]: (state, action) =>
       produce(state, (draft) => {
-        draft.list.unshift(action.payload.comment);
+        draft.shortsList.unshift(action.payload.comment);
       }),
 
-    [UPDATE_Shorts_Comment]: (state, action) =>
-      produce(state, (draft) => {
-        draft.list = action.payload.comment;
-      }),
-
-    [DELETE_Shorts_Comment]: (state, action) =>
+    [UPDATE_SHORTS_COMMENT]: (state, action) =>
       produce(state, (draft) => {
         let idx = draft.list.findIndex(
           (p) => p.postId === Number(action.payload.postId)
         );
-        draft.list[idx] = { ...draft.list[idx], ...action.payload.detail };
+        draft.shortsList[idx] = action.payload.comment;
+      }),
+
+    [DELETE_SHORTS_COMMENT]: (state, action) =>
+      produce(state, (draft) => {
+        draft.shortsList = state.shortsList.filter(
+          (list) => list.shortsCommentId !== action.payload.shortsCommentId
+        );
       }),
   },
   initialState
