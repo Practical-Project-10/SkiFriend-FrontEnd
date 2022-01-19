@@ -26,29 +26,31 @@ const Header = (props) => {
 
   if (goBack) {
     return (
-      <GoBack fixed={fixed}>
-        {push ? (
-          <Image
-            src={back}
-            _onClick={page === 'hotpost'? goMain: _onClick}
-            width="20px"
-            height="17px"
-            cursor="pointer"
-          />
-        ) : (
-          <Image
-            src={back}
-            _onClick={() => history.goBack()}
-            width="20px"
-            height="17px"
-            cursor="pointer"
-          />
-        )}
-        <Text bold block width="140px" margin="0 0 0 100px" size="18px">
+      <GoBack>
+        <Back>
+          {push ? (
+            <Image
+              src={back}
+              _onClick={page === 'hotpost'? goMain: _onClick}
+              width="20px"
+              height="17px"
+              cursor="pointer"
+            />
+          ) : (
+            <Image
+              src={back}
+              _onClick={() => history.goBack()}
+              width="20px"
+              height="17px"
+              cursor="pointer"
+            />
+          )}
+        </Back>
+        <Text bold size="18px" line='54px'>
           {children}
         </Text>
-        {complete ? <Button onClick={_onClick}>완료</Button> : null}
-        {phone ? <Button onClick={_onClick}>전화번호 공개</Button> : null}
+        {/* {complete ? <Button onClick={_onClick}>완료</Button> : null}
+        {phone ? <Button onClick={_onClick}>전화번호 공개</Button> : null} */}
       </GoBack>
     );
   }
@@ -79,11 +81,8 @@ const GoBack = styled.div`
   height: 54px;
   padding: 0 16px;
   background-color: #d9e3ee;
-  display: flex;
-  align-items: center;
   text-align: center;
-  position: ${(props) => (props.fixed ? "absolute" : "relative")};
-  ${(props) => (props.fixed ? "top: 0; left: 0; z-index: 9;" : "")}
+  position: relative;
 `;
 
 const Button = styled.div`
@@ -104,5 +103,13 @@ const Button = styled.div`
     cursor: pointer;
   }
 `;
+
+const Back = styled.div`
+  height: 17px;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  margin: auto 0;
+`
 
 export default Header;

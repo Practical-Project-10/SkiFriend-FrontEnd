@@ -183,7 +183,7 @@ const PlaceInfo = () => {
 };
 
 const Toggle = styled.div`
-  width: 380px;
+  width: 100%;
   height: 218px;
   padding: 9px;
   background-color: #D9E3EE;

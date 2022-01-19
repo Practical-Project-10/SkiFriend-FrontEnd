@@ -193,7 +193,7 @@ const Card = (props) => {
             {props.title}
           </Text>
 
-          <Posts width='342px'>
+          <Posts width='100%'>
             <Text bold>{props.startLocation}</Text>
             <Image src={arrow} width="50px" height="10px" />
             <Text bold color={repuest ? "#7281D1" : "#6195CF"}>
@@ -201,7 +201,7 @@ const Card = (props) => {
             </Text>
           </Posts>
 
-          <Grid is_flex width='342px' justify="space-between" margin="0 0 7px">
+          <Grid is_flex width='100%' justify="space-between" margin="0 0 7px">
             <Items repuest={repuest} width="101px">
               <Image src={calendar} width="11px" height="15px" />
               <Text size="12px" color="#FFF">
