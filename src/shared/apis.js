@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "https://seongeunyang.shop/",
+  baseURL: "http://3.34.19.50:8080/",
   headers: {
     "content-type": "application/json;charset=UTF-8",
     accept: "application/json,",
@@ -136,7 +136,7 @@ export const apis = {
 
   chatMSG: (roomId) => api.get(`/chat/message/${roomId}`),
 
-  chatShowProfile: (longRoomId) => api.get(`/user/introduction/${longRoomId}`),
+  chatShowProfile: (roomId) => api.get(`/user/introduction/${roomId}`),
 
   chatPhoneNum: () => api.get(`/user/info/phoneNum`),
 
