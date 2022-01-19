@@ -6,23 +6,43 @@ import produce from "immer";
 // initialState
 const initialState = {
   list: [],
+  shortsLikeList: [],
 };
 
 // action
 const GET_LIKE = "like/GET_LIKE";
+const GET_SHORTS_LIKE = "like/GET_SHORTS_LIKE";
 
 // action creater
 export const getLike = createAction(GET_LIKE, (likeList) => ({ likeList }));
+export const getShortsLike = createAction(GET_SHORTS_LIKE, (likeList) => ({
+  likeList,
+}));
 
 // thunk
-export const addLikeDB = (postId) =>
+//자유게시글 좋아요
+export const addLikeDB =
+  (postId) =>
   async (dispatch, getState, { history }) => {
     try {
       const response = await apis.changeLike(postId);
+      response &&
+        dispatch(getLike(response.data)) &&
+        dispatch(boardActions.getOneBoardDB(postId));
+    } catch (err) {
+      console.log(`좋아요 변경 실패${err}`);
+    }
+  };
 
-      response && dispatch(getLike(response.data)) && 
-      dispatch(boardActions.getOneBoardDB(postId));
-    } catch(err) {
+//동영상 좋아요
+export const addShortsLikeDB =
+  (videoId) =>
+  async (dispatch, getState, { history }) => {
+    try {
+      const response = await apis.shortsLike(videoId);
+      response && dispatch(getShortsLike(response.data));
+      // dispatch(boardActions.getOneBoardDB(videoId));
+    } catch (err) {
       console.log(`좋아요 변경 실패${err}`);
     }
   };
@@ -34,11 +54,16 @@ export default handleActions(
       produce(state, (draft) => {
         draft.list = action.payload.likeList;
       }),
+    [GET_SHORTS_LIKE]: (state, action) =>
+      produce(state, (draft) => {
+        draft.shortsLikeList = action.payload.likeList;
+      }),
   },
   initialState
 );
 
 const likeCreators = {
   addLikeDB,
+  addShortsLikeDB,
 };
 export { likeCreators };
