@@ -114,8 +114,8 @@ function App() {
             />
             <Route exact path="/shortsupload" component={ShortsUpload} />
             <Route exact path="/shorts" component={Shorts} />
-            <Navbar />
           </CardList>
+          <Navbar />
         </div>
       </Container>
     </React.Fragment>
