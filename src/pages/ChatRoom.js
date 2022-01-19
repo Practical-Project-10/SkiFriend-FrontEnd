@@ -70,14 +70,8 @@ const ChatRoom = () => {
         setMessageList(prevChatData);
       });
     setTimeout(() => {
-      //메세지 보내면 스크롤 자동내림
-      scrollRef.current.scrollIntoView({
-        behavior: "smooth",
-        block: "end",
-        inline: "start",
-      });
+      scrollMoveBottom(); //스크롤 다운
     }, 100);
-
     // dispatch(chatActions.getContentChatDB(roomId));
   }, []);
 
@@ -128,12 +122,7 @@ const ChatRoom = () => {
       };
       stomp.debug = null;
       await stomp.send("/pub/chat/message", token, JSON.stringify(datas));
-      //메세지 보내면 스크롤 자동내림
-      scrollRef.current.scrollIntoView({
-        behavior: "smooth",
-        block: "end",
-        inline: "start",
-      });
+      scrollMoveBottom(); //스크롤 다운
       // dispatch(chatActions.sendChatDB(roomId, message));
       setMessage("");
     }
@@ -157,13 +146,17 @@ const ChatRoom = () => {
       message: "전화번호 공개" + phoneInfo,
     };
     await stomp.send("/pub/chat/message", token, JSON.stringify(datas));
-    //메세지 보내면 스크롤 자동내림
+    scrollMoveBottom(); //스크롤 다운
+    // dispatch(chatActions.sendChatDB(roomId, message));
+  };
+
+  //메세지 보내면 스크롤 자동내림
+  const scrollMoveBottom = () => {
     scrollRef.current.scrollIntoView({
       behavior: "smooth",
       block: "end",
       inline: "start",
     });
-    // dispatch(chatActions.sendChatDB(roomId, message));
   };
 
   return (
