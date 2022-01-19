@@ -25,9 +25,7 @@ const KakaoAuthHandle = (props) => {
   }, []);
 
   return (
-    <React.Fragment>
-      <Container src={bg} alt="로딩 이미지"/>
-    </React.Fragment>
+    <Container src={bg} alt="로딩 이미지"/>
   );
 };
 

@@ -8,7 +8,6 @@ import Comment from "../assets/freeBoard/comment.svg";
 import { AiOutlineHeart } from "react-icons/ai";
 
 const Board = (props) => {
-  console.log(props.commentBoard)
   if(props.commentBoard) {
     return(
       <Grid width='100%'>

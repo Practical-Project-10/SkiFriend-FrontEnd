@@ -1,4 +1,3 @@
-//12121
 import React from "react";
 import GlobalStyleds from "./shared/globalStyles";
 
