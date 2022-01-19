@@ -17,12 +17,12 @@ const Header = (props) => {
     push,
     login,
     logout,
-    page
+    page,
   } = props;
-  
+
   const goMain = () => {
     history.goBack();
-  }
+  };
 
   if (goBack) {
     return (
@@ -31,7 +31,7 @@ const Header = (props) => {
           {push ? (
             <Image
               src={back}
-              _onClick={page === 'hotpost'? goMain: _onClick}
+              _onClick={page === "hotpost" ? goMain : _onClick}
               width="20px"
               height="17px"
               cursor="pointer"
@@ -46,7 +46,7 @@ const Header = (props) => {
             />
           )}
         </Back>
-        <Text bold size="18px" line='54px'>
+        <Text bold size="18px" line="54px">
           {children}
         </Text>
         {complete ? <Button onClick={_onClick}>완료</Button> : null}
@@ -110,6 +110,6 @@ const Back = styled.div`
   top: 0;
   bottom: 0;
   margin: auto 0;
-`
+`;
 
 export default Header;
