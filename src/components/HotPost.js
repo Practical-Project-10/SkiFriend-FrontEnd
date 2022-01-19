@@ -13,7 +13,7 @@ const HotPost = (props) => {
     <React.Fragment>
       <Posts>
         <Grid is_flex padding="20px 0">
-          <Grid width='28%'>
+          <Grid width="28%">
             <ResortName>{props.skiResort}</ResortName>
           </Grid>
           <Grid is_flex justify="space-between" width="72%">
