@@ -14,7 +14,6 @@ const ChatList = (props) => {
   const is_login = localStorage.getItem("is_login") === "true" ? true : false;
   const certification =
     localStorage.getItem("certification") === "true" ? true : false;
-
   //채팅방 목록으로 나타내기
   useEffect(() => {
     if (!is_login) {
@@ -43,8 +42,8 @@ const ChatList = (props) => {
   }, []);
 
   //채팅목록에서 클릭한 채팅방 대화내용 가져오기
-  const EnterChatRoom = (roomId, roomName, longRoomId) => {
-    history.push(`/chatroom/${roomId}/${roomName}/${longRoomId}`);
+  const EnterChatRoom = (roomId, roomName) => {
+    history.push(`/chatroom/${roomId}/${roomName}`);
   };
   //채팅방 나가기(삭제하기)
   const chatRoomExit = (roomId) => {
@@ -82,7 +81,7 @@ const ChatList = (props) => {
                 <Grid
                   is_flex
                   _onClick={() => {
-                    EnterChatRoom(list.roomId, list.roomName, list.longRoomId);
+                    EnterChatRoom(list.roomId, list.roomName);
                   }}
                 >
                   <Grid

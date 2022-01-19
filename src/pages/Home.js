@@ -38,7 +38,7 @@ const Home = (props) => {
   const accessToken = document.cookie.split("=")[1];
   const token = { Authorization: `${accessToken}` };
   //소켓
-  const sock = new SockJS("https://seongeunyang.shop/ws-alarm");
+  const sock = new SockJS("http://3.34.19.50:8080/ws-alarm");
   const stomp = Stomp.over(sock);
   //localstorage
   const is_login = localStorage.getItem("is_login") === "true" ? true : false;

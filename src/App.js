@@ -110,7 +110,7 @@ function App() {
             <Route exact path="/chatlist" component={ChatList} />
             <Route
               exact
-              path="/chatroom/:roomId/:roomName/:longRoomId"
+              path="/chatroom/:roomId/:roomName/"
               component={ChatRoom}
             />
             <Route exact path="/shortsupload" component={ShortsUpload} />
