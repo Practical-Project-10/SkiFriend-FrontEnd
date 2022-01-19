@@ -10,7 +10,7 @@ import { AiOutlineHeart } from "react-icons/ai";
 const Board = (props) => {
   if(props.commentBoard) {
     return(
-      <Grid width='100%'>
+      <Grid width='100%' padding='9px 16px' borderB='1px solid #edeeef'>
         <Grid width='100%' margin='0 0 9px 0' is_flex justify='space-between'>
           <Grid is_flex gap='9px'>
             <Text bold>스키보이</Text>

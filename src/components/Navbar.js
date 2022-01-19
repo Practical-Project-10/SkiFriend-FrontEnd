@@ -7,7 +7,8 @@ import { chatCreators } from "../redux/modules/chat";
 import styled from "styled-components";
 import { Grid } from "../elements";
 
-//react icons
+import shorts from "../assets/nav/shorts.svg"
+import shorts_active from "../assets/nav/shorts_active.svg"
 import home from "../assets/nav/home.svg";
 import home_active from "../assets/nav/home_active.svg";
 import info from "../assets/nav/info.svg";
@@ -66,14 +67,14 @@ const Navbar = ({ location }) => {
           />
         </NavLink>
       </Icon>
-      {/* <Icon>
+      <Icon>
         <NavLink to="/shorts" className="navLink">
           <img 
             src={location.pathname === "/shorts"? shorts_active: shorts} 
             alt='동영상'
           />
         </NavLink>
-      </Icon> */}
+      </Icon>
       <Icon>
         <NavLink to="/chatlist" className="navLink">
           <Grid _onClick={deleteAlarm}>
@@ -108,13 +109,14 @@ const FixedNav = styled.div`
   background: #fff;
   display: flex;
   align-items: center;
-  /* gap: 65px; */gap: 79px;
+  gap: 65px;
+  /* gap: 79px; */
 `;
 
 const Icon = styled.div`
   position: relative;
-  /* width: calc((100% - 268px) / 5); */
-  width: calc((100% - 237px) / 4);
+  width: calc((100% - 268px) / 5);
+  /* width: calc((100% - 237px) / 4); */
 `;
 
 const New = styled.div`
