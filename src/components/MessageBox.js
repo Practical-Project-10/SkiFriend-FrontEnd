@@ -11,6 +11,8 @@ import { BsTelephoneOutbound } from "react-icons/bs";
 
 const MessageBox = (props) => {
   const { chatInfo } = props;
+  const time = chatInfo.createdAt.split(" ");
+  const realTime = time[0] + " " + time[1] + " " + time[2];
   const dispatch = useDispatch();
   //경로
   const params = useParams();
@@ -44,7 +46,7 @@ const MessageBox = (props) => {
         {nickname === chatInfo.sender ? (
           <Grid display="flex" justify="flex-end" alignItems="end" margin="5px">
             <Text size="10px" margin="0 10px">
-              {chatInfo.createdAt}
+              {realTime}
             </Text>
             {/* 전화번호 공개 할 때와 일반 말풍선일 경우 */}
             {chatInfo.type === "PHONE_NUM" ? (
@@ -148,7 +150,7 @@ const MessageBox = (props) => {
                   </Text>
                 )}
                 <Text size="10px" margin="0 10px">
-                  {chatInfo.createdAt}
+                  {realTime}
                 </Text>
               </Grid>
             </Grid>
