@@ -26,7 +26,7 @@ const Short = (props) => {
   //localstorage 로그인정보
   const login_userId = localStorage.getItem("userId");
   const is_login = localStorage.getItem("is_login");
-
+  console.log(shortsData);
   // useState
   const [showModal, setShowModal] = useState(false);
   const [heart, setHeart] = useState(false);
@@ -63,12 +63,7 @@ const Short = (props) => {
   const likeChange = () => {
     if (is_login) {
       changeHeart();
-      return dispatch(
-        likeActions.addShortsLikeDB(
-          shortsData.shortsId,
-          shortsData.shortsCommentCnt
-        )
-      );
+      return dispatch(likeActions.addShortsLikeDB(shortsData.shortsId));
     } else {
       const ask = window.confirm(
         "로그인한 회원만 가능합니다. 로그인 페이지로 이동하시겠습니까?"
@@ -79,7 +74,7 @@ const Short = (props) => {
     }
   };
 
-  return(
+  return (
     <React.Fragment>
       <Container>
         {/* 아이콘 */}
@@ -87,7 +82,12 @@ const Short = (props) => {
           {/* 프로필 */}
           <Position top="44px" left="16px">
             <Grid is_flex>
-              <Image myIcon src={shortsData.profileImg} width="44px" height="44px" />
+              <Image
+                myIcon
+                src={shortsData.profileImg}
+                width="44px"
+                height="44px"
+              />
               <Grid padding="0 0 0 13px">
                 <Grid padding="0 0 5px">
                   <Text bold size="17px" color="#FFF">
@@ -102,7 +102,12 @@ const Short = (props) => {
           </Position>
 
           {/* 숏츠 작성 버튼 */}
-          <FloatButton src={shortsBtn} bottom='34px' left='16px' _onClick={() => history.push('/shortsupload')}/>
+          <FloatButton
+            src={shortsBtn}
+            bottom="34px"
+            left="16px"
+            _onClick={() => history.push("/shortsupload")}
+          />
 
           {/* 댓글 */}
           <Position
@@ -146,17 +151,17 @@ const Short = (props) => {
           />
         ) : null}
 
-        <ShortVideo src={shortsData.videoPath}/>
+        <ShortVideo src={shortsData.videoPath} />
       </Container>
     </React.Fragment>
   );
 };
 
 const Container = styled.div`
-  height: calc( 100vh - 70px );
-  background-color: rgba(0,0,0,0.6);
+  height: calc(100vh - 70px);
+  background-color: rgba(0, 0, 0, 0.6);
   position: relative;
-`
+`;
 
 const Position = styled.div`
   position: absolute;
@@ -172,6 +177,6 @@ const IconWrap = styled.div`
   height: calc(100vh - 70px);
   position: absolute;
   z-index: 1;
-`
+`;
 
 export default Short;
