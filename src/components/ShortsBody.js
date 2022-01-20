@@ -12,6 +12,7 @@ import shortsBtn from "../assets/shorts/shorts_btn.svg";
 import comment from "../assets/shorts/comment.png";
 
 import ShortComment from "./ShortComment";
+import ShortVideo from "./ShortsVideo";
 
 import high1 from "../assets/high1_logo.svg"; //임시
 //react icons
@@ -67,11 +68,16 @@ const Short = (props) => {
       }
     }
   };
-  return (
+  
+  return(
     <React.Fragment>
-      <Grid height="calc( 100vh - 70px )" bg="#669900" position="relative">
+      <Grid
+        height="calc( 100vh - 70px )"
+        bg='#669900'
+        position='relative'
+      >
         {/* 아이콘 */}
-        <Grid height="calc( 100vh - 70px )" position="relative">
+        <IconWrap>
           {/* 프로필 */}
           <Position top="44px" left="16px">
             <Grid is_flex>
@@ -92,12 +98,7 @@ const Short = (props) => {
           </Position>
 
           {/* 숏츠 작성 버튼 */}
-          <FloatButton
-            src={shortsBtn}
-            bottom="34px"
-            left="16px"
-            _onClick={() => history.push("/shortsupload")}
-          />
+          <FloatButton src={shortsBtn} bottom='34px' left='16px' _onClick={() => history.push('/shortsupload/shortid')}/>
 
           {/* 댓글 */}
           <Position
@@ -134,12 +135,17 @@ const Short = (props) => {
               </Grid>
             )}
           </Position>
-        </Grid>
+        </IconWrap>
 
         {/* 댓글모달 */}
-        {showModal ? (
-          <ShortComment closeModal={() => setShowModal(false)} />
-        ) : null}
+        {showModal
+        ? <ShortComment
+            closeModal={() => setShowModal(false)}
+          /> 
+        : null
+        }
+
+        <ShortVideo/>
       </Grid>
     </React.Fragment>
   );
@@ -153,5 +159,12 @@ const Position = styled.div`
   bottom: ${(props) => props.bottom};
   cursor: pointer;
 `;
+
+const IconWrap = styled.div`
+  width: 100%;
+  height: calc( 100vh - 70px );
+  position: absolute;
+  z-index: 1px;
+`
 
 export default Short;

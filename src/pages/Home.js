@@ -41,6 +41,7 @@ const Home = (props) => {
   const sock =
     // new SockJS("https://seongeunyang.shop/ws-alarm");
     new SockJS("http://3.34.19.50:8080/ws-alarm");
+
   const stomp = Stomp.over(sock);
   //localstorage
   const is_login = localStorage.getItem("is_login") === "true" ? true : false;
@@ -123,8 +124,7 @@ const Home = (props) => {
       const response = await (
         // await fetch("https://seongeunyang.shop/main")
         await fetch("http://3.34.19.50:8080/main")
-      )
-        .json();
+      ).json();
       dispatch(mainActions.loadPosts(response));
     };
     mainHotPosts();

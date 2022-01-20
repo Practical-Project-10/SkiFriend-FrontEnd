@@ -147,10 +147,10 @@ export const apis = {
   //동영상
   shortsRandomList: () => api.get(`/shorts`),
 
-  shortsUpload: (videoFile, title) =>
+  shortsUpload: (formData) =>
     api.post(
-      `/shorts`,
-      { videoFile, title },
+      "/shorts",
+      formData,
       {
         headers: {
           "Content-Type": "multipart/form-data",
@@ -158,7 +158,7 @@ export const apis = {
       }
     ),
 
-  shortsUpdate: (videoId, title) => api.put(`/shorts/${videoId}`, { title }),
+  shortsUpdate: (videoId, title) => api.put(`/shorts/${videoId}`, title),
 
   shortsDelete: (videoId) => api.delete(`/shorts/${videoId}`),
 

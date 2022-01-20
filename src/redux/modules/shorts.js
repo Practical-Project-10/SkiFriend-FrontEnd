@@ -42,9 +42,15 @@ const addShortsDB = (videoFile, title) => {
   return async function (dispatch, getState, { history }) {
     let formData = new FormData();
     formData.append("videoFile", videoFile);
+    formData.append(
+      "title",
+      new Blob([JSON.stringify(title)], { type: "application/json" })
+    );
+
     try {
-      const response = await apis.shortsUpload(formData, title);
+      const response = await apis.shortsUpload(formData);
       response && dispatch(addShorts(response.data));
+      history.push('/shorts');
     } catch (err) {
       console.log(err);
     }
