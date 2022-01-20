@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { history } from "../redux/ConfigStore";
 import { likeCreators as likeActions } from "../redux/modules/like";
-import { shortsActions } from "../redux/modules/shorts";
+import shorts, { shortsActions } from "../redux/modules/shorts";
 
 import styled from "styled-components";
 import { Grid, Image, Text } from "../elements";
@@ -14,7 +14,6 @@ import comment from "../assets/shorts/comment.png";
 import ShortComment from "./ShortComment";
 import ShortVideo from "./ShortsVideo";
 
-import high1 from "../assets/high1_logo.svg"; //임시
 //react icons
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 
@@ -27,6 +26,7 @@ const Short = (props) => {
   //localstorage 로그인정보
   const login_userId = localStorage.getItem("userId");
   const is_login = localStorage.getItem("is_login");
+
   // useState
   const [showModal, setShowModal] = useState(false);
   const [heart, setHeart] = useState(false);
@@ -44,7 +44,7 @@ const Short = (props) => {
       }
       setHeart(false);
     }
-  }, [shortsData]);
+  }, []);
 
   useEffect(() => {
     dispatch(shortsActions.getShortsDB());
@@ -79,15 +79,15 @@ const Short = (props) => {
     }
   };
 
-  return (
+  return(
     <React.Fragment>
-      <Grid height="calc( 100vh - 70px )" bg="#669900" position="relative">
+      <Container>
         {/* 아이콘 */}
         <IconWrap>
           {/* 프로필 */}
           <Position top="44px" left="16px">
             <Grid is_flex>
-              <Image myIcon src={high1} width="44px" height="44px" />
+              <Image myIcon src={shortsData.profileImg} width="44px" height="44px" />
               <Grid padding="0 0 0 13px">
                 <Grid padding="0 0 5px">
                   <Text bold size="17px" color="#FFF">
@@ -102,12 +102,7 @@ const Short = (props) => {
           </Position>
 
           {/* 숏츠 작성 버튼 */}
-          <FloatButton
-            src={shortsBtn}
-            bottom="34px"
-            left="16px"
-            _onClick={() => history.push("/shortsupload/shortid")}
-          />
+          <FloatButton src={shortsBtn} bottom='34px' left='16px' _onClick={() => history.push('/shortsupload')}/>
 
           {/* 댓글 */}
           <Position
@@ -151,11 +146,17 @@ const Short = (props) => {
           />
         ) : null}
 
-        <ShortVideo />
-      </Grid>
+        <ShortVideo src={shortsData.videoPath}/>
+      </Container>
     </React.Fragment>
   );
 };
+
+const Container = styled.div`
+  height: calc( 100vh - 70px );
+  background-color: rgba(0,0,0,0.6);
+  position: relative;
+`
 
 const Position = styled.div`
   position: absolute;
@@ -170,7 +171,7 @@ const IconWrap = styled.div`
   width: 100%;
   height: calc(100vh - 70px);
   position: absolute;
-  z-index: 1px;
-`;
+  z-index: 1;
+`
 
 export default Short;

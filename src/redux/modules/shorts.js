@@ -27,10 +27,13 @@ const initialState = {
 // middlewares
 // 동영상 조회
 const getShortsDB = () => {
-  return async function (dispatch) {
+  return async function (dispatch, getState, { history }) {
     try {
       const response = await apis.shortsRandomList();
+      const shortsId = response.data.shortsId;
+
       response && dispatch(getShorts(response.data));
+      history.push(`/shorts/${shortsId}`);
     } catch (err) {
       console.log(err);
     }
@@ -49,6 +52,7 @@ const addShortsDB = (videoFile, title) => {
 
     try {
       const response = await apis.shortsUpload(formData);
+      console.log(response);
       response && dispatch(addShorts(response.data));
       console.log(response);
       history.push("/shorts");

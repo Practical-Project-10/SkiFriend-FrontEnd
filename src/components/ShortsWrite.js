@@ -66,16 +66,9 @@ const VideoUpload = (props) => {
           {/* 동영상미리보기 */}
           <VideoArea>
             영상을 올려주세요.
-            {/* <ShortVideo src={file} id='video'/> */}
-            {/* <Swiper
-              spaceBetween={10}
-              slidesPerView={1}
-              navigation
-              pagination={{ clickable: true }}
-              style={{ width: "100%" }}
-            >
-              
-            </Swiper> */}
+            <Video>
+              <ShortVideo src={src}/>
+            </Video>
           </VideoArea>
         </Grid>
 
@@ -131,5 +124,11 @@ const Title = styled.input`
     outline: none;
   }
 `;
+
+const Video = styled.div`
+  position: absolute;
+  width: 100%;
+  height: 100%;
+`
 
 export default VideoUpload;

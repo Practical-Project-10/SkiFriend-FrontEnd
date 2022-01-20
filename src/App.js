@@ -112,8 +112,8 @@ function App() {
               path="/chatroom/:roomId/:roomName"
               component={ChatRoom}
             />
-            <Route exact path="/shortsupload/:shortid" component={ShortsUpload} />
-            <Route exact path="/shorts" component={Shorts} />
+            <Route exact path="/shortsupload" component={ShortsUpload} />
+            <Route exact path="/shorts/:shortid" component={Shorts} />
           </CardList>
           <Navbar />
         </div>

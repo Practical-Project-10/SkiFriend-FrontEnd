@@ -41,6 +41,7 @@ const Float = styled.div`
   width: 53px;
   height: 53px;
   background-image: ${props => props.src && `url(${props.src})`};
+  background-repeat: no-repeat;
 
   &:hover {
     opacity: 0.9;
