@@ -11,38 +11,32 @@ import ShortVideo from "./ShortsVideo";
 
 import Header from "./Header";
 
-const VideoUpload = (props) => {
-  const { is_edit } = props;
+const ShortsWrite = (props) => {
+  const {is_edit} = props;
   const dispatch = useDispatch();
 
   const titleInput = useRef();
   const fileInput = useRef();
-  const [file, setFile] = useState();
+  const [file, setFile] = useState(null);
   const [src, setSrc] = useState();
 
   const uploadFile = () => {
-    var video = document.getElementById("video");
-    const file = fileInput.current.files[0];
-    const videoUrl = URL.createObjectURL(file);
-
-    setFile(file);
+    const file_ = fileInput.current.files[0];
+    const videoUrl = URL.createObjectURL(file_);
+    setFile(file_);
     setSrc(videoUrl);
-    video.oncanplaythrough = () => {
-      video.play();
-    };
-    // dispatch(imageActions.setPreview(videoUrl));
   };
 
   const addShorts = () => {
-    if (file === undefined) {
+    const title = titleInput.current.value;
+
+    if (file === null || title === '') {
       return window.alert("제목 및 영상을 등록해 주세요.");
     } else {
-      return dispatch(
-        shortsActions.addShortsDB(file, titleInput.current.value)
-      );
+      dispatch(shortsActions.addShortsDB(file, titleInput.current.value));
     }
   };
-
+  
   return (
     <React.Fragment>
       <Header goBack complete _onClick={addShorts}>
@@ -130,4 +124,4 @@ const Video = styled.div`
   height: 100%;
 `;
 
-export default VideoUpload;
+export default ShortsWrite;

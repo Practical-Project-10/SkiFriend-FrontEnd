@@ -18,11 +18,10 @@ import price from "../assets/carpoolList/price_icon.svg";
 import etc from "../assets/etc_icon.svg";
 
 const Card = (props) => {
-  const { notLogin, page } = props;
+  const { noCard, page } = props;
   const dispatch = useDispatch();
   const is_login = localStorage.getItem("is_login") === "true" ? true : false;
-  const certification =
-    localStorage.getItem("certification") === "true" ? true : false;
+  const certification = localStorage.getItem("certification") === "true" ? true : false;
   const repuest = props.carpoolType === "카풀 요청";
   const nickname = localStorage.getItem("nickname");
   const is_mine = props.nickname === nickname;
@@ -83,16 +82,15 @@ const Card = (props) => {
     return dispatch(chatActions.makeRoomChatDB(postId));
   };
 
-  if (notLogin) {
+  if (noCard) {
     return (
       <Grid>
-        <Text>내가 쓴 카풀</Text>
-        <NotLogin>최근 카풀 내역이 없어요!</NotLogin>
+        <NotLogin>작성한 카풀 내역이 없어요!</NotLogin>
       </Grid>
     );
   }
 
-  if (page === "myPage") {
+  if (page === 'myPage') {
     return (
       <React.Fragment>
         <CarpoolCard
@@ -371,7 +369,7 @@ const NotLogin = styled.div`
   border-radius: 10px;
   color: #474d56;
   font-weight: 700;
-  font-size: 14px;
+  font-size: 13px;
   opacity: 0.5;
   text-align: center;
   line-height: 90px;

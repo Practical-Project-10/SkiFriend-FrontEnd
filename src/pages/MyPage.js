@@ -60,11 +60,11 @@ const MyPage = (props) => {
           </a>
 
           <Grid margin="25px 0 0">
-            {is_login ? (
+            <Text bold size="12px">
+              내가 쓴 카풀
+            </Text>
+            {is_login || myCarpool.length === 0 ? (
               <RowDiv>
-                <Text bold size="12px">
-                  내가 쓴 카풀
-                </Text>
                 <Swiper
                   className="scroll-container"
                   slidesPerView={1.3}
@@ -83,7 +83,7 @@ const MyPage = (props) => {
                 </Swiper>
               </RowDiv>
             ) : (
-              <Card notLogin />
+              <Card noCard/>
             )}
           </Grid>
         </Grid>
