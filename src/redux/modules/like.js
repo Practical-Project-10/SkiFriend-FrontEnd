@@ -46,8 +46,7 @@ export const addShortsLikeDB =
       // }else{
 
       // }
-      response && dispatch(getShortsLike(response.data)) &&
-      dispatch(shortsActions.getShortsDB());
+      response && dispatch(getShortsLike(response.data));
     } catch (err) {
       console.log(`좋아요 변경 실패${err}`);
     }
