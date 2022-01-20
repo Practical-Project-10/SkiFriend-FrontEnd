@@ -54,11 +54,9 @@ const addShortsDB = (videoFile, title) => {
 
     try {
       const response = await apis.shortsUpload(formData);
-      const shortsId = response.data.shortsId;
-      console.log(shortsId)
-
+      window.alert("동영상이 정상적으로 등록되었습니다.");
       response && dispatch(addShorts(response.data));
-      history.push(`/shorts/${shortsId}`);
+      history.push(`/shorts/${response.data.shortsId}`);
     } catch (err) {
       console.log(err);
     }
@@ -111,7 +109,7 @@ export default handleActions(
 
     [ADD_SHORTS]: (state, action) =>
       produce(state, (draft) => {
-        draft.shortsList = action.payload.shortsList;
+        draft.shortsList = action.payload.shortsDatas;
       }),
 
     [UPDATE_SHORTS]: (state, action) =>

@@ -16,8 +16,6 @@ const ShortComment = (props) => {
   const shortsId = params.shortsId;
   //redux data
   const commentList = useSelector((state) => state.comment.shortsList);
-  console.log(props);
-  console.log(commentList);
 
   useEffect(() => {
     dispatch(commentActions.getShortsCommentDB(shortsId));
@@ -34,7 +32,7 @@ const ShortComment = (props) => {
           {commentList && <Text color="#6195CF">{commentList.length}</Text>}
         </Grid>
 
-        <Grid display='flex' direction="column">
+        <Grid display="flex" direction="column">
           {commentList &&
             commentList.map((item) => {
               return (

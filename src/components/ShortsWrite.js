@@ -1,17 +1,15 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useRef } from "react";
 
-import { useDispatch, useSelector } from "react-redux";
-import { imageActions } from "../redux/modules/image";
+import { useDispatch } from "react-redux";
 import { shortsActions } from "../redux/modules/shorts";
 
 import styled from "styled-components";
-import { Grid, Text, Input, Image } from "../elements/index";
-import video from "../assets/freeBoard/video.svg"
+import { Grid } from "../elements/index";
+import video from "../assets/freeBoard/video.svg";
 
 import ShortVideo from "./ShortsVideo";
 
 import Header from "./Header";
-
 
 const ShortsWrite = (props) => {
   const {is_edit} = props;
@@ -21,7 +19,7 @@ const ShortsWrite = (props) => {
   const fileInput = useRef();
   const [file, setFile] = useState(null);
   const [src, setSrc] = useState();
-  
+
   const uploadFile = () => {
     const file_ = fileInput.current.files[0];
     const videoUrl = URL.createObjectURL(file_);
@@ -47,7 +45,7 @@ const ShortsWrite = (props) => {
       <Grid minHeight="calc( 100vh - 55px )" bg="#FFF">
         <Grid phoneSize>
           {/* 제목작성 */}
-          <Grid padding='0 0 18px'>
+          <Grid padding="0 0 18px">
             <Title
               maxLength="50"
               placeholder="제목을 작성해주세요.(50자 이내)"
@@ -76,7 +74,7 @@ const ShortsWrite = (props) => {
           hoverOpacity="0.8"
         >
           <label htmlFor="myFile" style={{ cursor: "pointer" }}>
-            <img src={video} alt='동영상 선택'/>
+            <img src={video} alt="동영상 선택" />
           </label>
           <input
             type="file"
@@ -97,8 +95,8 @@ const VideoArea = styled.div`
   width: 100%;
   height: 542px;
   padding: 0 16px;
-  margin:"0 0 5px";
-  background-color: #EAEAEA;
+  margin: "0 0 5px";
+  background-color: #eaeaea;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -106,7 +104,7 @@ const VideoArea = styled.div`
   color: #b7b8bc;
 
   position: relative;
-`
+`;
 
 const Title = styled.input`
   width: 100%;
@@ -124,6 +122,6 @@ const Video = styled.div`
   position: absolute;
   width: 100%;
   height: 100%;
-`
+`;
 
 export default ShortsWrite;

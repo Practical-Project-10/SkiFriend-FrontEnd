@@ -19,7 +19,7 @@ export const addShortsComment = createAction(ADD_SHORTS_COMMENT, (comment) => ({
 }));
 export const updateShortsComment = createAction(
   UPDATE_SHORTS_COMMENT,
-  (comment) => ({ comment })
+  (shortsCommentId, comment) => ({ shortsCommentId, comment })
 );
 export const deleteShortsComment = createAction(
   DELETE_SHORTS_COMMENT,
@@ -84,7 +84,7 @@ export const addShortsCommentDB =
   async (dispatch, getState, { history }) => {
     try {
       const response = await apis.shortsWriteComment(shortsId, content);
-      response && dispatch(addShortsComment(response.data));
+      response && dispatch(addShortsComment(response.config.data));
     } catch (err) {
       console.log(err);
     }
@@ -96,7 +96,8 @@ export const updateShortsCommentDB =
   async (dispatch, getState, { history }) => {
     try {
       const response = await apis.shortsUpdateComment(shortsCommentId, content);
-      response && dispatch(updateShortsComment(response.data));
+      response &&
+        dispatch(updateShortsComment(shortsCommentId, response.config.data));
     } catch (err) {
       console.log(err);
     }
@@ -108,7 +109,7 @@ export const deleteShortsCommentDB =
   async (dispatch, getState, { history }) => {
     try {
       const response = await apis.shortsDeleteComment(shortsCommentId);
-      response && dispatch(deleteShortsComment(response.data));
+      response && dispatch(deleteShortsComment(shortsCommentId));
     } catch (err) {
       console.log(`댓글삭제 실패${err}`);
     }
@@ -120,19 +121,6 @@ export default handleActions(
     [GET_SHORTS_COMMENT]: (state, action) =>
       produce(state, (draft) => {
         draft.shortsList = action.payload.commentList;
-        // draft.shortsList = draft.shortsList.reduce((prev, now) => {
-        //   if (
-        //     prev.findIndex((a) => a.shortsCommentId === now.shortsCommentId) ===
-        //     -1
-        //   ) {
-        //     return [...prev, now];
-        //   } else {
-        //     prev[
-        //       prev.findIndex((a) => a.shortsCommentId === now.shortsCommentId)
-        //     ] = now;
-        //     return prev;
-        //   }
-        // }, []);
       }),
 
     [ADD_SHORTS_COMMENT]: (state, action) =>
@@ -142,8 +130,8 @@ export default handleActions(
 
     [UPDATE_SHORTS_COMMENT]: (state, action) =>
       produce(state, (draft) => {
-        let idx = draft.list.findIndex(
-          (p) => p.postId === Number(action.payload.postId)
+        let idx = draft.shortsList.findIndex(
+          (p) => p.shortsCommentId === Number(action.payload.shortsCommentId)
         );
         draft.shortsList[idx] = action.payload.comment;
       }),

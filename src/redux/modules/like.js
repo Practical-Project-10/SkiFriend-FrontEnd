@@ -39,8 +39,6 @@ export const addLikeDB =
 export const addShortsLikeDB =
   (shortsId, likeCnt) =>
   async (dispatch, getState, { history }) => {
-    const test = getState().shorts.shortsList.shortsLikeCnt;
-    console.log(test);
     try {
       const response = await apis.shortsLike(shortsId);
       const state = response.data;
