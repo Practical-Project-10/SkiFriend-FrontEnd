@@ -26,7 +26,6 @@ const Short = (props) => {
   //localstorage 로그인정보
   const login_userId = localStorage.getItem("userId");
   const is_login = localStorage.getItem("is_login");
-  console.log(shortsData);
   // useState
   const [showModal, setShowModal] = useState(false);
   const [heart, setHeart] = useState(false);
@@ -44,10 +43,6 @@ const Short = (props) => {
       }
       setHeart(false);
     }
-  }, []);
-
-  useEffect(() => {
-    dispatch(shortsActions.getShortsDB());
   }, []);
 
   //-------heart-------
