@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { NavLink, withRouter } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { chatCreators } from "../redux/modules/chat";
+import { shortsActions } from "../redux/modules/shorts";
 
 import styled from "styled-components";
 import { Grid } from "../elements";
@@ -67,7 +68,7 @@ const Navbar = ({ location }) => {
           />
         </NavLink>
       </Icon>
-      <Icon>
+      <Icon onClick={() => dispatch(shortsActions.getShortsDB())}>
         <NavLink to="/shorts" className="navLink">
           <img 
             src={location.pathname === "/shorts"? shorts_active: shorts} 

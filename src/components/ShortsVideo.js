@@ -4,11 +4,11 @@ import styled from 'styled-components';
 import {Grid} from '../elements'
 
 const ShortVideo = (props) => {
-  // console.log(IdVideo)
+  console.log(props.src)
 
   return(
     <React.Fragment>
-      {/* <Grid height='100%' border='2px solid #000'> */}
+      <Grid height='100%' border='2px solid #000'>
         <Video 
           src={props.src}
           autoPlay // 자동재생
@@ -16,20 +16,22 @@ const ShortVideo = (props) => {
           loop // 반복 재생
         >
         </Video>
-      {/* </Grid> */}
+      </Grid>
     </React.Fragment>
   );
 };
 
 const Video = styled.video`
   width: 100%;
-  /* height: 593px; */
+  height: 100%;
   padding-bottom: 56.25%;
   border: 1px solid red;
   
   position: absolute;
-  top: 0;
+  top: 13%;
   left: 0;
+  right: 0;
+  margin: 0 auto;
 `
 
 export default ShortVideo;

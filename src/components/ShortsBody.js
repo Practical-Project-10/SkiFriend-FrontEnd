@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { history } from "../redux/ConfigStore";
 import { likeCreators as likeActions } from "../redux/modules/like";
-import { shortsActions } from "../redux/modules/shorts";
+import shorts, { shortsActions } from "../redux/modules/shorts";
 
 import styled from "styled-components";
 import { Grid, Image, Text } from "../elements";
@@ -14,7 +14,6 @@ import comment from "../assets/shorts/comment.png";
 import ShortComment from "./ShortComment";
 import ShortVideo from "./ShortsVideo";
 
-import high1 from "../assets/high1_logo.svg"; //임시
 //react icons
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 
@@ -24,15 +23,20 @@ const Short = (props) => {
   const shortsData = useSelector((state) => state.shorts.shortsList);
   const likeList = useSelector((state) => state.like.shortsLikeList);
   const likeData = shortsData.likesDtoList;
+
   //localstorage 로그인정보
   const login_userId = localStorage.getItem("userId");
   const is_login = localStorage.getItem("is_login");
+
   // useState
   const [showModal, setShowModal] = useState(false);
   const [heart, setHeart] = useState(false);
 
   useEffect(() => {
-    dispatch(shortsActions.getShortsDB());
+    if(shortsData.length === 0) {
+      dispatch(shortsActions.getShortsDB());
+    }
+
     if (likeData !== undefined) {
       for (let i = 0; i < likeData.length; i++) {
         if (likeData[i].userId === parseInt(login_userId)) {
@@ -43,7 +47,7 @@ const Short = (props) => {
       }
       setHeart(false);
     }
-  }, [shortsData]);
+  }, []);
 
   //-------heart-------
   const changeHeart = () => {
@@ -68,30 +72,24 @@ const Short = (props) => {
       }
     }
   };
-  
+
   return(
     <React.Fragment>
-      <Grid
-        height="calc( 100vh - 70px )"
-        bg='#669900'
-        position='relative'
-      >
+      <Container>
         {/* 아이콘 */}
         <IconWrap>
           {/* 프로필 */}
           <Position top="44px" left="16px">
             <Grid is_flex>
-              <Image myIcon src={high1} width="44px" height="44px" />
+              <Image myIcon src={shortsData.profileImg} width="44px" height="44px" />
               <Grid padding="0 0 0 13px">
                 <Grid padding="0 0 5px">
                   <Text bold size="17px" color="#FFF">
-                    {/* {shortsData.title} */}
-                    스키는 이렇게 타는거야
+                    {shortsData.title}
                   </Text>
                 </Grid>
                 <Text size="17px" color="#BDDCFF">
-                  {/* {shortsData.nickname} */}
-                  스키보이
+                  {shortsData.nickname}
                 </Text>
               </Grid>
             </Grid>
@@ -109,8 +107,7 @@ const Short = (props) => {
             <img src={comment} alt="댓글" />
             <Grid margin="-8px 0 0" align="center">
               <Text bold color="#FFF">
-                {/* {shortsData.shortsCommentCnt} */}
-                10
+                {shortsData.shortsCommentCnt}
               </Text>
             </Grid>
           </Position>
@@ -121,16 +118,14 @@ const Short = (props) => {
               <Grid margin="-8px 0 0" align="center">
                 <AiOutlineHeart size="45" color="#FFF" />
                 <Text bold color="#FFF">
-                  {/* {shortsData.shortsLikeCnt} */}
-                  10
+                  {shortsData.shortsLikeCnt}
                 </Text>
               </Grid>
             ) : (
               <Grid margin="-8px 0 0" align="center">
                 <AiFillHeart size="45" color="red" />
                 <Text bold color="#FFF">
-                  {/* {shortsData.shortsLikeCnt} */}
-                  10
+                  {shortsData.shortsLikeCnt}
                 </Text>
               </Grid>
             )}
@@ -145,11 +140,18 @@ const Short = (props) => {
         : null
         }
 
-        <ShortVideo/>
-      </Grid>
+        <ShortVideo src={shortsData.videoPath}/>
+      </Container>
     </React.Fragment>
   );
 };
+
+const Container = styled.div`
+  height: calc( 100vh - 70px );
+  background-color: rgba(0,0,0,0.6);
+  position: relative;
+  overflow: hidden;
+`
 
 const Position = styled.div`
   position: absolute;
@@ -164,7 +166,7 @@ const IconWrap = styled.div`
   width: 100%;
   height: calc( 100vh - 70px );
   position: absolute;
-  z-index: 1px;
+  z-index: 1;
 `
 
 export default Short;
