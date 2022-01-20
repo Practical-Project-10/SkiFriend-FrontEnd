@@ -26,7 +26,9 @@ const VideoUpload = (props) => {
 
   const titleInput = useRef();
   const fileInput = useRef();
+  const [file, setFile] = useState();
   const [src, setSrc] = useState();
+  console.log(src)
 
   // const uploadTitle = () => {
   //   console.log(titleInput.current.value)
@@ -37,17 +39,26 @@ const VideoUpload = (props) => {
   //     }
   //   )
   // }
-
+  
   const uploadFile = () => {
+    var video = document.getElementById("video"); 
     const file = fileInput.current.files[0];
     const videoUrl = URL.createObjectURL(file);
-    setSrc(file)
+
+    setFile(file);
+    setSrc(videoUrl)
+    // video.setAttribute('src', videoUrl);
+    video.oncanplaythrough = () => {
+      video.play();
+    }
+    console.log(video)
+
     // dispatch(imageActions.setPreview(videoUrl));
   }
   
   return (
     <React.Fragment>
-      <Header goBack complete _onClick={() => dispatch(shortsActions.addShortsDB(src, titleInput.current.value))}>
+      <Header goBack complete _onClick={() => dispatch(shortsActions.addShortsDB(file, titleInput.current.value))}>
         숏츠 {is_edit ? "수정" : "작성"}하기
       </Header>
       <Grid minHeight="calc( 100vh - 55px )" bg="#FFF">
@@ -65,9 +76,10 @@ const VideoUpload = (props) => {
 
           {/* 동영상미리보기 */}
           <VideoArea>
-            영상을 올려주세요.
+            {/* 영상을 올려주세요. */}
+            {/* <img src={src} alt="11"/> */}
             <Video>
-              <ShortVideo src={src}/>
+              <ShortVideo id="video" src={src} />
             </Video>
           </VideoArea>
         </Grid>

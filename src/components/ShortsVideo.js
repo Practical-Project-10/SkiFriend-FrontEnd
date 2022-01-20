@@ -4,12 +4,13 @@ import styled from 'styled-components';
 import {Grid} from '../elements';
 
 const ShortVideo = (props) => {
-  console.log(props.src)
+  console.log(props.id)
 
   return(
     <React.Fragment>
       <Grid height='100%'>
         <Video
+          id={props.id}
           src={props.src}
           //고양이 'https://skifriendbucket.s3.ap-northeast-2.amazonaws.com/shorts/ff9f840c-1f59-48f0-83d5-843aa5358a5d%EA%B0%80%EB%A3%A8%EC%BA%A3%EB%8B%A2%EC%98%81%EC%83%81.mp4'
           //재우님 'https://skifriendbucket.s3.ap-northeast-2.amazonaws.com/shorts/3260569f-ead5-4c14-a947-d8052b66c122IMG_4013.mp4'

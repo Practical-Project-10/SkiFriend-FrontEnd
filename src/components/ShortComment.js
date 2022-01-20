@@ -23,7 +23,7 @@ const ShortComment = (props) => {
 
   //동영상 댓글 페이지
   return (
-    <Grid>
+    <React.Fragment>
       <Background onClick={props.closeModal}></Background>
 
       <Container>
@@ -50,7 +50,7 @@ const ShortComment = (props) => {
       <CommentInput>
         <SendText shortsId={shortsData.shortsId}/>
       </CommentInput>
-    </Grid>
+    </React.Fragment>
   );
 };
 
@@ -78,6 +78,7 @@ const Background = styled.div`
   position: absolute;
   top: 0;
   left: 0;
+  z-index: 2;
 `;
 
 const Container = styled.div`
@@ -89,6 +90,7 @@ const Container = styled.div`
   background: #fff;
   border-radius: 22px 22px 0 0;
   overflow-y: scroll;
+  z-index: 3;
 `;
 
 const CommentInput = styled.div`
@@ -100,6 +102,7 @@ const CommentInput = styled.div`
   position: absolute;
   bottom: 0;
   left: 0;
+  z-index: 3;
 `;
 
 export default ShortComment;

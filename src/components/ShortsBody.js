@@ -28,11 +28,14 @@ const Short = (props) => {
   const is_login = localStorage.getItem("is_login");
   // useState
   const [showModal, setShowModal] = useState(false);
-  const [heart, setHeart] = useState(false);
-  // console.log(shortsData);
-  // console.log(likeList);
+  const [heart, setHeart] = useState(likeList);
+  console.log(likeList);
 
   useEffect(() => {
+    if(shortsData.length === 0) {
+      dispatch(shortsActions.getShortsDB());
+    }
+
     if (likeData !== undefined) {
       for (let i = 0; i < likeData.length; i++) {
         if (likeData[i].userId === parseInt(login_userId)) {
@@ -47,10 +50,10 @@ const Short = (props) => {
 
   //-------heart-------
   const changeHeart = () => {
-    if (likeList === false) {
-      return setHeart(true);
-    } else {
+    if (heart) {
       return setHeart(false);
+    } else {
+      return setHeart(true);
     }
   };
 
