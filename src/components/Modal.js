@@ -9,7 +9,7 @@ import defaultIMG from "../assets/myPage/profilePicture.png";
 const Modal = (props) => {
   const { page, complete } = props;
 
-  if (page === 'board') {
+  if (page === 'board' || page === 'shorts') {
     return (
       <ModalBackground onClick={props.closeModal} radius={props.radius}>
         <ModalContainer width={props.width} height={props.height}>
@@ -215,7 +215,7 @@ const ModalContainer = styled.div`
 `;
 
 const Menu = styled.div`
-  padding: ${(props) => (props.padding ? props.padding : "15px")};
+  padding: ${(props) => (props.padding ? props.padding : "5px")};
   border-bottom: 1px solid #edeeef;
   font-size: ${(props) => (props.fontS ? props.fontS : "16px")};
   font-weight: 700;

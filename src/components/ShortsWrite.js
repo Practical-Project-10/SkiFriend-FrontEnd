@@ -58,7 +58,6 @@ const ShortsWrite = (props) => {
           {/* 동영상미리보기 */}
           <VideoArea>
             {/* 영상을 올려주세요. */}
-            {/* <img src={src} alt="11"/> */}
             <Video>
               <ShortVideo id="video" src={src} />
             </Video>

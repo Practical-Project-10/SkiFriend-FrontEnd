@@ -75,10 +75,10 @@ const addShortsDB = (videoFile, title) => {
 };
 
 //동영상 수정
-const updateShortsDB = (title) => {
+const updateShortsDB = (shortsId, title) => {
   return async function (dispatch, getState, { history }) {
     try {
-      const response = await apis.shortsUpdate(title);
+      const response = await apis.shortsUpdate(shortsId, title);
       response && dispatch(updateShorts(response.data));
     } catch (err) {
       console.log(err);
@@ -87,10 +87,10 @@ const updateShortsDB = (title) => {
 };
 
 //동영상 삭제
-const deleteShortsDB = () => {
+const deleteShortsDB = (shortsId) => {
   return async function (dispatch, getState, { history }) {
     try {
-      const response = await apis.shortsDelete();
+      const response = await apis.shortsDelete(shortsId);
       response && dispatch(deleteShorts(response.data));
     } catch (err) {
       console.log(err);
