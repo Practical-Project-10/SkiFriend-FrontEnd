@@ -1,9 +1,7 @@
 import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import comment, {
-  commentCreators as commentActions,
-} from "../redux/modules/comment";
+import { commentCreators as commentActions } from "../redux/modules/comment";
 
 import styled, { keyframes } from "styled-components";
 import { Grid, Text } from "../elements";
@@ -12,13 +10,17 @@ import Board from "../components/Board";
 import SendText from "../components/SendText";
 
 const ShortComment = (props) => {
-  const { shortsData } = props;
   const dispatch = useDispatch();
+  //params
+  const params = useParams();
+  const shortsId = params.shortsId;
   //redux data
   const commentList = useSelector((state) => state.comment.shortsList);
+  console.log(props);
+  console.log(commentList);
 
   useEffect(() => {
-    dispatch(commentActions.getShortsCommentDB(shortsData.shortsId));
+    dispatch(commentActions.getShortsCommentDB(shortsId));
   }, []);
 
   //동영상 댓글 페이지
@@ -28,7 +30,8 @@ const ShortComment = (props) => {
 
       <Container>
         <Grid is_flex padding="13px 16px" borderB="1px solid #edeeef">
-          댓글&nbsp;<Text color="#6195CF">4</Text>
+          댓글&nbsp;
+          {commentList && <Text color="#6195CF">{commentList.length}</Text>}
         </Grid>
 
         <Grid is_flex direction="column">
@@ -36,11 +39,7 @@ const ShortComment = (props) => {
             commentList.map((item) => {
               return (
                 <Grid key={item.shortsCommentId}>
-                  <Board
-                    commentBoard
-                    comment={item}
-                    shortsId={shortsData.shortsId}
-                  />
+                  <Board commentBoard comment={item} shortsId={shortsId} />
                 </Grid>
               );
             })}
@@ -48,7 +47,7 @@ const ShortComment = (props) => {
       </Container>
       {/* 댓글 입력창 */}
       <CommentInput>
-        <SendText shortsId={shortsData.shortsId}/>
+        <SendText shortsId={shortsId} />
       </CommentInput>
     </Grid>
   );
@@ -78,6 +77,7 @@ const Background = styled.div`
   position: absolute;
   top: 0;
   left: 0;
+  z-index: 2;
 `;
 
 const Container = styled.div`
@@ -89,6 +89,7 @@ const Container = styled.div`
   background: #fff;
   border-radius: 22px 22px 0 0;
   overflow-y: scroll;
+  z-index: 3;
 `;
 
 const CommentInput = styled.div`
@@ -100,6 +101,7 @@ const CommentInput = styled.div`
   position: absolute;
   bottom: 0;
   left: 0;
+  z-index: 3;
 `;
 
 export default ShortComment;
