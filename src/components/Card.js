@@ -84,7 +84,7 @@ const Card = (props) => {
 
   if (noCard) {
     return (
-      <Grid>
+      <Grid height="165px">
         <NotLogin>작성한 카풀 내역이 없어요!</NotLogin>
       </Grid>
     );
@@ -95,7 +95,7 @@ const Card = (props) => {
       <React.Fragment>
         <CarpoolCard
           width="185px"
-          height="160px"
+          height="165px"
           padding="12px"
           repuest={repuest}
           status={!props.status}
@@ -108,7 +108,7 @@ const Card = (props) => {
           <Text block bold width="239px" size="16px">
             {props.title}
           </Text>
-          <Posts width="255px" height="30px" margin="7px 0">
+          <Posts width="90%" height="30px" margin="7px 0">
             <Text bold size="12px">
               {props.startLocation}
             </Text>
@@ -362,17 +362,17 @@ const SubMenu = styled.div`
 
 const NotLogin = styled.div`
   width: 185px;
-  height: 120px;
+  height: 160px;
   margin: 12px 0;
-  padding: 12px;
   background: #ededee;
   border-radius: 10px;
   color: #474d56;
   font-weight: 700;
   font-size: 13px;
   opacity: 0.5;
-  text-align: center;
-  line-height: 90px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 export default Card;

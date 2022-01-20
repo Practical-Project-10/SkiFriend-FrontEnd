@@ -111,13 +111,12 @@ const FixedNav = styled.div`
   display: flex;
   align-items: center;
   gap: 65px;
-  /* gap: 79px; */
+  z-index: 9;
 `;
 
 const Icon = styled.div`
   position: relative;
   width: calc((100% - 268px) / 5);
-  /* width: calc((100% - 237px) / 4); */
 `;
 
 const New = styled.div`

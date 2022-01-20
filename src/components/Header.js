@@ -73,7 +73,6 @@ const Head = styled.div`
   box-sizing: border-box;
   position: relative;
   background-color: #d9e3ee;
-  position: relative;
 `;
 
 const GoBack = styled.div`
