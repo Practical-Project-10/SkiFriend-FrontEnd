@@ -42,9 +42,15 @@ const addShortsDB = (videoFile, title) => {
   return async function (dispatch, getState, { history }) {
     let formData = new FormData();
     formData.append("videoFile", videoFile);
+    formData.append(
+      "title",
+      new Blob([JSON.stringify(title)], { type: "application/json" })
+    );
+
     try {
-      const response = await apis.shortsUpload(formData, title);
+      const response = await apis.shortsUpload(formData);
       response && dispatch(addShorts(response.data));
+      history.push('/shorts');
     } catch (err) {
       console.log(err);
     }
@@ -92,7 +98,7 @@ export default handleActions(
   {
     [GET_SHORTS]: (state, action) =>
       produce(state, (draft) => {
-        draft.shortsList.push(...action.payload.shortsList);
+        draft.shortsList = action.payload.shortsList;
       }),
 
     [ADD_SHORTS]: (state, action) =>

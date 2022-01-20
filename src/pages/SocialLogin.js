@@ -52,14 +52,14 @@ const Login = (props) => {
                 카카오톡
               </Button>
             </Grid>
-            {/* <Grid position="relative" cursor="pointer">
+            <Grid position="relative" cursor="pointer">
               <WrapLogo>
                 <img src={naver_logo} alt="네이버 로그인" />
               </WrapLogo>
               <Button bg="#FFF" color="#474D56" _onClick={naverLogin}>
                 네이버
               </Button>
-            </Grid> */}
+            </Grid>
           </Grid>
         </Grid>
       </Grid>

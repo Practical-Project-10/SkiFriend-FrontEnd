@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "https://seongeunyang.shop/",//https://seongeunyang.shop/   http://3.34.19.50:8080/
+  baseURL: "http://3.34.19.50:8080/",//https://seongeunyang.shop/   http://3.34.19.50:8080/
   headers: {
     "content-type": "application/json;charset=UTF-8",
     accept: "application/json,",
@@ -147,10 +147,10 @@ export const apis = {
   //동영상
   shortsRandomList: () => api.get(`/shorts`),
 
-  shortsUpload: (videoFile, title) =>
+  shortsUpload: (formData) =>
     api.post(
-      `/shorts`,
-      { videoFile, title },
+      "/shorts",
+      formData,
       {
         headers: {
           "Content-Type": "multipart/form-data",
@@ -158,7 +158,7 @@ export const apis = {
       }
     ),
 
-  shortsUpdate: (videoId, title) => api.put(`/shorts/${videoId}`, { title }),
+  shortsUpdate: (videoId, title) => api.put(`/shorts/${videoId}`, title),
 
   shortsDelete: (videoId) => api.delete(`/shorts/${videoId}`),
 
