@@ -1,6 +1,8 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 
 import {history} from "../redux/ConfigStore";
+import { useDispatch, useSelector } from "react-redux";
+import { shortsActions } from "../redux/modules/shorts";
 
 import styled from "styled-components";
 import {Grid, Image, Text} from "../elements"
@@ -11,12 +13,18 @@ import comment from "../assets/shorts/comment.png"
 import heart from "../assets/shorts/heart.png"
 
 import ShortComment from "./ShortComment";
+import ShortVideo from "./ShortsVideo";
 
 import high1 from "../assets/high1_logo.svg" //임시
 
 const Short = (props) => {
+  const dispatch = useDispatch();
+
+
   const [showModal, setShowModal] = useState(false);
   console.log(showModal)
+
+  useEffect(() => { dispatch(shortsActions.getShortsDB()); }, []);
   
   return(
     <React.Fragment>
@@ -25,9 +33,8 @@ const Short = (props) => {
         bg='#669900'
         position='relative'
       >
-
         {/* 아이콘 */}
-        <Grid height='calc( 100vh - 70px )' position='relative'>
+        <IconWrap>
           {/* 프로필 */}
           <Position top='44px' left='16px'>
             <Grid is_flex>
@@ -42,7 +49,7 @@ const Short = (props) => {
           </Position>
 
           {/* 숏츠 작성 버튼 */}
-          <FloatButton src={shortsBtn} bottom='34px' left='16px' _onClick={() => history.push('/shortsupload')}/>
+          <FloatButton src={shortsBtn} bottom='34px' left='16px' _onClick={() => history.push('/shortsupload/shortid')}/>
 
           {/* 댓글 */}
           <Position bottom='115px' right='16px' onClick={() => setShowModal(true)}>
@@ -59,7 +66,7 @@ const Short = (props) => {
               <Text bold color='#FFF'>10</Text>
             </Grid>
           </Position>
-        </Grid>
+        </IconWrap>
 
         {/* 댓글모달 */}
         {showModal
@@ -68,6 +75,8 @@ const Short = (props) => {
           /> 
         : null
         }
+
+        <ShortVideo/>
       </Grid>
     </React.Fragment>
   );
@@ -79,7 +88,14 @@ const Position = styled.div`
   left: ${props => props.left};
   right: ${props => props.right};
   bottom: ${props => props.bottom};
-  cursor: pointer;
+  cursor: 'pointer';
+`
+
+const IconWrap = styled.div`
+  width: 100%;
+  height: calc( 100vh - 70px );
+  position: absolute;
+  z-index: 1px;
 `
 
 export default Short;
