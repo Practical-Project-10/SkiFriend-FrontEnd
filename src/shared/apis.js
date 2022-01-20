@@ -148,34 +148,30 @@ export const apis = {
   shortsRandomList: () => api.get(`/shorts`),
 
   shortsUpload: (formData) =>
-    api.post(
-      "/shorts",
-      formData,
-      {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      }
-    ),
+    api.post("/shorts", formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    }),
 
-  shortsUpdate: (videoId, title) => api.put(`/shorts/${videoId}`, title),
+  shortsUpdate: (shortsId, title) => api.put(`/shorts/${shortsId}`, title),
 
-  shortsDelete: (videoId) => api.delete(`/shorts/${videoId}`),
+  shortsDelete: (shortsId) => api.delete(`/shorts/${shortsId}`),
 
   //동영상 좋아요
-  shortsLike: (videoId) => api.post(`/shorts/${videoId}/like`),
+  shortsLike: (shortsId) => api.post(`/shorts/${shortsId}/like`),
 
   //동영상 댓글
-  shortsListComment: (videoId) => api.get(`/shorts/${videoId}/comments`),
+  shortsListComment: (shortsId) => api.get(`/shorts/${shortsId}/comments`),
 
-  shortsWriteComment: (videoId, content) =>
-    api.post(`/shorts/${videoId}/comments`, content),
+  shortsWriteComment: (shortsId, content) =>
+    api.post(`/shorts/${shortsId}/comments`, content),
 
-  shortsUpdateComment: (videoCommentId, content) =>
-    api.put(`/shorts/comments/${videoCommentId}`, content),
+  shortsUpdateComment: (shortsCommentId, content) =>
+    api.put(`/shorts/comments/${shortsCommentId}`, content),
 
-  shortsDeleteComment: (videoCommentId) =>
-    api.delete(`/shorts/comments/${videoCommentId}`),
+  shortsDeleteComment: (shortsCommentId) =>
+    api.delete(`/shorts/comments/${shortsCommentId}`),
 
   //내가 작성한 동영상 목록
   myShortsList: () => api.get(`/user/info/shorts`),

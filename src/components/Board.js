@@ -10,9 +10,11 @@ import Comment from "../assets/freeBoard/comment.svg";
 import { AiOutlineHeart } from "react-icons/ai";
 
 const Board = (props) => {
-  const { comment } = props;
+  const { comment, shortsId } = props;
+  // const { shortsId } = props.shortsId;
   const dispatch = useDispatch();
-
+  console.log(shortsId);
+  console.log(props);
   //localstorage
   const userId = localStorage.getItem("userId");
   //------useState관리-------
@@ -131,7 +133,7 @@ const Board = (props) => {
       </Grid>
     );
   }
-  
+
   //자유게시판 상세보기
   return (
     <Grid>

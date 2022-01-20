@@ -1,6 +1,7 @@
 import { handleActions, createAction } from "redux-actions";
 import { apis } from "../../shared/apis";
 import { boardCreators as boardActions } from "./freeboard";
+import { shortsActions } from "./shorts";
 import produce from "immer";
 
 // initialState
@@ -36,12 +37,17 @@ export const addLikeDB =
 
 //동영상 좋아요
 export const addShortsLikeDB =
-  (shortsId) =>
+  (shortsId, likeCnt) =>
   async (dispatch, getState, { history }) => {
     try {
       const response = await apis.shortsLike(shortsId);
-      response && dispatch(getShortsLike(response.data));
-      // dispatch(boardActions.getOneBoardDB(videoId));
+      // if(response.data === true){
+
+      // }else{
+
+      // }
+      response && dispatch(getShortsLike(response.data)) &&
+      dispatch(shortsActions.getShortsDB());
     } catch (err) {
       console.log(`좋아요 변경 실패${err}`);
     }

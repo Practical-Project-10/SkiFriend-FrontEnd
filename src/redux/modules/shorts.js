@@ -54,7 +54,8 @@ const addShortsDB = (videoFile, title) => {
       const response = await apis.shortsUpload(formData);
       console.log(response);
       response && dispatch(addShorts(response.data));
-      history.push('/shorts');
+      console.log(response);
+      history.push("/shorts");
     } catch (err) {
       console.log(err);
     }

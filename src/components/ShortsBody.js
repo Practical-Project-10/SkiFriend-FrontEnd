@@ -22,8 +22,7 @@ const Short = (props) => {
   //redux data
   const shortsData = useSelector((state) => state.shorts.shortsList);
   const likeList = useSelector((state) => state.like.shortsLikeList);
-  const likeData = shortsData.likesDtoList;
-
+  const likeData = shortsData.shortsLikeResponseDtoList;
   //localstorage 로그인정보
   const login_userId = localStorage.getItem("userId");
   const is_login = localStorage.getItem("is_login");
@@ -31,12 +30,10 @@ const Short = (props) => {
   // useState
   const [showModal, setShowModal] = useState(false);
   const [heart, setHeart] = useState(false);
+  // console.log(shortsData);
+  // console.log(likeList);
 
   useEffect(() => {
-    if(shortsData.length === 0) {
-      dispatch(shortsActions.getShortsDB());
-    }
-
     if (likeData !== undefined) {
       for (let i = 0; i < likeData.length; i++) {
         if (likeData[i].userId === parseInt(login_userId)) {
@@ -47,6 +44,10 @@ const Short = (props) => {
       }
       setHeart(false);
     }
+  }, []);
+
+  useEffect(() => {
+    dispatch(shortsActions.getShortsDB());
   }, []);
 
   //-------heart-------
@@ -62,7 +63,12 @@ const Short = (props) => {
   const likeChange = () => {
     if (is_login) {
       changeHeart();
-      return dispatch(likeActions.addShortsLikeDB());
+      return dispatch(
+        likeActions.addShortsLikeDB(
+          shortsData.shortsId,
+          shortsData.shortsCommentCnt
+        )
+      );
     } else {
       const ask = window.confirm(
         "로그인한 회원만 가능합니다. 로그인 페이지로 이동하시겠습니까?"
@@ -133,12 +139,12 @@ const Short = (props) => {
         </IconWrap>
 
         {/* 댓글모달 */}
-        {showModal
-        ? <ShortComment
+        {showModal ? (
+          <ShortComment
+            shortsData={shortsData}
             closeModal={() => setShowModal(false)}
-          /> 
-        : null
-        }
+          />
+        ) : null}
 
         <ShortVideo src={shortsData.videoPath}/>
       </Container>
@@ -163,7 +169,7 @@ const Position = styled.div`
 
 const IconWrap = styled.div`
   width: 100%;
-  height: calc( 100vh - 70px );
+  height: calc(100vh - 70px);
   position: absolute;
   z-index: 1;
 `
