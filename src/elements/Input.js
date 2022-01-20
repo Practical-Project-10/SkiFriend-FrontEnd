@@ -15,6 +15,7 @@ const Input = forwardRef((props, ref) => {
     pattern,
     position,
     inputMode,
+    _readOnly,
     _value,
     more4,
     dupButton,
@@ -158,10 +159,18 @@ const Input = forwardRef((props, ref) => {
   //     ></Textarea>
   //   );
   // }
-  if(send) {
-    return(
-      <Send/>
-    )
+  if (send) {
+    return (
+      <Send
+        onKeyPress={_onKeyPress}
+        autoComplete={autocomplete}
+        autocapitalize={autocapitalize}
+        placeholder={placeholder}
+        onChange={_onChange}
+        value={_value}
+        readOnly={_readOnly}
+      />
+    );
   }
 
   return (
@@ -223,7 +232,7 @@ const Send = styled.input`
   padding: 14px 8px;
   border: 1px solid #a3a6ab;
   border-radius: 40px;
-`
+`;
 
 const DupButton = styled.input`
   border: 1px solid #212121;

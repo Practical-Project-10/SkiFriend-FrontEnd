@@ -92,7 +92,7 @@ export default handleActions(
   {
     [GET_SHORTS]: (state, action) =>
       produce(state, (draft) => {
-        draft.shortsList.push(...action.payload.shortsList);
+        draft.shortsList = action.payload.shortsList;
       }),
 
     [ADD_SHORTS]: (state, action) =>
