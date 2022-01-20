@@ -8,7 +8,7 @@ const ADD_SHORTS = "shorts/ADD_SHORTS";
 const UPDATE_SHORTS = "shorts/UPDATE_SHORTS";
 const DELETE_SHORTS = "shorts/DELETE_SHORTS";
 const GET_MY_SHORTS = "shorts/GET_MY_SHORTS";
-const LICK_COUNT = "LICK_COUNT";
+const LIKE_COUNT = "LIKE_COUNT";
 
 // acrtion creators
 const getShorts = createAction(GET_SHORTS, (shortsList) => ({ shortsList }));
@@ -18,7 +18,7 @@ const updateShorts = createAction(UPDATE_SHORTS, (shortsData) => ({
 }));
 const deleteShorts = createAction(DELETE_SHORTS, (shortsId) => ({ shortsId }));
 const getMyShorts = createAction(GET_MY_SHORTS, (myList) => ({ myList }));
-const likeCount = createAction(LICK_COUNT, (state) => ({state}));
+const likeCount = createAction(LIKE_COUNT, (state) => ({ state }));
 
 // initialState
 const initialState = {
@@ -36,7 +36,6 @@ const getShortsDB = () => {
 
       response && dispatch(getShorts(response.data));
       history.push(`/shorts/${shortsId}`);
-      console.log(response.data)
     } catch (err) {
       console.log(err);
     }
@@ -137,9 +136,9 @@ export default handleActions(
         draft.myShortsList.push(...action.payload.myList);
       }),
 
-    [LICK_COUNT]: (state, action) =>
+    [LIKE_COUNT]: (state, action) =>
       produce(state, (draft) => {
-        if(action.payload.state) {
+        if (action.payload.state) {
           draft.shortsList.shortsLikeCnt += 1;
         } else {
           draft.shortsList.shortsLikeCnt -= 1;

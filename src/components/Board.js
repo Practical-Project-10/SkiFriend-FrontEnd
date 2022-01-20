@@ -11,10 +11,7 @@ import { AiOutlineHeart } from "react-icons/ai";
 
 const Board = (props) => {
   const { comment, shortsId } = props;
-  // const { shortsId } = props.shortsId;
   const dispatch = useDispatch();
-  console.log(shortsId);
-  console.log(props);
   //localstorage
   const userId = localStorage.getItem("userId");
   //------useState관리-------
@@ -22,7 +19,7 @@ const Board = (props) => {
   const [commentEditValue, setCommentEditValue] = useState();
 
   useEffect(() => {
-    dispatch(commentActions.getShortsCommentDB());
+    dispatch(commentActions.getShortsCommentDB(shortsId));
   }, []);
 
   //-----댓글 수정 내용 가져오기----------
@@ -59,13 +56,18 @@ const Board = (props) => {
   if (props.commentBoard) {
     return (
       <Grid width="100%" padding="9px 16px" borderB="1px solid #edeeef">
-        <Grid width="100%" margin="0 0 9px 0" is_flex justify="space-between">
+        <Grid
+          width="100%"
+          margin="0 0 9px 0"
+          display="flex"
+          justify="space-between"
+        >
           <Grid is_flex gap="9px">
             <Text bold>{comment.nickname}</Text>
             <Text color="#a3a6ab">{comment.createdAt}</Text>
           </Grid>
           {/* 댓글 수정,삭제,변경 */}
-          {userId === comment.userId && (
+          {userId === String(comment.userId) && (
             <Grid is_flex gap="20px">
               <Grid cursor="pointer">
                 {comment.shortsCommentId === editCommentNo ? (
@@ -81,7 +83,7 @@ const Board = (props) => {
                   <Text
                     color="#a3a6ab"
                     _onClick={() => {
-                      updateCommentBtn(comment.commentId);
+                      updateCommentBtn(comment.shortsCommentId);
                     }}
                   >
                     수정
@@ -102,7 +104,7 @@ const Board = (props) => {
                   <Text
                     color="#a3a6ab"
                     _onClick={() => {
-                      deleteCommentBtn(comment.commentId);
+                      deleteCommentBtn(comment.shortsCommentId);
                     }}
                   >
                     삭제
