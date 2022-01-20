@@ -96,7 +96,7 @@ const Short = (props) => {
           </Position>
 
           {/* 숏츠 작성 버튼 */}
-          <FloatButton src={shortsBtn} bottom='34px' left='16px' _onClick={() => history.push('/shortsupload/shortid')}/>
+          <FloatButton src={shortsBtn} bottom='34px' left='16px' _onClick={() => history.push('/shortsupload')}/>
 
           {/* 댓글 */}
           <Position
@@ -150,7 +150,6 @@ const Container = styled.div`
   height: calc( 100vh - 70px );
   background-color: rgba(0,0,0,0.6);
   position: relative;
-  overflow: hidden;
 `
 
 const Position = styled.div`

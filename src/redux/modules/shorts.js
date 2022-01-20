@@ -27,10 +27,13 @@ const initialState = {
 // middlewares
 // 동영상 조회
 const getShortsDB = () => {
-  return async function (dispatch) {
+  return async function (dispatch, getState, { history }) {
     try {
       const response = await apis.shortsRandomList();
+      const shortsId = response.data.shortsId;
+
       response && dispatch(getShorts(response.data));
+      history.push(`/shorts/${shortsId}`);
     } catch (err) {
       console.log(err);
     }
