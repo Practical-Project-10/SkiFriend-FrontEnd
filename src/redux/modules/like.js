@@ -36,10 +36,10 @@ export const addLikeDB =
 
 //동영상 좋아요
 export const addShortsLikeDB =
-  (videoId) =>
+  (shortsId) =>
   async (dispatch, getState, { history }) => {
     try {
-      const response = await apis.shortsLike(videoId);
+      const response = await apis.shortsLike(shortsId);
       response && dispatch(getShortsLike(response.data));
       // dispatch(boardActions.getOneBoardDB(videoId));
     } catch (err) {

@@ -1,35 +1,138 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { history } from "../redux/ConfigStore";
+import { useDispatch } from "react-redux";
+import { commentCreators as commentActions } from "../redux/modules/comment";
 
-import { Grid, Text, Image } from "../elements";
+import { Grid, Text, Image, Input } from "../elements";
 import Comment from "../assets/freeBoard/comment.svg";
 
 // react icons
 import { AiOutlineHeart } from "react-icons/ai";
 
 const Board = (props) => {
-  if(props.commentBoard) {
-    return(
-      <Grid width='100%' padding='9px 16px' borderB='1px solid #edeeef'>
-        <Grid width='100%' margin='0 0 9px 0' is_flex justify='space-between'>
-          <Grid is_flex gap='9px'>
-            <Text bold>스키보이</Text>
-            <Text color='#a3a6ab'>14:21</Text>
-          </Grid>
-          <Grid is_flex gap='20px'>
-            <Grid>
-              <Text color='#a3a6ab'>수정</Text>
-            </Grid>
-            <Text color='#a3a6ab'>삭제</Text>
-          </Grid>
-        </Grid>
-        <Grid>
-          <Text>좀 타시네요? 낫 밷~</Text>
-        </Grid>
-      </Grid>
-    )
+  const { comment } = props;
+  const dispatch = useDispatch();
+
+  //localstorage
+  const userId = localStorage.getItem("userId");
+  //------useState관리-------
+  const [editCommentNo, setEditCommentNo] = useState();
+  const [commentEditValue, setCommentEditValue] = useState();
+
+  useEffect(() => {
+    dispatch(commentActions.getShortsCommentDB());
+  }, []);
+
+  //-----댓글 수정 내용 가져오기----------
+  const editComment = (e) => {
+    const currentComment = e.target.value;
+    setCommentEditValue(currentComment);
   };
 
+  //-------댓글수정-------
+  const updateCommentBtn = (editCommentId) => {
+    setEditCommentNo(editCommentId);
+  };
+
+  //-------댓글수정 전송-------
+  const updateSubmitCommentBtn = () => {
+    dispatch(
+      commentActions.updateShortsCommentDB(editCommentNo, commentEditValue)
+    );
+    setEditCommentNo(0);
+  };
+
+  //-------댓글 삭제--------
+  const deleteCommentBtn = (editCommentId) => {
+    const ask = window.confirm("정말 삭제하시겠습니까?");
+    if (ask) {
+      dispatch(commentActions.deleteShortsCommentDB(editCommentId));
+      return;
+    } else {
+      return;
+    }
+  };
+
+  //동영상 댓글 컴포넌트
+  if (props.commentBoard) {
+    return (
+      <Grid width="100%" padding="9px 16px" borderB="1px solid #edeeef">
+        <Grid width="100%" margin="0 0 9px 0" is_flex justify="space-between">
+          <Grid is_flex gap="9px">
+            <Text bold>{comment.nickname}</Text>
+            <Text color="#a3a6ab">{comment.createdAt}</Text>
+          </Grid>
+          {/* 댓글 수정,삭제,변경 */}
+          {userId === comment.userId && (
+            <Grid is_flex gap="20px">
+              <Grid cursor="pointer">
+                {comment.shortsCommentId === editCommentNo ? (
+                  <Text
+                    color="#a3a6ab"
+                    _onClick={() => {
+                      updateSubmitCommentBtn();
+                    }}
+                  >
+                    변경
+                  </Text>
+                ) : (
+                  <Text
+                    color="#a3a6ab"
+                    _onClick={() => {
+                      updateCommentBtn(comment.commentId);
+                    }}
+                  >
+                    수정
+                  </Text>
+                )}
+              </Grid>
+              <Grid cursor="pointer">
+                {comment.shortsCommentId === editCommentNo ? (
+                  <Text
+                    color="#a3a6ab"
+                    _onClick={() => {
+                      setEditCommentNo(0);
+                    }}
+                  >
+                    취소
+                  </Text>
+                ) : (
+                  <Text
+                    color="#a3a6ab"
+                    _onClick={() => {
+                      deleteCommentBtn(comment.commentId);
+                    }}
+                  >
+                    삭제
+                  </Text>
+                )}
+              </Grid>
+            </Grid>
+          )}
+        </Grid>
+        {/* 댓글내용 (수정시 인풋 보여주기) */}
+        <Grid>
+          {comment.shortsCommentId === editCommentNo ? (
+            <Input
+              free
+              width="390px"
+              height="3px"
+              radius="40px"
+              autocomplete="off"
+              _defaultValue={comment.content}
+              _onChange={editComment}
+            />
+          ) : (
+            <Text width="100%" wordWrap="break-word" wordBreak="break-all">
+              {comment.content}
+            </Text>
+          )}
+        </Grid>
+      </Grid>
+    );
+  }
+  
+  //자유게시판 상세보기
   return (
     <Grid>
       <Grid padding="9px" display="flex" direction="column" gap="3px">
@@ -42,9 +145,7 @@ const Board = (props) => {
           cursor="pointer"
           size="16px"
           _onClick={() => {
-            history.push(
-              `/freeboarddetail/${props.skiresort}/${props.postId}`
-            );
+            history.push(`/freeboarddetail/${props.skiresort}/${props.postId}`);
           }}
         >
           {props.title}

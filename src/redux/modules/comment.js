@@ -28,7 +28,7 @@ export const updateShortsComment = createAction(
 );
 export const deleteShortsComment = createAction(
   DELETE_SHORTS_COMMENT,
-  (videoCommentId) => ({ videoCommentId })
+  (shortsCommentId) => ({ shortsCommentId })
 );
 
 // thunk middleWare
@@ -68,10 +68,10 @@ export const deleteCommentDB =
 
 //동영상 댓글 조회
 export const getShortsCommentDB =
-  (videoId) =>
+  (shortsId) =>
   async (dispatch, getState, { history }) => {
     try {
-      const response = await apis.shortsListComment(videoId);
+      const response = await apis.shortsListComment(shortsId);
       response && dispatch(getShortsComment(response.data));
     } catch (err) {
       console.log(err);
@@ -80,10 +80,10 @@ export const getShortsCommentDB =
 
 //동영상 댓글 작성
 export const addShortsCommentDB =
-  (videoId, content) =>
+  (shortsId, content) =>
   async (dispatch, getState, { history }) => {
     try {
-      const response = await apis.shortsWriteComment(videoId, content);
+      const response = await apis.shortsWriteComment(shortsId, content);
       response && dispatch(addShortsComment(response.data));
     } catch (err) {
       console.log(err);
@@ -92,10 +92,10 @@ export const addShortsCommentDB =
 
 //동영상 댓글 수정
 export const updateShortsCommentDB =
-  (videoCommentId, content) =>
+  (shortsCommentId, content) =>
   async (dispatch, getState, { history }) => {
     try {
-      const response = await apis.shortsUpdateComment(videoCommentId, content);
+      const response = await apis.shortsUpdateComment(shortsCommentId, content);
       response && dispatch(updateShortsComment(response.data));
     } catch (err) {
       console.log(err);
@@ -104,10 +104,10 @@ export const updateShortsCommentDB =
 
 //동영상 댓글 삭제
 export const deleteShortsCommentDB =
-  (videoCommentId) =>
+  (shortsCommentId) =>
   async (dispatch, getState, { history }) => {
     try {
-      const response = await apis.shortsDeleteComment(videoCommentId);
+      const response = await apis.shortsDeleteComment(shortsCommentId);
       response && dispatch(deleteShortsComment(response.data));
     } catch (err) {
       console.log(`댓글삭제 실패${err}`);
