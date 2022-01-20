@@ -19,7 +19,7 @@ const ShortComment = (props) => {
 
   useEffect(() => {
     dispatch(commentActions.getShortsCommentDB(shortsId));
-  }, []);
+  }, [commentList.length]);
 
   //동영상 댓글 페이지
   return (

@@ -2,6 +2,7 @@ import { handleActions, createAction } from "redux-actions";
 import { apis } from "../../shared/apis";
 import produce from "immer";
 import { getOneBoardDB } from "./freeboard";
+import { shortsActions } from "./shorts";
 
 // action
 const GET_SHORTS_COMMENT = "comment/GET";
@@ -73,6 +74,7 @@ export const getShortsCommentDB =
     try {
       const response = await apis.shortsListComment(shortsId);
       response && dispatch(getShortsComment(response.data));
+      dispatch(shortsActions.CommentCount(response.data.length));
     } catch (err) {
       console.log(err);
     }
@@ -109,6 +111,7 @@ export const deleteShortsCommentDB =
   async (dispatch, getState, { history }) => {
     try {
       const response = await apis.shortsDeleteComment(shortsCommentId);
+      console.log(response);
       response && dispatch(deleteShortsComment(shortsCommentId));
     } catch (err) {
       console.log(`댓글삭제 실패${err}`);

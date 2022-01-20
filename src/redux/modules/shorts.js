@@ -8,7 +8,8 @@ const ADD_SHORTS = "shorts/ADD_SHORTS";
 const UPDATE_SHORTS = "shorts/UPDATE_SHORTS";
 const DELETE_SHORTS = "shorts/DELETE_SHORTS";
 const GET_MY_SHORTS = "shorts/GET_MY_SHORTS";
-const LIKE_COUNT = "LIKE_COUNT";
+const LIKE_COUNT = "shorts/LIKE_COUNT";
+const COMMENT_COUNT = "shorts/COMMENT_COUNT";
 
 // acrtion creators
 const getShorts = createAction(GET_SHORTS, (shortsList) => ({ shortsList }));
@@ -19,6 +20,9 @@ const updateShorts = createAction(UPDATE_SHORTS, (shortsData) => ({
 const deleteShorts = createAction(DELETE_SHORTS, (shortsId) => ({ shortsId }));
 const getMyShorts = createAction(GET_MY_SHORTS, (myList) => ({ myList }));
 const likeCount = createAction(LIKE_COUNT, (state) => ({ state }));
+const CommentCount = createAction(COMMENT_COUNT, (commentCnt) => ({
+  commentCnt,
+}));
 
 // initialState
 const initialState = {
@@ -37,7 +41,14 @@ const getShortsDB = () => {
       response && dispatch(getShorts(response.data));
       history.push(`/shorts/${shortsId}`);
     } catch (err) {
-      console.log(err);
+      const ask = window.confirm(
+        "등록된 게시물이 없습니다. 게시물을 작성하러 가시겠습니까?"
+      );
+      if (ask) {
+        return history.push(`/shortsupload`);
+      } else {
+        return history.push(`/`);
+      }
     }
   };
 };
@@ -143,12 +154,17 @@ export default handleActions(
           draft.shortsList.shortsLikeCnt -= 1;
         }
       }),
+    [COMMENT_COUNT]: (state, action) =>
+      produce(state, (draft) => {
+        draft.shortsList.shortsCommentCnt = action.payload.commentCnt;
+      }),
   },
   initialState
 );
 
 const shortsActions = {
   likeCount,
+  CommentCount,
   getShortsDB,
   addShortsDB,
   updateShortsDB,
