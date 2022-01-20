@@ -58,18 +58,18 @@ Image.defaultProps = {
   // shape: "myIcon",
   _onClick: () => {},
   src: defaultIMG,
-  width: '3.5em',
-  height: '3.5em',
+  width: "3.5em",
+  height: "3.5em",
 };
 
 const MyIcon = styled.div`
-  width: ${props => props.width};
-  height: ${props => props.height};
+  width: ${(props) => props.width};
+  height: ${(props) => props.height};
   border-radius: 50%;
   margin-right: 10px;
   background-size: cover;
   background-position: center;
-  background: ${(props) => props.src? `url(${props.src}) no-repeat center`: ''};
+  background-image: ${(props) => (props.src ? `url(${props.src})` : "")};
 `;
 
 const ElImage = styled.div`
@@ -82,7 +82,8 @@ const ElImage = styled.div`
   cursor: ${(props) => props.cursor};
   border: ${(props) => props.border};
   border-radius: ${(props) => props.radius};
-  background: ${(props) => props.src? `url(${props.src}) no-repeat center`: ''};
+  background: ${(props) =>
+    props.src ? `url(${props.src}) no-repeat center` : ""};
   background: ${(props) => props.bg};
   background-size: ${(props) => props.size};
 `;
