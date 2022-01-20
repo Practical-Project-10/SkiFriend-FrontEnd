@@ -8,8 +8,8 @@ import { shortsActions } from "../redux/modules/shorts";
 import styled from "styled-components";
 import { Grid } from "../elements";
 
-import shorts from "../assets/nav/shorts.svg"
-import shorts_active from "../assets/nav/shorts_active.svg"
+import shorts from "../assets/nav/shorts.svg";
+import shorts_active from "../assets/nav/shorts_active.svg";
 import home from "../assets/nav/home.svg";
 import home_active from "../assets/nav/home_active.svg";
 import info from "../assets/nav/info.svg";
@@ -27,7 +27,7 @@ const Navbar = ({ location }) => {
   useEffect(() => {
     if (alarm.length !== 0) {
       setNewRings(true);
-    } 
+    }
   }, [alarm]);
 
   if (
@@ -54,25 +54,22 @@ const Navbar = ({ location }) => {
     <FixedNav>
       <Icon>
         <NavLink to="/" className="navLink">
-          <img 
-            src={location.pathname === "/"? home_active: home} 
-            alt='홈'
-          />
+          <img src={location.pathname === "/" ? home_active : home} alt="홈" />
         </NavLink>
       </Icon>
       <Icon>
         <NavLink to="/placeinfo" className="navLink">
-          <img 
-            src={location.pathname === "/placeinfo"? info_active: info} 
-            alt='스키장 안내'
+          <img
+            src={location.pathname === "/placeinfo" ? info_active : info}
+            alt="스키장 안내"
           />
         </NavLink>
       </Icon>
       <Icon onClick={() => dispatch(shortsActions.getShortsDB())}>
         <NavLink to="/shorts" className="navLink">
-          <img 
-            src={location.pathname === "/shorts"? shorts_active: shorts} 
-            alt='동영상'
+          <img
+            src={location.pathname.includes("/shorts") ? shorts_active : shorts}
+            alt="동영상"
           />
         </NavLink>
       </Icon>
@@ -80,9 +77,9 @@ const Navbar = ({ location }) => {
         <NavLink to="/chatlist" className="navLink">
           <Grid _onClick={deleteAlarm}>
             {newRing && <New>New</New>}
-            <img 
-              src={location.pathname === "/chatlist"? chat_active: chat} 
-              alt='채팅'
+            <img
+              src={location.pathname === "/chatlist" ? chat_active : chat}
+              alt="채팅"
             />
           </Grid>
         </NavLink>
@@ -90,8 +87,8 @@ const Navbar = ({ location }) => {
       <Icon>
         <NavLink to="/mypage" className="navLink">
           <img
-            src={location.pathname === "/mypage"? myPage_active: myPage} 
-            alt='마이페이지'
+            src={location.pathname === "/mypage" ? myPage_active : myPage}
+            alt="마이페이지"
           />
         </NavLink>
       </Icon>

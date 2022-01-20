@@ -17,9 +17,11 @@ const Board = (props) => {
   //------useState관리-------
   const [editCommentNo, setEditCommentNo] = useState();
   const [commentEditValue, setCommentEditValue] = useState();
-
+  
   useEffect(() => {
-    dispatch(commentActions.getShortsCommentDB(shortsId));
+    if (!comment.userId) {
+      dispatch(commentActions.getShortsCommentDB(shortsId));
+    }
   }, []);
 
   //-----댓글 수정 내용 가져오기----------

@@ -31,7 +31,7 @@ const Short = (props) => {
   const [heart, setHeart] = useState(likeList);
 
   useEffect(() => {
-    if(shortsData.length === 0) {
+    if (shortsData.length === 0) {
       dispatch(shortsActions.getShortsDB());
     }
 
