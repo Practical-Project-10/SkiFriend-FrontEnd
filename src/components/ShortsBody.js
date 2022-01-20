@@ -83,7 +83,7 @@ const Short = (props) => {
         {/* 아이콘 */}
         <IconWrap>
           {/* 프로필 */}
-          <Position top="44px" left="16px">
+          <Position top="20px" left="16px">
             <Grid is_flex>
               <Image
                 myIcon
@@ -107,14 +107,14 @@ const Short = (props) => {
           {/* 숏츠 작성 버튼 */}
           <FloatButton
             src={shortsBtn}
-            bottom="34px"
+            bottom="20px"
             left="16px"
             _onClick={() => history.push("/shortsupload")}
           />
 
           {/* 댓글 갯수 */}
           <Position
-            bottom="115px"
+            bottom="95px"
             right="16px"
             onClick={() => setShowModal(true)}
           >
@@ -127,7 +127,7 @@ const Short = (props) => {
           </Position>
 
           {/* 좋아요 */}
-          <Position bottom="34px" right="16px" onClick={likeChange}>
+          <Position bottom="20px" right="16px" onClick={likeChange}>
             {!heart ? (
               <Grid margin="-8px 0 0" align="center">
                 <AiOutlineHeart size="45" color="#FFF" />
