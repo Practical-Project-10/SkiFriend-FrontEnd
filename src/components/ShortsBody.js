@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { history } from "../redux/ConfigStore";
 import { likeCreators as likeActions } from "../redux/modules/like";
-import shorts, { shortsActions } from "../redux/modules/shorts";
+import { shortsActions } from "../redux/modules/shorts";
 
 import styled from "styled-components";
 import { Grid, Image, Text } from "../elements";
@@ -29,7 +29,6 @@ const Short = (props) => {
   // useState
   const [showModal, setShowModal] = useState(false);
   const [heart, setHeart] = useState(likeList);
-  console.log(likeList);
 
   useEffect(() => {
     if(shortsData.length === 0) {
@@ -47,6 +46,12 @@ const Short = (props) => {
       setHeart(false);
     }
   }, []);
+
+  useEffect(() => {
+    if (shortsData.length === 0) {
+      dispatch(shortsActions.getShortsDB());
+    }
+  });
 
   //-------heart-------
   const changeHeart = () => {
@@ -107,7 +112,7 @@ const Short = (props) => {
             _onClick={() => history.push("/shortsupload")}
           />
 
-          {/* 댓글 */}
+          {/* 댓글 갯수 */}
           <Position
             bottom="115px"
             right="16px"
