@@ -9,6 +9,7 @@ import { Grid, Input } from "../elements";
 import sendBtn from "../assets/send.svg";
 
 const SendText = (props) => {
+  const { shortsId } = props;
   const dispatch = useDispatch();
   //params
   const params = useParams();
@@ -36,7 +37,7 @@ const SendText = (props) => {
   const addCommentBtn = () => {
     if (loginCheck) {
       if (commentValue.replace(/\s|/gi, "").length !== 0) {
-        dispatch(commentActions.addCommentDB(videoId, commentValue));
+        dispatch(commentActions.addShortsCommentDB(shortsId, commentValue));
         return setCommentValue("");
       }
       return;
