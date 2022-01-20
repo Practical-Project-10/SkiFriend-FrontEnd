@@ -40,13 +40,14 @@ export const addShortsLikeDB =
   (shortsId, likeCnt) =>
   async (dispatch, getState, { history }) => {
     const test = getState().shorts.shortsList.shortsLikeCnt;
-    console.log(test)
+    console.log(test);
     try {
       const response = await apis.shortsLike(shortsId);
-      const state = response.data
+      const state = response.data;
 
-      response && dispatch(getShortsLike(state)) &&
-      dispatch(shortsActions.likeCount(state))
+      response &&
+        dispatch(getShortsLike(state)) &&
+        dispatch(shortsActions.likeCount(state));
     } catch (err) {
       console.log(`좋아요 변경 실패${err}`);
     }

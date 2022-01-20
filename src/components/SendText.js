@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { commentCreators as commentActions } from "../redux/modules/comment";
 import { history } from "../redux/ConfigStore";
@@ -11,9 +10,6 @@ import sendBtn from "../assets/send.svg";
 const SendText = (props) => {
   const { shortsId } = props;
   const dispatch = useDispatch();
-  //params
-  const params = useParams();
-  const videoId = params.shortsId;
   // useState관리
   const [commentValue, setCommentValue] = useState("");
   //localstorage
@@ -25,7 +21,6 @@ const SendText = (props) => {
     const currentComment = e.target.value;
     setCommentValue(currentComment);
   };
-
   //엔터치면 메세지 보내지게 하기
   const onKeyPress = (e) => {
     if (e.key === "Enter" && commentValue.replace(/\s|/gi, "").length !== 0) {
