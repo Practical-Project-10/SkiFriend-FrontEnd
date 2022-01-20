@@ -3,11 +3,6 @@ import { apis } from "../../shared/apis";
 import produce from "immer";
 import { getOneBoardDB } from "./freeboard";
 
-// initialState
-const initialState = {
-  shortsList: [],
-};
-
 // action
 const GET_SHORTS_COMMENT = "comment/GET";
 const ADD_SHORTS_COMMENT = "comment/ADD";
@@ -30,6 +25,11 @@ export const deleteShortsComment = createAction(
   DELETE_SHORTS_COMMENT,
   (shortsCommentId) => ({ shortsCommentId })
 );
+
+// initialState
+const initialState = {
+  shortsList: [],
+};
 
 // thunk middleWare
 //게시판 댓글 작성
@@ -120,19 +120,19 @@ export default handleActions(
     [GET_SHORTS_COMMENT]: (state, action) =>
       produce(state, (draft) => {
         draft.shortsList = action.payload.commentList;
-        draft.shortsList = draft.shortsList.reduce((prev, now) => {
-          if (
-            prev.findIndex((a) => a.shortsCommentId === now.shortsCommentId) ===
-            -1
-          ) {
-            return [...prev, now];
-          } else {
-            prev[
-              prev.findIndex((a) => a.shortsCommentId === now.shortsCommentId)
-            ] = now;
-            return prev;
-          }
-        }, []);
+        // draft.shortsList = draft.shortsList.reduce((prev, now) => {
+        //   if (
+        //     prev.findIndex((a) => a.shortsCommentId === now.shortsCommentId) ===
+        //     -1
+        //   ) {
+        //     return [...prev, now];
+        //   } else {
+        //     prev[
+        //       prev.findIndex((a) => a.shortsCommentId === now.shortsCommentId)
+        //     ] = now;
+        //     return prev;
+        //   }
+        // }, []);
       }),
 
     [ADD_SHORTS_COMMENT]: (state, action) =>

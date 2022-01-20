@@ -7,6 +7,7 @@ import { connectRouter } from "connected-react-router";
 import User from "./modules/user";
 import FreeBoard from "./modules/freeboard";
 import Carpool from "./modules/carpool";
+import Comment from "./modules/comment";
 import Profile from "./modules/profile";
 import Image from "./modules/image";
 import Main from "./modules/main";
@@ -22,6 +23,7 @@ const rootReducer = combineReducers({
   user: User,
   freeboard: FreeBoard,
   carpool: Carpool,
+  comment: Comment,
   profile: Profile,
   image: Image,
   main: Main,

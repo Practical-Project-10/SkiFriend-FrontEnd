@@ -1,7 +1,9 @@
 import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { commentCreators as commentActions } from "../redux/modules/comment";
+import comment, {
+  commentCreators as commentActions,
+} from "../redux/modules/comment";
 
 import styled, { keyframes } from "styled-components";
 import { Grid, Text } from "../elements";
@@ -10,16 +12,14 @@ import Board from "../components/Board";
 import SendText from "../components/SendText";
 
 const ShortComment = (props) => {
+  const { shortsData } = props;
   const dispatch = useDispatch();
-  //params
-  const params = useParams();
-  const shortsId = params.shortsId;
   //redux data
   const commentList = useSelector((state) => state.comment.shortsList);
 
   useEffect(() => {
-    dispatch(commentActions.getShortsCommentDB(shortsId));
-  });
+    dispatch(commentActions.getShortsCommentDB(shortsData.shortsId));
+  }, []);
 
   //동영상 댓글 페이지
   return (
@@ -36,7 +36,11 @@ const ShortComment = (props) => {
             commentList.map((item) => {
               return (
                 <Grid key={item.shortsCommentId}>
-                  <Board commentBoard commnet={item} />
+                  <Board
+                    commentBoard
+                    comment={item}
+                    shortsId={shortsData.shortsId}
+                  />
                 </Grid>
               );
             })}
@@ -44,7 +48,7 @@ const ShortComment = (props) => {
       </Container>
       {/* 댓글 입력창 */}
       <CommentInput>
-        <SendText />
+        <SendText shortsId={shortsData.shortsId}/>
       </CommentInput>
     </Grid>
   );
