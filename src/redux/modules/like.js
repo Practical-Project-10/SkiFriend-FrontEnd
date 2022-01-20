@@ -7,7 +7,7 @@ import produce from "immer";
 // initialState
 const initialState = {
   list: [],
-  shortsLikeList: [],
+  shortsLikeList: '',
 };
 
 // action

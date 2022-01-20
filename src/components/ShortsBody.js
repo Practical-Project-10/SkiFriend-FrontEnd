@@ -31,6 +31,10 @@ const Short = (props) => {
   const [heart, setHeart] = useState(likeList);
 
   useEffect(() => {
+    if(shortsData.length === 0) {
+      dispatch(shortsActions.getShortsDB());
+    }
+
     if (likeData !== undefined) {
       for (let i = 0; i < likeData.length; i++) {
         if (likeData[i].userId === parseInt(login_userId)) {

@@ -25,7 +25,7 @@ const ShortComment = (props) => {
 
   //동영상 댓글 페이지
   return (
-    <Grid>
+    <React.Fragment>
       <Background onClick={props.closeModal}></Background>
 
       <Container>
@@ -49,7 +49,7 @@ const ShortComment = (props) => {
       <CommentInput>
         <SendText shortsId={shortsId} />
       </CommentInput>
-    </Grid>
+    </React.Fragment>
   );
 };
 
