@@ -27,6 +27,8 @@ const Short = (props) => {
   const login_userId = localStorage.getItem("userId");
   const is_login = localStorage.getItem("is_login");
 
+  // console
+
   // useState
   const [showModal, setShowModal] = useState(false);
   const [heart, setHeart] = useState(false);
@@ -44,10 +46,6 @@ const Short = (props) => {
       }
       setHeart(false);
     }
-  }, []);
-
-  useEffect(() => {
-    dispatch(shortsActions.getShortsDB());
   }, []);
 
   //-------heart-------
