@@ -34,7 +34,7 @@ const ShortComment = (props) => {
           {commentList && <Text color="#6195CF">{commentList.length}</Text>}
         </Grid>
 
-        <Grid is_flex direction="column">
+        <Grid display='flex' direction="column">
           {commentList &&
             commentList.map((item) => {
               return (

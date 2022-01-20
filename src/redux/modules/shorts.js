@@ -54,10 +54,11 @@ const addShortsDB = (videoFile, title) => {
 
     try {
       const response = await apis.shortsUpload(formData);
-      console.log(response);
+      const shortsId = response.data.shortsId;
+      console.log(shortsId)
+
       response && dispatch(addShorts(response.data));
-      console.log(response);
-      history.push("/shorts");
+      history.push(`/shorts/${shortsId}`);
     } catch (err) {
       console.log(err);
     }
@@ -110,7 +111,7 @@ export default handleActions(
 
     [ADD_SHORTS]: (state, action) =>
       produce(state, (draft) => {
-        draft.shortsList.unshift(action.payload.shortsDatas);
+        draft.shortsList = action.payload.shortsList;
       }),
 
     [UPDATE_SHORTS]: (state, action) =>

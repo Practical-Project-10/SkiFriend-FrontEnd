@@ -12,53 +12,36 @@ import ShortVideo from "./ShortsVideo";
 
 import Header from "./Header";
 
-//swiper
-import { Swiper, SwiperSlide } from "swiper/react";
-import SwiperCore, { Navigation, Pagination } from "swiper";
-import "swiper/swiper.min.css";
-import "swiper/components/navigation/navigation.min.css";
 
-const VideoUpload = (props) => {
-  const {is_edit, postId} = props;
+const ShortsWrite = (props) => {
+  const {is_edit} = props;
   const dispatch = useDispatch();
-
-  const preview = useSelector(state => state.image.preview);
 
   const titleInput = useRef();
   const fileInput = useRef();
-  const [file, setFile] = useState();
+  const [file, setFile] = useState(null);
   const [src, setSrc] = useState();
-  console.log(src)
-
-  // const uploadTitle = () => {
-  //   console.log(titleInput.current.value)
-  //   setForm(
-  //     {
-  //       ...form,
-  //       title: titleInput.current.value,
-  //     }
-  //   )
-  // }
   
   const uploadFile = () => {
-    var video = document.getElementById("video"); 
-    const file = fileInput.current.files[0];
-    const videoUrl = URL.createObjectURL(file);
+    const file_ = fileInput.current.files[0];
+    const videoUrl = URL.createObjectURL(file_);
+    setFile(file_);
+    setSrc(videoUrl);
+  };
 
-    setFile(file);
-    setSrc(videoUrl)
-    // video.setAttribute('src', videoUrl);
-    video.oncanplaythrough = () => {
-      video.play();
+  const addShorts = () => {
+    const title = titleInput.current.value;
+
+    if (file === null || title === '') {
+      return window.alert("제목 및 영상을 등록해 주세요.");
+    } else {
+      dispatch(shortsActions.addShortsDB(file, titleInput.current.value));
     }
-    console.log(video)
-
-    // dispatch(imageActions.setPreview(videoUrl));
-  }
+  };
   
   return (
     <React.Fragment>
-      <Header goBack complete _onClick={() => dispatch(shortsActions.addShortsDB(file, titleInput.current.value))}>
+      <Header goBack complete _onClick={addShorts}>
         숏츠 {is_edit ? "수정" : "작성"}하기
       </Header>
       <Grid minHeight="calc( 100vh - 55px )" bg="#FFF">
@@ -143,4 +126,4 @@ const Video = styled.div`
   height: 100%;
 `
 
-export default VideoUpload;
+export default ShortsWrite;
