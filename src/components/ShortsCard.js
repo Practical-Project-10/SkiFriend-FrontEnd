@@ -13,7 +13,6 @@ import etc from "../assets/etc_icon.svg";
 
 const ShortsCard = (props) => {
   const dispatch = useDispatch();
-
   const [showModal, setShowModal] = useState(false);
 
   const deleteMyShorts = () => {

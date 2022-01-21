@@ -60,7 +60,7 @@ const addProfileDB = (profile) => {
       dispatch(imageActions.setPreview(null));
     } catch (err) {
       window.alert("프로필을 다시 확인해 주세요!");
-      console.log("addProfileDB", err);
+      // console.log("addProfileDB", err);
       // const error = {...err};
       // console.log(error.response.data.error);
     }

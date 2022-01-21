@@ -83,7 +83,7 @@ const getCarpoolDB = (skiResort, page) => {
         dispatch(isNext(false));
       }
     } catch (err) {
-      console.log(err);
+      // console.log(err);
     }
   };
 };
@@ -95,7 +95,7 @@ const addCarpoolDB = (skiResort, carpool) => {
       response && history.push(`/carpool/${skiResort}`);
       dispatch(addCarpool(skiResort, response.data));
     } catch (err) {
-      console.log(err);
+      // console.log(err);
     }
   };
 };
@@ -107,7 +107,7 @@ const editCarpoolDB = (skiResort, postId, carpool) => {
       response && history.goBack();
       dispatch(editCarpool(skiResort, postId, response.data));
     } catch (err) {
-      console.log(err);
+      // console.log(err);
     }
   };
 };
@@ -122,7 +122,7 @@ const deleteCarpoolDB = (skiResort, postId, page) => {
       }
       // history.push(`/carpool/${skiResort}`);
     } catch (err) {
-      console.log(err);
+      // console.log(err);
     }
   };
 };
@@ -137,7 +137,7 @@ const completeCarpoolDB = (skiResort, postId, page) => {
         dispatch(completeMycarpool(skiResort, postId, response.data, page));
       }
     } catch (err) {
-      console.log(err);
+      // console.log(err);
     }
   };
 };
@@ -154,7 +154,7 @@ const filterCarpoolDB = (skiResort, form) => {
         history.push(`/filter/${skiResort}`);
       }
     } catch (err) {
-      console.log(err);
+      // console.log(err);
     }
   };
 };
@@ -165,7 +165,7 @@ const getMyCarpoolDB = (page) => {
       const response = await apis.getMyCarpool();
       response && dispatch(getMyCarpool(page, response.data));
     } catch (err) {
-      console.log(err);
+      // console.log(err);
     }
   };
 };

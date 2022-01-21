@@ -41,7 +41,7 @@ export const addCommentDB =
       const response = await apis.addPostComment(postId, content);
       response && dispatch(getOneBoardDB(postId));
     } catch (err) {
-      console.log(err);
+      // console.log(err);
     }
   };
 //게시판 댓글 수정
@@ -52,7 +52,7 @@ export const updateCommentDB =
       const response = await apis.updatePostComment(commentId, content);
       response && dispatch(getOneBoardDB(postId));
     } catch (err) {
-      console.log(err);
+      // console.log(err);
     }
   };
 //게시판 댓글 삭제
@@ -63,7 +63,7 @@ export const deleteCommentDB =
       const response = await apis.deletePostComment(commentId);
       response && dispatch(getOneBoardDB(postId));
     } catch (err) {
-      console.log(`댓글삭제 실패${err}`);
+      // console.log(`댓글삭제 실패${err}`);
     }
   };
 
@@ -76,7 +76,7 @@ export const getShortsCommentDB =
       response && dispatch(getShortsComment(response.data));
       dispatch(shortsActions.CommentCount(response.data.length));
     } catch (err) {
-      console.log(err);
+      // console.log(err);
     }
   };
 
@@ -88,7 +88,7 @@ export const addShortsCommentDB =
       const response = await apis.shortsWriteComment(shortsId, content);
       response && dispatch(addShortsComment(response.config.data));
     } catch (err) {
-      console.log(err);
+      // console.log(err);
     }
   };
 
@@ -101,7 +101,7 @@ export const updateShortsCommentDB =
       response &&
         dispatch(updateShortsComment(shortsCommentId, response.config.data));
     } catch (err) {
-      console.log(err);
+      // console.log(err);
     }
   };
 
@@ -113,7 +113,7 @@ export const deleteShortsCommentDB =
       const response = await apis.shortsDeleteComment(shortsCommentId);
       response && dispatch(deleteShortsComment(shortsCommentId));
     } catch (err) {
-      console.log(`댓글삭제 실패${err}`);
+      // console.log(`댓글삭제 실패${err}`);
     }
   };
 

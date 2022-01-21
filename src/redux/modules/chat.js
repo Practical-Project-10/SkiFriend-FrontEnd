@@ -68,7 +68,7 @@ export const getListChatDB =
 
       response && dispatch(getChatRoomList(response.data));
     } catch (err) {
-      console.log(`불러오기 실패${err}`);
+      // console.log(`불러오기 실패${err}`);
     }
   };
 
@@ -80,7 +80,7 @@ export const getContentChatDB =
       const response = await apis.chatMSG(roomId);
       response && dispatch(getChatList(response.data));
     } catch (err) {
-      console.log(`불러오기 실패${err}`);
+      // console.log(`불러오기 실패${err}`);
     }
   };
 
@@ -114,7 +114,7 @@ export const getProfileInfoDB =
 
       response && dispatch(getProfileList(response.data));
     } catch (err) {
-      console.log(`불러오기 실패${err}`);
+      // console.log(`불러오기 실패${err}`);
     }
   };
 
@@ -127,7 +127,7 @@ export const getPhoneNumDB =
 
       response && dispatch(getPhoneInfo(response.data));
     } catch (err) {
-      console.log(`불러오기 실패${err}`);
+      // console.log(`불러오기 실패${err}`);
     }
   };
 
@@ -139,7 +139,7 @@ export const chatRoomDeleteDB =
       const response = await apis.chatRoomDelete(roomId);
       response && dispatch(getListChatDB());
     } catch (err) {
-      console.log(`불러오기 실패${err}`);
+      // console.log(`불러오기 실패${err}`);
     }
   };
 
@@ -152,7 +152,7 @@ export const getRoomInfoDB =
 
       response && dispatch(getRoomInfo(response.data));
     } catch (err) {
-      console.log(`불러오기 실패${err}`);
+      // console.log(`불러오기 실패${err}`);
     }
   };
 

@@ -30,7 +30,6 @@ import Shorts from "./pages/Shorts";
 import background from "./assets/background.png.jpg";
 
 function App() {
-  
   return (
     <React.Fragment>
       <Container>
