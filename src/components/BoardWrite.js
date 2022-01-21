@@ -24,7 +24,6 @@ const BoardWrite = (props) => {
   // redux데이터
   const postData = useSelector((state) => state.freeboard.detail);
   const leftList = postData.photoList;
-  let _post = is_edit ? postData.find((p) => p.postId === postId) : null;
   // swiper관리
   SwiperCore.use([Navigation, Pagination]);
 

@@ -68,7 +68,7 @@ const Navbar = ({ location }) => {
       <Icon onClick={() => dispatch(shortsActions.getShortsDB())}>
         <NavLink to="/shorts" className="navLink">
           <img
-            src={location.pathname.includes("/shorts/") ? shorts_active : shorts}
+            src={location.pathname.includes("/shorts") ? shorts_active : shorts}
             alt="동영상"
           />
         </NavLink>

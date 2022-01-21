@@ -37,7 +37,6 @@ const ProfileWrite = (props) => {
     selfIntro,
     // phoneNum,
   } = profile;
-  console.log(profile)
 
   useEffect(() => {
     dispatch(profileActions.getProfileDB());
