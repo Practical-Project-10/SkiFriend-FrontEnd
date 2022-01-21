@@ -64,8 +64,9 @@ const addShortsDB = (videoFile, title) => {
       "requestDto",
       new Blob([JSON.stringify(title)], { type: "application/json" })
     );
-
+    console.log(videoFile, title);
     try {
+      console.log("das");
       const response = await apis.shortsUpload(formData);
       window.alert("shorts가 정상적으로 등록되었습니다.");
       response && dispatch(addShorts(response.data));
@@ -100,7 +101,6 @@ const deleteShortsDB = (shortsId) => {
   return async function (dispatch, getState, { history }) {
     try {
       const response = await apis.shortsDelete(shortsId);
-      console.log(response)
       response && dispatch(deleteShorts(shortsId));
     } catch (err) {
       console.log(err);
@@ -113,6 +113,7 @@ const myShortsDB = () => {
   return async function (dispatch, getState, { history }) {
     try {
       const response = await apis.myShortsList();
+      console.log(response);
       response && dispatch(getMyShorts(response.data));
     } catch (err) {
       console.log(err);
@@ -146,10 +147,9 @@ export default handleActions(
 
     [DELETE_SHORTS]: (state, action) =>
       produce(state, (draft) => {
-        let deleted_list = draft.shortsList.filter(
+        draft.myShortsList = state.myShortsList.filter(
           (l) => l.shortsId !== action.payload.shortsId
         );
-        draft.shortsList = deleted_list;
       }),
 
     [GET_MY_SHORTS]: (state, action) =>
