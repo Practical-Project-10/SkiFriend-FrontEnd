@@ -30,7 +30,6 @@ const ShortsBody = (props) => {
   // useState
   const [showModal, setShowModal] = useState(false);
   const [heart, setHeart] = useState(likeList);
-
   useEffect(() => {
     if (shortsData.length === 0) {
       dispatch(shortsActions.getShortsDB());
@@ -148,6 +147,7 @@ const ShortsBody = (props) => {
             closeModal={() => setShowModal(false)}
           />
         ) : null}
+        
         <ThumbNail src={shortsData.thumbNailPath} alt="썸네일"/>
         <ShortVideo src={shortsData.videoPath}/>
       </Container>
