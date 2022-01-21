@@ -111,7 +111,6 @@ export const deleteShortsCommentDB =
   async (dispatch, getState, { history }) => {
     try {
       const response = await apis.shortsDeleteComment(shortsCommentId);
-      console.log(response);
       response && dispatch(deleteShortsComment(shortsCommentId));
     } catch (err) {
       console.log(`댓글삭제 실패${err}`);

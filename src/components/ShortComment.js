@@ -15,7 +15,6 @@ const ShortComment = (props) => {
 
   //redux data
   const commentList = useSelector((state) => state.comment.shortsList);
-  console.log(commentList)
 
   useEffect(() => {
     dispatch(commentActions.getShortsCommentDB(shortsId));
@@ -79,7 +78,7 @@ const Background = styled.div`
   position: absolute;
   top: 0;
   left: 0;
-  z-index: 3;
+  z-index: 19;
 `;
 
 const Container = styled.div`
@@ -91,7 +90,7 @@ const Container = styled.div`
   background: #fff;
   border-radius: 22px 22px 0 0;
   overflow-y: scroll;
-  z-index: 3;
+  z-index: 19;
 `;
 
 const CommentInput = styled.div`
@@ -103,7 +102,7 @@ const CommentInput = styled.div`
   position: absolute;
   bottom: 0;
   left: 0;
-  z-index: 3;
+  z-index: 19;
 `;
 
 export default ShortComment;

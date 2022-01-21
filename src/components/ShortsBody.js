@@ -21,7 +21,6 @@ const ShortsBody = (props) => {
   const dispatch = useDispatch();
   //redux data
   const shortsData = useSelector((state) => state.shorts.shortsList);
-  console.log(shortsData)
   const likeList = useSelector((state) => state.like.shortsLikeList);
   const likeData = shortsData.shortsLikeResponseDtoList;
   //localstorage 로그인정보
@@ -140,17 +139,17 @@ const ShortsBody = (props) => {
           </Position>
         </IconWrap>
 
-        {/* 댓글모달 */}
-        {showModal ? (
-          <ShortComment
-            shortsData={shortsData.shortsId}
-            closeModal={() => setShowModal(false)}
-          />
-        ) : null}
-        
         <ThumbNail src={shortsData.thumbNailPath} alt="썸네일"/>
         <ShortVideo src={shortsData.videoPath}/>
       </Container>
+
+      {/* 댓글모달 */}
+      {showModal ? (
+        <ShortComment
+          shortsData={shortsData.shortsId}
+          closeModal={() => setShowModal(false)}
+        />
+      ) : null}
     </React.Fragment>
   );
 };
