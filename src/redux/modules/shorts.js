@@ -41,8 +41,7 @@ const getShortsDB = () => {
       const shortsId = response.data.shortsId;
 
       response && dispatch(getShorts(response.data));
-      // history.push(`/shorts`);
-      history.push(`/shorts/${shortsId}`);
+      history.push(`/shorts`);
     } catch (err) {
       const ask = window.confirm(
         "등록된 게시물이 없습니다. 게시물을 작성하러 가시겠습니까?"
@@ -70,7 +69,7 @@ const addShortsDB = (videoFile, title) => {
       const response = await apis.shortsUpload(formData);
       window.alert("shorts가 정상적으로 등록되었습니다.");
       response && dispatch(addShorts(response.data));
-      history.push(`/shorts/${response.data.shortsId}`);
+      history.push(`/shorts`);
     } catch (err) {
       console.log(err);
     }

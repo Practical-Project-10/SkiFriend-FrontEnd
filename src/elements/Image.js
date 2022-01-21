@@ -84,7 +84,7 @@ const ElImage = styled.div`
   border-radius: ${(props) => props.radius};
   background: ${(props) =>
     props.src ? `url(${props.src}) no-repeat center` : ""};
-  background: ${(props) => props.bg};
+  background-color: ${(props) => props.bg};
   background-size: ${(props) => props.size};
 `;
 

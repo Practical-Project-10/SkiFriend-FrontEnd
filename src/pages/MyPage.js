@@ -113,7 +113,7 @@ const MyPage = (props) => {
                   {myShortsList.map((s) => {
                     return (
                       <SwiperSlide key={s.shortsId}>
-                        <ShortsCard {...s} />
+                        <ShortsCard page='myPage' {...s} />
                       </SwiperSlide>
                     );
                   })}

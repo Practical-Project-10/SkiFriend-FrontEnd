@@ -11,9 +11,8 @@ import SendText from "../components/SendText";
 
 const ShortComment = (props) => {
   const dispatch = useDispatch();
-  //params
-  const params = useParams();
-  const shortsId = params.shortsId;
+  const shortsId = props.shortsData;
+
   //redux data
   const commentList = useSelector((state) => state.comment.shortsList);
   console.log(commentList)
@@ -80,7 +79,7 @@ const Background = styled.div`
   position: absolute;
   top: 0;
   left: 0;
-  z-index: 2;
+  z-index: 3;
 `;
 
 const Container = styled.div`
