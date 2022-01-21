@@ -38,9 +38,18 @@ const getShortsDB = () => {
   return async function (dispatch, getState, { history }) {
     try {
       const response = await apis.shortsRandomList();
-      const shortsId = response.data.shortsId;
 
       response && dispatch(getShorts(response.data));
+      if(response.data.length === 0) {
+        const ask = window.confirm(
+          "등록된 게시물이 없습니다. 게시물을 작성하러 가시겠습니까?"
+          );
+          if (ask) {
+            return history.push(`/shortsupload`);
+          } else {
+            return history.push(`/`);
+        };
+      };
       history.push(`/shorts`);
     } catch (err) {
       const is_login =
