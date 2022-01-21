@@ -19,7 +19,7 @@ const Board = (props) => {
   const [commentEditValue, setCommentEditValue] = useState();
 
   useEffect(() => {
-    if (page === 'commentBoard' && !comment) {
+    if (page === "commentBoard") {
       dispatch(commentActions.getShortsCommentDB(shortsId));
     }
   }, []);
@@ -55,7 +55,7 @@ const Board = (props) => {
   };
 
   //동영상 댓글 컴포넌트
-  if (page === 'commentBoard') {
+  if (page === "commentBoard") {
     return (
       <Grid width="100%" padding="9px 16px" borderB="1px solid #edeeef">
         <Grid
