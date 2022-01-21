@@ -113,7 +113,11 @@ function App() {
               component={ChatRoom}
             />
             <Route exact path="/shortsupload" component={ShortsUpload} />
-            <Route exact path="/shortsupload/:shortsId" component={ShortsUpload} />
+            <Route
+              exact
+              path="/shortsupload/:shortsId"
+              component={ShortsUpload}
+            />
             <Route exact path="/shorts" component={Shorts} />
           </CardList>
           <Navbar />

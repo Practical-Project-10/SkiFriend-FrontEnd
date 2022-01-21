@@ -25,14 +25,12 @@ const KakaoAuthHandle = (props) => {
     kakaoLogin();
   }, []);
 
-  return (
-    <Container src={bg} alt="로딩 이미지"/>
-  );
+  return <Container src={bg} alt="로딩 이미지" />;
 };
 
 export default KakaoAuthHandle;
 
 const Container = styled.img`
   width: 100%;
-  min-height: calc( 100vh - 55px );
+  min-height: calc(100vh - 55px);
 `;
