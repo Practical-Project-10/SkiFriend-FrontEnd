@@ -24,7 +24,7 @@ const MyPage = (props) => {
   const user_profile = useSelector((state) => state.profile.user_profile);
   const myCarpool = useSelector((state) => state.carpool.list["myPage"]);
   const myShortsList = useSelector((state) => state.shorts.myShortsList);
-
+  console.log(myShortsList)
   useEffect(() => {
     if (!is_login) {
       return null;
@@ -112,8 +112,8 @@ const MyPage = (props) => {
                 >
                   {myShortsList.map((s) => {
                     return (
-                      <SwiperSlide>
-                        <ShortsCard key={s.shortsId} {...s} />;
+                      <SwiperSlide key={s.shortsId}>
+                        <ShortsCard {...s} />
                       </SwiperSlide>
                     );
                   })}

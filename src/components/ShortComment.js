@@ -37,7 +37,7 @@ const ShortComment = (props) => {
             commentList.map((item) => {
               return (
                 <Grid key={item.shortsCommentId}>
-                  <Board commentBoard comment={item} shortsId={shortsId} />
+                  <Board page="commentBoard" comment={item} shortsId={shortsId} />
                 </Grid>
               );
             })}
