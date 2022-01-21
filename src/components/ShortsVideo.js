@@ -13,7 +13,10 @@ const ShortVideo = (props) => {
           autoPlay // 자동재생
           muted={props.page === "myPage"? true: false} // 음소거 -> 안하면 좋겠지만 이거 안하면 자동 재생이 안돼요
           loop // 반복 재생
-        ></Video>
+          playsinline
+        >
+          {/* <Video src={props.src} type="video/mp4"/> */}
+        </Video>
       </Grid>
     </React.Fragment>
   );

@@ -156,8 +156,8 @@ const ShortsBody = (props) => {
           </Position>
         </IconWrap>
 
-        {/* <ThumbNail src={shortsData.thumbNailPath} alt="썸네일"/>
-        <ShortVideo src={shortsData.videoPath}/> */}
+        <ThumbNail src={shortsData.thumbNailPath} alt="썸네일"/>
+        <ShortVideo src={shortsData.videoPath}/>
       </Container>
 
       {/* 댓글모달 */}
