@@ -13,8 +13,8 @@ const KakaoAuthHandle = (props) => {
     let code = new URL(window.location.href).searchParams.get("code");
     const kakaoLogin = async () => {
       await axios
-        .get(`https://seongeunyang.shop/user/kakao/callback?code=${code}`) 
-        // .get(`http://3.34.19.50:8080/user/kakao/callback?code=${code}`) 
+        // .get(`https://seongeunyang.shop/user/kakao/callback?code=${code}`)
+        .get(`http://3.34.19.50:8080/user/kakao/callback?code=${code}`)
         .then((res) => {
           setCookie("token", res.headers.authorization);
           localStorage.setItem("userId", res.data);
@@ -25,14 +25,12 @@ const KakaoAuthHandle = (props) => {
     kakaoLogin();
   }, []);
 
-  return (
-    <Container src={bg} alt="로딩 이미지"/>
-  );
+  return <Container src={bg} alt="로딩 이미지" />;
 };
 
 export default KakaoAuthHandle;
 
 const Container = styled.img`
   width: 100%;
-  min-height: calc( 100vh - 55px );
+  min-height: calc(100vh - 55px);
 `;

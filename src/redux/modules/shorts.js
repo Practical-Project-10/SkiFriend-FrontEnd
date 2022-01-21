@@ -43,11 +43,28 @@ const getShortsDB = () => {
       response && dispatch(getShorts(response.data));
       history.push(`/shorts`);
     } catch (err) {
+      const is_login =
+        localStorage.getItem("is_login") === "true" ? true : false;
       const ask = window.confirm(
         "등록된 게시물이 없습니다. 게시물을 작성하러 가시겠습니까?"
       );
+      const login_ask = window.confirm(
+        "게시물 작성은 회원만 가능합니다. 로그인 페이지로 이동하시겠습니까?"
+      );
       if (ask) {
-        return history.push(`/shortsupload`);
+        if (is_login) {
+          return history.push(`/shortsupload`);
+        } else {
+          if (is_login) {
+            return history.push(`/`);
+          } else {
+            if (login_ask) {
+              return history.push(`login`);
+            } else {
+              return history.push(`/`);
+            }
+          }
+        }
       } else {
         return history.push(`/`);
       }
