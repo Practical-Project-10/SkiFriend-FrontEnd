@@ -39,6 +39,7 @@ const getShortsDB = () => {
       const shortsId = response.data.shortsId;
 
       response && dispatch(getShorts(response.data));
+      // history.push(`/shorts`);
       history.push(`/shorts/${shortsId}`);
     } catch (err) {
       const ask = window.confirm(
@@ -56,6 +57,7 @@ const getShortsDB = () => {
 //동영상 작성
 const addShortsDB = (videoFile, title) => {
   return async function (dispatch, getState, { history }) {
+    console.log(videoFile, title)
     let formData = new FormData();
     formData.append("videoFile", videoFile);
     formData.append(
@@ -66,7 +68,7 @@ const addShortsDB = (videoFile, title) => {
     try {
       console.log("das");
       const response = await apis.shortsUpload(formData);
-      window.alert("동영상이 정상적으로 등록되었습니다.");
+      window.alert("shorts가 정상적으로 등록되었습니다.");
       response && dispatch(addShorts(response.data));
       history.push(`/shorts/${response.data.shortsId}`);
     } catch (err) {
@@ -78,9 +80,16 @@ const addShortsDB = (videoFile, title) => {
 //동영상 수정
 const updateShortsDB = (shortsId, title) => {
   return async function (dispatch, getState, { history }) {
+    let formData = new FormData();
+    formData.append(
+      "requestDto",
+      new Blob([JSON.stringify(title)], { type: "application/json" })
+    );
     try {
-      const response = await apis.shortsUpdate(shortsId, title);
-      response && dispatch(updateShorts(response.data));
+      const response = await apis.shortsUpdate(shortsId, formData);
+      response && history.push('/myPage');
+      window.alert('shorts가 정상적으로 수정되었습니다.')
+      dispatch(updateShorts(response.data));
     } catch (err) {
       console.log(err);
     }
@@ -142,6 +151,7 @@ export default handleActions(
           (l) => l.shortsId !== action.payload.shortsId
         );
       }),
+
     [GET_MY_SHORTS]: (state, action) =>
       produce(state, (draft) => {
         draft.myShortsList.push(...action.payload.myList);
