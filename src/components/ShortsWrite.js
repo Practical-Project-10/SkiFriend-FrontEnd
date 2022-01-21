@@ -1,46 +1,85 @@
 import React, { useState, useRef } from "react";
 
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { shortsActions } from "../redux/modules/shorts";
 
 import styled from "styled-components";
-import { Grid } from "../elements/index";
-import video from "../assets/freeBoard/video.svg";
+import { Grid, Text } from "../elements/index";
+import video_ from "../assets/freeBoard/video.svg";
 
 import ShortVideo from "./ShortsVideo";
 
 import Header from "./Header";
 
 const ShortsWrite = (props) => {
-  const {is_edit} = props;
+  const {is_edit, shortsId} = props;
   const dispatch = useDispatch();
+  const myShortsList = useSelector(state => state.shorts.myShortsList);
+  const shorts = is_edit? myShortsList.find(s => s.shortsId === Number(shortsId)): null;
 
-  const titleInput = useRef();
+  // const titleInput = useRef(shorts? shorts.title: '');
   const fileInput = useRef();
-  const [file, setFile] = useState(null);
-  const [src, setSrc] = useState();
+  // const [file, setFile] = useState(null);
+  const [src, setSrc] = useState(shorts? shorts.videoPath: '');
+  const [form, setForm] = useState(
+    {
+      title: shorts? shorts.title: '',
+      video: shorts? shorts.videoPath: null,
+    }
+  );
+  const {title, video} = form;
 
+  const handleChange = (e) => {
+    const {name, value} = e.target;
+
+    setForm(
+      {
+        ...form,
+        [name]: value,
+      }
+    );
+  }
+
+  // 파일 업로드
   const uploadFile = () => {
     const file_ = fileInput.current.files[0];
     const videoUrl = URL.createObjectURL(file_);
-    setFile(file_);
     setSrc(videoUrl);
+    setForm(
+      {
+        ...form,
+        video: file_,
+      }
+    );
   };
+  console.log(form);
 
+  //숏츠 업로드
   const addShorts = () => {
-    const title = titleInput.current.value;
+    // const title = titleInput.current.value;
 
-    if (file === null || title === '') {
+    if (video === null || title === '') {
       return window.alert("제목 및 영상을 등록해 주세요.");
     } else {
-      dispatch(shortsActions.addShortsDB(file, titleInput.current.value));
+      dispatch(shortsActions.addShortsDB(video, title));
+    }
+  };
+
+  //숏츠 수정
+  const updateShorts = () => {
+    // const title = titleInput.current.value;
+    
+    if (video === null || title === '') {
+      return window.alert("제목 및 영상을 등록해 주세요.");
+    } else {
+      dispatch(shortsActions.updateShortsDB(shortsId, title));
     }
   };
   
   return (
     <React.Fragment>
-      <Header goBack complete _onClick={addShorts}>
-        숏츠 {is_edit ? "수정" : "작성"}하기
+      <Header goBack complete _onClick={is_edit? updateShorts: addShorts}>
+        숏츠 {is_edit? "수정" : "작성"}하기
       </Header>
       <Grid minHeight="calc( 100vh - 55px )" bg="#FFF">
         <Grid phoneSize>
@@ -49,9 +88,10 @@ const ShortsWrite = (props) => {
             <Title
               maxLength="50"
               placeholder="제목을 작성해주세요.(50자 이내)"
-              ref={titleInput}
-              // _value={is_edit ? title : null}
-              // onChange={uploadTitle}
+              name='title'
+              value={title}
+              onChange={handleChange}
+              // ref={titleInput}
             />
           </Grid>
 
@@ -69,21 +109,26 @@ const ShortsWrite = (props) => {
           padding="20px 0"
           align="center"
           borderT="1px solid grey"
-          cursor="pointer"
-          hoverOpacity="0.8"
         >
-          <label htmlFor="myFile" style={{ cursor: "pointer" }}>
-            <img src={video} alt="동영상 선택" />
-          </label>
-          <input
-            type="file"
-            id="myFile"
-            multiple
-            style={{ display: "none" }}
-            ref={fileInput}
-            onChange={uploadFile}
-            // accept="video/*"
-          />
+          {is_edit
+          ? <Grid>
+              <Text color='rgba(0,0,0,0.5)'>동영상은 수정할 수 없습니다.</Text>
+            </Grid>
+          : <React.Fragment>
+              <label htmlFor="myFile" style={{ cursor: "pointer", opacity: '0.8' }}>
+                <img src={video_} alt="동영상 선택" />
+              </label>
+              <input
+                type="file"
+                id="myFile"
+                multiple
+                style={{ display: "none" }}
+                ref={fileInput}
+                onChange={uploadFile}
+                accept="video/*"
+              />
+            </React.Fragment>
+          }
         </Grid>
       </Grid>
     </React.Fragment>
