@@ -19,9 +19,7 @@ const Board = (props) => {
   const [commentEditValue, setCommentEditValue] = useState();
 
   useEffect(() => {
-    if (!comment) {
-      dispatch(commentActions.getShortsCommentDB(shortsId));
-    }
+    dispatch(commentActions.getShortsCommentDB(shortsId));
   }, []);
 
   //-----댓글 수정 내용 가져오기----------

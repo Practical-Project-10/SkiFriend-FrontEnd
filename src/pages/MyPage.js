@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
 import { profileActions } from "../redux/modules/profile";
@@ -112,8 +112,8 @@ const MyPage = (props) => {
                 >
                   {myShortsList.map((s) => {
                     return (
-                      <SwiperSlide>
-                        <ShortsCard key={s.shortsId} {...s} />;
+                      <SwiperSlide key={s.shortsId}>
+                        <ShortsCard {...s} />
                       </SwiperSlide>
                     );
                   })}

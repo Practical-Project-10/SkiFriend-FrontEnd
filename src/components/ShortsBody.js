@@ -29,11 +29,9 @@ const Short = (props) => {
   // useState
   const [showModal, setShowModal] = useState(false);
   const [heart, setHeart] = useState(likeList);
-  console.log(shortsData)
 
   useEffect(() => {
     if (shortsData.length === 0) {
-      console.log('111')
       dispatch(shortsActions.getShortsDB());
     }
 

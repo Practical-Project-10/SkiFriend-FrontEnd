@@ -14,7 +14,8 @@ const COMMENT_COUNT = "shorts/COMMENT_COUNT";
 // acrtion creators
 const getShorts = createAction(GET_SHORTS, (shortsList) => ({ shortsList }));
 const addShorts = createAction(ADD_SHORTS, (shortsDatas) => ({ shortsDatas }));
-const updateShorts = createAction(UPDATE_SHORTS, (shortsData) => ({
+const updateShorts = createAction(UPDATE_SHORTS, (shortsId, shortsData) => ({
+  shortsId,
   shortsData,
 }));
 const deleteShorts = createAction(DELETE_SHORTS, (shortsId) => ({ shortsId }));
@@ -57,7 +58,7 @@ const getShortsDB = () => {
 //동영상 작성
 const addShortsDB = (videoFile, title) => {
   return async function (dispatch, getState, { history }) {
-    console.log(videoFile, title)
+    console.log(videoFile, title);
     let formData = new FormData();
     formData.append("videoFile", videoFile);
     formData.append(
@@ -87,9 +88,10 @@ const updateShortsDB = (shortsId, title) => {
     );
     try {
       const response = await apis.shortsUpdate(shortsId, formData);
-      response && history.push('/myPage');
-      window.alert('shorts가 정상적으로 수정되었습니다.')
-      dispatch(updateShorts(response.data));
+      response && history.push("/myPage");
+      window.alert("shorts가 정상적으로 수정되었습니다.");
+      console.log(response);
+      dispatch(updateShorts(shortsId, response.data));
     } catch (err) {
       console.log(err);
     }
@@ -136,13 +138,10 @@ export default handleActions(
 
     [UPDATE_SHORTS]: (state, action) =>
       produce(state, (draft) => {
-        let idx = draft.shortsList.findIndex(
+        let idx = draft.myShortsList.findIndex(
           (l) => l.shortsId === Number(action.payload.shortsId)
         );
-        draft.shortsList[idx] = {
-          ...draft.shortsList[idx],
-          ...action.payload.shortsData,
-        };
+        draft.myShortsList[idx] = action.payload.shortsData;
       }),
 
     [DELETE_SHORTS]: (state, action) =>
