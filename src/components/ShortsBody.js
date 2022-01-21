@@ -21,7 +21,6 @@ const ShortsBody = (props) => {
   const dispatch = useDispatch();
   //redux data
   const shortsData = useSelector((state) => state.shorts.shortsList);
-  console.log(shortsData)
   const likeList = useSelector((state) => state.like.shortsLikeList);
   const likeData = shortsData.shortsLikeResponseDtoList;
   //localstorage 로그인정보

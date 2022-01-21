@@ -24,7 +24,7 @@ export const hotPostsDB =
       const response = await axios.get("http://3.34.19.50:8080//main");
       response && dispatch(loadPosts(response));
     } catch (err) {
-      console.log(`게시물 가져오기 실패${err}`);
+      // console.log(`게시물 가져오기 실패${err}`);
     }
   };
 
