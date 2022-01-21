@@ -1,11 +1,11 @@
 const CLIENT_ID = "af4c2105b17debc9c5ba96f70c6ee0b9";
 const REDIRECT_URI =
-  "https://skifriend.shop/user/kakao/callback";
-  // "http://localhost:3000/user/kakao/callback";
+  // "https://skifriend.shop/user/kakao/callback";
+  "http://localhost:3000/user/kakao/callback";
 
 const REDIRECT_URI_PRO =
-  "https://skifriend.shop/user/kakao/callback/properties";
-  // "http://localhost:3000/user/kakao/callback/properties";
+  // "https://skifriend.shop/user/kakao/callback/properties";
+  "http://localhost:3000/user/kakao/callback/properties";
 
 export const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=code`;
 
