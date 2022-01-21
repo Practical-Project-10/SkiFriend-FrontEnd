@@ -30,7 +30,6 @@ import Shorts from "./pages/Shorts";
 import background from "./assets/background.png.jpg";
 
 function App() {
-  // var video = document.getElementById("video");
   return (
     <React.Fragment>
       <Container>

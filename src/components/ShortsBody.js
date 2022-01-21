@@ -139,17 +139,17 @@ const ShortsBody = (props) => {
           </Position>
         </IconWrap>
 
-        {/* 댓글모달 */}
-        {showModal ? (
-          <ShortComment
-            shortsData={shortsData.shortsId}
-            closeModal={() => setShowModal(false)}
-          />
-        ) : null}
-        
         <ThumbNail src={shortsData.thumbNailPath} alt="썸네일"/>
         <ShortVideo src={shortsData.videoPath}/>
       </Container>
+
+      {/* 댓글모달 */}
+      {showModal ? (
+        <ShortComment
+          shortsData={shortsData.shortsId}
+          closeModal={() => setShowModal(false)}
+        />
+      ) : null}
     </React.Fragment>
   );
 };
