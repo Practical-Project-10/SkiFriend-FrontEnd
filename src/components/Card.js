@@ -85,7 +85,7 @@ const Card = (props) => {
   if (noCard) {
     return (
       <Grid height="165px">
-        <NotLogin>작성한 카풀 내역이 없어요!</NotLogin>
+        <NotLogin>작성한 내역이 없어요!</NotLogin>
       </Grid>
     );
   }

@@ -1,9 +1,9 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
 import { profileActions } from "../redux/modules/profile";
 import { carpoolActions } from "../redux/modules/carpool";
-import { shortsActions } from '../redux/modules/shorts';
+import { shortsActions } from "../redux/modules/shorts";
 
 //swiper
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -20,25 +20,28 @@ import banner from "../assets/myPage/mypage_banner.png";
 
 const MyPage = (props) => {
   const dispatch = useDispatch();
-  const is_login = localStorage.getItem("is_login") === 'true'? true: false;
+  const is_login = localStorage.getItem("is_login") === "true" ? true : false;
   const user_profile = useSelector((state) => state.profile.user_profile);
-  const myCarpool = useSelector((state) => state.carpool.list['myPage']);
-  const myShortsList = useSelector(state => state.shorts.myShortsList);
+  const myCarpool = useSelector((state) => state.carpool.list["myPage"]);
+  const myShortsList = useSelector((state) => state.shorts.myShortsList);
 
   useEffect(() => {
     if (!is_login) {
       return null;
     }
     // if(user_profile === {}) {
-      dispatch(profileActions.getProfileDB());
+    dispatch(profileActions.getProfileDB());
     // }
-    if(myShortsList.length === 0) {
-      dispatch(shortsActions.myShortsDB());
-    }
-    if(myCarpool.length === 0) {
-      dispatch(carpoolActions.getMyCarpoolDB('myPage'));
+    if (myCarpool.length === 0) {
+      dispatch(carpoolActions.getMyCarpoolDB("myPage"));
     }
   }, []);
+
+  useEffect(() => {
+    if (myShortsList.length === 0) {
+      dispatch(shortsActions.myShortsDB());
+    }
+  }, [myShortsList.length]);
 
   return (
     //로그인 안 했을 때
@@ -48,7 +51,7 @@ const MyPage = (props) => {
       <Grid margin="0 0 70px 0" minHeight="calc( 100vh - 154px )">
         {/* 유저프로필 */}
         <Grid phoneSize>
-          <UserProfile {...user_profile} is_login={is_login}/>
+          <UserProfile {...user_profile} is_login={is_login} />
         </Grid>
 
         <Menu>
@@ -69,7 +72,7 @@ const MyPage = (props) => {
               내가 작성한 카풀
             </Text>
             {!is_login || myCarpool.length === 0 ? (
-              <Card noCard/>
+              <Card noCard />
             ) : (
               <RowDiv>
                 <Swiper
@@ -82,7 +85,7 @@ const MyPage = (props) => {
                     return (
                       <SwiperSlide key={l.createdAt}>
                         <Grid width="100%">
-                          <Card page="myPage" {...l}/>
+                          <Card page="myPage" {...l} />
                         </Grid>
                       </SwiperSlide>
                     );
@@ -97,22 +100,26 @@ const MyPage = (props) => {
             <Text bold size="12px">
               나의 숏츠
             </Text>
-            <RowDiv>
-              <Swiper
-                className="scroll-container"
-                slidesPerView={2.5}
-                spaceBetween={10}
-                initialSlide={0}
-              >
-                <SwiperSlide>
-                  {myShortsList.map(s => {
-                    return(
-                      <ShortsCard key={s.shortsId} {...s}/>
-                    )
+            {!is_login || myShortsList.length === 0 ? (
+              <Card noCard />
+            ) : (
+              <RowDiv>
+                <Swiper
+                  className="scroll-container"
+                  slidesPerView={2.5}
+                  spaceBetween={10}
+                  initialSlide={0}
+                >
+                  {myShortsList.map((s) => {
+                    return (
+                      <SwiperSlide>
+                        <ShortsCard key={s.shortsId} {...s} />;
+                      </SwiperSlide>
+                    );
                   })}
-                </SwiperSlide>
-              </Swiper>
-            </RowDiv>
+                </Swiper>
+              </RowDiv>
+            )}
           </Grid>
         </Menu>
       </Grid>
@@ -133,10 +140,10 @@ const Menu = styled.div`
   height: 706px;
   padding: 16px;
   border-radius: 22px 22px 0 0;
-  background-color: #FFF;
+  background-color: #fff;
   display: flex;
   flex-direction: column;
   gap: 25px;
-`
+`;
 
 export default MyPage;

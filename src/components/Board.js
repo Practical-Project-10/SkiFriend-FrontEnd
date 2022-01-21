@@ -17,9 +17,9 @@ const Board = (props) => {
   //------useState관리-------
   const [editCommentNo, setEditCommentNo] = useState();
   const [commentEditValue, setCommentEditValue] = useState();
-  
+
   useEffect(() => {
-    if (!comment.userId) {
+    if (!comment) {
       dispatch(commentActions.getShortsCommentDB(shortsId));
     }
   }, []);

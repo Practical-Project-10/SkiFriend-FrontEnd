@@ -13,7 +13,8 @@ const KakaoAuthHandle2 = (props) => {
     const kakaoLogin = async () => {
       await axios
         .get(
-          `https://seongeunyang.shop/user/kakao/callback/${userId}?code=${code}`
+          // `https://seongeunyang.shop/user/kakao/callback/${userId}?code=${code}`
+          `http://3.34.19.50:8080/user/kakao/callback/${userId}?code=${code}`
         )
         .then((res) => {
           localStorage.setItem("is_login", true);
@@ -24,9 +25,7 @@ const KakaoAuthHandle2 = (props) => {
     kakaoLogin();
   }, []);
 
-  return (
-    <Container src={bg} alt="로딩 이미지"/>
-  );
+  return <Container src={bg} alt="로딩 이미지" />;
 };
 
 export default KakaoAuthHandle2;
