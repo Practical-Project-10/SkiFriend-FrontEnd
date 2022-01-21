@@ -52,7 +52,6 @@ const ShortsWrite = (props) => {
       }
     );
   };
-  console.log(form);
 
   //숏츠 업로드
   const addShorts = () => {

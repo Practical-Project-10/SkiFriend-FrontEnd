@@ -87,8 +87,8 @@ const updateShortsDB = (shortsId, title) => {
     );
     try {
       const response = await apis.shortsUpdate(shortsId, formData);
-      response && history.push('/myPage');
-      window.alert('shorts가 정상적으로 수정되었습니다.')
+      response && history.push("/myPage");
+      window.alert("shorts가 정상적으로 수정되었습니다.");
       dispatch(updateShorts(shortsId, response.data));
     } catch (err) {
       console.log(err);
@@ -113,7 +113,6 @@ const myShortsDB = () => {
   return async function (dispatch, getState, { history }) {
     try {
       const response = await apis.myShortsList();
-      console.log(response);
       response && dispatch(getMyShorts(response.data));
     } catch (err) {
       console.log(err);
@@ -131,7 +130,6 @@ export default handleActions(
 
     [ADD_SHORTS]: (state, action) =>
       produce(state, (draft) => {
-        console.log(action.payload.shortsDatas)
         draft.shortsList = action.payload.shortsDatas;
         draft.myShortsList.push(action.payload.shortsDatas);
       }),
