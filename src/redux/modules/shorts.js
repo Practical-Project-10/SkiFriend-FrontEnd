@@ -1,6 +1,7 @@
 import { createAction, handleActions } from "redux-actions";
 import produce from "immer";
 import { apis } from "../../shared/apis";
+import { push } from "connected-react-router";
 
 //action
 const GET_SHORTS = "shorts/GET_SHORTS";
@@ -58,16 +59,14 @@ const getShortsDB = () => {
 //동영상 작성
 const addShortsDB = (videoFile, title) => {
   return async function (dispatch, getState, { history }) {
-    console.log(videoFile, title);
     let formData = new FormData();
     formData.append("videoFile", videoFile);
     formData.append(
       "requestDto",
       new Blob([JSON.stringify(title)], { type: "application/json" })
     );
-    console.log(videoFile, title);
+
     try {
-      console.log("das");
       const response = await apis.shortsUpload(formData);
       window.alert("shorts가 정상적으로 등록되었습니다.");
       response && dispatch(addShorts(response.data));
@@ -88,9 +87,8 @@ const updateShortsDB = (shortsId, title) => {
     );
     try {
       const response = await apis.shortsUpdate(shortsId, formData);
-      response && history.push("/myPage");
-      window.alert("shorts가 정상적으로 수정되었습니다.");
-      console.log(response);
+      response && history.push('/myPage');
+      window.alert('shorts가 정상적으로 수정되었습니다.')
       dispatch(updateShorts(shortsId, response.data));
     } catch (err) {
       console.log(err);
@@ -133,7 +131,9 @@ export default handleActions(
 
     [ADD_SHORTS]: (state, action) =>
       produce(state, (draft) => {
+        console.log(action.payload.shortsDatas)
         draft.shortsList = action.payload.shortsDatas;
+        draft.myShortsList.push(action.payload.shortsDatas);
       }),
 
     [UPDATE_SHORTS]: (state, action) =>

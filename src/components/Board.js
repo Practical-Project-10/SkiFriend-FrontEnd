@@ -10,7 +10,7 @@ import Comment from "../assets/freeBoard/comment.svg";
 import { AiOutlineHeart } from "react-icons/ai";
 
 const Board = (props) => {
-  const { comment, shortsId } = props;
+  const { page, comment, shortsId } = props;
   const dispatch = useDispatch();
   //localstorage
   const userId = localStorage.getItem("userId");
@@ -19,7 +19,9 @@ const Board = (props) => {
   const [commentEditValue, setCommentEditValue] = useState();
 
   useEffect(() => {
-    dispatch(commentActions.getShortsCommentDB(shortsId));
+    if (page === 'commentBoard' && !comment) {
+      dispatch(commentActions.getShortsCommentDB(shortsId));
+    }
   }, []);
 
   //-----댓글 수정 내용 가져오기----------
@@ -53,7 +55,7 @@ const Board = (props) => {
   };
 
   //동영상 댓글 컴포넌트
-  if (props.commentBoard) {
+  if (page === 'commentBoard') {
     return (
       <Grid width="100%" padding="9px 16px" borderB="1px solid #edeeef">
         <Grid
