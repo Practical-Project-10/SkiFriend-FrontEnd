@@ -29,7 +29,6 @@ const Short = (props) => {
   // useState
   const [showModal, setShowModal] = useState(false);
   const [heart, setHeart] = useState(likeList);
-
   useEffect(() => {
     if (shortsData.length === 0) {
       dispatch(shortsActions.getShortsDB());
@@ -148,7 +147,10 @@ const Short = (props) => {
           />
         ) : null}
 
-        <ShortVideo src={shortsData.videoPath} />
+        <ShortVideo
+          src={shortsData.videoPath}
+          ThumbNail={shortsData.thumbNailPath}
+        />
       </Container>
     </React.Fragment>
   );
@@ -173,7 +175,7 @@ const IconWrap = styled.div`
   width: 100%;
   height: calc(100vh - 70px);
   position: absolute;
-  z-index: 1;
+  z-index: 2;
 `;
 
 export default Short;
