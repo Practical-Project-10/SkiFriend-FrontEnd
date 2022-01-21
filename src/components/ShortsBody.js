@@ -10,6 +10,7 @@ import { Grid, Image, Text } from "../elements";
 import FloatButton from "../components/FloatButton";
 import shortsBtn from "../assets/shorts/shorts_btn.svg";
 import comment from "../assets/shorts/comment.png";
+import arrow from "../assets/carpoolList/arrow.svg"
 
 import ShortComment from "./ShortComment";
 import ShortVideo from "./ShortsVideo";
@@ -29,10 +30,10 @@ const ShortsBody = (props) => {
   // useState
   const [showModal, setShowModal] = useState(false);
   const [heart, setHeart] = useState(likeList);
+
+  console.log(shortsData.length)
   useEffect(() => {
-    if (shortsData.length === 0) {
-      dispatch(shortsActions.getShortsDB());
-    }
+    dispatch(shortsActions.getShortsDB());
 
     if (likeData !== undefined) {
       for (let i = 0; i < likeData.length; i++) {
@@ -59,21 +60,33 @@ const ShortsBody = (props) => {
   const likeChange = () => {
     if (is_login) {
       changeHeart();
-      return dispatch(likeActions.addShortsLikeDB(shortsData.shortsId));
+      dispatch(likeActions.addShortsLikeDB(shortsData.shortsId));
     } else {
       const ask = window.confirm(
         "로그인한 회원만 가능합니다. 로그인 페이지로 이동하시겠습니까?"
       );
       if (ask) {
-        return history.push(`/login`);
+        history.push(`/login`);
       }
     }
   };
 
+  const goAddShorts = () => {
+    if (is_login) {
+      history.push('/shortsupload');
+    } else {
+      const ask = window.confirm(
+        "로그인한 회원만 가능합니다. 로그인 페이지로 이동하시겠습니까?"
+      );
+      if (ask) {
+        history.push(`/login`);
+      }
+    }
+  }
+
   return (
     <React.Fragment>
       <Container>
-        {/* 아이콘 */}
         <IconWrap>
           {/* 프로필 */}
           <Position top="20px" left="16px">
@@ -96,18 +109,23 @@ const ShortsBody = (props) => {
               </Grid>
             </Grid>
           </Position>
+          
+          {/* 다음 동영상 불러오는 버튼 */}
+          <Position top='47%' right='16px' onClick={() => dispatch(shortsActions.getShortsDB())}>
+            <img src={arrow} width='36' alt="다음 영상"/>
+          </Position>
 
           {/* 숏츠 작성 버튼 */}
           <FloatButton
             src={shortsBtn}
-            bottom="20px"
+            bottom="5%"
             left="16px"
-            _onClick={() => history.push("/shortsupload")}
+            _onClick={goAddShorts}
           />
 
           {/* 댓글 갯수 */}
           <Position
-            bottom="95px"
+            bottom="15%"
             right="16px"
             onClick={() => setShowModal(true)}
           >
@@ -120,7 +138,7 @@ const ShortsBody = (props) => {
           </Position>
 
           {/* 좋아요 */}
-          <Position bottom="20px" right="16px" onClick={likeChange}>
+          <Position bottom="5%" right="16px" onClick={likeChange}>
             {!heart ? (
               <Grid margin="-8px 0 0" align="center">
                 <AiOutlineHeart size="45" color="#FFF" />
@@ -139,8 +157,8 @@ const ShortsBody = (props) => {
           </Position>
         </IconWrap>
 
-        <ThumbNail src={shortsData.thumbNailPath} alt="썸네일"/>
-        <ShortVideo src={shortsData.videoPath}/>
+        {/* <ThumbNail src={shortsData.thumbNailPath} alt="썸네일"/>
+        <ShortVideo src={shortsData.videoPath}/> */}
       </Container>
 
       {/* 댓글모달 */}

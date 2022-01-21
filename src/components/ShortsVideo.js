@@ -25,7 +25,7 @@ const Video = styled.video`
   position: absolute;
   top: 0;
   left: 0;
-  z-index: 1;
+  ${props => props.page === "myPage"? "z-index: 1;": ''}
 `;
 
 export default ShortVideo;

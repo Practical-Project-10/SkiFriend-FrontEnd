@@ -169,7 +169,7 @@ const Home = (props) => {
         </Header>
       )}
       <Grid width="100%" margin="0 0 70px">
-        <Grid width="100%" height="189px">
+        <BannerArea>
           {/* 캐러셀 배너 */}
           <Slider {...settings}>
             {Carousel.map((item) => {
@@ -185,7 +185,7 @@ const Home = (props) => {
               );
             })}
           </Slider>
-        </Grid>
+        </BannerArea>
 
         <Grid align="center" padding="4px 0" bg="#474D56">
           {/* 가이드 링크 */}
@@ -253,4 +253,16 @@ const BannerImage = styled.img`
   max-width: 100%;
   max-height: 189px;
 `;
+
+const BannerArea = styled.div`
+  /* width: 100%; */
+  height: 189px;
+  .slick-next::before {
+    content: "";
+    display: none;
+    /* position: absolute; */
+    right: 0;
+  }
+`
+
 export default Home;
