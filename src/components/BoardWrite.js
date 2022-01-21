@@ -29,8 +29,8 @@ const BoardWrite = (props) => {
   SwiperCore.use([Navigation, Pagination]);
 
   // useState관리
-  const [title, setTitle] = useState(_post ? postData.title : "");
-  const [content, setContet] = useState(_post ? postData.content : "");
+  const [title, setTitle] = useState(is_edit ? postData.title : "");
+  const [content, setContet] = useState(is_edit ? postData.content : "");
   const [photoList, setPhotoList] = useState([]);
   const [deletePhotoList, setDeletePhotoList] = useState([]);
   const [uploadURL, setUploadURL] = useState([]);

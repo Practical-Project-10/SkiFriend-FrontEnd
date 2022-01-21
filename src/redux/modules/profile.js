@@ -37,38 +37,6 @@ const getProfileDB = () => {
   };
 }
 
-// const addProfileDB = (profile) => {
-//   return async (dispatch, getState, { history }) => {
-//     const new_profile = {
-//       gender: profile.gender,
-//       ageRange: profile.ageRange,
-//       career: profile.career,
-//       selfIntro: profile.selfIntro,
-//     };
-
-//     const formData = new FormData();
-//     formData.append("profileImg", profile.profileImg);
-//     formData.append("vacImg", profile.vacImg);
-//     formData.append(
-//       "requestDto",
-//       new Blob([JSON.stringify(new_profile)], { type: "application/json" })
-//     );
-//     try {
-//       const response = await apis.addProfile(formData);
-
-//       const _profile = response.data;
-//       response && userStorage(response.data);
-//       history.push("/mypage");
-//       window.alert("정상적으로 프로필이 등록되었습니다.");
-//       dispatch(addProfile(_profile));
-//       dispatch(imageActions.setPreview(null));
-//     } catch (err) {
-//       window.alert("프로필을 다시 확인해 주세요!");
-//       console.log("addProfileDB", err);
-//     }
-//   };
-// };
-
 const addProfileDB = (profile) => {
   return async (dispatch, getState, { history }) => {
     const new_profile = {

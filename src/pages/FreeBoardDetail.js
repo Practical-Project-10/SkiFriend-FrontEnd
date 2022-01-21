@@ -195,7 +195,7 @@ const FreeBoardDetail = ({ history }, props) => {
                 {postData.content &&
                   postData.content.split("\n").map((line) => {
                     return (
-                      <span>
+                      <span key={postId+'a'}>
                         {line}
                         <br />
                       </span>

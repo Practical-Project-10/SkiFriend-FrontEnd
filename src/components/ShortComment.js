@@ -16,6 +16,7 @@ const ShortComment = (props) => {
   const shortsId = params.shortsId;
   //redux data
   const commentList = useSelector((state) => state.comment.shortsList);
+  console.log(commentList)
 
   useEffect(() => {
     dispatch(commentActions.getShortsCommentDB(shortsId));
