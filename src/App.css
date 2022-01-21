@@ -2,8 +2,3 @@
   text-align: center;
 }
 
-/* a링크 태그 및 색상 없애기 */
-.navLink {
-  text-decoration: none;
-  color: black;
-}

@@ -17,10 +17,11 @@ import ShortVideo from "./ShortsVideo";
 //react icons
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 
-const Short = (props) => {
+const ShortsBody = (props) => {
   const dispatch = useDispatch();
   //redux data
   const shortsData = useSelector((state) => state.shorts.shortsList);
+  console.log(shortsData)
   const likeList = useSelector((state) => state.like.shortsLikeList);
   const likeData = shortsData.shortsLikeResponseDtoList;
   //localstorage 로그인정보
@@ -142,15 +143,13 @@ const Short = (props) => {
         {/* 댓글모달 */}
         {showModal ? (
           <ShortComment
-            shortsData={shortsData}
+            shortsData={shortsData.shortsId}
             closeModal={() => setShowModal(false)}
           />
         ) : null}
-
-        <ShortVideo
-          src={shortsData.videoPath}
-          ThumbNail={shortsData.thumbNailPath}
-        />
+        
+        <ThumbNail src={shortsData.thumbNailPath} alt="썸네일"/>
+        <ShortVideo src={shortsData.videoPath}/>
       </Container>
     </React.Fragment>
   );
@@ -158,7 +157,6 @@ const Short = (props) => {
 
 const Container = styled.div`
   height: calc(100vh - 70px);
-  background-color: rgba(0, 0, 0, 0.6);
   position: relative;
 `;
 
@@ -173,9 +171,15 @@ const Position = styled.div`
 
 const IconWrap = styled.div`
   width: 100%;
-  height: calc(100vh - 70px);
+  height: 100%;
   position: absolute;
   z-index: 2;
 `;
 
-export default Short;
+const ThumbNail = styled.img`
+  width: 100%;
+  height: 99%;
+  filter: blur(15px);
+`
+
+export default ShortsBody;
