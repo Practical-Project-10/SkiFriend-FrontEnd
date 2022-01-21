@@ -19,7 +19,7 @@ const Board = (props) => {
   const [commentEditValue, setCommentEditValue] = useState();
 
   useEffect(() => {
-    if (page === 'commentBoard' && !comment) {
+    if (page === 'commentBoard') {
       dispatch(commentActions.getShortsCommentDB(shortsId));
     }
   }, []);

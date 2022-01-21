@@ -29,8 +29,8 @@ const BoardWrite = (props) => {
   SwiperCore.use([Navigation, Pagination]);
 
   // useState관리
-  const [title, setTitle] = useState(postData ? postData.title : "");
-  const [content, setContet] = useState(postData ? postData.content : "");
+  const [title, setTitle] = useState(is_edit ? postData.title : "");
+  const [content, setContet] = useState(is_edit ? postData.content : "");
   const [photoList, setPhotoList] = useState([]);
   const [deletePhotoList, setDeletePhotoList] = useState([]);
   const [uploadURL, setUploadURL] = useState([]);
@@ -130,7 +130,7 @@ const BoardWrite = (props) => {
           <Input
             title
             _maxLength="50"
-            _value={is_edit ? title : null}
+            _value={title}
             placeholder="제목을 작성해주세요.(50자 이내)"
             _onChange={postTitle}
           />
@@ -138,7 +138,7 @@ const BoardWrite = (props) => {
           <Content
             placeholder="내용을 입력하세요(200자 이내)"
             maxLength="200"
-            value={is_edit ? content : null}
+            value={content}
             onChange={postContent}
           ></Content>
         </Grid>

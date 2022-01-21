@@ -20,6 +20,7 @@ const CarpoolFilter = (props) => {
     date: "",
     status: "false",
   });
+  console.log(form);
   
   const bringDate = (date) => {
     setForm({
