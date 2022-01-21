@@ -69,10 +69,10 @@ const Board = (props) => {
             <Text color="#a3a6ab">{comment.createdAt}</Text>
           </Grid>
           {/* 댓글 수정,삭제,변경 */}
-          {userId === String(comment.userId) && (
+          {comment && userId === String(comment.userId) && (
             <Grid is_flex gap="20px">
               <Grid cursor="pointer">
-                {comment.shortsCommentId === editCommentNo ? (
+                {comment && comment.shortsCommentId === editCommentNo ? (
                   <Text
                     color="#a3a6ab"
                     _onClick={() => {
@@ -93,7 +93,7 @@ const Board = (props) => {
                 )}
               </Grid>
               <Grid cursor="pointer">
-                {comment.shortsCommentId === editCommentNo ? (
+                {comment && comment.shortsCommentId === editCommentNo ? (
                   <Text
                     color="#a3a6ab"
                     _onClick={() => {
@@ -118,7 +118,7 @@ const Board = (props) => {
         </Grid>
         {/* 댓글내용 (수정시 인풋 보여주기) */}
         <Grid>
-          {comment.shortsCommentId === editCommentNo ? (
+          {comment && comment.shortsCommentId === editCommentNo ? (
             <Input
               free
               width="390px"

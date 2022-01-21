@@ -10,7 +10,7 @@ import { Grid, Image, Text } from "../elements";
 import FloatButton from "../components/FloatButton";
 import shortsBtn from "../assets/shorts/shorts_btn.svg";
 import comment from "../assets/shorts/comment.png";
-import arrow from "../assets/carpoolList/arrow.svg"
+import arrow from "../assets/carpoolList/arrow.svg";
 
 import ShortComment from "./ShortComment";
 import ShortVideo from "./ShortsVideo";
@@ -30,7 +30,7 @@ const ShortsBody = (props) => {
   // useState
   const [showModal, setShowModal] = useState(false);
   const [heart, setHeart] = useState(likeList);
-  
+
   useEffect(() => {
     dispatch(shortsActions.getShortsDB());
 
@@ -72,7 +72,7 @@ const ShortsBody = (props) => {
 
   const goAddShorts = () => {
     if (is_login) {
-      history.push('/shortsupload');
+      history.push("/shortsupload");
     } else {
       const ask = window.confirm(
         "로그인한 회원만 가능합니다. 로그인 페이지로 이동하시겠습니까?"
@@ -81,7 +81,7 @@ const ShortsBody = (props) => {
         history.push(`/login`);
       }
     }
-  }
+  };
 
   return (
     <React.Fragment>
@@ -108,10 +108,14 @@ const ShortsBody = (props) => {
               </Grid>
             </Grid>
           </Position>
-          
+
           {/* 다음 동영상 불러오는 버튼 */}
-          <Position top='47%' right='16px' onClick={() => dispatch(shortsActions.getShortsDB())}>
-            <img src={arrow} width='36' alt="다음 영상"/>
+          <Position
+            top="47%"
+            right="16px"
+            onClick={() => dispatch(shortsActions.getShortsDB())}
+          >
+            <img src={arrow} width="36" alt="다음 영상" />
           </Position>
 
           {/* 숏츠 작성 버튼 */}
@@ -196,6 +200,6 @@ const ThumbNail = styled.img`
   width: 100%;
   height: 99%;
   filter: blur(15px);
-`
+`;
 
 export default ShortsBody;
