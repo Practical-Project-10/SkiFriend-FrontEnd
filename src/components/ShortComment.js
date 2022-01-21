@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { commentCreators as commentActions } from "../redux/modules/comment";
 
@@ -18,7 +17,7 @@ const ShortComment = (props) => {
 
   useEffect(() => {
     dispatch(commentActions.getShortsCommentDB(shortsId));
-  }, [commentList.length]);
+  }, []);
 
   //동영상 댓글 페이지
   return (
