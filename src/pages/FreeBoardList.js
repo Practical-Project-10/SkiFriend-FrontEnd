@@ -19,7 +19,7 @@ const FreeBoardList = () => {
   //redux
   const boardList = useSelector((state) => state.freeboard.list);
   const resortImg = useSelector((state) => state.carpool.resortImg);
-  console.log(boardList)
+
   //로그인 판단
   const is_login = localStorage.getItem("is_login");
   const loginCheck = is_login === "true" ? true : false;

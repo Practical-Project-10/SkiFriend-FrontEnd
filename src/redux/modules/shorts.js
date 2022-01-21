@@ -16,7 +16,7 @@ const COMMENT_COUNT = "shorts/COMMENT_COUNT";
 const getShorts = createAction(GET_SHORTS, (shortsList) => ({ shortsList }));
 const addShorts = createAction(ADD_SHORTS, (shortsDatas) => ({ shortsDatas }));
 const updateShorts = createAction(UPDATE_SHORTS, (shortsId, shortsData) => ({
-  shortsId, 
+  shortsId,
   shortsData,
 }));
 const deleteShorts = createAction(DELETE_SHORTS, (shortsId) => ({ shortsId }));
@@ -88,7 +88,6 @@ const updateShortsDB = (shortsId, title) => {
     try {
       const response = await apis.shortsUpdate(shortsId, formData);
       response && history.push('/myPage');
-      console.log(response)
       window.alert('shorts가 정상적으로 수정되었습니다.')
       dispatch(updateShorts(shortsId, response.data));
     } catch (err) {
@@ -142,7 +141,6 @@ export default handleActions(
         let idx = draft.myShortsList.findIndex(
           (l) => l.shortsId === Number(action.payload.shortsId)
         );
-
         draft.myShortsList[idx] = action.payload.shortsData;
       }),
 
