@@ -154,7 +154,7 @@ export const apis = {
       },
     }),
 
-  shortsUpdate: (shortsId, title) => api.put(`/shorts/${shortsId}`, title),
+  shortsUpdate: (shortsId, formData) => api.put(`/shorts/${shortsId}`, formData),
 
   shortsDelete: (shortsId) => api.delete(`/shorts/${shortsId}`),
 
