@@ -32,7 +32,7 @@ const getProfileDB = () => {
 
       // dispatch(getProfile(userInfo));
     } catch (err) {
-      console.log("getProfileDB", err);
+      // console.log("getProfileDB", err);
     }
   };
 }

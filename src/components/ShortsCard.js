@@ -27,7 +27,7 @@ const ShortsCard = (props) => {
     <React.Fragment>
       <Grid position="relative">
         <Grid width="144px" height="250px" bg="#D9E4EE" radius="7px">
-          <ShortsVideo src={props.videoPath} />
+          <ShortsVideo page={props.page} src={props.videoPath} />
         </Grid>
 
         <Ect onClick={() => setShowModal(true)}>
