@@ -34,10 +34,14 @@ const ShortComment = (props) => {
 
         <Grid display="flex" direction="column">
           {commentList &&
-            commentList.map((item) => {
+            commentList.map((item, idx) => {
               return (
-                <Grid key={item.shortsCommentId}>
-                  <Board page="commentBoard" comment={item} shortsId={shortsId} />
+                <Grid key={item.shortsCommentId + idx}>
+                  <Board
+                    page="commentBoard"
+                    comment={item}
+                    shortsId={shortsId}
+                  />
                 </Grid>
               );
             })}

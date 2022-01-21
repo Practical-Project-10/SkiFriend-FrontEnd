@@ -35,7 +35,7 @@ const ProfileWrite = (props) => {
     // ageRange,
     career,
     selfIntro,
-    phoneNum,
+    // phoneNum,
   } = profile;
   useEffect(() => {
     dispatch(profileActions.getProfileDB());
@@ -149,7 +149,7 @@ const ProfileWrite = (props) => {
                 type="text"
                 _disabled
                 _name="phoneNum"
-                _value={phoneNum !== "null" ? user_profile.phoneNum : null}
+                _value={user_profile.phoneNum ? user_profile.phoneNum : null}
                 _onChange={handleChange}
                 placeholder="휴대폰 인증을 해주세요."
               />
@@ -193,7 +193,7 @@ const ProfileWrite = (props) => {
               <Text size="12px">자기소개</Text>
               <Textarea
                 name="selfIntro"
-                value={selfIntro !== "null" ? selfIntro : null}
+                value={selfIntro ? selfIntro : ""}
                 placeholder="내용을 입력해주세요(글자제한 60자)"
                 maxLength="60"
                 onChange={handleChange}
