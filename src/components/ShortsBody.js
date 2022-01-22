@@ -29,20 +29,22 @@ const ShortsBody = (props) => {
   const is_login = localStorage.getItem("is_login");
   // useState
   const [showModal, setShowModal] = useState(false);
-  const [heart, setHeart] = useState(false);
+  const [heart, setHeart] = useState();
   console.log(likeData);
   console.log(likeList);
   useEffect(() => {
     dispatch(shortsActions.getShortsDB());
     if (likeData !== undefined) {
-      for (let i = 0; i < likeData.length; i++) {
-        if (likeData[i].userId === parseInt(login_userId)) {
-          return setHeart(true);
-        } else {
-          continue;
+      setTimeout(() => {
+        for (let i = 0; i < likeData.length; i++) {
+          if (likeData[i].userId === parseInt(login_userId)) {
+            return setHeart(true);
+          } else {
+            continue;
+          }
         }
-      }
-      return setHeart(false);
+        return setHeart(false);
+      }, 1000);
     }
   }, []);
 
@@ -164,7 +166,7 @@ const ShortsBody = (props) => {
           </Position>
         </IconWrap>
 
-        <ShortVideo page='shorts' {...shortsData} />
+        <ShortVideo page="shorts" {...shortsData} />
       </Container>
 
       {/* 댓글모달 */}
