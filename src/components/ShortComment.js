@@ -11,7 +11,6 @@ import SendText from "../components/SendText";
 const ShortComment = (props) => {
   const dispatch = useDispatch();
   const shortsId = props.shortsData;
-
   //redux data
   const commentList = useSelector((state) => state.comment.shortsList);
 
