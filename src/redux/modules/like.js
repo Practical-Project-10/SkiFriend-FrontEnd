@@ -7,7 +7,7 @@ import produce from "immer";
 // initialState
 const initialState = {
   list: [],
-  shortsLikeList: "",
+  shortsLikeList: false,
 };
 
 // action
@@ -39,13 +39,19 @@ export const addLikeDB =
 export const addShortsLikeDB =
   (shortsId) =>
   async (dispatch, getState, { history }) => {
+    const login_userId = localStorage.getItem("userId");
+
     try {
       const response = await apis.shortsLike(shortsId);
-      const state = response.data;
-      console.log(state);
-      response &&
-        dispatch(getShortsLike(state)) &&
-        dispatch(shortsActions.likeCount(state));
+      const user_list = {
+        shortsLikeResponseDtoList: response.data
+      };
+      
+      const contain_me = response.data.find(l => l.userId === Number(login_userId))
+      const is_like = contain_me? true: false;
+
+      response && dispatch(shortsActions.getShorts(user_list, is_like));
+      // dispatch(getShortsLike(is_like));
     } catch (err) {
       // console.log(`좋아요 변경 실패${err}`);
     }
@@ -67,6 +73,7 @@ export default handleActions(
 );
 
 const likeCreators = {
+  getShortsLike,
   addLikeDB,
   addShortsLikeDB,
 };
