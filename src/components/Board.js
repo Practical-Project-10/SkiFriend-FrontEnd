@@ -121,7 +121,7 @@ const Board = (props) => {
           {comment && comment.shortsCommentId === editCommentNo ? (
             <Input
               free
-              width="390px"
+              width="100%"
               height="3px"
               radius="40px"
               autocomplete="off"

@@ -14,7 +14,6 @@ import etc from "../assets/etc_icon.svg";
 const ShortsCard = (props) => {
   const dispatch = useDispatch();
   const [showModal, setShowModal] = useState(false);
-
   const deleteMyShorts = () => {
     const ask = window.confirm("해당 영상을 삭제 하시겠습니까?");
     if (ask) {
@@ -26,7 +25,7 @@ const ShortsCard = (props) => {
     <React.Fragment>
       <Grid position="relative">
         <Grid width="144px" height="250px" bg="#D9E4EE" radius="7px">
-          <ShortsVideo page={props.page} src={props.videoPath} />
+          <ShortsVideo content={props} />
         </Grid>
 
         <Ect onClick={() => setShowModal(true)}>
