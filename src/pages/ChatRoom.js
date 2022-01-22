@@ -36,7 +36,7 @@ const ChatRoom = () => {
   const messageDatas = (recv) => {
     setMessageList((prev) => [...prev, recv]);
   };
-
+  console.log(messageList);
   //메세지 내용
   const messageChat = (e) => {
     const content = e.target.value;

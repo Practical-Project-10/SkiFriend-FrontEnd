@@ -1,7 +1,6 @@
 import { createAction, handleActions } from "redux-actions";
 import produce from "immer";
 import { apis } from "../../shared/apis";
-import { push } from "connected-react-router";
 
 //action
 const GET_SHORTS = "shorts/GET_SHORTS";
