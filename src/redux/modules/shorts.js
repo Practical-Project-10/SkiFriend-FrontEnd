@@ -42,6 +42,7 @@ const getShortsDB = () => {
 
     try {
       const response = await apis.shortsRandomList();
+      const shortsId = response.data.shortsId;
       const likeUsers = response.data.shortsLikeResponseDtoList;
       const contain_me = likeUsers.find(
         (l) => l.userId === Number(login_userId)
