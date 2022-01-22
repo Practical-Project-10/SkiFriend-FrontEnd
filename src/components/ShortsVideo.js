@@ -1,15 +1,38 @@
 import React from "react";
 
 import styled from "styled-components";
-import { Grid } from "../elements";
+import { Grid, Text, Image } from "../elements";
 
 const ShortVideo = (props) => {
-  console.log(props);
+
   return (
-    <React.Fragment>
-      <Title>{props.title}</Title>
+    <Shorts>
+      <ThumbNail src={props.thumbNailPath} alt="썸네일"/>
+      <Position>
+        <Grid is_flex>
+
+          {props.page === 'shorts' && 
+            <Image
+              myIcon
+              src={props.profileImg}
+              width="44px"
+              height="44px"
+            />
+          }
+          
+          <Grid padding="0 0 0 13px">
+            <Grid padding="0 0 5px">
+              <Text bold size="17px" color="#FFF">
+                {props.title}
+              </Text>
+            </Grid>
+            <Text size="17px" color="#BDDCFF">
+              {props.nickname}
+            </Text>
+          </Grid>
+        </Grid>
+      </Position>
       <Grid>
-        <ThumbNail src={props.thumbNailPath} alt="썸네일" />
         <Video
           src={props.videoPath}
           autoPlay // 자동재생
@@ -18,15 +41,26 @@ const ShortVideo = (props) => {
           playsInline
         ></Video>
       </Grid>
-    </React.Fragment>
+    </Shorts>
   );
 };
 
-const Title = styled.text`
-  padding: 5px;
-  font-size: 12px;
-  font-weight: 600;
+const Shorts = styled.div`
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+`
+
+const ThumbNail = styled.img`
+  width: 100%;
+  height: 100%;
+  filter: blur(15px);
+`;
+
+const Position = styled.div`
   position: absolute;
+  top: 5%;
+  left: 16px;
   z-index: 2;
 `;
 
@@ -39,9 +73,4 @@ const Video = styled.video`
   ${(props) => (props.page === "myPage" ? "z-index: 1;" : "")}
 `;
 
-const ThumbNail = styled.img`
-  width: 100%;
-  height: 99%;
-  filter: blur(15px);
-`;
 export default ShortVideo;
