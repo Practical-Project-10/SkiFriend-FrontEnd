@@ -41,25 +41,11 @@ const getShortsDB = () => {
       const response = await apis.shortsRandomList();
 
       response && dispatch(getShorts(response.data));
-      if(response.data.length === 0) {
-        const ask = window.confirm(
-          "등록된 게시물이 없습니다. 게시물을 작성하러 가시겠습니까?"
-          );
-          if (ask) {
-            return history.push(`/shortsupload`);
-          } else {
-            return history.push(`/`);
-        };
-      };
-      history.push(`/shorts`);
     } catch (err) {
       const is_login =
         localStorage.getItem("is_login") === "true" ? true : false;
       const ask = window.confirm(
         "등록된 게시물이 없습니다. 게시물을 작성하러 가시겠습니까?"
-      );
-      const login_ask = window.confirm(
-        "게시물 작성은 회원만 가능합니다. 로그인 페이지로 이동하시겠습니까?"
       );
       if (ask) {
         if (is_login) {
@@ -68,6 +54,9 @@ const getShortsDB = () => {
           if (is_login) {
             return history.push(`/`);
           } else {
+            const login_ask = window.confirm(
+              "게시물 작성은 회원만 가능합니다. 로그인 페이지로 이동하시겠습니까?"
+            );
             if (login_ask) {
               return history.push(`login`);
             } else {
@@ -190,8 +179,8 @@ export default handleActions(
       }),
     [COMMENT_COUNT]: (state, action) =>
       produce(state, (draft) => {
-        console.log(action.payload.state)
-        if(action.payload.state) {
+        console.log(action.payload.state);
+        if (action.payload.state) {
           draft.shortsList.shortsCommentCnt = action.payload.commentCnt;
         } else {
           draft.shortsList.shortsCommentCnt -= 1;

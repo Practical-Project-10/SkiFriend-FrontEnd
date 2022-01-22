@@ -4,16 +4,16 @@ import styled from "styled-components";
 import { Grid } from "../elements";
 
 const ShortVideo = (props) => {
-
+  console.log(props);
   return (
     <React.Fragment>
-      <Title>{props.content.title}</Title>
+      <Title>{props.title}</Title>
       <Grid>
-        <ThumbNail src={props.content.thumbNailPath} alt="썸네일" />
+        <ThumbNail src={props.thumbNailPath} alt="썸네일" />
         <Video
-          src={props.content.videoPath}
+          src={props.videoPath}
           autoPlay // 자동재생
-          muted={props.content.page === "myPage" ? true : false} // 음소거 -> 안하면 좋겠지만 이거 안하면 자동 재생이 안돼요
+          muted={props.page === "myPage" ? true : false} // 음소거 -> 안하면 좋겠지만 이거 안하면 자동 재생이 안돼요
           loop // 반복 재생
           playsInline
         ></Video>
