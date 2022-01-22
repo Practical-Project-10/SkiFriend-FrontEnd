@@ -74,7 +74,7 @@ export const getShortsCommentDB =
     try {
       const response = await apis.shortsListComment(shortsId);
       response && dispatch(getShortsComment(response.data));
-      dispatch(shortsActions.CommentCount(response.data.length));
+      dispatch(shortsActions.CommentCount(true, response.data.length));
     } catch (err) {
       // console.log(err);
     }
@@ -110,8 +110,9 @@ export const deleteShortsCommentDB =
   (shortsCommentId) =>
   async (dispatch, getState, { history }) => {
     try {
-      const response = await apis.shortsDeleteComment(shortsCommentId);
-      response && dispatch(deleteShortsComment(shortsCommentId));
+      await apis.shortsDeleteComment(shortsCommentId);
+      dispatch(deleteShortsComment(shortsCommentId));
+      dispatch(shortsActions.CommentCount(false));
     } catch (err) {
       // console.log(`댓글삭제 실패${err}`);
     }

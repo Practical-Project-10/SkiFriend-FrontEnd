@@ -22,7 +22,8 @@ const updateShorts = createAction(UPDATE_SHORTS, (shortsId, shortsData) => ({
 const deleteShorts = createAction(DELETE_SHORTS, (shortsId) => ({ shortsId }));
 const getMyShorts = createAction(GET_MY_SHORTS, (myList) => ({ myList }));
 const likeCount = createAction(LIKE_COUNT, (state) => ({ state }));
-const CommentCount = createAction(COMMENT_COUNT, (commentCnt) => ({
+const CommentCount = createAction(COMMENT_COUNT, (state, commentCnt) => ({
+  state,
   commentCnt,
 }));
 
@@ -189,7 +190,12 @@ export default handleActions(
       }),
     [COMMENT_COUNT]: (state, action) =>
       produce(state, (draft) => {
-        draft.shortsList.shortsCommentCnt = action.payload.commentCnt;
+        console.log(action.payload.state)
+        if(action.payload.state) {
+          draft.shortsList.shortsCommentCnt = action.payload.commentCnt;
+        } else {
+          draft.shortsList.shortsCommentCnt -= 1;
+        }
       }),
   },
   initialState

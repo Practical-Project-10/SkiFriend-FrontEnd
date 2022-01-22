@@ -120,8 +120,9 @@ const Home = (props) => {
 
   useEffect(() => {
     const mainHotPosts = async () => {
-      const response = await // await fetch("https://seongeunyang.shop/main")
+      const response = await 
       (
+        // await fetch("https://seongeunyang.shop/main")
         await fetch("http://3.34.19.50:8080/main")
       ).json();
       dispatch(mainActions.loadPosts(response));
