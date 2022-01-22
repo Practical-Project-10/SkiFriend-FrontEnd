@@ -5,6 +5,18 @@ import { Grid, Text, Image } from "../elements";
 
 const ShortVideo = (props) => {
 
+  if(props.page === 'write') {
+    return(
+      <Video
+        src={props.src}
+        autoPlay // 자동재생
+        muted={props.page === "myPage" ? true : false} // 음소거 -> 안하면 좋겠지만 이거 안하면 자동 재생이 안돼요
+        loop // 반복 재생
+        playsInline
+      />
+    )
+  }
+
   return (
     <Shorts>
       <ThumbNail src={props.thumbNailPath} alt="썸네일"/>
@@ -26,9 +38,11 @@ const ShortVideo = (props) => {
                 {props.title}
               </Text>
             </Grid>
-            <Text size="17px" color="#BDDCFF">
-              {props.nickname}
-            </Text>
+            {props.page === 'shorts' && 
+              <Text size="17px" color="#BDDCFF">
+                {props.nickname}
+              </Text>
+            }
           </Grid>
         </Grid>
       </Position>
@@ -39,7 +53,7 @@ const ShortVideo = (props) => {
           muted={props.page === "myPage" ? true : false} // 음소거 -> 안하면 좋겠지만 이거 안하면 자동 재생이 안돼요
           loop // 반복 재생
           playsInline
-        ></Video>
+        />
       </Grid>
     </Shorts>
   );
