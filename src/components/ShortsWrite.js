@@ -45,6 +45,7 @@ const ShortsWrite = (props) => {
     const file_ = fileInput.current.files[0];
     const videoUrl = URL.createObjectURL(file_);
     setSrc(videoUrl);
+    console.log(videoUrl)
     setForm(
       {
         ...form,
@@ -98,7 +99,7 @@ const ShortsWrite = (props) => {
           <VideoArea>
             {/* 영상을 올려주세요. */}
             <Video>
-              <ShortVideo id="video" src={src} />
+              <ShortVideo page='write' src={src} />
             </Video>
           </VideoArea>
         </Grid>
