@@ -20,40 +20,37 @@ import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 
 const ShortsBody = (props) => {
   const dispatch = useDispatch();
-  //redux data
+
   const shortsData = useSelector((state) => state.shorts.shortsList);
-  // const likeList = useSelector((state) => state.like.shortsLikeList);
-  // const likeData = shortsData.shortsLikeResponseDtoList;
-  const is_like = shortsData.is_like;
-  console.log(shortsData);
-  console.log(is_like);
+  const likeData = shortsData.shortsLikeResponseDtoList;
 
   //localstorage 로그인정보
-  // const login_userId = localStorage.getItem("userId");
+  const login_userId = localStorage.getItem("userId");
   const is_login = localStorage.getItem("is_login");
   // useState
   const [showModal, setShowModal] = useState(false);
-  
-  // const likeData_ = likeData !== undefined? likeData: [];
-  // const is_like = likeData_.find(l => l.userId === Number(login_userId))
-  // console.log(is_like);
+
   const [heart, setHeart] = useState(false);
   console.log(heart)
-  useEffect(() => {
-    dispatch(shortsActions.getShortsDB());
 
-    // if (likeData !== undefined) {
-      // for (let i = 0; i < likeData.length; i++) {
-      //   console.log(likeData[i].userId === parseInt(login_userId))
-      //   if (likeData[i].userId === parseInt(login_userId)) {
-      //     return setHeart(true);
-      //   } 
-      //   // else {
-      //   //   // continue;
-      //   // }
-      // }
-      // return setHeart(false);
-    // }
+  useEffect(() => {
+    if(shortsData.length === 0) {
+      dispatch(shortsActions.getShortsDB());
+    }
+    console.log(1)
+    if (likeData !== undefined) {
+      console.log(2)
+      for (let i = 0; i < likeData.length; i++) {
+        console.log(likeData[i].userId === parseInt(login_userId))
+        if (likeData[i].userId === parseInt(login_userId)) {
+          return setHeart(true);
+        } 
+        // else {
+        //   // continue;
+        // }
+      }
+      return setHeart(false);
+    }
   }, []);
 
   //-------heart-------
@@ -97,28 +94,6 @@ const ShortsBody = (props) => {
     <React.Fragment>
       <Container>
         <IconWrap>
-          {/* 프로필 */}
-          {/* <Position top="20px" left="16px">
-            <Grid is_flex>
-              <Image
-                myIcon
-                src={shortsData.profileImg}
-                width="44px"
-                height="44px"
-              />
-              <Grid padding="0 0 0 13px">
-                <Grid padding="0 0 5px">
-                  <Text bold size="17px" color="#FFF">
-                    {shortsData.title}
-                  </Text>
-                </Grid>
-                <Text size="17px" color="#BDDCFF">
-                  {shortsData.nickname}
-                </Text>
-              </Grid>
-            </Grid>
-          </Position> */}
-
           {/* 다음 동영상 불러오는 버튼 */}
           <Position
             top="50%"
