@@ -12,7 +12,7 @@ const GET_MY_SHORTS = "shorts/GET_MY_SHORTS";
 const COMMENT_COUNT = "shorts/COMMENT_COUNT";
 
 // acrtion creators
-const getShorts = createAction(GET_SHORTS, (shortsList, is_like) => ({ 
+const getShorts = createAction(GET_SHORTS, (shortsList, is_like) => ({
   shortsList,
   is_like,
 }));
@@ -39,19 +39,21 @@ const initialState = {
 const getShortsDB = () => {
   return async function (dispatch, getState, { history }) {
     const login_userId = localStorage.getItem("userId");
-    
+
     try {
       const response = await apis.shortsRandomList();
       const shortsId = response.data.shortsId;
       const likeUsers = response.data.shortsLikeResponseDtoList;
-      const contain_me = likeUsers.find(l => l.userId === Number(login_userId))
-      const is_like = contain_me? true: false;
-
+      const contain_me = likeUsers.find(
+        (l) => l.userId === Number(login_userId)
+      );
+      const is_like = contain_me ? true : false;
+      const shortsId = response.data.shortsId;
       response && dispatch(getShorts(response.data, is_like));
-      if(response) {
+      if (response) {
         history.push(`/shorts/${shortsId}`);
       } else {
-        history.push('/shorts');
+        history.push(`/shorts`);
       }
       // dispatch(likeCreators.getShortsLike(is_like));
     } catch (err) {
@@ -153,10 +155,11 @@ export default handleActions(
   {
     [GET_SHORTS]: (state, action) =>
       produce(state, (draft) => {
-        const likeUserList = action.payload.shortsList
-        draft.shortsList = {...draft.shortsList, ...likeUserList};
-        draft.shortsList.shortsLikeCnt = likeUserList.shortsLikeResponseDtoList.length;
-        draft.shortsList['is_like'] = action.payload.is_like;
+        const likeUserList = action.payload.shortsList;
+        draft.shortsList = { ...draft.shortsList, ...likeUserList };
+        draft.shortsList.shortsLikeCnt =
+          likeUserList.shortsLikeResponseDtoList.length;
+        draft.shortsList["is_like"] = action.payload.is_like;
         // console.log(draft.shortsList.shortsLikeCnt)
       }),
 

@@ -3,10 +3,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { history } from "../redux/ConfigStore";
 import { likeCreators as likeActions } from "../redux/modules/like";
 import { shortsActions } from "../redux/modules/shorts";
-import { commentCreators as commentActions } from "../redux/modules/comment";
 
 import styled from "styled-components";
-import { Grid, Image, Text } from "../elements";
+import { Grid, Text } from "../elements";
 
 import FloatButton from "../components/FloatButton";
 import shortsBtn from "../assets/shorts/shorts_btn.svg";
@@ -17,41 +16,39 @@ import ShortVideo from "./ShortsVideo";
 
 //react icons
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
+import { useParams } from "react-router-dom";
 
 const ShortsBody = (props) => {
   const dispatch = useDispatch();
-
+  //params
+  const params = useParams();
+  const shortsId = params.shortsId;
+  //redux data
   const shortsData = useSelector((state) => state.shorts.shortsList);
   const likeData = shortsData.shortsLikeResponseDtoList;
-
   //localstorage 로그인정보
   const login_userId = localStorage.getItem("userId");
   const is_login = localStorage.getItem("is_login");
   // useState
   const [showModal, setShowModal] = useState(false);
-
   const [heart, setHeart] = useState(false);
-  console.log(heart)
 
   useEffect(() => {
-    if(shortsData.length === 0) {
-      dispatch(shortsActions.getShortsDB());
-    }
-    console.log(1)
+    dispatch(shortsActions.getShortsDB());
+  }, []);
+
+  useEffect(() => {
     if (likeData !== undefined) {
-      console.log(2)
       for (let i = 0; i < likeData.length; i++) {
-        console.log(likeData[i].userId === parseInt(login_userId))
         if (likeData[i].userId === parseInt(login_userId)) {
           return setHeart(true);
-        } 
-        // else {
-        //   // continue;
-        // }
+        } else {
+          continue;
+        }
       }
       return setHeart(false);
     }
-  }, []);
+  }, [shortsId]);
 
   //-------heart-------
   const changeHeart = () => {

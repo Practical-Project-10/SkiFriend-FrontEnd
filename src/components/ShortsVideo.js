@@ -49,7 +49,9 @@ const ShortVideo = (props) => {
         <Video
           src={props.videoPath}
           autoPlay // 자동재생
-          muted// muted={props.page === "myPage" ? true : false} // 음소거 
+          muted
+          // ={props.page === "myPage" ? true : false} // 음소거 
+
           loop // 반복 재생
           playsInline
         />
