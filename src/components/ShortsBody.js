@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { history } from "../redux/ConfigStore";
 import { likeCreators as likeActions } from "../redux/modules/like";
 import { shortsActions } from "../redux/modules/shorts";
+import { commentCreators as commentActions } from "../redux/modules/comment";
 
 import styled from "styled-components";
 import { Grid, Image, Text } from "../elements";
@@ -10,7 +11,6 @@ import { Grid, Image, Text } from "../elements";
 import FloatButton from "../components/FloatButton";
 import shortsBtn from "../assets/shorts/shorts_btn.svg";
 import comment from "../assets/shorts/comment.png";
-import arrow from "../assets/carpoolList/arrow.svg";
 
 import ShortComment from "./ShortComment";
 import ShortVideo from "./ShortsVideo";
@@ -33,7 +33,6 @@ const ShortsBody = (props) => {
 
   useEffect(() => {
     dispatch(shortsActions.getShortsDB());
-
     if (likeData !== undefined) {
       for (let i = 0; i < likeData.length; i++) {
         if (likeData[i].userId === parseInt(login_userId)) {
@@ -115,7 +114,7 @@ const ShortsBody = (props) => {
             right="16px"
             onClick={() => dispatch(shortsActions.getShortsDB())}
           >
-            <img src={arrow} width="36" alt="다음 영상" />
+            →
           </Position>
 
           {/* 숏츠 작성 버튼 */}
@@ -160,8 +159,8 @@ const ShortsBody = (props) => {
           </Position>
         </IconWrap>
 
-        <ThumbNail src={shortsData.thumbNailPath} alt="썸네일"/>
-        <ShortVideo src={shortsData.videoPath}/>
+        <ThumbNail src={shortsData.thumbNailPath} alt="썸네일" />
+        <ShortVideo src={shortsData.videoPath} />
       </Container>
 
       {/* 댓글모달 */}
