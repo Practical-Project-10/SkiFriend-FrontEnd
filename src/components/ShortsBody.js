@@ -29,8 +29,9 @@ const ShortsBody = (props) => {
   const is_login = localStorage.getItem("is_login");
   // useState
   const [showModal, setShowModal] = useState(false);
-  const [heart, setHeart] = useState(likeList);
-
+  const [heart, setHeart] = useState(false);
+  console.log(likeData);
+  console.log(likeList);
   useEffect(() => {
     dispatch(shortsActions.getShortsDB());
     if (likeData !== undefined) {
@@ -41,10 +42,12 @@ const ShortsBody = (props) => {
           continue;
         }
       }
-      setHeart(false);
+      return setHeart(false);
     }
   }, []);
 
+  console.log(heart);
+  console.log(likeData);
   //-------heart-------
   const changeHeart = () => {
     if (heart) {
@@ -115,10 +118,8 @@ const ShortsBody = (props) => {
             onClick={() => dispatch(shortsActions.getShortsDB())}
           >
             <NextBtn>
-              →
-              {/* <img src={arrow} width="36" alt="다음 영상" /> */}
+              →{/* <img src={arrow} width="36" alt="다음 영상" /> */}
             </NextBtn>
-
           </Position>
 
           {/* 숏츠 작성 버튼 */}
@@ -202,8 +203,8 @@ const NextBtn = styled.div`
   width: 50px;
   height: 50px;
   border-radius: 999px;
-  background-color: #6195CF;
-  color: #FFF;
+  background-color: #6195cf;
+  color: #fff;
   font-size: 50px;
   font-weight: bold;
   /* line-height: 37px; */
@@ -214,6 +215,6 @@ const NextBtn = styled.div`
   &:hover {
     opacity: 0.9;
   }
-`
+`;
 
 export default ShortsBody;

@@ -4,7 +4,6 @@ import styled from "styled-components";
 import { Grid, Text, Image } from "../elements";
 
 const ShortVideo = (props) => {
-  console.log(props.thumbNailPath)
 
   return (
     <Shorts>
