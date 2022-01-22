@@ -7,7 +7,7 @@ import produce from "immer";
 // initialState
 const initialState = {
   list: [],
-  shortsLikeList: '',
+  shortsLikeList: "",
 };
 
 // action
@@ -37,12 +37,12 @@ export const addLikeDB =
 
 //동영상 좋아요
 export const addShortsLikeDB =
-  (shortsId, likeCnt) =>
+  (shortsId) =>
   async (dispatch, getState, { history }) => {
     try {
       const response = await apis.shortsLike(shortsId);
       const state = response.data;
-
+      console.log(state);
       response &&
         dispatch(getShortsLike(state)) &&
         dispatch(shortsActions.likeCount(state));

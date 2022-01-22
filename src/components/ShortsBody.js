@@ -29,27 +29,28 @@ const ShortsBody = (props) => {
   const is_login = localStorage.getItem("is_login");
   // useState
   const [showModal, setShowModal] = useState(false);
-  const [heart, setHeart] = useState();
+  const [heart, setHeart] = useState(false);
+  console.log(shortsData);
   console.log(likeData);
   console.log(likeList);
   useEffect(() => {
     dispatch(shortsActions.getShortsDB());
     if (likeData !== undefined) {
-      setTimeout(() => {
-        for (let i = 0; i < likeData.length; i++) {
-          if (likeData[i].userId === parseInt(login_userId)) {
-            return setHeart(true);
-          } else {
-            continue;
-          }
+      for (let i = 0; i < likeData.length; i++) {
+        if (likeData[i].userId === parseInt(login_userId)) {
+          return setHeart(true);
+        } else {
+          continue;
         }
-        return setHeart(false);
-      }, 1000);
+      }
+      return setHeart(false);
     }
   }, []);
 
+  useEffect(() => {
+  }, []);
+
   console.log(heart);
-  console.log(likeData);
   //-------heart-------
   const changeHeart = () => {
     if (heart) {
@@ -148,16 +149,16 @@ const ShortsBody = (props) => {
 
           {/* 좋아요 */}
           <Position bottom="5%" right="16px" onClick={likeChange}>
-            {!heart ? (
+            {heart ? (
               <Grid margin="-8px 0 0" align="center">
-                <AiOutlineHeart size="45" color="#FFF" />
+                <AiFillHeart size="45" color="red" />
                 <Text bold color="#FFF">
                   {shortsData.shortsLikeCnt}
                 </Text>
               </Grid>
             ) : (
               <Grid margin="-8px 0 0" align="center">
-                <AiFillHeart size="45" color="red" />
+                <AiOutlineHeart size="45" color="#FFF" />
                 <Text bold color="#FFF">
                   {shortsData.shortsLikeCnt}
                 </Text>

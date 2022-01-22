@@ -68,8 +68,8 @@ const ChatList = (props) => {
           minHeight="calc( 100vh - 124px )"
         >
           {chatRoomList.map((list, index) => {
-            const time = chatRoomList[index].lastMsgTime.split(" ");
-            const realTime = time[0] + " " + time[1] + " " + time[2];
+            // const time = chatRoomList[index].lastMsgTime.split(" ");
+            // const realTime = time[0] + " " + time[1] + " " + time[2];
             return (
               <Grid
                 is_flex
@@ -138,7 +138,7 @@ const ChatList = (props) => {
                       </Text>
                     )}
                     <Text size="11px" height="15px" margin="0 5px">
-                      {realTime}
+                      {list.lastMsgTime}
                     </Text>
                   </Grid>
                 </Grid>
