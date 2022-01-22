@@ -13,7 +13,6 @@ const MessageBox = (props) => {
   const { chatInfo } = props;
   // const time = chatInfo.createdAt.split(" ");
   // const realTime = time[0] + " " + time[1] + " " + time[2];
-  console.log(chatInfo);
   const dispatch = useDispatch();
   //경로
   const params = useParams();

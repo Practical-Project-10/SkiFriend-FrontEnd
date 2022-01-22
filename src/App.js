@@ -119,6 +119,7 @@ function App() {
               component={ShortsUpload}
             />
             <Route exact path="/shorts" component={Shorts} />
+            <Route exact path="/shorts/:shortsId" component={Shorts} />
           </CardList>
           <Navbar />
         </div>
