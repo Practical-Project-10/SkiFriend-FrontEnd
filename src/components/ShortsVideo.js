@@ -19,19 +19,19 @@ const ShortVideo = (props) => {
   return (
     <Shorts>
       <ThumbNail src={props.thumbNailPath} alt="썸네일"/>
-      <Position>
+      <Position top={props.top} left={props.left}>
         <Grid is_flex>
 
           {props.page === 'shorts' && 
             <Image
               myIcon
               src={props.profileImg}
-              width="44px"
+              width="22%"
               height="44px"
             />
           }
           
-          <Grid padding="0 0 0 13px">
+          <Grid width="116%" padding="0 0 0 13px">
             <Grid padding="0 0 5px">
               <Text bold size="17px" color="#FFF">
                 {props.title}
@@ -73,9 +73,10 @@ const ThumbNail = styled.img`
 `;
 
 const Position = styled.div`
+  width: 80%;
   position: absolute;
-  top: 5%;
-  left: 16px;
+  top: ${props => props.top};
+  left: ${props => props.left};
   z-index: 2;
 `;
 

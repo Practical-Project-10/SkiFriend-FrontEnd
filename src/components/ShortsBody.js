@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+
+import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { history } from "../redux/ConfigStore";
 import { likeCreators as likeActions } from "../redux/modules/like";
@@ -7,16 +9,15 @@ import { shortsActions } from "../redux/modules/shorts";
 import styled from "styled-components";
 import { Grid, Text } from "../elements";
 
-import FloatButton from "../components/FloatButton";
-import shortsBtn from "../assets/shorts/shorts_btn.svg";
+import shortsBtn from "../assets/shorts/addShorts_btn.png";
 import comment from "../assets/shorts/comment.png";
+import heart_ from "../assets/shorts/heart.png";
+import fillHeart from "../assets/shorts/fillHeart.png";
+import nextShortBtn from "../assets/shorts/nextShort_btn.png";
 
 import ShortComment from "./ShortComment";
 import ShortVideo from "./ShortsVideo";
 
-//react icons
-import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
-import { useParams } from "react-router-dom";
 
 const ShortsBody = (props) => {
   const dispatch = useDispatch();
@@ -93,26 +94,25 @@ const ShortsBody = (props) => {
         <IconWrap>
           {/* 다음 동영상 불러오는 버튼 */}
           <Position
-            top="50%"
-            right="16px"
+            bottom="4%"
+            left="16px"
             onClick={() => dispatch(shortsActions.getShortsDB())}
           >
-            <NextBtn>
-              →{/* <img src={arrow} width="36" alt="다음 영상" /> */}
-            </NextBtn>
+            <img src={nextShortBtn} alt="다음 동영상" />
           </Position>
 
           {/* 숏츠 작성 버튼 */}
-          <FloatButton
-            src={shortsBtn}
-            bottom="5%"
-            left="16px"
-            _onClick={goAddShorts}
-          />
+          <Position
+            bottom="23%"
+            right="21px"
+            onClick={goAddShorts}
+          >
+            <img src={shortsBtn} alt="작성" />
+          </Position>
 
           {/* 댓글 갯수 */}
           <Position
-            bottom="15%"
+            bottom="13%"
             right="16px"
             onClick={() => setShowModal(true)}
           >
@@ -125,26 +125,17 @@ const ShortsBody = (props) => {
           </Position>
 
           {/* 좋아요 */}
-          <Position bottom="5%" right="16px" onClick={likeChange}>
-            {heart ? (
-              <Grid margin="-8px 0 0" align="center">
-                <AiFillHeart size="45" color="red" />
-                <Text bold color="#FFF">
-                  {shortsData.shortsLikeCnt}
-                </Text>
-              </Grid>
-            ) : (
-              <Grid margin="-8px 0 0" align="center">
-                <AiOutlineHeart size="45" color="#FFF" />
-                <Text bold color="#FFF">
-                  {shortsData.shortsLikeCnt}
-                </Text>
-              </Grid>
-            )}
+          <Position bottom="4%" right="16px" onClick={likeChange}>
+            <img src={heart? fillHeart: heart_} alt="댓글" />
+            <Grid margin="-8px 0 0" align="center">
+              <Text bold color="#FFF">
+                {shortsData.shortsLikeCnt}
+              </Text>
+            </Grid>
           </Position>
         </IconWrap>
 
-        <ShortVideo page="shorts" {...shortsData} />
+        <ShortVideo page="shorts" top="5%" left="16px" {...shortsData} />
       </Container>
 
       {/* 댓글모달 */}
