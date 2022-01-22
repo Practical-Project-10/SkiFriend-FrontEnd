@@ -87,7 +87,7 @@ const ShortsBody = (props) => {
       <Container>
         <IconWrap>
           {/* 프로필 */}
-          <Position top="20px" left="16px">
+          {/* <Position top="20px" left="16px">
             <Grid is_flex>
               <Image
                 myIcon
@@ -106,7 +106,7 @@ const ShortsBody = (props) => {
                 </Text>
               </Grid>
             </Grid>
-          </Position>
+          </Position> */}
 
           {/* 다음 동영상 불러오는 버튼 */}
           <Position
@@ -163,8 +163,7 @@ const ShortsBody = (props) => {
           </Position>
         </IconWrap>
 
-        <ThumbNail src={shortsData.thumbNailPath} alt="썸네일" />
-        <ShortVideo src={shortsData.videoPath} />
+        <ShortVideo page='shorts' {...shortsData} />
       </Container>
 
       {/* 댓글모달 */}
@@ -197,12 +196,6 @@ const IconWrap = styled.div`
   height: 100%;
   position: absolute;
   z-index: 2;
-`;
-
-const ThumbNail = styled.img`
-  width: 100%;
-  height: 99%;
-  filter: blur(15px);
 `;
 
 const NextBtn = styled.div`
