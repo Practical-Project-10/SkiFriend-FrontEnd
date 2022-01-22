@@ -109,6 +109,14 @@ const CarpoolWrite = (props) => {
     dispatch(carpoolActions.editCarpoolDB(skiResort, postId, form));
   };
 
+  const maxPrice = (e) => {
+    console.log(e.target.value, e.target.maxLength)
+    if(e.target.value.length > e.target.maxLength) {
+      e.target.value = e.target.value.slice(0, e.target.maxLength);
+    }
+    console.log(e.target.value);
+  }
+
   return (
     <React.Fragment>
       <Header goBack>카풀 {is_edit ? "수정" : "작성"} 페이지</Header>
@@ -154,6 +162,7 @@ const CarpoolWrite = (props) => {
             _name="price"
             _value={price}
             _onChange={handleChange}
+            _onInput={maxPrice}
             autocomplete="off"
             placeholder="숫자만 입력가능! 서울→경기 편도시세 10000(자유협의)"
             padding="19px 8px"

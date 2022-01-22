@@ -22,6 +22,7 @@ const Input = forwardRef((props, ref) => {
     _name,
     _onBlur,
     _onClick,
+    _onInput,
     buttonText,
     width,
     border,
@@ -108,6 +109,7 @@ const Input = forwardRef((props, ref) => {
           placeholder={placeholder}
           onChange={_onChange}
           maxLength={_maxLength}
+          onInput={_onInput}
         />
       </Grid>
     );

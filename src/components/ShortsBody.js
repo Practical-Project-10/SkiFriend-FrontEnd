@@ -110,11 +110,15 @@ const ShortsBody = (props) => {
 
           {/* 다음 동영상 불러오는 버튼 */}
           <Position
-            top="47%"
+            top="50%"
             right="16px"
             onClick={() => dispatch(shortsActions.getShortsDB())}
           >
-            →
+            <NextBtn>
+              →
+              {/* <img src={arrow} width="36" alt="다음 영상" /> */}
+            </NextBtn>
+
           </Position>
 
           {/* 숏츠 작성 버튼 */}
@@ -200,5 +204,23 @@ const ThumbNail = styled.img`
   height: 99%;
   filter: blur(15px);
 `;
+
+const NextBtn = styled.div`
+  width: 50px;
+  height: 50px;
+  border-radius: 999px;
+  background-color: #6195CF;
+  color: #FFF;
+  font-size: 50px;
+  font-weight: bold;
+  /* line-height: 37px; */
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  &:hover {
+    opacity: 0.9;
+  }
+`
 
 export default ShortsBody;
