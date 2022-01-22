@@ -48,7 +48,6 @@ const getShortsDB = () => {
         (l) => l.userId === Number(login_userId)
       );
       const is_like = contain_me ? true : false;
-      const shortsId = response.data.shortsId;
       response && dispatch(getShorts(response.data, is_like));
       if (response) {
         history.push(`/shorts/${shortsId}`);

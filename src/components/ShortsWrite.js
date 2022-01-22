@@ -86,8 +86,8 @@ const ShortsWrite = (props) => {
           {/* 제목작성 */}
           <Grid padding="0 0 18px">
             <Title
-              maxLength="50"
-              placeholder="제목을 작성해주세요.(50자 이내)"
+              maxLength="12"
+              placeholder="제목을 작성해주세요.(12자 이내)"
               name='title'
               value={title}
               onChange={handleChange}
