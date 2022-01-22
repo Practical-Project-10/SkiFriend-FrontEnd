@@ -1,7 +1,7 @@
 import { createAction, handleActions } from "redux-actions";
 import produce from "immer";
 import { apis } from "../../shared/apis";
-import { push } from "connected-react-router";
+import { likeCreators } from "./like";
 
 //action
 const GET_SHORTS = "shorts/GET_SHORTS";
@@ -9,11 +9,13 @@ const ADD_SHORTS = "shorts/ADD_SHORTS";
 const UPDATE_SHORTS = "shorts/UPDATE_SHORTS";
 const DELETE_SHORTS = "shorts/DELETE_SHORTS";
 const GET_MY_SHORTS = "shorts/GET_MY_SHORTS";
-const LIKE_COUNT = "shorts/LIKE_COUNT";
 const COMMENT_COUNT = "shorts/COMMENT_COUNT";
 
 // acrtion creators
-const getShorts = createAction(GET_SHORTS, (shortsList) => ({ shortsList }));
+const getShorts = createAction(GET_SHORTS, (shortsList, is_like) => ({ 
+  shortsList,
+  is_like,
+}));
 const addShorts = createAction(ADD_SHORTS, (shortsDatas) => ({ shortsDatas }));
 const updateShorts = createAction(UPDATE_SHORTS, (shortsId, shortsData) => ({
   shortsId,
@@ -21,7 +23,6 @@ const updateShorts = createAction(UPDATE_SHORTS, (shortsId, shortsData) => ({
 }));
 const deleteShorts = createAction(DELETE_SHORTS, (shortsId) => ({ shortsId }));
 const getMyShorts = createAction(GET_MY_SHORTS, (myList) => ({ myList }));
-const likeCount = createAction(LIKE_COUNT, (state) => ({ state }));
 const CommentCount = createAction(COMMENT_COUNT, (state, commentCnt) => ({
   state,
   commentCnt,
@@ -29,7 +30,7 @@ const CommentCount = createAction(COMMENT_COUNT, (state, commentCnt) => ({
 
 // initialState
 const initialState = {
-  shortsList: [],
+  shortsList: {},
   myShortsList: [],
 };
 
@@ -37,10 +38,16 @@ const initialState = {
 // 동영상 조회
 const getShortsDB = () => {
   return async function (dispatch, getState, { history }) {
+    const login_userId = localStorage.getItem("userId");
+    
     try {
       const response = await apis.shortsRandomList();
+      const likeUsers = response.data.shortsLikeResponseDtoList;
+      const contain_me = likeUsers.find(l => l.userId === Number(login_userId))
+      const is_like = contain_me? true: false;
 
-      response && dispatch(getShorts(response.data));
+      response && dispatch(getShorts(response.data, is_like));
+      // dispatch(likeCreators.getShortsLike(is_like));
     } catch (err) {
       const is_login =
         localStorage.getItem("is_login") === "true" ? true : false;
@@ -140,7 +147,11 @@ export default handleActions(
   {
     [GET_SHORTS]: (state, action) =>
       produce(state, (draft) => {
-        draft.shortsList = action.payload.shortsList;
+        const likeUserList = action.payload.shortsList
+        draft.shortsList = {...draft.shortsList, ...likeUserList};
+        draft.shortsList.shortsLikeCnt = likeUserList.shortsLikeResponseDtoList.length;
+        draft.shortsList['is_like'] = action.payload.is_like;
+        // console.log(draft.shortsList.shortsLikeCnt)
       }),
 
     [ADD_SHORTS]: (state, action) =>
@@ -169,14 +180,6 @@ export default handleActions(
         draft.myShortsList.push(...action.payload.myList);
       }),
 
-    [LIKE_COUNT]: (state, action) =>
-      produce(state, (draft) => {
-        if (action.payload.state) {
-          draft.shortsList.shortsLikeCnt += 1;
-        } else {
-          draft.shortsList.shortsLikeCnt -= 1;
-        }
-      }),
     [COMMENT_COUNT]: (state, action) =>
       produce(state, (draft) => {
         console.log(action.payload.state);
@@ -191,7 +194,7 @@ export default handleActions(
 );
 
 const shortsActions = {
-  likeCount,
+  getShorts,
   CommentCount,
   getShortsDB,
   addShortsDB,

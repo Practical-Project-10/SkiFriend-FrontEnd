@@ -22,32 +22,45 @@ const ShortsBody = (props) => {
   const dispatch = useDispatch();
   //redux data
   const shortsData = useSelector((state) => state.shorts.shortsList);
-  const likeList = useSelector((state) => state.like.shortsLikeList);
-  const likeData = shortsData.shortsLikeResponseDtoList;
+  // const likeList = useSelector((state) => state.like.shortsLikeList);
+  // const likeData = shortsData.shortsLikeResponseDtoList;
+  const is_like = shortsData.is_like;
+  console.log(shortsData);
+  console.log(is_like);
+
   //localstorage 로그인정보
-  const login_userId = localStorage.getItem("userId");
+  // const login_userId = localStorage.getItem("userId");
   const is_login = localStorage.getItem("is_login");
   // useState
   const [showModal, setShowModal] = useState(false);
+  
+  // const likeData_ = likeData !== undefined? likeData: [];
+  // const is_like = likeData_.find(l => l.userId === Number(login_userId))
+  // console.log(is_like);
   const [heart, setHeart] = useState(false);
-  console.log(likeData);
-  console.log(likeList);
+  console.log(heart)
+
+
+
   useEffect(() => {
     dispatch(shortsActions.getShortsDB());
-    if (likeData !== undefined) {
-      for (let i = 0; i < likeData.length; i++) {
-        if (likeData[i].userId === parseInt(login_userId)) {
-          return setHeart(true);
-        } else {
-          continue;
-        }
-      }
-      return setHeart(false);
-    }
+
+    // if (likeData !== undefined) {
+      // for (let i = 0; i < likeData.length; i++) {
+      //   console.log(likeData[i].userId === parseInt(login_userId))
+      //   if (likeData[i].userId === parseInt(login_userId)) {
+      //     return setHeart(true);
+      //   } 
+      //   // else {
+      //   //   // continue;
+      //   // }
+      // }
+      // return setHeart(false);
+    // }
   }, []);
 
-  console.log(heart);
-  console.log(likeData);
+  // console.log(heart);
+  // console.log(likeList);
   //-------heart-------
   const changeHeart = () => {
     if (heart) {
@@ -146,16 +159,16 @@ const ShortsBody = (props) => {
 
           {/* 좋아요 */}
           <Position bottom="5%" right="16px" onClick={likeChange}>
-            {!heart ? (
+            {heart ? (
               <Grid margin="-8px 0 0" align="center">
-                <AiOutlineHeart size="45" color="#FFF" />
+                <AiFillHeart size="45" color="red" />
                 <Text bold color="#FFF">
                   {shortsData.shortsLikeCnt}
                 </Text>
               </Grid>
             ) : (
               <Grid margin="-8px 0 0" align="center">
-                <AiFillHeart size="45" color="red" />
+                <AiOutlineHeart size="45" color="#FFF" />
                 <Text bold color="#FFF">
                   {shortsData.shortsLikeCnt}
                 </Text>
