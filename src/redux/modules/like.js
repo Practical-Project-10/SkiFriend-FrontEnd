@@ -37,7 +37,7 @@ export const addLikeDB =
 
 //동영상 좋아요
 export const addShortsLikeDB =
-  (shortsId, likeCnt) =>
+  (shortsId) =>
   async (dispatch, getState, { history }) => {
     const login_userId = localStorage.getItem("userId");
 

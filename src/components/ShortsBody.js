@@ -39,9 +39,6 @@ const ShortsBody = (props) => {
   // console.log(is_like);
   const [heart, setHeart] = useState(false);
   console.log(heart)
-
-
-
   useEffect(() => {
     dispatch(shortsActions.getShortsDB());
 
@@ -59,8 +56,6 @@ const ShortsBody = (props) => {
     // }
   }, []);
 
-  // console.log(heart);
-  // console.log(likeList);
   //-------heart-------
   const changeHeart = () => {
     if (heart) {
@@ -177,7 +172,7 @@ const ShortsBody = (props) => {
           </Position>
         </IconWrap>
 
-        <ShortVideo page='shorts' {...shortsData} />
+        <ShortVideo page="shorts" {...shortsData} />
       </Container>
 
       {/* 댓글모달 */}
