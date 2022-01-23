@@ -14,6 +14,8 @@ import defaultIMG from "../assets/myPage/profilePicture.png";
 const ProfileWrite = (props) => {
   const history = props.history;
   const dispatch = useDispatch();
+
+  // redux데이터
   const preview = useSelector((state) => state.image.preview);
   const user_profile = useSelector((state) => state.profile.user_profile);
   const pfImgFile = useRef();
@@ -49,6 +51,7 @@ const ProfileWrite = (props) => {
     });
   };
 
+  //프로필 이미지 미리보기
   const selectFile = () => {
     const reader = new FileReader();
     const profileImgFile = pfImgFile.current.files[0];
@@ -67,6 +70,7 @@ const ProfileWrite = (props) => {
     }
   };
 
+  // 프로필 이미지 삭제
   const deleteImg = (e) => {
     const { id } = e.target;
     if (id === "deleteProfile") {
@@ -79,10 +83,12 @@ const ProfileWrite = (props) => {
     }
   };
 
+  // 프로필 등록
   const addProfile = () => {
     dispatch(profileActions.addProfileDB(profile));
   };
 
+  // 회원탈퇴
   const deleteUser = () => {
     const ask = window.confirm("정말 회원탈퇴 하시겠습니까?");
     if (ask) {
@@ -109,6 +115,7 @@ const ProfileWrite = (props) => {
           margin="40px auto 9px"
           position="relative"
         >
+          {/* 프로필 이미지 */}
           <Image
             width="150px"
             height="150px"
@@ -129,6 +136,7 @@ const ProfileWrite = (props) => {
             X
           </DeletePic>
         </Grid>
+        {/* 유저 정보 입력 */}
         <Grid margin="70px 0 0">
           <Grid
             width="100%"

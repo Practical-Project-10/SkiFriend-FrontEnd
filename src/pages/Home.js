@@ -100,9 +100,10 @@ const Home = (props) => {
     },
   ];
 
+  // 채팅방 연결/구독
   useEffect(() => {
     try {
-      stomp.debug = null;
+      stomp.debug = null; // 채팅 콘솔 제거
       stomp.connect(token, () => {
         stomp.subscribe(
           `/sub/alarm/${userId}`,
@@ -118,11 +119,13 @@ const Home = (props) => {
     }
   }, []);
 
+  // 인기게시글
   useEffect(() => {
     const mainHotPosts = async () => {
       const response = await // await fetch("https://seongeunyang.shop/main")
       (
-        await fetch("http://3.34.19.50:8080/main")
+        await fetch("https://seongeunyang.shop/main")
+        // await fetch("http://3.34.19.50:8080/main")
       ).json();
       dispatch(mainActions.loadPosts(response));
     };
@@ -215,6 +218,8 @@ const Home = (props) => {
             );
           })}
         </IconWrap>
+
+        {/* 인기게시글 */}
         <Grid
           bg="#FFF"
           height="413px"

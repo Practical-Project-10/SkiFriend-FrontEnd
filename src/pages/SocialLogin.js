@@ -9,6 +9,7 @@ import { KAKAO_AUTH_URL } from "../shared/kakaoAuth";
 
 const Login = (props) => {
   const history = props.history;
+
   const kakaoLogin = () => {
     window.location.href = KAKAO_AUTH_URL;
   };

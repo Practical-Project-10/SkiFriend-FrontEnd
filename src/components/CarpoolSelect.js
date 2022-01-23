@@ -35,6 +35,7 @@ const CarpoolSelect = (props) => {
     props.bringDate(date);
   };
 
+  // 모집완료 보지 않기
   const hiddenChange = (e) => {
     const { name, value } = e.target;
 

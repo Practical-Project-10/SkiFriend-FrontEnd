@@ -14,6 +14,7 @@ import Header from "./Header";
 const ShortsWrite = (props) => {
   const {is_edit, shortsId} = props;
   const dispatch = useDispatch();
+  //redux데이터
   const myShortsList = useSelector(state => state.shorts.myShortsList);
   const shorts = is_edit? myShortsList.find(s => s.shortsId === Number(shortsId)): null;
 

@@ -38,7 +38,7 @@ const PlaceInfo = () => {
           [id]: true,
         }
       )
-    };
+    }
 
     if(state[0][1] === true) {
       setToggleState(
@@ -47,7 +47,7 @@ const PlaceInfo = () => {
           [id]: false,
         }
       )
-    };
+    }
   };
 
   const resortInfo = [
