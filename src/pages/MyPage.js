@@ -20,8 +20,10 @@ import banner from "../assets/myPage/mypage_banner.png";
 
 const MyPage = (props) => {
   const dispatch = useDispatch();
+  // localStorage 로그인 정보
   const is_login = localStorage.getItem("is_login") === "true" ? true : false;
   const user_profile = useSelector((state) => state.profile.user_profile);
+  // redux데이터
   const myCarpool = useSelector((state) => state.carpool.list["myPage"]);
   const myShortsList = useSelector((state) => state.shorts.myShortsList);
 

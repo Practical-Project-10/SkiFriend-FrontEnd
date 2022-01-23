@@ -14,7 +14,7 @@ const ShortVideo = (props) => {
       />
     );
   }
-
+  //
   return (
     <Shorts>
       <ThumbNail src={props.thumbNailPath} alt="썸네일" />
@@ -23,8 +23,7 @@ const ShortVideo = (props) => {
           {props.page === "shorts" && (
             <Image myIcon src={props.profileImg} width="22%" height="44px" />
           )}
-
-          <Grid width="116%" padding="0 0 0 13px">
+          <Grid padding="0 0 0 13px">
             <Grid padding="0 0 5px">
               <Text bold size="17px" color="#FFF">
                 {props.title}

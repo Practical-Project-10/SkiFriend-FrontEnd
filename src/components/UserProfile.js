@@ -12,6 +12,8 @@ import notLoginProfile from "../assets/myPage/profile_default_img.png";
 const UserProfile = (props) => {
   const { gender, ageRange, career, profileImg, nickname, selfIntro } = props;
   const dispatch = useDispatch();
+
+  
   const is_phoneNum =
     localStorage.getItem("is_phoneNum") !== "null" ? true : false;
 

@@ -21,6 +21,7 @@ const CarpoolFilter = (props) => {
     status: "false",
   });
   
+  // CarpoolSelect에서 date 가져오기 //최적화 할때 CarpoolSelect로 이동
   const bringDate = (date) => {
     setForm({
       ...form,
@@ -28,6 +29,7 @@ const CarpoolFilter = (props) => {
     });
   };
 
+  // CarpoolSelect에서 form 가져오기 //최적화 할때 CarpoolSelect로 이동
   const bringForm = (name, value) => {
     setForm({
       ...form,
@@ -35,6 +37,7 @@ const CarpoolFilter = (props) => {
     });
   };
 
+  // CarpoolSelect에서 지역 가져오기 //최적화 할때 CarpoolSelect로 이동
   const bringLocation = (name, value) => {
     setForm({
       ...form,
