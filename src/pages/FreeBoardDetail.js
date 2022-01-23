@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { boardCreators as boardActions } from "../redux/modules/freeboard";
@@ -11,15 +10,15 @@ import Modal from "../components/Modal";
 
 import styled from "styled-components";
 import { Grid, Text } from "../elements/index";
+import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
+import { BsChat } from "react-icons/bs";
+import { BiDotsHorizontalRounded } from "react-icons/bi";
+
 //swiper
 import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore, { Navigation, Pagination } from "swiper";
 import "swiper/swiper.min.css";
 import "swiper/components/navigation/navigation.min.css";
-//react icons
-import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
-import { BsChat } from "react-icons/bs";
-import { BiDotsHorizontalRounded } from "react-icons/bi";
 
 const FreeBoardDetail = ({ history }, props) => {
   const dispatch = useDispatch();
@@ -52,7 +51,9 @@ const FreeBoardDetail = ({ history }, props) => {
       return setHeart(false);
     }
   };
+
   useEffect(() => {
+    //----좋아요 누른 이력 표시----
     if (likeData !== undefined) {
       for (let i = 0; i < likeData.length; i++) {
         if (likeData[i].userId === parseInt(login_userId)) {
@@ -66,6 +67,7 @@ const FreeBoardDetail = ({ history }, props) => {
   }, [postData]);
 
   useEffect(() => {
+    //----상세보기 페이지 정보 가져오기----
     dispatch(boardActions.getOneBoardDB(postId));
   }, []);
 
@@ -118,7 +120,6 @@ const FreeBoardDetail = ({ history }, props) => {
       >
         자유게시글
       </Header>
-      {/* body */}
       <Grid bg="#FFF" minHeight="calc( 100vh - 55px )">
         <Grid phoneSize>
           <Grid
@@ -167,7 +168,7 @@ const FreeBoardDetail = ({ history }, props) => {
               {/* modal 끝 */}
             </Grid>
           </Grid>
-          {/* 좋아요 댓글 시간 */}
+          {/* 좋아요 댓글,시간 */}
           <Grid padding="16px 0" is_flex justify="space-between">
             <Grid>
               <Text size="12px">{postData.createdAt}</Text>
@@ -187,7 +188,7 @@ const FreeBoardDetail = ({ history }, props) => {
               </Grid>
             </Grid>
           </Grid>
-          {/* 사진 및 게시글 */}
+          {/* 사진 및 게시글 (상세페이지 body)*/}
           <Grid>
             <Grid padding="16px 0">
               <Text>
@@ -195,7 +196,7 @@ const FreeBoardDetail = ({ history }, props) => {
                 {postData.content &&
                   postData.content.split("\n").map((line) => {
                     return (
-                      <span key={postId+'a'}>
+                      <span key={postId + "a"}>
                         {line}
                         <br />
                       </span>
@@ -203,6 +204,7 @@ const FreeBoardDetail = ({ history }, props) => {
                   })}
               </Text>
             </Grid>
+            {/* 사진 여러장 처리 */}
             <Grid is_flex width="100%" height="250px" padding="0 16px">
               <Swiper
                 spaceBetween={10}
@@ -229,6 +231,7 @@ const FreeBoardDetail = ({ history }, props) => {
                   })}
               </Swiper>
             </Grid>
+            {/* 좋아요 표시 */}
             <Small onClick={likeChange}>
               {!heart ? (
                 <AiOutlineHeart size="16" color="#FFF" />

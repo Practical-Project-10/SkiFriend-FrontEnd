@@ -4,9 +4,13 @@ import { imageActions } from "./image";
 import { apis } from "../../shared/apis";
 import { userStorage } from "../../shared/userStorage";
 
+//initialState
+const initialState = {
+  user_profile: {},
+};
+
 //action
 const GET_PROFILE = "GET_PROFILE";
-// const ADD_PROFILE = "ADD_PROFILE";
 const ADD_PROFILE = "ADD_PROFILE";
 
 //action creators
@@ -19,17 +23,6 @@ const getProfileDB = () => {
     try {
       const response = await apis.getProfile();
       response && dispatch(getProfile(response.data));
-      // const userInfo = {
-      //   nickname: localStorage.getItem('nickname'),
-      //   profileImg: localStorage.getItem('profileImg'),
-      //   gender: localStorage.getItem('gender'),
-      //   ageRange: localStorage.getItem('ageRange'),
-      //   career: localStorage.getItem('career') !== "null"? localStorage.getItem('career'): null,
-      //   selfIntro: localStorage.getItem('selfIntro') !== "null"? localStorage.getItem('selfIntro'): null,
-      //   phoneNum: localStorage.getItem('phoneNum') !== "null"? localStorage.getItem('phoneNum'): null,
-      // };
-
-      // dispatch(getProfile(userInfo));
     } catch (err) {
       // console.log("getProfileDB", err);
     }
@@ -66,12 +59,6 @@ const addProfileDB = (profile) => {
     }
   };
 };
-
-//initialState
-const initialState = {
-  user_profile: {},
-};
-
 //reducer
 export default handleActions(
   {
@@ -79,10 +66,6 @@ export default handleActions(
       produce(state, (draft) => {
         draft.user_profile = action.payload.profile;
       }),
-    // [ADD_PROFILE]: (state, action) =>
-    //   produce(state, (draft) => {
-    //     draft.user_profile = action.payload.profile;
-    //   }),
     [ADD_PROFILE]: (state, action) =>
       produce(state, (draft) => {
         draft.user_profile = action.payload.profile;
@@ -93,14 +76,9 @@ export default handleActions(
 
 const profileActions = {
   getProfile,
-  // addProfile,
   addProfile,
   getProfileDB,
-  // addProfileDB,
   addProfileDB,
-  // isPhoneNumDB,
-  // isSmsCheckDB,
-  // changePwdDB,
 };
 
 export { profileActions };

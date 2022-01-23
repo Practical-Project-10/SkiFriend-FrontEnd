@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { chatCreators as chatActions } from "../redux/modules/chat";
 
 import Modal from "../components/Modal";
 
 import { Grid, Text, Image } from "../elements/index";
-import { useParams } from "react-router-dom";
 import defaultIMG from "../assets/myPage/profilePicture.png";
 import { BsTelephoneOutbound } from "react-icons/bs";
 

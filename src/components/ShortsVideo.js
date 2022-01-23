@@ -4,44 +4,37 @@ import styled from "styled-components";
 import { Grid, Text, Image } from "../elements";
 
 const ShortVideo = (props) => {
-
-  if(props.page === 'write') {
-    return(
+  if (props.page === "write") {
+    return (
       <Video
         src={props.src}
         autoPlay // 자동재생
         loop // 반복 재생
         playsInline
       />
-    )
-  };
+    );
+  }
 
   return (
     <Shorts>
-      <ThumbNail src={props.thumbNailPath} alt="썸네일"/>
+      <ThumbNail src={props.thumbNailPath} alt="썸네일" />
       <Position top={props.top} left={props.left}>
         <Grid is_flex>
+          {props.page === "shorts" && (
+            <Image myIcon src={props.profileImg} width="22%" height="44px" />
+          )}
 
-          {props.page === 'shorts' && 
-            <Image
-              myIcon
-              src={props.profileImg}
-              width="22%"
-              height="44px"
-            />
-          }
-          
           <Grid width="116%" padding="0 0 0 13px">
             <Grid padding="0 0 5px">
               <Text bold size="17px" color="#FFF">
                 {props.title}
               </Text>
             </Grid>
-            {props.page === 'shorts' && 
+            {props.page === "shorts" && (
               <Text size="17px" color="#BDDCFF">
                 {props.nickname}
               </Text>
-            }
+            )}
           </Grid>
         </Grid>
       </Position>
@@ -49,9 +42,7 @@ const ShortVideo = (props) => {
         <Video
           src={props.videoPath}
           autoPlay // 자동재생
-          muted
-          // ={props.page === "myPage" ? true : false} // 음소거 
-
+          muted={props.page === "myPage" ? true : false} // 음소거
           loop // 반복 재생
           playsInline
         />
@@ -64,7 +55,7 @@ const Shorts = styled.div`
   width: 100%;
   height: 100%;
   overflow: hidden;
-`
+`;
 
 const ThumbNail = styled.img`
   width: 100%;
@@ -75,8 +66,8 @@ const ThumbNail = styled.img`
 const Position = styled.div`
   width: 80%;
   position: absolute;
-  top: ${props => props.top};
-  left: ${props => props.left};
+  top: ${(props) => props.top};
+  left: ${(props) => props.left};
   z-index: 2;
 `;
 

@@ -17,9 +17,7 @@ const ShortsWrite = (props) => {
   const myShortsList = useSelector(state => state.shorts.myShortsList);
   const shorts = is_edit? myShortsList.find(s => s.shortsId === Number(shortsId)): null;
 
-  // const titleInput = useRef(shorts? shorts.title: '');
   const fileInput = useRef();
-  // const [file, setFile] = useState(null);
   const [src, setSrc] = useState(shorts? shorts.videoPath: '');
   const [form, setForm] = useState(
     {
@@ -45,7 +43,6 @@ const ShortsWrite = (props) => {
     const file_ = fileInput.current.files[0];
     const videoUrl = URL.createObjectURL(file_);
     setSrc(videoUrl);
-    console.log(videoUrl)
     setForm(
       {
         ...form,
@@ -56,8 +53,6 @@ const ShortsWrite = (props) => {
 
   //숏츠 업로드
   const addShorts = () => {
-    // const title = titleInput.current.value;
-
     if (video === null || title === '') {
       return window.alert("제목 및 영상을 등록해 주세요.");
     } else {
@@ -66,9 +61,7 @@ const ShortsWrite = (props) => {
   };
 
   //숏츠 수정
-  const updateShorts = () => {
-    // const title = titleInput.current.value;
-    
+  const updateShorts = () => {    
     if (video === null || title === '') {
       return window.alert("제목 및 영상을 등록해 주세요.");
     } else {
@@ -91,7 +84,6 @@ const ShortsWrite = (props) => {
               name='title'
               value={title}
               onChange={handleChange}
-              // ref={titleInput}
             />
           </Grid>
 

@@ -23,7 +23,6 @@ import ChatRoom from "./pages/ChatRoom";
 import Snowflakes from "./components/Snowflakes";
 import KakaoAuthHandle from "./components/KakaoAuthHandle";
 import KakaoAuthHandle2 from "./components/KakaoAuthHandle2";
-import NaverAuthHandle from "./components/NaverAuthHandle";
 import ShortsUpload from "./pages/ShortsUpload";
 import Shorts from "./pages/Shorts";
 
@@ -50,11 +49,7 @@ function App() {
               path="/user/kakao/callback/properties"
               component={KakaoAuthHandle2}
             />
-            <Route
-              exact
-              path="/user/naver/callback"
-              component={NaverAuthHandle}
-            />
+            <Route exact path="/user/naver/callback" />
             <Route exact path="/carpool/:skiresort" component={Carpool} />
             <Route exact path="/filter/:skiresort" component={FilterList} />
             <Route exact path="/carpoolwrite" component={CarpoolWrite} />
@@ -136,7 +131,6 @@ const Container = styled.div`
   justify-content: flex-start;
   align-items: center;
   background: #d9e3ee;
-  /* background-size: contain; */
   overflow: hidden;
   position: relative;
 

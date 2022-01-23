@@ -136,8 +136,6 @@ const CarpoolSelect = (props) => {
               </Grid>
             }
             
-
-            
           </Grid>
         )}
 
@@ -258,11 +256,6 @@ const CarpoolSelect = (props) => {
             </Grid>
           )}
         </form>
-
-        {/* <Grid>
-          <Input type="checkBox"/>
-          <Text>모집 중인 게시글만 보기</Text>
-        </Grid> */}
       </Grid>
     </React.Fragment>
   );

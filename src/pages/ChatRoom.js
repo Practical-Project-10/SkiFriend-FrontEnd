@@ -2,25 +2,25 @@ import React, { useState, useRef, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { chatCreators as chatActions } from "../redux/modules/chat";
-import styled from "styled-components";
 import axios from "axios";
-
 import SockJS from "sockjs-client";
 import Stomp from "stompjs";
+
 import MessageBox from "../components/MessageBox";
 import Header from "../components/Header";
 import ChatRoomCard from "../components/ChatRoomCard";
-//icons
+
+import styled from "styled-components";
 import { Grid, Input, Image } from "../elements/index";
 import sendBtn from "../assets/send.svg";
 
 const ChatRoom = () => {
   const dispatch = useDispatch();
+  const scrollRef = useRef();
   //경로
   const params = useParams();
   const roomId = params.roomId;
   const roomName = params.roomName;
-  const scrollRef = useRef();
   //redux 데이터
   // const datas = useSelector((state) => state.chat.chatList);
   const phoneInfo = useSelector((state) => state.chat.phoneInfoList);
@@ -44,9 +44,8 @@ const ChatRoom = () => {
 
   useEffect(() => {
     //소켓
-    const sock =
-      // new SockJS("https://seongeunyang.shop/ws-stomp");
-      new SockJS("http://3.34.19.50:8080/ws-stomp");
+    const sock = new SockJS("https://seongeunyang.shop/ws-stomp");
+    // new SockJS("http://3.34.19.50:8080/ws-stomp");
     setStomp(Stomp.over(sock));
     dispatch(chatActions.getRoomInfoDB(roomId)); //방정보 가져오기
     // dispatch(chatActions.getContentChatDB(roomId)); //대화내용 가져오기
@@ -64,7 +63,7 @@ const ChatRoom = () => {
   useEffect(() => {
     axios
       // https://seongeunyang.shop/    http://3.34.19.50:8080/
-      .get(` http://3.34.19.50:8080/chat/message/${roomId}`, {
+      .get(` https://seongeunyang.shop/chat/message/${roomId}`, {
         headers: token,
       })
       .then((res) => {
@@ -114,6 +113,7 @@ const ChatRoom = () => {
       sendMessage();
     }
   };
+
   //메세지 보내기
   const sendMessage = async () => {
     if (message.replace(/\s|/gi, "").length !== 0) {
@@ -140,6 +140,7 @@ const ChatRoom = () => {
       return;
     }
   };
+
   //전화번호 보여주기
   const showPhoneNum = async () => {
     const datas = {
@@ -163,7 +164,6 @@ const ChatRoom = () => {
 
   return (
     <React.Fragment>
-      {/* 상단부  */}
       <Grid>
         <Header goBack phone fixed _onClick={getPhoneNum}>
           {roomName}
@@ -175,16 +175,16 @@ const ChatRoom = () => {
           direction="column"
         >
           <Grid padding="0 16px" height="642px" overflow="scroll">
+            {/* 방정보 카드 */}
             <ChatRoomCard roomInfo={roomInfoList} />
+            {/* 채팅말풍선(body부분)*/}
             <div style={{ padding: "0 0 70px 0" }} ref={scrollRef}>
-              {/* 채팅말풍선 */}
               {messageList.map((msg, idx) => {
                 return <MessageBox key={"message" + idx} chatInfo={msg} />;
               })}
             </div>
           </Grid>
-          {/* 하단부 버튼들 */}
-
+          {/* 채팅입력창 */}
           <Grid height="100px" position="relative" bg="#474D56">
             <Grid is_flex padding="35px 16px">
               <Input
@@ -193,7 +193,7 @@ const ChatRoom = () => {
                 width="92%"
                 height="40px"
                 radius="40px"
-                autocomplete="off"
+                autocomplete="off" //자동입력 끄기
                 _value={message}
                 _onKeyPress={onKeyPress}
                 _onChange={messageChat}

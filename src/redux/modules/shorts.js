@@ -2,6 +2,12 @@ import { createAction, handleActions } from "redux-actions";
 import produce from "immer";
 import { apis } from "../../shared/apis";
 
+// initialState
+const initialState = {
+  shortsList: {},
+  myShortsList: [],
+};
+
 //action
 const GET_SHORTS = "shorts/GET_SHORTS";
 const ADD_SHORTS = "shorts/ADD_SHORTS";
@@ -27,12 +33,6 @@ const CommentCount = createAction(COMMENT_COUNT, (state, commentCnt) => ({
   commentCnt,
 }));
 
-// initialState
-const initialState = {
-  shortsList: {},
-  myShortsList: [],
-};
-
 // middlewares
 // 동영상 조회
 const getShortsDB = () => {
@@ -53,7 +53,6 @@ const getShortsDB = () => {
       } else {
         history.push(`/shorts`);
       }
-      // dispatch(likeCreators.getShortsLike(is_like));
     } catch (err) {
       const is_login =
         localStorage.getItem("is_login") === "true" ? true : false;
@@ -158,7 +157,6 @@ export default handleActions(
         draft.shortsList.shortsLikeCnt =
           likeUserList.shortsLikeResponseDtoList.length;
         draft.shortsList["is_like"] = action.payload.is_like;
-        // console.log(draft.shortsList.shortsLikeCnt)
       }),
 
     [ADD_SHORTS]: (state, action) =>

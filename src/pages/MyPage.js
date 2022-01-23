@@ -29,9 +29,7 @@ const MyPage = (props) => {
     if (!is_login) {
       return null;
     }
-    // if(user_profile === {}) {
     dispatch(profileActions.getProfileDB());
-    // }
     if (myCarpool.length === 0) {
       dispatch(carpoolActions.getMyCarpoolDB("myPage"));
     }

@@ -38,8 +38,8 @@ const Home = (props) => {
   const accessToken = document.cookie.split("=")[1];
   const token = { Authorization: `${accessToken}` };
   //소켓
-  // const sock = new SockJS("https://seongeunyang.shop/ws-alarm");
-  const sock = new SockJS("http://3.34.19.50:8080/ws-alarm");
+  const sock = new SockJS("https://seongeunyang.shop/ws-alarm");
+  // const sock = new SockJS("http://3.34.19.50:8080/ws-alarm");
 
   const stomp = Stomp.over(sock);
   //localstorage
@@ -120,9 +120,8 @@ const Home = (props) => {
 
   useEffect(() => {
     const mainHotPosts = async () => {
-      const response = await 
+      const response = await // await fetch("https://seongeunyang.shop/main")
       (
-        // await fetch("https://seongeunyang.shop/main")
         await fetch("http://3.34.19.50:8080/main")
       ).json();
       dispatch(mainActions.loadPosts(response));
@@ -259,14 +258,12 @@ const BannerImage = styled.img`
 `;
 
 const BannerArea = styled.div`
-  /* width: 100%; */
   height: 189px;
   .slick-next::before {
     content: "";
     display: none;
-    /* position: absolute; */
     right: 0;
   }
-`
+`;
 
 export default Home;

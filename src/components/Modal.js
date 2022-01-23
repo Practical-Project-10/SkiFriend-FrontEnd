@@ -160,7 +160,6 @@ const Modal = (props) => {
             >
               삭제하기
             </Menu>
-            {/* {_onClick ? ( */}
             <Menu
               fontS={props.fontS}
               padding={props.padding}
@@ -168,7 +167,6 @@ const Modal = (props) => {
             >
               모집 완료
             </Menu>
-            {/* ) : null} */}
             <Menu
               fontS={props.fontS}
               padding={props.padding}

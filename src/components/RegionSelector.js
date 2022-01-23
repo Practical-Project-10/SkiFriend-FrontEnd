@@ -353,7 +353,6 @@ const RegionSelector = forwardRef((props, loca) => {
   };
 
   return (
-    // <Grid is_flex width="144px" height="55px" onChange={changeLocation}>
     <Form is_flex width="144px" height="55px" onChange={changeLocation}>
       <Select
         margin="0 3px 0 0"
@@ -380,7 +379,6 @@ const RegionSelector = forwardRef((props, loca) => {
         <option value="">군/구</option>
       </Select>
     </Form>
-    // </Grid>
   );
 });
 

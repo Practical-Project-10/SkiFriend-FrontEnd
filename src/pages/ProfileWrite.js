@@ -31,11 +31,8 @@ const ProfileWrite = (props) => {
   const {
     nickname,
     profileImg,
-    // gender,
-    // ageRange,
     career,
     selfIntro,
-    // phoneNum,
   } = profile;
 
   useEffect(() => {
@@ -81,10 +78,6 @@ const ProfileWrite = (props) => {
       dispatch(imageActions.deletePreview());
     }
   };
-
-  // const addProfile = async () => {
-  //   dispatch(profileActions.addProfileDB(profile));
-  // };
 
   const addProfile = () => {
     dispatch(profileActions.addProfileDB(profile));

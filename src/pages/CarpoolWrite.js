@@ -110,11 +110,9 @@ const CarpoolWrite = (props) => {
   };
 
   const maxPrice = (e) => {
-    console.log(e.target.value, e.target.maxLength)
     if(e.target.value.length > e.target.maxLength) {
       e.target.value = e.target.value.slice(0, e.target.maxLength);
     }
-    console.log(e.target.value);
   }
 
   return (
