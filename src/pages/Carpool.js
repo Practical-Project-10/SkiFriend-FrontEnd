@@ -32,6 +32,7 @@ const Carpool = (props) => {
     )
   }, []);
 
+  //로그인 유도
   const induceProfile = () => {
     if (!is_login) {
       const ask = window.confirm(
@@ -58,6 +59,7 @@ const Carpool = (props) => {
   const list = document.getElementById("list");
   const cardList = document.getElementById("cardList");
 
+  //무한 스크롤 추후 쓰로틀로 변경
   const infinifyScroll = () => {
     const recentScroll = list ? list.scrollTop : null;
     const cardListHeight = cardList ? cardList.offsetHeight : null;

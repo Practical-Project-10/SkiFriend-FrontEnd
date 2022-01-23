@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 import { history } from "../redux/ConfigStore";
 import { useDispatch } from "react-redux";
@@ -14,6 +14,8 @@ import etc from "../assets/etc_icon.svg";
 const ShortsCard = (props) => {
   const dispatch = useDispatch();
   const [showModal, setShowModal] = useState(false);
+
+  //숏츠 삭제
   const deleteMyShorts = () => {
     const ask = window.confirm("해당 영상을 삭제 하시겠습니까?");
     if (ask) {

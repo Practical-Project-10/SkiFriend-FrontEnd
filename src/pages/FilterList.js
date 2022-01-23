@@ -14,8 +14,11 @@ import filter from "../assets/carpoolList/filter.svg";
 const FilterList = (props) => {
   const history = props.history;
   const dispatch = useDispatch();
-  const certification = localStorage.getItem("certification") === "true"? true: false;
+  //스키장 이름
   const skiResort = props.match.params.skiresort;
+  //휴대폰 인증 여부
+  const certification = localStorage.getItem("certification") === "true"? true: false;
+  //redux데이터
   const carpool_list = useSelector((state) => state.carpool.list[skiResort]);
   const resortImg = useSelector((state) => state.carpool.resortImg);
 

@@ -34,6 +34,7 @@ const Card = (props) => {
     setShowModal(false);
   };
 
+  //카풀 수정
   const editCard = () => {
     if (page === "myPage") {
       return history.push(`/carpoolwrite/${page}/${props.postId}`);
@@ -41,6 +42,7 @@ const Card = (props) => {
     history.push(`/carpoolwrite/${props.skiResort}/${props.postId}`);
   };
 
+  //카풀 삭제
   const deleteCard = () => {
     if (page === "myPage") {
       dispatch(carpoolActions.deleteCarpoolDB(props.skiResort, props.postId, page));
@@ -49,6 +51,7 @@ const Card = (props) => {
     dispatch(carpoolActions.deleteCarpoolDB(props.skiResort, props.postId));
   };
 
+  //카풀 모집완료
   const completeCard = () => {
     if (page === "myPage") {
       dispatch(carpoolActions.completeCarpoolDB(props.skiResort, props.postId, page));
@@ -82,6 +85,7 @@ const Card = (props) => {
     return dispatch(chatActions.makeRoomChatDB(postId));
   };
 
+  //내가 작성한 카풀카드가 없을 때 --- 마이페이지
   if (noCard) {
     return (
       <Grid height="165px">
@@ -90,6 +94,7 @@ const Card = (props) => {
     );
   }
 
+  //내가 작성한 카풀카드 --- 마이페이지
   if (page === 'myPage') {
     return (
       <React.Fragment>
@@ -174,6 +179,7 @@ const Card = (props) => {
     );
   }
 
+  // 카풀페이지
   return (
     <React.Fragment>
       <CarpoolCard
