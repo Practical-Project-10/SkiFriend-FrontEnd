@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { Grid, Image, Text } from "../elements/index";
 
-import SkiIcon from "../components/SkiIcon"
+import SkiIcon from "../components/SkiIcon";
 import Header from "../components/Header";
 
 import High1 from "../assets/high1_logo.svg";
@@ -12,7 +12,7 @@ import Vivaldi from "../assets/vivaldi_logo.svg";
 import Phoenix from "../assets/phoenix_logo.svg";
 import Wellihilli from "../assets/welli_logo.svg";
 import Konjiam from "../assets/konjiam_logo.svg";
-import drop from "../assets/drop.svg"
+import drop from "../assets/drop.svg";
 
 const PlaceInfo = () => {
   const [toggleState, setToggleState] = useState({
@@ -23,37 +23,33 @@ const PlaceInfo = () => {
     tabWellihilliPark: false,
     tabKonjiam: false,
   });
-  //객체를 배열로 변경 -- 142줄 
+  //객체를 배열로 변경
   const list = Object.entries(toggleState);
 
   const toggleMenu = (e) => {
-    const {id} = e.currentTarget;
+    const { id } = e.currentTarget;
     //id와 일치하는 요소를 반환
-    const state = list.filter(t => t[0] === id);
+    const state = list.filter((t) => t[0] === id);
 
-    if(state[0][1] === false) {
-      setToggleState(
-        {
-          ...toggleState,
-          [id]: true,
-        }
-      )
+    if (state[0][1] === false) {
+      setToggleState({
+        ...toggleState,
+        [id]: true,
+      });
     }
 
-    if(state[0][1] === true) {
-      setToggleState(
-        {
-          ...toggleState,
-          [id]: false,
-        }
-      )
+    if (state[0][1] === true) {
+      setToggleState({
+        ...toggleState,
+        [id]: false,
+      });
     }
   };
 
   const resortInfo = [
     {
-      resort: '하이원',
-      id: 'tabHighOne',
+      resort: "하이원",
+      id: "tabHighOne",
       logo: High1,
       intro: "https://www.high1.com/ski/contents.do?key=730",
       slope: "https://www.high1.com/ski/slopeView.do?key=748&mode=p",
@@ -61,8 +57,8 @@ const PlaceInfo = () => {
       weather: "http://www.high1.com/www/contents.do?key=622",
     },
     {
-      resort: '용평',
-      id: 'tabYongPyong',
+      resort: "용평",
+      id: "tabYongPyong",
       logo: YongPyong,
       intro: "https://www.yongpyong.co.kr/kor/skiNboard/introduce.do",
       slope: "https://www.yongpyong.co.kr/kor/skiNboard/slope/introduce.do",
@@ -70,26 +66,30 @@ const PlaceInfo = () => {
       weather: "https://www.yongpyong.co.kr/kor/skiNboard/live.do",
     },
     {
-      resort: '비발디',
-      id: 'tabVivaldiPark',
+      resort: "비발디",
+      id: "tabVivaldiPark",
       logo: Vivaldi,
-      intro: "https://www.sonohotelsresorts.com/daemyung.vp.skiworld.index.ds/dmparse.dm",
-      slope: "https://www.sonohotelsresorts.com/daemyung.vp.skiworld.04_02_01.ds/dmparse.dm",
+      intro:
+        "https://www.sonohotelsresorts.com/daemyung.vp.skiworld.index.ds/dmparse.dm",
+      slope:
+        "https://www.sonohotelsresorts.com/daemyung.vp.skiworld.04_02_01.ds/dmparse.dm",
       fare: "https://www.sonohotelsresorts.com/daemyung.vp.skiworld.04_04_01.ds/dmparse.dm",
-      weather: "https://www.kweather.co.kr/forecast/forecast_sports.html?index=6&area=42720370%7C212&rname=Xff3UAv5Ux72VicBTAj8Uv73ZOYN&idx=ski",
+      weather:
+        "https://www.kweather.co.kr/forecast/forecast_sports.html?index=6&area=42720370%7C212&rname=Xff3UAv5Ux72VicBTAj8Uv73ZOYN&idx=ski",
     },
     {
-      resort: '휘닉스',
-      id: 'tabPhoenix',
+      resort: "휘닉스",
+      id: "tabPhoenix",
       logo: Phoenix,
       intro: "https://phoenixhnr.co.kr/static/pyeongchang/guide/intro",
       slope: "https://phoenixhnr.co.kr/static/pyeongchang/snowpark/slope-lift",
       fare: "https://phoenixhnr.co.kr/static/pyeongchang/guide/price/snowpark",
-      weather: "https://phoenixhnr.co.kr/static/pyeongchang/guide/weather/weather1",
+      weather:
+        "https://phoenixhnr.co.kr/static/pyeongchang/guide/weather/weather1",
     },
     {
-      resort: '웰리힐리',
-      id: 'tabWellihilliPark',
+      resort: "웰리힐리",
+      id: "tabWellihilliPark",
       logo: Wellihilli,
       intro: "https://www.wellihillipark.com/snowpark/snowpark/intro",
       slope: "https://www.wellihillipark.com/snowpark/snowpark/slope-guide",
@@ -97,8 +97,8 @@ const PlaceInfo = () => {
       weather: "https://www.wellihillipark.com/home/guide/weather",
     },
     {
-      resort: '곤지암',
-      id: 'tabKonjiam',
+      resort: "곤지암",
+      id: "tabKonjiam",
       logo: Konjiam,
       intro: "https://www.konjiamresort.co.kr/ski/useInfo.dev",
       slope: "https://www.konjiamresort.co.kr/ski/sloPe.dev",
@@ -111,63 +111,55 @@ const PlaceInfo = () => {
     <React.Fragment>
       <Grid>
         <Header>스키장 정보</Header>
-        <Grid phoneSize bg='#FFF' margin='0 0 70px 0' minHeight='calc( 100vh - 124px )' radius='22px 22px 0 0'>
+        <Grid
+          phoneSize
+          bg="#FFF"
+          margin="0 0 70px 0"
+          minHeight="calc( 100vh - 124px )"
+          radius="22px 22px 0 0"
+        >
           {/* 하이원 정보 */}
           {resortInfo.map((r, i) => {
-            
-            return(
+            return (
               <Grid id={r.id} key={r.id} _onClick={toggleMenu}>
                 <Grid is_flex>
-                  <Grid padding='16px 0' margin='0 13px 0 0'>
-                    <SkiIcon border='2px solid #6195CF' src={r.logo}/>
+                  <Grid padding="16px 0" margin="0 13px 0 0">
+                    <SkiIcon border="2px solid #6195CF" src={r.logo} />
                   </Grid>
-                  <Grid width='100%' is_flex justify='space-between'>
-                    <Grid width='70px' align='center'>
-                      <Text size='17px'>{r.resort}</Text>
+                  <Grid width="100%" is_flex justify="space-between">
+                    <Grid width="70px" align="center">
+                      <Text size="17px">{r.resort}</Text>
                     </Grid>
                     <Grid>
-                      <Image src={drop} width='46px' height='46px'/>
+                      <Image src={drop} width="46px" height="46px" />
                     </Grid>
                   </Grid>
                 </Grid>
 
                 {/* 토글 메뉴 */}
-                {list[i][1] &&
-                  <Toggle width="100px" align='center' margin='0 auto'>
-                    <Info
-                      href={r.intro}
-                      target="_blank"
-                    >
+                {list[i][1] && (
+                  <Toggle width="100px" align="center" margin="0 auto">
+                    <Info href={r.intro} target="_blank">
                       소개
                     </Info>
 
-                    <Info
-                      href={r.slope}
-                      target="_blank"
-                    >
+                    <Info href={r.slope} target="_blank">
                       슬로프안내
                     </Info>
 
-                    <Info
-                      href={r.fare}
-                      target="_blank"
-                    >
+                    <Info href={r.fare} target="_blank">
                       요금정보
                     </Info>
 
-                    <Info
-                      href={r.weather}
-                      target="_blank"
-                    >
+                    <Info href={r.weather} target="_blank">
                       날씨
                     </Info>
                   </Toggle>
-                }
-                <div style={{border: '1px solid #adb6c1'}}></div>
+                )}
+                <div style={{ border: "1px solid #adb6c1" }}></div>
               </Grid>
-            )
+            );
           })}
-
         </Grid>
       </Grid>
     </React.Fragment>
@@ -178,24 +170,24 @@ const Toggle = styled.div`
   width: 100%;
   height: 218px;
   padding: 9px;
-  background-color: #D9E3EE;
+  background-color: #d9e3ee;
   text-align: center;
   border-top: 2px solid #adb6c1;
-`
+`;
 
 const Info = styled.a`
   display: block;
   height: 43px;
   margin-bottom: 9px;
-  background-color: #FFF;
+  background-color: #fff;
   font-size: 14px;
   line-height: 42px;
-  border: 1px solid #6195CF;
+  border: 1px solid #6195cf;
   border-radius: 6px;
 
   &:last-child {
     margin-bottom: 0;
   }
-`
+`;
 
 export default PlaceInfo;

@@ -14,21 +14,15 @@ const ShortVideo = (props) => {
       />
     );
   }
-
+  //
   return (
     <Shorts>
       <ThumbNail src={props.thumbNailPath} alt="썸네일" />
       <Position top={props.top} left={props.left}>
         <Grid is_flex>
-          {props.page === 'shorts' && 
-            <Image
-              myIcon
-              src={props.profileImg}
-              width="44px"
-              height="44px"
-            />
-          }
-          
+          {props.page === "shorts" && (
+            <Image myIcon src={props.profileImg} width="44px" height="44px" />
+          )}
           <Grid padding="0 0 0 13px">
             <Grid padding="0 0 5px">
               <Text bold size="17px" color="#FFF">
