@@ -21,7 +21,7 @@ const ShortVideo = (props) => {
       <Position top={props.top} left={props.left}>
         <Grid is_flex>
           {props.page === "shorts" && (
-            <Image myIcon src={props.profileImg} width="22%" height="44px" />
+            <Image myIcon src={props.profileImg} width="44px" height="44px" />
           )}
           <Grid padding="0 0 0 13px">
             <Grid padding="0 0 5px">
