@@ -26,12 +26,12 @@ const ShortVideo = (props) => {
             <Image
               myIcon
               src={props.profileImg}
-              width="22%"
+              width="44px"
               height="44px"
             />
           }
           
-          <Grid width="116%" padding="0 0 0 13px">
+          <Grid padding="0 0 0 13px">
             <Grid padding="0 0 5px">
               <Text bold size="17px" color="#FFF">
                 {props.title}
@@ -49,9 +49,7 @@ const ShortVideo = (props) => {
         <Video
           src={props.videoPath}
           autoPlay // 자동재생
-          muted
-          // ={props.page === "myPage" ? true : false} // 음소거 
-
+          muted={props.page === "myPage" ? true : false} // 음소거 
           loop // 반복 재생
           playsInline
         />

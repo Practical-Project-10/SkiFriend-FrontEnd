@@ -11,9 +11,10 @@ import Header from "../components/Header";
 const CarpoolWrite = (props) => {
   const dispatch = useDispatch();
   const skiResort = props.match.params.skiresort;
+  //redux데이터
   const carpool_list = useSelector((state) => state.carpool.list);
+  //지역교차 유무
   const [state, setState] = React.useState(false);
-
   //수정 유무
   const postId = props.match.params.postId;
   const is_edit = postId ? true : false;
@@ -85,6 +86,7 @@ const CarpoolWrite = (props) => {
       });
     }
   };
+
   // 카풀게시물 추가
   const addCarpool = () => {
     if (form.startLocation === "" || form.startLocation === " ") {
@@ -104,17 +106,18 @@ const CarpoolWrite = (props) => {
     }
     dispatch(carpoolActions.addCarpoolDB(skiResort, form));
   };
+
   // 카풀게시물 수정
   const editCarpool = () => {
     dispatch(carpoolActions.editCarpoolDB(skiResort, postId, form));
   };
 
+  // 가격 99,999원까지 제한
   const maxPrice = (e) => {
     console.log(e.target.value, e.target.maxLength)
     if(e.target.value.length > e.target.maxLength) {
       e.target.value = e.target.value.slice(0, e.target.maxLength);
     }
-    console.log(e.target.value);
   }
 
   return (
@@ -124,6 +127,7 @@ const CarpoolWrite = (props) => {
         <Text color="red" padding="10px">
           필수 입력사항
         </Text>
+        
         <CarpoolSelect
           is_edit={is_edit}
           form={form}
@@ -135,6 +139,7 @@ const CarpoolWrite = (props) => {
 
         <div style={{ border: "5px solid #edeeef" }}></div>
 
+        {/* 선택 입력 사항 */}
         <Grid
           phoneSize
           margin="10px 0 0"

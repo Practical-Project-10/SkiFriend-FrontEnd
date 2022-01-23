@@ -155,10 +155,8 @@ export default handleActions(
       produce(state, (draft) => {
         const likeUserList = action.payload.shortsList;
         draft.shortsList = { ...draft.shortsList, ...likeUserList };
-        draft.shortsList.shortsLikeCnt =
-          likeUserList.shortsLikeResponseDtoList.length;
+        draft.shortsList.shortsLikeCnt = likeUserList.shortsLikeResponseDtoList.length;
         draft.shortsList["is_like"] = action.payload.is_like;
-        // console.log(draft.shortsList.shortsLikeCnt)
       }),
 
     [ADD_SHORTS]: (state, action) =>

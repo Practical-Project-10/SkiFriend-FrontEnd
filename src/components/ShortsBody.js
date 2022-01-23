@@ -170,22 +170,4 @@ const IconWrap = styled.div`
   z-index: 2;
 `;
 
-const NextBtn = styled.div`
-  width: 50px;
-  height: 50px;
-  border-radius: 999px;
-  background-color: #6195cf;
-  color: #fff;
-  font-size: 50px;
-  font-weight: bold;
-  /* line-height: 37px; */
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  &:hover {
-    opacity: 0.9;
-  }
-`;
-
 export default ShortsBody;

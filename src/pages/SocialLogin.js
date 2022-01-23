@@ -5,19 +5,14 @@ import { Grid, Button, Image, Text } from "../elements/index";
 import logo from "../assets/login/logo.svg";
 import bg from "../assets/login/login.png";
 import kakao_logo from "../assets/login/kakao.svg";
-import naver_logo from "../assets/login/naver.svg";
 
 import { KAKAO_AUTH_URL } from "../shared/kakaoAuth";
-import { NAVER_AUTH_URL } from "../shared/naverAuth";
 
 const Login = (props) => {
   const history = props.history;
+
   const kakaoLogin = () => {
     window.location.href = KAKAO_AUTH_URL;
-  };
-
-  const naverLogin = () => {
-    window.location.href = NAVER_AUTH_URL;
   };
 
   return (
@@ -52,14 +47,6 @@ const Login = (props) => {
                 카카오톡
               </Button>
             </Grid>
-            {/* <Grid position="relative" cursor="pointer">
-              <WrapLogo>
-                <img src={naver_logo} alt="네이버 로그인" />
-              </WrapLogo>
-              <Button bg="#FFF" color="#474D56" _onClick={naverLogin}>
-                네이버
-              </Button>
-            </Grid> */}
           </Grid>
         </Grid>
       </Grid>

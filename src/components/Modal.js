@@ -9,6 +9,7 @@ import defaultIMG from "../assets/myPage/profilePicture.png";
 const Modal = (props) => {
   const { page, complete } = props;
 
+  // 숏츠 및 자유게시물
   if (page === 'board' || page === 'shorts') {
     return (
       <ModalBackground onClick={props.closeModal} radius={props.radius}>
@@ -43,6 +44,7 @@ const Modal = (props) => {
     )
   }
 
+  // 마이페이지 프로필
   if (page === 'profile') {
     return (
       <ModalBackground onClick={props.closeModal}>
@@ -107,6 +109,7 @@ const Modal = (props) => {
     );
   }
 
+  // 카풀
   return (
     <React.Fragment>
       <ModalBackground onClick={props.closeModal} radius={props.radius}>
