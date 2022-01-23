@@ -3,6 +3,13 @@ import { produce } from "immer";
 import { apis } from "../../shared/apis";
 import { deleteCookie } from "../../shared/cookie";
 
+//initialState
+const initialState = {
+  is_login: false,
+  is_sms: false,
+  user: {},
+};
+
 //action
 const SET_USER = "SET_USER";
 const LOGOUT = "LOGOUT";
@@ -15,9 +22,8 @@ const logout = createAction(LOGOUT, () => ({}));
 const phoneNum = createAction(PHONENUM_CHECK, (num) => ({ num }));
 const smsCheck = createAction(SMS_CHECK, (state) => ({ state }));
 
-//[회원가입, 회원탈퇴, 비밀번호수정, 문자인증]은 서버에서 처리 리덕스에서 할거 없음
-
 //middlewares
+//핸드폰 인증번호 요청
 const isPhoneNumDB = (_phoneNum) => {
   return async (dispatch, getState, { history }) => {
     try {
@@ -31,6 +37,7 @@ const isPhoneNumDB = (_phoneNum) => {
   };
 };
 
+//핸드폰 인증번호 확인
 const isSmsCheckDB = (phoneNum, randomNum) => {
   return async (dispatch, getState, { history }) => {
     try {
@@ -48,6 +55,7 @@ const isSmsCheckDB = (phoneNum, randomNum) => {
   };
 };
 
+//회원 탈퇴
 const deleteUserInfoDB = () => {
   return async (dispatch, getState, { history }) => {
     try {
@@ -59,12 +67,6 @@ const deleteUserInfoDB = () => {
       // console.log(err);
     }
   };
-};
-
-const initialState = {
-  is_login: false,
-  is_sms: false,
-  user: {},
 };
 
 export default handleActions(

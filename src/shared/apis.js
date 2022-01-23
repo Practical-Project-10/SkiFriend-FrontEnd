@@ -95,7 +95,6 @@ export const apis = {
   // 자유게시글
   getFreePost: (skiResort, page) =>
     api.get(`/board/freeBoard/${skiResort}?size=10&page=1`, {
-      // params: {page: page, size: 17}
     }),
 
   writeFreePost: (skiResort, datas) =>
@@ -154,7 +153,8 @@ export const apis = {
       },
     }),
 
-  shortsUpdate: (shortsId, formData) => api.put(`/shorts/${shortsId}`, formData),
+  shortsUpdate: (shortsId, formData) =>
+    api.put(`/shorts/${shortsId}`, formData),
 
   shortsDelete: (shortsId) => api.delete(`/shorts/${shortsId}`),
 

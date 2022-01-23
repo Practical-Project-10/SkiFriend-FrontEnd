@@ -148,7 +148,6 @@ const CardList = styled.div`
   height: 100%;
   max-height: 100vh;
   overflow-y: scroll;
-  /* position: relative; */
 `;
 
 export default Carpool;

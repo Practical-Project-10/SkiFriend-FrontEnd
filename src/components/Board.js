@@ -5,8 +5,6 @@ import { commentCreators as commentActions } from "../redux/modules/comment";
 
 import { Grid, Text, Image, Input } from "../elements";
 import Comment from "../assets/freeBoard/comment.svg";
-
-// react icons
 import { AiOutlineHeart } from "react-icons/ai";
 
 const Board = (props) => {
@@ -138,7 +136,7 @@ const Board = (props) => {
     );
   }
 
-  //자유게시판 상세보기
+  //자유게시판 목록 페이지
   return (
     <Grid>
       <Grid padding="9px" display="flex" direction="column" gap="3px">

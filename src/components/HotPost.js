@@ -59,7 +59,6 @@ const ResortName = styled.div`
 
 const Posts = styled.div`
   &:last-child > hr {
-    /* display: none; */
   }
 `;
 

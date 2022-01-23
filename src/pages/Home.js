@@ -122,7 +122,7 @@ const Home = (props) => {
   // 인기게시글
   useEffect(() => {
     const mainHotPosts = async () => {
-      const response = await 
+      const response = await // await fetch("https://seongeunyang.shop/main")
       (
         await fetch("https://seongeunyang.shop/main")
         // await fetch("http://3.34.19.50:8080/main")
@@ -263,14 +263,12 @@ const BannerImage = styled.img`
 `;
 
 const BannerArea = styled.div`
-  /* width: 100%; */
   height: 189px;
   .slick-next::before {
     content: "";
     display: none;
-    /* position: absolute; */
     right: 0;
   }
-`
+`;
 
 export default Home;

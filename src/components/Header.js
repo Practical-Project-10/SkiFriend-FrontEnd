@@ -13,7 +13,6 @@ const Header = (props) => {
     children,
     _onClick,
     phone,
-    fixed,
     push,
     login,
     logout,

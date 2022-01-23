@@ -1,20 +1,22 @@
 import React, { useEffect } from "react";
-
 import { useDispatch, useSelector } from "react-redux";
 import { chatCreators as chatActions } from "../redux/modules/chat";
+import { history } from "../redux/ConfigStore";
 
 import Header from "../components/Header";
 
 import { Grid, Text, Button } from "../elements/index";
-import { history } from "../redux/ConfigStore";
 
 const ChatList = (props) => {
   const dispatch = useDispatch();
+  //redux data
   const chatRoomList = useSelector((state) => state.chat.roomList);
+  //localStorage 로그인 판단
   const is_login = localStorage.getItem("is_login") === "true" ? true : false;
   const certification =
     localStorage.getItem("certification") === "true" ? true : false;
-  //채팅방 목록으로 나타내기
+
+  //채팅방 목록
   useEffect(() => {
     if (!is_login) {
       const ask = window.confirm(
@@ -37,20 +39,21 @@ const ChatList = (props) => {
         return history.goBack();
       }
     }
-
+    //채팅방 목록 조회
     dispatch(chatActions.getListChatDB());
   }, []);
 
-  //채팅목록에서 클릭한 채팅방 대화내용 가져오기
+  //채팅방 들어가기
   const EnterChatRoom = (roomId, roomName) => {
     history.push(`/chatroom/${roomId}/${roomName}`);
   };
-  //채팅방 나가기(삭제하기)
+  //채팅방 나가기
   const chatRoomExit = (roomId) => {
     const ask = window.confirm(
       "해당 채팅방을 나가면 이전 대화 내용이 모두 사라집니다. 정말 나가시겠습니까?"
     );
     if (ask) {
+      //채팅방 내용 삭제
       return dispatch(chatActions.chatRoomDeleteDB(roomId));
     }
   };
@@ -67,6 +70,7 @@ const ChatList = (props) => {
           overflow="scroll"
           minHeight="calc( 100vh - 124px )"
         >
+          {/* 채팅방 목록 나타내기 */}
           {chatRoomList.map((list, index) => {
             // const time = chatRoomList[index].lastMsgTime.split(" ");
             // const realTime = time[0] + " " + time[1] + " " + time[2];
@@ -118,11 +122,12 @@ const ChatList = (props) => {
                     </Text>
                   </Grid>
                 </Grid>
-                {/* 안읽은 메세지 표시 */}
                 <Grid align="end">
+                  {/* 채팅방 나가기 */}
                   <Button smallBtn _onClick={() => chatRoomExit(list.roomId)}>
                     채팅방 나가기
                   </Button>
+                  {/* 안읽은 메세지 표시 */}
                   <Grid is_flex align="center">
                     {list.notVerifiedMsgCnt > 0 && (
                       <Text

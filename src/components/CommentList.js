@@ -233,7 +233,6 @@ const CommentWrite = styled.div`
   bottom: 0;
   left: 0;
   background: #fff;
-  /* text-align: center; */
 `;
 
 const CommentInput = styled.input`

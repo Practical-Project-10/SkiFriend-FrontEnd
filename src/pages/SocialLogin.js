@@ -5,7 +5,6 @@ import { Grid, Button, Image, Text } from "../elements/index";
 import logo from "../assets/login/logo.svg";
 import bg from "../assets/login/login.png";
 import kakao_logo from "../assets/login/kakao.svg";
-
 import { KAKAO_AUTH_URL } from "../shared/kakaoAuth";
 
 const Login = (props) => {

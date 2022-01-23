@@ -14,16 +14,12 @@ const LOAD = "freeboard/LOAD";
 const ADD = "freeboard/POST";
 const GETONE = "freeboard/GETONE";
 const UPDATE = "freeboard/UPDATE";
-// const LOADING = "freeboard/LOADING";
-// const NEXT = "freeboard/NEXT";
 
 // action creater
 export const loadBoard = createAction(LOAD, (postList) => ({ postList }));
 export const addBoard = createAction(ADD, (postData) => ({ postData }));
 export const getOneBoard = createAction(GETONE, (postData) => ({ postData }));
 export const updateBoard = createAction(UPDATE, (postData) => ({ postData }));
-// export const loadingBoard = createAction(LOADING, (state) => ({ state }));
-// export const nextBoard = createAction(NEXT, (state) => ({ state }));
 
 // thunk
 // 자유 게시판 목록 불러오기
@@ -64,6 +60,7 @@ export const addBoardDB =
       // console.log(`오류 발생!${err}`);
     }
   };
+
 //상세페이지 게시글 정보 가져오기
 export const getOneBoardDB =
   (postId) =>
@@ -76,6 +73,7 @@ export const getOneBoardDB =
       // console.log(`오류 발생!${err}`);
     }
   };
+
 //게시글 수정
 export const updateBoardDB =
   (skiResort, postId, images, datas) =>
@@ -105,6 +103,7 @@ export const updateBoardDB =
       // console.log(`오류 발생!${err}`);
     }
   };
+
 //게시글 삭제
 export const deleteBoardDB =
   (postId, skiresort) =>
@@ -123,7 +122,6 @@ export default handleActions(
   {
     [LOAD]: (state, action) =>
       produce(state, (draft) => {
-        // draft.page += 1
         draft.list = action.payload.postList;
         draft.list = draft.list.reduce((prev, now) => {
           if (prev.findIndex((a) => a.postId === now.postId) === -1) {
@@ -152,16 +150,6 @@ export default handleActions(
         );
         draft.list[idx] = { ...draft.list[idx], ...action.payload.detail };
       }),
-
-    // [LOADING]: (state, action) =>
-    //   produce(state, (draft) => {
-    //     draft.is_loading = action.payload.state;
-    //   }),
-
-    // [NEXT]: (state, action) =>
-    //   produce(state, (draft) => {
-    //     draft.is_next = action.payload.state;
-    //   }),
   },
   initialState
 );

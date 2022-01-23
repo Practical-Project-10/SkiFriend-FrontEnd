@@ -4,6 +4,11 @@ import produce from "immer";
 import { getOneBoardDB } from "./freeboard";
 import { shortsActions } from "./shorts";
 
+// initialState
+const initialState = {
+  shortsList: [],
+};
+
 // action
 const GET_SHORTS_COMMENT = "comment/GET";
 const ADD_SHORTS_COMMENT = "comment/ADD";
@@ -26,11 +31,6 @@ export const deleteShortsComment = createAction(
   DELETE_SHORTS_COMMENT,
   (shortsCommentId) => ({ shortsCommentId })
 );
-
-// initialState
-const initialState = {
-  shortsList: [],
-};
 
 // thunk middleWare
 //게시판 댓글 작성

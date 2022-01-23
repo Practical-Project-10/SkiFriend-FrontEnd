@@ -16,13 +16,18 @@ const FreeBoardList = () => {
   //경로
   const params = useParams();
   const skiresort = params.skiresort;
-  //redux
+  //redux data
   const boardList = useSelector((state) => state.freeboard.list);
   const resortImg = useSelector((state) => state.carpool.resortImg);
-
   //로그인 판단
   const is_login = localStorage.getItem("is_login");
   const loginCheck = is_login === "true" ? true : false;
+
+  useEffect(() => {
+    dispatch(carpoolActions.imageResortDB(skiresort)); //배너 이미지 가져오기
+    dispatch(boardActions.loadBoardDB(skiresort)); // 게시글 조회
+  }, []);
+
   // 게시글 작성 페이지 이동 판단
   const moveWritePage = () => {
     if (loginCheck) {
@@ -38,11 +43,6 @@ const FreeBoardList = () => {
       }
     }
   };
-
-  useEffect(() => {
-    dispatch(carpoolActions.imageResortDB(skiresort));
-    dispatch(boardActions.loadBoardDB(skiresort));
-  }, []);
 
   return (
     <React.Fragment>
@@ -61,7 +61,7 @@ const FreeBoardList = () => {
         </Grid>
         {/* 메뉴 탭바 */}
         <CarpoolMenuBar />
-        {/* body */}
+        {/* 게시글 목록 body */}
         <Grid margin="16px" height="300px">
           {boardList.map((l) => {
             return (

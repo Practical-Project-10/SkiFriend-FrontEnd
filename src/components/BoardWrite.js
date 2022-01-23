@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { boardCreators as boardActions } from "../redux/modules/freeboard";
-import { imageActions } from "../redux/modules/image";
 
 import styled from "styled-components";
 import { Grid, Text, Input, Image } from "../elements/index";
 import UnderArrow from "../assets/freeBoard/underArrow.svg";
+import { AiOutlineCamera } from "react-icons/ai";
 
 import Header from "./Header";
 
@@ -14,13 +14,10 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore, { Navigation, Pagination } from "swiper";
 import "swiper/swiper.min.css";
 import "swiper/components/navigation/navigation.min.css";
-//react icons
-import { AiOutlineCamera } from "react-icons/ai";
 
 const BoardWrite = (props) => {
   const { is_edit, skiresort, postId } = props;
   const dispatch = useDispatch();
-
   // redux데이터
   const postData = useSelector((state) => state.freeboard.detail);
   const leftList = postData.photoList;
@@ -47,9 +44,9 @@ const BoardWrite = (props) => {
     setContet(currentContent);
   };
 
-  //미리보기 사진저장
   useEffect(() => {
     if (is_edit) {
+      //상세보기 데이터 가져오기
       return dispatch(boardActions.getOneBoardDB(postId));
     }
   }, []);
@@ -65,12 +62,11 @@ const BoardWrite = (props) => {
       ImgUrlList.push(ImgUrl);
       Photobook.push(i + 1);
     }
-    dispatch(imageActions.setPreview(ImgUrlList));
     setUploadURL(ImgUrlList);
     setPhotoList(Photobook);
   };
 
-  // 데이터 전송 (완료 버튼)
+  // 데이터 전송
   const addPostBtn = () => {
     const requestDto = { title: title, content: content, photoList: photoList };
     const ask = window.confirm("게시물을 등록하시겠습니까?");
@@ -83,7 +79,7 @@ const BoardWrite = (props) => {
     }
   };
 
-  // 데이터 수정 (완료 버튼)
+  // 데이터 수정
   const editPostBtn = () => {
     const requestDto = {
       title: title,
@@ -123,7 +119,6 @@ const BoardWrite = (props) => {
           <Text>작성 전 꼭 읽어주세요!</Text>
           <Image src={UnderArrow} width="13px" height="8px" />
         </Grid>
-
         <Grid phoneSize height="330px">
           {/* 제목작성 */}
           <Input
@@ -141,7 +136,7 @@ const BoardWrite = (props) => {
             onChange={postContent}
           ></Content>
         </Grid>
-        {/* 사진미리보기 */}
+        {/*사진미리보기 */}
         <Grid is_flex width="100%" height="280px" padding="0 16px 5px">
           <Swiper
             spaceBetween={10}
@@ -150,6 +145,7 @@ const BoardWrite = (props) => {
             pagination={{ clickable: true }}
             style={{ width: "100%" }}
           >
+            {/* 수정페이지 */}
             {is_edit &&
               leftList !== undefined &&
               leftList.map((photo, index) => {
@@ -174,6 +170,7 @@ const BoardWrite = (props) => {
                   </SwiperSlide>
                 );
               })}
+            {/* 작성페이지 */}
             {uploadURL.length !== 0 &&
               uploadURL.map((file, index) => {
                 return (
