@@ -31,7 +31,6 @@ export const addLikeDB =
         dispatch(getLike(response.data)) &&
         dispatch(boardActions.getOneBoardDB(postId));
     } catch (err) {
-      // console.log(`좋아요 변경 실패${err}`);
     }
   };
 
@@ -51,9 +50,7 @@ export const addShortsLikeDB =
       const is_like = contain_me? true: false;
 
       response && dispatch(shortsActions.getShorts(user_list, is_like));
-      // dispatch(getShortsLike(is_like));
     } catch (err) {
-      // console.log(`좋아요 변경 실패${err}`);
     }
   };
 

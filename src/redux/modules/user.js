@@ -32,7 +32,6 @@ const isPhoneNumDB = (_phoneNum) => {
       dispatch(phoneNum(_phoneNum));
     } catch (err) {
       window.alert("이미 전화번호 인증을 완료하셨습니다.");
-      // console.log(err);
     }
   };
 };
@@ -48,9 +47,7 @@ const isSmsCheckDB = (phoneNum, randomNum) => {
       history.goBack();
       dispatch(smsCheck(response.data));
     } catch (err) {
-      window.alert("인증번호가 일치하지 않습니다.");
-      // window.alert(err.errorMessage);
-      // console.log(err);
+
     }
   };
 };
@@ -64,7 +61,6 @@ const deleteUserInfoDB = () => {
       history.push("/");
       dispatch(logout());
     } catch (err) {
-      // console.log(err);
     }
   };
 };

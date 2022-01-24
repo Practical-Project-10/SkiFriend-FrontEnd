@@ -24,7 +24,6 @@ export const hotPostsDB =
       const response = await apis.hotPosts();
       response && dispatch(loadPosts(response));
     } catch (err) {
-      // console.log(`게시물 가져오기 실패${err}`);
     }
   };
 
