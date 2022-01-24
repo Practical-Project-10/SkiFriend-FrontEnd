@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "https://seongeunyang.shop/", //https://seongeunyang.shop/   http://3.34.19.50:8080/
+  baseURL: "http://3.34.19.50:8080/", //https://seongeunyang.shop/   http://3.34.19.50:8080/
   headers: {
     "content-type": "application/json;charset=UTF-8",
     accept: "application/json,",
@@ -90,12 +90,11 @@ export const apis = {
     api.post(`/board/carpool/${skiResort}/category`, datas),
 
   // 메인페이지 HOT게시물
-  hotPost: api.get("/main"),
+  hotPosts: () => api.get(`/main`),
 
   // 자유게시글
   getFreePost: (skiResort, page) =>
-    api.get(`/board/freeBoard/${skiResort}?size=10&page=1`, {
-    }),
+    api.get(`/board/freeBoard/${skiResort}?size=10&page=1`, {}),
 
   writeFreePost: (skiResort, datas) =>
     api.post(`/board/${skiResort}/freeBoard`, datas, {

@@ -1,5 +1,4 @@
 import React, { useState, useRef } from "react";
-
 import { useDispatch, useSelector } from "react-redux";
 import { shortsActions } from "../redux/modules/shorts";
 
@@ -8,7 +7,6 @@ import { Grid, Text } from "../elements/index";
 import video_ from "../assets/freeBoard/video.svg";
 
 import ShortVideo from "./ShortsVideo";
-
 import Header from "./Header";
 
 const ShortsWrite = (props) => {

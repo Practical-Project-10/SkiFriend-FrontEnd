@@ -18,7 +18,6 @@ import nextShortBtn from "../assets/shorts/nextShort_btn.png";
 import ShortComment from "./ShortComment";
 import ShortVideo from "./ShortsVideo";
 
-
 const ShortsBody = (props) => {
   const dispatch = useDispatch();
   //params
@@ -102,11 +101,7 @@ const ShortsBody = (props) => {
           </Position>
 
           {/* 숏츠 작성 버튼 */}
-          <Position
-            bottom="23%"
-            right="21px"
-            onClick={goAddShorts}
-          >
+          <Position bottom="23%" right="21px" onClick={goAddShorts}>
             <img src={shortsBtn} alt="작성" />
           </Position>
 
@@ -126,7 +121,7 @@ const ShortsBody = (props) => {
 
           {/* 좋아요 */}
           <Position bottom="4%" right="16px" onClick={likeChange}>
-            <img src={heart? fillHeart: heart_} alt="댓글" />
+            <img src={heart ? fillHeart : heart_} alt="댓글" />
             <Grid margin="-8px 0 0" align="center">
               <Text bold color="#FFF">
                 {shortsData.shortsLikeCnt}
