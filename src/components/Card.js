@@ -1,8 +1,4 @@
 import React, { useState } from "react";
-
-import styled from "styled-components";
-import { Grid, Text, Image } from "../elements/index";
-
 import { useDispatch } from "react-redux";
 import { history } from "../redux/ConfigStore";
 import { carpoolActions } from "../redux/modules/carpool";
@@ -10,6 +6,8 @@ import { chatCreators as chatActions } from "../redux/modules/chat";
 
 import Modal from "../components/Modal";
 
+import styled from "styled-components";
+import { Grid, Text, Image } from "../elements/index";
 import arrow from "../assets/carpoolList/arrow_icon.svg";
 import calendar from "../assets/carpoolList/calendar_icon.svg";
 import clock from "../assets/carpoolList/clock_icon.svg";
@@ -21,11 +19,11 @@ const Card = (props) => {
   const { noCard, page } = props;
   const dispatch = useDispatch();
   const is_login = localStorage.getItem("is_login") === "true" ? true : false;
-  const certification = localStorage.getItem("certification") === "true" ? true : false;
+  const certification =
+    localStorage.getItem("certification") === "true" ? true : false;
   const repuest = props.carpoolType === "카풀 요청";
   const nickname = localStorage.getItem("nickname");
   const is_mine = props.nickname === nickname;
-  console.log('렌더링')
   //------useState관리-------
   const [showmodal, setShowModal] = useState(false);
 
@@ -45,7 +43,9 @@ const Card = (props) => {
   //카풀 삭제
   const deleteCard = () => {
     if (page === "myPage") {
-      dispatch(carpoolActions.deleteCarpoolDB(props.skiResort, props.postId, page));
+      dispatch(
+        carpoolActions.deleteCarpoolDB(props.skiResort, props.postId, page)
+      );
       return null;
     }
     dispatch(carpoolActions.deleteCarpoolDB(props.skiResort, props.postId));
@@ -54,7 +54,9 @@ const Card = (props) => {
   //카풀 모집완료
   const completeCard = () => {
     if (page === "myPage") {
-      dispatch(carpoolActions.completeCarpoolDB(props.skiResort, props.postId, page));
+      dispatch(
+        carpoolActions.completeCarpoolDB(props.skiResort, props.postId, page)
+      );
       return null;
     }
     dispatch(carpoolActions.completeCarpoolDB(props.skiResort, props.postId));
@@ -95,7 +97,7 @@ const Card = (props) => {
   }
 
   //내가 작성한 카풀카드 --- 마이페이지
-  if (page === 'myPage') {
+  if (page === "myPage") {
     return (
       <React.Fragment>
         <CarpoolCard
@@ -140,7 +142,14 @@ const Card = (props) => {
             <Grid is_flex>
               {/* 게시글 수정 삭제 modal 시작 */}
               {/* 게시글을 조회한사람이 작성한 사람과 일치할 경우 모달 선택창이 보이게 하기 */}
-              <SubMenu width="27px" height="27px" line="41px" onClick={() => {setShowModal(true)}}>
+              <SubMenu
+                width="27px"
+                height="27px"
+                line="41px"
+                onClick={() => {
+                  setShowModal(true);
+                }}
+              >
                 <Image src={etc} width="27px" height="27px" />
               </SubMenu>
             </Grid>
@@ -197,7 +206,7 @@ const Card = (props) => {
             {props.title}
           </Text>
 
-          <Posts width='100%'>
+          <Posts width="100%">
             <Text bold>{props.startLocation}</Text>
             <Image src={arrow} width="50px" height="10px" />
             <Text bold color={repuest ? "#7281D1" : "#6195CF"}>
@@ -205,7 +214,7 @@ const Card = (props) => {
             </Text>
           </Posts>
 
-          <Grid is_flex width='100%' justify="space-between" margin="0 0 7px">
+          <Grid is_flex width="100%" justify="space-between" margin="0 0 7px">
             <Items repuest={repuest} width="101px">
               <Image src={calendar} width="11px" height="15px" />
               <Text size="12px" color="#FFF">
