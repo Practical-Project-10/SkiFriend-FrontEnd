@@ -25,7 +25,7 @@ jobs:
         run: yarn install
         
       - name: Build
-        run: yanr build
+        run: yarn build
 
       - name: Deploy
         env: 
