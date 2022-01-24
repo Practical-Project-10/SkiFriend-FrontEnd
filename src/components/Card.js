@@ -24,6 +24,7 @@ const Card = (props) => {
   const repuest = props.carpoolType === "카풀 요청";
   const nickname = localStorage.getItem("nickname");
   const is_mine = props.nickname === nickname;
+  
   //------useState관리-------
   const [showmodal, setShowModal] = useState(false);
 
