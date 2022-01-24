@@ -216,4 +216,4 @@ const Select = styled.select`
   border-radius: 6px;
 `;
 
-export default React.memo(CarpoolWrite);
+export default CarpoolWrite;
