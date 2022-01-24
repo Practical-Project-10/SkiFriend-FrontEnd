@@ -14,7 +14,6 @@ const KakaoAuthHandle = (props) => {
     const kakaoLogin = async () => {
       await apis.kakaoLogin1(code)
         .then((res) => {
-          console.log(res.data)
           setCookie("token", res.headers.authorization);
           localStorage.setItem("userId", res.data);
           window.location.href = KAKAO_ADD_PROPERTIES;

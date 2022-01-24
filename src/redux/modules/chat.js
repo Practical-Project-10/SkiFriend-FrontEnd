@@ -53,9 +53,7 @@ export const makeRoomChatDB =
         history.push(
           `/chatroom/${response.data.roomId}/${response.data.roomName}`
         );
-    } catch (err) {
-      window.alert(err);
-    }
+    } catch (err) {}
   };
 
 //채팅목록 정보 가져오기
@@ -66,9 +64,7 @@ export const getListChatDB =
       const response = await apis.chatRoomList();
 
       response && dispatch(getChatRoomList(response.data));
-    } catch (err) {
-      // console.log(`불러오기 실패${err}`);
-    }
+    } catch (err) {}
   };
 
 //채팅방 내용 가져오기
@@ -78,9 +74,7 @@ export const getContentChatDB =
     try {
       const response = await apis.chatMSG(roomId);
       response && dispatch(getChatList(response.data));
-    } catch (err) {
-      // console.log(`불러오기 실패${err}`);
-    }
+    } catch (err) {}
   };
 
 //프로필 정보
@@ -91,9 +85,7 @@ export const getProfileInfoDB =
       const response = await apis.chatShowProfile(roomId);
 
       response && dispatch(getProfileList(response.data));
-    } catch (err) {
-      // console.log(`불러오기 실패${err}`);
-    }
+    } catch (err) {}
   };
 
 //전화번호 가져오기
@@ -104,9 +96,7 @@ export const getPhoneNumDB =
       const response = await apis.chatPhoneNum();
 
       response && dispatch(getPhoneInfo(response.data));
-    } catch (err) {
-      // console.log(`불러오기 실패${err}`);
-    }
+    } catch (err) {}
   };
 
 //대화방 삭제
@@ -116,9 +106,7 @@ export const chatRoomDeleteDB =
     try {
       const response = await apis.chatRoomDelete(roomId);
       response && dispatch(getListChatDB());
-    } catch (err) {
-      // console.log(`불러오기 실패${err}`);
-    }
+    } catch (err) {}
   };
 
 //카풀정보 가져오기
@@ -129,9 +117,7 @@ export const getRoomInfoDB =
       const response = await apis.chatRoomInfo(roomId);
 
       response && dispatch(getRoomInfo(response.data));
-    } catch (err) {
-      // console.log(`불러오기 실패${err}`);
-    }
+    } catch (err) {}
   };
 
 // reducer

@@ -29,9 +29,7 @@ export const loadBoardDB =
     try {
       const response = await apis.getFreePost(skiResort, page);
       response && dispatch(loadBoard(response.data));
-    } catch (err) {
-      // console.log(`불러오기 실패${err}`);
-    }
+    } catch (err) {}
   };
 
 // 게시글 등록하기
@@ -56,9 +54,7 @@ export const addBoardDB =
       history.push(`/freeboardlist/${skiResort}`);
       dispatch(addBoard(response.data));
       dispatch(imageActions.setPreview(null));
-    } catch (err) {
-      // console.log(`오류 발생!${err}`);
-    }
+    } catch (err) {}
   };
 
 //상세페이지 게시글 정보 가져오기
@@ -69,9 +65,7 @@ export const getOneBoardDB =
       const response = await apis.getOneFreePost(postId);
 
       response && dispatch(getOneBoard(response.data));
-    } catch (err) {
-      // console.log(`오류 발생!${err}`);
-    }
+    } catch (err) {}
   };
 
 //게시글 수정
@@ -99,9 +93,7 @@ export const updateBoardDB =
       response && history.push(`/freeboarddetail/${skiResort}/${postId}`);
       dispatch(updateBoard(response.config.data));
       dispatch(imageActions.setPreview(null));
-    } catch (err) {
-      // console.log(`오류 발생!${err}`);
-    }
+    } catch (err) {}
   };
 
 //게시글 삭제
@@ -112,9 +104,7 @@ export const deleteBoardDB =
       const response = await apis.deleteFreePost(postId);
       response && history.push(`/freeboardlist/${skiresort}`);
       dispatch(loadBoardDB());
-    } catch (err) {
-      // console.log(`삭제요청 실패${err}`);
-    }
+    } catch (err) {}
   };
 
 // reducer

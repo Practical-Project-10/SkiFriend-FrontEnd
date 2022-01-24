@@ -23,7 +23,6 @@ const initialState = {
 
 //action
 const GET_CARPOOL = "GET_CARPOOL";
-const ADD_CARPOOL = "ADD_CARPOOL";
 const EDIT_CARPOOL = "EDIT_CARPOOL";
 const DELETE_CARPOOL = "DELETE_CARPOOL";
 const FILTER_CARPOOL = "FILTER_CARPOOL";
@@ -38,10 +37,6 @@ const RESET = "RESET";
 const getCarpool = createAction(GET_CARPOOL, (skiResort, list) => ({
   skiResort,
   list,
-}));
-const addCarpool = createAction(ADD_CARPOOL, (skiResort, carpool) => ({
-  skiResort,
-  carpool,
 }));
 const editCarpool = createAction(
   EDIT_CARPOOL,
@@ -105,9 +100,7 @@ const getCarpoolDB = (skiResort, page) => {
         dispatch(getCarpool(skiResort, response.data));
         dispatch(isNext(false));
       }
-    } catch (err) {
-      // console.log(err);
-    }
+    } catch (err) {}
   };
 };
 
@@ -117,10 +110,7 @@ const addCarpoolDB = (skiResort, carpool) => {
     try {
       const response = await apis.addCarpool(skiResort, carpool);
       response && history.push(`/carpool/${skiResort}`);
-      dispatch(addCarpool(skiResort, response.data));
-    } catch (err) {
-      // console.log(err);
-    }
+    } catch (err) {}
   };
 };
 
@@ -131,9 +121,7 @@ const editCarpoolDB = (skiResort, postId, carpool) => {
       const response = await apis.editCarpool(postId, carpool);
       response && history.goBack();
       dispatch(editCarpool(skiResort, postId, response.data));
-    } catch (err) {
-      // console.log(err);
-    }
+    } catch (err) {}
   };
 };
 
@@ -146,9 +134,7 @@ const deleteCarpoolDB = (skiResort, postId, page) => {
       if (page === "myPage") {
         dispatch(deleteCarpool(skiResort, postId, page));
       }
-    } catch (err) {
-      // console.log(err);
-    }
+    } catch (err) {}
   };
 };
 
@@ -162,9 +148,7 @@ const completeCarpoolDB = (skiResort, postId, page) => {
       if (page === "myPage") {
         dispatch(completeMycarpool(skiResort, postId, response.data, page));
       }
-    } catch (err) {
-      // console.log(err);
-    }
+    } catch (err) {}
   };
 };
 
@@ -180,9 +164,7 @@ const filterCarpoolDB = (skiResort, form) => {
         dispatch(filterCarpool(skiResort, response.data));
         history.push(`/filter/${skiResort}`);
       }
-    } catch (err) {
-      // console.log(err);
-    }
+    } catch (err) {}
   };
 };
 
@@ -192,9 +174,7 @@ const getMyCarpoolDB = (page) => {
     try {
       const response = await apis.getMyCarpool();
       response && dispatch(getMyCarpool(page, response.data));
-    } catch (err) {
-      // console.log(err);
-    }
+    } catch (err) {}
   };
 };
 
@@ -207,11 +187,6 @@ export default handleActions(
         draft.is_loading = false;
         draft.page += 1;
         draft.list[skiResort].push(...action.payload.list);
-      }),
-    [ADD_CARPOOL]: (state, action) =>
-      produce(state, (draft) => {
-        // const skiResort = action.payload.skiResort;
-        // draft.list[skiResort].unshift(action.payload.carpool);
       }),
     [EDIT_CARPOOL]: (state, action) =>
       produce(state, (draft) => {
@@ -295,7 +270,6 @@ export default handleActions(
 
 const carpoolActions = {
   getCarpool,
-  addCarpool,
   editCarpool,
   deleteCarpool,
   reset,
