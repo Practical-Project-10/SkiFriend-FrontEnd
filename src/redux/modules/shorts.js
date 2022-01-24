@@ -98,7 +98,6 @@ const addShortsDB = (videoFile, title) => {
       response && dispatch(addShorts(response.data));
       history.push(`/shorts`);
     } catch (err) {
-      // console.log(err);
     }
   };
 };
@@ -117,7 +116,6 @@ const updateShortsDB = (shortsId, title) => {
       window.alert("shorts가 정상적으로 수정되었습니다.");
       dispatch(updateShorts(shortsId, response.data));
     } catch (err) {
-      // console.log(err);
     }
   };
 };
@@ -129,7 +127,6 @@ const deleteShortsDB = (shortsId) => {
       const response = await apis.shortsDelete(shortsId);
       response && dispatch(deleteShorts(shortsId));
     } catch (err) {
-      // console.log(err);
     }
   };
 };
@@ -141,7 +138,6 @@ const myShortsDB = () => {
       const response = await apis.myShortsList();
       response && dispatch(getMyShorts(response.data));
     } catch (err) {
-      // console.log(err);
     }
   };
 };
