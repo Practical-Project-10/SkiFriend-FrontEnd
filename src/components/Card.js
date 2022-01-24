@@ -381,4 +381,4 @@ const NotLogin = styled.div`
   justify-content: center;
 `;
 
-export default React.memo(Card);
+export default Card;
