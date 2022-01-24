@@ -1,108 +1,148 @@
-import { createAction, handleActions } from "redux-actions";
+import { handleActions, createAction } from "redux-actions";
+import { apis } from "../../shared/apis";
 import produce from "immer";
-import alert from "sweetalert";
-import { apis } from "../components/shared/apis";
-import { loadPostDB } from "./post";
+import { getOneBoardDB } from "./freeboard";
+import { shortsActions } from "./shorts";
 
 // initialState
 const initialState = {
-  list: [],
+  shortsList: [],
 };
 
 // action
-const LOAD = "comment/LOAD";
-const ADD = "comment/ADD";
-const UPDATE = "comment/UPDATE";
-const DELETE = "comment/DELETE";
+const GET_SHORTS_COMMENT = "comment/GET";
+const ADD_SHORTS_COMMENT = "comment/ADD";
+const UPDATE_SHORTS_COMMENT = "comment/UPDATE";
+const DELETE_SHORTS_COMMENT = "comment/DELETE";
 
-// action create
-const loadComment = createAction(LOAD, (comment) => ({ comment }));
-const addComment = createAction(ADD, (comment, store) => ({
+// action creater
+export const getShortsComment = createAction(
+  GET_SHORTS_COMMENT,
+  (commentList) => ({ commentList })
+);
+export const addShortsComment = createAction(ADD_SHORTS_COMMENT, (comment) => ({
   comment,
-  store,
 }));
-const updateComment = createAction(UPDATE, (content) => ({ content }));
-const deleteComment = createAction(DELETE, (commentId) => ({ commentId }));
+export const updateShortsComment = createAction(
+  UPDATE_SHORTS_COMMENT,
+  (shortsCommentId, comment) => ({ shortsCommentId, comment })
+);
+export const deleteShortsComment = createAction(
+  DELETE_SHORTS_COMMENT,
+  (shortsCommentId) => ({ shortsCommentId })
+);
 
 // thunk middleWare
+//게시판 댓글 작성
 export const addCommentDB =
   (postId, content) =>
   async (dispatch, getState, { history }) => {
-    const state = getState().freeboard.list.resortPosts;
-    await apis
-      .addComment(postId, content)
-      .then((res) => {
-        let index;
-        for (let i = 0; i < state.length; i++) {
-          if (state[i].id === postId) {
-            index = i;
-          }
-        }
-        alert("댓글달기 성공!");
-        dispatch(addComment(res.data, state[index]));
-        dispatch(loadPostDB()).then(console.log("갯수추가 완료"));
-        dispatch(loadCommentDB(postId))
-          .then(console.log("댓글로딩완료"))
-          .catch((e) => console.log(e));
-      })
-      .catch((e) => console.log(e));
+    try {
+      const response = await apis.addPostComment(postId, content);
+      response && dispatch(getOneBoardDB(postId));
+    } catch (err) {}
   };
-
-export const loadCommentDB =
-  (postId) =>
-  async (dispatch, getState, { history }) => {
-    await apis.getComment(postId).then((res) => {
-      dispatch(loadComment(res.data));
-    });
-  };
-
+//게시판 댓글 수정
 export const updateCommentDB =
-  (commentId, content) =>
+  (postId, commentId, content) =>
   async (dispatch, getState, { history }) => {
-   await apis.updateComment(commentId, content).then((res) => {
-      dispatch(loadComment(res.data));
-    });
+    try {
+      const response = await apis.updatePostComment(commentId, content);
+      response && dispatch(getOneBoardDB(postId));
+    } catch (err) {}
   };
-
+//게시판 댓글 삭제
 export const deleteCommentDB =
   (postId, commentId) =>
   async (dispatch, getState, { history }) => {
-    await apis.deleteComment(postId, commentId).then((res) => {
-      dispatch(loadCommentDB(postId));
-      deleteComment(commentId);
-      alert("댓글 삭제");
-    });
+    try {
+      const response = await apis.deletePostComment(commentId);
+      response && dispatch(getOneBoardDB(postId));
+    } catch (err) {}
+  };
+
+//동영상 댓글 조회
+export const getShortsCommentDB =
+  (shortsId) =>
+  async (dispatch, getState, { history }) => {
+    try {
+      const response = await apis.shortsListComment(shortsId);
+      response && dispatch(getShortsComment(response.data));
+      dispatch(shortsActions.CommentCount(true, response.data.length));
+    } catch (err) {}
+  };
+
+//동영상 댓글 작성
+export const addShortsCommentDB =
+  (shortsId, content) =>
+  async (dispatch, getState, { history }) => {
+    try {
+      const response = await apis.shortsWriteComment(shortsId, content);
+      response && dispatch(addShortsComment(response.config.data));
+    } catch (err) {}
+  };
+
+//동영상 댓글 수정
+export const updateShortsCommentDB =
+  (shortsCommentId, content) =>
+  async (dispatch, getState, { history }) => {
+    try {
+      const response = await apis.shortsUpdateComment(shortsCommentId, content);
+      response &&
+        dispatch(updateShortsComment(shortsCommentId, response.config.data));
+    } catch (err) {}
+  };
+
+//동영상 댓글 삭제
+export const deleteShortsCommentDB =
+  (shortsCommentId) =>
+  async (dispatch, getState, { history }) => {
+    try {
+      await apis.shortsDeleteComment(shortsCommentId);
+      dispatch(deleteShortsComment(shortsCommentId));
+      dispatch(shortsActions.CommentCount(false));
+    } catch (err) {}
   };
 
 // reducer
 export default handleActions(
   {
-    [LOAD]: (state, action) => {
-      return {
-        ...state,
-        list: action.payload.comment,
-      };
-    },
-    [ADD]: (state, action) =>
+    [GET_SHORTS_COMMENT]: (state, action) =>
       produce(state, (draft) => {
-        draft.list.push(action.payload.comment);
-        draft.list.push((action.payload.store.numOfComments += 1));
+        draft.shortsList = action.payload.commentList;
       }),
 
-    [UPDATE]: (state, action) =>
+    [ADD_SHORTS_COMMENT]: (state, action) =>
       produce(state, (draft) => {
-        let idx = draft.list.findIndex(
-          (p) => p.id === Number(action.payload.userId)
+        draft.shortsList.unshift(action.payload.comment);
+      }),
+
+    [UPDATE_SHORTS_COMMENT]: (state, action) =>
+      produce(state, (draft) => {
+        let idx = draft.shortsList.findIndex(
+          (p) => p.shortsCommentId === Number(action.payload.shortsCommentId)
         );
-        draft.list[idx] = { ...draft.list[idx], ...action.payload.post };
+        draft.shortsList[idx] = action.payload.comment;
       }),
 
-    [DELETE]: (state, action) => {
-      return {
-        ...state,
-        list: state.list.filter((list) => list.id !== action.payload.commentId),
-      };
-    },
+    [DELETE_SHORTS_COMMENT]: (state, action) =>
+      produce(state, (draft) => {
+        draft.shortsList = state.shortsList.filter(
+          (list) => list.shortsCommentId !== action.payload.shortsCommentId
+        );
+      }),
   },
   initialState
 );
+
+const commentCreators = {
+  addCommentDB,
+  updateCommentDB,
+  deleteCommentDB,
+  getShortsCommentDB,
+  addShortsCommentDB,
+  updateShortsCommentDB,
+  deleteShortsCommentDB,
+};
+
+export { commentCreators };

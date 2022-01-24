@@ -4,21 +4,32 @@ import { createBrowserHistory } from "history";
 import { connectRouter } from "connected-react-router";
 
 //---- Reducer ----
-
-// import Post from "./post";
 import User from "./modules/user";
-// import Comment from "./comment";
-// import Like from "./like";
+import FreeBoard from "./modules/freeboard";
+import Carpool from "./modules/carpool";
+import Comment from "./modules/comment";
+import Profile from "./modules/profile";
+import Image from "./modules/image";
+import Main from "./modules/main";
+import Chat from "./modules/chat";
+import Like from "./modules/like";
+import Shorts from "./modules/shorts";
 
 //---- history----
 export const history = createBrowserHistory();
 
 //---- rootReducer ----
 const rootReducer = combineReducers({
-  // like: Like,
-  // comment: Comment,
-  // post: Post,
   user: User,
+  freeboard: FreeBoard,
+  carpool: Carpool,
+  comment: Comment,
+  profile: Profile,
+  image: Image,
+  main: Main,
+  chat: Chat,
+  like: Like,
+  shorts: Shorts,
   router: connectRouter(history),
 });
 

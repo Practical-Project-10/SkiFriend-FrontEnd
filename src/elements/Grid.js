@@ -9,12 +9,16 @@ const Grid = (props) => {
     padding,
     margin,
     bg,
+    bgSize,
     color,
     children,
     _onClick,
     position,
-    justify,
     display,
+    justify,
+    alignItems,
+    borderT,
+    line,
     height,
     minHeight,
     overflow,
@@ -25,27 +29,41 @@ const Grid = (props) => {
     wrap,
     direction,
     cursor,
-    mainFrame,
-    navbar,
-    header,
+    hoverOpacity,
+    hoverBg,
+    className,
     menubar,
-    skiIcon,
+    link,
+    href,
+    target,
+    id,
+    src,
+    gap,
+    phoneSize,
+    header2,
+    _onScroll,
   } = props;
 
   const styles = {
     is_flex,
     width,
     maxWidth,
+    line,
     height,
     minHeight,
     margin,
     padding,
+    alignItems,
+    borderT,
     bg,
+    bgSize,
     color,
     direction,
     position,
     justify,
     display,
+    hoverOpacity,
+    hoverBg,
     overflow,
     border,
     radius,
@@ -53,32 +71,54 @@ const Grid = (props) => {
     borderB,
     wrap,
     cursor,
-    mainFrame,
+    src,
+    gap,
+    phoneSize,
   };
 
-  if (mainFrame) {
-    return <MainFrame>{children}</MainFrame>;
+  if (header2) {
+    return <Header2 {...styles}>{children}</Header2>;
   }
-  if (header) {
-    return <Header {...styles}>{children}</Header>;
-  }
-  if (navbar) {
-    return <Navbar {...styles}>{children}</Navbar>;
-  }
+
   if (menubar) {
     return <Menubar {...styles}>{children}</Menubar>;
   }
-  if (skiIcon) {
+
+  if (className === "modalBackground") {
     return (
-      <SkiIcon {...styles} onClick={_onClick}>
+      <ModalBackground {...styles} onClick={_onClick}>
         {children}
-      </SkiIcon>
+      </ModalBackground>
+    );
+  }
+
+  if (className === "modalContainer") {
+    return (
+      <ModalContainer {...styles} onClick={_onClick}>
+        {children}
+      </ModalContainer>
+    );
+  }
+
+  if (link) {
+    return (
+      <Link {...styles} href={href} target={target}>
+        {children}
+      </Link>
+    );
+  }
+
+  if (className === "dropdown") {
+    return (
+      <Dropdown {...styles} onClick={_onClick}>
+        {children}
+      </Dropdown>
     );
   }
 
   return (
     <React.Fragment>
-      <GridBox {...styles} onClick={_onClick}>
+      <GridBox {...styles} onClick={_onClick} onScroll={_onScroll} id={id}>
         {children}
       </GridBox>
     </React.Fragment>
@@ -89,9 +129,12 @@ Grid.defaultProps = {
   _onClick: () => {},
 };
 
+// 먼저 css 결을 정하기
+
 const GridBox = styled.div`
   width: ${(props) => props.width};
   height: ${(props) => props.height};
+  line-height: ${(props) => props.line};
   color: ${(props) => props.color};
   max-width: ${(props) => props.maxWidth};
   min-height: ${(props) => props.minHeight};
@@ -99,49 +142,35 @@ const GridBox = styled.div`
   display: ${(props) => props.display};
   padding: ${(props) => props.padding};
   margin: ${(props) => props.margin};
-  background-color: ${(props) => props.bg};
   position: ${(props) => props.position};
+  background: ${(props) => (props.src ? `url(${props.src}) no-repeat` : "")};
+  background-size: ${(props) => (props.bgSize ? props.bgSize : "cover")};
+  background-position: center;
+  background-color: ${(props) => props.bg};
+  /* background-position: ${(props) => props.position}; */
   border: ${(props) => props.border};
+  border-top: ${(props) => props.borderT};
   border-bottom: ${(props) => props.borderB};
   border-radius: ${(props) => props.radius};
+  box-sizing: border-box;
   overflow: ${(props) => props.overflow};
   text-align: ${(props) => props.align};
+  align-items: ${(props) => props.alignItems};
   flex-wrap: ${(props) => props.wrap};
   flex-direction: ${(props) => props.direction};
   cursor: ${(props) => props.cursor};
-  box-sizing: border-box;
+  &:hover {
+    opacity: ${(props) => props.hoverOpacity};
+    background: ${(props) => props.hoverBg};
+  }
   ${(props) => (props.is_flex ? "display: flex; align-items: center;" : "")}
   ${(props) => (props.className ? `className: ${props.className};` : "")}
   &::-webkit-scrollbar {
     display: none;
   }
-  border: 1px solid black;
-`;
-
-const MainFrame = styled.div`
-  width: 100%;
-  height: 100%;
-  max-width: 412px;
-  min-height: 100vh;
-  padding: 42px 16px 48px;
-  border: 1px solid #000;
-  box-sizing: border-box;
-`;
-
-const Navbar = styled.div`
-  width: 100%;
-  height: 30px;
-  justify-content: space-around;
-  ${(props) => (props.is_flex ? "display: flex; align-items: center;" : "")};
-  margin: ${(props) => props.margin};
-`;
-
-const Header = styled.div`
-  width: 100%;
-  height: 50px;
-  text-align: center;
-  padding-top: 10px;
-  background: orange;
+  gap: ${(props) => props.gap};
+  ${(props) =>
+    props.phoneSize ? "padding: 0 16px 0;" : ""}/* border: 1px solid black; */
 `;
 
 const Menubar = styled.div`
@@ -152,12 +181,59 @@ const Menubar = styled.div`
   ${(props) => (props.is_flex ? "display: flex; align-items: center;" : "")};
 `;
 
-const SkiIcon = styled.div`
-  width: 33%;
-  height: 70px;
-  display: flex;
-  flex-direction: column;
-  background: red;
+const ModalBackground = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 3;
 `;
 
+const ModalContainer = styled.div`
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  max-height: 250px;
+  width: 25rem;
+  height: 250px;
+  background: #ffffff;
+  border-radius: 10px;
+  text-align: center;
+`;
+
+const Link = styled.a`
+  font-size: 15px;
+`;
+
+const Dropdown = styled.div`
+  position: absolute;
+  max-height: 150px;
+  min-width: 100px;
+  top: 175px;
+  /* left: 100px; */
+  /* transform: translateX(-45%); */
+  background-color: var(--bg);
+  border: var(--border);
+  /* border-radius: var(--border-radius); */
+  padding: 1rem;
+  overflow-x: scroll;
+  transition: height var(--speed) ease;
+  z-index: 1;
+`;
+
+const Header2 = styled.div`
+  width: 100%;
+  height: 87px;
+  font-size: 22px;
+  line-height: 5;
+  font-weight: 700;
+  background: #d9e3ee;
+  padding: 0 16px;
+  text-align: ${(props) => props.align};
+  justify-content: ${(props) => props.justify};
+  ${(props) => (props.is_flex ? "display: flex; align-items: center;" : "")}
+`;
 export default Grid;

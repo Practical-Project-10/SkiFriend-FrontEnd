@@ -7,26 +7,48 @@ const Text = (props) => {
     size,
     children,
     margin,
-    marginB,
     align,
-    weight,
+    radius,
+    bg,
+    bold,
     link,
     padding,
     _onClick,
     cursor,
     boardlink,
+    opacity,
+    whiteSpace,
+    textOverflow,
+    wordWrap,
+    wordBreak,
+    overflow,
+    line,
+    block,
+    width,
+    sort,
   } = props;
 
   const styles = {
     color,
     size,
     margin,
-    marginB,
-    weight,
+    bold,
+    radius,
+    bg,
     align,
     link,
     padding,
+    whiteSpace,
+    textOverflow,
+    wordWrap,
+    wordBreak,
+    overflow,
     cursor,
+    opacity,
+    line,
+    block,
+    width,
+    sort,
   };
 
   if (boardlink) {
@@ -36,6 +58,7 @@ const Text = (props) => {
       </List>
     );
   }
+
   return (
     <P {...styles} onClick={_onClick}>
       {children}
@@ -43,22 +66,35 @@ const Text = (props) => {
   );
 };
 
-const P = styled.p`
-  color: ${(props) => props.color};
-  font-size: ${(props) => props.size};
-  font-weight: ${(props) => props.weight};
-  margin: ${(props) => props.margin};
-  margin-bottom: ${(props) => props.marginB};
-  padding: ${(props) => props.padding};
-  text-align: ${(props) => props.align};
-  cursor: ${(props) => props.cursor};
-  ${(props) => (props.className ? `className: ${props.className};` : "")}
-`;
-
 Text.defaultProps = {
   children: null,
   _onClick: () => {},
+  size: "14px",
+  color: "#474D56",
 };
+
+const P = styled.p`
+  width: ${(props) => props.width};
+  color: ${(props) => props.color};
+  text-decoration: ${(props) => (props.deco ? "underline" : "")};
+  font-size: ${(props) => props.size};
+  line-height: ${(props) => props.line};
+  font-weight: ${(props) => (props.bold ? 700 : 400)};
+  text-align: ${(props) => (props.sort ? props.sort : "")};
+  margin: ${(props) => props.margin};
+  padding: ${(props) => props.padding};
+  word-wrap: ${(props) => props.wordWrap};
+  word-break: ${(props) => props.wordBreak};
+  white-space: ${(props) => props.whiteSpace};
+  overflow: ${(props) => props.overflow};
+  text-overflow: ${(props) => props.textOverflow};
+  background-color: ${(props) => props.bg};
+  border-radius: ${(props) => props.radius};
+  opacity: ${(props) => props.opacity};
+  display: ${(props) => (props.block ? "block" : "")};
+  cursor: ${(props) => props.cursor};
+  ${(props) => (props.className ? `className: ${props.className};` : "")};
+`;
 
 const List = styled.p`
   border-bottom: 2px solid red;

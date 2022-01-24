@@ -1,130 +1,26 @@
-import React, { useState } from "react";
-import { history } from "../redux/ConfigStore";
-import { useDispatch } from "react-redux";
-import { boardCreators as boardActions } from "../redux/modules/freeboard";
+import React from "react";
+import { useParams } from "react-router-dom";
 
-import { Grid, Button, Text, Input } from "../elements/index";
+import BoardWrite from "../components/BoardWrite"
 
-//react icons
-import { GrFormPrevious } from "react-icons/gr";
-import { AiOutlineCamera } from "react-icons/ai";
-
-// swiper
-import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/swiper.min.css";
-import "swiper/components/navigation/navigation.min.css";
-import SwiperCore, { Navigation, Pagination } from "swiper";
-
-const FreeBoardWrite = () => {
-  const dispatch = useDispatch;
-
-  // swiper관리
-  SwiperCore.use([Navigation, Pagination]);
-
-  const swiperParams = {
-    navigation: true,
-    pagination: true,
-  };
-
-  // useState관리
-  const [title, setTitle] = useState();
-  const [content, setContet] = useState();
-  const [uploadURL, setUploadURL] = useState([]);
-  const [uploadFiles, setUploadFiles] = useState(null);
-
-  // 제목
-  const postTitle = (e) => {
-    const currentTitle = e.target.value;
-    setTitle(currentTitle);
-  };
-
-  // 글 내용
-  const postContent = (e) => {
-    const currentContent = e.target.value;
-    setContet(currentContent);
-  };
-
-  // 이미지 업로드
-  const uploadImg = (e) => {
-    e.preventDefault();
-    setUploadFiles(e.target.files);
-    const ImgUrlList = [...uploadURL];
-    for (let i = 0; i < e.target.files.length; i++) {
-      const ImgUrl = URL.createObjectURL(e.target.files[i]);
-
-      ImgUrlList.push(ImgUrl);
-    }
-    setUploadURL(ImgUrlList);
-  };
-
-  // 데이터 전송 (완료 버튼)
-  const addPostBtn = () => {
-    dispatch(boardActions.addBoardDB(title, content));
-  };
+const FreeBoardWrite = (props) => {
+  // 주소 경로값
+  const params = useParams();
+  const skiresort = params.skiresort;
+  const postId = params.postId;
+  // 작성 수정 판단 여부
+  const is_edit = postId ? true : false;
 
   return (
     <React.Fragment>
-      <Grid header>게시글 작성 페이지</Grid>
-      <Grid is_flex justify="space-between">
-        <Grid
-          cursor="pointer"
-          _onClick={() => {
-            history.goBack();
-          }}
-        >
-          <GrFormPrevious size="40" />
-        </Grid>
-        <Button smallBtn _onClick={addPostBtn}>
-          완료
-        </Button>
-      </Grid>
-      <Grid align="center">
-        <Grid is_flex padding="20px">
-          <Text>제목</Text>
-          <Input title _onChange={postTitle}></Input>
-        </Grid>
-        <Input
-          textarea
-          placeholder="내용을 입력하세요"
-          _onChange={postContent}
-        />
-      </Grid>
-      <Grid is_flex width="100%" height="200px">
-        {/* <Swiper {...swiperParams} style={{ width: "100%" }}>
-          {uploadURL.length !== 0 &&
-            uploadURL.map((file, index) => {
-              return (
-                <React.Fragment>
-                  <SwiperSlide
-                    style={{
-                      margin: "auto",
-                      position: "relative",
-                    }}
-                    key={index}
-                  >
-                    <Grid is_flex width="100%" height="200px"> */}
-        <img src={uploadURL} alt="userUploadImg" />
-        {/* </Grid>
-                  </SwiperSlide>
-                </React.Fragment>
-              );
-            })}
-        </Swiper> */}
-      </Grid>
-      <Grid>
-        <label htmlFor="myFile" style={{ cursor: "pointer" }}>
-          <AiOutlineCamera size="25" />
-        </label>
-        <input
-          type="file"
-          id="myFile"
-          style={{ display: "none" }}
-          // multiple
-          accept="image/*"
-          onChange={uploadImg}
-        />
-      </Grid>
+      {/* 게시물작성, 수정에 사용(페이지에 필요한 data props로 넘겨주기) */}
+      <BoardWrite
+        is_edit={is_edit}
+        skiresort={skiresort}
+        postId={postId}
+      />
     </React.Fragment>
   );
 };
+
 export default FreeBoardWrite;

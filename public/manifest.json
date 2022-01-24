@@ -1,25 +1,22 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "스키프렌드",
+  "name": "스키프렌드",
+  "description": "스키인들을 위한 카풀 서비스, 스키프렌드에서 카풀 친구들을 찾아보세요!",
   "icons": [
-    {
-      "src": "favicon.ico",
-      "sizes": "64x64 32x32 24x24 16x16",
-      "type": "image/x-icon"
-    },
-    {
-      "src": "logo192.png",
-      "type": "image/png",
-      "sizes": "192x192"
-    },
-    {
-      "src": "logo512.png",
-      "type": "image/png",
-      "sizes": "512x512"
-    }
+    {"src": "favicon.ico", "sizes": "64x64 32x32 24x24 16x16", "type": "image/x-icon"
+  },
+  {
+      "src": "icon-192.png", "type": "image/png", "sizes": "192x192"
+  },
+  {
+      "src": "icon-256.png", "type": "image/png", "sizes": "256x256"
+  },
+  {
+      "src": "icon-512.png", "type": "image/png", "sizes": "512x512"
+  }
   ],
-  "start_url": ".",
+  "start_url": "/",
   "display": "standalone",
-  "theme_color": "#000000",
+  "theme_color": "#6195CF",
   "background_color": "#ffffff"
 }
