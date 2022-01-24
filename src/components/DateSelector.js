@@ -25,7 +25,7 @@ const DateSelector = (props) => {
   // value 다시 손보기
   return (
     <React.Fragment>
-      <DatePicker_
+      <Picker
         locale={ko}
         dateFormat="yyyy-MM-dd"
         selected={date_}
@@ -39,7 +39,7 @@ const DateSelector = (props) => {
   );
 };
 
-const DatePicker_ = styled(DatePicker)`
+const Picker = styled(DatePicker)`
   width: 100%;
   padding: 19px;
   margin-right: 24px;

@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { commentCreators as commentActions } from "../redux/modules/comment";
 
-import styled, { keyframes } from "styled-components";
+import styled from "styled-components";
 import { Grid, Text } from "../elements";
 
 import Board from "../components/Board";
@@ -51,23 +51,6 @@ const ShortComment = (props) => {
     </React.Fragment>
   );
 };
-
-// const boxFade = keyframes`
-//   0% {
-//     opacity: 1;
-//     top: 20px;
-
-//   }
-//   50% {
-//     opacity: 0;
-//     top: 400px;
-//   }
-//   100% {
-//     opacity: 1;
-//     top: 20px;
-//   }
-// `;
-/* animation: ${boxFade} 2s 1s infinite linear alternate; */
 
 const Background = styled.div`
   width: 100%;
