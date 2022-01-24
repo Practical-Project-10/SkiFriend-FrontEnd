@@ -153,12 +153,11 @@ const ChatRoom = () => {
 
   return (
     <React.Fragment>
-      <Grid>
+      <Grid position="fixed" width="412px">
         <Header goBack phone fixed _onClick={getPhoneNum}>
           {roomName}
         </Header>
         <Grid
-          margin="54px 0 0 0"
           minHeight="calc( 100vh - 124px )"
           display="flex"
           direction="column"

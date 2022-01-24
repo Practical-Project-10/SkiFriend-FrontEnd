@@ -15,7 +15,6 @@ const KakaoAuthHandle2 = (props) => {
     const kakaoLogin = async () => {
       await apis.kakaoLogin2(code, userId)
         .then((res) => {
-          console.log(res.data)
           localStorage.setItem("is_login", true);
           userStorage(res.data);
           history.push("/");
