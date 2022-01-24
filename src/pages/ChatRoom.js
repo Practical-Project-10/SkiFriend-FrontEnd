@@ -45,8 +45,8 @@ const ChatRoom = () => {
   useEffect(() => {
     //소켓
     const sock =
-      new SockJS("https://seongeunyang.shop/ws-stomp");
-      // new SockJS("http://3.34.19.50:8080/ws-stomp");
+      // new SockJS("https://seongeunyang.shop/ws-stomp");
+      new SockJS("http://3.34.19.50:8080/ws-stomp");
 
     setStomp(Stomp.over(sock));
     dispatch(chatActions.getRoomInfoDB(roomId)); //방정보 가져오기
@@ -63,7 +63,7 @@ const ChatRoom = () => {
   useEffect(() => {
     axios
       // https://seongeunyang.shop/    http://3.34.19.50:8080/
-      .get(` https://seongeunyang.shop/chat/message/${roomId}`, {
+      .get(` http://3.34.19.50:8080/chat/message/${roomId}`, {
         headers: token,
       })
       .then((res) => {

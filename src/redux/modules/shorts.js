@@ -38,7 +38,6 @@ const CommentCount = createAction(COMMENT_COUNT, (state, commentCnt) => ({
 const getShortsDB = () => {
   return async function (dispatch, getState, { history }) {
     const login_userId = localStorage.getItem("userId");
-
     try {
       const response = await apis.shortsRandomList();
       const shortsId = response.data.shortsId;

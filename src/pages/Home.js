@@ -1,10 +1,8 @@
 import React, { useEffect } from "react";
-
 import { useDispatch, useSelector } from "react-redux";
 import { mainCreators as mainActions } from "../redux/modules/main";
 import { userActions } from "../redux/modules/user";
 import { chatCreators } from "../redux/modules/chat";
-
 import SockJS from "sockjs-client";
 import Stomp from "stompjs";
 
@@ -38,8 +36,8 @@ const Home = (props) => {
   const accessToken = document.cookie.split("=")[1];
   const token = { Authorization: `${accessToken}` };
   //소켓
-  const sock = new SockJS("https://seongeunyang.shop/ws-alarm");
-  // const sock = new SockJS("http://3.34.19.50:8080/ws-alarm");
+  // const sock = new SockJS("https://seongeunyang.shop/ws-alarm");
+  const sock = new SockJS("http://3.34.19.50:8080/ws-alarm");
 
   const stomp = Stomp.over(sock);
   //localstorage
@@ -121,16 +119,7 @@ const Home = (props) => {
 
   // 인기게시글
   useEffect(() => {
-    const mainHotPosts = async () => {
-      const response = await // await fetch("https://seongeunyang.shop/main")
-      (
-        await fetch("https://seongeunyang.shop/main")
-        // await fetch("http://3.34.19.50:8080/main")
-      ).json();
-      dispatch(mainActions.loadPosts(response));
-    };
-    mainHotPosts();
-    // dispatch(mainActions.hotPostsDB());
+    dispatch(mainActions.hotPostsDB());
   }, []);
 
   //로그아웃
@@ -201,7 +190,6 @@ const Home = (props) => {
           </a>
         </Grid>
         <IconWrap>
-          {/* padding='26px' 적용이 안 됨*/}
           {skiResort.map((r) => {
             return (
               <Grid
