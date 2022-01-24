@@ -7,7 +7,7 @@ import { setCookie } from "../shared/cookie";
 
 import styled from "styled-components";
 import bg from "../assets/login/login.png";
-
+//닉네임
 const KakaoAuthHandle = (props) => {
   useEffect(() => {
     let code = new URL(window.location.href).searchParams.get("code");
@@ -18,7 +18,6 @@ const KakaoAuthHandle = (props) => {
           setCookie("token", res.headers.authorization);
           localStorage.setItem("userId", res.data);
           window.location.href = KAKAO_ADD_PROPERTIES;
-          // history.push('/user/kakao/callback/properties');
         });
     };
     kakaoLogin();

@@ -8,7 +8,7 @@ import bg from "../assets/login/login.png";
 
 const KakaoAuthHandle2 = (props) => {
   const { history } = props;
-
+  //연령, 성별
   useEffect(() => {
     let code = new URL(window.location.href).searchParams.get("code");
     let userId = localStorage.getItem("userId");
