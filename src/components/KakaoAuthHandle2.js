@@ -1,5 +1,7 @@
-import axios from "axios";
-import { useEffect } from "react";
+import React, { useEffect } from "react";
+
+import { apis } from "../shared/apis";
+
 import styled from "styled-components";
 import { userStorage } from "../shared/userStorage";
 import bg from "../assets/login/login.png";
@@ -11,12 +13,9 @@ const KakaoAuthHandle2 = (props) => {
     let code = new URL(window.location.href).searchParams.get("code");
     let userId = localStorage.getItem("userId");
     const kakaoLogin = async () => {
-      await axios
-        .get(
-          // `https://seongeunyang.shop/user/kakao/callback/${userId}?code=${code}`
-          `http://3.34.19.50:8080/user/kakao/callback/${userId}?code=${code}`
-        )
+      await apis.kakaoLogin2(code, userId)
         .then((res) => {
+          console.log(res.data)
           localStorage.setItem("is_login", true);
           userStorage(res.data);
           history.push("/");

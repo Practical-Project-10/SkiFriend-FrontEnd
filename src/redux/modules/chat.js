@@ -1,6 +1,5 @@
 import { handleActions, createAction } from "redux-actions";
 import { apis } from "../../shared/apis";
-import { socket } from "../../shared/socket";
 import produce from "immer";
 
 // initialState
@@ -82,27 +81,6 @@ export const getContentChatDB =
     } catch (err) {
       // console.log(`불러오기 실패${err}`);
     }
-  };
-
-//대화연결
-export const connectChatDB =
-  (roomId) =>
-  async (dispatch, getState, { history }) => {
-    await socket.chatConnect(() => {
-      socket.chatRoomSubscribe(roomId);
-    });
-  };
-
-//메세지 보내기
-export const sendChatDB =
-  (roomId, message) =>
-  async (dispatch, getState, { history }) => {
-    const content = JSON.stringify({
-      type: "TALK",
-      rommId: roomId,
-      message: message,
-    });
-    await socket.chatSendMSG(content);
   };
 
 //프로필 정보
@@ -211,8 +189,6 @@ const chatCreators = {
   makeRoomChatDB,
   getListChatDB,
   getContentChatDB,
-  connectChatDB,
-  sendChatDB,
   getProfileInfoDB,
   getPhoneNumDB,
   getRoomInfoDB,
