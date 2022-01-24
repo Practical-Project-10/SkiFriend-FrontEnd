@@ -2,7 +2,6 @@ import React, { useState, useRef, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { chatCreators as chatActions } from "../redux/modules/chat";
-import axios from "axios";
 import SockJS from "sockjs-client";
 import Stomp from "stompjs";
 
@@ -22,7 +21,7 @@ const ChatRoom = () => {
   const roomId = params.roomId;
   const roomName = params.roomName;
   //redux 데이터
-  // const datas = useSelector((state) => state.chat.chatList);
+  const datas = useSelector((state) => state.chat.chatList);
   const phoneInfo = useSelector((state) => state.chat.phoneInfoList);
   const roomInfoList = useSelector((state) => state.chat.roomInfoList);
   //토큰
@@ -42,6 +41,22 @@ const ChatRoom = () => {
     setMessage(content);
   };
 
+  //엔터치면 메세지 보내지게하기
+  const onKeyPress = (e) => {
+    if (e.key === "Enter" && message.replace(/\s|/gi, "").length !== 0) {
+      sendMessage();
+    }
+  };
+
+  //메세지 보내면 스크롤 자동내림
+  const scrollMoveBottom = () => {
+    scrollRef.current.scrollIntoView({
+      behavior: "smooth",
+      block: "end",
+      inline: "start",
+    });
+  };
+
   useEffect(() => {
     //소켓
     const sock =
@@ -50,6 +65,7 @@ const ChatRoom = () => {
 
     setStomp(Stomp.over(sock));
     dispatch(chatActions.getRoomInfoDB(roomId)); //방정보 가져오기
+    dispatch(chatActions.getContentChatDB(roomId)); //대화내용 가져오기
   }, []);
 
   useEffect(() => {
@@ -61,20 +77,11 @@ const ChatRoom = () => {
 
   // 대화내용 가져오기
   useEffect(() => {
-    axios
-      // https://seongeunyang.shop/    http://3.34.19.50:8080/
-      .get(` http://3.34.19.50:8080/chat/message/${roomId}`, {
-        headers: token,
-      })
-      .then((res) => {
-        const prevChatData = res.data;
-        setMessageList(prevChatData);
-      });
+    setMessageList(datas);
     setTimeout(() => {
       scrollMoveBottom(); //스크롤 다운
     }, 100);
-    // dispatch(chatActions.getContentChatDB(roomId));
-  }, []);
+  }, [datas]);
 
   // stomp연결
   const chatConnect = () => {
@@ -107,13 +114,6 @@ const ChatRoom = () => {
     }
   };
 
-  //엔터치면 메세지 보내지게하기
-  const onKeyPress = (e) => {
-    if (e.key === "Enter" && message.replace(/\s|/gi, "").length !== 0) {
-      sendMessage();
-    }
-  };
-
   //메세지 보내기
   const sendMessage = async () => {
     if (message.replace(/\s|/gi, "").length !== 0) {
@@ -125,7 +125,6 @@ const ChatRoom = () => {
       stomp.debug = null;
       await stomp.send("/pub/chat/message", token, JSON.stringify(datas));
       scrollMoveBottom(); //스크롤 다운
-      // dispatch(chatActions.sendChatDB(roomId, message));
       setMessage("");
     }
   };
@@ -150,16 +149,6 @@ const ChatRoom = () => {
     };
     await stomp.send("/pub/chat/message", token, JSON.stringify(datas));
     scrollMoveBottom(); //스크롤 다운
-    // dispatch(chatActions.sendChatDB(roomId, message));
-  };
-
-  //메세지 보내면 스크롤 자동내림
-  const scrollMoveBottom = () => {
-    scrollRef.current.scrollIntoView({
-      behavior: "smooth",
-      block: "end",
-      inline: "start",
-    });
   };
 
   return (
