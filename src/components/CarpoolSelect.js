@@ -15,6 +15,7 @@ const CarpoolSelect = (props) => {
     props.form;
 
   const [state, setState] = useState(false); //지역 교차 상태
+  
   const [reqSelect, setReqSelect] = useState(false);
   const [ofSelect, setOfSelect] = useState(false);
   const [noneSelect, setNoneSelect] = useState(false);
