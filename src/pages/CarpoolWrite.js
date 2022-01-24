@@ -34,6 +34,7 @@ const CarpoolWrite = (props) => {
     notice: `${carpool ? carpool.notice : ""}`,
   });
   const { title, price, memberNum, notice } = form;
+  console.log(form)
 
   // 제목, 가격, 모집인원, 주의사항 변경
   const handleChange = (e) => {
@@ -215,4 +216,4 @@ const Select = styled.select`
   border-radius: 6px;
 `;
 
-export default CarpoolWrite;
+export default React.memo(CarpoolWrite);

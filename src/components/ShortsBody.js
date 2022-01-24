@@ -30,16 +30,28 @@ const ShortsBody = (props) => {
   //localstorage 로그인정보
   const login_userId = localStorage.getItem("userId");
   const is_login = localStorage.getItem("is_login");
+  
   // useState
   const [showModal, setShowModal] = useState(false);
   const [heart, setHeart] = useState(false);
+
+  //-------heart-------
+  const changeHeart = () => {
+    if (heart) {
+      return setHeart(false);
+    } else {
+      return setHeart(true);
+    }
+  };
 
   useEffect(() => {
     dispatch(shortsActions.getShortsDB());
   }, []);
 
   useEffect(() => {
+    console.log('test1')
     if (likeData !== undefined) {
+      console.log('test2')
       for (let i = 0; i < likeData.length; i++) {
         if (likeData[i].userId === parseInt(login_userId)) {
           return setHeart(true);
@@ -51,14 +63,6 @@ const ShortsBody = (props) => {
     }
   }, [shortsId]);
 
-  //-------heart-------
-  const changeHeart = () => {
-    if (heart) {
-      return setHeart(false);
-    } else {
-      return setHeart(true);
-    }
-  };
 
   //-------좋아요 변경---------
   const likeChange = () => {
