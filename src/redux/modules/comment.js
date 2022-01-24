@@ -40,9 +40,7 @@ export const addCommentDB =
     try {
       const response = await apis.addPostComment(postId, content);
       response && dispatch(getOneBoardDB(postId));
-    } catch (err) {
-      // console.log(err);
-    }
+    } catch (err) {}
   };
 //게시판 댓글 수정
 export const updateCommentDB =
@@ -51,9 +49,7 @@ export const updateCommentDB =
     try {
       const response = await apis.updatePostComment(commentId, content);
       response && dispatch(getOneBoardDB(postId));
-    } catch (err) {
-      // console.log(err);
-    }
+    } catch (err) {}
   };
 //게시판 댓글 삭제
 export const deleteCommentDB =
@@ -62,9 +58,7 @@ export const deleteCommentDB =
     try {
       const response = await apis.deletePostComment(commentId);
       response && dispatch(getOneBoardDB(postId));
-    } catch (err) {
-      // console.log(`댓글삭제 실패${err}`);
-    }
+    } catch (err) {}
   };
 
 //동영상 댓글 조회
@@ -75,9 +69,7 @@ export const getShortsCommentDB =
       const response = await apis.shortsListComment(shortsId);
       response && dispatch(getShortsComment(response.data));
       dispatch(shortsActions.CommentCount(true, response.data.length));
-    } catch (err) {
-      // console.log(err);
-    }
+    } catch (err) {}
   };
 
 //동영상 댓글 작성
@@ -87,9 +79,7 @@ export const addShortsCommentDB =
     try {
       const response = await apis.shortsWriteComment(shortsId, content);
       response && dispatch(addShortsComment(response.config.data));
-    } catch (err) {
-      // console.log(err);
-    }
+    } catch (err) {}
   };
 
 //동영상 댓글 수정
@@ -100,9 +90,7 @@ export const updateShortsCommentDB =
       const response = await apis.shortsUpdateComment(shortsCommentId, content);
       response &&
         dispatch(updateShortsComment(shortsCommentId, response.config.data));
-    } catch (err) {
-      // console.log(err);
-    }
+    } catch (err) {}
   };
 
 //동영상 댓글 삭제
@@ -113,9 +101,7 @@ export const deleteShortsCommentDB =
       await apis.shortsDeleteComment(shortsCommentId);
       dispatch(deleteShortsComment(shortsCommentId));
       dispatch(shortsActions.CommentCount(false));
-    } catch (err) {
-      // console.log(`댓글삭제 실패${err}`);
-    }
+    } catch (err) {}
   };
 
 // reducer
