@@ -78,6 +78,7 @@ const reset = createAction(RESET, (skiResort) => ({ skiResort }));
 
 // middlewares
 //스키장 이미지 배너 조회
+
 const imageResortDB = (skiResort) => {
   return async function (dispatch) {
     try {

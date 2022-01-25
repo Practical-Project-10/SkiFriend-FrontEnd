@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useMemo} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { carpoolActions } from "../redux/modules/carpool";
 
@@ -33,6 +33,7 @@ const CarpoolWrite = (props) => {
     notice: `${carpool ? carpool.notice : ""}`,
   });
   const { title, price, memberNum, notice } = form;
+  console.log(form)
 
   // 제목, 가격, 모집인원, 주의사항 변경
   const handleChange = (e) => {
@@ -45,6 +46,7 @@ const CarpoolWrite = (props) => {
 
   // 날짜 변경
   const bringDate = (date) => {
+    console.log('hi')
     setForm({
       ...form,
       date,
@@ -59,7 +61,7 @@ const CarpoolWrite = (props) => {
     });
   };
 
-  // 지역 교차시 실행
+  // 지역 선택
   const bringLocation = (name, value) => {
     setForm({
       ...form,
@@ -67,7 +69,7 @@ const CarpoolWrite = (props) => {
     });
   };
 
-  // 출발 도착 지역 바꾸기
+  // 지역 교차 버튼 클릭시 실행
   const ChageLocation = (startLoca) => {
     if (!state) {
       setState(true);
@@ -214,4 +216,4 @@ const Select = styled.select`
   border-radius: 6px;
 `;
 
-export default CarpoolWrite;
+export default React.memo(CarpoolWrite);
