@@ -7,3 +7,5 @@ const Test = (props) => {
     <div>testestestestestestestestestestestestestest</div>
   )
 }
+
+export default Test;
