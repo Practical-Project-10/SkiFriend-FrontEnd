@@ -19,6 +19,7 @@ jobs:
           key: ${{ runner.OS }}-yarn-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
             ${{ runner.OS }}-yarn-
+            ${{ runner.OS }}-
             
       - name: Install Dependencies # 의존 파일 설치
         run: yarn install
