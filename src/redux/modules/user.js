@@ -47,7 +47,7 @@ const isSmsCheckDB = (phoneNum, randomNum) => {
       history.goBack();
       dispatch(smsCheck(response.data));
     } catch (err) {
-
+      window.alert("인증번호가 틀렸습니다. 다시 입력해 주세요.");
     }
   };
 };

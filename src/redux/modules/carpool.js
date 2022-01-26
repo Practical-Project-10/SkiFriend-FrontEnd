@@ -154,10 +154,20 @@ const completeCarpoolDB = (skiResort, postId, page) => {
 };
 
 //카풀 필터
-const filterCarpoolDB = (skiResort, form) => {
+const filterCarpoolDB = (skiResort, form, status) => {
   return async function (dispatch, getState, { history }) {
+    const form_ = {
+      carpoolType: form.carpoolType,
+      memberNum: form.memberNum,
+      startLocation: form.startLocation,
+      endLocation: form.endLocation,
+      date: form.date,
+      status: status,
+    }
+    console.log(form_)
+
     try {
-      const response = await apis.filterCarpool(skiResort, form);
+      const response = await apis.filterCarpool(skiResort, form_);
       if (response.data.length === 0) {
         window.alert("필터에 맞는 정보가 없습니다");
         return null;

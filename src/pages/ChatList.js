@@ -50,7 +50,7 @@ const ChatList = (props) => {
   //채팅방 나가기
   const chatRoomExit = (roomId) => {
     const ask = window.confirm(
-      "해당 채팅방을 나가면 이전 대화 내용이 모두 사라집니다. 정말 나가시겠습니까?"
+      "해당 채팅방을 나가면 이전 대화내용이 모두 사라지고, 다시 연락하실 수 없습니다. 정말 나가시겠습니까?"
     );
     if (ask) {
       //채팅방 내용 삭제

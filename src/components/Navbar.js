@@ -40,7 +40,8 @@ const Navbar = ({ location }) => {
     location.pathname.includes("/carpoolwrite") ||
     location.pathname.includes("/freeboardedit") ||
     location.pathname.includes("/profilewrite") ||
-    location.pathname.includes("/shortsupload")
+    location.pathname.includes("/shortsupload") ||
+    location.pathname.includes("/carpoolfilter")
   ) {
     return null;
   }
