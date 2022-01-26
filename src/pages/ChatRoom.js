@@ -53,7 +53,6 @@ const ChatRoom = () => {
     scrollRef.current.scrollIntoView({
       behavior: "smooth",
       block: "end",
-      // inline: "start",
     });
   };
 
