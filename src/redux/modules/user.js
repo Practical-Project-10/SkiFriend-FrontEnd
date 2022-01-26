@@ -47,7 +47,7 @@ const isSmsCheckDB = (phoneNum, randomNum) => {
       history.goBack();
       dispatch(smsCheck(response.data));
     } catch (err) {
-
+      window.alert("인증번호가 틀렸습니다. 다시 입력해 주세요.");
     }
   };
 };
@@ -60,8 +60,7 @@ const deleteUserInfoDB = () => {
       window.alert("회원탈퇴 요청이 정상적으로 처리되었습니다.");
       history.push("/");
       dispatch(logout());
-    } catch (err) {
-    }
+    } catch (err) {}
   };
 };
 
