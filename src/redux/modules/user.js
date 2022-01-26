@@ -60,8 +60,7 @@ const deleteUserInfoDB = () => {
       window.alert("회원탈퇴 요청이 정상적으로 처리되었습니다.");
       history.push("/");
       dispatch(logout());
-    } catch (err) {
-    }
+    } catch (err) {}
   };
 };
 
