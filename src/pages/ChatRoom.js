@@ -53,15 +53,15 @@ const ChatRoom = () => {
     scrollRef.current.scrollIntoView({
       behavior: "smooth",
       block: "end",
-      inline: "start",
+      // inline: "start",
     });
   };
 
   useEffect(() => {
     //소켓
     const sock =
-      new SockJS("https://seongeunyang.shop/ws-stomp");
-      // new SockJS("http://3.34.19.50:8080/ws-stomp");
+      // new SockJS("https://seongeunyang.shop/ws-stomp");
+      new SockJS("http://3.34.19.50:8080/ws-stomp");
 
     setStomp(Stomp.over(sock));
     dispatch(chatActions.getRoomInfoDB(roomId)); //방정보 가져오기
@@ -72,6 +72,7 @@ const ChatRoom = () => {
     chatConnect(); //채팅룸 연결
     return () => {
       chatDisconnect();
+      dispatch(chatActions.reset());
     };
   }, [stomp]);
 
@@ -93,6 +94,7 @@ const ChatRoom = () => {
           (message) => {
             const responseData = JSON.parse(message.body);
             messageDatas(responseData);
+            scrollMoveBottom();
           },
           token
         );
@@ -157,12 +159,8 @@ const ChatRoom = () => {
         <Header goBack phone fixed _onClick={getPhoneNum}>
           {roomName}
         </Header>
-        <Grid
-          height="calc( 100vh - 54px )"
-          display="flex"
-          direction="column"
-        >
-          <Grid phoneSize margin='0 0 100px' overflow="scroll">
+        <Grid height="calc( 100vh - 54px )" display="flex" direction="column">
+          <Grid phoneSize margin="0 0 100px" overflow="scroll">
             {/* 방정보 카드 */}
             <ChatRoomCard roomInfo={roomInfoList} />
             {/* 채팅말풍선(body부분)*/}
@@ -174,17 +172,17 @@ const ChatRoom = () => {
           </Grid>
           {/* 채팅입력창 */}
           <SendBox>
-              <Input
-                free
-                width="92%"
-                height="40px"
-                radius="40px"
-                autocomplete="off" //자동입력 끄기
-                _value={message}
-                _onKeyPress={onKeyPress}
-                _onChange={messageChat}
-              />
-              <Send onClick={sendMessage}>
+            <Input
+              free
+              width="92%"
+              height="40px"
+              radius="40px"
+              autocomplete="off" //자동입력 끄기
+              _value={message}
+              _onKeyPress={onKeyPress}
+              _onChange={messageChat}
+            />
+            <Send onClick={sendMessage}>
               <Image
                 src={sendBtn}
                 width="30px"
@@ -204,7 +202,7 @@ const ChatRoom = () => {
 const Container = styled.div`
   position: absolute;
   width: 100%;
-`
+`;
 
 const SendBox = styled.div`
   width: 100%;
@@ -212,11 +210,11 @@ const SendBox = styled.div`
   align-items: center;
   justify-content: center;
   height: 100px;
-  background-color: #474D56;
+  background-color: #474d56;
   position: absolute;
   bottom: 0;
   left: 0;
-`
+`;
 
 const Send = styled.div`
   width: 30px;

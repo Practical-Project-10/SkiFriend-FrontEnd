@@ -20,11 +20,13 @@ const CarpoolRequire = (props) => {
   const dispatch = useDispatch();
   const params = useParams();
   const carpool_list = useSelector((state) => state.carpool.list);
-  
+
   const skiResort = params.skiresort;
   // 수정 유무
-  const carpool = is_edit? carpool_list[skiResort].find((l) => l.postId === Number(postId)): null;
-  
+  const carpool = is_edit
+    ? carpool_list[skiResort].find((l) => l.postId === Number(postId))
+    : null;
+
   const [state, setState] = useState(false); //지역 교차 상태
   const [status, setStatus] = useState(false); //필터 페이지 - 모집 완료 제외
   const [reqSelect, setReqSelect] = useState(false);
@@ -32,7 +34,6 @@ const CarpoolRequire = (props) => {
   const startLoca = useRef();
   const subLoca = useRef();
   const endLoca = useRef();
-  console.log(status)
 
   const [form, setForm] = React.useState({
     carpoolType: `${carpool ? carpool.carpoolType : ""}`,
@@ -45,13 +46,23 @@ const CarpoolRequire = (props) => {
     memberNum: `${carpool ? carpool.memberNum : ""}`,
     notice: `${carpool ? carpool.notice : ""}`,
   });
-  const { title, price, memberNum, notice, startLocation, endLocation, date, time, carpoolType } = form;
+  const {
+    title,
+    price,
+    memberNum,
+    notice,
+    startLocation,
+    endLocation,
+    date,
+    time,
+    carpoolType,
+  } = form;
   const optional = {
     title,
     price,
     memberNum,
     notice,
-  }
+  };
   console.log(form);
 
   const handleChange = (e) => {
@@ -64,17 +75,15 @@ const CarpoolRequire = (props) => {
 
   // 지역 보내기
   const selectLocation = (name, value) => {
-    setForm(
-      {
-        ...form,
-        [name]: value,
-      }
-    )
+    setForm({
+      ...form,
+      [name]: value,
+    });
   };
 
   // 날짜 선택
   const selectDate = (date) => {
-    console.log('hi')
+    console.log("hi");
     setForm({
       ...form,
       date,
@@ -83,7 +92,6 @@ const CarpoolRequire = (props) => {
 
   // 지역 교차 버튼 클릭시 실행
   const ChageLocation = () => {
-
     if (!state) {
       setState(true);
       setForm({
@@ -166,7 +174,13 @@ const CarpoolRequire = (props) => {
                 {startLocation}
               </Text>
               <Image src={arrow} width="50px" height="10px" size="40px 10px" />
-              <Text bold width="122px" sort="center" size="20px" color="#6195cf">
+              <Text
+                bold
+                width="122px"
+                sort="center"
+                size="20px"
+                color="#6195cf"
+              >
                 {endLocation}
               </Text>
             </Location>
@@ -185,9 +199,9 @@ const CarpoolRequire = (props) => {
               />
               <Image src={arrow} width="50px" height="10px" />
 
-              {props.is_filter
-              ? <Select
-                  width='144px'
+              {props.is_filter ? (
+                <Select
+                  width="144px"
                   name="endLocation"
                   ref={endLoca}
                   // value={carpool.endLocation? endLocation}
@@ -196,7 +210,8 @@ const CarpoolRequire = (props) => {
                   <option value="">스키장 선택</option>
                   <option value={skiResort}>{skiResort}</option>
                 </Select>
-              : <Grid>
+              ) : (
+                <Grid>
                   <Label htmlFor="endLocation" width="144px">
                     {skiResort}
                   </Label>
@@ -210,8 +225,7 @@ const CarpoolRequire = (props) => {
                     readOnly
                   />
                 </Grid>
-              }
-              
+              )}
             </Grid>
           )}
 
@@ -332,38 +346,35 @@ const CarpoolRequire = (props) => {
           </form>
         </Grid>
 
-        {!props.is_filter 
-        ? <Grid padding='0 16px 16px'>
+        {!props.is_filter ? (
+          <Grid padding="0 16px 16px">
             <div style={{ border: "5px solid #edeeef" }}></div>
 
-            <CarpoolOptional
-              handleChange={handleChange}
-              optional={optional}
-            />
+            <CarpoolOptional handleChange={handleChange} optional={optional} />
             <Grid padding="50px 0 0">
               <Button _onClick={is_edit ? editCarpool : addCarpool}>
                 {is_edit ? "수정" : "작성"}
               </Button>
             </Grid>
           </Grid>
-        : <Grid padding='0 16px 16px'>
+        ) : (
+          <Grid padding="0 16px 16px">
             <Button size="20px" _onClick={filterSubmit}>
               필터적용
             </Button>
           </Grid>
-        }
+        )}
       </Container>
     </React.Fragment>
   );
 };
 
-
 const Container = styled.div`
-  height: ${props => props.height};
+  height: ${(props) => props.height};
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  background-color: #FFF;
+  background-color: #fff;
 `;
 
 const ChangeButton = styled.button`
@@ -376,7 +387,7 @@ const ChangeButton = styled.button`
 `;
 
 const Select = styled.select`
-  width: ${props => props.width};
+  width: ${(props) => props.width};
   padding: 18px;
   border-radius: 6px;
   border: 1px solid #474d56;
