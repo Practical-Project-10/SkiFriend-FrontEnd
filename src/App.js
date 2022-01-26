@@ -27,6 +27,7 @@ import KakaoAuthHandle2 from "./components/KakaoAuthHandle2";
 import ShortsUpload from "./pages/ShortsUpload";
 import Shorts from "./pages/Shorts";
 import Spinner from "./components/Spinner";
+
 import background from "./assets/background.png.jpg";
 
 function App() {
@@ -39,6 +40,7 @@ function App() {
         <div id="wrap">
           <GlobalStyleds />
           <CardList>
+            <Route exact path="/test" component={Test} />
             <Route exact path="/" component={Home} />
             <Route exact path="/phoneauth" component={PhoneAuth} />
             <Route exact path="/login" component={SocialLogin} />
