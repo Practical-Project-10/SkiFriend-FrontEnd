@@ -40,7 +40,6 @@ function App() {
         <div id="wrap">
           <GlobalStyleds />
           <CardList>
-            <Route exact path="/test" component={Test} />
             <Route exact path="/" component={Home} />
             <Route exact path="/phoneauth" component={PhoneAuth} />
             <Route exact path="/login" component={SocialLogin} />
