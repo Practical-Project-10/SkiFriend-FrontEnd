@@ -351,6 +351,7 @@ const RegionSelector = forwardRef((props, loca) => {
       changeLoca(e.target.name, location);
     }
   };
+  console.log('리렌더링')
 
   return (
     <Form is_flex width="144px" height="55px" onChange={changeLocation}>

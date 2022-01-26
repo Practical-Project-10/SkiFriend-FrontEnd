@@ -4,16 +4,14 @@ import CircularProgress from "@mui/material/CircularProgress";
 
 const Spinner = (props) => {
   return (
-    <React.Fragment>
-      <Outter>
-        <CircularProgress style={{ color: "#FFF", fontSize: "400px" }} />
-      </Outter>
-    </React.Fragment>
+    <Outter>
+      <CircularProgress style={{ color: "#FFF", fontSize: "400px" }} />
+    </Outter>
   );
 };
 
 const Outter = styled.div`
-  background: rgba(0, 0, 0, 0.2);
+  background: rgba(0,0,0,0.4);
   width: 100%;
   height: 100vh;
   position: absolute;
