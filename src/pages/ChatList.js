@@ -5,6 +5,7 @@ import { history } from "../redux/ConfigStore";
 
 import Header from "../components/Header";
 
+import styled from 'styled-components';
 import { Grid, Text, Button } from "../elements/index";
 
 const ChatList = (props) => {
@@ -66,10 +67,17 @@ const ChatList = (props) => {
           bg="#FFF"
           height="675px"
           radius="22px 22px 0 0"
-          padding="26px 0 0 0"
+          padding="26px 0"
           overflow="scroll"
           minHeight="calc( 100vh - 124px )"
+          position="relative"
         >
+          {chatRoomList.length === 0 &&
+            <NoChat>
+              채팅 내역이 없습니다!
+            </NoChat>
+          }
+          
           {/* 채팅방 목록 나타내기 */}
           {chatRoomList.map((list, index) => {
             return (
@@ -153,5 +161,22 @@ const ChatList = (props) => {
     </React.Fragment>
   );
 };
+
+const NoChat = styled.div`
+  width: 100%;
+  height: 100%;
+  border-radius: 22px 22px 0 0;
+  color: #7a7d80;
+  font-size: 28px;
+  font-weight: 700;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  position: absolute;
+  left: 0;
+  top: 0;
+`
 
 export default ChatList;
