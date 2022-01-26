@@ -60,8 +60,8 @@ const ChatRoom = () => {
   useEffect(() => {
     //소켓
     const sock =
-      new SockJS("https://seongeunyang.shop/ws-stomp");
-      // new SockJS("http://3.34.19.50:8080/ws-stomp");
+      // new SockJS("https://seongeunyang.shop/ws-stomp");
+      new SockJS("http://3.34.19.50:8080/ws-stomp");
 
     setStomp(Stomp.over(sock));
     dispatch(chatActions.getRoomInfoDB(roomId)); //방정보 가져오기
@@ -153,29 +153,31 @@ const ChatRoom = () => {
 
   return (
     <React.Fragment>
-      <Container position="fixed" width="412px">
+      <Grid position="fixed" width="412px">
         <Header goBack phone fixed _onClick={getPhoneNum}>
           {roomName}
         </Header>
         <Grid
-          height="calc( 100vh - 54px )"
+          minHeight="calc( 100vh - 124px )"
           display="flex"
           direction="column"
         >
-          <Grid phoneSize margin='0 0 100px' overflow="scroll">
+          <Grid padding="0 16px" height="642px" overflow="scroll">
             {/* 방정보 카드 */}
             <ChatRoomCard roomInfo={roomInfoList} />
             {/* 채팅말풍선(body부분)*/}
-            <div style={{ padding: "0 0 40px 0" }} ref={scrollRef}>
+            <div style={{ padding: "0 0 70px 0" }} ref={scrollRef}>
               {messageList.map((msg, idx) => {
                 return <MessageBox key={"message" + idx} chatInfo={msg} />;
               })}
             </div>
           </Grid>
           {/* 채팅입력창 */}
-          <SendBox>
+          <Grid height="100px" position="relative" bg="#474D56">
+            <Grid is_flex padding="35px 16px">
               <Input
                 free
+                position="absolute"
                 width="92%"
                 height="40px"
                 radius="40px"
@@ -185,38 +187,22 @@ const ChatRoom = () => {
                 _onChange={messageChat}
               />
               <Send onClick={sendMessage}>
-              <Image
-                src={sendBtn}
-                width="30px"
-                height="30px"
-                position="center"
-                size="19px 20px"
-                cursor="pointer"
-              />
-            </Send>
-          </SendBox>
+                <Image
+                  src={sendBtn}
+                  width="30px"
+                  height="30px"
+                  position="center"
+                  size="19px 20px"
+                  cursor="pointer"
+                />
+              </Send>
+            </Grid>
+          </Grid>
         </Grid>
-      </Container>
+      </Grid>
     </React.Fragment>
   );
 };
-
-const Container = styled.div`
-  position: absolute;
-  width: 100%;
-`
-
-const SendBox = styled.div`
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100px;
-  background-color: #474D56;
-  position: absolute;
-  bottom: 0;
-  left: 0;
-`
 
 const Send = styled.div`
   width: 30px;
@@ -226,5 +212,4 @@ const Send = styled.div`
   position: absolute;
   right: 26px;
 `;
-
 export default ChatRoom;
