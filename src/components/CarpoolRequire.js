@@ -37,7 +37,7 @@ const CarpoolRequire = (props) => {
   const [form, setForm] = React.useState({
     carpoolType: `${carpool ? carpool.carpoolType : ""}`,
     startLocation: `${carpool ? carpool.startLocation : ""}`,
-    endLocation: `${carpool ? carpool.endLocation : skiResort}`,
+    endLocation: `${carpool ? carpool.endLocation : ""}`,
     date: `${carpool ? carpool.date : ""}`,
     time: `${carpool ? carpool.time : ""}`,
     title: `${carpool ? carpool.title : ""}`,
