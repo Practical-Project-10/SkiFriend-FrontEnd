@@ -164,7 +164,6 @@ const filterCarpoolDB = (skiResort, form, status) => {
       date: form.date,
       status: status,
     }
-    console.log(form_)
 
     try {
       const response = await apis.filterCarpool(skiResort, form_);

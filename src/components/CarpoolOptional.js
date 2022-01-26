@@ -4,7 +4,6 @@ import styled from "styled-components";
 import { Grid, Text, Input } from "../elements";
 
 const CarpoolOptional = ({handleChange, optional}) => {
-  console.log(optional)
   // 가격 99,999원까지 제한
   const maxPrice = (e) => {
     if(e.target.value.length > e.target.maxLength) {
