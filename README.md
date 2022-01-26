@@ -1,72 +1,139 @@
-# Getting Started with Create React App
+<h2>스키인들을 위한 카풀 서비스</h2>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<br/>
 
-## Available Scripts
+<img width="100%" src="https://skifriend.shop/static/media/Home_banner.255a018411020b126d65.png" alt="skifriend">
 
-In the project directory, you can run:
+<br/>
 
-### `yarn start`
+[사이트 링크 바로가기](https://skifriend.shop/)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+<br/>
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## 프로젝트 소개
 
-### `yarn test`
+- 스키장 카풀을 요청, 제공 하고 더 나아가 스키장을 이용하는 사람들을 위한 커뮤니티 서비스
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## 프로젝트 기간
 
-### `yarn build`
+- 21.12.18(토) - 22.01.28(금)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## 팀원👨‍👨‍👦‍👦
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- Frontend(React) : [박재우](https://github.com/Jay1025), [정민수]()
+- Backend(Spring) : 이현범(팀장), 양성은, 최석영
+- Designer : 권순권, 김신
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+<br/>
 
-### `yarn eject`
+- 📝[노션 정보](https://power-bowler-c76.notion.site/8-13-10-0c3ad4dd39b34a2b8501e8bac3c63d19)
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+<br/>
+### 🎥 시연 영상
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+[![Vue](https://img.youtube.com/vi/cviKHk5Aqi8/0.jpg)](https://youtu.be/cviKHk5Aqi8)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+<br/>
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## 📚 프로젝트 아키텍처
 
-## Learn More
+<img width="1183" alt="프론트엔드 아키텍처" src="https://user-images.githubusercontent.com/83019343/151115330-df6227ee-baae-4052-98da-d99b4bcc7045.png">
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## 🛠 Package
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+<img width="100%" alt="패키지" src="https://user-images.githubusercontent.com/85838870/144557723-042f65a7-7d2d-4228-af46-7a2d6986ec3b.png">
 
-### Code Splitting
+<br/>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## 📌 유저 피드백 및 개선사항
 
-### Analyzing the Bundle Size
+⛏[QA 리스트](https://docs.google.com/spreadsheets/d/13MDuHS-sXkQ6DfsqEc9zZM6r1PRwBrr0EIXGdHG6Cdg/edit#gid=0)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+**1. 디자인 CSS 변경**
 
-### Making a Progressive Web App
+- 프로젝트를 하는 도중에 야구 시즌이 끝난는 것을 알게되어 보완하기 위해 스크린야구와 굿즈를 자랑하는 페이지를 만들었고
+  더 사용자가 더 원활하게 소통할 수 있도록 기존에 사용했던 타임라인을 게시글에 댓글을 달 수 있는 커뮤니티로 변경하였습니다.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+- 일단 보완된 스크린 야구 페이지는 야구 시즌이 비시즌일 때 사용자들이 사용할 수 있게 만든 페이지이며,사진을 보시다 시피
+  지도에서 원하는 스크린 야구장을 선택할 수 있게 만들었고 스크린 야구를 즐기고 싶은 사용자들이 모임을 가질 수 있도록 모임을
+  만드는 페이지를 들었습니다.
 
-### Advanced Configuration
+<img width="50%" alt="피드백" src="https://user-images.githubusercontent.com/85838870/144557767-8b4bd549-fb92-4dc1-833a-4f399534a7a2.png">
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+<br/>
 
-### Deployment
+**2. 페이지 전환시 초기화**
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+- 수정 전에는 페이지이동을 하면 데이터정보들이 초기화되지만 SESSION Storage를 사용하여 페이지에 데이터정보들을 담아 남아있게 수정하였습니다.
 
-### `yarn build` fails to minify
+<img width="50%" alt="피드백" src="https://user-images.githubusercontent.com/85838870/144557723-042f65a7-7d2d-4228-af46-7a2d6986ec3b.png">
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+<br/>
 
-readme
+**3. 원활한 의사소통**
+
+- 기존에는 모임 생성을 하는 디테일 페이지에서 방명록을 남겨 소통하는 방식이였으나 사용자들이 소통하는 데 더 원활한 환경을 제공하기 위해 실시간 채팅방을 구현하였습니다.
+  프론트엔드에서 채팅구현은 백엔드가 spring이기 때문에 stompjs를 사용하여 채팅을 구현하였습니다.
+
+<img width="50%" alt="피드백" src="https://user-images.githubusercontent.com/85838870/144557677-8885e9bd-09d8-448a-88aa-0a2f39aa6eb8.png">
+
+**4. AWS S3**
+
+- 백엔드에서 이미지 파일을 저장하고 불러오는 방식을 사용했으나, 사용자가 많을 경우 백엔드 쪽 이미지를 저장 할 용량과 프론트에서 데이터를 받아오는 속도가 문제 될 경우를
+  우려해서 이미지 파일을 s3 버켓에 저장하고 불러오는 방식으로 수정하였습니다. 수정을 한 뒤에는 통신을 통해 이미지를 받아오지 않고 버켓에 저장 된 이미지 url 만을 사용해서
+  불러오므로 확실히 수정전보다 로딩속도가 빨라진 것을 확인할 수 있습니다.
+
+<br/>
+
+## **페이지 구성📖**
+
+- 메인
+- 로그인/회원가입/마이페이지
+- 경기 모임 페이지/모임 디테일페이지/모임 추가 페이지/일정 페이지
+- 스크린 모임 페이지/모임 디테일페이지/모임 추가 페이지/일정 페이지
+- 타임라인(한 줄 게시판)[초기] & 커뮤니티[후기]
+- 굿즈 페이지/디테일 페이지/모임 추가 페이지
+- 채팅 리스트/채팅방
+- 알람 페이지
+- 내모임 페이지
+
+<br/>
+
+## 💪 역할 분담
+
+- 주재일
+
+        회원가입(fomik -yup vaildation),
+        로그인(jwt토큰 쿠키사용) ,
+        카카오로그인 ,
+        로그인유지(axios 인터셉터),
+        마이페이지/ 내모임수정(세션스토리이 글 임시저장) ,
+        구단 선택,
+        경기일정페이지 기능,
+        경기모임 추가(날짜 선택 react-datepicker),
+        스크린야구모임생성(카카오 지도 api) ,
+       굿즈자랑 (인스타 피드형식 + 좋아요 기능),
+       굿즈 생성,
+        aws ssl 인증서를 사용한 cloud front https 배포 ,
+       aws s3 이미지 업로드(nanoid를 이용한 파일이름 중복방지 암호화)
+
+- 최진식
+
+      경기모임, 스야모임 상세페이지
+      (좋아요, 수정, 삭제, 모임확정, 모임취소, 모임참석, 모임취소, 댓글작성, 댓글수정, 댓글삭제),
+       알람(모집승인, 취소, 일반 알람확인),
+        stompjs 실시간 채팅,
+        로딩중 표시, 스켈레톤,
+        PWA
+
+- 신유빈
+
+      메인 페이지(본인이 선택한 구단의 핫한 모임,
+      구단별 선택,일정별 선택),
+      스크린 페이지(지역별 선택),
+      스크린 디테일 페이지(삭제,등록),
+      swiper 커스텀 마이징,
+      커뮤니티,커뮤니티 디테일,수정,삭제
+      (댓글수정,댓글삭제,댓글등록),
+      경기일정페이지(날짜별 경기모음 최대 2주)
+      리드미 작성
