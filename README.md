@@ -17,9 +17,8 @@
   - [프로젝트 기간](#프로젝트-기간)
   - [팀원](#팀원)
   - [프로젝트 아키텍처](#프로젝트-아키텍처)
-  - [Package](#package)
   - [유저 피드백 및 개선사항](#유저-피드백-및-개선사항)
-  - [페이지 구성📖](#페이지-구성)
+  - [페이지 구성](#페이지-구성)
   - [역할 분담](#역할-분담)
 
 <br/>
@@ -52,35 +51,28 @@
 <br/>
 
 ## 🛠 기술 스텍 및 라이브러리
-<img src="https://img.shields.io/badge/react-61DAFB?style=for-the-badge&logo=react&logoColor=black">
-
-* 주요언어: Javascript
-* 주요 라이브러리: React
-* 상태관리
-  * redux
-  * redux-actions
-  * redux-thunk
-  * redux-logger
-  * immer
-* 배포
-  * aws s3(서비스 배포, 이미지 업로드)
-  * aws cloudfront(Https 적용)
-* 통신
-  * axios
-  * soket-io
-* 이미지 리사이징
-  * browser-image-compression
-* 스타일
-  * postcss
-* PWA
-  * workbox-cli(서비스 워커 커스텀)
-* 라이브러리 & 패키지
-  * react-slick
-  * moment(IOS에서 날짜 출력 시 NaN로 출력되는 트러블슈팅을 위해 사용)
-  * craco(import 시 경로에서 오는 지옥같은 패스를 해결하고자 절대경로를 사용하여 코드 가독성 향상)
-
-
-## 유저 피드백 및 개선사항
+- 주요언어: Javascript
+- 주요 라이브러리: React
+- 상태관리
+  - redux
+  - redux-thunk
+  - redux-logger
+  - immer
+- 배포
+  - github actions
+  - aws s3(서비스 배포)
+  - aws cloudfront(Https 적용)
+- 통신
+  - axios
+  - sockJS
+- 스타일
+  - styled-component
+- PWA
+- Git Actions
+- 라이브러리 & 패키지
+  - react-datepicker
+  - react-swiper
+  - react-slick
 
 <br/>
 
@@ -108,7 +100,7 @@
   - 숏츠 게시글 (동영상 CRUD)
   - 마이페이지(사용자가 작성한 카풀/숏츠 게시글 모아보기[react-swiper] 활용, 회원탈퇴, 프로필 수정)
 
-  - gitgub actions 활용한 CI/CD
+  - Git Actions 활용한 CI/CD
         
 - 박재우
   Axios 및 Redux를 활용한 CRUD작업
@@ -118,7 +110,15 @@
   - 배너캐러셀[react-slick활용]
 
   Socket을 활용한 채팅기능 구현
-  - 채팅(SocketJS, Stomp, 채팅방 전화번호/ 프로필 공개, 채팅방 나가기, 안읽음 메세지 표시)
+  - 채팅(SockJS, Stomp, 채팅방 전화번호/ 프로필 공개, 채팅방 나가기, 안읽음 메세지 표시)
 
   모바일 최적화를 위해 PWA적용
   - PWA(Cloud Front, Route53, S3 - https배포)
+
+<br/>
+
+**## 유저 피드백 및 개선사항
+
+- 피드백: 가입 절차가 너무 많아요
+  개선 사항
+    - 기존의 가입 절차는 번호인증 + 회원가입 + 프로필 필수항목 작성
