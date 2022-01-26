@@ -11,7 +11,11 @@ const Spinner = (props) => {
 };
 
 const Outter = styled.div`
+<<<<<<< HEAD
+  background: rgba(0, 0, 0, 0.4);
+=======
   background: rgba(0,0,0,0.4);
+>>>>>>> c7eaae23245a63221ebecf9a3ea8c405e7ea7361
   width: 100%;
   height: 100vh;
   position: absolute;

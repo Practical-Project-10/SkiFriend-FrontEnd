@@ -16,11 +16,14 @@ api.interceptors.request.use(function (config) {
 
 export const apis = {
   //카카오 소셜로그인
-  kakaoLogin1: (code) =>  // 닉네임
-    api.get(`/user/kakao/callback?code=${code}`),
+  kakaoLogin1: (
+    code // 닉네임
+  ) => api.get(`/user/kakao/callback?code=${code}`),
 
-  kakaoLogin2: (code, userId) =>  // 성별, 연령대
-    api.get(`/user/kakao/callback/${userId}?code=${code}`),
+  kakaoLogin2: (
+    code,
+    userId // 성별, 연령대
+  ) => api.get(`/user/kakao/callback/${userId}?code=${code}`),
 
   //전화번호
   phoneNumCheck: (phoneNumber) =>

@@ -106,6 +106,7 @@ const ChatRoom = () => {
 
     return () => {
       chatDisconnect();
+      dispatch(chatActions.reset());
     };
   }, [stomp]);
 
@@ -116,8 +117,6 @@ const ChatRoom = () => {
       scrollMoveBottom(); //스크롤 다운
     }, 100);
   }, [datas]);
-
-
 
   //메세지 보내기
   const sendMessage = async () => {
