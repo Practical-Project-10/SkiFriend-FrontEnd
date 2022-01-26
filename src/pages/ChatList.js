@@ -72,8 +72,6 @@ const ChatList = (props) => {
         >
           {/* 채팅방 목록 나타내기 */}
           {chatRoomList.map((list, index) => {
-            // const time = chatRoomList[index].lastMsgTime.split(" ");
-            // const realTime = time[0] + " " + time[1] + " " + time[2];
             return (
               <Grid
                 is_flex

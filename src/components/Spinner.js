@@ -4,18 +4,19 @@ import CircularProgress from "@mui/material/CircularProgress";
 
 const Spinner = (props) => {
   return (
-    <Outter>
-      영상 업로드 중
-      <CircularProgress style={{ color: "orange", fontSize: "300px" }} />
-    </Outter>
+    <React.Fragment>
+      <Outter>
+        <CircularProgress style={{ color: "#FFF", fontSize: "400px" }} />
+      </Outter>
+    </React.Fragment>
   );
 };
 
 const Outter = styled.div`
-  background: #fff;
+  background: rgba(0, 0, 0, 0.2);
   width: 100%;
   height: 100vh;
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   display: flex;
