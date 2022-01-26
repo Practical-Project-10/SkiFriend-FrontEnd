@@ -103,6 +103,7 @@
   - Git Actions 활용한 CI/CD
         
 - 박재우
+
   Axios 및 Redux를 활용한 CRUD작업
   - 자유게시판(게시물CRUD, 댓글CRUD, 좋아요, 사진다중전송[react-swiper활용])
   - 쇼츠(댓글, 좋아요)
