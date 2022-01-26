@@ -23,6 +23,7 @@ const ChatRoomCard = (props) => {
         display="flex"
         direction="column"
         justify="space-between"
+        gap='14px'
       >
         <Text block size="20px" bold>
           {roomInfo.title}
