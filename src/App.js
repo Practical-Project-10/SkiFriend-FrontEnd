@@ -1,6 +1,7 @@
 import React from "react";
-import GlobalStyleds from "./shared/globalStyles";
+import { useSelector } from "react-redux";
 
+import GlobalStyleds from "./shared/globalStyles";
 import styled from "styled-components";
 import { Route } from "react-router-dom";
 //pages import
@@ -25,12 +26,13 @@ import KakaoAuthHandle from "./components/KakaoAuthHandle";
 import KakaoAuthHandle2 from "./components/KakaoAuthHandle2";
 import ShortsUpload from "./pages/ShortsUpload";
 import Shorts from "./pages/Shorts";
-
-import Test from "./pages/Test";
+import Spinner from "./components/Spinner";
 
 import background from "./assets/background.png.jpg";
 
 function App() {
+  const is_loaded = useSelector((state) => state.shorts.is_loaded);
+
   return (
     <React.Fragment>
       <Container>
@@ -118,6 +120,7 @@ function App() {
             />
             <Route exact path="/shorts" component={Shorts} />
             <Route exact path="/shorts/:shortsId" component={Shorts} />
+            {is_loaded && <Spinner />}
           </CardList>
           <Navbar />
         </div>

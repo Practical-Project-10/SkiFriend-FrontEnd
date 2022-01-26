@@ -53,7 +53,9 @@ export const makeRoomChatDB =
         history.push(
           `/chatroom/${response.data.roomId}/${response.data.roomName}`
         );
-    } catch (err) {}
+    } catch (err) {
+      window.alert("이미 나간 채팅방이므로 연락하기가 불가능합니다.");
+    }
   };
 
 //채팅목록 정보 가져오기
