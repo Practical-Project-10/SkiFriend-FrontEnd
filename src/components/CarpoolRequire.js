@@ -204,7 +204,6 @@ const CarpoolRequire = (props) => {
                   width="144px"
                   name="endLocation"
                   ref={endLoca}
-                  // value={carpool.endLocation? endLocation}
                   onChange={handleChange}
                 >
                   <option value="">스키장 선택</option>
