@@ -53,15 +53,15 @@ const ChatRoom = () => {
     scrollRef.current.scrollIntoView({
       behavior: "smooth",
       block: "end",
-      inline: "start",
+      inline: "nearest",
     });
   };
 
   useEffect(() => {
     //소켓
     const sock =
-      new SockJS("https://seongeunyang.shop/ws-stomp");
-      // new SockJS("http://3.34.19.50:8080/ws-stomp");
+      // new SockJS("https://seongeunyang.shop/ws-stomp");
+      new SockJS("http://3.34.19.50:8080/ws-stomp");
 
     setStomp(Stomp.over(sock));
     dispatch(chatActions.getRoomInfoDB(roomId)); //방정보 가져오기
@@ -69,7 +69,41 @@ const ChatRoom = () => {
   }, []);
 
   useEffect(() => {
+    
+    scrollMoveBottom();
+    // stomp연결
+    const chatConnect = () => {
+      try {
+        stomp.debug = null;
+        stomp.connect(token, () => {
+          stomp.subscribe(
+            `/sub/chat/room/${roomId}`,
+            (message) => {
+              const responseData = JSON.parse(message.body);
+              messageDatas(responseData);
+            },
+            token
+          );
+        });
+      } catch (err) {
+        // console.log(err);
+      }
+    };
+
+    // stomp 연결해제
+    const chatDisconnect = () => {
+      try {
+        stomp.debug = null;
+        stomp.disconnect(() => {
+          stomp.unsubscribe("sub-0");
+        }, token);
+      } catch (err) {
+        // console.log(err);
+      }
+    };
+
     chatConnect(); //채팅룸 연결
+
     return () => {
       chatDisconnect();
     };
@@ -83,36 +117,7 @@ const ChatRoom = () => {
     }, 100);
   }, [datas]);
 
-  // stomp연결
-  const chatConnect = () => {
-    try {
-      stomp.debug = null;
-      stomp.connect(token, () => {
-        stomp.subscribe(
-          `/sub/chat/room/${roomId}`,
-          (message) => {
-            const responseData = JSON.parse(message.body);
-            messageDatas(responseData);
-          },
-          token
-        );
-      });
-    } catch (err) {
-      // console.log(err);
-    }
-  };
 
-  // stomp 연결해제
-  const chatDisconnect = () => {
-    try {
-      stomp.debug = null;
-      stomp.disconnect(() => {
-        stomp.unsubscribe("sub-0");
-      }, token);
-    } catch (err) {
-      // console.log(err);
-    }
-  };
 
   //메세지 보내기
   const sendMessage = async () => {
@@ -153,31 +158,30 @@ const ChatRoom = () => {
 
   return (
     <React.Fragment>
-      <Grid position="fixed" width="412px">
+      <div>
         <Header goBack phone fixed _onClick={getPhoneNum}>
           {roomName}
         </Header>
         <Grid
-          minHeight="calc( 100vh - 124px )"
+          height="calc( 100vh - 54px )"
           display="flex"
           direction="column"
+          phoneSize
         >
-          <Grid padding="0 16px" height="642px" overflow="scroll">
-            {/* 방정보 카드 */}
-            <ChatRoomCard roomInfo={roomInfoList} />
+          {/* 방정보 카드 */}
+          <ChatRoomCard roomInfo={roomInfoList} />
+          <Grid margin='0 0 100px' overflow="scroll">
             {/* 채팅말풍선(body부분)*/}
-            <div style={{ padding: "0 0 70px 0" }} ref={scrollRef}>
+            <div style={{padding:'0 0 40px'}} ref={scrollRef}>
               {messageList.map((msg, idx) => {
                 return <MessageBox key={"message" + idx} chatInfo={msg} />;
               })}
             </div>
           </Grid>
           {/* 채팅입력창 */}
-          <Grid height="100px" position="relative" bg="#474D56">
-            <Grid is_flex padding="35px 16px">
+          <SendBox>
               <Input
                 free
-                position="absolute"
                 width="92%"
                 height="40px"
                 radius="40px"
@@ -187,22 +191,35 @@ const ChatRoom = () => {
                 _onChange={messageChat}
               />
               <Send onClick={sendMessage}>
-                <Image
-                  src={sendBtn}
-                  width="30px"
-                  height="30px"
-                  position="center"
-                  size="19px 20px"
-                  cursor="pointer"
-                />
-              </Send>
-            </Grid>
-          </Grid>
+              <Image
+                src={sendBtn}
+                width="30px"
+                height="30px"
+                position="center"
+                size="19px 20px"
+                cursor="pointer"
+              />
+            </Send>
+          </SendBox>
         </Grid>
-      </Grid>
+      </div>
     </React.Fragment>
   );
 };
+
+
+
+const SendBox = styled.div`
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100px;
+  background-color: #474D56;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+`
 
 const Send = styled.div`
   width: 30px;
@@ -212,4 +229,5 @@ const Send = styled.div`
   position: absolute;
   right: 26px;
 `;
+
 export default ChatRoom;
