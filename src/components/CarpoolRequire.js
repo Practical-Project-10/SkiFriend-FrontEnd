@@ -37,7 +37,7 @@ const CarpoolRequire = (props) => {
   const [form, setForm] = React.useState({
     carpoolType: `${carpool ? carpool.carpoolType : ""}`,
     startLocation: `${carpool ? carpool.startLocation : ""}`,
-    endLocation: `${carpool ? carpool.endLocation : ""}`,
+    endLocation: `${carpool ? carpool.endLocation : skiResort}`,
     date: `${carpool ? carpool.date : ""}`,
     time: `${carpool ? carpool.time : ""}`,
     title: `${carpool ? carpool.title : ""}`,
@@ -190,7 +190,7 @@ const CarpoolRequire = (props) => {
                   width='144px'
                   name="endLocation"
                   ref={endLoca}
-                  value={endLocation}
+                  // value={carpool.endLocation? endLocation}
                   onChange={handleChange}
                 >
                   <option value="">스키장 선택</option>
