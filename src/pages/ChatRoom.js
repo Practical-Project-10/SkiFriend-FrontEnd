@@ -60,8 +60,8 @@ const ChatRoom = () => {
   useEffect(() => {
     //소켓
     const sock =
-      // new SockJS("https://seongeunyang.shop/ws-stomp");
-      new SockJS("http://3.34.19.50:8080/ws-stomp");
+      new SockJS("https://seongeunyang.shop/ws-stomp");
+      // new SockJS("http://3.34.19.50:8080/ws-stomp");
 
     setStomp(Stomp.over(sock));
     dispatch(chatActions.getRoomInfoDB(roomId)); //방정보 가져오기
@@ -76,7 +76,7 @@ const ChatRoom = () => {
       try {
         stomp.debug = null;
         stomp.connect(token, () => {
-          stomp.subscribe(
+          stomp.subscribe( // 같은 방을 구독하고 있는
             `/sub/chat/room/${roomId}`,
             (message) => {
               const responseData = JSON.parse(message.body);
