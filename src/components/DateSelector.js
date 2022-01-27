@@ -12,8 +12,6 @@ const DateSelector = (props) => {
   const [date_, setDate_] = React.useState();
 
   function sendDate(date) {
-    console.log(date)
-    console.log(date_)
     setDate_(date);
     let year = date.getFullYear(); //yyyy
     let month = 1 + date.getMonth(); //Month

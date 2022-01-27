@@ -48,9 +48,7 @@ const ShortsBody = (props) => {
   }, []);
 
   useEffect(() => {
-    console.log('test1')
     if (likeData !== undefined) {
-      console.log('test2')
       for (let i = 0; i < likeData.length; i++) {
         if (likeData[i].userId === parseInt(login_userId)) {
           return setHeart(true);
