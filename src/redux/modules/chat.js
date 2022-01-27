@@ -71,7 +71,7 @@ export const getListChatDB =
     } catch (err) {}
   };
 
-//채팅방 내용 가져오기
+//채팅방 내용 가져오기//
 export const getContentChatDB =
   (roomId) =>
   async (dispatch, getState, { history }) => {
