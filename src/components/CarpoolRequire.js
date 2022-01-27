@@ -63,7 +63,6 @@ const CarpoolRequire = (props) => {
     memberNum,
     notice,
   };
-  console.log(form);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -83,7 +82,6 @@ const CarpoolRequire = (props) => {
 
   // 날짜 선택
   const selectDate = (date) => {
-    console.log("hi");
     setForm({
       ...form,
       date,

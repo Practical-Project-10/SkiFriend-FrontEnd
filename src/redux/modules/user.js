@@ -24,12 +24,12 @@ const smsCheck = createAction(SMS_CHECK, (state) => ({ state }));
 
 //middlewares
 //핸드폰 인증번호 요청
-const isPhoneNumDB = (_phoneNum) => {
+const isPhoneNumDB = (phoneNum) => {
   return async (dispatch, getState, { history }) => {
     try {
-      await apis.phoneNumCheck(_phoneNum);
+      await apis.phoneNumCheck(phoneNum);
       window.alert("인증번호가 전송되었습니다.");
-      dispatch(phoneNum(_phoneNum));
+      dispatch(phoneNum(phoneNum));
     } catch (err) {
       window.alert("이미 전화번호 인증을 완료하셨습니다.");
     }
