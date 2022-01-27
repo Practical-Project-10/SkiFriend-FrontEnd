@@ -113,7 +113,6 @@ const Home = (props) => {
         );
       });
     } catch (error) {
-      // console.log(error);
     }
   }, []);
 
@@ -170,7 +169,6 @@ const Home = (props) => {
                   src={item.url}
                   style={{ cursor: item.id === 1 ? "" : "pointer" }}
                   onClick={() => connectUrl(item.id)}
-                  target="_blank"
                   alt="배너"
                 />
               );
