@@ -30,6 +30,8 @@ import Spinner from "./components/Spinner";
 
 import background from "./assets/background.png.jpg";
 
+import Test from "./pages/Test";
+
 function App() {
   const is_loaded = useSelector((state) => state.shorts.is_loaded);
 
@@ -40,6 +42,7 @@ function App() {
         <div id="wrap">
           <GlobalStyleds />
           <CardList>
+            <Route exact path="/test" component={Test} />
             <Route exact path="/" component={Home} />
             <Route exact path="/phoneauth" component={PhoneAuth} />
             <Route exact path="/login" component={SocialLogin} />
