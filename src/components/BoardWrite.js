@@ -27,7 +27,7 @@ const BoardWrite = (props) => {
   // useState관리
   const [title, setTitle] = useState(is_edit ? postData.title : "");
   const [content, setContet] = useState(is_edit ? postData.content : "");
-  const [photoList, setPhotoList] = useState([]);
+  const [photoId, setPhotoId] = useState([]);
   const [deletePhotoList, setDeletePhotoList] = useState([]);
   const [uploadURL, setUploadURL] = useState([]);
   const [uploadFiles, setUploadFiles] = useState(null);
@@ -53,22 +53,21 @@ const BoardWrite = (props) => {
 
   // 이미지 업로드
   const uploadImg = (e) => {
-    e.preventDefault();
     setUploadFiles(e.target.files);
     const ImgUrlList = [...uploadURL];
-    const Photobook = [...photoList];
+    const Photobook = [...photoId];
     for (let i = 0; i < e.target.files.length; i++) {
       const ImgUrl = URL.createObjectURL(e.target.files[i]);
       ImgUrlList.push(ImgUrl);
       Photobook.push(i + 1);
     }
-    setUploadURL(ImgUrlList);
-    setPhotoList(Photobook);
+    setUploadURL(ImgUrlList); //자신이 고른 사진 화면에 보여주기 위해
+    setPhotoId(Photobook); //사진번호 넘겨주기 위해
   };
 
   // 데이터 전송
   const addPostBtn = () => {
-    const requestDto = { title: title, content: content, photoList: photoList };
+    const requestDto = { title: title, content: content, photoList: photoId };
     const ask = window.confirm("게시물을 등록하시겠습니까?");
     if (ask) {
       return dispatch(
@@ -142,7 +141,6 @@ const BoardWrite = (props) => {
             spaceBetween={10}
             slidesPerView={1}
             navigation
-            pagination={{ clickable: true }}
             style={{ width: "100%" }}
           >
             {/* 수정페이지 */}
@@ -154,10 +152,9 @@ const BoardWrite = (props) => {
                     <DeletePic onClick={() => deleteImg(photo.photoId)}>
                       X
                     </DeletePic>
-                    <EditImage className="leftList">
+                    <EditImage>
                       <img
                         id={photo.photoId}
-                        className="leftList"
                         src={photo.photoUrl}
                         style={{
                           width: "100%",
