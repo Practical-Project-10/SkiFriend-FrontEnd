@@ -36,7 +36,6 @@ const Home = (props) => {
   const accessToken = document.cookie.split("=")[1];
   const token = { Authorization: `${accessToken}` };
   //소켓
-  // const sock = new SockJS("https://seongeunyang.shop/ws-alarm");
   const sock = new SockJS("http://3.34.19.50:8080/ws-alarm");
 
   const stomp = Stomp.over(sock);
@@ -113,7 +112,6 @@ const Home = (props) => {
         );
       });
     } catch (error) {
-      // console.log(error);
     }
   }, []);
 
@@ -170,7 +168,6 @@ const Home = (props) => {
                   src={item.url}
                   style={{ cursor: item.id === 1 ? "" : "pointer" }}
                   onClick={() => connectUrl(item.id)}
-                  target="_blank"
                   alt="배너"
                 />
               );
