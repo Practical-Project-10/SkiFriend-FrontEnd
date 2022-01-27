@@ -58,7 +58,7 @@ const Carpool = (props) => {
   const list = document.getElementById("list");
   const cardList = document.getElementById("cardList");
 
-  //무한 스크롤 추후 쓰로틀로 변경
+  
   const infinifyScroll = () => {
     const recentScroll = list ? list.scrollTop : null;
     const cardListHeight = cardList ? cardList.offsetHeight : null;

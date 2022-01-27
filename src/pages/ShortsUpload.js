@@ -2,7 +2,7 @@ import React from "react";
 
 import { useParams } from "react-router-dom";
 
-import SortsWrite from "../components/ShortsWrite";
+import ShortsWrite from "../components/ShortsWrite";
 
 const ShortsUpload = (props) => {
   // 주소 경로값
@@ -14,7 +14,7 @@ const ShortsUpload = (props) => {
 
   return (
     <React.Fragment>
-      <SortsWrite
+      <ShortsWrite
         is_edit={is_edit}
         shortsId={shortsId}
       />
