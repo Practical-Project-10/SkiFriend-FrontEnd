@@ -36,8 +36,8 @@ const Home = (props) => {
   const accessToken = document.cookie.split("=")[1];
   const token = { Authorization: `${accessToken}` };
   //소켓
-  const sock = new SockJS("https://seongeunyang.shop/ws-alarm");
-  // const sock = new SockJS("http://3.34.19.50:8080/ws-alarm");
+  // const sock = new SockJS("https://seongeunyang.shop/ws-alarm");
+  const sock = new SockJS("http://3.34.19.50:8080/ws-alarm");
 
   const stomp = Stomp.over(sock);
   //localstorage
@@ -112,8 +112,7 @@ const Home = (props) => {
           token
         );
       });
-    } catch (error) {
-    }
+    } catch (error) {}
   }, []);
 
   // 인기게시글
