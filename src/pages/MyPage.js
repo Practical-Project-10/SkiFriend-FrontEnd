@@ -26,7 +26,6 @@ const MyPage = (props) => {
   // redux데이터
   const myCarpool = useSelector((state) => state.carpool.list["myPage"]);
   const myShortsList = useSelector((state) => state.shorts.myShortsList);
-  console.log(myShortsList)
 
   useEffect(() => {
     if (!is_login) {
@@ -42,8 +41,7 @@ const MyPage = (props) => {
     if (myShortsList.length === 0) {
       dispatch(shortsActions.myShortsDB());
     }
-    console.log('mycarpool')
-  }, [myShortsList]);
+  }, []);
 
   return (
     //로그인 안 했을 때
