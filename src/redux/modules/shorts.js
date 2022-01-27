@@ -185,7 +185,6 @@ export default handleActions(
 
     [COMMENT_COUNT]: (state, action) =>
       produce(state, (draft) => {
-        console.log(action.payload.state);
         if (action.payload.state) {
           draft.shortsList.shortsCommentCnt = action.payload.commentCnt;
         } else {
