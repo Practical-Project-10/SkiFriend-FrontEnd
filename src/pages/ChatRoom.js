@@ -86,7 +86,6 @@ const ChatRoom = () => {
           );
         });
       } catch (err) {
-        // console.log(err);
       }
     };
 
@@ -98,7 +97,6 @@ const ChatRoom = () => {
           stomp.unsubscribe("sub-0");
         }, token);
       } catch (err) {
-        // console.log(err);
       }
     };
 
