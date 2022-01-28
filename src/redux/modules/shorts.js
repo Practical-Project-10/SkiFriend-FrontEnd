@@ -101,7 +101,8 @@ const addShortsDB = (videoFile, title) => {
     try {
       const response = await apis.shortsUpload(formData);
       window.alert("shorts가 정상적으로 등록되었습니다.");
-      response && dispatch(addShorts(response.data));
+      response && console.log('hi')
+      dispatch(addShorts(response.data));
       history.push(`/shorts`);
     } catch (err) {}
   };

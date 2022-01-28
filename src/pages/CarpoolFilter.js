@@ -7,66 +7,6 @@ import CarpoolRequire from "../components/CarpoolRequire";
 import Header from "../components/Header";
 
 const CarpoolFilter = (props) => {
-  const dispatch = useDispatch();
-  const skiResort = props.match.params.skiresort;
-  const [state, setState] = React.useState(false);
-
-  // const [form, setForm] = useState({
-  //   carpoolType: "",
-  //   memberNum: "",
-  //   startLocation: "",
-  //   endLocation: "",
-  //   date: "",
-  //   status: "false",
-  // });
-  
-  // // CarpoolSelect에서 date 가져오기 //최적화 할때 CarpoolSelect로 이동
-  // const bringDate = (date) => {
-  //   setForm({
-  //     ...form,
-  //     date,
-  //   });
-  // };
-
-  // // CarpoolSelect에서 form 가져오기 //최적화 할때 CarpoolSelect로 이동
-  // const bringForm = (name, value) => {
-  //   setForm({
-  //     ...form,
-  //     [name]: value,
-  //   });
-  // };
-
-  // // CarpoolSelect에서 지역 가져오기 //최적화 할때 CarpoolSelect로 이동
-  // const bringLocation = (name, value) => {
-  //   setForm({
-  //     ...form,
-  //     [name]: value,
-  //   });
-  // };
-
-  // // 출발 도착 지역 바꾸기
-  // const location = (startLoca) => {
-  //   if (!state) {
-  //     setState(true);
-  //     setForm({
-  //       ...form,
-  //       startLocation: skiResort,
-  //       endLocation: startLoca,
-  //     });
-  //   } else {
-  //     setState(false);
-  //     setForm({
-  //       ...form,
-  //       startLocation: startLoca,
-  //       endLocation: skiResort,
-  //     });
-  //   }
-  // };
-
-  // // 필터 적용
-  // const filterSubmit = async () => {
-  //   dispatch(carpoolActions.filterCarpoolDB(skiResort, form));
-  // };
 
   return (
     <React.Fragment>
