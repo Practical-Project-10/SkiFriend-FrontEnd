@@ -31,7 +31,7 @@ const isPhoneNumDB = (phoneNum_) => {
       window.alert("인증번호가 전송되었습니다.");
       dispatch(phoneNum(phoneNum_));
     } catch (err) {
-      window.alert("이미 전화번호 인증을 완료하셨습니다.");
+      window.alert("이미 전화번호 인증을 완료하였습니다.");
     }
   };
 };

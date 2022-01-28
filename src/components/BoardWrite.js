@@ -11,7 +11,7 @@ import Header from "./Header";
 
 //swiper
 import { Swiper, SwiperSlide } from "swiper/react";
-import SwiperCore, { Navigation, Pagination } from "swiper";
+import SwiperCore, { Navigation } from "swiper";
 import "swiper/swiper.min.css";
 import "swiper/components/navigation/navigation.min.css";
 
@@ -22,7 +22,7 @@ const BoardWrite = (props) => {
   const postData = useSelector((state) => state.freeboard.detail);
   const leftList = postData.photoList;
   // swiper관리
-  SwiperCore.use([Navigation, Pagination]);
+  SwiperCore.use([Navigation]);
 
   // useState관리
   const [title, setTitle] = useState(is_edit ? postData.title : "");
@@ -53,16 +53,17 @@ const BoardWrite = (props) => {
 
   // 이미지 업로드
   const uploadImg = (e) => {
-    setUploadFiles(e.target.files);
+    setUploadFiles(e.target.files); //서버에 보내줄 사진 데이터
     const ImgUrlList = [...uploadURL];
     const Photobook = [...photoId];
     for (let i = 0; i < e.target.files.length; i++) {
-      const ImgUrl = URL.createObjectURL(e.target.files[i]);
+      //주어진 객체를 가리키는 URL을 DOMString으로 반환
+      const ImgUrl = URL.createObjectURL(e.target.files[i]); //객체 URL을 생성할 File, Blob, MediaSource (en-US) 객체
       ImgUrlList.push(ImgUrl);
       Photobook.push(i + 1);
     }
     setUploadURL(ImgUrlList); //자신이 고른 사진 화면에 보여주기 위해
-    setPhotoId(Photobook); //사진번호 넘겨주기 위해
+    setPhotoId(Photobook); //서버에 사진번호 넘겨주기 위해
   };
 
   // 데이터 전송
