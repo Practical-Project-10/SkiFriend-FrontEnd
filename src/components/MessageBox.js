@@ -11,8 +11,6 @@ import { BsTelephoneOutbound } from "react-icons/bs";
 
 const MessageBox = (props) => {
   const { chatInfo } = props;
-  // const time = chatInfo.createdAt.split(" ");
-  // const realTime = time[0] + " " + time[1] + " " + time[2];
   const dispatch = useDispatch();
   //경로
   const params = useParams();
@@ -41,7 +39,7 @@ const MessageBox = (props) => {
 
   return (
     <React.Fragment>
-      {/* 내가 메세지 보낼때 보이는 위치와 상대방이 나에게 보낼때 위치 */}
+      {/* 내가 메세지 보낼때 보이는 위치*/}
       <Grid>
         {nickname === chatInfo.sender ? (
           <Grid display="flex" justify="flex-end" alignItems="end" margin="5px">
@@ -83,6 +81,7 @@ const MessageBox = (props) => {
             )}
           </Grid>
         ) : (
+          //상대방이 나에게 메세지를 보낼때 보이는 위치
           <Grid display="flex" justify="left" alignItems="start" margin="5px">
             {chatInfo.senderImg === "null" ? (
               <Grid

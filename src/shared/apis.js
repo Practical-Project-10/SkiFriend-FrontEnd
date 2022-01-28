@@ -104,7 +104,7 @@ export const apis = {
 
   // 자유게시글
   getFreePost: (skiResort, page) =>
-    api.get(`/board/freeBoard/${skiResort}?size=10&page=1`, {}),
+    api.get(`/board/freeBoard/${skiResort}`, {}),
 
   writeFreePost: (skiResort, datas) =>
     api.post(`/board/${skiResort}/freeBoard`, datas, {

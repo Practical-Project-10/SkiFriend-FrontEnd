@@ -56,12 +56,12 @@ const ChatRoom = () => {
       inline: "nearest",
     });
   };
-  
+
   useEffect(() => {
     //소켓
     const sock =
-    // new SockJS("https://seongeunyang.shop/ws-stomp");
-    new SockJS("http://3.34.19.50:8080/ws-stomp");
+      // new SockJS("https://seongeunyang.shop/ws-stomp");
+      new SockJS("http://3.34.19.50:8080/ws-stomp");
 
     setStomp(Stomp.over(sock));
     dispatch(chatActions.getRoomInfoDB(roomId)); //방정보 가져오기
@@ -69,37 +69,7 @@ const ChatRoom = () => {
   }, []);
 
   useEffect(() => {
-    
     scrollMoveBottom();
-    // stomp연결
-    const chatConnect = () => {
-      try {
-        stomp.debug = null;
-        stomp.connect(token, () => {
-          stomp.subscribe( // 같은 방을 구독하고 있는 사람의 메시지를 받는다.
-            `/sub/chat/room/${roomId}`,
-            (message) => {
-              const responseData = JSON.parse(message.body);
-              messageDatas(responseData);
-            },
-            token
-          );
-        });
-      } catch (err) {
-      }
-    };
-
-    // stomp 연결해제
-    const chatDisconnect = () => {
-      try {
-        stomp.debug = null;
-        stomp.disconnect(() => {
-          stomp.unsubscribe("sub-0");
-        }, token);
-      } catch (err) {
-      }
-    };
-
     chatConnect(); //채팅룸 연결
 
     return () => {
@@ -116,6 +86,33 @@ const ChatRoom = () => {
     }, 100);
   }, [datas]);
 
+  // stomp연결
+  const chatConnect = () => {
+    try {
+      stomp.debug = null;
+      stomp.connect(token, () => {
+        stomp.subscribe(
+          `/sub/chat/room/${roomId}`,
+          (message) => {
+            const responseData = JSON.parse(message.body); 
+            messageDatas(responseData);
+          },
+          token
+        );
+      });
+    } catch (err) {}
+  };
+
+  // stomp 연결해제
+  const chatDisconnect = () => {
+    try {
+      stomp.debug = null;
+      stomp.disconnect(() => {
+        stomp.unsubscribe("sub-0");
+      }, token);
+    } catch (err) {}
+  };
+
   //메세지 보내기
   const sendMessage = async () => {
     if (message.replace(/\s|/gi, "").length !== 0) {
@@ -125,7 +122,7 @@ const ChatRoom = () => {
         message: message,
       };
       stomp.debug = null;
-      await stomp.send("/pub/chat/message", token, JSON.stringify(datas));
+      await stomp.send("/pub/chat/message", token, JSON.stringify(datas)); 
       scrollMoveBottom(); //스크롤 다운
       setMessage("");
     }
@@ -167,9 +164,9 @@ const ChatRoom = () => {
         >
           {/* 방정보 카드 */}
           <ChatRoomCard roomInfo={roomInfoList} />
-          <Grid margin='0 0 100px' overflow="scroll">
+          <Grid margin="0 0 100px" overflow="scroll">
             {/* 채팅말풍선(body부분)*/}
-            <div style={{padding:'0 0 40px'}} ref={scrollRef}>
+            <div style={{ padding: "0 0 40px" }} ref={scrollRef}>
               {messageList.map((msg, idx) => {
                 return <MessageBox key={"message" + idx} chatInfo={msg} />;
               })}
@@ -177,17 +174,17 @@ const ChatRoom = () => {
           </Grid>
           {/* 채팅입력창 */}
           <SendBox>
-              <Input
-                free
-                width="92%"
-                height="40px"
-                radius="40px"
-                autocomplete="off" //자동입력 끄기
-                _value={message}
-                _onKeyPress={onKeyPress}
-                _onChange={messageChat}
-              />
-              <Send onClick={sendMessage}>
+            <Input
+              free
+              width="92%"
+              height="40px"
+              radius="40px"
+              autocomplete="off" //자동입력 끄기
+              _value={message}
+              _onKeyPress={onKeyPress}
+              _onChange={messageChat}
+            />
+            <Send onClick={sendMessage}>
               <Image
                 src={sendBtn}
                 width="30px"
@@ -204,19 +201,17 @@ const ChatRoom = () => {
   );
 };
 
-
-
 const SendBox = styled.div`
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
   height: 100px;
-  background-color: #474D56;
+  background-color: #474d56;
   position: absolute;
   bottom: 0;
   left: 0;
-`
+`;
 
 const Send = styled.div`
   width: 30px;

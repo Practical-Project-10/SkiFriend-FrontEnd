@@ -1,5 +1,4 @@
 import React from "react";
-
 import { history } from "../redux/ConfigStore";
 
 import styled from "styled-components";

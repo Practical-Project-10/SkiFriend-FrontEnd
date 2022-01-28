@@ -31,7 +31,6 @@ const Home = (props) => {
   const history = props.history;
   //redux 데이터
   const hotPosts = useSelector((state) => state.main.list);
-  // const alarm = useSelector((state) => state.chat.alarm);
   //토큰
   const accessToken = document.cookie.split("=")[1];
   const token = { Authorization: `${accessToken}` };
