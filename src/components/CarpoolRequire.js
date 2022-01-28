@@ -15,8 +15,6 @@ import CarpoolOptional from "./CarpoolOptional";
 
 const CarpoolRequire = (props) => {
   const { postId, is_edit } = props;
-  // const { memberNum, startLocation, endLocation, date, time, carpoolType } =
-  //   props.form;
   const dispatch = useDispatch();
   const params = useParams();
   const carpool_list = useSelector((state) => state.carpool.list);

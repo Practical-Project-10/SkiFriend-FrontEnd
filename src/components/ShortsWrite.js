@@ -41,6 +41,7 @@ const ShortsWrite = (props) => {
   const uploadFile = () => {
     const file_ = fileInput.current.files[0];
     const videoUrl = URL.createObjectURL(file_);
+    
     setSrc(videoUrl);
     setForm(
       {
