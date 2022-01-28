@@ -21,6 +21,7 @@ const GET_ROOM_INFO = "chat/GET_ROOM_INFO";
 const ADD = "chat/ADD";
 const GET_ALARM = "chat/GET_ALARM";
 const DELETE_ALARM = "chat/DELETE_ALARM";
+const RESET = "chat/RESET";
 
 // action creater
 export const getChatList = createAction(GET_CHATLIST, (chatList) => ({
@@ -41,6 +42,7 @@ export const getRoomInfo = createAction(GET_ROOM_INFO, (roomInfo) => ({
 export const addChat = createAction(ADD, (chatData) => ({ chatData }));
 const getAlarm = createAction(GET_ALARM, (newChat) => ({ newChat }));
 const deleteAlarm = createAction(DELETE_ALARM, () => ({}));
+const reset = createAction(RESET, () => ({}));
 
 // thunk
 // 채팅방 만들기(연락하기)
@@ -53,7 +55,9 @@ export const makeRoomChatDB =
         history.push(
           `/chatroom/${response.data.roomId}/${response.data.roomName}`
         );
-    } catch (err) {}
+    } catch (err) {
+      window.alert("이미 나간 채팅방이므로 연락하기가 불가능합니다.");
+    }
   };
 
 //채팅목록 정보 가져오기
@@ -67,7 +71,7 @@ export const getListChatDB =
     } catch (err) {}
   };
 
-//채팅방 내용 가져오기
+//채팅방 내용 가져오기//
 export const getContentChatDB =
   (roomId) =>
   async (dispatch, getState, { history }) => {
@@ -162,6 +166,10 @@ export default handleActions(
       produce(state, (draft) => {
         draft.alarm = [];
       }),
+    [RESET]: (state, action) =>
+      produce(state, (draft) => {
+        draft.chatList = [];
+      }),
   },
   initialState
 );
@@ -172,6 +180,7 @@ const chatCreators = {
   getRoomInfo,
   getAlarm,
   deleteAlarm,
+  reset,
   makeRoomChatDB,
   getListChatDB,
   getContentChatDB,

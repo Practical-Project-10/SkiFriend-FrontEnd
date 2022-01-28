@@ -6,6 +6,7 @@ import { apis } from "../../shared/apis";
 const initialState = {
   shortsList: {},
   myShortsList: [],
+  is_loaded: false,
 };
 
 //action
@@ -15,6 +16,7 @@ const UPDATE_SHORTS = "shorts/UPDATE_SHORTS";
 const DELETE_SHORTS = "shorts/DELETE_SHORTS";
 const GET_MY_SHORTS = "shorts/GET_MY_SHORTS";
 const COMMENT_COUNT = "shorts/COMMENT_COUNT";
+const LOADED = "shorts/LOADED";
 
 // acrtion creators
 const getShorts = createAction(GET_SHORTS, (shortsList, is_like) => ({
@@ -31,6 +33,9 @@ const getMyShorts = createAction(GET_MY_SHORTS, (myList) => ({ myList }));
 const CommentCount = createAction(COMMENT_COUNT, (state, commentCnt) => ({
   state,
   commentCnt,
+}));
+const isLoaded = createAction(LOADED, (loaded) => ({
+  loaded,
 }));
 
 // middlewares
@@ -85,6 +90,7 @@ const getShortsDB = () => {
 //동영상 작성
 const addShortsDB = (videoFile, title) => {
   return async function (dispatch, getState, { history }) {
+    dispatch(isLoaded(true));
     let formData = new FormData();
     formData.append("videoFile", videoFile);
     formData.append(
@@ -95,10 +101,10 @@ const addShortsDB = (videoFile, title) => {
     try {
       const response = await apis.shortsUpload(formData);
       window.alert("shorts가 정상적으로 등록되었습니다.");
-      response && dispatch(addShorts(response.data));
+      response && console.log('hi')
+      dispatch(addShorts(response.data));
       history.push(`/shorts`);
-    } catch (err) {
-    }
+    } catch (err) {}
   };
 };
 
@@ -115,8 +121,7 @@ const updateShortsDB = (shortsId, title) => {
       response && history.push("/myPage");
       window.alert("shorts가 정상적으로 수정되었습니다.");
       dispatch(updateShorts(shortsId, response.data));
-    } catch (err) {
-    }
+    } catch (err) {}
   };
 };
 
@@ -126,8 +131,7 @@ const deleteShortsDB = (shortsId) => {
     try {
       const response = await apis.shortsDelete(shortsId);
       response && dispatch(deleteShorts(shortsId));
-    } catch (err) {
-    }
+    } catch (err) {}
   };
 };
 
@@ -137,8 +141,7 @@ const myShortsDB = () => {
     try {
       const response = await apis.myShortsList();
       response && dispatch(getMyShorts(response.data));
-    } catch (err) {
-    }
+    } catch (err) {}
   };
 };
 
@@ -149,7 +152,8 @@ export default handleActions(
       produce(state, (draft) => {
         const likeUserList = action.payload.shortsList;
         draft.shortsList = { ...draft.shortsList, ...likeUserList };
-        draft.shortsList.shortsLikeCnt = likeUserList.shortsLikeResponseDtoList.length;
+        draft.shortsList.shortsLikeCnt =
+          likeUserList.shortsLikeResponseDtoList.length;
         draft.shortsList["is_like"] = action.payload.is_like;
       }),
 
@@ -157,6 +161,7 @@ export default handleActions(
       produce(state, (draft) => {
         draft.shortsList = action.payload.shortsDatas;
         draft.myShortsList.push(action.payload.shortsDatas);
+        draft.is_loaded = false;
       }),
 
     [UPDATE_SHORTS]: (state, action) =>
@@ -181,12 +186,15 @@ export default handleActions(
 
     [COMMENT_COUNT]: (state, action) =>
       produce(state, (draft) => {
-        console.log(action.payload.state);
         if (action.payload.state) {
           draft.shortsList.shortsCommentCnt = action.payload.commentCnt;
         } else {
           draft.shortsList.shortsCommentCnt -= 1;
         }
+      }),
+    [LOADED]: (state, action) =>
+      produce(state, (draft) => {
+        draft.is_loaded = action.payload.loaded;
       }),
   },
   initialState
@@ -195,6 +203,7 @@ export default handleActions(
 const shortsActions = {
   getShorts,
   CommentCount,
+  isLoaded,
   getShortsDB,
   addShortsDB,
   updateShortsDB,

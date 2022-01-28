@@ -24,14 +24,14 @@ const smsCheck = createAction(SMS_CHECK, (state) => ({ state }));
 
 //middlewares
 //핸드폰 인증번호 요청
-const isPhoneNumDB = (_phoneNum) => {
+const isPhoneNumDB = (phoneNum_) => {
   return async (dispatch, getState, { history }) => {
     try {
-      await apis.phoneNumCheck(_phoneNum);
+      await apis.phoneNumCheck(phoneNum_);
       window.alert("인증번호가 전송되었습니다.");
-      dispatch(phoneNum(_phoneNum));
+      dispatch(phoneNum(phoneNum_));
     } catch (err) {
-      window.alert("이미 전화번호 인증을 완료하셨습니다.");
+      window.alert("이미 전화번호 인증을 완료하였습니다.");
     }
   };
 };
@@ -47,7 +47,7 @@ const isSmsCheckDB = (phoneNum, randomNum) => {
       history.goBack();
       dispatch(smsCheck(response.data));
     } catch (err) {
-
+      window.alert("인증번호가 틀렸습니다. 다시 입력해 주세요.");
     }
   };
 };
@@ -60,8 +60,7 @@ const deleteUserInfoDB = () => {
       window.alert("회원탈퇴 요청이 정상적으로 처리되었습니다.");
       history.push("/");
       dispatch(logout());
-    } catch (err) {
-    }
+    } catch (err) {}
   };
 };
 

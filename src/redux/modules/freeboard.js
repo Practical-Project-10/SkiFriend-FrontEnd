@@ -63,7 +63,6 @@ export const getOneBoardDB =
   async (dispatch, getState, { history }) => {
     try {
       const response = await apis.getOneFreePost(postId);
-
       response && dispatch(getOneBoard(response.data));
     } catch (err) {}
   };
@@ -92,7 +91,6 @@ export const updateBoardDB =
       const response = await apis.updateFreePost(postId, formdata);
       response && history.push(`/freeboarddetail/${skiResort}/${postId}`);
       dispatch(updateBoard(response.config.data));
-      dispatch(imageActions.setPreview(null));
     } catch (err) {}
   };
 

@@ -41,7 +41,7 @@ const MyPage = (props) => {
     if (myShortsList.length === 0) {
       dispatch(shortsActions.myShortsDB());
     }
-  }, [myShortsList.length]);
+  }, []);
 
   return (
     //로그인 안 했을 때

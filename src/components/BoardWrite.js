@@ -11,7 +11,7 @@ import Header from "./Header";
 
 //swiper
 import { Swiper, SwiperSlide } from "swiper/react";
-import SwiperCore, { Navigation, Pagination } from "swiper";
+import SwiperCore, { Navigation } from "swiper";
 import "swiper/swiper.min.css";
 import "swiper/components/navigation/navigation.min.css";
 
@@ -22,12 +22,12 @@ const BoardWrite = (props) => {
   const postData = useSelector((state) => state.freeboard.detail);
   const leftList = postData.photoList;
   // swiper관리
-  SwiperCore.use([Navigation, Pagination]);
+  SwiperCore.use([Navigation]);
 
   // useState관리
   const [title, setTitle] = useState(is_edit ? postData.title : "");
   const [content, setContet] = useState(is_edit ? postData.content : "");
-  const [photoList, setPhotoList] = useState([]);
+  const [photoId, setPhotoId] = useState([]);
   const [deletePhotoList, setDeletePhotoList] = useState([]);
   const [uploadURL, setUploadURL] = useState([]);
   const [uploadFiles, setUploadFiles] = useState(null);
@@ -53,22 +53,22 @@ const BoardWrite = (props) => {
 
   // 이미지 업로드
   const uploadImg = (e) => {
-    e.preventDefault();
-    setUploadFiles(e.target.files);
+    setUploadFiles(e.target.files); //서버에 보내줄 사진 데이터
     const ImgUrlList = [...uploadURL];
-    const Photobook = [...photoList];
+    const Photobook = [...photoId];
     for (let i = 0; i < e.target.files.length; i++) {
-      const ImgUrl = URL.createObjectURL(e.target.files[i]);
+      //주어진 객체를 가리키는 URL을 DOMString으로 반환
+      const ImgUrl = URL.createObjectURL(e.target.files[i]); //객체 URL을 생성할 File, Blob, MediaSource (en-US) 객체
       ImgUrlList.push(ImgUrl);
       Photobook.push(i + 1);
     }
-    setUploadURL(ImgUrlList);
-    setPhotoList(Photobook);
+    setUploadURL(ImgUrlList); //자신이 고른 사진 화면에 보여주기 위해
+    setPhotoId(Photobook); //서버에 사진번호 넘겨주기 위해
   };
 
   // 데이터 전송
   const addPostBtn = () => {
-    const requestDto = { title: title, content: content, photoList: photoList };
+    const requestDto = { title: title, content: content, photoList: photoId };
     const ask = window.confirm("게시물을 등록하시겠습니까?");
     if (ask) {
       return dispatch(
@@ -142,7 +142,6 @@ const BoardWrite = (props) => {
             spaceBetween={10}
             slidesPerView={1}
             navigation
-            pagination={{ clickable: true }}
             style={{ width: "100%" }}
           >
             {/* 수정페이지 */}
@@ -154,10 +153,9 @@ const BoardWrite = (props) => {
                     <DeletePic onClick={() => deleteImg(photo.photoId)}>
                       X
                     </DeletePic>
-                    <EditImage className="leftList">
+                    <EditImage>
                       <img
                         id={photo.photoId}
-                        className="leftList"
                         src={photo.photoUrl}
                         style={{
                           width: "100%",

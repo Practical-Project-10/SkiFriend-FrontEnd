@@ -31,7 +31,6 @@ const Home = (props) => {
   const history = props.history;
   //redux 데이터
   const hotPosts = useSelector((state) => state.main.list);
-  // const alarm = useSelector((state) => state.chat.alarm);
   //토큰
   const accessToken = document.cookie.split("=")[1];
   const token = { Authorization: `${accessToken}` };
@@ -112,9 +111,7 @@ const Home = (props) => {
           token
         );
       });
-    } catch (error) {
-      // console.log(error);
-    }
+    } catch (error) {}
   }, []);
 
   // 인기게시글
@@ -170,7 +167,6 @@ const Home = (props) => {
                   src={item.url}
                   style={{ cursor: item.id === 1 ? "" : "pointer" }}
                   onClick={() => connectUrl(item.id)}
-                  target="_blank"
                   alt="배너"
                 />
               );

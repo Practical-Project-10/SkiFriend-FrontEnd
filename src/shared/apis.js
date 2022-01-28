@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "https://seongeunyang.shop/", //https://seongeunyang.shop/   http://3.34.19.50:8080/
+  baseURL: "https://seongeunyang.shop/", // https://seongeunyang.shop/   http://3.34.19.50:8080/
   headers: {
     "content-type": "application/json;charset=UTF-8",
     accept: "application/json,",
@@ -16,11 +16,14 @@ api.interceptors.request.use(function (config) {
 
 export const apis = {
   //카카오 소셜로그인
-  kakaoLogin1: (code) =>  // 닉네임
-    api.get(`/user/kakao/callback?code=${code}`),
+  kakaoLogin1: (
+    code // 닉네임
+  ) => api.get(`/user/kakao/callback?code=${code}`),
 
-  kakaoLogin2: (code, userId) =>  // 성별, 연령대
-    api.get(`/user/kakao/callback/${userId}?code=${code}`),
+  kakaoLogin2: (
+    code,
+    userId // 성별, 연령대
+  ) => api.get(`/user/kakao/callback/${userId}?code=${code}`),
 
   //전화번호
   phoneNumCheck: (phoneNumber) =>
@@ -101,7 +104,7 @@ export const apis = {
 
   // 자유게시글
   getFreePost: (skiResort, page) =>
-    api.get(`/board/freeBoard/${skiResort}?size=10&page=1`, {}),
+    api.get(`/board/freeBoard/${skiResort}`, {}),
 
   writeFreePost: (skiResort, datas) =>
     api.post(`/board/${skiResort}/freeBoard`, datas, {

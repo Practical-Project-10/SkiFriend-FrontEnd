@@ -5,6 +5,7 @@ import { history } from "../redux/ConfigStore";
 
 import Header from "../components/Header";
 
+import styled from 'styled-components';
 import { Grid, Text, Button } from "../elements/index";
 
 const ChatList = (props) => {
@@ -50,7 +51,7 @@ const ChatList = (props) => {
   //채팅방 나가기
   const chatRoomExit = (roomId) => {
     const ask = window.confirm(
-      "해당 채팅방을 나가면 이전 대화 내용이 모두 사라집니다. 정말 나가시겠습니까?"
+      "해당 채팅방을 나가면 이전 대화내용이 모두 사라지고, 다시 연락하실 수 없습니다. 정말 나가시겠습니까?"
     );
     if (ask) {
       //채팅방 내용 삭제
@@ -66,14 +67,19 @@ const ChatList = (props) => {
           bg="#FFF"
           height="675px"
           radius="22px 22px 0 0"
-          padding="26px 0 0 0"
+          padding="26px 0"
           overflow="scroll"
           minHeight="calc( 100vh - 124px )"
+          position="relative"
         >
+          {chatRoomList.length === 0 &&
+            <NoChat>
+              채팅 내역이 없습니다!
+            </NoChat>
+          }
+          
           {/* 채팅방 목록 나타내기 */}
           {chatRoomList.map((list, index) => {
-            // const time = chatRoomList[index].lastMsgTime.split(" ");
-            // const realTime = time[0] + " " + time[1] + " " + time[2];
             return (
               <Grid
                 is_flex
@@ -155,5 +161,22 @@ const ChatList = (props) => {
     </React.Fragment>
   );
 };
+
+const NoChat = styled.div`
+  width: 100%;
+  height: 100%;
+  border-radius: 22px 22px 0 0;
+  color: #7a7d80;
+  font-size: 28px;
+  font-weight: 700;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  position: absolute;
+  left: 0;
+  top: 0;
+`
 
 export default ChatList;

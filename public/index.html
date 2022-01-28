@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 
 <head>
   <meta charset="utf-8" />
@@ -18,12 +18,14 @@
   <!-- IOS -->
   <!-- 주소창 등의 웹 브라우저 UI를 표시하지 않기 -->
   <meta name="apple-mobile-web-app-capable" content="yes">
+  <!-- 상태 바의 스타일을 지정 -->
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <!-- 홈 화면에서 표시되는 앱 이름을 지정 -->
   <meta name="apple-mobile-web-app-title" content="스키프렌드">
   <!-- 홈 화면에서 표시되는 앱 아이콘을 지정 -->
-  <link rel="apple-touch-icon" href="%PUBLIC_URL%/icon-152.png" />
+  <link rel="apple-touch-icon" href="icon-152.png" />
   <!-- 크롬 안드로이드 -->
-  <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+  <link rel="manifest" href="manifest.json" />
 </head>
 
 <body>
@@ -31,34 +33,7 @@
   <div id="root"></div>
 </body>
 <script>
-  // window.addEventListener('beforeinstallprompt', (event) => {
-  //   // 나중에 이벤트를 활성화하려고 보관한다.
-  //   window.deferredPrompt = event;
-  //   // 설치 버튼에 담긴 hidden 클래스를 제거한다. 
-  //   divInstall.classList.toggle('hidden', false);
-  // });
 
-  // butInstall.addEventListener('click', async () => {
-  //   const promptEvent = window.deferredPrompt;
-  //   if (!promptEvent) {
-  //     // The deferred prompt isn't available.
-  //     return;
-  //   }
-  //   // 설치 prompt 호출!
-  //   promptEvent.prompt();
-  //   // 결과물 로깅 및 사용자 선택 저장
-  //   const result = await promptEvent.userChoice;
-  //   // 이벤트 초기화. prompt()는 한번만 호출할 수 있다.
-  //   window.deferredPrompt = null;
-  //   // 설치 버튼 다시 숨기기
-  //   divInstall.classList.toggle('hidden', true);
-
-  // });
-
-  // window.addEventListener('appinstalled', (event) => {
-  //   // 이벤트 초기화 (리소스 가비지 처리) 
-  //   window.deferredPrompt = null;
-  // });
 </script>
 
 </html>
