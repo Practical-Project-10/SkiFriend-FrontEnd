@@ -31,13 +31,12 @@ const Home = (props) => {
   const history = props.history;
   //redux 데이터
   const hotPosts = useSelector((state) => state.main.list);
-  // const alarm = useSelector((state) => state.chat.alarm);
   //토큰
   const accessToken = document.cookie.split("=")[1];
   const token = { Authorization: `${accessToken}` };
   //소켓
-  const sock = new SockJS("https://seongeunyang.shop/ws-alarm");
-  // const sock = new SockJS("http://3.34.19.50:8080/ws-alarm");
+  // const sock = new SockJS("https://seongeunyang.shop/ws-alarm");
+  const sock = new SockJS("http://3.34.19.50:8080/ws-alarm");
 
   const stomp = Stomp.over(sock);
   //localstorage
